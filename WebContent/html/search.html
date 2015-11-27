@@ -1,0 +1,91 @@
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="pagemain-head">
+			<!-- <h4 class="title-head">Search</h4>-->
+			<hr></hr> 
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="search-page">
+			<div class="col-md-3 col-sm-4 treewidthpan">
+				<div class="panel-group" id="accordion">
+					<div class="panel panel-default panelheadinstyle">
+						<div class="panel-heading panelbottomborder">
+							<h4 class="panel-title">
+								<a href="javascript:;" data-toggle="collapse" ng-click="onClickTree()"
+									data-parent="#accordion" data-target="#collapseOne">
+									Use Case Dimension Filters </a>
+							</h4>
+						</div>
+						<div id="collapseOne" class="panel-collapse collapse in">
+							<div class="panel-body">
+								<div class="article-tree">
+									<div ng-style="{'overflow': 'auto'}">
+										<div class="filter-tree">
+											<ul>
+											<!--<li ng-repeat="typecast in displayTree">{{typecast.Type}}</li>-->
+												<node-tree ng-model="displayTree"></node-tree>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<button class="result-search btn pull-right" ng-click="ClikedResult()">Refresh Result</button>
+							</div>
+						</div>
+					</div>
+					<!-- code for usecases -->
+					<div class="panel panel-default panelheadinstyle">
+						<div class="panel-heading panelbottomborder">
+							<h4 class="panel-title">
+								<a href="javascript:;" data-toggle="collapse" ng-click="onClickTab()"
+									data-parent="#accordion" data-target="#collapseTwo">Search by Name/ID</a>
+							</h4>
+						</div>
+						<div id="collapseTwo" class="panel-collapse collapse">
+							<div class="panel-body">
+								<ul class="sidemenu-nav treelevel">
+									<li class="usectree"><a herf="" class="activesidenav" ng-click="onClickTab()"> Use Case</a></li>
+									<li><a herf="" ng-click="onClickTabRule()"> Use Case Rule</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /code for usecases -->
+					<!-- code for library customview -->
+					<div ng-show="showAllmode" class="panel panel-default panelheadinstyle">
+						<div class="panel-heading panelbottomborder">
+							<h4 class="panel-title">
+								<a href="javascript:;" data-toggle="collapse" ng-click="onShowlibrary()"
+									data-parent="#accordion" data-target="#collapseThree">Show Library</a>
+							</h4>
+						</div>
+						<div id="collapseThree" class="panel-collapse collapse">
+							<div class="panel-body">
+								<ul class="sidemenu-nav treelevel">
+									<li><a herf="" ng-click="showAll();">ALL</a></li>
+									<li><a herf="" ng-click="oobN()">Custom</a></li>
+									<li><a herf="" ng-click="oobY()">Out of Box</a></li>
+								</ul>
+
+							</div>
+						</div>
+					</div>
+					<!-- /code for library customview -->					</div>
+			</div>
+			<div ng-include="currentTab"></div>
+		</div>
+	</div>
+</div>
+  <script>
+     angular.element("ul.sidemenu-nav li a").click(function(){
+ 	 angular.element("ul.sidemenu-nav li a").removeClass("activesidenav");
+ 	 angular.element(this).addClass("activesidenav");
+	 });
+     angular.element(".treelevel li a").click(function(){
+    	 angular.element(".treelevel li").removeClass("usectree");
+    	 angular.element(this).parent().addClass(" usectree");
+   	 });
+  </script>
