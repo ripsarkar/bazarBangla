@@ -4,7 +4,7 @@
             <div ng-show="pagemain.main">
                 <div class="sub_menu">
                     <ul>
-                        <li class="active btn btn-sub-menu"> <a ng-click="pageUsecase()">Usecases</a></li>
+                        <li class="active btn btn-sub-menu"> <a ng-click="pageUsecase()">Use Cases</a></li>
                         <li class="btn btn-sub-menu"> <a ng-click="pageRule()">Rule</a></li>
                     </ul>
                 </div>
@@ -12,8 +12,8 @@
             <div ng-show="pagemain.usecase">
                 <div class="sub_menu">
                     <ul>
-                        <li class="active btn btn-sub-menu"> <a ui-sref="home.createusecase">Create Usecases</a></li>
-                        <li class="btn btn-sub-menu"> <a ui-sref="home.updateUsecase">Update Usecases</a></li>
+                        <li class="active btn btn-sub-menu"> <a ui-sref="home.createusecase">Create Use Cases</a></li>
+                        <li class="btn btn-sub-menu"> <a ui-sref="home.updateUsecase">Update Use Cases</a></li>
                     </ul>
                 </div>
             </div>
@@ -62,12 +62,12 @@
                             <div class="margintp1 col-md-12 col-sm-12 ">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-6">
-                                        <label> Usecase ID <span style="color:red"></span></label>
-                                        <input type="text" class="form-control" placeholder="Usecase ID" disabled ng-model="crtUsercaseId" required>
+                                        <label> Use Case ID <span style="color:red"></span></label>
+                                        <input type="text" class="form-control" placeholder="Use Case ID" disabled ng-model="crtUsercaseId" required>
                                     </div>
                                     <div class="col-md-3 col-sm-6">
-                                        <label> Usecase Name <span style="color:red"></span></label>
-                                        <input type="text" class="form-control" placeholder="Usecase Name" disabled ng-model="crtUsercaseName" required>
+                                        <label> Use Case Name <span style="color:red"></span></label>
+                                        <input type="text" class="form-control" placeholder="Use Case Name" disabled ng-model="crtUsercaseName" required>
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
                                         <span ng-show="updateRuleFrom.crtRuleName.$error.required" class="help-block">This field is required</span>
                                     </div>
                                 <div class="col-md-4 col-sm-6">
-                                    <label> OOB </label><br>
+                                    <label> Out of Box </label><br>
 								<select class="form-control valselect" ng-model="uformcontrolYN">
 								<!-- ng-change=uyngetDetailscr() -->
 									<option>Yes</option>
@@ -115,8 +115,8 @@
                                         <!--<li class="tabshead"><a herf="" ng-class="licreateruleinputdata" ng-click="liinputdata()"> Input Data Elements</a></li>
                                 <li class="tabshead"><a herf="" ng-class="licreaterulelog" ng-click="lilog()"> Log Resource</a></li>-->
                                         <li class="tabshead"><a herf="" ng-class="licreateruleoutput" ng-click="lioutput()"> Output</a></li>
-                                        <li class="tabshead"><a herf="" ng-class="licreaterulethd" ng-click="lithd()"> Thread Model</a></li>
-                                        <li class="tabshead"><a herf="" ng-class="licreateruleresponse" ng-click="liresponse()"> Response</a></li>
+                                        <li class="tabshead"><a herf="" ng-class="licreaterulethd" ng-click="lithd()"> Threat Model</a></li>
+                                       <!--  <li class="tabshead"><a herf="" ng-class="licreateruleresponse" ng-click="liresponse()"> Response</a></li> -->
                                     </div>
                                 </div>
                             </div>
@@ -124,8 +124,8 @@
                             <div class="ruledetails" ng-show="ruledetails">
                                 <div class="row margintp1">
                                     <div class=" col-md-4 ">
-                                        <label>Pesdu code </label>
-                                        <textarea class="form-control" placeholder="Pesdu code" maxlength="2000" ng-model="crtRulepesducode" id="crtRulepesducode" name="crtRulepesducode"></textarea>
+                                        <label>Pseudo Code </label>
+                                        <textarea class="form-control" placeholder="Pseudo Code" maxlength="2000" ng-model="crtRulepesducode" id="crtRulepesducode" name="crtRulepesducode"></textarea>
                                     </div>
 
                                     <div class=" col-md-4">
@@ -143,8 +143,8 @@
                                 <div class="clearfix"></div>
                                 <div class="row margintp1">
                                     <div class=" col-md-4 ">
-                                        <label>Reference Set Inc. </label>
-                                        <textarea class="form-control" placeholder="Reference Set Inc" maxlength="2000" name="crtRuleRefSet" ng-model="crtRuleRefSet"></textarea>
+                                        <label>Reference Set </label>
+                                        <textarea class="form-control" placeholder="Reference Set " maxlength="2000" name="crtRuleRefSet" ng-model="crtRuleRefSet"></textarea>
 
                                     </div>
                                     <div class="clearfix"></div>
@@ -236,7 +236,7 @@
                                 <div class="margintp1 col-md-12">
                                     <div class="col-md-offset-4 col-md-4">
                                         <!--<button class="btn btn-none tabsbtn" type="reset"> Clear</button>-->
-                                        <button class="btn btn-primary tabsbtn" ng-click="liresponse()"> Next </button>
+                                        <button class="btn btn-primary tabsbtn" ng-click="lithd()"> Next </button>
                                     </div>
                                 </div>
                             </div>
@@ -260,7 +260,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3 col-sm-6">
-                                    <label> Standrad Attack </label>
+                                    <label> Standard Attack </label>
                                     <select class="form-control" ng-model="UsecaseStrdAtt" ng-change="thdStrd_extch()" ng-blur="thdStrd_ch()">
                                         <option ng-selected="UsecaseStrdAtt == thdStrddata.SurrId" ng-repeat="thdStrddata in thdStrddatas | orderBy:'Name'" value="{{thdStrddata.SurrId}}">
                                             {{thdStrddata.Name}} {{thdStrddata.ID}}
@@ -280,7 +280,7 @@
                                         <thead>
                                             <th> CAPEC Category</th>
                                             <th>Meta Attack</th>
-                                            <th>Standrad Attack</th>
+                                            <th>Standard Attack</th>
                                             <th></th>
                                         </thead>
                                         <tbody>
@@ -298,11 +298,13 @@
                             <div class="clearfix"></div>
                             <div class="margintp1 col-md-12">
                                 <div class="col-md-offset-4 col-md-4">
-                                    <button class="btn btn-primary tabsbtn" ng-click="liresponse()"> Next </button>
+                                   <!--  <button class="btn btn-primary tabsbtn" ng-click="liresponse()"> Next </button> -->
+                                     <button class="btn btn-none tabsbtn" ng-click="reSet()" id="reSet"> Clear</button>
+                                     <button type="submit" class="btn btn-primary tabsbtn" ng-click="crtRuleSubmit()"> Submit </button>
                                 </div>
                             </div>
                         </div>
-                            <div class="clearfix"></div>
+           <!--                  <div class="clearfix"></div>
                             <div class="ruleinput" ng-show="ruleresponse">
                                 <div class="row margintp1">
                                     <div class="col-md-4 ">
@@ -317,7 +319,7 @@
                                         <button type="submit" class="btn btn-primary tabsbtn" ng-click="crtRuleSubmit()"> Submit </button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

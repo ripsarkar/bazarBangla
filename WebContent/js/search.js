@@ -342,6 +342,12 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 
 	//link visited
     $scope.$watch(function () {
+    	//checking if oob value is N then ommit
+    	angular.element( ".oobvalue" ).each(function(){
+    		if(angular.element(this ).html() == "N"){
+    			angular.element(this ).html("");
+    		}
+    	});
     	//link visited color change
     	angular.element( ".dimensionTableBasic" ).click(function() {
     		angular.element(".dimensionTableBasic").removeClass("dimensionTableVisited");
@@ -419,6 +425,13 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		
 	}
 
+	//for twindle arrow
+	angular.element(".accordListrotate").click(function(){
+	    angular.element(".accordListrotate").removeClass('accordList');
+	    angular.element(this).addClass('accordList');
+
+	}); 
+	
     //code for user role specific access
 
 	$scope.$watch(function () {
@@ -1383,10 +1396,10 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
                   $scope.tabledata = [];
                   $scope.chckresult();
               }
-              //end loading animation	
+              //end loading animation
               $rootScope.loadinganimation = false;
           }).error(function(data, status, headers, config) {
-              //end loading animation	
+              //end loading animation
               $rootScope.loadinganimation = false;
               if (data.ErrCode != undefined) {
                   $scope.resultdata={

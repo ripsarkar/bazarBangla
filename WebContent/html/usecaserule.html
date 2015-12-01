@@ -50,7 +50,7 @@
                         <td class="exportid"><a class="dimensionTableBasic" href="javascript:void(0);" ng-click="uscaseruleclick(usecrule.usecase_rule_surr_id)">
 							{{usecrule.usecase_rule_name}} </a>
                         </td>
-						<td>{{usecrule.oob_flag}}</td>	
+						<td align="center" class="oobvalue">{{usecrule.oob_flag}}</td>	
                         <td ng-hide="exported"><div ng-show="usecrule.exportYes" >
 								<input type="checkbox" class="ruleexport" ng-model="rulepaexpo" ng-click="exportpres($index, usecrule.fileName, usecrule.packageSurrId, rulepaexpo)"/>
 							</div>
@@ -83,7 +83,7 @@
                             <th class="tableheaderLeft">Regulatory category:</th>
                             <td>
                                 <li class="relaList">
-                                    <a id="regcatallin" class="tooltiphov"></a>
+                                    <div id="regcatallin" class="tooltiphov"></div>
                                 </li>
                             </td>
                         </tr>

@@ -15,7 +15,7 @@
 					<div class="panel panel-default panelheadinstyle">
 						<div class="panel-heading panelbottomborder">
 							<h4 class="panel-title">
-								<a href="javascript:;" data-toggle="collapse" ng-click="onClickTree()"
+								<a style="padding-right: 71px;" class="accordListrotate accordList" href="javascript:;" data-toggle="collapse" ng-click="onClickTree()"
 									data-parent="#accordion" data-target="#collapseOne">
 									Use Case Dimension Filters </a>
 							</h4>
@@ -40,7 +40,7 @@
 					<div class="panel panel-default panelheadinstyle">
 						<div class="panel-heading panelbottomborder">
 							<h4 class="panel-title">
-								<a href="javascript:;" data-toggle="collapse" ng-click="onClickTab()"
+								<a style="padding-right: 131px;" class="accordListrotate"  href="javascript:;" data-toggle="collapse" ng-click="onClickTab()"
 									data-parent="#accordion" data-target="#collapseTwo">Search by Name/ID</a>
 							</h4>
 						</div>
@@ -58,26 +58,87 @@
 					<div ng-show="showAllmode" class="panel panel-default panelheadinstyle">
 						<div class="panel-heading panelbottomborder">
 							<h4 class="panel-title">
-								<a href="javascript:;" data-toggle="collapse" ng-click="onShowlibrary()"
+								<a style="padding-right: 177px;" class="accordListrotate"  href="javascript:;" data-toggle="collapse" ng-click="onShowlibrary()"
 									data-parent="#accordion" data-target="#collapseThree">Show Library</a>
 							</h4>
 						</div>
 						<div id="collapseThree" class="panel-collapse collapse">
 							<div class="panel-body">
 								<ul class="sidemenu-nav treelevel">
-									<li><a herf="" ng-click="showAll();">ALL</a></li>
-									<li><a herf="" ng-click="oobN()">Custom</a></li>
-									<li><a herf="" ng-click="oobY()">Out of Box</a></li>
+									<li><a herf="" data-toggle="modal" data-target="#myModal">ALL</a></li>
+									<li><a herf="" data-toggle="modal" data-target="#myModal2">Custom</a></li>
+									<li><a herf="" data-toggle="modal" data-target="#myModal3">Out of Box</a></li>
 								</ul>
 
 							</div>
 						</div>
 					</div>
-					<!-- /code for library customview -->					</div>
+					<!-- /code for library customview -->					
+				</div>
 			</div>
 			<div ng-include="currentTab"></div>
 		</div>
 	</div>
+</div>
+<!-- Moda1_all -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        Modal content
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Show All</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to fetch entire library?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="showAll();">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Moda2_all -->
+<div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+        Modal content
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Show All</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to fetch all Custom Use Case Rules?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"  ng-click="oobN()">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Moda3_all -->
+<div class="modal fade" id="myModal3" role="dialog">
+    <div class="modal-dialog">
+        Modal content
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Show All</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to fetch all Out of Box Use Case Rules?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="oobY()">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+            </div>
+        </div>
+
+    </div>
 </div>
   <script>
      angular.element("ul.sidemenu-nav li a").click(function(){

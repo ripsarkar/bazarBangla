@@ -42,26 +42,29 @@ function HomeController(UserService,  $rootScope, $scope, $http) {
 
 
     //code for user role specific access
-
-	$scope.$watch(function () {
-	    if ($rootScope.role == "ADMIN") {
-	        $scope.useCaseMaintain = true;
-	        $scope.userAccountManagement = true;
-	        $scope.ucrlPackage = true;
-	        $scope.alertMenu = true;
-	        $scope.searchMenu = true;
-	    }
-	    if ($rootScope.role == "SALES_PERSON") {
-	        $scope.searchMenu = true;
-	    }
-	    if ($rootScope.role == "USER_VIEW") {
-	        $scope.searchMenu = true;
-	        $rootScope.exported = true;
-	    }
-	    if ($rootScope.role == "USER_EXPORT") {
-	        $scope.searchMenu = true;
-	    }
-	});
+	
+	  $scope.$watch(function () {
+		    if ($rootScope.role == "ADMIN") {
+		        $scope.useCaseMaintain = true;
+		        $scope.userAccountManagement = true;
+		        $scope.ucrlPackage = true;
+		        $scope.alertMenu = true;
+		        $scope.searchMenu = true;
+		       
+		    }
+		    if ($rootScope.role == "SALES_PERSON") {
+		        $scope.searchMenu = true;
+		        $scope.useCaseMaintain = true;
+		    }
+		    if ($rootScope.role == "USER_VIEW") {
+		        $scope.searchMenu = true;
+		        $rootScope.exported = true;
+		    }
+		    if ($rootScope.role == "USER_EXPORT") {
+		        $scope.searchMenu = true;
+		        $scope.useCaseMaintain = true;
+		    }
+		});
 
     //starting messege
     $scope.userMsg = "Please select search criteria from left";

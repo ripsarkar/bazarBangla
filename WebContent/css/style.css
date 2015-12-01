@@ -1,4 +1,28 @@
 /*-------------ripunjoy css-------------*/
+
+.accordListrotate{
+	background-image:url("../img/ArrowRight.png");
+	background-repeat:no-repeat;
+	background-position: right; 
+}
+.accordList{
+	background-image:url("../img/ArrowDown.png");
+	background-repeat:no-repeat;
+	background-position: right; 
+} 
+
+.feedidname{
+	float:right;
+	padding:0 50px 5px 0px;
+	   font-weight:bold;
+}
+.feedbackhead{
+	float:left;
+	width:100%;
+	padding-bottom:5px !important;
+	margin-bottom:10px !important;
+	
+}
 .parent_li ul li ul li{
 	display:none;
 }
@@ -6,9 +30,13 @@
 	font-size:14px;
 	padding-left:10px;
 }
-a.tooltiphov:hover{
+.tooltiphov:hover{
 	text-decoration:none;
-	font-weight:bold;
+	text-shadow: .25px 0px .1px,
+                  -.25px 0px .1px;
+}
+.tooltiphov a:hover{
+	text-decoration:none;
 }
 ::-webkit-scrollbar {
     width: 8px;
