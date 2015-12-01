@@ -43,7 +43,11 @@
                 	localStorage.setItem("surrrip", result.User[0].user_surr_id);
                 	localStorage.setItem("surrComprip", result.User[0].company_surr_id);
                 	localStorage.setItem("namerip", result.User[0].user_name);
-                	localStorage.setItem("fullname", (result.User[0].user_first_name+" "+result.User[0].user_middle_name+" "+result.User[0].user_last_name));
+                	if(result.User[0].user_middle_name!=null){
+                		localStorage.setItem("fullname", (result.User[0].user_first_name+" "+result.User[0].user_middle_name+" "+result.User[0].user_last_name));	
+                	}else{
+                		localStorage.setItem("fullname", (result.User[0].user_first_name+" "+result.User[0].user_last_name));
+                	}                	
                 	localStorage.setItem("showallbutt", result.User[0].user_industry_name);
                 	localStorage.setItem("cmpyId", result.User[0].company_surr_id);
 
