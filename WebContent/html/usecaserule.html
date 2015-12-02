@@ -73,7 +73,10 @@
 
     <!-- relationship table -->
     <div ng-show="rulerelationtable">
-        <h4> <span class="relacategoryN">{{usecaseSummary}}</span> </h4>
+        <h4>
+         <span class="relacategoryBold">Relationships </span><span class="relacategoryN">for </span><span class="relacategoryBold"> Use Case # : </span>
+		 <span class="relacategoryN">{{useCaseNo}} </span><span class="relacategoryBold"> Use Case Name : </span><span class="relacategoryN">{{useCaseName}} </span> 
+        </h4>
         <div ng-show="">{{relationsearchbottom}}</div>
         <div class="panel panel-default tablecontrol">
             <div class="table table-striped relationshiptable">

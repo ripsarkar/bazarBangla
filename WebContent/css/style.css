@@ -28,7 +28,12 @@
 }
 .relacategoryN{
 	font-size:14px;
-	padding-left:10px;
+	
+}
+.relacategoryBold{
+	font-size:14px;
+	font-weight: bold;
+	padding-left:5px;
 }
 .tooltiphov:hover{
 	text-decoration:none;

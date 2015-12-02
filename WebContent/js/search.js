@@ -370,7 +370,8 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		//$scope.errorrelationsearch=false;
 		var datasurr = usecrule.UseCaseSurr;
 		
-		$scope.usecaseSummary = "Relationships for Use Case # :  "+usecrule.IdLabel+"  Use Case Name : "+usecrule.UseCase;
+		$scope.useCaseNo = usecrule.IdLabel
+		$scope.useCaseName = usecrule.UseCase;
 
 		SearchResultService.usecaseRelationships(datasurr).success(function(output)
 		    	{		
@@ -380,9 +381,13 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 						//
 		    			//regcat list
 						var regcatall = output.regulatory_cat;
+						var tooltip1 = regcatall[0].reg_cat_desc;
+						
 						if(regcatall.length>0){
-							var regulatorytree = "<strong>" + "(" + regcatall[0].reg_cat_name + ")" + "</strong>" + "-" + regcatall[0].reg_pub_name  + "<strong>"+ "::"  + "</strong>"+ regcatall[0].reg_cntrl_name;
+							var regulatorytree = "<a data-toggle='tooltip' data-placement='left' title=\'" + tooltip1 +"\' tooltip-placement='left'>" + "<strong>" + "(" + regcatall[0].reg_cat_name + ")" + "</strong>" + "-" + regcatall[0].reg_pub_name  + "<strong>"+ "::"  + "</strong>"+ regcatall[0].reg_cntrl_name;
 							for(var i=0;i<regcatall.length-1;i++){
+								tooltip1 = regcatall[i+1].reg_cat_desc;
+								
 								if(regcatall[i].reg_pub_name == regcatall[i+1].reg_pub_name && regcatall[i].reg_cat_name == regcatall[i+1].reg_cat_name){
 								//alert(regcatall[i].reg_pub_name);
 								regulatorytree = regulatorytree  + ","	+ regcatall[i+1].reg_cntrl_name;
@@ -390,7 +395,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 									regulatorytree = regulatorytree + "--" + regcatall[i+1].reg_pub_name + "<strong>" + "::"  + "</strong>"+ regcatall[i+1].reg_cntrl_name;
 								}
 								else if(regcatall[i].reg_pub_name != regcatall[i+1].reg_pub_name && regcatall[i].reg_cat_name != regcatall[i+1].reg_cat_name){
-									regulatorytree = regulatorytree + "</br>" + "<strong>" + "(" + regcatall[i+1].reg_cat_name + ")" + "</strong>" + "-" + regcatall[i+1].reg_pub_name  + "<strong>"+ "::"  + "</strong>"+ regcatall[i+1].reg_cntrl_name;
+									regulatorytree = regulatorytree + "</a>" + "</br>" + "<a data-toggle='tooltip' data-placement='left' title=\'" + tooltip1 +"\' tooltip-placement='left'>" + "<strong>" + "(" + regcatall[i+1].reg_cat_name + ")" + "</strong>" + "-" + regcatall[i+1].reg_pub_name  + "<strong>"+ "::"  + "</strong>"+ regcatall[i+1].reg_cntrl_name;
 								}
 							}
 							 var elem = document.getElementById('regcatallinucresult');
@@ -1058,6 +1063,11 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
             var resultURL = $rootScope.url+'/getSearchByDimensionResult';
             $http.post(resultURL, postJson).success(function(data, status, headers, config) {
                 if (data.cateGory.length == 0) {
+                	 $scope.resultdata={
+                             cateGory:[]
+                         };
+                	$scope.chckresult();
+                	$scope.tabledata =[];
                     $scope.showResult = false;
                     $scope.userMsg = "Please select search criteria from left";
                     $scope.licreateruledetails = 'active';

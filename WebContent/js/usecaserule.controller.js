@@ -323,7 +323,10 @@ app.controller("usecaseruleController",["$scope","ApiServicerule","$rootScope",'
 		$scope.errorrelationsearch=false;
 		var datasurr = usecrule.usecase_surr_id;
 		
-		$scope.usecaseSummary = "Relationships for Use Case # :  "+usecrule.usecase_id+"  Use Case Name : "+usecrule.usecase_name;
+		$scope.useCaseNo = usecrule.usecase_id;
+		$scope.useCaseName = usecrule.usecase_name;
+		
+		//$scope.usecaseSummary = "Relationships for Use Case # :  "+usecrule.usecase_id+"  Use Case Name : "+usecrule.usecase_name;
 
 
 		ApiServicerule.usecaseRuleRelationships(datasurr).success(function(output)
