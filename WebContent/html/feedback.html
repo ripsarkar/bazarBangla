@@ -11,8 +11,8 @@
     </div>
     <div class="container">
         <div class="row">
-            <table class="table table-striped">
-                <thead>
+            <table class="table table-striped searchtablerow fixed-header">
+             <tr class="tableheader">
                     <th>Use Case#</th>
                     <th>Use Case Name</th>
                     <th>Use Case Rule ID</th>
@@ -22,24 +22,29 @@
                     <th>Org.Rule Name</th>
                     <th>Implementation%</th>
                     <th>Feedback</th>
-                </thead>
-                <tbody>
+               </tr>
+               </table>
+				<div class="searchtable">
+				<div class="usecaselibtable">
+					<table class="table table-striped searchtablerow fixed-header">
                     <!--| startFrom:currentPage*pageSize | limitTo:pageSize-->
                     <tr ng-repeat="pkgdata in rulesPckg | startFrom:currentPage*pageSize | limitTo:pageSize">
-                        <td>{{pkgdata.id_label}}</td>
-                        <td>{{pkgdata.name}}</td>
-                        <td>{{pkgdata.ruleid_label}}</td>
-                        <td>{{pkgdata.rulename}}</td>
-                        <td>{{pkgdata.ruleoob_flag}}</td>
-                        <td>{{pkgdata.ruleclient_rule_id}}</td>
-                        <td>{{pkgdata.ruleclient_rule_name}}</td>
-                        <td>{{pkgdata.rulerule_impl_percent}}</td>
+                        <td  align="center">{{pkgdata.id_label}}</td>
+                        <td  align="center">{{pkgdata.name}}</td>
+                        <td  align="center">{{pkgdata.ruleid_label}}</td>
+                        <td  align="center">{{pkgdata.rulename}}</td>
+                        <td  align="center">{{pkgdata.ruleoob_flag}}</td>
+                        <td  align="center">{{pkgdata.ruleclient_rule_id}}</td>
+                        <td  align="center">{{pkgdata.ruleclient_rule_name}}</td>
+                        <td  align="center">{{pkgdata.rulerule_impl_percent}}</td>
                         <td><a href="javascript:void(0);" ng-click="open();feedbackForm(pkgdata.ruleid, pkgdata.ucId, pkgdata.ucName, $index)" data-toggle="modal" data-target="#myModal" class="pull-right"><span class="icon-feedback"></span></a>
                         </td>
                     </tr>
 
-                </tbody>
+                
             </table>
+            </div>
+            </div>
         </div>
     </div>
     <div class="container">
@@ -64,26 +69,26 @@
                     <div class="col-md-6">
                         <label> Implementation start date <span class="red"> *</span></label>
                         <p class="input-group">
-                            <input type="text" class="form-control" required datepicker-popup="dd/MM/yyyy" ng-model="startdt" is-open="opened" />
+                            <input type="text" class="form-control" required  datepicker-popup="yyyy-MM-dd HH:mm:ss" ng-model="startdt" datepicker-options="dateOptions" is-open="opened" />
                             <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
+               			 <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+             			 </span>
                         </p>
                     </div>
                     <div class="col-md-6 col-sm-6">
-                        <label> Org.RuleID </label>
-                        <input type="text" class="form-control" maxlength="10" placeholder="Org.Rule ID"  ng-model="feedbackFrm.orgruleid">
+                        <label> Organization Rule ID </label>
+                        <input type="text" class="form-control" maxlength="50" placeholder="Organization Rule ID"  ng-model="feedbackFrm.orgruleid">
                     </div>
                 </div>
                 <div class="row margintp1">
                     <div class="col-md-6 col-sm-6">
-                        <label> Org.Rule Name</label>
-                        <input type="text" class="form-control" maxlength="10" placeholder="Org.Rule Name"  ng-model="feedbackFrm.orgrulename">
+                        <label> Organization Name</label>
+                        <input type="text" class="form-control" maxlength="100" placeholder=" Organization Name"  ng-model="feedbackFrm.orgrulename">
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <label> Implementation update date/Time <span class="red"> *</span></label>
                         <p class="input-group">
-                            <input type="text" class="form-control" ng-change="isValidDate(updatedt)" required datepicker-popup="dd/MM/yyyy" ng-model="updatedt" is-open="Upopened" />
+                            <input type="text" class="form-control" ng-change="isValidDate(updatedt)" required datepicker-popup="yyyy-MM-dd HH:mm:ss" ng-model="updatedt" is-open="Upopened" />
                             <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="Upopen($event)"> <i class="glyphicon glyphicon-calendar"> </i></button>
               </span>

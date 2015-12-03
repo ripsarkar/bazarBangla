@@ -5,7 +5,7 @@ app.controller("feedbackController", ["$scope", "$rootScope", "$state", '$http',
     //$scope.rulesPckg='';
 
     $scope.currentPage = 0;
-    $scope.pageSize = 10;
+    $scope.pageSize = 4;
     //$scope.data = [];
     $scope.pgnation = function() {
         if (typeof $scope.rulesPckg != 'undefined' && $scope.rulesPckg.length > 0) {
@@ -22,8 +22,19 @@ app.controller("feedbackController", ["$scope", "$rootScope", "$state", '$http',
     	}
     });
     /*date picker code*/
-   
-    
+//    $scope.$watch(function () {
+//    	if($scope.startdt != undefined || $scope.startdt!=''){
+//    		var dt =new Date();
+//        	var hr=dt.getHours();
+//        	var min=dt.getMinutes();
+//        	var sec=dt.getSeconds();
+//        	var time = hr +":"+min+":"+sec;
+//        	$scope.startdt = $scope.startdt+time;
+//    	}
+//    	
+//    //	alert(time);
+//    });
+      
     $scope.pageLoad = function() {
     	$rootScope.loadinganimation=true;
         
@@ -47,6 +58,7 @@ app.controller("feedbackController", ["$scope", "$rootScope", "$state", '$http',
     	                        fbruledata.ruleclient_rule_id = fbrule[i].Rule[j].client_rule_id;
     	                        fbruledata.ruleclient_rule_name = fbrule[i].Rule[j].client_rule_name;
     	                        fbruledata.rulerule_impl_percent = fbrule[i].Rule[j].rule_impl_percent;
+    	                        
     	                        fb_tb.push(fbruledata);
     	                    } else {
     	                        fbruledata.id_label = "";
@@ -150,6 +162,8 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '
     };
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
     $scope.format = $scope.formats[2];
+    
+    
 
     $scope.Upopen = function($event) {
         $event.preventDefault();
@@ -191,14 +205,14 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '
                         var impstrt = $scope.feedbackdetails[0].uc_rule_impl_start_dt;
                         var impupt = $scope.feedbackdetails[0].uc_rule_impl_updt_dt;
                         //$scope.feedbackFrm.impstrtdate = impstrt.split('.')[0];
-                        $scope.startdt = impstrt.split(' ')[0];
+                        $scope.startdt = impstrt;
                         $scope.dt = $scope.feedbackFrm.impstrtdate;
                         $scope.feedbackFrm.orgruleid = $scope.feedbackdetails[0].client_rule_id;
                         $scope.feedbackFrm.orgrulename = $scope.feedbackdetails[0].client_rule_name;
                         //$scope.feedbackFrm.impupdate = impupt.split('.')[0];
-                        $scope.updatedt = impupt.split(' ')[0];
+                        $scope.updatedt = impupt;
                         $scope.feedbackFrm.Implper = $scope.feedbackdetails[0].rule_impl_percent.toString();
-                        $scope.feedbackFrm.fedbckcomments = "";
+                        $scope.feedbackFrm.fedbckcomments =  $scope.feedbackdetails[0].client_rule_comment;
                     } else {
                         $scope.feedbackFrm.impstrtdate = "";
                         $scope.feedbackFrm.orgruleid = "";
@@ -284,7 +298,7 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '
                  clientucruleimplStartDate: $scope.feedbackFrm.impstrtdate,
                  clientucruleimplUpdtDate: $scope.feedbackFrm.impupdate,
                  clientucruleimplpercent: $scope.feedbackFrm.Implper,
-                 clientcomments: $scope.feedbackFrm.fedbckcomments,
+                 clientcomments : $scope.feedbackFrm.fedbckcomments,
                  usersurrid: $scope.usrId
              }
 

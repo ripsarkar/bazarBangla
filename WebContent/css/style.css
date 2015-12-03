@@ -1,5 +1,7 @@
 /*-------------ripunjoy css-------------*/
-
+.relationshiptable a,.tooltiphov{
+	cursor:default;
+}
 .accordListrotate{
 	background-image:url("../img/ArrowRight.png");
 	background-repeat:no-repeat;
