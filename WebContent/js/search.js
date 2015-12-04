@@ -473,11 +473,31 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
     }
     $scope.onClickTree = function() {
         $scope.currentTab = 'html/search-result.html';
-        $scope.tabledata = [];
+        $scope.dimensionrule=false;
+        $scope.dimensionrelationtable=false;
+        $scope.dimensionrule=false;
+        $scope.dimensionrelationtable=false;
+        $scope.resultdata={
+                cateGory:[]
+            };
+        $scope.chckresult();
+        $scope.tabledata =[];
+       $scope.showResult = false;
+       $scope.userMsg = "Please select search criteria from left";
     }
     $scope.onShowlibrary = function() {
         $scope.currentTab = 'html/search-result.html';
-        $scope.tabledata = [];
+        $scope.dimensionrule=false;
+        $scope.dimensionrelationtable=false;
+        $scope.resultdata={
+                cateGory:[]
+            };
+        $scope.chckresult();
+        $scope.tabledata =[];
+       $scope.showResult = false;
+       $scope.userMsg = "Please select search criteria from left";
+
+        
     }
 
 
@@ -490,7 +510,10 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
     $scope.name = $rootScope.username;
     /*-------/code for search pages------*/
     $scope.getResult = function(data) {
-		
+    	var id = data.RuleId;
+    	$scope.ruleNo = data.RuleIdValue;
+		$scope.ruleName = data.Rule;
+    	
     	//rule-relation table display shuffle
 		$scope.dimensionrelationtable=false;
 		$scope.dimensionrule=true;
@@ -506,7 +529,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
         $scope.responseText = [];
         $scope.inputDisplay = [];
 
-        SearchResultService.getRuleSearchResult(data).then(function(result) {
+        SearchResultService.getRuleSearchResult(id).then(function(result) {
             $scope.ruleResult = result.RuleDescription;
             $scope.logSource = result.LogSource[0].Value;
             $scope.input = result.Input;
@@ -1051,10 +1074,13 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
             $scope.dimensionrule=false;
             $scope.dimensionrelationtable=false;
             alert('Please select search criteria from dimensions');
-            $scope.userMsg = "Please select search criteria from dimensions";
-            $scope.resultdata.cateGory.length=0;
-            $scope.chckresult();
-           
+//  
+      	$scope.chckresult();
+      	$scope.tabledata =[];
+          $scope.showResult = false;
+          $scope.userMsg = "Please select search criteria from left";
+
+
             return false;
        }
 

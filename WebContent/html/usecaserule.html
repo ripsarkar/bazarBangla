@@ -25,7 +25,9 @@
 
     <h4 class="topborder">Result</h4>
     <div class="panel panel-default tablecontrol">
-             <table class="table table-striped searchtablerow fixed-header">
+    <div ng-show="showResult">
+             <table class="searchtable">
+             <thead>
                     <tr class="tableheader">
                     	 <th>Use Case Category</th>
                         <th>Use Case Sub Category</th>
@@ -37,9 +39,8 @@
                         <th ng-hide="exported">Export<a href="javascript:void(0);" class="exprticon" ng-click="exportFilesRulepg();"></a></th>
                         <th>Use case Rule Description</th>
                     </tr>
-             </table>
-             <div class="searchtable">
-               <table class="table table-striped searchtablerow fixed-header">
+           </thead>
+           <tbody>
                     <tr ng-repeat="usecrule in tabledata" class="usecaseTablerule">
                         <td>{{usecrule.usecase_category}}</td>
                         <td>{{usecrule.usecase_subcategory}}</td>
@@ -47,7 +48,7 @@
                         <td><a class="dimensionTableBasic" href="javascript:void(0);" ng-click="uscaserelationclick(usecrule)">{{usecrule.usecase_name}}</a>
                         </td>
                         <td>{{usecrule.usecase_rule_id}}</td>
-                        <td class="exportid"><a class="dimensionTableBasic" href="javascript:void(0);" ng-click="uscaseruleclick(usecrule.usecase_rule_surr_id)">
+                        <td class="exportid"><a class="dimensionTableBasic" href="javascript:void(0);" ng-click="uscaseruleclick(usecrule)">
 							{{usecrule.usecase_rule_name}} </a>
                         </td>
 						<td align="center" class="oobvalue">{{usecrule.oob_flag}}</td>	
@@ -60,9 +61,31 @@
                         </td> -->
                         <td>{{usecrule.usecase_rule_desc}}</td>
                     </tr>
+                    </tbody>
             </table>
-        <div ng-model="withNoData" class="pleaseprovide" ng-show="pleaseprovide">{{nosearch}}</div>
-        </div>
+    </div>
+      <div ng-show="!showResult">
+       <table class="searchtable">
+             <thead>
+                    <tr class="tableheader">
+                    	 <th>Use Case Category</th>
+                        <th>Use Case Sub Category</th>
+                        <th>Use Case#</th>
+                        <th>Use Case</th>
+                        <th>Use Case Rule #</th>
+                        <th>Use Case Rule</th>
+                        <th>Out of Box</th>
+                        <th ng-hide="exported">Export<a href="javascript:void(0);" class="exprticon" ng-click="exportFilesRulepg();"></a></th>
+                        <th>Use case Rule Description</th>
+                    </tr>
+           </thead>
+           <tbody>
+           	<tr align="middle">
+					<td colspan="7">{{nosearch}}</td>
+				</tr>
+           </tbody>
+           </table>
+    </div>
     </div>
     <div class="uitabs">
         <tabset>
@@ -90,13 +113,13 @@
                                 </li>
                             </td>
                         </tr>
-                        <tr>
+                       <!--  <tr>
                             <th class="tableheaderLeft">Threat category:</th>
                             <td>
                                 <li ng-repeat="tcatagory in threatcategory" class="tcataliststybull"><a data-toggle="tooltip" data-placement="left" title="{{tcatagory.desc}}" tooltip-placement="left" class="tooltiphov"><strong>({{tcatagory.type}})</strong> {{tcatagory.name}}({{tcatagory.id}}) </a>
                                 </li>
                             </td>
-                        </tr>
+                        </tr> -->
                         <tr>
                             <th class="tableheaderLeft">Essential Practice:</th>
                             <td>
@@ -140,6 +163,13 @@
     <!-- /relationship table -->
     <!-------------bottom tab-------------->
     <div ng-show="ruletable">
+    <h4>
+    	<span class="relacategoryBold">Rule Details </span><span
+				class="relacategoryN">for </span><span class="relacategoryBold">
+				Rule Id : </span> <span class="relacategoryN">{{ruleNo}} </span><span
+				class="relacategoryBold"> Rule Name : </span><span
+				class="relacategoryN">{{ruleName}} </span>
+				</h4>
         <div class="uitabs">
             <div class="uitabsresult">
                 <div class="tabsreg">

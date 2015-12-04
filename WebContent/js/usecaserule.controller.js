@@ -3,7 +3,7 @@
 app.controller("usecaseruleController",["$scope","ApiServicerule","$rootScope",'$http', function($scope, ApiServicerule, $rootScope, $http){
 	
 	$scope.nosearch="Please provide Rule Id/Name to Search";
-
+	$scope.showResult=false;
 	
 	var namefield;
 	var idfield;
@@ -188,9 +188,10 @@ app.controller("usecaseruleController",["$scope","ApiServicerule","$rootScope",'
 							$rootScope.loadinganimation=false;
 							//
 			    			//end loading animation	
-							
+							$scope.showResult=true;
 							if($scope.resultdata.cateGory.length==0){
 								$scope.pleaseprovide = false;
+								$scope.showResult=false;
 								//$scope.nosearch = resultnamerule.useCaseRules[0].error;
 								$scope.nosearch ="No Usecase Rule Found";
 								
@@ -230,7 +231,12 @@ app.controller("usecaseruleController",["$scope","ApiServicerule","$rootScope",'
 	$scope.rulerelationtable=false;
 	
 	//ruletable event click
-	$scope.uscaseruleclick=function(usecaseruleid){
+	$scope.uscaseruleclick=function(data){
+		
+		$scope.ruleNo = data.usecase_rule_id;
+		$scope.ruleName = data.usecase_rule_name;
+		
+		var usecaseruleid=	data.usecase_rule_surr_id;
 		
 				//tab select/deselect
 	      $scope.licreateruledetails = 'active';

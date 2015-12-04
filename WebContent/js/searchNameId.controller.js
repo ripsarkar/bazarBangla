@@ -6,6 +6,8 @@ app.controller("searchNameIdController",["$scope","ApiService", "$rootScope", fu
 	var namefield;
 	var idfield;
 	
+	$scope.showResult=false;
+	
 	/*-----------------watch function starts-----------------*/
 
     $scope.$watch(function () {
@@ -98,8 +100,10 @@ app.controller("searchNameIdController",["$scope","ApiService", "$rootScope", fu
 			{
 					$scope.usercaseall = resultname.useCases;
 					$rootScope.loadinganimation=false;
+					$scope.showResult=true;
 					if(resultname.useCases[0].error==" No Usecase Found"){
 						$scope.pleaseprovide = false;
+						$scope.showResult=false;
 						//$scope.nosearch = resultname.useCases[0].error;
 						$scope.nosearch = "No Usecase Found";
 						

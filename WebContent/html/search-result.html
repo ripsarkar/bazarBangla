@@ -6,68 +6,85 @@
 	</div>
 	<div class="clear-fix"></div>
 	<div class="panel panel-default tablecontrol">
-
-		<table class="table table-striped searchtablerow fixed-header">
-			<tr class="tableheader">
-				<th>Use Case Category</th>
-				<th>Use Case Sub Category</th>
-				<th>Use Case#</th>
-				<th>Use Case</th>
-				<th>Use Case Rule #</th>
-				<th>Use Case Rule</th>
-				<th>Out of Box</th>
-				<th ng-hide="exported">Export<a href="javascript:void(0);"
-					class="exprticon" ng-click="exportFiles();"></th>
-				<th>Use Case Rule Description</th>
-			</tr>
-		</table>
-		<div class="searchtable">
-			<div ng-show="showResult">
-				<div class="usecaselibtable">
-					<table class="table table-striped searchtablerow fixed-header">
-						<tr ng-repeat="result in tabledata" class="usecaseTable">
-							<td ng-model="datashown">{{result.Category}}</td>
-							<td>{{result.SubCategory}}</td>
-							<td>{{result.IdLabel}}</td>
-							<td><a class="dimensionTableBasic"
-								href="javascript:void(0);"
-								ng-click='dimensionRelationship(result)'>{{result.UseCase}}</a>
-							</td>
-							<td>{{result.RuleIdValue}}</a>
-							</td>
-							<td><a class="dimensionTableBasic"
-								href="javascript:void(0);" ng-click="getResult(result.RuleId)">
-									{{result.Rule}}</a></td>
-							<td align="center" class="oobvalue">{{result.oob_flag}}</td>
-							<td align="center" ng-hide="exported">
-								<div ng-show="result.exportYes">
-									<input id="{{result.packageSurrId}}" type="checkbox"
-										value="{{result.packageSurrId}}"
-										ng-checked="selection.indexOf(result.packageSurrId) > -1"
-										ng-click="toggleSelection(result)" />
-								</div>
-							</td>
-
-							<!-- <td ng-hide="exported">
-                            <a href="" class="exprticon" ng-click='exprt(data)' ng-show="datashown">
-                        </td> -->
-							<td>{{result.RuleDescription}}</td>
-						</tr>
-
-					</table>
-				</div>
-			</div>
-			<div ng-show="!showResult">
-				<table class="table table-striped">
-					<tr align="middle">
-						<td colspan="7">{{userMsg}}</td>
+		<div ng-show="showResult">
+			<table class="searchtable">
+				<thead>
+					<tr>
+						<th>Use Case Category</th>
+						<th>Use Case Sub Category</th>
+						<th>Use Case#</th>
+						<th>Use Case</th>
+						<th>Use Case Rule #</th>
+						<th>Use Case Rule</th>
+						<th>Out of Box</th>
+						<th ng-hide="exported">Export<a href="javascript:void(0);"
+							class="exprticon" ng-click="exportFiles();"></th>
+						<th>Use Case Rule Description</th>
 					</tr>
-				</table>
-			</div>
+				</thead>
+
+				<tbody>
+				<tr ng-repeat="result in tabledata" class="usecaseTable">
+						<td ng-model="datashown">{{result.Category}}</td>
+						<td>{{result.SubCategory}}</td>
+						<td>{{result.IdLabel}}</td>
+						<td><a class="dimensionTableBasic" href="javascript:void(0);"
+							ng-click='dimensionRelationship(result)'>{{result.UseCase}}</a></td>
+						<td>{{result.RuleIdValue}}</a>
+						</td>
+						<td><a class="dimensionTableBasic" href="javascript:void(0);"
+							ng-click="getResult(result)"> {{result.Rule}}</a></td>
+						<td align="center" class="oobvalue">{{result.oob_flag}}</td>
+						<td align="center" ng-hide="exported">
+							<div ng-show="result.exportYes">
+								<input id="{{result.packageSurrId}}" type="checkbox"
+									value="{{result.packageSurrId}}"
+									ng-checked="selection.indexOf(result.packageSurrId) > -1"
+									ng-click="toggleSelection(result)" />
+							</div>
+						</td>
+						<td>{{result.RuleDescription}}</td>
+					</tr>
+				</tbody>
+
+
+			</table>
 		</div>
+		<div ng-show="!showResult">
+			<table class="searchtable">
+				<thead>
+					<tr>
+						<th>Use Case Category</th>
+						<th>Use Case Sub Category</th>
+						<th>Use Case#</th>
+						<th>Use Case</th>
+						<th>Use Case Rule #</th>
+						<th>Use Case Rule</th>
+						<th>Out of Box</th>
+						<th ng-hide="exported">Export<a href="javascript:void(0);"
+							class="exprticon" ng-click="exportFiles();"></th>
+						<th>Use Case Rule Description</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr align="middle">
+					<td colspan="7">{{userMsg}}</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+
 	</div>
 
 	<div class="uitabs" ng-show="dimensionrule">
+	<h4>
+			<span class="relacategoryBold">Rule Details </span><span
+				class="relacategoryN">for </span><span class="relacategoryBold">
+				Rule Id : </span> <span class="relacategoryN">{{ruleNo}} </span><span
+				class="relacategoryBold"> Rule Name : </span><span
+				class="relacategoryN">{{ruleName}} </span>
+		</h4>
 		<div class="uitabsresult">
 			<div class="tabsreg">
 				<div class="margintp1 col-md-12">
@@ -202,8 +219,11 @@
 	<!-- relationship table -->
 	<div ng-show="dimensionrelationtable">
 		<h4>
-			<span class="relacategoryBold">Relationships </span><span class="relacategoryN">for </span><span class="relacategoryBold"> Use Case # : </span>
-			<span class="relacategoryN">{{useCaseNo}} </span><span class="relacategoryBold"> Use Case Name : </span><span class="relacategoryN">{{useCaseName}} </span>
+			<span class="relacategoryBold">Relationships </span><span
+				class="relacategoryN">for </span><span class="relacategoryBold">
+				Use Case # : </span> <span class="relacategoryN">{{useCaseNo}} </span><span
+				class="relacategoryBold"> Use Case Name : </span><span
+				class="relacategoryN">{{useCaseName}} </span>
 		</h4>
 		<div class="panel panel-default tablecontrol">
 			<div class="table table-striped relationshiptable">

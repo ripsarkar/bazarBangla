@@ -239,35 +239,63 @@ body {
     padding-top: 5px !important;
     border-top: 2px solid #d5e9f9;
 }
-.searchtable{
+
+
+
+
+/****  Table Alignment Issue  ****/
+.tablecontrol table.searchtable {
+	display: block !important;
+    width: 100% !important;
+    float: left;
+}
+.searchtable tbody, .searchtable thead {
+	display: inline-block;
+    width: 100%;	
+}
+.searchtable tbody {
 	max-height: 250px;
-	overflow-y: scroll;
+    overflow-y: scroll;
 }
-.searchtablerow td {
-    font-size: 12px;
-    color: #8d8d8e;
-    width: 11%;
-  
-  
+.searchtable thead {}
+.searchtable thead {
+	background: rgb(5, 168, 230) none repeat scroll 0% 0% !important;
+	font-weight: normal !important;
+	display: inline-block;
+    width: 100%;	
 }
 
+.searchtable td, .searchtable th {
+    font-size: 12px; 
+    padding: 8px;
+}
+.searchtable th {width: 10.6%}
+.searchtable td {width: 11%;}
+.searchtable th:last-child {width: 15.2%;}
+.searchtable th {color: #fff;}
+.searchtable td {color: #8d8d8e;}
+.searchtable tbody tr:nth-child(odd) {background: #f9f9f9;}
+.searchtable tbody tr:nth-child(even) {background: #fff;}
+.searchtable tbody tr:hover {background: #D5E9F9;}
+.searchtable.searchname tr {
+	display: inline-block;
+    width: 100%;
+}
+.searchtable.searchname th {
+	display: inline-block;
+    width: 32.1%;
+}
+.searchtable.searchname td {
+	display: inline-block;
+    width: 33%;
+}
+/*********************************************************************/
 
-.searchtablerow th {
+/* .searchtablerow th {
     font-size: 12px;
     color: #fff;
     width: 11%;
-   
-
-}
-.searchtablerow thead {
-	/* float: left; */
-}
-.searchtablerow tbody {
-/*     overflow-y: scroll;
-    width: 100%;
-    height: 298px;
-    float: left; */
-}
+} */
 .relaList{
 	float: left;
 	display:inline;
