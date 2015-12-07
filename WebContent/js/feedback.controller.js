@@ -5,7 +5,7 @@ app.controller("feedbackController", ["$scope", "$rootScope", "$state", '$http',
     //$scope.rulesPckg='';
 
     $scope.currentPage = 0;
-    $scope.pageSize = 4;
+    $scope.pageSize = 10;
     //$scope.data = [];
     $scope.pgnation = function() {
         if (typeof $scope.rulesPckg != 'undefined' && $scope.rulesPckg.length > 0) {
@@ -21,19 +21,7 @@ app.controller("feedbackController", ["$scope", "$rootScope", "$state", '$http',
     		$scope.pageLoad();
     	}
     });
-    /*date picker code*/
-//    $scope.$watch(function () {
-//    	if($scope.startdt != undefined || $scope.startdt!=''){
-//    		var dt =new Date();
-//        	var hr=dt.getHours();
-//        	var min=dt.getMinutes();
-//        	var sec=dt.getSeconds();
-//        	var time = hr +":"+min+":"+sec;
-//        	$scope.startdt = $scope.startdt+time;
-//    	}
-//    	
-//    //	alert(time);
-//    });
+   
       
     $scope.pageLoad = function() {
     	$rootScope.loadinganimation=true;
@@ -152,9 +140,15 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '
     var fdmodeldata = feedback_model.getfbModal_data();
      $scope.size = 'lg';
     $scope.open = function($event) {
-        $event.preventDefault();
+    	$event.preventDefault();
         $event.stopPropagation();
         $scope.opened = true;
+        $scope.startTime = $filter('date')(new Date(), 'HH:mm:ss');
+   
+    };
+    $scope.onchangeStartDate =function() {
+    	var stDate =  $filter('date')($scope.startdt, 'yyyy-MM-dd');
+   	  	$scope.startdt = stDate  +" "+ $scope.startTime;
     };
 
     $scope.cancel = function() {
@@ -169,6 +163,13 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '
         $event.preventDefault();
         $event.stopPropagation();
         $scope.Upopened = true;
+        $scope.updateTime = $filter('date')(new Date(), 'HH:mm:ss');
+    };
+    
+    $scope.onchangeUpdtDate =function() {
+    	var updDate =  $filter('date')($scope.updatedt, 'yyyy-MM-dd');
+   	  	$scope.updatedt = updDate  +" "+ $scope.updateTime;
+  
     };
 
     $scope.feedbackFrm = {
@@ -180,6 +181,7 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '
         fedbckcomments: ""
     };
     $scope.ucruleid = "";
+    
     $scope.feedbackForm = function(id, fdlabel, fdname,index) {
     	$rootScope.loadinganimation=true;
         
@@ -202,15 +204,17 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '
                         $scope.pcklists = [];
                     }
                     if (fbformId != "" && fbformId != null && $scope.feedbackdetails[0].client_rule_id != null && typeof fbformId != 'undefined') {
-                        var impstrt = $scope.feedbackdetails[0].uc_rule_impl_start_dt;
-                        var impupt = $scope.feedbackdetails[0].uc_rule_impl_updt_dt;
-                        //$scope.feedbackFrm.impstrtdate = impstrt.split('.')[0];
-                        $scope.startdt = impstrt;
-                        $scope.dt = $scope.feedbackFrm.impstrtdate;
+                   
+                       var stDt = $scope.feedbackdetails[0].uc_rule_impl_start_dt;
+                      $scope.startdt = stDt.split(' ')[0]+" "+ stDt.split(' ')[1];
+                      
+                      var upDt = $scope.feedbackdetails[0].uc_rule_impl_updt_dt;
+                      $scope.updatedt = upDt.split(' ')[0]+" "+ upDt.split(' ')[1];
+               
                         $scope.feedbackFrm.orgruleid = $scope.feedbackdetails[0].client_rule_id;
                         $scope.feedbackFrm.orgrulename = $scope.feedbackdetails[0].client_rule_name;
-                        //$scope.feedbackFrm.impupdate = impupt.split('.')[0];
-                        $scope.updatedt = impupt;
+                     
+                      
                         $scope.feedbackFrm.Implper = $scope.feedbackdetails[0].rule_impl_percent.toString();
                         $scope.feedbackFrm.fedbckcomments =  $scope.feedbackdetails[0].client_rule_comment;
                     } else {
@@ -267,8 +271,10 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '
         	$scope.validation = true;
         	 updt = true;
         }
-    	 $scope.feedbackFrm.impstrtdate =  $filter('date')($scope.startdt, 'yyyy-MM-dd HH:mm:ss');
-	     $scope.feedbackFrm.impupdate =  $filter('date')($scope.updatedt, 'yyyy-MM-dd HH:mm:ss');
+    	
+    	 $scope.feedbackFrm.impstrtdate = $scope.startdt;
+    	 $scope.feedbackFrm.impupdate = $scope.updatedt;
+    	
 
 	     if (stdt && updt) {
 	    	 stdt =false;

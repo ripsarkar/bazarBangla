@@ -60,7 +60,12 @@
 
         <div class="modal-header">
             <button type="button" class="close" ng-click="cancel()">&times;</button>
-            <h4 class="modal-title model_tit">Input Feedback Details <span class="pull-right">Use Case Rule ID: {{ fdlabel}} , Rule Name : {{fdname}}</span></h4>
+            <h4 class="modal-title model_tit"><span class="title-head">Input Feedback Details</span>
+			<span class="pull-right"><span class="relacategoryBold">
+				Use Case Rule ID: </span> <span class="relacategoryN">{{ fdlabel}} </span><span
+				class="relacategoryBold"> Rule Name : </span><span
+				class="relacategoryN">{{fdname}} </span></span></h4>
+
         </div>
         <div class="modal-body">
             <form name="feedbackFrm" ng-submit="feedbacksubmitchck(id)" novalidate autocomplete="off" role="form" style="margin: 10px 35px;">
@@ -69,7 +74,7 @@
                     <div class="col-md-6">
                         <label> Implementation start date <span class="red"> *</span></label>
                         <p class="input-group">
-                            <input type="text" class="form-control" required  datepicker-popup="yyyy-MM-dd HH:mm:ss" ng-model="startdt" datepicker-options="dateOptions" is-open="opened" />
+                            <input type="text" class="form-control" required ng-change="onchangeStartDate()"  datepicker-popup="yyyy-MM-dd" ng-model="startdt" datepicker-options="dateOptions" is-open="opened" />
                             <span class="input-group-btn">
                			 <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
              			 </span>
@@ -88,7 +93,7 @@
                     <div class="col-md-6 col-sm-6">
                         <label> Implementation update date/Time <span class="red"> *</span></label>
                         <p class="input-group">
-                            <input type="text" class="form-control" ng-change="isValidDate(updatedt)" required datepicker-popup="yyyy-MM-dd HH:mm:ss" ng-model="updatedt" is-open="Upopened" />
+                            <input type="text" class="form-control"  ng-change="onchangeUpdtDate()" required datepicker-popup="yyyy-MM-dd" ng-model="updatedt" is-open="Upopened" />
                             <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="Upopen($event)"> <i class="glyphicon glyphicon-calendar"> </i></button>
               </span>

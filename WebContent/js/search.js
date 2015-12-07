@@ -335,7 +335,1171 @@ app.factory('Items', ['$http','$rootScope', function($http, $rootScope) {
 
 
 app.controller("searchController",["$scope","SearchResultService","$rootScope", 'Items', '$http', function($scope, SearchResultService, $rootScope, Items, $http){
-    
+	/////////////////////////////////////////////////////////
+	$rootScope.loadinganimation=true;
+	 $http.get($rootScope.url+"/getAllApiNew/9052").success(function(result){
+		 $rootScope.loadinganimation=false;
+		 $scope.regulacat = result.RegCat;
+		 $scope.cybersec = result.CyberSecFunc;
+		 $scope.industry = result.Industry;
+		 $scope.eepp = result.EP;
+		 $scope.logsour = result.LogSource;
+		 $scope.thrtmodl = result.ThreatModel;
+	 });
+
+	 
+	 angular.element(function () {
+			angular.element('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
+			angular.element('.tree li.parent_li > span').on('click', function (e) {
+				
+				angular.element(this).next("ul").css('display','inline');
+
+		        var children = angular.element(this).parent('li.parent_li').find(' > ul > li');
+		        if (children.is(":visible")) {
+		            children.hide('fast');
+		            angular.element(this).attr('title', 'Expand this branch').find(' > i').text("+");
+		            angular.element(".parenttreenone").css({
+			            'overflow-y': 'hidden',
+			            'height': '300px'
+			            });
+
+		        } else {
+		            children.show('fast');
+		            angular.element(this).attr('title', 'Collapse this branch').find(' > i').text("-");
+		            angular.element(".parenttreenone").css({
+			            'overflow-y': 'scroll',
+			            'height': '300px'
+			            });
+		        }
+		        e.stopPropagation();
+		    });
+	});
+	 
+	var mm=true;
+	angular.element('.tree li.parent_li > span').on('click',function () {
+		if(mm){
+		angular.element('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
+		angular.element('.tree li.parent_li > span').on('click', function (e) {
+	        var children = angular.element(this).parent('li.parent_li').find(' > ul > li');
+	        if (children.is(":visible")) {
+	            children.hide('fast');
+	            angular.element(this).attr('title', 'Expand this branch').find(' > i').text("+");
+	        } else {
+	            children.show('fast');
+	            angular.element(this).attr('title', 'Collapse this branch').find(' > i').text("-");
+	        }
+	        e.stopPropagation();
+	    });
+		mm=false;
+		}
+		else{
+			e.stopPropagation();
+		}
+	});
+
+	angular.element('.collapall').on('click',function () {
+		//alert(2);
+		angular.element(".start").next("ul").css('display','none');
+        angular.element(".parenttreenone").css({
+            'overflow-y': 'hidden',
+            'height': '300px'
+            });
+        angular.element(".headPlus").text("+");
+	});
+	 
+	$scope.$watch(function () {
+		angular.element("input[type='checkbox']").change(function () {
+			angular.element(this).siblings('ul')
+		           .find("input[type='checkbox']")
+		           .prop('checked', this.checked);
+		  });
+		/*if(angular.element(".findchild").children().length==0){
+			angular.element(".findchild").parent('li').remove();
+		}*/
+	});
+	 var postjsonresult = {
+				"RegCat": [],
+				"CyberSecFunc": [],
+				"Industry": [],
+				"EP": [],
+				"ThreatModel": [],
+				"LogSource": []
+			};
+	 
+	 
+	 $scope.clear = function() {
+		 $scope.currentTab = 'html/search-result.html';
+	        $scope.dimensionrule=false;
+	        $scope.dimensionrelationtable=false;
+	        $scope.tabledata =[];
+	       $scope.showResult = false;
+	       $scope.userMsg = "Please select search criteria from left";
+	 }
+	angular.element('.alltreeclear').on('click',function () {     
+		angular.element("input[type='checkbox']").siblings('ul')
+        .find("input[type='checkbox']")
+        .prop('checked', false);
+		angular.element(this).siblings("input[type='checkbox']")
+        .prop('checked', false);
+		postjsonresult = {
+				"RegCat": [],
+				"CyberSecFunc": [],
+				"Industry": [],
+				"EP": [],
+				"ThreatModel": [],
+				"LogSource": []
+			};
+	});
+	
+	
+//////////////////CODE FOR CYBERSEC//////////////////////
+
+	var matchfound = false;
+	var semimatchfound = false;
+	var subcatlast ={};
+	var UseCSubCat={};
+	var usecase ={};
+	var i,j,k;
+	$scope.entervalueSubcat = function($event,ndval){
+		subcatlast ={};
+		UseCSubCat={};
+		usecase ={};
+		//get last id
+		subcatlast["id"] = parseInt(ndval);
+		//get 2ndid
+		var ucCatSuID=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('input').val();
+		//get 1stid
+		var ucSubCatSuID=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().parent().parent().children('input').val();
+		//inserting element in post json
+		if(angular.element($event.currentTarget).is(':checked') == true){
+
+			for(i=0;i<postjsonresult.CyberSecFunc.length;i++){
+				if(postjsonresult.CyberSecFunc[i].id == ucSubCatSuID){
+					for(j=0;j<postjsonresult.CyberSecFunc[i].UseCaseCat.length;j++){
+						if(postjsonresult.CyberSecFunc[i].UseCaseCat[j].id == ucCatSuID){
+							for(k=0;k<postjsonresult.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat.length;k++){
+								if(postjsonresult.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].id == subcatlast["id"]){
+									totalmatchfound = true;
+									break;
+								}
+							}
+							//alert("semimatchfound");
+							semimatchfound = true;
+							break;
+							}
+						}
+					//alert("matchfound");
+					matchfound = true;
+					break;
+				}
+			}
+			if(matchfound == false){
+				UseCSubCat["UseCaseSubCat"] = [];
+				usecase["UseCaseCat"] = [];
+				UseCSubCat["UseCaseSubCat"].push(subcatlast);
+				UseCSubCat["id"] = parseInt(ucCatSuID);
+				usecase["UseCaseCat"].push(UseCSubCat);
+				usecase["id"] = parseInt(ucSubCatSuID);
+			    postjsonresult.CyberSecFunc.push(usecase);
+			    console.log(postjsonresult);
+			}
+			if(semimatchfound == true){
+				postjsonresult.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat.push(subcatlast);
+			    console.log(postjsonresult);
+			}
+
+		}
+		//removing element from post json
+		else{
+			for(i=0;i<postjsonresult.CyberSecFunc.length;i++){
+				if(postjsonresult.CyberSecFunc[i].id == ucSubCatSuID){
+					for(j=0;j<postjsonresult.CyberSecFunc[i].UseCaseCat.length;j++){
+						if(postjsonresult.CyberSecFunc[i].UseCaseCat[j].id == ucCatSuID){
+							for(k=0;k<postjsonresult.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat.length;k++){
+								if(postjsonresult.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].id == subcatlast["id"]){
+									if(postjsonresult.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat.length==1){
+										
+										postjsonresult.CyberSecFunc.splice(i, 1);
+									    console.log(postjsonresult);
+
+										break;
+									}
+									else{
+										postjsonresult.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat.splice(k, 1);
+										break;
+										
+									}
+								}
+							}
+							break;
+							}
+						}
+					break;
+				}
+			}
+			
+		}
+
+		
+	}
+	$scope.UsecaseSubCategory = function($event){
+		
+		var upmatchfound = false;
+		subcatlast ={};
+		UseCSubCat={};
+		usecase ={};
+		UseCSubCat["UseCaseSubCat"] = [];
+		usecase["UseCaseCat"] = [];
+		
+		// = parseInt(ndvalusesub);
+		//get 2ndid
+		var ucCatSuID=angular.element($event.currentTarget).parent().parent().parent().children('input').val();
+		//get 1stid	
+		var ucSubCatSuID=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().children('input').val();
+
+		subcatlast["id"] = [];
+		angular.element($event.currentTarget).parent().children('ul').children('li').each(function(){
+			subcatlast ={};
+			subcatlast["id"] = parseInt(angular.element(this).children('input').val());
+			UseCSubCat["UseCaseSubCat"].push(subcatlast);
+		})
+		//inserting element in post json
+		if(angular.element($event.currentTarget).is(':checked') == true){
+			
+			
+			for(i=0;i<postjsonresult.CyberSecFunc.length;i++){
+				if(postjsonresult.CyberSecFunc[i].id == ucSubCatSuID){
+					for(j=0;j<postjsonresult.CyberSecFunc[i].UseCaseCat.length;j++){
+						if(postjsonresult.CyberSecFunc[i].UseCaseCat[j].id == ucCatSuID){
+							postjsonresult.CyberSecFunc[i].UseCaseCat.splice(j, 1);
+							upmatchfound = false;
+							break;
+							}
+						}
+					upmatchfound = true;
+					break;
+				}
+			}
+			
+			if(upmatchfound == false){
+				UseCSubCat["id"] = parseInt(ucCatSuID);
+				usecase["UseCaseCat"].push(UseCSubCat);
+				usecase["id"] = parseInt(ucSubCatSuID);
+			    postjsonresult.CyberSecFunc.push(usecase);
+			    console.log(postjsonresult);
+			}
+
+		}
+		//removing element from post json
+		else{
+			for(i=0;i<postjsonresult.CyberSecFunc.length;i++){
+				if(postjsonresult.CyberSecFunc[i].id == ucSubCatSuID){
+					for(j=0;j<postjsonresult.CyberSecFunc[i].UseCaseCat.length;j++){
+						if(postjsonresult.CyberSecFunc[i].UseCaseCat[j].id == ucCatSuID){
+
+									if(postjsonresult.CyberSecFunc[i].UseCaseCat.length==1){
+										
+										postjsonresult.CyberSecFunc.splice(i, 1);
+									    console.log(postjsonresult);
+
+										break;
+									}
+									else{
+										postjsonresult.CyberSecFunc[i].UseCaseCat.splice(j, 1);
+										break;
+										
+									}
+							break;
+							}
+						}
+					break;
+				}
+			}
+		//root for loop ends
+		}
+	}
+	$scope.entervalue = function($event,ndvalusesub){
+		var upmatchfound = false;
+		subcatlast ={};
+		UseCSubCat={};
+		usecase ={};
+		UseCSubCat["UseCaseSubCat"] = [];
+		usecase["UseCaseCat"] = [];
+		
+		// = parseInt(ndvalusesub);
+		//get 2ndid
+		var ucCatSuID=parseInt(ndvalusesub);
+		//get 1stid	
+		var ucSubCatSuID=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('input').val();
+
+		subcatlast["id"] = [];
+		angular.element($event.currentTarget).parent().children('ul').children('li').children('ul').children('li').each(function(){
+			subcatlast ={};
+			subcatlast["id"] = parseInt(angular.element(this).children('input').val());
+			UseCSubCat["UseCaseSubCat"].push(subcatlast);
+		})
+		//inserting element in post json
+		if(angular.element($event.currentTarget).is(':checked') == true){
+			
+			
+			for(i=0;i<postjsonresult.CyberSecFunc.length;i++){
+				if(postjsonresult.CyberSecFunc[i].id == ucSubCatSuID){
+					for(j=0;j<postjsonresult.CyberSecFunc[i].UseCaseCat.length;j++){
+						if(postjsonresult.CyberSecFunc[i].UseCaseCat[j].id == ucCatSuID){
+							postjsonresult.CyberSecFunc[i].UseCaseCat.splice(j, 1);
+							upmatchfound = false;
+							break;
+							}
+						}
+					upmatchfound = true;
+					break;
+				}
+			}
+			
+			if(upmatchfound == false){
+				UseCSubCat["id"] = parseInt(ucCatSuID);
+				usecase["UseCaseCat"].push(UseCSubCat);
+				usecase["id"] = parseInt(ucSubCatSuID);
+			    postjsonresult.CyberSecFunc.push(usecase);
+			    console.log(postjsonresult);
+			}
+
+		}
+		//removing element from post json
+		else{
+			for(i=0;i<postjsonresult.CyberSecFunc.length;i++){
+				if(postjsonresult.CyberSecFunc[i].id == ucSubCatSuID){
+					for(j=0;j<postjsonresult.CyberSecFunc[i].UseCaseCat.length;j++){
+						if(postjsonresult.CyberSecFunc[i].UseCaseCat[j].id == ucCatSuID){
+
+									if(postjsonresult.CyberSecFunc[i].UseCaseCat.length==1){
+										
+										postjsonresult.CyberSecFunc.splice(i, 1);
+									    console.log(postjsonresult);
+
+										break;
+									}
+									else{
+										postjsonresult.CyberSecFunc[i].UseCaseCat.splice(j, 1);
+										break;
+										
+									}
+							break;
+							}
+						}
+					break;
+				}
+			}
+		//root for loop ends
+		}
+		
+	}
+
+//////////////////END OF CODE FOR CYBERSEC///////////////	
+////////////////////CODE FOR REGCAT/////////////////////
+	var matchfound2 = false;
+	var semimatchfound2 = false;
+	var subcatlast2 ={};
+	var UseCSubCat2={};
+	var usecase2 ={};
+	
+	$scope.entervalueSubcat2 = function($event,ndval){
+		subcatlast2 ={};
+		UseCSubCat2={};
+		usecase2 ={};
+		//get last id
+		subcatlast2["id"] = parseInt(ndval);
+		//get 2ndid
+		var ucCatSuID2=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('input').val();
+		//get 1stid
+		var ucSubCatSuID2=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().parent().parent().children('input').val();
+		//inserting element in post json
+		if(angular.element($event.currentTarget).is(':checked') == true){
+
+			for(var i=0;i<postjsonresult.RegCat.length;i++){
+				if(postjsonresult.RegCat[i].id == ucSubCatSuID2){
+					for(var j=0;j<postjsonresult.RegCat[i].RegPub.length;j++){
+						if(postjsonresult.RegCat[i].RegPub[j].id == ucCatSuID2){
+							for(var k=0;k<postjsonresult.RegCat[i].RegPub[j].RegCntl.length;k++){
+								if(postjsonresult.RegCat[i].RegPub[j].RegCntl[k].id == subcatlast2["id"]){
+									totalmatchfound2 = true;
+									break;
+								}
+							}
+							//alert("semimatchfound2");
+							semimatchfound2 = true;
+							break;
+							}
+						}
+					//alert("matchfound2");
+					matchfound2 = true;
+					break;
+				}
+			}
+			if(matchfound2 == false){
+				UseCSubCat2["RegCntl"] = [];
+				usecase2["RegPub"] = [];
+				UseCSubCat2["RegCntl"].push(subcatlast2);
+				UseCSubCat2["id"] = parseInt(ucCatSuID2);
+				usecase2["RegPub"].push(UseCSubCat2);
+				usecase2["id"] = parseInt(ucSubCatSuID2);
+			    postjsonresult.RegCat.push(usecase2);
+			    console.log(postjsonresult);
+			}
+			if(semimatchfound2 == true){
+				postjsonresult.RegCat[i].RegPub[j].RegCntl.push(subcatlast2);
+			    console.log(postjsonresult);
+			}
+
+		}
+		//removing element from post json
+		else{
+			for(var i=0;i<postjsonresult.RegCat.length;i++){
+				if(postjsonresult.RegCat[i].id == ucSubCatSuID2){
+					for(var j=0;j<postjsonresult.RegCat[i].RegPub.length;j++){
+						if(postjsonresult.RegCat[i].RegPub[j].id == ucCatSuID2){
+							for(var k=0;k<postjsonresult.RegCat[i].RegPub[j].RegCntl.length;k++){
+								if(postjsonresult.RegCat[i].RegPub[j].RegCntl[k].id == subcatlast2["id"]){
+									if(postjsonresult.RegCat[i].RegPub[j].RegCntl.length==1){
+										
+										postjsonresult.RegCat.splice(i, 1);
+									    console.log(postjsonresult);
+
+										break;
+									}
+									else{
+										postjsonresult.RegCat[i].RegPub[j].RegCntl.splice(k, 1);
+										break;
+										
+									}
+								}
+							}
+							break;
+							}
+						}
+					break;
+				}
+			}
+			
+		}
+
+		
+	}
+	var upmatchfound2 = false;
+	$scope.entervalue2 = function($event,ndvalusesub){
+		var subcatlast ={};
+		var UseCSubCat={};
+		var usecase ={};
+		UseCSubCat["RegCntl"] = [];
+		usecase["RegPub"] = [];
+		
+		// = parseInt(ndvalusesub);
+		//get 2ndid
+		var ucCatSuID=parseInt(ndvalusesub);
+		//get 1stid	
+		var ucSubCatSuID=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('input').val();
+
+		subcatlast["id"] = [];
+		angular.element($event.currentTarget).parent().children('ul').children('li').children('ul').children('li').each(function(){
+			subcatlast ={};
+			subcatlast["id"] = parseInt(angular.element(this).children('input').val());
+			UseCSubCat["RegCntl"].push(subcatlast);
+		})
+		//inserting element in post json
+		if(angular.element($event.currentTarget).is(':checked') == true){
+			
+			
+			for(i=0;i<postjsonresult.RegCat.length;i++){
+				if(postjsonresult.RegCat[i].id == ucSubCatSuID){
+					for(j=0;j<postjsonresult.RegCat[i].RegPub.length;j++){
+						if(postjsonresult.RegCat[i].RegPub[j].id == ucCatSuID){
+							postjsonresult.RegCat[i].RegPub.splice(j, 1);
+							upmatchfound2 = false;
+							break;
+							}
+						}
+					upmatchfound2 = true;
+					break;
+				}
+			}
+			
+			if(upmatchfound2 == false){
+				UseCSubCat["id"] = parseInt(ucCatSuID);
+				usecase["RegPub"].push(UseCSubCat);
+				usecase["id"] = parseInt(ucSubCatSuID);
+			    postjsonresult.RegCat.push(usecase);
+			    console.log(postjsonresult);
+			}
+
+		}
+		//removing element from post json
+		else{
+			for(i=0;i<postjsonresult.RegCat.length;i++){
+				if(postjsonresult.RegCat[i].id == ucSubCatSuID){
+					for(j=0;j<postjsonresult.RegCat[i].RegPub.length;j++){
+						if(postjsonresult.RegCat[i].RegPub[j].id == ucCatSuID){
+
+									if(postjsonresult.RegCat[i].RegPub.length==1){
+										
+										postjsonresult.RegCat.splice(i, 1);
+									    console.log(postjsonresult);
+
+										break;
+									}
+									else{
+										postjsonresult.RegCat[i].RegPub.splice(j, 1);
+										break;
+										
+									}
+							break;
+							}
+						}
+					break;
+				}
+			}
+		//root for loop ends
+		}
+		
+	}
+
+	$scope.RegCatSubCategory = function($event){
+		
+		var upmatchfound = false;
+		subcatlast ={};
+		UseCSubCat={};
+		usecase ={};
+		UseCSubCat["RegCntl"] = [];
+		usecase["RegPub"] = [];
+		
+		// = parseInt(ndvalusesub);
+		//get 2ndid
+		var ucCatSuID=angular.element($event.currentTarget).parent().parent().parent().children('input').val();
+		//get 1stid	
+		var ucSubCatSuID=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().children('input').val();
+
+		subcatlast["id"] = [];
+		angular.element($event.currentTarget).parent().children('ul').children('li').each(function(){
+			subcatlast ={};
+			subcatlast["id"] = parseInt(angular.element(this).children('input').val());
+			UseCSubCat["RegCntl"].push(subcatlast);
+		})
+		//inserting element in post json
+		if(angular.element($event.currentTarget).is(':checked') == true){
+			
+			
+			for(i=0;i<postjsonresult.RegCat.length;i++){
+				if(postjsonresult.RegCat[i].id == ucSubCatSuID){
+					for(j=0;j<postjsonresult.RegCat[i].RegPub.length;j++){
+						if(postjsonresult.RegCat[i].RegPub[j].id == ucCatSuID){
+							postjsonresult.RegCat[i].RegPub.splice(j, 1);
+							upmatchfound = false;
+							break;
+							}
+						}
+					upmatchfound = true;
+					break;
+				}
+			}
+			
+			if(upmatchfound == false){
+				UseCSubCat["id"] = parseInt(ucCatSuID);
+				usecase["RegPub"].push(UseCSubCat);
+				usecase["id"] = parseInt(ucSubCatSuID);
+			    postjsonresult.RegCat.push(usecase);
+			    console.log(postjsonresult);
+			}
+
+		}
+		//removing element from post json
+		else{
+			for(i=0;i<postjsonresult.RegCat.length;i++){
+				if(postjsonresult.RegCat[i].id == ucSubCatSuID){
+					for(j=0;j<postjsonresult.RegCat[i].RegPub.length;j++){
+						if(postjsonresult.RegCat[i].RegPub[j].id == ucCatSuID){
+
+									if(postjsonresult.RegCat[i].RegPub.length==1){
+										
+										postjsonresult.RegCat.splice(i, 1);
+									    console.log(postjsonresult);
+
+										break;
+									}
+									else{
+										postjsonresult.RegCat[i].RegPub.splice(j, 1);
+										break;
+										
+									}
+							break;
+							}
+						}
+					break;
+				}
+			}
+		//root for loop ends
+		}
+	}
+	////////////////// END CODE FOR REGCAT///////////////////
+	
+	//////////////////CODE FOR INDUSTRY//////////////////////
+	$scope.entervalueSubcatIndustry = function($event,ndval){
+		var totalmatchfound2 = false;
+		var subcatlast2 ={};
+
+			//get last id
+			subcatlast2["id"] = parseInt(ndval);
+
+			//inserting element in post json
+			if(angular.element($event.currentTarget).is(':checked') == true){
+
+
+					postjsonresult.Industry.push(subcatlast2);
+
+			}
+			//removing element from post json
+			else{
+
+								for(var k=0;k<postjsonresult.Industry.length;k++){
+									if(postjsonresult.Industry[k].id == subcatlast2["id"]){
+
+											postjsonresult.Industry.splice(k, 1);
+											break;
+									}
+								}
+
+
+			}
+
+			console.log(postjsonresult);
+		}
+	$scope.entervalueSubcatIndustryTop = function($event){
+		var usecase={};
+		usecase["id"]=[];
+		if(angular.element($event.currentTarget).is(':checked') == true){
+		angular.element($event.currentTarget).parent().children('ul').children('li').each(function(){
+			usecase={};
+			usecase["id"]=parseInt(angular.element(this).children('input').val());
+
+			    postjsonresult.Industry.push(usecase);
+			    console.log(postjsonresult);
+
+		});
+				}
+			//removing element from post json
+			else{
+				postjsonresult.Industry = [];
+				console.log(postjsonresult);
+			}
+	}
+	//////////////////END OF CODE FOR INDUSTRY///////////////
+	//////////////////CODE FOR EP//////////////////////
+	$scope.entervalueSubcatEP = function($event,ndval){
+		var totalmatchfound2 = false;
+		var subcatlast2 ={};
+
+			//get last id
+			subcatlast2["id"] = parseInt(ndval);
+
+			//inserting element in post json
+			if(angular.element($event.currentTarget).is(':checked') == true){
+
+
+					postjsonresult.EP.push(subcatlast2);
+
+			}
+			//removing element from post json
+			else{
+
+								for(var k=0;k<postjsonresult.EP.length;k++){
+									if(postjsonresult.EP[k].id == subcatlast2["id"]){
+
+											postjsonresult.EP.splice(k, 1);
+											break;
+									}
+								}
+
+
+			}
+
+			console.log(postjsonresult);
+		}
+	$scope.entervalueSubcatEPTop = function($event){
+		var usecase={};
+		usecase["id"]=[];
+		if(angular.element($event.currentTarget).is(':checked') == true){
+		angular.element($event.currentTarget).parent().children('ul').children('li').each(function(){
+			usecase={};
+			usecase["id"]=parseInt(angular.element(this).children('input').val());
+
+			    postjsonresult.EP.push(usecase);
+			    console.log(postjsonresult);
+
+		});
+				}
+			//removing element from post json
+			else{
+				postjsonresult.EP = [];
+				console.log(postjsonresult);
+			}
+	}
+	//////////////////END OF CODE FOR EP///////////////
+	//////////////////CODE FOR LogSource///////////////
+	$scope.entervalueSubcatLogSource = function($event,ndval){
+		var totalmatchfound2 = false;
+		var subcatlast2 ={};
+
+			//get last id
+			subcatlast2["id"] = parseInt(ndval);
+
+			//inserting element in post json
+			if(angular.element($event.currentTarget).is(':checked') == true){
+
+
+					postjsonresult.LogSource.push(subcatlast2);
+
+			}
+			//removing element from post json
+			else{
+
+								for(var k=0;k<postjsonresult.LogSource.length;k++){
+									if(postjsonresult.LogSource[k].id == subcatlast2["id"]){
+
+											postjsonresult.LogSource.splice(k, 1);
+											break;
+									}
+								}
+
+
+			}
+
+			console.log(postjsonresult);
+		}
+	$scope.entervalueSubcatLogSourceTop = function($event){
+		var usecase={};
+		usecase["id"]=[];
+		if(angular.element($event.currentTarget).is(':checked') == true){
+		angular.element($event.currentTarget).parent().children('ul').children('li').each(function(){
+			usecase={};
+			usecase["id"]=parseInt(angular.element(this).children('input').val());
+
+			    postjsonresult.LogSource.push(usecase);
+			    console.log(postjsonresult);
+
+		});
+				}
+			//removing element from post json
+			else{
+				postjsonresult.LogSource = [];
+				console.log(postjsonresult);
+			}
+	}
+	//////////////////END OF CODE FOR LogSource///////////////
+	//////////////////CODE FOR Threat model///////////////
+
+	$scope.cliThreMod = function($event,ndval){
+		
+		
+		var subcatlast2 ={};
+
+		//get last id
+		subcatlast2["id"] = parseInt(ndval);
+
+		//inserting element in post json
+		if(angular.element($event.currentTarget).is(':checked') == true){
+
+
+				postjsonresult.ThreatModel.push(subcatlast2);
+
+		}
+		//removing element from post json
+		else{
+
+							for(var k=0;k<postjsonresult.ThreatModel.length;k++){
+								if(postjsonresult.ThreatModel[k].id == subcatlast2["id"]){
+
+										postjsonresult.ThreatModel.splice(k, 1);
+										break;
+								}
+							}
+
+
+		}
+
+		console.log(postjsonresult);
+	}
+	
+	//////////////////CODE FOR Threat model///////////////
+	////////////////////////////////
+	var obj  = {};
+	var obj2  = {};
+	
+	var threatModelObj;
+	$http.get($rootScope.url+"/getAllApiNew/9052").success(function(result2){
+		obj = result2;
+		obj2 = result2;		
+		threatModelObj=obj.ThreatModel;
+		//code cyber sec
+		for(i=0;i<obj.CyberSecFunc.length;i++){
+
+		    obj.CyberSecFunc[i].id = obj.CyberSecFunc[i].SurrId;
+		    delete obj.CyberSecFunc[i].SurrId;
+		    delete obj.CyberSecFunc[i].Name;
+
+		    for(j=0;j<obj.CyberSecFunc[i].UseCaseCat.length;j++){
+
+		    obj.CyberSecFunc[i].UseCaseCat[j].id = obj.CyberSecFunc[i].UseCaseCat[j].SurrId;
+		    delete obj.CyberSecFunc[i].UseCaseCat[j].SurrId;
+		    delete obj.CyberSecFunc[i].UseCaseCat[j].Name;
+
+		    for(k=0;k<obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat.length;k++){
+
+		    obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].id = obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].SurrId;
+		    delete obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].SurrId;    
+		    delete obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].Name;
+		    
+		}
+		    
+		}
+		}
+		//regcat
+		for(i=0;i<obj.RegCat.length;i++){
+
+		    obj.RegCat[i].id = obj.RegCat[i].SurrId;
+		    delete obj.RegCat[i].SurrId;
+		    delete obj.RegCat[i].Name;
+
+		    for(j=0;j<obj.RegCat[i].RegPub.length;j++){
+
+		    obj.RegCat[i].RegPub[j].id = obj.RegCat[i].RegPub[j].SurrId;
+		    delete obj.RegCat[i].RegPub[j].SurrId;
+		    delete obj.RegCat[i].RegPub[j].Name;
+
+		    for(k=0;k<obj.RegCat[i].RegPub[j].RegCntl.length;k++){
+
+		    obj.RegCat[i].RegPub[j].RegCntl[k].id = obj.RegCat[i].RegPub[j].RegCntl[k].SurrId;
+		    delete obj.RegCat[i].RegPub[j].RegCntl[k].SurrId;    
+		    delete obj.RegCat[i].RegPub[j].RegCntl[k].Name;
+		    
+		}
+		    
+		}
+		}
+		//Threat model
+		var thrt = {};
+		var threatarry=[];
+
+		for(i=0;i<obj.ThreatModel.length;i++){
+
+		    for(j=0;j<obj.ThreatModel[i].children.length;j++){
+		        thrt = {}
+		    thrt["id"] = obj.ThreatModel[i].children[j].SurrId;
+		    threatarry.push(thrt);
+		    }
+		}
+
+		obj.ThreatModel=[];
+		for(i=0;i<threatarry.length;i++){
+		obj.ThreatModel.push(threatarry[i]);
+		}
+		//industry
+		for(i=0;i<obj.Industry.length;i++){
+
+		    obj.Industry[i].id = obj.Industry[i].SurrId;
+		    delete obj.Industry[i].SurrId;
+		    delete obj.Industry[i].Name;
+
+		}
+		//EP
+		for(i=0;i<obj.EP.length;i++){
+
+		    obj.EP[i].id = obj.EP[i].SurrId;
+		    delete obj.EP[i].SurrId;
+		    delete obj.EP[i].Name;
+
+		}
+		//LogSource
+		for(i=0;i<obj.LogSource.length;i++){
+
+		    obj.LogSource[i].id = obj.LogSource[i].SurrId;
+		    delete obj.LogSource[i].SurrId;
+		    delete obj.LogSource[i].Name;
+
+		}
+	 });
+	///////////selecting threat model root////////////////////
+	$scope.cliThreModTop = function($event){
+		//Threat model
+		postjsonresult.ThreatModel = [];
+		if(angular.element($event.currentTarget).is(':checked') == true){
+			for(i=0;i<obj.ThreatModel.length;i++){
+				postjsonresult.ThreatModel.push(obj.ThreatModel[i]);
+				}
+			}
+			//removing element from post json
+			else{
+				postjsonresult.ThreatModel = [];
+				console.log(postjsonresult);
+			}
+	}
+	///////////selecting Cyber Security root////////////////////
+	$scope.entervalueSubcatCyberSecFuncTop = function($event){
+		//Threat model
+		postjsonresult.CyberSecFunc = [];
+		if(angular.element($event.currentTarget).is(':checked') == true){
+			for(i=0;i<obj.CyberSecFunc.length;i++){
+				postjsonresult.CyberSecFunc.push(obj.CyberSecFunc[i]);
+				}
+			}
+			//removing element from post json
+			else{
+				postjsonresult.CyberSecFunc = [];
+				console.log(postjsonresult);
+			}
+	}
+	///////////selecting RegCat root////////////////////
+	$scope.entervalueSubcatRegCatTop = function($event){
+		//Threat model
+		postjsonresult.RegCat = [];
+		if(angular.element($event.currentTarget).is(':checked') == true){
+			for(i=0;i<obj.RegCat.length;i++){
+				postjsonresult.RegCat.push(obj.RegCat[i]);
+				}
+			}
+			//removing element from post json
+			else{
+				postjsonresult.RegCat = [];
+				console.log(postjsonresult);
+			}
+	}	
+	////////////////////////selecting main root/////////////////////////
+	$scope.caAll = function(){
+		if(angular.element(".allclass").is(':checked') == true){
+		postjsonresult = {
+				"RegCat": [],
+				"CyberSecFunc": [],
+				"Industry": [],
+				"EP": [],
+				"ThreatModel": [],
+				"LogSource": []
+			};
+		for(i=0;i<obj.CyberSecFunc.length;i++){
+
+				postjsonresult.CyberSecFunc.push(obj.CyberSecFunc[i]);
+
+		}
+		for(i=0;i<obj.ThreatModel.length;i++){
+			postjsonresult.ThreatModel.push(obj.ThreatModel[i]);
+			}
+		for(i=0;i<obj.RegCat.length;i++){
+			postjsonresult.RegCat.push(obj.RegCat[i]);
+			
+		}
+		for(i=0;i<obj.EP.length;i++){
+			postjsonresult.EP.push(obj.EP[i]);
+			
+		}
+		for(i=0;i<obj.LogSource.length;i++){
+			postjsonresult.LogSource.push(obj.LogSource[i]);
+			
+		}
+		for(i=0;i<obj.Industry.length;i++){
+			postjsonresult.Industry.push(obj.Industry[i]);
+			
+		}
+		console.log(obj.RegCat);
+		}
+
+	//removing element from post json
+	else{
+		
+		postjsonresult = {
+				"RegCat": [],
+				"CyberSecFunc": [],
+				"Industry": [],
+				"EP": [],
+				"ThreatModel": [],
+				"LogSource": []
+			};
+	
+	}
+	}
+	//////////////////cyber security second root///////////////
+	$scope.entervalueSubcatCyberSecFunc = function($event,ndvl){
+		
+	if(angular.element($event.currentTarget).is(':checked') == true){
+		for(i=0;i<obj.CyberSecFunc.length;i++){
+			if(obj.CyberSecFunc[i].id == ndvl)
+				{
+				postjsonresult.CyberSecFunc.push(obj.CyberSecFunc[i]);
+				break;
+				}
+		}
+	}
+	//removing element from post json
+	else{
+		for(i=0;i<postjsonresult.CyberSecFunc.length;i++){
+			if(postjsonresult.CyberSecFunc[i].id == ndvl)
+				{
+				postjsonresult.CyberSecFunc.splice(i,1);
+				break;
+				}
+		}
+	
+	}
+	}
+	
+
+	$scope.UsecaseCategory = function($event){
+		var ndvl = angular.element($event.currentTarget).parent().parent().parent().children('input').val();
+		
+		if(angular.element($event.currentTarget).is(':checked') == true){
+			for(i=0;i<obj.CyberSecFunc.length;i++){
+				if(obj.CyberSecFunc[i].id == ndvl)
+					{
+					postjsonresult.CyberSecFunc.push(obj.CyberSecFunc[i]);
+					break;
+					}
+			}
+		}
+		//removing element from post json
+		else{
+			for(i=0;i<postjsonresult.CyberSecFunc.length;i++){
+				if(postjsonresult.CyberSecFunc[i].id == ndvl)
+					{
+					postjsonresult.CyberSecFunc.splice(i,1);
+					break;
+					}
+			}
+		
+		}
+		}	
+	///////////////////////////////////threat subroot///////////////
+
+
+	/*$scope.cliThreModMid = function($event,ndvlqe){
+		
+		//Threat model
+		postjsonresult.ThreatModel = [];
+		if(angular.element($event.currentTarget).is(':checked') == true){
+			for(i=0;i<obj.ThreatModel.length;i++){
+				postjsonresult.ThreatModel.push(obj.ThreatModel[i]);
+				}
+			}
+			//removing element from post json
+			else{
+				postjsonresult.ThreatModel = [];
+				console.log(postjsonresult);
+			}
+	
+	
+	}*/
+	
+$scope.cliThreModMid = function($event,ndvlqe){	
+		//Threat model
+		
+		//postjsonresult.ThreatModel = [];		
+		var thrtObj=null;
+			for(i=0;i<threatModelObj.length;i++){	
+				console.log("Threat model obj"+JSON.stringify(threatModelObj[i]));
+				if(threatModelObj[i].SurrId==ndvlqe){					
+					thrtObj=threatModelObj[i];
+					break;
+				}
+				for (j=0;j<threatModelObj[i].children.length;j++){
+					
+					if(threatModelObj[i].children[j].SurrId==ndvlqe){
+						thrtObj=threatModelObj[i].children[j];
+						break;
+					}
+					
+				}
+			}
+			
+			
+			if(angular.element($event.currentTarget).is(':checked') == true){
+				var obj={
+					id:thrtObj.SurrId
+				};
+				postjsonresult.ThreatModel.push(obj);
+				if ((thrtObj.ThreadModelType=='C' || thrtObj.ThreadModelType=='M') && thrtObj.children.length>0){
+					for (j=0;j<thrtObj.children.length;j++){
+						var obj={
+							id:thrtObj.children[j].SurrId
+						};
+						postjsonresult.ThreatModel.push(obj);					
+					};	
+			   };
+			}else{
+				var obj={
+					id:thrtObj.SurrId
+				};
+				postjsonresult.ThreatModel.pop(obj);
+				if ((thrtObj.ThreadModelType=='C' || thrtObj.ThreadModelType=='M') && thrtObj.children.length>0){
+					var obj={
+							id:thrtObj.SurrId
+						};
+					for (j=0;j<thrtObj.children.length;j++){
+						postjsonresult.ThreatModel.pop(obj);					
+					};	
+			   };	
+				
+			};			
+			console.log("The last selected value is"+JSON.stringify(postjsonresult));		
+	
+	
+	};
+	//////////////////Reg cat second root///////////////
+	$scope.entervalueSubcatRegCat = function($event,ndvlq){
+		
+	if(angular.element($event.currentTarget).is(':checked') == true){
+		for(i=0;i<obj.RegCat.length;i++){
+			if(obj.RegCat[i].id == ndvlq)
+				{
+				postjsonresult.RegCat.push(obj.RegCat[i]);
+				break;
+				}
+		}
+	}
+	//removing element from post json
+	else{
+		for(i=0;i<postjsonresult.RegCat.length;i++){
+			if(postjsonresult.RegCat[i].id == ndvlq)
+				{
+				postjsonresult.RegCat.splice(i,1);
+				break;
+				}
+		}
+	
+	}
+	}
+	
+
+	$scope.RegCategor = function($event){
+		var ndvl = angular.element($event.currentTarget).parent().parent().parent().children('input').val();
+		
+		if(angular.element($event.currentTarget).is(':checked') == true){
+			for(i=0;i<obj.RegCat.length;i++){
+				if(obj.RegCat[i].id == ndvl)
+					{
+					postjsonresult.RegCat.push(obj.RegCat[i]);
+					break;
+					}
+			}
+		}
+		//removing element from post json
+		else{
+			for(i=0;i<postjsonresult.RegCat.length;i++){
+				if(postjsonresult.RegCat[i].id == ndvl)
+					{
+					postjsonresult.RegCat.splice(i,1);
+					break;
+					}
+			}
+		
+		}
+		}		
+	
+	////////////////////////////////////////////////////////
+	/////////////////////////////////////////// END OF NEW TREE///////////////////////////////////////////////// 
 	if($rootScope.userIndustryName =="ALL"){
 		$scope.showAllmode=true;
 	}
@@ -715,6 +1879,9 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
     }
     
     $scope.ClikedResult = function(node) {
+    	  $scope.dimensionrule=false;
+	        $scope.dimensionrelationtable=false;
+
         $scope.licreateruledetails = 'active';
         $scope.licreateruleinput = 'no-active';
         $scope.licreateruleinputdata = 'no-active';
@@ -1033,8 +2200,10 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
         var resultURL = $rootScope.url+'/getSearchByDimensionResult';
         $scope.parsejson();
         //console.log(JSON.stringify($scope.outputJson));
-       if($scope.outputJson.RegCat.length !=0 || $scope.outputJson.CyberSecFunc.length !=0 || $scope.outputJson.Industry.length !=0 || $scope.outputJson.EP.length !=0 | $scope.outputJson.ThreatModel.length !=0 | $scope.outputJson.LogSource.length !=0){
-        $http.post(resultURL, $scope.outputJson).success(function(data, status, headers, config) {
+   //    if($scope.outputJson.RegCat.length !=0 || $scope.outputJson.CyberSecFunc.length !=0 || $scope.outputJson.Industry.length !=0 || $scope.outputJson.EP.length !=0 | $scope.outputJson.ThreatModel.length !=0 | $scope.outputJson.LogSource.length !=0){
+        if(postjsonresult.RegCat.length !=0 || postjsonresult.CyberSecFunc.length !=0 || postjsonresult.Industry.length !=0 || postjsonresult.EP.length !=0 | postjsonresult.ThreatModel.length !=0 | postjsonresult.LogSource.length !=0){
+
+        $http.post(resultURL, postjsonresult/*$scope.outputJson*/).success(function(data, status, headers, config) {
             $rootScope.loadinganimation = false; 
             if (data.cateGory.length == 0) {
                 $scope.resultdata={
