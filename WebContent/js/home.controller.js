@@ -50,7 +50,7 @@ function HomeController(UserService,  $rootScope, $scope, $http) {
 		        $scope.ucrlPackage = true;
 		        $scope.alertMenu = true;
 		        $scope.searchMenu = true;
-		       
+		        $scope.feedback = true;
 		    }
 		    if ($rootScope.role == "SALES_PERSON") {
 		        $scope.searchMenu = true;
@@ -59,10 +59,13 @@ function HomeController(UserService,  $rootScope, $scope, $http) {
 		    if ($rootScope.role == "USER_VIEW") {
 		        $scope.searchMenu = true;
 		        $rootScope.exported = true;
+		        $scope.feedback = false;
+		        $scope.userAccountManagement = false;
+		        $scope.showAllmode=true;
 		    }
 		    if ($rootScope.role == "USER_EXPORT") {
 		        $scope.searchMenu = true;
-		        $scope.useCaseMaintain = true;
+		        $scope.feedback = true;
 		    }
 		});
 

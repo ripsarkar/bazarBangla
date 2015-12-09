@@ -37,7 +37,7 @@
 <div class="tree well parenttreenone">
     <ul>
         <li>
-            <input type="checkbox" ng-click="caAll()" class="allclass">Select All<div class="collapall glyphicon glyphicon-resize-small forclearhover" style="float:right;padding:0px 6px"></div><div class="alltreeclear" ng-click="clear()" style="float:right;padding:0px 6px">clear</div>
+          <input type="checkbox" ng-click="caAll()" class="allclass">Select All<div class="collapall glyphicon glyphicon-resize-small forclearhover" style="float:right;padding:0px 6px"></div><div class="alltreeclear" ng-click="clear()" style="float:right;padding:0px 6px">clear</div>
             <!-- cybersec -->
             <ul>
                 <li>
@@ -50,13 +50,13 @@
 	                                <input type="checkbox" value="UseCaseCat" ng-click="UsecaseCategory($event)">Usecase Category<span><i class="icon-minus-sign">+</i></span>
 		                            <ul class="findchild">
 		                                <li ng-repeat="useca in cybers.UseCaseCat">
-			                                <input type="checkbox"  ng-click="entervalue($event,useca.SurrId)" value="{{useca.SurrId}}">{{useca.Name}}<span><i class="icon-leaf">+</i></span>
+			                                <input type="checkbox"  ng-click="entervalue($event,useca.SurrId)" value="{{useca.SurrId}}"><pre class="uccatagory"></pre>{{useca.Name}}<span><i class="icon-leaf">+</i></span>
 					                         <ul>
 				                                <li>
 					                                <input type="checkbox"  ng-click="UsecaseSubCategory($event)" value="UseCaseSubCat">Usecase SubCategory<span><i class="icon-leaf">+</i></span>
 							                         <ul>
 						                                <li ng-repeat="usecasesu in useca.UseCaseSubCat">
-							                               <input type="checkbox"  ng-click="entervalueSubcat($event,usecasesu.SurrId)" value="{{usecasesu.SurrId}}">{{usecasesu.Name}}
+							                               <input type="checkbox"  ng-click="entervalueSubcat($event,usecasesu.SurrId)" value="{{usecasesu.SurrId}}"><pre class="ucSubcatagory"></pre>{{usecasesu.Name}}
 						                                </li>
 						                             </ul>				                                
 						                        </li>
@@ -82,13 +82,13 @@
 	                                <input type="checkbox" ng-click="RegCategor($event)">Regulatory Publication<span><i class="icon-minus-sign">+</i></span>
 		                            <ul>
 		                                <li ng-repeat="regpub in regcat.RegPub">
-			                                <input type="checkbox"  ng-click="entervalue2($event,regpub.SurrId)" value="{{regpub.SurrId}}">{{regpub.Name}}<span><i class="icon-leaf">+</i></span>
+			                                <input type="checkbox"  ng-click="entervalue2($event,regpub.SurrId)" value="{{regpub.SurrId}}"><pre class="regcatagory"></pre>{{regpub.Name}}<span><i class="icon-leaf">+</i></span>
 					                         <ul>
 				                                <li>
 					                                <input type="checkbox" ng-click="RegCatSubCategory($event)">Regulatory Control</a><span><i class="icon-leaf">+</i></span>
 							                         <ul>
 						                                <li ng-repeat="regctrl in regpub.RegCntl">
-							                                <input type="checkbox"  ng-click="entervalueSubcat2($event,regctrl.SurrId)" value="{{regctrl.SurrId}}">{{regctrl.Name}}
+							                                <input type="checkbox"  ng-click="entervalueSubcat2($event,regctrl.SurrId)" value="{{regctrl.SurrId}}"><pre class="regSubcatagory"></pre>{{regctrl.Name}}
 						                                </li>
 						                             </ul>				                                
 						                        </li>
@@ -172,10 +172,10 @@
                 	<input type="checkbox"  ng-click="cliThreModTop($event)">Threat Model<span class="start"><i class="icon-minus-sign headPlus">+</i></span>
                     <ul>
                         <li ng-repeat="thrt1 in thrtmodl">
-                        	<input type="checkbox" ng-click="cliThreModMid($event,thrt1.SurrId)"><strong>({{thrt1.ThreadModelType}}-{{thrt1.SurrId}})</strong>{{thrt1.Name}}<span><i class="icon-minus-sign">+</i></span>
+                        	<input type="checkbox" ng-click="cliThreModMid($event,thrt1.SurrId)"><pre class="uccatagory"></pre>{{thrt1.Name}}-<strong>{{thrt1.SurrId}}</strong><span><i class="icon-minus-sign">+</i></span>
                             <ul>
 		                                <li ng-repeat="thrt2 in thrt1.children">
-			                                <input type="checkbox" ng-click="cliThreMod($event,thrt2.SurrId)"></strong>({{thrt2.ThreadModelType}})</strong>{{thrt2.Name}}
+			                                <input type="checkbox" ng-click="cliThreMod($event,thrt2.SurrId)"><pre class="threatScatagoryM" ng-if="thrt2.ThreadModelType=='M'"></pre><pre class="threatScatagoryS" ng-if="thrt2.ThreadModelType=='S'"></pre>{{thrt2.Name}}
 		                                </li>
                             </ul>
                         </li>

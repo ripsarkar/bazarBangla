@@ -1,9 +1,55 @@
 /*-------------ripunjoy css-------------*/
 
 /*------------------Tree start--------------------*/
-
+.uccatagory{
+	display:inline;
+	background-image:url("../img/C.png");
+	background-repeat:no-repeat;
+	padding: 0px 7px;
+	border: 0px;
+	border-radius: 0px;
+}
+.ucSubcatagory{
+	display:inline;
+	background-image:url("../img/SC.png");
+	background-repeat:no-repeat;
+	padding: 0px 7px;
+	border: 0px;
+	border-radius: 0px;
+}
+.regcatagory{
+	display:inline;
+	background-image:url("../img/P.png");
+	background-repeat:no-repeat;
+	padding: 0px 7px;
+	border: 0px;
+	border-radius: 0px;
+}
+.regSubcatagory{
+	display:inline;
+	background-image:url("../img/CN.png");
+	background-repeat:no-repeat;
+	padding: 0px 7px;
+	border: 0px;
+	border-radius: 0px;
+}
+.threatScatagoryM{
+	display:inline;
+	background-image:url("../img/M.png");
+	background-repeat:no-repeat;
+	padding: 0px 7px;
+	border: 0px;
+	border-radius: 0px;
+}
+.threatScatagoryS{
+	display:inline;
+	background-image:url("../img/S.png");
+	background-repeat:no-repeat;
+	padding: 0px 7px;
+	border: 0px;
+	border-radius: 0px;
+}
 .collapall{
-	float: right;
 	cursor:pointer;
 }
 .parenttreenone, .parenttreenone ul{
@@ -1288,7 +1334,7 @@ font-weight: 400;
 .tablehg{ max-height: 120px; overflow-y: auto;}
 /*-------New tree css----------*/
 .well {
-
+	font-size:12px;
     border: 0 !important;
     border-radius: 0px !important;
     box-shadow: none !important;

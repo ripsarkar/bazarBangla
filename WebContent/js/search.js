@@ -1130,31 +1130,40 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	//////////////////CODE FOR Threat model///////////////
 	////////////////////////////////
 	var obj  = {};
-	var obj2  = {};
+
 	
 	var threatModelObj;
+	var	CyberSecFunc;
 	$http.get($rootScope.url+"/getAllApiNew/9052").success(function(result2){
+		
 		obj = result2;
-		obj2 = result2;		
-		threatModelObj=obj.ThreatModel;
+	
+		threatModelObj=result2.ThreatModel;
+		obj.RegCat = result2.RegCat;
+		CyberSecFunc = result2.CyberSecFunc;
+		obj.Industry = result2.Industry;
+		obj.EP = result2.EP;
+		obj.LogSource = result2.LogSource;
+		obj.ThreatModel = result2.ThreatModel;
+		
 		//code cyber sec
-		for(i=0;i<obj.CyberSecFunc.length;i++){
+		for(i=0;i<CyberSecFunc.length;i++){
 
-		    obj.CyberSecFunc[i].id = obj.CyberSecFunc[i].SurrId;
-		    delete obj.CyberSecFunc[i].SurrId;
-		    delete obj.CyberSecFunc[i].Name;
+		    CyberSecFunc[i].id = CyberSecFunc[i].SurrId;
+		    delete CyberSecFunc[i].SurrId;
+		    delete CyberSecFunc[i].Name;
 
-		    for(j=0;j<obj.CyberSecFunc[i].UseCaseCat.length;j++){
+		    for(j=0;j<CyberSecFunc[i].UseCaseCat.length;j++){
 
-		    obj.CyberSecFunc[i].UseCaseCat[j].id = obj.CyberSecFunc[i].UseCaseCat[j].SurrId;
-		    delete obj.CyberSecFunc[i].UseCaseCat[j].SurrId;
-		    delete obj.CyberSecFunc[i].UseCaseCat[j].Name;
+		    CyberSecFunc[i].UseCaseCat[j].id = CyberSecFunc[i].UseCaseCat[j].SurrId;
+		    delete CyberSecFunc[i].UseCaseCat[j].SurrId;
+		    delete CyberSecFunc[i].UseCaseCat[j].Name;
 
-		    for(k=0;k<obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat.length;k++){
+		    for(k=0;k<CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat.length;k++){
 
-		    obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].id = obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].SurrId;
-		    delete obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].SurrId;    
-		    delete obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].Name;
+		    CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].id = CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].SurrId;
+		    delete CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].SurrId;    
+		    delete CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].Name;
 		    
 		}
 		    
@@ -1245,8 +1254,8 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		//Threat model
 		postjsonresult.CyberSecFunc = [];
 		if(angular.element($event.currentTarget).is(':checked') == true){
-			for(i=0;i<obj.CyberSecFunc.length;i++){
-				postjsonresult.CyberSecFunc.push(obj.CyberSecFunc[i]);
+			for(i=0;i<CyberSecFunc.length;i++){
+				postjsonresult.CyberSecFunc.push(CyberSecFunc[i]);
 				}
 			}
 			//removing element from post json
@@ -1281,9 +1290,9 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 				"ThreatModel": [],
 				"LogSource": []
 			};
-		for(i=0;i<obj.CyberSecFunc.length;i++){
+		for(i=0;i<CyberSecFunc.length;i++){
 
-				postjsonresult.CyberSecFunc.push(obj.CyberSecFunc[i]);
+				postjsonresult.CyberSecFunc.push(CyberSecFunc[i]);
 
 		}
 		for(i=0;i<obj.ThreatModel.length;i++){
@@ -1326,10 +1335,10 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	$scope.entervalueSubcatCyberSecFunc = function($event,ndvl){
 		
 	if(angular.element($event.currentTarget).is(':checked') == true){
-		for(i=0;i<obj.CyberSecFunc.length;i++){
-			if(obj.CyberSecFunc[i].id == ndvl)
+		for(i=0;i<CyberSecFunc.length;i++){
+			if(CyberSecFunc[i].id == ndvl)
 				{
-				postjsonresult.CyberSecFunc.push(obj.CyberSecFunc[i]);
+				postjsonresult.CyberSecFunc.push(CyberSecFunc[i]);
 				break;
 				}
 		}
@@ -1352,10 +1361,10 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		var ndvl = angular.element($event.currentTarget).parent().parent().parent().children('input').val();
 		
 		if(angular.element($event.currentTarget).is(':checked') == true){
-			for(i=0;i<obj.CyberSecFunc.length;i++){
-				if(obj.CyberSecFunc[i].id == ndvl)
+			for(i=0;i<CyberSecFunc.length;i++){
+				if(CyberSecFunc[i].id == ndvl)
 					{
-					postjsonresult.CyberSecFunc.push(obj.CyberSecFunc[i]);
+					postjsonresult.CyberSecFunc.push(CyberSecFunc[i]);
 					break;
 					}
 			}
@@ -1617,6 +1626,10 @@ $scope.cliThreModMid = function($event,ndvlqe){
 	    if ($rootScope.role == "USER_VIEW") {
 	        $scope.searchMenu = true;
 	        $rootScope.exported = true;
+	        $scope.feedback = true;
+	        $scope.userAccountManagement = false;
+	        $scope.showAllmode=true;
+	        
 	    }
 	    if ($rootScope.role == "USER_EXPORT") {
 	        $scope.searchMenu = true;
