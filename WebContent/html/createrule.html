@@ -50,10 +50,10 @@
                                     <label> Search by Use Case ID</label>
                                     <input type="text" class="form-control" placeholder="Search by ID" ng-change="RuleIDlive_search()" ng-blur="Search_RuleId()" ng-model="SearchRuleID" typeahead="RuleId for RuleId in RuleIds | filter:$viewValue ">
                                 </div>
-                                <div class="col-md-3 col-sm-6">
+                              <!--   <div class="col-md-3 col-sm-6">
                                     <label> Search by Use Case Name</label>
                                     <input type="text" class="form-control" placeholder="Search by  Name" ng-change="RuleNamelive_search()" ng-blur="Search_RuleName()" ng-model="SearchRuleName" typeahead="RuleName for RuleName in RuleNames | filter:$viewValue">
-                                </div>
+                                </div> -->
                                 <div class="col-md-3 col-sm-6">
                                     <label> Use Case ID <span class="red"> *</span></label>
                                     <input type="text" class="form-control" placeholder="Use Case ID" disabled ng-model="crtUsercaseId" required>
@@ -63,6 +63,7 @@
                                     <input type="text" class="form-control" placeholder="Use Case Name" disabled ng-model="crtUsercaseName" required>
                                 </div>
                             </div>
+                                <hr>
                         </div>
                         <hr>
                         <div class="margintp1 col-md-12 col-sm-12 ">
@@ -124,8 +125,8 @@
                                     <textarea class="form-control" placeholder="Saved Search logic" maxlength="2000" ng-model="crtRuleSaveSrchlogic"></textarea>
                                 </div>
                                 <div class=" col-md-4">
-                                    <label>Building logic </label>
-                                    <textarea class="form-control" placeholder="Building logic" maxlength="5000" ng-model="crtRuleBuildlogic"></textarea>
+                                    <label>Building Blocks </label>
+                                    <textarea class="form-control" placeholder="Building Blocks" maxlength="5000" ng-model="crtRuleBuildlogic"></textarea>
                                 </div>
                             </div>
                             <div class="clearfix"></div>

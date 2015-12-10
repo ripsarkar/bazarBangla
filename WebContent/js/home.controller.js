@@ -51,14 +51,19 @@ function HomeController(UserService,  $rootScope, $scope, $http) {
 		        $scope.alertMenu = true;
 		        $scope.searchMenu = true;
 		        $scope.feedback = true;
+		        $scope.showAllmode=false;
+		        $rootScope.exported = true;
 		    }
 		    if ($rootScope.role == "SALES_PERSON") {
 		        $scope.searchMenu = true;
+		        $rootScope.exported = true;
 		        $scope.useCaseMaintain = true;
+		        $scope.userAccountManagement = false;
+		        $scope.showAllmode=false;
 		    }
 		    if ($rootScope.role == "USER_VIEW") {
 		        $scope.searchMenu = true;
-		        $rootScope.exported = true;
+		        $rootScope.exported = false;
 		        $scope.feedback = false;
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=true;
@@ -66,6 +71,9 @@ function HomeController(UserService,  $rootScope, $scope, $http) {
 		    if ($rootScope.role == "USER_EXPORT") {
 		        $scope.searchMenu = true;
 		        $scope.feedback = true;
+		        $rootScope.exported = true;
+		        $scope.userAccountManagement = false;
+		        $scope.showAllmode=true;
 		    }
 		});
 

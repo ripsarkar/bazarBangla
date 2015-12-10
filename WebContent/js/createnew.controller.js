@@ -482,10 +482,12 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
 
 app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http', 'UsecaseService', function($scope, $rootScope, $state, $http, UsecaseService) {
 
-
-    $scope.chckfunction = function() {
+	$scope.formcontrolYN = "No";
+   
+	$scope.chckfunction = function() {
         console.log($scope.crtRuleTrsn);
     }
+    
 
     $scope.pagemain = {
         main: true,

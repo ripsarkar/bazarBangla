@@ -951,8 +951,18 @@ a:hover >span.icon-alert {
     display: block;
     float: left;
     margin-top: -27px;
-    background-position: -71px -205px;
+    background-position: -71px -325px;
 }
+a:hover >span.icon-search {
+    background: transparent url("../img/iconsprite.png") repeat scroll 0% 0%;
+    width: 50px;
+    height: 54px;
+    display: block;
+    float: left;
+    margin-top: -27px;
+    background-position: -71px -325px;
+}
+
 
 a.exprticon {
     background: transparent url("../img/exporticon.png") repeat scroll 0% 0%;
