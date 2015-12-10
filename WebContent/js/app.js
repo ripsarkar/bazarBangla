@@ -112,7 +112,7 @@
         // $rootScope.url = 'http://uclapireleasetwo.mybluemix.net';
         
         // UAT test url       
-        $rootScope.url = 'https://uclapistage.mybluemix.net';
+        $rootScope.url = 'https://uclapiuat.mybluemix.net';
         
     }
 
