@@ -336,6 +336,29 @@ app.factory('Items', ['$http','$rootScope', function($http, $rootScope) {
 
 app.controller("searchController",["$scope","SearchResultService","$rootScope", 'Items', '$http', function($scope, SearchResultService, $rootScope, Items, $http){
 	/////////////////////////////////////////////////////////
+	 var postjsonresult = {
+				"RegCat": [],
+				"CyberSecFunc": [],
+				"Industry": [],
+				"EP": [],
+				"ThreatModel": [],
+				"LogSource": []
+			};
+	var obj  = {};
+	var threatModelObj;
+	var CyberSecFunc = [];
+	var RegCat = [];
+	var Industry=[];
+	var EP=[];
+	var LogSource=[];
+	
+	$scope.items = [];
+	var cybertoname="";
+	var cybertoname2="";
+	var RegCatoname="";
+	var threatname="";
+	var threatname2="";
+
 	$rootScope.loadinganimation=true;
 	 $http.get($rootScope.url+"/getAllApiNew/9052").success(function(result){
 		 $rootScope.loadinganimation=false;
@@ -345,8 +368,217 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		 $scope.eepp = result.EP;
 		 $scope.logsour = result.LogSource;
 		 $scope.thrtmodl = result.ThreatModel;
-	 });
+		 
+		 
+		 //////////////////////////////////////////////////////////////
+			obj = result;
+			
+			threatModelObj=result.ThreatModel;
+			obj.RegCat = result.RegCat;
+			obj.CyberSecFunc = result.CyberSecFunc;
+			obj.ThreatModel = result.ThreatModel;
+			obj.Industry = result.Industry;
+			obj.EP = result.EP;
+			obj.LogSource = result.LogSource;
+			//code cyber sec
+			
+			var UseCaseCatX={};
+			UseCaseCatX["UseCaseCat"]=[];
+			UseCaseCatX["id"]=[];
+			
+			var UseCaseSubCatX={};
+			UseCaseSubCatX["UseCaseSubCat"]=[];
+			UseCaseSubCatX["id"]=[];		
+			
+			var UseCaseSubSubCatX={};
+			UseCaseSubSubCatX["id"]=[];		
+			
 
+			
+			for(i=0;i<obj.CyberSecFunc.length;i++){
+				
+				UseCaseCatX={}
+				UseCaseCatX["UseCaseCat"]=[];
+				UseCaseCatX["id"]=obj.CyberSecFunc[i].SurrId;
+				
+				if(i==0){
+					cybertoname = cybertoname + obj.CyberSecFunc[i].Name+"-";
+					}
+					else{
+					cybertoname = cybertoname +"/"+  obj.CyberSecFunc[i].Name+"-";
+					}
+				
+			    for(j=0;j<obj.CyberSecFunc[i].UseCaseCat.length;j++){
+			    	UseCaseSubCatX={};
+			    	UseCaseSubCatX["UseCaseSubCat"]=[];
+					UseCaseSubCatX["id"]=obj.CyberSecFunc[i].UseCaseCat[j].SurrId;
+					
+					if(j==0){
+						cybertoname = cybertoname +"-" + obj.CyberSecFunc[i].UseCaseCat[j].Name+"-";
+						}
+						else{
+						cybertoname = cybertoname +"-"+  obj.CyberSecFunc[i].UseCaseCat[j].Name+"-";
+						}
+					
+					
+					for(k=0;k<obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat.length;k++){
+				    	UseCaseSubSubCatX={};
+				    	UseCaseSubSubCatX["id"]=obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].SurrId;
+				    	UseCaseSubCatX["UseCaseSubCat"].push(UseCaseSubSubCatX);
+				    	
+						if(k==0){
+							cybertoname = cybertoname + obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].Name;
+							}
+							else{
+							cybertoname = cybertoname +","+  obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].Name;
+							}
+		
+					
+				    }
+			    	UseCaseCatX["UseCaseCat"].push(UseCaseSubCatX);
+			    }
+		    	CyberSecFunc.push(UseCaseCatX);
+			}
+			console.log("cyber");
+			console.log(cybertoname);
+
+			//regcat
+			var RegPubtX={};
+			RegPubtX["RegPub"]=[];
+			RegPubtX["id"]=[];
+			
+			var RegCntlX={};
+			RegCntlX["RegCntl"]=[];
+			RegCntlX["id"]=[];
+			
+			var RegCntlCntlX={};
+			RegCntlCntlX["id"]=[];	
+			for(i=0;i<obj.RegCat.length;i++){
+				
+				RegPubtX={}
+				RegPubtX["RegPub"]=[];
+				RegPubtX["id"]=obj.RegCat[i].SurrId;
+				
+				if(i==0){
+					RegCatoname = RegCatoname + obj.RegCat[i].Name+"-";
+					}
+					else{
+					RegCatoname = RegCatoname +"/"+  obj.RegCat[i].Name+"-";
+					}
+
+			    for(j=0;j<obj.RegCat[i].RegPub.length;j++){
+			    	RegCntlX={};
+			    	RegCntlX["RegCntl"]=[];
+			    	RegCntlX["id"]=obj.RegCat[i].RegPub[j].SurrId;
+			    	
+					if(j==0){
+						RegCatoname = RegCatoname +"-" + obj.RegCat[i].RegPub[j].Name+"-";
+						}
+						else{
+						RegCatoname = RegCatoname +"-"+  obj.RegCat[i].RegPub[j].Name+"-";
+						}
+			    	
+			    	
+			    for(k=0;k<obj.RegCat[i].RegPub[j].RegCntl.length;k++){
+			    	RegCntlCntlX={};
+			    	RegCntlCntlX["id"]=obj.RegCat[i].RegPub[j].RegCntl[k].SurrId;
+			    	RegCntlX["RegCntl"].push(RegCntlCntlX);
+			    	
+					if(k==0){
+						RegCatoname = RegCatoname + obj.RegCat[i].RegPub[j].RegCntl[k].Name;
+						}
+						else{
+						RegCatoname = RegCatoname +","+  obj.RegCat[i].RegPub[j].RegCntl[k].Name;
+						}
+			    }
+			    RegPubtX["RegPub"].push(RegCntlX);
+			}
+			RegCat.push(RegPubtX);
+			}
+			
+			console.log("RegCat");
+
+			console.log(RegCat);
+			
+			
+			//Threat model
+			var thrt = {};
+			var threatarry=[];
+
+			for(i=0;i<obj.ThreatModel.length;i++){
+				
+				
+				if(i==0){
+					threatname = threatname + obj.ThreatModel[i].Name+"-";
+					}
+					else{
+					threatname = threatname +"/"+  obj.ThreatModel[i].Name+"-";
+					}
+				if(i==0){
+					threatname2 = threatname2 + obj.ThreatModel[i].Name+"-";
+					}
+					else{
+					threatname2 = threatname2 +"/"+  obj.ThreatModel[i].Name+"-";
+					}
+				
+
+			    for(j=0;j<obj.ThreatModel[i].children.length;j++){
+					if(j==0){
+						threatname = threatname +"-" + obj.ThreatModel[i].children[j].Name+"-";
+						}
+						else{
+						threatname = threatname +"-"+  obj.ThreatModel[i].children[j].Name+"-";
+						}
+
+			    thrt = {}
+			    thrt["id"] = obj.ThreatModel[i].children[j].SurrId;
+			    threatarry.push(thrt);
+			    }
+			}
+
+			obj.ThreatModel=[];
+			for(i=0;i<threatarry.length;i++){
+			obj.ThreatModel.push(threatarry[i]);
+			}
+			
+			//industry
+			var indus={};
+			 indus["id"]=[];
+			for(i=0;i<obj.Industry.length;i++){
+				indus={};
+			     indus["id"]= obj.Industry[i].SurrId;
+			     Industry.push(indus);
+
+			}
+			//EP
+			var ep={};
+			 ep["id"]=[];
+			for(i=0;i<obj.EP.length;i++){
+				ep={};
+				ep["id"]= obj.EP[i].SurrId;
+			    EP.push(ep);
+
+			}
+			//LogSource
+			var logSource={};
+			 logSource["id"]=[];
+			for(i=0;i<obj.LogSource.length;i++){
+				logSource={};
+				logSource["id"]= obj.LogSource[i].SurrId;
+				LogSource.push(logSource);
+
+			}
+			
+			
+			
+			
+		 //////////////////////////////////////////////////////////////
+		 
+		 
+		 
+		 
+	 });
+	 
 	 
 	 angular.element(function () {
 			angular.element('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
@@ -417,17 +649,11 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 			angular.element(".findchild").parent('li').remove();
 		}*/
 	});
-	 var postjsonresult = {
-				"RegCat": [],
-				"CyberSecFunc": [],
-				"Industry": [],
-				"EP": [],
-				"ThreatModel": [],
-				"LogSource": []
-			};
+
 	 
 	 
 	 $scope.clear = function() {
+        $scope.items=[];
 		 $scope.currentTab = 'html/search-result.html';
 	        $scope.dimensionrule=false;
 	        $scope.dimensionrelationtable=false;
@@ -460,7 +686,9 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	var UseCSubCat={};
 	var usecase ={};
 	var i,j,k;
-	$scope.entervalueSubcat = function($event,ndval){
+
+	$scope.entervalueSubcat = function($event,ndval,nameval){
+
 		subcatlast ={};
 		UseCSubCat={};
 		usecase ={};
@@ -468,10 +696,20 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		subcatlast["id"] = parseInt(ndval);
 		//get 2ndid
 		var ucCatSuID=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('input').val();
+		var ucCatSuName=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('div').text();
 		//get 1stid
 		var ucSubCatSuID=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().parent().parent().children('input').val();
+		var ucSubCatSuName=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().parent().parent().children('div').text();
+		
+		var totalname = ucSubCatSuName +"-"+ ucCatSuName +"-"+ nameval;
 		//inserting element in post json
 		if(angular.element($event.currentTarget).is(':checked') == true){
+			
+			//search criteria
+
+				$scope.items.push({names:totalname, ids:ndval,idname:"CyberSecFunc",idsubname:ucSubCatSuName,idsubsubname:ucCatSuName});
+			
+			//search criteria ends
 
 			for(i=0;i<postjsonresult.CyberSecFunc.length;i++){
 				if(postjsonresult.CyberSecFunc[i].id == ucSubCatSuID){
@@ -511,6 +749,18 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		}
 		//removing element from post json
 		else{
+			//pop search criteria
+			
+			for(i=0;i<$scope.items.length;i++){
+				
+				if($scope.items[i].ids == ndval){
+					$scope.items.splice(i,1);
+					break;
+				}
+			}
+			
+			//code for poping element
+			
 			for(i=0;i<postjsonresult.CyberSecFunc.length;i++){
 				if(postjsonresult.CyberSecFunc[i].id == ucSubCatSuID){
 					for(j=0;j<postjsonresult.CyberSecFunc[i].UseCaseCat.length;j++){
@@ -539,33 +789,56 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 			}
 			
 		}
-
-		
 	}
 	$scope.UsecaseSubCategory = function($event){
-		
+
 		var upmatchfound = false;
 		subcatlast ={};
 		UseCSubCat={};
 		usecase ={};
 		UseCSubCat["UseCaseSubCat"] = [];
 		usecase["UseCaseCat"] = [];
+
+		var nameval="";
+		for(i=0;i<angular.element($event.currentTarget).parent('li').children('ul').children('li').length;i++){
+		if(i==0){
+		nameval =  nameval + angular.element($event.currentTarget).parent('li').children('ul').children('li').children('div').eq(i).text();
+		}
+		else{
+			nameval =  nameval + ","+angular.element($event.currentTarget).parent('li').children('ul').children('li').children('div').eq(i).text();
+		}
+		}
+		var ndval = angular.element($event.currentTarget).parent().parent().parent().children('input').val();
 		
 		// = parseInt(ndvalusesub);
 		//get 2ndid
 		var ucCatSuID=angular.element($event.currentTarget).parent().parent().parent().children('input').val();
+		var ucCatSuName=angular.element($event.currentTarget).parent().parent().parent().children('div').text();
 		//get 1stid	
 		var ucSubCatSuID=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().children('input').val();
-
+		var ucSubCatSuName=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().children('div').text();
+		//
 		subcatlast["id"] = [];
 		angular.element($event.currentTarget).parent().children('ul').children('li').each(function(){
 			subcatlast ={};
 			subcatlast["id"] = parseInt(angular.element(this).children('input').val());
 			UseCSubCat["UseCaseSubCat"].push(subcatlast);
 		})
+		
+
+		//
+		var totalname = ucSubCatSuName +"-"+ ucCatSuName +"-"+ nameval;
 		//inserting element in post json
 		if(angular.element($event.currentTarget).is(':checked') == true){
-			
+			//search criteria
+			for(i=$scope.items.length;i>0;i--){
+				if($scope.items[i-1].idsubsubname == ucCatSuName){
+					$scope.items.splice(i-1,1);
+					i=$scope.items.length+1;
+				}
+			}
+			$scope.items.push({names:totalname, ids:ndval,idname:"CyberSecFunc",idsubname:ucSubCatSuName,idsubsubname:ucCatSuName});
+			//search criteria ends
 			
 			for(i=0;i<postjsonresult.CyberSecFunc.length;i++){
 				if(postjsonresult.CyberSecFunc[i].id == ucSubCatSuID){
@@ -592,6 +865,19 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		}
 		//removing element from post json
 		else{
+			
+			//pop search criteria
+			
+			for(i=0;i<$scope.items.length;i++){
+				
+				if($scope.items[i].ids == ndval){
+					$scope.items.splice(i,1);
+					break;
+				}
+			}
+			
+			//
+			
 			for(i=0;i<postjsonresult.CyberSecFunc.length;i++){
 				if(postjsonresult.CyberSecFunc[i].id == ucSubCatSuID){
 					for(j=0;j<postjsonresult.CyberSecFunc[i].UseCaseCat.length;j++){
@@ -618,7 +904,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		//root for loop ends
 		}
 	}
-	$scope.entervalue = function($event,ndvalusesub){
+	$scope.entervalue = function($event,ndvalusesub,nameval){
 		var upmatchfound = false;
 		subcatlast ={};
 		UseCSubCat={};
@@ -626,11 +912,30 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		UseCSubCat["UseCaseSubCat"] = [];
 		usecase["UseCaseCat"] = [];
 		
-		// = parseInt(ndvalusesub);
+		//
+		var nameval2="";
+		for(i=0;i<angular.element($event.currentTarget).parent('li').children('ul').children('li').children('ul').children('li').length;i++){
+
+		if(i==0){
+			nameval2 =  nameval2  + angular.element($event.currentTarget).parent('li').children('ul').children('li').children('ul').children('li').children('div').eq(i).text();
+			
+		}else{
+			
+			nameval2 =  nameval2 + "," + angular.element($event.currentTarget).parent('li').children('ul').children('li').children('ul').children('li').children('div').eq(i).text();
+			
+		}
+		}
+		var ndval = ndvalusesub;
+		
+		
+		
+		
 		//get 2ndid
 		var ucCatSuID=parseInt(ndvalusesub);
+		var ucCatSuName=nameval;
 		//get 1stid	
 		var ucSubCatSuID=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('input').val();
+		var ucSubCatSuName=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('div').text();
 
 		subcatlast["id"] = [];
 		angular.element($event.currentTarget).parent().children('ul').children('li').children('ul').children('li').each(function(){
@@ -638,9 +943,23 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 			subcatlast["id"] = parseInt(angular.element(this).children('input').val());
 			UseCSubCat["UseCaseSubCat"].push(subcatlast);
 		})
+		
+		
+		//
+		var totalname = ucSubCatSuName +"-"+ nameval +"-"+ nameval2;
+		
 		//inserting element in post json
 		if(angular.element($event.currentTarget).is(':checked') == true){
 			
+			//search criteria
+			for(i=$scope.items.length;i>0;i--){
+				if($scope.items[i-1].idsubsubname == ucCatSuName){
+					$scope.items.splice(i-1,1);
+					i=$scope.items.length+1;
+				}
+			}
+			$scope.items.push({names:totalname, ids:ndval,idname:"CyberSecFunc",idsubname:ucSubCatSuName,idsubsubname:ucCatSuName});
+			//search criteria ends
 			
 			for(i=0;i<postjsonresult.CyberSecFunc.length;i++){
 				if(postjsonresult.CyberSecFunc[i].id == ucSubCatSuID){
@@ -667,6 +986,21 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		}
 		//removing element from post json
 		else{
+			
+			//pop search criteria
+			
+			for(i=0;i<$scope.items.length;i++){
+				
+				if($scope.items[i].ids == ndval){
+					$scope.items.splice(i,1);
+					break;
+				}
+			}
+			
+			//
+			
+			
+			
 			for(i=0;i<postjsonresult.CyberSecFunc.length;i++){
 				if(postjsonresult.CyberSecFunc[i].id == ucSubCatSuID){
 					for(j=0;j<postjsonresult.CyberSecFunc[i].UseCaseCat.length;j++){
@@ -703,7 +1037,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	var UseCSubCat2={};
 	var usecase2 ={};
 	
-	$scope.entervalueSubcat2 = function($event,ndval){
+	$scope.entervalueSubcat2 = function($event,ndval,nameval){
 		subcatlast2 ={};
 		UseCSubCat2={};
 		usecase2 ={};
@@ -711,10 +1045,20 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		subcatlast2["id"] = parseInt(ndval);
 		//get 2ndid
 		var ucCatSuID2=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('input').val();
+		var ucCatSuName=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('div').text();
 		//get 1stid
 		var ucSubCatSuID2=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().parent().parent().children('input').val();
+		var ucSubCatSuName=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().parent().parent().children('div').text();
+		
+		//pushing name in result addition
+		var totalname = ucSubCatSuName +"-"+ ucCatSuName +"-"+ nameval;
+		
 		//inserting element in post json
 		if(angular.element($event.currentTarget).is(':checked') == true){
+			
+			//search criteria
+			$scope.items.push({names:totalname, ids:ndval,idname:"RegCat",idsubname:ucSubCatSuName,idsubsubname:ucCatSuName});
+			//search criteria ends
 
 			for(var i=0;i<postjsonresult.RegCat.length;i++){
 				if(postjsonresult.RegCat[i].id == ucSubCatSuID2){
@@ -754,6 +1098,20 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		}
 		//removing element from post json
 		else{
+			
+			
+			//pop search criteria
+			
+			for(i=0;i<$scope.items.length;i++){
+				
+				if($scope.items[i].ids == ndval){
+					$scope.items.splice(i,1);
+					break;
+				}
+			}
+			
+			
+			//poping data from json
 			for(var i=0;i<postjsonresult.RegCat.length;i++){
 				if(postjsonresult.RegCat[i].id == ucSubCatSuID2){
 					for(var j=0;j<postjsonresult.RegCat[i].RegPub.length;j++){
@@ -786,81 +1144,127 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		
 	}
 	var upmatchfound2 = false;
-	$scope.entervalue2 = function($event,ndvalusesub){
-		var subcatlast ={};
-		var UseCSubCat={};
-		var usecase ={};
-		UseCSubCat["RegCntl"] = [];
-		usecase["RegPub"] = [];
+	$scope.entervalue2 = function($event,ndvalusesub,nameval){
+	var subcatlast ={};
+	var UseCSubCat={};
+	var usecase ={};
+	UseCSubCat["RegCntl"] = [];
+	usecase["RegPub"] = [];
+	
+
+	
+	
+	//
+	var nameval2="";
+	for(i=0;i<angular.element($event.currentTarget).parent('li').children('ul').children('li').children('ul').children('li').length;i++){
+
+	if(i==0){
+		nameval2 =  nameval2  + angular.element($event.currentTarget).parent('li').children('ul').children('li').children('ul').children('li').children('div').eq(i).text();
+	}else{
 		
-		// = parseInt(ndvalusesub);
-		//get 2ndid
-		var ucCatSuID=parseInt(ndvalusesub);
-		//get 1stid	
-		var ucSubCatSuID=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('input').val();
-
-		subcatlast["id"] = [];
-		angular.element($event.currentTarget).parent().children('ul').children('li').children('ul').children('li').each(function(){
-			subcatlast ={};
-			subcatlast["id"] = parseInt(angular.element(this).children('input').val());
-			UseCSubCat["RegCntl"].push(subcatlast);
-		})
-		//inserting element in post json
-		if(angular.element($event.currentTarget).is(':checked') == true){
-			
-			
-			for(i=0;i<postjsonresult.RegCat.length;i++){
-				if(postjsonresult.RegCat[i].id == ucSubCatSuID){
-					for(j=0;j<postjsonresult.RegCat[i].RegPub.length;j++){
-						if(postjsonresult.RegCat[i].RegPub[j].id == ucCatSuID){
-							postjsonresult.RegCat[i].RegPub.splice(j, 1);
-							upmatchfound2 = false;
-							break;
-							}
-						}
-					upmatchfound2 = true;
-					break;
-				}
-			}
-			
-			if(upmatchfound2 == false){
-				UseCSubCat["id"] = parseInt(ucCatSuID);
-				usecase["RegPub"].push(UseCSubCat);
-				usecase["id"] = parseInt(ucSubCatSuID);
-			    postjsonresult.RegCat.push(usecase);
-			    console.log(postjsonresult);
-			}
-
-		}
-		//removing element from post json
-		else{
-			for(i=0;i<postjsonresult.RegCat.length;i++){
-				if(postjsonresult.RegCat[i].id == ucSubCatSuID){
-					for(j=0;j<postjsonresult.RegCat[i].RegPub.length;j++){
-						if(postjsonresult.RegCat[i].RegPub[j].id == ucCatSuID){
-
-									if(postjsonresult.RegCat[i].RegPub.length==1){
-										
-										postjsonresult.RegCat.splice(i, 1);
-									    console.log(postjsonresult);
-
-										break;
-									}
-									else{
-										postjsonresult.RegCat[i].RegPub.splice(j, 1);
-										break;
-										
-									}
-							break;
-							}
-						}
-					break;
-				}
-			}
-		//root for loop ends
-		}
+		nameval2 =  nameval2 + "," + angular.element($event.currentTarget).parent('li').children('ul').children('li').children('ul').children('li').children('div').eq(i).text();
 		
 	}
+	}
+	var ndval = ndvalusesub;
+	
+
+	//get 2ndid
+	var ucCatSuID=parseInt(ndvalusesub);
+	var ucCatSuName=nameval;
+	//get 1stid	
+	var ucSubCatSuID=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('input').val();
+	var ucSubCatSuName=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('div').text();
+
+	subcatlast["id"] = [];
+	angular.element($event.currentTarget).parent().children('ul').children('li').children('ul').children('li').each(function(){
+		subcatlast ={};
+		subcatlast["id"] = parseInt(angular.element(this).children('input').val());
+		UseCSubCat["RegCntl"].push(subcatlast);
+	});
+	
+	//
+	var totalname = ucSubCatSuName +"-"+ nameval +"-"+ nameval2;		
+	
+	//inserting element in post json
+	if(angular.element($event.currentTarget).is(':checked') == true){
+
+		//search criteria
+		for(i=$scope.items.length;i>0;i--){
+			if($scope.items[i-1].idsubsubname == ucCatSuName){
+				$scope.items.splice(i-1,1);
+				i=$scope.items.length+1;
+			}
+		}
+		$scope.items.push({names:totalname, ids:ndval,idname:"RegCat",idsubname:ucSubCatSuName,idsubsubname:ucCatSuName});
+		//search criteria ends
+		
+		
+		for(i=0;i<postjsonresult.RegCat.length;i++){
+			if(postjsonresult.RegCat[i].id == ucSubCatSuID){
+				for(j=0;j<postjsonresult.RegCat[i].RegPub.length;j++){
+					if(postjsonresult.RegCat[i].RegPub[j].id == ucCatSuID){
+						postjsonresult.RegCat[i].RegPub.splice(j, 1);
+						upmatchfound2 = false;
+						break;
+						}
+					}
+				upmatchfound2 = true;
+				break;
+			}
+		}
+		
+		if(upmatchfound2 == false){
+			UseCSubCat["id"] = parseInt(ucCatSuID);
+			usecase["RegPub"].push(UseCSubCat);
+			usecase["id"] = parseInt(ucSubCatSuID);
+		    postjsonresult.RegCat.push(usecase);
+		    console.log(postjsonresult);
+		}
+
+	}
+	//removing element from post json
+	else{
+		
+		//pop search criteria
+		
+		for(i=0;i<$scope.items.length;i++){
+			
+			if($scope.items[i].ids == ndval){
+				$scope.items.splice(i,1);
+				break;
+			}
+		}
+		
+		//
+
+		for(i=0;i<postjsonresult.RegCat.length;i++){
+			if(postjsonresult.RegCat[i].id == ucSubCatSuID){
+				for(j=0;j<postjsonresult.RegCat[i].RegPub.length;j++){
+					if(postjsonresult.RegCat[i].RegPub[j].id == ucCatSuID){
+
+								if(postjsonresult.RegCat[i].RegPub.length==1){
+									
+									postjsonresult.RegCat.splice(i, 1);
+								    console.log(postjsonresult);
+
+									break;
+								}
+								else{
+									postjsonresult.RegCat[i].RegPub.splice(j, 1);
+									break;
+									
+								}
+						break;
+						}
+					}
+				break;
+			}
+		}
+	//root for loop ends
+	}
+	
+}
 
 	$scope.RegCatSubCategory = function($event){
 		
@@ -871,11 +1275,24 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		UseCSubCat["RegCntl"] = [];
 		usecase["RegPub"] = [];
 		
-		// = parseInt(ndvalusesub);
+		var nameval="";
+		for(i=0;i<angular.element($event.currentTarget).parent('li').children('ul').children('li').length;i++){
+		if(i==0){
+		nameval =  nameval + angular.element($event.currentTarget).parent('li').children('ul').children('li').children('div').eq(i).text();
+		}
+		else{
+		nameval =  nameval + ","+angular.element($event.currentTarget).parent('li').children('ul').children('li').children('div').eq(i).text();
+		}
+		}
+		var ndval = angular.element($event.currentTarget).parent().parent().parent().children('input').val();
+		
 		//get 2ndid
 		var ucCatSuID=angular.element($event.currentTarget).parent().parent().parent().children('input').val();
+		var ucCatSuName=angular.element($event.currentTarget).parent().parent().parent().children('div').text();
 		//get 1stid	
 		var ucSubCatSuID=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().children('input').val();
+		var ucSubCatSuName=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().children('div').text();
+		//
 
 		subcatlast["id"] = [];
 		angular.element($event.currentTarget).parent().children('ul').children('li').each(function(){
@@ -884,8 +1301,20 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 			UseCSubCat["RegCntl"].push(subcatlast);
 		})
 		//inserting element in post json
+		
+		//
+		var totalname = ucSubCatSuName +"-"+ ucCatSuName +"-"+ nameval;
+		//
 		if(angular.element($event.currentTarget).is(':checked') == true){
-			
+			//search criteria
+			for(i=$scope.items.length;i>0;i--){
+				if($scope.items[i-1].idsubsubname == ucCatSuName){
+					$scope.items.splice(i-1,1);
+					i=$scope.items.length+1;
+				}
+			}
+			$scope.items.push({names:totalname, ids:ndval,idname:"RegCat",idsubname:ucSubCatSuName,idsubsubname:ucCatSuName});
+			//search criteria ends
 			
 			for(i=0;i<postjsonresult.RegCat.length;i++){
 				if(postjsonresult.RegCat[i].id == ucSubCatSuID){
@@ -912,6 +1341,17 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		}
 		//removing element from post json
 		else{
+			//pop search criteria
+			
+			for(i=0;i<$scope.items.length;i++){
+				
+				if($scope.items[i].ids == ndval){
+					$scope.items.splice(i,1);
+					break;
+				}
+			}
+			
+			//
 			for(i=0;i<postjsonresult.RegCat.length;i++){
 				if(postjsonresult.RegCat[i].id == ucSubCatSuID){
 					for(j=0;j<postjsonresult.RegCat[i].RegPub.length;j++){
@@ -941,22 +1381,39 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	////////////////// END CODE FOR REGCAT///////////////////
 	
 	//////////////////CODE FOR INDUSTRY//////////////////////
-	$scope.entervalueSubcatIndustry = function($event,ndval){
+	$scope.entervalueSubcatIndustry = function($event,ndval,nameval){
 		var totalmatchfound2 = false;
 		var subcatlast2 ={};
 
 			//get last id
 			subcatlast2["id"] = parseInt(ndval);
 
+			var totalname = "Industry" +"-"+ nameval;
+			
 			//inserting element in post json
 			if(angular.element($event.currentTarget).is(':checked') == true){
-
-
+				
+				//search criteria
+				$scope.items.push({names:totalname, ids:ndval, idname:"Industry"});
+				console.log($scope.items);
+				//pushing data in postjson
 					postjsonresult.Industry.push(subcatlast2);
 
 			}
 			//removing element from post json
 			else{
+				
+				//pop search criteria
+				
+				for(i=0;i<$scope.items.length;i++){
+					
+					if($scope.items[i].ids == ndval){
+						$scope.items.splice(i,1);
+						break;
+					}
+				}
+				
+				//code for poping element
 
 								for(var k=0;k<postjsonresult.Industry.length;k++){
 									if(postjsonresult.Industry[k].id == subcatlast2["id"]){
@@ -972,42 +1429,96 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 			console.log(postjsonresult);
 		}
 	$scope.entervalueSubcatIndustryTop = function($event){
+		
+	
 		var usecase={};
 		usecase["id"]=[];
+		var totalname="Industry" +"-";
+
+		for(i=0;i<angular.element($event.currentTarget).parent('li').children('ul').children('li').length;i++){
+			if(i==0){
+			totalname = totalname + angular.element($event.currentTarget).parent('li').children('ul').children('li').children('div').eq(i).text();
+			}
+			else{
+			totalname = totalname +","+ angular.element($event.currentTarget).parent('li').children('ul').children('li').children('div').eq(i).text();
+			}
+		}
+		
+
+
 		if(angular.element($event.currentTarget).is(':checked') == true){
-		angular.element($event.currentTarget).parent().children('ul').children('li').each(function(){
+			for(i=$scope.items.length;i>0;i--){
+				if($scope.items[i-1].idname == "Industry"){
+					$scope.items.splice(i-1,1);
+					i=$scope.items.length+1;
+				}
+			}
+			//search criteria
+			$scope.items.push({names:totalname, ids:"Industry", idname:"Industry"});
+			console.log($scope.items);
+			//
+			angular.element($event.currentTarget).parent().children('ul').children('li').each(function(){
+
+			//pushing data in postjson
+
 			usecase={};
 			usecase["id"]=parseInt(angular.element(this).children('input').val());
 
 			    postjsonresult.Industry.push(usecase);
 			    console.log(postjsonresult);
 
-		});
-				}
+			});
+			}
 			//removing element from post json
 			else{
+				
+				//pop search criteria
+				for(i=0;i<$scope.items.length;i++){
+					
+					if($scope.items[i].idname == "Industry"){
+						$scope.items.splice(i,1);
+					}
+				}
+				
+				//code for poping element		
+				
 				postjsonresult.Industry = [];
 				console.log(postjsonresult);
 			}
 	}
 	//////////////////END OF CODE FOR INDUSTRY///////////////
 	//////////////////CODE FOR EP//////////////////////
-	$scope.entervalueSubcatEP = function($event,ndval){
+	$scope.entervalueSubcatEP = function($event,ndval,nameval){
 		var totalmatchfound2 = false;
 		var subcatlast2 ={};
 
+		var totalname = "EP" +"-"+ nameval;
 			//get last id
 			subcatlast2["id"] = parseInt(ndval);
 
 			//inserting element in post json
 			if(angular.element($event.currentTarget).is(':checked') == true){
 
+				//search criteria
 
+				$scope.items.push({names:totalname, ids:ndval, idname:"EP"});
+				//
 					postjsonresult.EP.push(subcatlast2);
 
 			}
 			//removing element from post json
 			else{
+				//pop search criteria
+				
+				for(i=0;i<$scope.items.length;i++){
+					
+					if($scope.items[i].ids == ndval){
+						$scope.items.splice(i,1);
+						break;
+					}
+				}
+				
+				//code for poping element
 
 								for(var k=0;k<postjsonresult.EP.length;k++){
 									if(postjsonresult.EP[k].id == subcatlast2["id"]){
@@ -1025,7 +1536,33 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	$scope.entervalueSubcatEPTop = function($event){
 		var usecase={};
 		usecase["id"]=[];
+		
+		
+		var totalname="EP" +"-";
+
+		for(i=0;i<angular.element($event.currentTarget).parent('li').children('ul').children('li').length;i++){
+			if(i==0){
+			totalname = totalname + angular.element($event.currentTarget).parent('li').children('ul').children('li').children('div').eq(i).text();
+			}
+			else{
+			totalname = totalname +","+ angular.element($event.currentTarget).parent('li').children('ul').children('li').children('div').eq(i).text();
+			}
+		}
+		
+		
+		
+		
 		if(angular.element($event.currentTarget).is(':checked') == true){
+			//search criteria clearing
+			for(i=$scope.items.length;i>0;i--){
+				if($scope.items[i-1].idname == "EP"){
+					$scope.items.splice(i-1,1);
+					i=$scope.items.length+1;
+				}
+			}
+			//search criteria
+			$scope.items.push({names:totalname, ids:"EP", idname:"EP"});
+
 		angular.element($event.currentTarget).parent().children('ul').children('li').each(function(){
 			usecase={};
 			usecase["id"]=parseInt(angular.element(this).children('input').val());
@@ -1037,28 +1574,53 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 				}
 			//removing element from post json
 			else{
+				
+				//pop search criteria
+				for(i=0;i<$scope.items.length;i++){
+					
+					if($scope.items[i].idname == "EP"){
+						$scope.items.splice(i,1);
+					}
+				}
+				
 				postjsonresult.EP = [];
 				console.log(postjsonresult);
 			}
 	}
 	//////////////////END OF CODE FOR EP///////////////
 	//////////////////CODE FOR LogSource///////////////
-	$scope.entervalueSubcatLogSource = function($event,ndval){
+	$scope.entervalueSubcatLogSource = function($event,ndval,nameval){
 		var totalmatchfound2 = false;
 		var subcatlast2 ={};
 
 			//get last id
 			subcatlast2["id"] = parseInt(ndval);
-
+			
+			
+			var totalname = "LogSource" +"-"+ nameval;
+			
 			//inserting element in post json
 			if(angular.element($event.currentTarget).is(':checked') == true){
-
+				
+				//search criteria
+				$scope.items.push({names:totalname, ids:ndval, idname:"LogSource"});
 
 					postjsonresult.LogSource.push(subcatlast2);
 
 			}
 			//removing element from post json
 			else{
+				//pop search criteria
+				
+				for(i=0;i<$scope.items.length;i++){
+					
+					if($scope.items[i].ids == ndval){
+						$scope.items.splice(i,1);
+						break;
+					}
+				}
+				
+				//code for poping element
 
 								for(var k=0;k<postjsonresult.LogSource.length;k++){
 									if(postjsonresult.LogSource[k].id == subcatlast2["id"]){
@@ -1076,7 +1638,31 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	$scope.entervalueSubcatLogSourceTop = function($event){
 		var usecase={};
 		usecase["id"]=[];
+		
+		var totalname="LogSource" +"-";
+
+		for(i=0;i<angular.element($event.currentTarget).parent('li').children('ul').children('li').length;i++){
+			if(i==0){
+			totalname = totalname + angular.element($event.currentTarget).parent('li').children('ul').children('li').children('div').eq(i).text();
+			}
+			else{
+			totalname = totalname +","+ angular.element($event.currentTarget).parent('li').children('ul').children('li').children('div').eq(i).text();
+			}
+		}
+		
 		if(angular.element($event.currentTarget).is(':checked') == true){
+			
+			for(i=$scope.items.length;i>0;i--){
+				if($scope.items[i-1].idname == "LogSource"){
+					$scope.items.splice(i-1,1);
+					i=$scope.items.length+1;
+				}
+			}
+			//search criteria
+			$scope.items.push({names:totalname, ids:"LogSource", idname:"LogSource"});
+			
+			
+			
 		angular.element($event.currentTarget).parent().children('ul').children('li').each(function(){
 			usecase={};
 			usecase["id"]=parseInt(angular.element(this).children('input').val());
@@ -1088,6 +1674,13 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 				}
 			//removing element from post json
 			else{
+				//pop search criteria
+				for(i=0;i<$scope.items.length;i++){
+					
+					if($scope.items[i].idname == "LogSource"){
+						$scope.items.splice(i,1);
+					}
+				}
 				postjsonresult.LogSource = [];
 				console.log(postjsonresult);
 			}
@@ -1095,8 +1688,9 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	//////////////////END OF CODE FOR LogSource///////////////
 	//////////////////CODE FOR Threat model///////////////
 
-	$scope.cliThreMod = function($event,ndval){
-		
+	$scope.cliThreMod = function($event,ndval,nameval){
+		var parentparaname = angular.element($event.currentTarget).parent().parent().parent().children("div").text();
+		var totalname="ThreatModel" +"-"+ parentparaname+"-" + nameval;
 		
 		var subcatlast2 ={};
 
@@ -1106,12 +1700,24 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		//inserting element in post json
 		if(angular.element($event.currentTarget).is(':checked') == true){
 
-
+			//search criteria
+			$scope.items.push({names:totalname, ids:ndval, idname:"ThreatModel", idsubname:parentparaname});
+			
+			
 				postjsonresult.ThreatModel.push(subcatlast2);
 
 		}
 		//removing element from post json
 		else{
+			
+			//pop search criteria
+			for(i=0;i<$scope.items.length;i++){
+				
+				if($scope.items[i].ids == ndval){
+					$scope.items.splice(i,1);
+				}
+			}
+			
 
 							for(var k=0;k<postjsonresult.ThreatModel.length;k++){
 								if(postjsonresult.ThreatModel[k].id == subcatlast2["id"]){
@@ -1128,123 +1734,42 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	}
 	
 	//////////////////CODE FOR Threat model///////////////
-	////////////////////////////////
-	var obj  = {};
 
-	
-	var threatModelObj;
-	var	CyberSecFunc;
-	$http.get($rootScope.url+"/getAllApiNew/9052").success(function(result2){
-		
-		obj = result2;
-	
-		threatModelObj=result2.ThreatModel;
-		obj.RegCat = result2.RegCat;
-		CyberSecFunc = result2.CyberSecFunc;
-		obj.Industry = result2.Industry;
-		obj.EP = result2.EP;
-		obj.LogSource = result2.LogSource;
-		obj.ThreatModel = result2.ThreatModel;
-		
-		//code cyber sec
-		for(i=0;i<CyberSecFunc.length;i++){
-
-		    CyberSecFunc[i].id = CyberSecFunc[i].SurrId;
-		    delete CyberSecFunc[i].SurrId;
-		    delete CyberSecFunc[i].Name;
-
-		    for(j=0;j<CyberSecFunc[i].UseCaseCat.length;j++){
-
-		    CyberSecFunc[i].UseCaseCat[j].id = CyberSecFunc[i].UseCaseCat[j].SurrId;
-		    delete CyberSecFunc[i].UseCaseCat[j].SurrId;
-		    delete CyberSecFunc[i].UseCaseCat[j].Name;
-
-		    for(k=0;k<CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat.length;k++){
-
-		    CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].id = CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].SurrId;
-		    delete CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].SurrId;    
-		    delete CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].Name;
-		    
-		}
-		    
-		}
-		}
-		//regcat
-		for(i=0;i<obj.RegCat.length;i++){
-
-		    obj.RegCat[i].id = obj.RegCat[i].SurrId;
-		    delete obj.RegCat[i].SurrId;
-		    delete obj.RegCat[i].Name;
-
-		    for(j=0;j<obj.RegCat[i].RegPub.length;j++){
-
-		    obj.RegCat[i].RegPub[j].id = obj.RegCat[i].RegPub[j].SurrId;
-		    delete obj.RegCat[i].RegPub[j].SurrId;
-		    delete obj.RegCat[i].RegPub[j].Name;
-
-		    for(k=0;k<obj.RegCat[i].RegPub[j].RegCntl.length;k++){
-
-		    obj.RegCat[i].RegPub[j].RegCntl[k].id = obj.RegCat[i].RegPub[j].RegCntl[k].SurrId;
-		    delete obj.RegCat[i].RegPub[j].RegCntl[k].SurrId;    
-		    delete obj.RegCat[i].RegPub[j].RegCntl[k].Name;
-		    
-		}
-		    
-		}
-		}
-		//Threat model
-		var thrt = {};
-		var threatarry=[];
-
-		for(i=0;i<obj.ThreatModel.length;i++){
-
-		    for(j=0;j<obj.ThreatModel[i].children.length;j++){
-		        thrt = {}
-		    thrt["id"] = obj.ThreatModel[i].children[j].SurrId;
-		    threatarry.push(thrt);
-		    }
-		}
-
-		obj.ThreatModel=[];
-		for(i=0;i<threatarry.length;i++){
-		obj.ThreatModel.push(threatarry[i]);
-		}
-		//industry
-		for(i=0;i<obj.Industry.length;i++){
-
-		    obj.Industry[i].id = obj.Industry[i].SurrId;
-		    delete obj.Industry[i].SurrId;
-		    delete obj.Industry[i].Name;
-
-		}
-		//EP
-		for(i=0;i<obj.EP.length;i++){
-
-		    obj.EP[i].id = obj.EP[i].SurrId;
-		    delete obj.EP[i].SurrId;
-		    delete obj.EP[i].Name;
-
-		}
-		//LogSource
-		for(i=0;i<obj.LogSource.length;i++){
-
-		    obj.LogSource[i].id = obj.LogSource[i].SurrId;
-		    delete obj.LogSource[i].SurrId;
-		    delete obj.LogSource[i].Name;
-
-		}
-	 });
 	///////////selecting threat model root////////////////////
 	$scope.cliThreModTop = function($event){
+		
+		var totalname="ThreatModel" +"-"+threatname;
+		
+		
 		//Threat model
 		postjsonresult.ThreatModel = [];
 		if(angular.element($event.currentTarget).is(':checked') == true){
+			
+			for(i=$scope.items.length;i>0;i--){
+				if($scope.items[i-1].idname == "ThreatModel"){
+					$scope.items.splice(i-1,1);
+					i=$scope.items.length+1;
+				}
+			}
+			
+			//search criteria
+			$scope.items.push({names:totalname, ids:"ThreatModel", idname:"ThreatModel"});
+			
+			
 			for(i=0;i<obj.ThreatModel.length;i++){
 				postjsonresult.ThreatModel.push(obj.ThreatModel[i]);
 				}
 			}
 			//removing element from post json
 			else{
+				//pop search criteria
+				for(i=0;i<$scope.items.length;i++){
+					
+					if($scope.items[i].idname == "ThreatModel"){
+						$scope.items.splice(i,1);
+					}
+				}
+				
 				postjsonresult.ThreatModel = [];
 				console.log(postjsonresult);
 			}
@@ -1252,14 +1777,38 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	///////////selecting Cyber Security root////////////////////
 	$scope.entervalueSubcatCyberSecFuncTop = function($event){
 		//Threat model
+		var totalname="CyberSecFunc" +"-"+ cybertoname;
+		
 		postjsonresult.CyberSecFunc = [];
 		if(angular.element($event.currentTarget).is(':checked') == true){
+			
+
+			for(i=$scope.items.length;i>0;i--){
+				if($scope.items[i-1].idname == "CyberSecFunc"){
+					$scope.items.splice(i-1,1);
+					i=$scope.items.length+1;
+				}
+			}
+			//search criteria
+			$scope.items.push({names:totalname, ids:"CyberSecFunc", idname:"CyberSecFunc"});
+			
+			//pushing value 
 			for(i=0;i<CyberSecFunc.length;i++){
 				postjsonresult.CyberSecFunc.push(CyberSecFunc[i]);
 				}
 			}
 			//removing element from post json
 			else{
+				
+
+				//pop search criteria
+				for(i=0;i<$scope.items.length;i++){
+					
+					if($scope.items[i].idname == "CyberSecFunc"){
+						$scope.items.splice(i,1);
+					}
+				}
+				//pop result
 				postjsonresult.CyberSecFunc = [];
 				console.log(postjsonresult);
 			}
@@ -1267,14 +1816,38 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	///////////selecting RegCat root////////////////////
 	$scope.entervalueSubcatRegCatTop = function($event){
 		//Threat model
+		
+		var totalname="RegCat" +"-"+RegCatoname;
+		
 		postjsonresult.RegCat = [];
 		if(angular.element($event.currentTarget).is(':checked') == true){
-			for(i=0;i<obj.RegCat.length;i++){
-				postjsonresult.RegCat.push(obj.RegCat[i]);
+			
+			for(i=$scope.items.length;i>0;i--){
+				if($scope.items[i-1].idname == "RegCat"){
+					$scope.items.splice(i-1,1);
+					i=$scope.items.length+1;
+				}
+			}
+			//search criteria
+			$scope.items.push({names:totalname, ids:"RegCat", idname:"RegCat"});
+			
+			
+			for(i=0;i<RegCat.length;i++){
+				postjsonresult.RegCat.push(RegCat[i]);
 				}
 			}
 			//removing element from post json
 			else{
+				
+				//pop search criteria
+				for(i=0;i<$scope.items.length;i++){
+					
+					if($scope.items[i].idname == "RegCat"){
+						$scope.items.splice(i,1);
+					}
+				}
+				
+				
 				postjsonresult.RegCat = [];
 				console.log(postjsonresult);
 			}
@@ -1298,23 +1871,23 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		for(i=0;i<obj.ThreatModel.length;i++){
 			postjsonresult.ThreatModel.push(obj.ThreatModel[i]);
 			}
-		for(i=0;i<obj.RegCat.length;i++){
-			postjsonresult.RegCat.push(obj.RegCat[i]);
+		for(i=0;i<RegCat.length;i++){
+			postjsonresult.RegCat.push(RegCat[i]);
 			
 		}
-		for(i=0;i<obj.EP.length;i++){
-			postjsonresult.EP.push(obj.EP[i]);
+		for(i=0;i<EP.length;i++){
+			postjsonresult.EP.push(EP[i]);
 			
 		}
-		for(i=0;i<obj.LogSource.length;i++){
-			postjsonresult.LogSource.push(obj.LogSource[i]);
+		for(i=0;i<LogSource.length;i++){
+			postjsonresult.LogSource.push(LogSource[i]);
 			
 		}
-		for(i=0;i<obj.Industry.length;i++){
-			postjsonresult.Industry.push(obj.Industry[i]);
+		for(i=0;i<Industry.length;i++){
+			postjsonresult.Industry.push(Industry[i]);
 			
 		}
-		console.log(obj.RegCat);
+		console.log(postjsonresult);
 		}
 
 	//removing element from post json
@@ -1332,9 +1905,48 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	}
 	}
 	//////////////////cyber security second root///////////////
-	$scope.entervalueSubcatCyberSecFunc = function($event,ndvl){
-		
+	$scope.entervalueSubcatCyberSecFunc = function($event,ndvl,nameval){
+		//search criteria code
+		for(i=0;i<CyberSecFunc.length;i++){
+			if(CyberSecFunc[i].id == ndvl){
+			    for(j=0;j<obj.CyberSecFunc[i].UseCaseCat.length;j++){
+					
+					if(j==0){
+						cybertoname2 = cybertoname2 +"-" + obj.CyberSecFunc[i].UseCaseCat[j].Name+"-";
+						}
+						else{
+						cybertoname2 = cybertoname2 +"-"+  obj.CyberSecFunc[i].UseCaseCat[j].Name+"-";
+						}
+					
+					
+					for(k=0;k<obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat.length;k++){
+		    	
+						if(k==0){
+							cybertoname2 = cybertoname2 + obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].Name;
+							}
+							else{
+							cybertoname2 = cybertoname2 +","+  obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].Name;
+							}
+				    }
+			    }
+				
+			}
+		}
+		var totalname="CyberSecFunc" +"-"+nameval+"-"+cybertoname2;
+		cybertoname2 = "";
+		//End search criteria code
 	if(angular.element($event.currentTarget).is(':checked') == true){
+		
+		for(i=$scope.items.length;i>0;i--){
+			if($scope.items[i-1].idsubname == nameval){
+				$scope.items.splice(i-1,1);
+				i=$scope.items.length+1;
+			}
+		}
+		//search criteria
+		$scope.items.push({names:totalname, ids:ndvl, idname:"CyberSecFunc", idsubname:nameval});
+		
+
 		for(i=0;i<CyberSecFunc.length;i++){
 			if(CyberSecFunc[i].id == ndvl)
 				{
@@ -1345,6 +1957,15 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	}
 	//removing element from post json
 	else{
+		
+		//pop search criteria
+		for(i=0;i<$scope.items.length;i++){
+			
+			if($scope.items[i].ids == ndvl){
+				$scope.items.splice(i,1);
+			}
+		}
+		
 		for(i=0;i<postjsonresult.CyberSecFunc.length;i++){
 			if(postjsonresult.CyberSecFunc[i].id == ndvl)
 				{
@@ -1358,9 +1979,57 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	
 
 	$scope.UsecaseCategory = function($event){
+
 		var ndvl = angular.element($event.currentTarget).parent().parent().parent().children('input').val();
+		var nameval=angular.element($event.currentTarget).parent().parent().parent().children('div').text();
+		
+			var cybertoname2="";
+		//search criteria code
+		for(i=0;i<CyberSecFunc.length;i++){
+			if(CyberSecFunc[i].id == ndvl){
+			    for(j=0;j<obj.CyberSecFunc[i].UseCaseCat.length;j++){
+					
+					if(j==0){
+						cybertoname2 = cybertoname2 +"-" + obj.CyberSecFunc[i].UseCaseCat[j].Name+"-";
+						}
+						else{
+						cybertoname2 = cybertoname2 +"-"+  obj.CyberSecFunc[i].UseCaseCat[j].Name+"-";
+						}
+					
+					
+					for(k=0;k<obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat.length;k++){
+		    	
+						if(k==0){
+							cybertoname2 = cybertoname2 + obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].Name;
+							}
+							else{
+							cybertoname2 = cybertoname2 +","+  obj.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat[k].Name;
+							}
+				    }
+			    }
+				
+			}
+		}
+		var totalname="CyberSecFunc" +"-"+nameval+"-"+cybertoname2;
+		cybertoname2 = "";
+		//End search criteria code
+		
+		
+		
 		
 		if(angular.element($event.currentTarget).is(':checked') == true){
+			
+			
+			for(i=$scope.items.length;i>0;i--){
+				if($scope.items[i-1].idsubname == nameval){
+					$scope.items.splice(i-1,1);
+					i=$scope.items.length+1;
+				}
+			}
+			//search criteria
+			$scope.items.push({names:totalname, ids:ndvl, idname:"CyberSecFunc", idsubname:nameval});
+			
+
 			for(i=0;i<CyberSecFunc.length;i++){
 				if(CyberSecFunc[i].id == ndvl)
 					{
@@ -1371,6 +2040,13 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		}
 		//removing element from post json
 		else{
+			//pop search criteria
+			for(i=0;i<$scope.items.length;i++){
+				if($scope.items[i].ids == ndvl){
+					$scope.items.splice(i,1);
+				}
+			}
+			
 			for(i=0;i<postjsonresult.CyberSecFunc.length;i++){
 				if(postjsonresult.CyberSecFunc[i].id == ndvl)
 					{
@@ -1384,27 +2060,10 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	///////////////////////////////////threat subroot///////////////
 
 
-	/*$scope.cliThreModMid = function($event,ndvlqe){
-		
+$scope.cliThreModMid = function($event,ndvlqe,nameval){	
+	var totalname="ThreatModel" +"-"+ nameval+"-" + threatname2;
 		//Threat model
-		postjsonresult.ThreatModel = [];
-		if(angular.element($event.currentTarget).is(':checked') == true){
-			for(i=0;i<obj.ThreatModel.length;i++){
-				postjsonresult.ThreatModel.push(obj.ThreatModel[i]);
-				}
-			}
-			//removing element from post json
-			else{
-				postjsonresult.ThreatModel = [];
-				console.log(postjsonresult);
-			}
-	
-	
-	}*/
-	
-$scope.cliThreModMid = function($event,ndvlqe){	
-		//Threat model
-		
+	console.log(threatModelObj);
 		//postjsonresult.ThreatModel = [];		
 		var thrtObj=null;
 			for(i=0;i<threatModelObj.length;i++){	
@@ -1425,6 +2084,18 @@ $scope.cliThreModMid = function($event,ndvlqe){
 			
 			
 			if(angular.element($event.currentTarget).is(':checked') == true){
+				
+				for(i=$scope.items.length;i>0;i--){
+					if($scope.items[i-1].idsubname == nameval){
+						$scope.items.splice(i-1,1);
+						i=$scope.items.length+1;
+					}
+				}
+				//search criteria
+				$scope.items.push({names:totalname, ids:ndvlqe, idname:"ThreatModel", idsubname:nameval});
+				
+				
+				
 				var obj={
 					id:thrtObj.SurrId
 				};
@@ -1438,6 +2109,16 @@ $scope.cliThreModMid = function($event,ndvlqe){
 					};	
 			   };
 			}else{
+				
+				//pop search criteria
+				for(i=0;i<$scope.items.length;i++){
+					
+					if($scope.items[i].ids == ndvlqe){
+						$scope.items.splice(i,1);
+					}
+				}
+				
+				//
 				var obj={
 					id:thrtObj.SurrId
 				};
@@ -1457,19 +2138,72 @@ $scope.cliThreModMid = function($event,ndvlqe){
 	
 	};
 	//////////////////Reg cat second root///////////////
-	$scope.entervalueSubcatRegCat = function($event,ndvlq){
+	$scope.entervalueSubcatRegCat = function($event,ndvlq,nameval){
+		//search criteria code
+		var regcatoname2=""
+		for(i=0;i<RegCat.length;i++){
+			if(RegCat[i].id == ndvlq){
+			    for(j=0;j<obj.RegCat[i].RegPub.length;j++){
+					
+					if(j==0){
+						regcatoname2 = regcatoname2 +"-" + obj.RegCat[i].RegPub[j].Name+"-";
+						}
+						else{
+						regcatoname2 = regcatoname2 +"-"+  obj.RegCat[i].RegPub[j].Name+"-";
+						}
+					
+					
+					for(k=0;k<obj.RegCat[i].RegPub[j].RegCntl.length;k++){
+		    	
+						if(k==0){
+							regcatoname2 = regcatoname2 + obj.RegCat[i].RegPub[j].RegCntl[k].Name;
+							}
+							else{
+							regcatoname2 = regcatoname2 +","+  obj.RegCat[i].RegPub[j].RegCntl[k].Name;
+							}
+				    }
+			    }
+				
+			}
+		}
+		var totalname="RegCat" +"-"+nameval+"-"+regcatoname2;
+		regcatoname2 = "";
+		//End search criteria code
 		
 	if(angular.element($event.currentTarget).is(':checked') == true){
-		for(i=0;i<obj.RegCat.length;i++){
-			if(obj.RegCat[i].id == ndvlq)
+		//search criteria
+		for(i=$scope.items.length;i>0;i--){
+			if($scope.items[i-1].idsubname == nameval){
+				$scope.items.splice(i-1,1);
+				i=$scope.items.length+1;
+			}
+		}
+		
+		$scope.items.push({names:totalname, ids:ndvlq, idname:"RegCat", idsubname:nameval});
+		//End search criteria
+		
+		
+		for(i=0;i<RegCat.length;i++){
+			if(RegCat[i].id == ndvlq)
 				{
-				postjsonresult.RegCat.push(obj.RegCat[i]);
+				postjsonresult.RegCat.push(RegCat[i]);
 				break;
 				}
 		}
 	}
 	//removing element from post json
 	else{
+		
+		//pop search criteria
+		for(i=0;i<$scope.items.length;i++){
+			
+			if($scope.items[i].ids == ndvlq){
+				$scope.items.splice(i,1);
+			}
+		}
+		//
+		
+		
 		for(i=0;i<postjsonresult.RegCat.length;i++){
 			if(postjsonresult.RegCat[i].id == ndvlq)
 				{
@@ -1484,18 +2218,68 @@ $scope.cliThreModMid = function($event,ndvlqe){
 
 	$scope.RegCategor = function($event){
 		var ndvl = angular.element($event.currentTarget).parent().parent().parent().children('input').val();
+		var nameval=angular.element($event.currentTarget).parent().parent().parent().children('div').text();
+
+		//search criteria code
+		var regcatoname2="";
+		for(i=0;i<RegCat.length;i++){
+			if(RegCat[i].id == ndvl){
+			    for(j=0;j<obj.RegCat[i].RegPub.length;j++){
+					
+					if(j==0){
+						regcatoname2 = regcatoname2 +"-" + obj.RegCat[i].RegPub[j].Name+"-";
+						}
+						else{
+						regcatoname2 = regcatoname2 +"-"+  obj.RegCat[i].RegPub[j].Name+"-";
+						}
+					
+					
+					for(k=0;k<obj.RegCat[i].RegPub[j].RegCntl.length;k++){
+		    	
+						if(k==0){
+							regcatoname2 = regcatoname2 + obj.RegCat[i].RegPub[j].RegCntl[k].Name;
+							}
+							else{
+							regcatoname2 = regcatoname2 +","+  obj.RegCat[i].RegPub[j].RegCntl[k].Name;
+							}
+				    }
+			    }
+				
+			}
+		}
+		var totalname="RegCat" +"-"+nameval+"-"+regcatoname2;
+		cybertoname2 = "";
+		//End search criteria code
 		
 		if(angular.element($event.currentTarget).is(':checked') == true){
-			for(i=0;i<obj.RegCat.length;i++){
-				if(obj.RegCat[i].id == ndvl)
+			
+			for(i=$scope.items.length;i>0;i--){
+				if($scope.items[i-1].idsubname == nameval){
+					$scope.items.splice(i-1,1);
+					i=$scope.items.length+1;
+				}
+			}
+			//search criteria
+			$scope.items.push({names:totalname, ids:ndvl, idname:"RegCat", idsubname:nameval});
+			
+			
+			for(i=0;i<RegCat.length;i++){
+				if(RegCat[i].id == ndvl)
 					{
-					postjsonresult.RegCat.push(obj.RegCat[i]);
+					postjsonresult.RegCat.push(RegCat[i]);
 					break;
 					}
 			}
 		}
 		//removing element from post json
 		else{
+			//pop search criteria
+			for(i=0;i<$scope.items.length;i++){
+				if($scope.items[i].ids == ndvl){
+					$scope.items.splice(i,1);
+				}
+			}
+			
 			for(i=0;i<postjsonresult.RegCat.length;i++){
 				if(postjsonresult.RegCat[i].id == ndvl)
 					{
@@ -1760,11 +2544,11 @@ $scope.cliThreModMid = function($event,ndvlqe){
     $scope.selectedNode = "";
     function buildEmptyTree() {
         var entdata = null;
-        var dataURL = $rootScope.url+"/getAllApi/"+$rootScope.surrId;
+        var dataURL = "data/dataRajesh.json";
         Items.getJson(dataURL).then(function(result) {
             $scope.displayTree = result;
         }, function(result) {
-            alert("Error: No data returned", result);
+            //alert("Error: No data returned", result);
         }); 
     }
 

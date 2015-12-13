@@ -1,5 +1,22 @@
 /*-------------ripunjoy css-------------*/
-
+/*-----------------search criteria---------------*/
+.searchcriteria ul{
+    padding-left:0px;
+}
+.searchcriteria ul li{
+list-style: outside none none;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-shadow: 2px 2px 2px #ccc;
+font-size: 12px;
+padding: 5px 10px;
+color:#777777;
+margin-bottom:10px;
+float:left;
+margin-right:10px;  
+max-width: 100%;
+word-wrap: break-word;
+}
 /*------------------Tree start--------------------*/
 .uccatagory{
 	display:inline;

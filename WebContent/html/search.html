@@ -44,21 +44,21 @@
                 	<input type="checkbox" ng-click="entervalueSubcatCyberSecFuncTop($event)" >Cyber Security<span class="start"><i class="icon-minus-sign headPlus">+</i></span>
                     <ul>
                         <li ng-repeat="cybers in cybersec">
-                        	<input type="checkbox"  ng-click="entervalueSubcatCyberSecFunc($event,cybers.SurrId)" value="{{cybers.SurrId}}">{{cybers.Name}}<span><i class="icon-minus-sign">+</i></span>
+                        	<input type="checkbox"  ng-click="entervalueSubcatCyberSecFunc($event,cybers.SurrId,cybers.Name)" value="{{cybers.SurrId}}"><div style="display:inline">{{cybers.Name}}</div><span><i class="icon-minus-sign">+</i></span>
                             <ul>
                                 <li>
-	                                <input type="checkbox" value="UseCaseCat" ng-click="UsecaseCategory($event)">Usecase Category<span><i class="icon-minus-sign">+</i></span>
+	                                <input type="checkbox" value="UseCaseCat" ng-click="UsecaseCategory($event)">Use Case Category<span><i class="icon-minus-sign">+</i></span>
 		                            <ul class="findchild">
 		                                <li ng-repeat="useca in cybers.UseCaseCat">
-			                                <input type="checkbox"  ng-click="entervalue($event,useca.SurrId)" value="{{useca.SurrId}}"><pre class="uccatagory"></pre>{{useca.Name}}<span><i class="icon-leaf">+</i></span>
+			                                <input type="checkbox"  ng-click="entervalue($event,useca.SurrId,useca.Name)" value="{{useca.SurrId}}"><pre class="uccatagory"></pre><div style="display:inline">{{useca.Name}}</div><span><i class="icon-leaf">+</i></span>
 					                         <ul>
 				                                <li>
-					                                <input type="checkbox"  ng-click="UsecaseSubCategory($event)" value="UseCaseSubCat">Usecase SubCategory<span><i class="icon-leaf">+</i></span>
+					                                <input type="checkbox"  ng-click="UsecaseSubCategory($event)" value="UseCaseSubCat">Use Case SubCategory<span><i class="icon-leaf">+</i></span>
 							                         <ul>
 						                                <li ng-repeat="usecasesu in useca.UseCaseSubCat">
-							                               <input type="checkbox"  ng-click="entervalueSubcat($event,usecasesu.SurrId)" value="{{usecasesu.SurrId}}"><pre class="ucSubcatagory"></pre>{{usecasesu.Name}}
+							                               <input type="checkbox"  ng-click="entervalueSubcat($event,usecasesu.SurrId,usecasesu.Name)" value="{{usecasesu.SurrId}}"><pre class="ucSubcatagory"></pre><div style="display:inline">{{usecasesu.Name}}</div>
 						                                </li>
-						                             </ul>				                                
+						                             </ul>                                
 						                        </li>
 				                             </ul>
 		                                </li>
@@ -76,19 +76,19 @@
                 	<input type="checkbox" ng-click="entervalueSubcatRegCatTop($event)">Regulatory Category<span class="start"><i class="icon-minus-sign headPlus">+</i></span>
                     <ul>
                         <li ng-repeat="regcat in regulacat">
-                        	<input type="checkbox"  ng-click="entervalueSubcatRegCat($event,regcat.SurrId)" value="{{regcat.SurrId}}">{{regcat.Name}}<span><i class="icon-minus-sign">+</i></span>
+                        	<input type="checkbox"  ng-click="entervalueSubcatRegCat($event,regcat.SurrId,regcat.Name)" value="{{regcat.SurrId}}"><div style="display:inline">{{regcat.Name}}</div><span><i class="icon-minus-sign">+</i></span>
                             <ul>
                                 <li>
 	                                <input type="checkbox" ng-click="RegCategor($event)">Regulatory Publication<span><i class="icon-minus-sign">+</i></span>
 		                            <ul>
 		                                <li ng-repeat="regpub in regcat.RegPub">
-			                                <input type="checkbox"  ng-click="entervalue2($event,regpub.SurrId)" value="{{regpub.SurrId}}"><pre class="regcatagory"></pre>{{regpub.Name}}<span><i class="icon-leaf">+</i></span>
+			                                <input type="checkbox"  ng-click="entervalue2($event,regpub.SurrId,regpub.Name)" value="{{regpub.SurrId}}"><pre class="regcatagory"></pre><div style="display:inline">{{regpub.Name}}</div><span><i class="icon-leaf">+</i></span>
 					                         <ul>
 				                                <li>
 					                                <input type="checkbox" ng-click="RegCatSubCategory($event)">Regulatory Control</a><span><i class="icon-leaf">+</i></span>
 							                         <ul>
 						                                <li ng-repeat="regctrl in regpub.RegCntl">
-							                                <input type="checkbox"  ng-click="entervalueSubcat2($event,regctrl.SurrId)" value="{{regctrl.SurrId}}"><pre class="regSubcatagory"></pre>{{regctrl.Name}}
+							                                <input type="checkbox"  ng-click="entervalueSubcat2($event,regctrl.SurrId,regctrl.Name)" value="{{regctrl.SurrId}}"><pre class="regSubcatagory"></pre><div style="display:inline">{{regctrl.Name}}</div>
 						                                </li>
 						                             </ul>				                                
 						                        </li>
@@ -108,27 +108,7 @@
                 	<input type="checkbox"  ng-click="entervalueSubcatIndustryTop($event)">Industry<span class="start"><i class="icon-minus-sign headPlus">+</i></span>
                     <ul>
                         <li ng-repeat="indus in industry">
-                        	<input type="checkbox" ng-click="entervalueSubcatIndustry($event,indus.SurrId)" value="{{indus.SurrId}}">{{indus.Name}}<!-- <span><i class="icon-minus-sign">+</i></span>
-                            <ul >
-                                <li>
-	                                <input type="checkbox">Regulatory Publication<span><i class="icon-minus-sign">+</i></span>
-		                            <ul>
-		                                <li ng-repeat="regpub in regcat.RegPub">
-			                                <input type="checkbox">{{regpub.Name}}<span><i class="icon-leaf">+</i></span>
-					                         <ul>
-				                                <li>
-					                                <input type="checkbox">Regulatory Control<span><i class="icon-leaf">+</i></span>
-							                         <ul>
-						                                <li ng-repeat="regctrl in regpub.RegCntl">
-							                                <input type="checkbox">{{regctrl.Name}}
-						                                </li>
-						                             </ul>				                                
-						                        </li>
-				                             </ul>
-		                                </li>
-		                             </ul>
-                                </li>
-                            </ul> -->
+                        	<input type="checkbox" ng-click="entervalueSubcatIndustry($event,indus.SurrId,indus.Name)" value="{{indus.SurrId}}"><div style="display:inline">{{indus.Name}}</div>
                         </li>
                     </ul>
                 </li>
@@ -140,27 +120,7 @@
                 	<input type="checkbox" ng-click="entervalueSubcatEPTop($event)">EP<span class="start"><i class="icon-minus-sign headPlus">+</i></span>
                     <ul>
                         <li ng-repeat="ep in eepp">
-                        	<input type="checkbox" ng-click="entervalueSubcatEP($event,ep.SurrId)" value="{{ep.SurrId}}">{{ep.Name}}<!-- <span><i class="icon-minus-sign">+</i></span>
-                            <ul >
-                                <li>
-	                                <input type="checkbox">Regulatory Publication<span><i class="icon-minus-sign">+</i></span>
-		                            <ul>
-		                                <li ng-repeat="regpub in regcat.RegPub">
-			                                <input type="checkbox">{{regpub.Name}}<span><i class="icon-leaf">+</i></span>
-					                         <ul>
-				                                <li>
-					                                <input type="checkbox">Regulatory Control<span><i class="icon-leaf">+</i></span>
-							                         <ul>
-						                                <li ng-repeat="regctrl in regpub.RegCntl">
-							                                <input type="checkbox">{{regctrl.Name}}
-						                                </li>
-						                             </ul>				                                
-						                        </li>
-				                             </ul>
-		                                </li>
-		                             </ul>
-                                </li>
-                            </ul> -->
+                        	<input type="checkbox" ng-click="entervalueSubcatEP($event,ep.SurrId,ep.Name)" value="{{ep.SurrId}}"><div style="display:inline">{{ep.Name}}</div>
                         </li>
                     </ul>
                 </li>
@@ -172,11 +132,11 @@
                 	<input type="checkbox"  ng-click="cliThreModTop($event)">Threat Model<span class="start"><i class="icon-minus-sign headPlus">+</i></span>
                     <ul>
                         <li ng-repeat="thrt1 in thrtmodl">
-                        	<input type="checkbox" ng-click="cliThreModMid($event,thrt1.SurrId)"><pre class="uccatagory"></pre>{{thrt1.Name}}-<strong>{{thrt1.SurrId}}</strong><span><i class="icon-minus-sign">+</i></span>
+                        	<input type="checkbox" ng-click="cliThreModMid($event,thrt1.SurrId,thrt1.Name)"><pre class="uccatagory"></pre><div style="display:inline">{{thrt1.Name}}</div>-<strong>{{thrt1.SurrId}}</strong><span><i class="icon-minus-sign">+</i></span>
                             <ul>
-		                                <li ng-repeat="thrt2 in thrt1.children">
-			                                <input type="checkbox" ng-click="cliThreMod($event,thrt2.SurrId)"><pre class="threatScatagoryM" ng-if="thrt2.ThreadModelType=='M'"></pre><pre class="threatScatagoryS" ng-if="thrt2.ThreadModelType=='S'"></pre>{{thrt2.Name}}
-		                                </li>
+		                       <li ng-repeat="thrt2 in thrt1.children">
+			                      <input type="checkbox" ng-click="cliThreMod($event,thrt2.SurrId,thrt2.Name)"><pre class="threatScatagoryM" ng-if="thrt2.ThreadModelType=='M'"></pre><pre class="threatScatagoryS" ng-if="thrt2.ThreadModelType=='S'"></pre>{{thrt2.Name}}-<strong>{{thrt2.SurrId}}</strong>
+		                       </li>
                             </ul>
                         </li>
                     </ul>
@@ -189,27 +149,7 @@
                 	<input type="checkbox" ng-click="entervalueSubcatLogSourceTop($event)">LogSource<span class="start"><i class="icon-minus-sign headPlus">+</i></span>
                     <ul>
                         <li ng-repeat="log in logsour">
-                        	<input type="checkbox" ng-click="entervalueSubcatLogSource($event,log.SurrId)" value="{{log.SurrId}}">{{log.Name}}<!-- <span><i class="icon-minus-sign">+</i></span>
-                            <ul>
-                                <li>
-	                                <input type="checkbox">Regulatory Publication<span><i class="icon-minus-sign">+</i></span>
-		                            <ul>
-		                                <li ng-repeat="regpub in regcat.RegPub">
-			                                <input type="checkbox">{{regpub.Name}}<span><i class="icon-leaf">+</i></span>
-					                         <ul>
-				                                <li>
-					                                <input type="checkbox">Regulatory Control<span><i class="icon-leaf">+</i></span>
-							                         <ul>
-						                                <li ng-repeat="regctrl in regpub.RegCntl">
-							                                <input type="checkbox">{{regctrl.Name}}
-						                                </li>
-						                             </ul>				                                
-						                        </li>
-				                             </ul>
-		                                </li>
-		                             </ul>
-                                </li>
-                            </ul> -->
+                        	<input type="checkbox" ng-click="entervalueSubcatLogSource($event,log.SurrId,log.Name)" value="{{log.SurrId}}"><div style="display:inline">{{log.Name}}</div><!-- <span><i class="icon-minus-sign">+</i></span>
                         </li>
                     </ul>
                 </li>

@@ -37,9 +37,59 @@ function HomeController(UserService,  $rootScope, $scope, $http) {
     		angular.element(this).parents(".usecaseTablerule").addClass("usecaseTableclick");
     	});
     });
+    var feedhov = true;
+	angular.element(".feedbackmenu").click(function(){
+			angular.element(this).children("span").css({
+				'background-position':'52px 0px'
+			});
+			feedhov = false;
+	});
+	
 
-
-
+	angular.element(".feedbackmenu").hover(function(){
+		angular.element(this).children("span").css({
+			'background-position':'52px 0px'
+		});
+	},
+	function(){
+		if(feedhov==true){
+		angular.element(this).children("span").css({
+			'background-position':'0px 0px'
+		});
+		}
+	});
+	angular.element(".forallnotFedd").click(function(){
+		angular.element(".feedbackmenu").children("span").css({
+			'background-position':'0px 0px'
+		});
+		feedhov = true;
+	});
+    var searhov = true;
+	angular.element(".searchlibrarymenuI").click(function(){
+		angular.element(this).children("span").css({
+			'background-position':'-71px -325px'
+		});
+		searhov = false;
+	});
+	angular.element(".searchlibrarymenuI").hover(function(){
+		angular.element(this).children("span").css({
+			'background-position':'-71px -325px'
+		});
+	},
+	function(){
+		if(searhov==true){
+		angular.element(this).children("span").css({
+			'background-position':'0px -325px'
+		});
+		}
+	});
+	angular.element(".forallnotsear").click(function(){
+		angular.element(".searchlibrarymenuI").children("span").css({
+			'background-position':'0px -325px'
+		});
+		searhov = true;
+	});
+	
 
     //code for user role specific access
 	
