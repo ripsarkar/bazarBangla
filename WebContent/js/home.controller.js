@@ -110,11 +110,12 @@ function HomeController(UserService,  $rootScope, $scope, $http) {
 		        $scope.useCaseMaintain = true;
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=false;
+				$scope.feedback = true;
 		    }
 		    if ($rootScope.role == "USER_VIEW") {
 		        $scope.searchMenu = true;
 		        $rootScope.exported = false;
-		        $scope.feedback = false;
+		        $scope.feedback = true;
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=true;
 		    }

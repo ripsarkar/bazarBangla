@@ -351,6 +351,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	var Industry=[];
 	var EP=[];
 	var LogSource=[];
+	var ThreatModel=[];
 	
 	$scope.items = [];
 	var cybertoname="";
@@ -360,6 +361,8 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	var threatname2="";
 
 	$rootScope.loadinganimation=true;
+	
+	
 	 $http.get($rootScope.url+"/getAllApiNew/9052").success(function(result){
 		 $rootScope.loadinganimation=false;
 		 $scope.regulacat = result.RegCat;
@@ -377,6 +380,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 			obj.RegCat = result.RegCat;
 			obj.CyberSecFunc = result.CyberSecFunc;
 			obj.ThreatModel = result.ThreatModel;
+			ThreatModel = result.ThreatModel;
 			obj.Industry = result.Industry;
 			obj.EP = result.EP;
 			obj.LogSource = result.LogSource;
@@ -514,14 +518,10 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 					else{
 					threatname = threatname +"/"+  obj.ThreatModel[i].Name+"-";
 					}
-				if(i==0){
-					threatname2 = threatname2 + obj.ThreatModel[i].Name+"-";
-					}
-					else{
-					threatname2 = threatname2 +"/"+  obj.ThreatModel[i].Name+"-";
-					}
-				
 
+				thrt = {}
+			    thrt["id"] = obj.ThreatModel[i].SurrId;
+				threatarry.push(thrt);
 			    for(j=0;j<obj.ThreatModel[i].children.length;j++){
 					if(j==0){
 						threatname = threatname +"-" + obj.ThreatModel[i].children[j].Name+"-";
@@ -530,9 +530,21 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 						threatname = threatname +"-"+  obj.ThreatModel[i].children[j].Name+"-";
 						}
 
+
 			    thrt = {}
 			    thrt["id"] = obj.ThreatModel[i].children[j].SurrId;
 			    threatarry.push(thrt);
+				    for(k=0;k<obj.ThreatModel[i].children[j].children.length;k++){
+						if(k==0){
+							threatname = threatname +"-" + obj.ThreatModel[i].children[j].children[k].Name+"-";
+							}
+							else{
+							threatname = threatname +"-"+  obj.ThreatModel[i].children[j].children[k].Name+"-";
+							}
+				    thrt = {}
+				    thrt["id"] = obj.ThreatModel[i].children[j].children[k].SurrId;
+				    threatarry.push(thrt);
+				    }
 			    }
 			}
 
@@ -1690,7 +1702,85 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 
 	$scope.cliThreMod = function($event,ndval,nameval){
 		var parentparaname = angular.element($event.currentTarget).parent().parent().parent().children("div").text();
-		var totalname="ThreatModel" +"-"+ parentparaname+"-" + nameval;
+		var childparaname = "";
+		for (var k=0;k<angular.element($event.currentTarget).parent('li').children('ul').children('li').length;k++){
+
+				if(k==0){
+					childparaname = childparaname + angular.element($event.currentTarget).parent('li').children('ul').children('li').children('div').eq(k).text();
+				}
+				else{
+					childparaname = childparaname +","+ angular.element($event.currentTarget).parent('li').children('ul').children('li').children('div').eq(k).text();
+				}
+					
+		}
+		
+		var totalname="ThreatModel" +"-"+ parentparaname+"-" + nameval+"-" + childparaname;
+		
+		var subcatlast2 ={};
+
+		//get last id
+		subcatlast2["id"] = parseInt(ndval);
+
+		//inserting element in post json
+		if(angular.element($event.currentTarget).is(':checked') == true){
+			for(i=$scope.items.length;i>0;i--){
+				if($scope.items[i-1].idsubsubname == nameval){
+					$scope.items.splice(i-1,1);
+					i=$scope.items.length+1;
+				}
+			}
+			//search criteria
+			$scope.items.push({names:totalname, ids:ndval, idname:"ThreatModel", idsubname:parentparaname, idsubsubname:nameval});
+			
+			
+				postjsonresult.ThreatModel.push(subcatlast2);
+				for (k=0;k<angular.element($event.currentTarget).parent('li').children('ul').children('li').length;k++){
+					var obj={
+						id:parseInt(angular.element($event.currentTarget).parent('li').children('ul').children('li').children('input').eq(k).val())
+					};
+					postjsonresult.ThreatModel.push(obj);
+					obj={};
+				};
+
+		}
+		//removing element from post json
+		else{
+			
+			//pop search criteria
+			for(i=0;i<$scope.items.length;i++){
+				
+				if($scope.items[i].ids == ndval){
+					$scope.items.splice(i,1);
+				}
+			}
+			
+
+							for(var k=0;k<postjsonresult.ThreatModel.length;k++){
+								if(postjsonresult.ThreatModel[k].id == subcatlast2["id"]){
+
+										postjsonresult.ThreatModel.splice(k, 1);
+										break;
+								}
+							}
+							for (var k=0;k<angular.element($event.currentTarget).parent('li').children('ul').children('li').length;k++){
+								var obj={
+									id:parseInt(angular.element($event.currentTarget).parent('li').children('ul').children('li').children('input').eq(k).val())
+								};
+								postjsonresult.ThreatModel.pop(obj);
+								obj={};
+							};
+
+
+		}
+
+		console.log(postjsonresult);
+	}
+	
+	
+	$scope.cliThreModInner = function($event,ndval,nameval){
+		var parentparaname = angular.element($event.currentTarget).parent().parent().parent().children("div").text();
+		var grandparentname = angular.element($event.currentTarget).parent().parent().parent().parent().parent().children("div").text();
+		var totalname="ThreatModel" +"-"+ grandparentname+"-"+parentparaname+"-" + nameval;
 		
 		var subcatlast2 ={};
 
@@ -1701,7 +1791,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		if(angular.element($event.currentTarget).is(':checked') == true){
 
 			//search criteria
-			$scope.items.push({names:totalname, ids:ndval, idname:"ThreatModel", idsubname:parentparaname});
+			$scope.items.push({names:totalname, ids:ndval, idname:"ThreatModel", idsubname:grandparentname, idsubsubname:parentparaname});
 			
 			
 				postjsonresult.ThreatModel.push(subcatlast2);
@@ -1771,8 +1861,8 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 				}
 				
 				postjsonresult.ThreatModel = [];
-				console.log(postjsonresult);
 			}
+		console.log(postjsonresult);
 	}
 	///////////selecting Cyber Security root////////////////////
 	$scope.entervalueSubcatCyberSecFuncTop = function($event){
@@ -2060,8 +2150,36 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	///////////////////////////////////threat subroot///////////////
 
 
-$scope.cliThreModMid = function($event,ndvlqe,nameval){	
+$scope.cliThreModMid = function($event,ndvlqe,nameval){
+	//search criteria code
+	for(i=0;i<ThreatModel.length;i++){
+		if(ThreatModel[i].SurrId == ndvlqe){
+		    for(j=0;j<ThreatModel[i].children.length;j++){
+				
+				if(j==0){
+					threatname2 = threatname2 +"-" +ThreatModel[i].children[j].Name+"-";
+					}
+					else{
+					threatname2 = threatname2 +"-"+  ThreatModel[i].children[j].Name+"-";
+					}
+				
+				for(k=0;k<ThreatModel[i].children[j].children.length;k++){
+
+					if(k==0){
+						threatname2 = threatname2 +"-" +ThreatModel[i].children[j].children[k].Name+"-";
+						}
+						else{
+						threatname2 = threatname2 +"-"+ ThreatModel[i].children[j].children[k].Name+"-";
+						}
+			    }
+		    }
+			
+		}
+	}
+
 	var totalname="ThreatModel" +"-"+ nameval+"-" + threatname2;
+	threatname2="";
+	//
 		//Threat model
 	console.log(threatModelObj);
 		//postjsonresult.ThreatModel = [];		
@@ -2078,7 +2196,15 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 						thrtObj=threatModelObj[i].children[j];
 						break;
 					}
-					
+					for (k=0;k<threatModelObj[i].children[j].children.length;k++){
+						
+						if(threatModelObj[i].children[j].children[k].SurrId==ndvlqe){
+							thrtObj=threatModelObj[i].children[j].children[k];
+							break;
+						}
+						
+					}
+
 				}
 			}
 			
@@ -2095,7 +2221,6 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 				$scope.items.push({names:totalname, ids:ndvlqe, idname:"ThreatModel", idsubname:nameval});
 				
 				
-				
 				var obj={
 					id:thrtObj.SurrId
 				};
@@ -2105,8 +2230,15 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 						var obj={
 							id:thrtObj.children[j].SurrId
 						};
-						postjsonresult.ThreatModel.push(obj);					
-					};	
+						postjsonresult.ThreatModel.push(obj);
+						for (k=0;k<thrtObj.children[j].children.length;k++){
+							var obj={
+								id:thrtObj.children[j].children[k].SurrId
+							};
+							postjsonresult.ThreatModel.push(obj);					
+						};
+					};
+					
 			   };
 			}else{
 				
@@ -2128,7 +2260,13 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 							id:thrtObj.SurrId
 						};
 					for (j=0;j<thrtObj.children.length;j++){
-						postjsonresult.ThreatModel.pop(obj);					
+						postjsonresult.ThreatModel.pop(obj);
+						for (k=0;k<thrtObj.children[j].children.length;k++){
+							var obj={
+								id:thrtObj.children[j].children[k].SurrId
+							};
+							postjsonresult.ThreatModel.pop(obj);					
+						};
 					};	
 			   };	
 				
@@ -2293,12 +2431,31 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 	
 	////////////////////////////////////////////////////////
 	/////////////////////////////////////////// END OF NEW TREE///////////////////////////////////////////////// 
+	
+	
+
+	
+
+	
 	if($rootScope.userIndustryName =="ALL"){
 		$scope.showAllmode=true;
 	}
+	//sliding
+	angular.element(".accord1").slideDown();
 
 	//link visited
     $scope.$watch(function () {
+    	//toggle class for heading
+    	angular.element(".accord1Heading").click(function(e){
+    		
+    		angular.element(".accord1").slideToggle();
+    		angular.element(this).toggleClass( "accord2Heading" );
+    		
+    		e.stopImmediatePropagation();
+    		
+    	});
+
+    	//
     	//checking if oob value is N then ommit
     	angular.element( ".oobvalue" ).each(function(){
     		if(angular.element(this ).html() == "N"){

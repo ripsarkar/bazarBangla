@@ -1,5 +1,10 @@
 /*-------------ripunjoy css-------------*/
+
 /*-----------------search criteria---------------*/
+.searchcriteria{
+	float:left;
+	width:100%;
+}
 .searchcriteria ul{
     padding-left:0px;
 }
@@ -373,7 +378,7 @@ body {
 
 .topmarginreduce h4 {
     margin-top: 0px !important;
-    margin-bottom: 5px !important;
+    /* margin-bottom: 5px !important; */
 }
 
 .topborder {
@@ -624,6 +629,7 @@ a {
     color: #848484;
     font-weight: 400;
     margin-top: 50px;
+     min-height:400px;
 }
 
 .title-head {
@@ -1388,3 +1394,48 @@ padding-bottom:3px;
 	margin-bottom: 15px;
 }
 /*-------/New tree css----------*/
+/*-------------accordio-----------------*/
+.accord1Heading{
+	cursor:pointer;
+	padding:10px;
+	float: left;
+	width: 100%;
+	background-image: url("../img/ArrowDown.png");
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.accord2Heading{
+	background-image: url("../img/ArrowRight.png");
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.accord1Heading{
+margin-bottom:0px !important;
+}
+.accord1 ul{
+	margin-bottom:0px;
+}
+
+.loginBold{
+	font-size:22px;
+	font-weight: bold;
+	padding-left:5px;
+}
+
+
+  .conditional_form_part {
+    display: none;
+  }
+  
+  .conditional_form_part_enable{
+  	margin-top:25%;
+  	padding-right:10%;
+    display: inline-block;
+  }
+  
+   .loginbtn{
+  	margin-top:20%;
+ 	padding-left:35%
+   
+  }
+  
