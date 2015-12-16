@@ -2584,6 +2584,20 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 
     $scope.onClickTab = function() {
         $scope.currentTab = 'html/search-name-id.html';
+				angular.element("input[type='checkbox']").siblings('ul')
+        .find("input[type='checkbox']")
+        .prop('checked', false);
+		angular.element(".allclass").prop('checked', false);
+		
+		postjsonresult = {
+				"RegCat": [],
+				"CyberSecFunc": [],
+				"Industry": [],
+				"EP": [],
+				"ThreatModel": [],
+				"LogSource": []
+			};
+			$scope.items = [];
     }
     $scope.onClickTabRule = function() {
         $scope.currentTab = 'html/usecaserule.html';
@@ -2605,6 +2619,22 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
     }
     $scope.onShowlibrary = function() {
         $scope.currentTab = 'html/search-result.html';
+		
+		angular.element("input[type='checkbox']").siblings('ul')
+        .find("input[type='checkbox']")
+        .prop('checked', false);
+		angular.element(".allclass").prop('checked', false);
+		
+		postjsonresult = {
+				"RegCat": [],
+				"CyberSecFunc": [],
+				"Industry": [],
+				"EP": [],
+				"ThreatModel": [],
+				"LogSource": []
+			};
+			$scope.items = [];
+		
         $scope.dimensionrule=false;
         $scope.dimensionrelationtable=false;
         $scope.resultdata={
