@@ -21,11 +21,11 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="col-md-4 col-sm-6">
-                                        <label> User name </label>
+                                        <label> User name<span style="color:red">*</span> </label>
                                         <input type="text" maxlength="50" class="form-control" placeholder="Username" ng-model="usernamemain" ng-disabled="disableusername">
                                     </div>
                                     <div class="col-md-4 col-sm-6 hide">
-                                        <label> Password </label>
+                                        <label> Password<span style="color:red">*</span> </label>
                                         <input type="password" class="form-control" placeholder="Password" ng-model="password">
                                     </div>
                                     <div class="col-md-4 col-sm-6">
@@ -38,7 +38,7 @@
                                     <div class="clearfix"></div>
                                     <hr>
                                     <div class="col-md-4 col-sm-6">
-                                        <label> First Name </label>
+                                        <label> First Name<span style="color:red">*</span> </label>
                                         <input type="text" maxlength="40" class="form-control" placeholder="First Name" ng-model="firstname">
                                     </div>
                                     <div class="col-md-4 col-sm-6">
@@ -46,24 +46,24 @@
                                         <input type="text" maxlength="40" class="form-control" placeholder="Middle Name" ng-model="middlename">
                                     </div>
                                     <div class="col-md-4 col-sm-6">
-                                        <label> Last Name</label>
+                                        <label> Last Name<span style="color:red">*</span></label>
                                         <input type="text" maxlength="40" class="form-control" placeholder="Last Name" ng-model="lastname">
                                     </div>
                                     <div class="clearfix"></div>
                                     <hr>
                                     <div class="col-md-4 col-sm-6">
-                                        <label> Contact Number </label>
+                                        <label> Contact Number<span style="color:red">*</span> </label>
                                         <input type="text" maxlength="40" class="form-control" placeholder="Contact Number" ng-model="contactnum">
                                     </div>
                                     <div class="col-md-8 col-sm-6">
-                                        <label> Email Address </label>
+                                        <label> Email Address<span style="color:red">*</span> </label>
                                         <input type="text" maxlength="40" class="form-control" placeholder="ibm@ibm.com" ng-model="emailadd">
                                     </div>
                                     <div class="clearfix"></div>
                                     <hr>
 
                                     <div class="col-md-4 col-sm-6">
-                                    <label>Organization Name</label> 
+                                    <label>Organization Name<span style="color:red">*</span></label> 
  						<!-- <select class="form-control" ng-model="selectedCompanycr" ng-options="company.name for company in companyListli  track by company.id "
 							 ng-change=getDetailscr()>
  							<option style="display: none" value="">--Please Select--</option>
@@ -88,7 +88,7 @@
                                     <div class="margintp2">
 
                                         <div class="col-md-4 col-sm-6">
-                                            <label> Role </label>
+                                            <label> Role<span style="color:red">*</span> </label>
                                             <select class="form-control" ng-model="role">
                                                 <option ng-repeat="rolemain in rolelist| orderBy : 'user_role_name'">{{rolemain.user_role_name}}</option>
                                             </select>

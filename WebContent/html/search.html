@@ -154,7 +154,7 @@
                 	<input type="checkbox" ng-click="entervalueSubcatLogSourceTop($event)">LogSource<span class="start"><i class="icon-minus-sign headPlus">+</i></span>
                     <ul>
                         <li ng-repeat="log in logsour">
-                        	<input type="checkbox" ng-click="entervalueSubcatLogSource($event,log.SurrId,log.Name)" value="{{log.SurrId}}"><div style="display:inline">{{log.Name}}</div><!-- <span><i class="icon-minus-sign">+</i></span>
+                        	<input type="checkbox" ng-click="entervalueSubcatLogSource($event,log.SurrId,log.Name)" value="{{log.SurrId}}"><div style="display:inline">{{log.Name}}</div>
                         </li>
                     </ul>
                 </li>
@@ -191,7 +191,7 @@
 					</div>
 					<!-- /code for usecases -->
 					<!-- code for library customview -->
-					<div ng-show="showAllmode" class="panel panel-default panelheadinstyle">
+					<div class="panel panel-default panelheadinstyle">
 						<div class="panel-heading panelbottomborder">
 							<h4 class="panel-title">
 								<a style="padding-right: 177px;" class="accordListrotate"  href="javascript:;" data-toggle="collapse" ng-click="onShowlibrary()"
@@ -209,6 +209,29 @@
 							</div>
 						</div>
 					</div>
+
+
+                    <!-- <div ng-show="showAllmode" class="panel panel-default panelheadinstyle">
+                        <div class="panel-heading panelbottomborder">
+                            <h4 class="panel-title">
+                                <a style="padding-right: 177px;" class="accordListrotate"  href="javascript:;" data-toggle="collapse" ng-click="onShowlibrary()"
+                                    data-parent="#accordion" data-target="#collapseThree">Show Library</a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <ul class="sidemenu-nav treelevel">
+                                    <li><a herf="" data-toggle="modal" data-target="#myModal">ALL</a></li>
+                                    <li><a herf="" data-toggle="modal" data-target="#myModal2">Custom</a></li>
+                                    <li><a herf="" data-toggle="modal" data-target="#myModal3">Out of Box</a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div> -->
+
+
+
 					<!-- /code for library customview -->					
 				</div>
 			</div>

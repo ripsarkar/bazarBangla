@@ -12,7 +12,7 @@
 	</div>
 	<div class="clear-fix"></div>
 	<div class="panel panel-default tablecontrol">
-		<div ng-show="showResult">
+		<div>
 			<table class="searchtable">
 				<thead>
 					<tr>
@@ -23,7 +23,9 @@
 						<th>Use Case Rule #</th>
 						<th>Use Case Rule</th>
 						<th>Out of Box</th>
-						<th ng-hide="exported">Export<a href="javascript:void(0);"
+						<!-- <th ng-hide="exported">Export<a href="javascript:void(0);"
+							class="exprticon" ng-click="exportFiles();"></th> -->
+						<th>Export<a href="javascript:void(0);"
 							class="exprticon" ng-click="exportFiles();"></th>
 						<th>Use Case Rule Description</th>
 					</tr>
@@ -41,7 +43,7 @@
 						<td><a class="dimensionTableBasic" href="javascript:void(0);"
 							ng-click="getResult(result)"> {{result.Rule}}</a></td>
 						<td align="center" class="oobvalue">{{result.oob_flag}}</td>
-						<td align="center" ng-hide="exported">
+						<td align="center">
 							<div ng-show="result.exportYes">
 								<input id="{{result.packageSurrId}}" type="checkbox"
 									value="{{result.packageSurrId}}"
@@ -49,14 +51,21 @@
 									ng-click="toggleSelection(result)" />
 							</div>
 						</td>
+						<!-- <td align="center" ng-hide="exported">
+							<div ng-show="result.exportYes">
+								<input id="{{result.packageSurrId}}" type="checkbox"
+									value="{{result.packageSurrId}}"
+									ng-checked="selection.indexOf(result.packageSurrId) > -1"
+									ng-click="toggleSelection(result)" />
+							</div>
+						</td> -->
 						<td>{{result.RuleDescription}}</td>
 					</tr>
 				</tbody>
-
-
 			</table>
-		</div>
-		<div ng-hide="showResult">
+		<div  ng-hide="showResult" align="center" style="padding:10px 0px">{{userMsg}}</div>
+</div>
+		<!-- <div ng-hide="showResult">
 			<table class="searchtable">
 				<thead>
 					<tr>
@@ -78,7 +87,7 @@
 				</tr>
 				</tbody>
 			</table>
-		</div>
+		</div> -->
 
 
 	</div>

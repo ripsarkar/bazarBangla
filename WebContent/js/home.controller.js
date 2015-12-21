@@ -3,27 +3,120 @@
 //app.controller('HomeController', HomeController);
 var app = angular.module('app').controller('HomeController', HomeController);
 //var ucrsui = angular.module("app", ["ui.bootstrap"]).config();
-HomeController.$inject = ['UserService', '$rootScope', '$scope', '$http'];
+HomeController.$inject = ['UserService', '$rootScope', '$scope', '$http','$location'];
 //angular.module("app", ["ui.bootstrap"]).config();
 
 
-function HomeController(UserService,  $rootScope, $scope, $http) {
+function HomeController(UserService,  $rootScope, $scope, $http,$location) {
+	
+	console.log("dataloading value::"+$rootScope.dataLoading);
+	
+    if($rootScope.dataLoading == undefined || $rootScope.dataLoading==false) {
+    	console.log("data loading GET called");
+		  $rootScope.loadinganimation = true;
+		  var loadUserdetails = {
+ 	                method: "GET",
+ 	                url: $rootScope.url+"/getUserDetails",
+ 	            };
+ 	            $http(loadUserdetails).success(function(result) {
+ 	             $rootScope.dataLoading=true;
+ 	             $rootScope.loadinganimation = false;
+ 	            	if (result.User[0].error!=undefined) {
+ 	            		if(result.User[0].error=="Username not populated"){
+ 	            			$rootScope.loginError=false;
+ 	            		}else{
+ 	            			$rootScope.loginError=true;
+ 	            		}
+ 	            		$location.path('/login');
+ 	                }else{
+ 	                	$rootScope.loginError=false;
+ 	                	// Store
+ 	                	localStorage.setItem("rolerip", result.User[0].user_role_name);
+ 	                	localStorage.setItem("surrrip", result.User[0].user_surr_id);
+ 	                	localStorage.setItem("surrComprip", result.User[0].company_surr_id);
+ 	                	localStorage.setItem("namerip", result.User[0].user_name);
+ 	                	if(result.User[0].user_middle_name!=null){
+ 	                		localStorage.setItem("fullname", (result.User[0].user_first_name+" "+result.User[0].user_middle_name+" "+result.User[0].user_last_name));	
+ 	                	}else{
+ 	                		localStorage.setItem("fullname", (result.User[0].user_first_name+" "+result.User[0].user_last_name));
+ 	                	}
+ 	                	
+ 	                	localStorage.setItem("showallbutt", result.User[0].user_industry_name);
+ 	                	localStorage.setItem("cmpyId", result.User[0].company_surr_id);
+
+ 	                	$rootScope.role = result.User[0].user_role_name;
+ 	                	$rootScope.surrId = result.User[0].user_surr_id;
+ 	                	$rootScope.user_name = result.User[0].user_name;
+ 	                    $rootScope.disabled=false;
+ 	                 //   $rootScope.username = result.User[0].user_name;
+ 	                   $rootScope.username = localStorage.getItem("fullname");
+ 	                   $rootScope.compSurrId = localStorage.getItem("surrComprip");
+ 	                    $location.path('/home/search');
+ 	                }
+ 	            	
+ 	            }).error(function (error) {
+ 	             $rootScope.loadinganimation = false;
+ 	            	$rootScope.loginError=true;
+ 	            	$location.path('/login');
+ 	            });
+		  
+	  }
+
+     	   
+	  
+	//  initController();
 	//code for showall button visibility
 	$rootScope.userIndustryName =  localStorage.getItem("showallbutt");
 
-	if($rootScope.userIndustryName =="ALL"){
+	/*if($rootScope.userIndustryName =="ALL"){
 		$scope.showAllmode=true;
-	}
+	}*/
+	$scope.showAllmode=true;
 	//logout
 	$scope.localStorageclear=function(){
+		
 	   localStorage.clear();
-	}
+	   $location.path('/login');
+//	   $rootScope.loadinganimation = true;
+//	   var logout =   {
+//				method: "GET",    			
+//		
+//				url: $rootScope.url+"/logout",
+//				headers: {
+//		               'Access-Control-Allow-Origin':"{$_SERVER['HTTP_ORIGIN']}",
+//		               'Access-Control-Request-Method': 'GET',
+//		               'Content-Type': "application/json",
+//		               'Access-Control-Allow-Headers': "Content-Type",
+//		              ' Access-Control-Allow-Credentials':'true',
+//		              'Access-Control-Max-Age': '86400'
+//		           }
+//					
+//	         
+//			};
+//			
+////			 if (isset($_SERVER['HTTP_ORIGIN'])) {
+////		        header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+////		        header('Access-Control-Allow-Credentials: true');
+////		        header('Access-Control-Max-Age: 86400');    // cache for 1 day
+////		    }
+//		  
+//			 $http(logout).success(function(result) {
+//	            	$rootScope.loadinganimation = false;
+//	            	
+//	            	$location.path('/login');
+//	            }).error(function (error) {
+//		             $rootScope.loadinganimation = false;
+//		            	
+//		            	$location.path('/login');
+//		            });
+		}
+	
 	//local storage
-	$rootScope.role = localStorage.getItem("rolerip");
-	$rootScope.surrId = localStorage.getItem("surrrip");
-	$rootScope.user_name = localStorage.getItem("namerip");
-	$rootScope.username = localStorage.getItem("fullname");
-	$rootScope.compSurrId = localStorage.getItem("surrComprip");
+//	$rootScope.role = localStorage.getItem("rolerip");
+//	$rootScope.surrId = localStorage.getItem("surrrip");
+//	$rootScope.user_name = localStorage.getItem("namerip");
+//	$rootScope.username = localStorage.getItem("fullname");
+//	$rootScope.compSurrId = localStorage.getItem("surrComprip");
 
 	//link visited
     $scope.$watch(function () {
@@ -101,20 +194,20 @@ function HomeController(UserService,  $rootScope, $scope, $http) {
 		        $scope.alertMenu = true;
 		        $scope.searchMenu = true;
 		        $scope.feedback = true;
-		        $scope.showAllmode=false;
-		        //$rootScope.exported = false;
+		        $scope.showAllmode=true;
+		        $rootScope.exported = true;
 		    }
 		    if ($rootScope.role == "SALES_PERSON") {
 		        $scope.searchMenu = true;
-		        //$rootScope.exported = false;
+		        $rootScope.exported = true;
 		        $scope.useCaseMaintain = true;
 		        $scope.userAccountManagement = false;
-		        $scope.showAllmode=false;
-				$scope.feedback = true;
+		        $scope.showAllmode=true;
+		        $scope.feedback = true;
 		    }
 		    if ($rootScope.role == "USER_VIEW") {
 		        $scope.searchMenu = true;
-		        $rootScope.exported = true;
+		        $rootScope.exported = false;
 		        $scope.feedback = true;
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=true;
@@ -122,7 +215,7 @@ function HomeController(UserService,  $rootScope, $scope, $http) {
 		    if ($rootScope.role == "USER_EXPORT") {
 		        $scope.searchMenu = true;
 		        $scope.feedback = true;
-		        //$rootScope.exported = false;
+		        $rootScope.exported = true;
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=true;
 		    }
@@ -154,39 +247,39 @@ function HomeController(UserService,  $rootScope, $scope, $http) {
     });
 
 
-    $scope.name = $rootScope.username;
+  
     /*-------/code for search pages------*/
 
-    var vm = this;
-    vm.user = null;
-    vm.allUsers = [];
-    vm.deleteUser = deleteUser;
+//    var vm = this;
+//    vm.user = null;
+//    vm.allUsers = [];
+//    vm.deleteUser = deleteUser;
 
-    initController();
+//    initController();
+//
+//    function initController() {
+//   //     loadCurrentUser();
+//   //     loadAllUsers();
+//    }
+//
+//    function loadCurrentUser() {
+//        UserService.GetByUsername($rootScope.globals.currentUser.username).then(function(user) {
+//                vm.user = user;
+//            });
+//    }
 
-    function initController() {
-        loadCurrentUser();
-        loadAllUsers();
-    }
+//    function loadAllUsers() {
+//        UserService.GetAll()
+//            .then(function(users) {
+//                vm.allUsers = users;
+//            });
+//    }
 
-    function loadCurrentUser() {
-        UserService.GetByUsername($rootScope.globals.currentUser.username).then(function(user) {
-                vm.user = user;
-            });
-    }
-
-    function loadAllUsers() {
-        UserService.GetAll()
-            .then(function(users) {
-                vm.allUsers = users;
-            });
-    }
-
-    function deleteUser(id) {
-        UserService.Delete(id).then(function() {
-                loadAllUsers();
-            });
-    }
+//    function deleteUser(id) {
+//        UserService.Delete(id).then(function() {
+//                loadAllUsers();
+//            });
+//    }
 
   $scope.selection=[];
 }

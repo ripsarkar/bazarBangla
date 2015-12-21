@@ -5,7 +5,14 @@
 
     LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService','$rootScope'];
     function LoginController($location, AuthenticationService, FlashService, $rootScope) {
-        var vm = this;
+    	
+    	if($rootScope.loginError){
+    		$rootScope.loginError=false;
+    		document.getElementById("logErr").className = "";
+    		document.getElementById("logErr").className = "conditional_form_part_enable alert alert-danger msg-alert";
+    	}
+    	
+    	var vm = this;
 
         vm.login = login;
        

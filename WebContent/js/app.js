@@ -11,8 +11,8 @@
     	    .state('home', {
     	      url: "/home",
     	      templateUrl: "html/home.html",
-              controller: 'HomeController',
-              autoActivateChild: 'home.search'
+            //  controller: 'HomeController',
+             autoActivateChild: 'home.search'
     	    })
     	     .state("home.search", {
     	      url:"/search",
@@ -22,8 +22,8 @@
     	    .state('login', {
     	      url: "/login",
     	      templateUrl: "login.html",
-    	      controller: 'LoginController',
-              controllerAs: 'vm'
+    	      controller: 'LoginController'
+            //  controllerAs: 'vm'
     	    })
     	    .state('register', {
     	      url: "/register",
@@ -64,6 +64,11 @@
               //controller:'feedbackController',
               templateUrl: "html/feedback.html"
     	    })
+    	    .state("home.viewfeedback", {
+    	      url:"/viewfeedback",
+              //controller:'viewfeedbackController',
+              templateUrl: "html/viewfeedback.html"
+    	    });
     	    })
         .run(run);
 
@@ -79,24 +84,27 @@
     	});
     	
         // keep user logged in after page refresh
-        $rootScope.globals = $cookieStore.get('globals') || {};
-        if ($rootScope.globals.currentUser) {
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
-        }
+//        $rootScope.globals = $cookieStore.get('globals') || {};
+//        if ($rootScope.globals.currentUser) {
+//            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+//        }
 
-        $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            // redirect to login page if not logged in and trying to access a restricted page
-            var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
-            var loggedIn = $rootScope.globals.currentUser;
-            if (restrictedPage && !loggedIn) {
-                $location.path('/login');
-            }
-        });
-        
+//        $rootScope.$on('$locationChangeStart', function (event, next, current) {
+//            // redirect to login page if not logged in and trying to access a restricted page
+//            var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
+//            var loggedIn = $rootScope.globals.currentUser;
+//            if (restrictedPage && !loggedIn) {
+//                $location.path('/login');
+//            }
+//        });
+    	
+    	
+      
         /**
          * change the value of $rootscope.url for 
          * pointing to different db
          */
+     
        
         // test db url
        //  $rootScope.url = 'http://ucsrinternaltest.mybluemix.net';
@@ -112,8 +120,15 @@
         // $rootScope.url = 'http://uclapireleasetwo.mybluemix.net';
         
         // UAT test url       
-        $rootScope.url = 'https://uclapiuat.mybluemix.net';
+        $rootScope.url = 'http://uclapiuat.mybluemix.net';
+         
+  //    $location.path('/login');
+  	//  initController();
+  	 
         
+
+   	 
+  	
     }
 
 })();

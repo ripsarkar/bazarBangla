@@ -36,7 +36,7 @@
 	</div>
 	<h4 class="topborder">Result</h4>
 	<div class="panel panel-default tablecontrol">
-		<div ng-show="showResult">
+		<div>
 			<table class="searchtable searchname">
 				<thead>
 					<tr>
@@ -53,15 +53,14 @@
 						<td>{{usec.usecase_name}}</td>
 						<td>{{usec.usecase_desc}}</td>
 					</tr>
-					<div ng-model="withNoData" class="pleaseprovide"
-						ng-show="pleaseprovide">{{nosearch}}</div>
+					
 				</tbody>
 
 
 			</table>
-
+	<div ng-model="withNoData" class="pleaseprovide" ng-show="pleaseprovide">{{nosearch}}</div>
 		</div>
-		<div ng-show="!showResult">
+		<!-- <div ng-show="!showResult">
 			<table class="searchtable searchname">
 				<thead>
 					<tr>
@@ -78,7 +77,7 @@
 
 
 			</table>
-		</div>
+		</div> -->
 	</div>
 	<div class="uitabs">
 		<tabset> <tab ng-repeat="tab in tabs" heading="{{tab.title}}"

@@ -14,8 +14,8 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
 	$scope.role="";
 	$scope.password="";
 	//check box
-	$scope.isactive=false;
-	$scope.master=false;
+	$scope.isactive=true;
+	$scope.master=true;
 	//
 	$scope.selectedCompanycr="";
     $scope.industryName="";

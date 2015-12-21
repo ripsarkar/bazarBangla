@@ -25,7 +25,7 @@
 
     <h4 class="topborder">Result</h4>
     <div class="panel panel-default tablecontrol">
-    <div ng-show="showResult">
+    <div>
              <table class="searchtable">
              <thead>
                     <tr class="tableheader">
@@ -36,7 +36,8 @@
                         <th>Use Case Rule #</th>
                         <th>Use Case Rule</th>
                         <th>Out of Box</th>
-                        <th ng-hide="exported">Export<a href="javascript:void(0);" class="exprticon" ng-click="exportFilesRulepg();"></a></th>
+                        <!-- <th ng-hide="exported">Export<a href="javascript:void(0);" class="exprticon" ng-click="exportFilesRulepg();"></a></th> -->
+                        <th>Export<a href="javascript:void(0);" class="exprticon" ng-click="exportFilesRulepg();"></a></th>
                         <th>Use case Rule Description</th>
                     </tr>
            </thead>
@@ -52,19 +53,21 @@
 							{{usecrule.usecase_rule_name}} </a>
                         </td>
 						<td align="center" class="oobvalue">{{usecrule.oob_flag}}</td>	
-                        <td ng-hide="exported"><div ng-show="usecrule.exportYes" >
+                        <!-- <td ng-hide="exported"><div ng-show="usecrule.exportYes" >
 								<input type="checkbox" class="ruleexport" ng-model="rulepaexpo" ng-click="exportpres($index, usecrule.fileName, usecrule.packageSurrId, rulepaexpo)"/>
 							</div>
-						</td>
-						<!-- <td ng-hide="exported">
-                            <a href="" class="exprticon" ng-click='exprt(data)' ng-show="datashown">
-                        </td> -->
+						</td> -->
+                        <td><div ng-show="usecrule.exportYes" >
+                                <input type="checkbox" class="ruleexport" ng-model="rulepaexpo" ng-click="exportpres($index, usecrule.fileName, usecrule.packageSurrId, rulepaexpo)"/>
+                            </div>
+                        </td>
                         <td>{{usecrule.usecase_rule_desc}}</td>
                     </tr>
                     </tbody>
             </table>
+            <div ng-hide="showResult" align="center" style="padding:10px 0px">{{nosearch}}</div>
     </div>
-      <div ng-hide="showResult">
+      <!-- <div ng-hide="showResult">
        <table class="searchtable">
              <thead>
                     <tr class="tableheader">
@@ -85,7 +88,7 @@
 				</tr>
            </tbody>
            </table>
-    </div>
+    </div> -->
     </div>
     <div class="uitabs">
         <tabset>

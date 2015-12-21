@@ -589,7 +589,10 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		 
 		 
 		 
-	 });
+	 }).error(function(data, status, headers, config) {
+         $rootScope.loadinganimation = false;
+        
+     });
 	 
 	 
 	 angular.element(function () {
@@ -2560,13 +2563,9 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 	        $scope.ucrlPackage = true;
 	        $scope.alertMenu = true;
 	        $scope.searchMenu = true;
-            //$rootScope.exported = false;
-
 	    }
 	    if ($rootScope.role == "SALES_PERSON") {
 	        $scope.searchMenu = true;
-            //$rootScope.exported = false;
-
 	    }
 	    if ($rootScope.role == "USER_VIEW") {
 	        $scope.searchMenu = true;
@@ -2578,8 +2577,6 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 	    }
 	    if ($rootScope.role == "USER_EXPORT") {
 	        $scope.searchMenu = true;
-            //$rootScope.exported = false;
-
 	    }
 	});
     
@@ -3493,6 +3490,9 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
     }
 
     $scope.showAll = function() {
+    	//hiding rule and relation table
+    	$scope.dimensionrule=false;
+    	$scope.dimensionrelationtable=false;
         //starting loading animation
         $rootScope.loadinganimation = true;
         //empty tree
@@ -3532,6 +3532,9 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
     }
     //oob N
     $scope.oobN = function() {
+    	//hiding rule and relation table
+    	$scope.dimensionrule=false;
+    	$scope.dimensionrelationtable=false;
         //starting loading animation
         $rootScope.loadinganimation = true;
         //empty tree
@@ -3571,6 +3574,9 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
     }
     //oob Y
     $scope.oobY = function() {
+    	//hiding rule and relation table
+    	$scope.dimensionrule=false;
+    	$scope.dimensionrelationtable=false;
         //starting loading animation
         $rootScope.loadinganimation = true;
         //empty tree

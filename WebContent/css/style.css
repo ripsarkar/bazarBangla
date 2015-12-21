@@ -396,12 +396,16 @@ body {
     float: left;
 }
 .searchtable tbody, .searchtable thead {
-	display: inline-block;
-    width: 100%;	
+/*	display: inline-block;
+*/    width: 100%;	
 }
 .searchtable tbody {
 	max-height: 250px;
-    overflow-y: scroll;
+/*    overflow-y: scroll;
+*/}
+
+.searchtableview tbody {
+	max-height: auto !important;
 }
 .searchtable thead {}
 .searchtable thead {
@@ -1002,6 +1006,23 @@ a:hover.exprticon {
     display: block;
     background-position: -29px 0px;
 }
+
+.icon-export {
+    background: transparent url("../img/excel-icon1.png") repeat scroll 0% 0%;
+    width: 50px;
+    height: 50px;
+    display: block;
+    background-position: 0px 0px;
+}
+
+.icon-export:hover{
+    background: transparent url("../img/excel-icon1.png") repeat scroll 0% 0%;
+    width: 50px;
+    height: 50px;
+    display: block;
+    background-position: 0px 0px;
+}
+
 
 .mainsearch-input {
     background: rgb(53, 53, 53) none repeat scroll 0% 0%;
