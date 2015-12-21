@@ -102,11 +102,11 @@ function HomeController(UserService,  $rootScope, $scope, $http) {
 		        $scope.searchMenu = true;
 		        $scope.feedback = true;
 		        $scope.showAllmode=false;
-		        $rootScope.exported = true;
+		        //$rootScope.exported = false;
 		    }
 		    if ($rootScope.role == "SALES_PERSON") {
 		        $scope.searchMenu = true;
-		        $rootScope.exported = true;
+		        //$rootScope.exported = false;
 		        $scope.useCaseMaintain = true;
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=false;
@@ -114,7 +114,7 @@ function HomeController(UserService,  $rootScope, $scope, $http) {
 		    }
 		    if ($rootScope.role == "USER_VIEW") {
 		        $scope.searchMenu = true;
-		        $rootScope.exported = false;
+		        $rootScope.exported = true;
 		        $scope.feedback = true;
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=true;
@@ -122,7 +122,7 @@ function HomeController(UserService,  $rootScope, $scope, $http) {
 		    if ($rootScope.role == "USER_EXPORT") {
 		        $scope.searchMenu = true;
 		        $scope.feedback = true;
-		        $rootScope.exported = true;
+		        //$rootScope.exported = false;
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=true;
 		    }

@@ -2560,17 +2560,17 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 	        $scope.ucrlPackage = true;
 	        $scope.alertMenu = true;
 	        $scope.searchMenu = true;
-            $rootScope.exported = true;
+            //$rootScope.exported = false;
 
 	    }
 	    if ($rootScope.role == "SALES_PERSON") {
 	        $scope.searchMenu = true;
-            $rootScope.exported = true;
+            //$rootScope.exported = false;
 
 	    }
 	    if ($rootScope.role == "USER_VIEW") {
 	        $scope.searchMenu = true;
-	        $rootScope.exported = false;
+	        $rootScope.exported = true;
 	        $scope.feedback = true;
 	        $scope.userAccountManagement = false;
 	        $scope.showAllmode=true;
@@ -2578,7 +2578,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 	    }
 	    if ($rootScope.role == "USER_EXPORT") {
 	        $scope.searchMenu = true;
-            $rootScope.exported = true;
+            //$rootScope.exported = false;
 
 	    }
 	});
