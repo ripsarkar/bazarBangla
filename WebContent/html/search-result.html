@@ -25,7 +25,7 @@
 						<th>Out of Box</th>
 						<!-- <th ng-hide="exported">Export<a href="javascript:void(0);"
 							class="exprticon" ng-click="exportFiles();"></th> -->
-						<th>Export<a href="javascript:void(0);"
+						<th ng-hide="exported">Export<a href="javascript:void(0);"
 							class="exprticon" ng-click="exportFiles();"></th>
 						<th>Use Case Rule Description</th>
 					</tr>
@@ -43,7 +43,7 @@
 						<td><a class="dimensionTableBasic" href="javascript:void(0);"
 							ng-click="getResult(result)"> {{result.Rule}}</a></td>
 						<td align="center" class="oobvalue">{{result.oob_flag}}</td>
-						<td align="center">
+						<td align="center" ng-hide="exported">
 							<div ng-show="result.exportYes">
 								<input id="{{result.packageSurrId}}" type="checkbox"
 									value="{{result.packageSurrId}}"
@@ -63,7 +63,7 @@
 					</tr>
 				</tbody>
 			</table>
-		<div  ng-hide="showResult" align="center" style="padding:10px 0px">{{userMsg}}</div>
+		<div  ng-hide="showResult" align="center" class="nosearchFnaly">{{userMsg}}</div>
 </div>
 		<!-- <div ng-hide="showResult">
 			<table class="searchtable">

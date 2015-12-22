@@ -19,8 +19,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
  	                url: $rootScope.url+"/getUserDetails",
  	            };
  	            $http(loadUserdetails).success(function(result) {
- 	             $rootScope.dataLoading=true;
- 	             $rootScope.loadinganimation = false;
+ 	             $rootScope.dataLoading=true; 	            
  	            	if (result.User[0].error!=undefined) {
  	            		if(result.User[0].error=="Username not populated"){
  	            			$rootScope.loginError=false;
@@ -53,6 +52,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
  	                   $rootScope.compSurrId = localStorage.getItem("surrComprip");
  	                    $location.path('/home/search');
  	                }
+ 	            	 $rootScope.loadinganimation = false;
  	            	
  	            }).error(function (error) {
  	             $rootScope.loadinganimation = false;
@@ -68,10 +68,9 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 	//code for showall button visibility
 	$rootScope.userIndustryName =  localStorage.getItem("showallbutt");
 
-	/*if($rootScope.userIndustryName =="ALL"){
+	if($rootScope.userIndustryName =="ALL"){
 		$scope.showAllmode=true;
-	}*/
-	$scope.showAllmode=true;
+	}
 	//logout
 	$scope.localStorageclear=function(){
 		
@@ -112,7 +111,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		}
 	
 	//local storage
-//	$rootScope.role = localStorage.getItem("rolerip");
+	$rootScope.role = localStorage.getItem("rolerip");
 //	$rootScope.surrId = localStorage.getItem("surrrip");
 //	$rootScope.user_name = localStorage.getItem("namerip");
 //	$rootScope.username = localStorage.getItem("fullname");
@@ -195,29 +194,33 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		        $scope.searchMenu = true;
 		        $scope.feedback = true;
 		        $scope.showAllmode=true;
-		        $rootScope.exported = true;
+		        $rootScope.exported = false;
+		        $rootScope.searchOOBCri=true;
 		    }
 		    if ($rootScope.role == "SALES_PERSON") {
 		        $scope.searchMenu = true;
-		        $rootScope.exported = true;
+		        $rootScope.exported = false;
 		        $scope.useCaseMaintain = true;
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=true;
 		        $scope.feedback = true;
+		        $rootScope.searchOOBCri=true;
 		    }
 		    if ($rootScope.role == "USER_VIEW") {
 		        $scope.searchMenu = true;
-		        $rootScope.exported = false;
+		        $rootScope.exported = true;
 		        $scope.feedback = true;
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=true;
+		        $rootScope.searchOOBCri=true;
 		    }
 		    if ($rootScope.role == "USER_EXPORT") {
 		        $scope.searchMenu = true;
 		        $scope.feedback = true;
-		        $rootScope.exported = true;
+		        $rootScope.exported = false;
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=true;
+		        $rootScope.searchOOBCri=true;
 		    }
 		});
 

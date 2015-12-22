@@ -37,7 +37,7 @@
                         <th>Use Case Rule</th>
                         <th>Out of Box</th>
                         <!-- <th ng-hide="exported">Export<a href="javascript:void(0);" class="exprticon" ng-click="exportFilesRulepg();"></a></th> -->
-                        <th>Export<a href="javascript:void(0);" class="exprticon" ng-click="exportFilesRulepg();"></a></th>
+                        <th ng-hide="exported">Export<a href="javascript:void(0);" class="exprticon" ng-click="exportFilesRulepg();"></a></th>
                         <th>Use case Rule Description</th>
                     </tr>
            </thead>
@@ -57,7 +57,7 @@
 								<input type="checkbox" class="ruleexport" ng-model="rulepaexpo" ng-click="exportpres($index, usecrule.fileName, usecrule.packageSurrId, rulepaexpo)"/>
 							</div>
 						</td> -->
-                        <td><div ng-show="usecrule.exportYes" >
+                        <td ng-hide="exported"><div ng-show="usecrule.exportYes" >
                                 <input type="checkbox" class="ruleexport" ng-model="rulepaexpo" ng-click="exportpres($index, usecrule.fileName, usecrule.packageSurrId, rulepaexpo)"/>
                             </div>
                         </td>
@@ -65,7 +65,7 @@
                     </tr>
                     </tbody>
             </table>
-            <div ng-hide="showResult" align="center" style="padding:10px 0px">{{nosearch}}</div>
+            <div ng-hide="showResult" align="center" class="nosearchFnaly">{{nosearch}}</div>
     </div>
       <!-- <div ng-hide="showResult">
        <table class="searchtable">

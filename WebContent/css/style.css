@@ -1,5 +1,9 @@
 /*-------------ripunjoy css-------------*/
-
+.nosearchFnaly{
+	padding:10px 0px;
+	float:left;
+	width:100%;
+}
 /*-----------------search criteria---------------*/
 .searchcriteria{
 	float:left;
@@ -400,9 +404,10 @@ body {
 */    width: 100%;	
 }
 .searchtable tbody {
+	overflow-y: auto;
 	max-height: 250px;
-/*    overflow-y: scroll;
-*/}
+	float: left;
+}
 
 .searchtableview tbody {
 	max-height: auto !important;

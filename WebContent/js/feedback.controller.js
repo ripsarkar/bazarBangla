@@ -403,7 +403,7 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
    }*/
 
         $scope.cpmysurrid = function() {
-            var URLviewpage = 'https://uclapidev.mybluemix.net/getCompany';
+            var URLviewpage = $rootScope.url+'/getCompany';
             $http.get(URLviewpage).success(function(data, status, headers, config) {
                 if ($rootScope.role == "ADMIN") {
                     var chckall = {
@@ -422,7 +422,7 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
         $scope.cpmysurrid();
         $scope.orgName = 'adm';
         var URLviewpage = null;
-        var viewPagedata = "https://uclapidev.mybluemix.net/viewFeedbackData/";
+        var viewPagedata = $rootScope.url+'/viewFeedbackData/';
         if ($rootScope.role == "ADMIN") {
             URLviewpage = viewPagedata + $scope.orgName;
             $scope.all_org = true;
