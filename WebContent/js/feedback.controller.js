@@ -370,6 +370,7 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
         $scope.pageSize = 20;
         //$scope.data = [];
         $scope.pgnation = function() {
+        
             if (typeof $scope.vfbPckg != 'undefined' && $scope.vfbPckg.length > 0) {
                 $scope.numberOfPages = function() {
                     return Math.ceil($scope.vfbPckg.length / $scope.pageSize);
@@ -474,6 +475,8 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
         $scope.vfbvdata = [];
 
         $scope.orgcmpname = function() {
+        	 $scope.currentPage = 0;
+             $scope.pageSize = 20;
             $scope.cmpyId = $scope.orgName;
             if ($rootScope.role == "ADMIN") {
             URLviewpage = viewPagedata + $scope.orgName;
