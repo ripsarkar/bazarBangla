@@ -260,8 +260,6 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
     });
     $scope.globalUseCase_data = {};
 
-
-
     $scope.UsecaseRegcat_extch = function() {
         $rootScope.loadinganimation = true;
         if ($scope.UsecaseRegcat != '') {
@@ -279,7 +277,7 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
 
             });
         }
-    }
+    };
 
     $scope.UsecaseRegPub_extch = function() {
         if ($scope.UsecaseRegPub != '') {
@@ -935,9 +933,11 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
         }
 
         if (typeof $scope.crtRuleEventName != 'undefined') {
-            var crtRuleEventNameId = {};
-            crtRuleEventNameId.SurrId = $scope.crtRuleEventName;
-            crtRuleInput_SurrId.push(crtRuleEventNameId);
+            for(var w=0;w<$scope.crtRuleEventName.length;w++){
+                var crtRuleEventNameId = {};
+                crtRuleEventNameId.SurrId = $scope.crtRuleEventName[w];
+                crtRuleInput_SurrId.push(crtRuleEventNameId);
+            }
         }
 
         if (typeof $scope.crtRuleEventAttribute != 'undefined') {
@@ -1042,9 +1042,9 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 "report_logic": $scope.crtRuleReportlogic,
                 "save_search_logic": $scope.crtRuleSaveSrchlogic,
                 "building_blocks": $scope.crtRuleBuildlogic,
-                "reference_set_ind": $scope.crtReferSet,
+                "reference_set_ind": $scope.crtRuleRefSet,//crtRuleRefSet, crtReferSet
                 "response_text": $scope.crtRuleResponse,
-                "event_name": $scope.crtRuleEventName,
+                "event_name": "",
                 "rule_description": $scope.crtRuleDsecpt,
                 "oob_flag":statusOOB
             },
@@ -1057,12 +1057,13 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
 
 
         if (typeof $scope.crtUsercaseId != 'undefined' && $scope.crtUsercaseId != '' && typeof $scope.crtUsercaseName != 'undefined' && $scope.crtUsercaseName != '' && typeof $scope.crtRuleID != 'undefined' && $scope.crtRuleID != '' && typeof $scope.crtRuleName != 'undefined' && $scope.crtRuleName != '') {
-
+            //console.log(JSON.stringify(crtRule_postJson, null, 2));
             $http.post($rootScope.url + '/saveRule', crtRule_postJson).success(function(data, status, headers, config) {
                 alert('Usecase Rule Created Successfully');
                 UsecaseService.setUsecasecrtdata('');
 
                 $scope.reSet();
+                ThdCrt.length =0;
                 $state.go($state.current, {}, {
                     reload: true
                 });
@@ -1852,6 +1853,7 @@ app.controller("updateRuleController", ["$scope", "$rootScope", "$state", '$http
     }
     $rootScope.loadinganimation = true;
     $http.get($rootScope.url + '/getRuleTabData').success(function(data, status, headers, config) {
+        //console.log(JSON.stringify(data, null,2));
         $rootScope.loadinganimation = false;
         $scope.Rule_data = data;
         $scope.transdatas = [];
@@ -1925,7 +1927,9 @@ app.controller("updateRuleController", ["$scope", "$rootScope", "$state", '$http
             $rootScope.loadinganimation = true;
             
             var appstatuesoob;
+            
             $http.get($rootScope.url + '/getDetailsbyUcRuleID/' + $scope.UpdateRuleID).success(function(data, status, headers, config) {
+                console.log(JSON.stringify(data, null,2));
                 $rootScope.loadinganimation = false;
               //for oob value
                 appstatuesoob = data.Rule[0].UC_RULE_OOB_FLAG;
@@ -1984,6 +1988,7 @@ app.controller("updateRuleController", ["$scope", "$rootScope", "$state", '$http
 
                     $scope.crtRuleTrsn = [];
                     $scope.crtRuleRefr = [];
+                    $scope.crtRuleEventName = [];
                     for (var i = 0; i < data.input.length; i++) {
                         if (data.input[i].UCSR_INPUT_NAME == "Transactional Data") {
                             //console.log("Transactional" + data.input[i].UCSR_INPUT_SURR_ID);
@@ -1996,7 +2001,7 @@ app.controller("updateRuleController", ["$scope", "$rootScope", "$state", '$http
                             }
                         } else if (data.input[i].UCSR_INPUT_NAME == "Event Name/Category") {
                             if (data.input[i].Selected == 'True') {
-                                $scope.crtRuleEventName = data.input[i].UCSR_INPUT_SURR_ID;
+                                $scope.crtRuleEventName.push(data.input[i].UCSR_INPUT_SURR_ID);
                             }
                         }
                     }
@@ -2037,6 +2042,8 @@ app.controller("updateRuleController", ["$scope", "$rootScope", "$state", '$http
                             $scope.crtRuleLogSource.push(data.log_source[i].LOG_SOURCE_KEYWORD_SURR_ID);
                         }
                     }
+                    $scope.ThdCrttables = [];
+                    $scope.ThdCrttables.length = 0;
                     for (var i = 0; i < data.ThreadModelGroup.length; i++) {
                         var Thdctrltb = {};
                         var thdata = data.ThreadModelGroup[i];
@@ -2454,9 +2461,11 @@ app.controller("updateRuleController", ["$scope", "$rootScope", "$state", '$http
         }
 
         if (typeof $scope.crtRuleEventName != 'undefined') {
-            var crtRuleEventNameId = {};
-            crtRuleEventNameId.SurrId = $scope.crtRuleEventName;
-            crtRuleInput_SurrId.push(crtRuleEventNameId);
+            for (var w = 0; w < $scope.crtRuleEventName.length; w++) {
+                var crtRuleEventNameId = {};
+                crtRuleEventNameId.SurrId = $scope.crtRuleEventName[w];
+                crtRuleInput_SurrId.push(crtRuleEventNameId);
+            }
         }
 
         if (typeof $scope.crtRuleEventAttribute != 'undefined') {
@@ -2554,7 +2563,7 @@ app.controller("updateRuleController", ["$scope", "$rootScope", "$state", '$http
                 "save_search_logic": $scope.crtRuleSaveSrchlogic,
                 "building_blocks": $scope.crtRuleBuildlogic,
                 "reference_set_ind": $scope.crtRuleRefSet,
-                "event_name": $scope.crtRuleName,
+                "event_name": "",
                 "response_text": $scope.crtRuleResponse,
                 "oob_flag": statusOOBu
             },
@@ -2565,10 +2574,11 @@ app.controller("updateRuleController", ["$scope", "$rootScope", "$state", '$http
             "ThreadModelGroup": ThdCrt
         };
         if (typeof $scope.crtRuleID != 'undefined' && typeof $scope.crtRuleName != 'undefined' && $scope.crtRuleID != '' && typeof $scope.crtRuleName != '') {
-
+            
             $http.post($rootScope.url + '/updateRule', crtRule_postJson).success(function(data, status, headers, config) {
                 alert('Update Rule Successfully saved');
                 ThdCrt.length = 0;
+                $scope.ThdCrttables.length = 0;
                 $scope.reSetupdate();
             }).error(function(data, status, headers, config) {
                 alert("Sorry Application error in serverside");
@@ -2733,5 +2743,4 @@ app.controller("updateRuleController", ["$scope", "$rootScope", "$state", '$http
         $scope.ruleresponse = false;
         $scope.rulethd = true;
     }
-
 }]);

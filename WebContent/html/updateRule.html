@@ -175,7 +175,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label>Event Name/ Categroy </label>
-                                        <select class="form-control" ng-model="crtRuleEventName" name="crtRuleEventName" ng-options="eventcatdata.SurrId as eventcatdata.Name for eventcatdata in eventcatdatas | orderBy:'Name'" required>
+                                        <select multiple class="form-control" ng-model="crtRuleEventName" name="crtRuleEventName" ng-options="eventcatdata.SurrId as eventcatdata.Name for eventcatdata in eventcatdatas | orderBy:'Name'" required>
                                         </select>
 
                                     </div>

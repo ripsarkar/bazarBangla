@@ -1,3 +1,86 @@
+app.directive('readMore', function() {
+  return {
+    restrict: 'A',
+    transclude: true,
+    replace: true,
+    template: '<p></p>',
+    scope: {
+      moreText: '@',
+      lessText: '@',
+      words: '@',
+      ellipsis: '@',
+      char: '@',
+      limit: '@',
+      content: '@'
+    },
+    link: function(scope, elem, attr, ctrl, transclude) {
+      var moreText = angular.isUndefined(scope.moreText) ? ' <a class="read-more"> ...More</a>' : ' <a class="read-more">' + scope.moreText + '</a>',
+        lessText = angular.isUndefined(scope.lessText) ? ' <a class="read-less"> ...Less</a>' : ' <a class="read-less">' + scope.lessText + '</a>',
+        ellipsis = angular.isUndefined(scope.ellipsis) ? '' : scope.ellipsis,
+        limit = angular.isUndefined(scope.limit) ? 35 : scope.limit;
+
+      attr.$observe('content', function(str) {
+        readmore(str);
+      });
+
+      transclude(scope.$parent, function(clone, scope) {
+        readmore(clone.text().trim());
+      });
+
+      function readmore(text) {
+
+        var text = text,
+          orig = text,
+          regex = /\s+/gi,
+          charCount = text.length,
+          wordCount = text.trim().replace(regex, ' ').split(' ').length,
+          countBy = 'char',
+          count = charCount,
+          foundWords = [],
+          markup = text,
+          more = '';
+
+        if (!angular.isUndefined(attr.words)) {
+          countBy = 'words';
+          count = wordCount;
+        }
+
+        if (countBy === 'words') { // Count words
+
+          foundWords = text.split(/\s+/);
+
+          if (foundWords.length > limit) {
+            text = foundWords.slice(0, limit).join(' ') + ellipsis;
+            more = foundWords.slice(limit, count).join(' ');
+            markup = text + moreText + '<span class="more-text">' + more + lessText + '</span>';
+          }
+
+        } else { // Count characters
+
+          if (count > limit) {
+            text = orig.slice(0, limit) + ellipsis;
+            more = orig.slice(limit, count);
+            markup = text + moreText + '<span class="more-text">' + more + lessText + '</span>';
+          }
+
+        }
+
+        elem.append(markup);
+        elem.find('.read-more').on('click', function() {
+          $(this).hide();
+          elem.find('.more-text').addClass('show').slideDown();
+        });
+        elem.find('.read-less').on('click', function() {
+          elem.find('.read-more').show();
+          elem.find('.more-text').hide().removeClass('show');
+        });
+
+      }
+    }
+  };
+});
+
+
 app.directive('nodeTree', function() {
     return {
         template: '<node ng-repeat="node in tree"></node>',
@@ -335,6 +418,8 @@ app.factory('Items', ['$http','$rootScope', function($http, $rootScope) {
 
 
 app.controller("searchController",["$scope","SearchResultService","$rootScope", 'Items', '$http', function($scope, SearchResultService, $rootScope, Items, $http){
+	 $scope.showModal = false;
+	
 	/////////////////////////////////////////////////////////
 	 var postjsonresult = {
 				"RegCat": [],
@@ -342,7 +427,9 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 				"Industry": [],
 				"EP": [],
 				"ThreatModel": [],
-				"LogSource": []
+				"LogSource": [],
+				"oobParam": "", 
+				"useCaseRuleIdName": ""
 			};
 	var obj  = {};
 	var threatModelObj;
@@ -513,10 +600,10 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 				
 				
 				if(i==0){
-					threatname = threatname + obj.ThreatModel[i].Name+"-";
+					threatname = threatname + obj.ThreatModel[i].Name+"(" +obj.ThreatModel[i].SurrId+")-";
 					}
 					else{
-					threatname = threatname +"/"+  obj.ThreatModel[i].Name+"-";
+					threatname = threatname +"/"+  obj.ThreatModel[i].Name+"(" +obj.ThreatModel[i].SurrId+")-";
 					}
 
 				thrt = {}
@@ -524,10 +611,10 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 				threatarry.push(thrt);
 			    for(j=0;j<obj.ThreatModel[i].children.length;j++){
 					if(j==0){
-						threatname = threatname +"-" + obj.ThreatModel[i].children[j].Name+"-";
+						threatname = threatname +"-" + obj.ThreatModel[i].children[j].Name+"(" +obj.ThreatModel[i].children[j].SurrId+")-";
 						}
 						else{
-						threatname = threatname +"-"+  obj.ThreatModel[i].children[j].Name+"-";
+						threatname = threatname +"-"+  obj.ThreatModel[i].children[j].Name+"(" +obj.ThreatModel[i].children[j].SurrId+")-";
 						}
 
 
@@ -536,10 +623,10 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 			    threatarry.push(thrt);
 				    for(k=0;k<obj.ThreatModel[i].children[j].children.length;k++){
 						if(k==0){
-							threatname = threatname +"-" + obj.ThreatModel[i].children[j].children[k].Name+"-";
+							threatname = threatname +"-" + obj.ThreatModel[i].children[j].children[k].Name+"(" +obj.ThreatModel[i].children[j].children[k].SurrId+")-";
 							}
 							else{
-							threatname = threatname +"-"+  obj.ThreatModel[i].children[j].children[k].Name+"-";
+							threatname = threatname +"-"+  obj.ThreatModel[i].children[j].children[k].Name+"(" +obj.ThreatModel[i].children[j].children[k].SurrId+")-";
 							}
 				    thrt = {}
 				    thrt["id"] = obj.ThreatModel[i].children[j].children[k].SurrId;
@@ -655,6 +742,9 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	});
 	 
 	$scope.$watch(function () {
+		//ruleID length
+		$rootScope.ruleLength = angular.element(".searchtabBody").children('tr').length;
+		//
 		angular.element("input[type='checkbox']").change(function () {
 			angular.element(this).siblings('ul')
 		           .find("input[type='checkbox']")
@@ -702,8 +792,21 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	var usecase ={};
 	var i,j,k;
 
+	
+	$scope.tableReset = function(){
+		angular.element('#rateplanmapping-scroll tbody').scrollTop(0);
+		$scope.resultdata={
+              cateGory:[]
+          };
+          $scope.chckresult();
+          $scope.showResult = false;
+          $scope.dimensionrule=false;
+          $scope.dimensionrelationtable=false;
+	}
+	
 	$scope.entervalueSubcat = function($event,ndval,nameval){
-
+		 $scope.tableReset();
+		
 		subcatlast ={};
 		UseCSubCat={};
 		usecase ={};
@@ -806,6 +909,8 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		}
 	}
 	$scope.UsecaseSubCategory = function($event){
+		
+		$scope.tableReset();
 
 		var upmatchfound = false;
 		subcatlast ={};
@@ -920,6 +1025,8 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		}
 	}
 	$scope.entervalue = function($event,ndvalusesub,nameval){
+		$scope.tableReset();
+		
 		var upmatchfound = false;
 		subcatlast ={};
 		UseCSubCat={};
@@ -1053,6 +1160,8 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	var usecase2 ={};
 	
 	$scope.entervalueSubcat2 = function($event,ndval,nameval){
+		
+		$scope.tableReset();
 		subcatlast2 ={};
 		UseCSubCat2={};
 		usecase2 ={};
@@ -1160,6 +1269,8 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	}
 	var upmatchfound2 = false;
 	$scope.entervalue2 = function($event,ndvalusesub,nameval){
+		$scope.tableReset();
+		
 	var subcatlast ={};
 	var UseCSubCat={};
 	var usecase ={};
@@ -1282,6 +1393,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 }
 
 	$scope.RegCatSubCategory = function($event){
+		$scope.tableReset();
 		
 		var upmatchfound = false;
 		subcatlast ={};
@@ -1397,13 +1509,15 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	
 	//////////////////CODE FOR INDUSTRY//////////////////////
 	$scope.entervalueSubcatIndustry = function($event,ndval,nameval){
+		$scope.tableReset();
+		
 		var totalmatchfound2 = false;
 		var subcatlast2 ={};
 
 			//get last id
 			subcatlast2["id"] = parseInt(ndval);
 
-			var totalname = "Industry" +"-"+ nameval;
+			var totalname = "Industry" +" : "+ nameval;
 			
 			//inserting element in post json
 			if(angular.element($event.currentTarget).is(':checked') == true){
@@ -1445,10 +1559,11 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		}
 	$scope.entervalueSubcatIndustryTop = function($event){
 		
+		$scope.tableReset();
 	
 		var usecase={};
 		usecase["id"]=[];
-		var totalname="Industry" +"-";
+		var totalname="Industry" +" : ";
 
 		for(i=0;i<angular.element($event.currentTarget).parent('li').children('ul').children('li').length;i++){
 			if(i==0){
@@ -1504,10 +1619,12 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	//////////////////END OF CODE FOR INDUSTRY///////////////
 	//////////////////CODE FOR EP//////////////////////
 	$scope.entervalueSubcatEP = function($event,ndval,nameval){
+		$scope.tableReset();
+		
 		var totalmatchfound2 = false;
 		var subcatlast2 ={};
 
-		var totalname = "EP" +"-"+ nameval;
+		var totalname = "IBM 10 Essential Practices" +" : "+ nameval;
 			//get last id
 			subcatlast2["id"] = parseInt(ndval);
 
@@ -1549,11 +1666,14 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 			console.log(postjsonresult);
 		}
 	$scope.entervalueSubcatEPTop = function($event){
+		
+		$scope.tableReset();
+              
 		var usecase={};
 		usecase["id"]=[];
 		
 		
-		var totalname="EP" +"-";
+		var totalname="IBM 10 Essential Practices" +" : ";
 
 		for(i=0;i<angular.element($event.currentTarget).parent('li').children('ul').children('li').length;i++){
 			if(i==0){
@@ -1605,6 +1725,8 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	//////////////////END OF CODE FOR EP///////////////
 	//////////////////CODE FOR LogSource///////////////
 	$scope.entervalueSubcatLogSource = function($event,ndval,nameval){
+		$scope.tableReset();
+		
 		var totalmatchfound2 = false;
 		var subcatlast2 ={};
 
@@ -1612,7 +1734,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 			subcatlast2["id"] = parseInt(ndval);
 			
 			
-			var totalname = "LogSource" +"-"+ nameval;
+			var totalname = "LogSource" +" : "+ nameval;
 			
 			//inserting element in post json
 			if(angular.element($event.currentTarget).is(':checked') == true){
@@ -1651,10 +1773,12 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 			console.log(postjsonresult);
 		}
 	$scope.entervalueSubcatLogSourceTop = function($event){
+		$scope.tableReset();
+              
 		var usecase={};
 		usecase["id"]=[];
 		
-		var totalname="LogSource" +"-";
+		var totalname="LogSource" +" : ";
 
 		for(i=0;i<angular.element($event.currentTarget).parent('li').children('ul').children('li').length;i++){
 			if(i==0){
@@ -1704,6 +1828,9 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	//////////////////CODE FOR Threat model///////////////
 
 	$scope.cliThreMod = function($event,ndval,nameval){
+		
+		$scope.tableReset();
+              
 		var parentparaname = angular.element($event.currentTarget).parent().parent().parent().children("div").text();
 		var childparaname = "";
 		for (var k=0;k<angular.element($event.currentTarget).parent('li').children('ul').children('li').length;k++){
@@ -1717,7 +1844,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 					
 		}
 		
-		var totalname="ThreatModel" +"-"+ parentparaname+"-" + nameval+"-" + childparaname;
+		var totalname="ThreatModel" +" : "+ parentparaname+"-" + nameval+"("+ndval+")"+"-" + childparaname;
 		
 		var subcatlast2 ={};
 
@@ -1781,9 +1908,11 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	
 	
 	$scope.cliThreModInner = function($event,ndval,nameval){
+		$scope.tableReset();
+		
 		var parentparaname = angular.element($event.currentTarget).parent().parent().parent().children("div").text();
 		var grandparentname = angular.element($event.currentTarget).parent().parent().parent().parent().parent().children("div").text();
-		var totalname="ThreatModel" +"-"+ grandparentname+"-"+parentparaname+"-" + nameval;
+		var totalname="ThreatModel" +" : "+ grandparentname+"-"+parentparaname+"-" + nameval+"("+ndval+")";
 		
 		var subcatlast2 ={};
 
@@ -1831,7 +1960,9 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	///////////selecting threat model root////////////////////
 	$scope.cliThreModTop = function($event){
 		
-		var totalname="ThreatModel" +"-"+threatname;
+		$scope.tableReset();
+		
+		var totalname="ThreatModel" +" : "+threatname ;
 		
 		
 		//Threat model
@@ -1869,8 +2000,11 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	}
 	///////////selecting Cyber Security root////////////////////
 	$scope.entervalueSubcatCyberSecFuncTop = function($event){
+		$scope.tableReset();
+           
+		
 		//Threat model
-		var totalname="CyberSecFunc" +"-"+ cybertoname;
+		var totalname=" Cyber Security " +" : "+ cybertoname;
 		
 		postjsonresult.CyberSecFunc = [];
 		if(angular.element($event.currentTarget).is(':checked') == true){
@@ -1908,9 +2042,12 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	}
 	///////////selecting RegCat root////////////////////
 	$scope.entervalueSubcatRegCatTop = function($event){
+		$scope.tableReset();
+		
+		
 		//Threat model
 		
-		var totalname="RegCat" +"-"+RegCatoname;
+		var totalname="RegCat" +" : "+RegCatoname;
 		
 		postjsonresult.RegCat = [];
 		if(angular.element($event.currentTarget).is(':checked') == true){
@@ -1944,9 +2081,15 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 				postjsonresult.RegCat = [];
 				console.log(postjsonresult);
 			}
-	}	
+	}
+	
+
+	
 	////////////////////////selecting main root/////////////////////////
 	$scope.caAll = function(){
+		
+		$scope.tableReset();
+		
 		if(angular.element(".allclass").is(':checked') == true){
 		postjsonresult = {
 				"RegCat": [],
@@ -1999,6 +2142,8 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	}
 	//////////////////cyber security second root///////////////
 	$scope.entervalueSubcatCyberSecFunc = function($event,ndvl,nameval){
+		$scope.tableReset();
+		
 		//search criteria code
 		for(i=0;i<CyberSecFunc.length;i++){
 			if(CyberSecFunc[i].id == ndvl){
@@ -2025,7 +2170,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 				
 			}
 		}
-		var totalname="CyberSecFunc" +"-"+nameval+"-"+cybertoname2;
+		var totalname=" Cyber Security " +" : "+nameval+"-"+cybertoname2;
 		cybertoname2 = "";
 		//End search criteria code
 	if(angular.element($event.currentTarget).is(':checked') == true){
@@ -2072,6 +2217,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	
 
 	$scope.UsecaseCategory = function($event){
+		$scope.tableReset();
 
 		var ndvl = angular.element($event.currentTarget).parent().parent().parent().children('input').val();
 		var nameval=angular.element($event.currentTarget).parent().parent().parent().children('div').text();
@@ -2103,7 +2249,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 				
 			}
 		}
-		var totalname="CyberSecFunc" +"-"+nameval+"-"+cybertoname2;
+		var totalname=" Cyber Security " +" : "+nameval+"-"+cybertoname2;
 		cybertoname2 = "";
 		//End search criteria code
 		
@@ -2154,25 +2300,27 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 
 
 $scope.cliThreModMid = function($event,ndvlqe,nameval){
+	
+	$scope.tableReset();
 	//search criteria code
 	for(i=0;i<ThreatModel.length;i++){
 		if(ThreatModel[i].SurrId == ndvlqe){
 		    for(j=0;j<ThreatModel[i].children.length;j++){
 				
 				if(j==0){
-					threatname2 = threatname2 +"-" +ThreatModel[i].children[j].Name+"-";
+					threatname2 = threatname2 +"-" +ThreatModel[i].children[j].Name+"("+ThreatModel[i].children[j].SurrId+")-";
 					}
 					else{
-					threatname2 = threatname2 +"-"+  ThreatModel[i].children[j].Name+"-";
+					threatname2 = threatname2 +"-"+  ThreatModel[i].children[j].Name+"("+ThreatModel[i].children[j].SurrId+")-";
 					}
 				
 				for(k=0;k<ThreatModel[i].children[j].children.length;k++){
 
 					if(k==0){
-						threatname2 = threatname2 +"-" +ThreatModel[i].children[j].children[k].Name+"-";
+						threatname2 = threatname2 +"-" +ThreatModel[i].children[j].children[k].Name+"("+ThreatModel[i].children[j].SurrId+")-";
 						}
 						else{
-						threatname2 = threatname2 +"-"+ ThreatModel[i].children[j].children[k].Name+"-";
+						threatname2 = threatname2 +"-"+ ThreatModel[i].children[j].children[k].Name+"("+ThreatModel[i].children[j].SurrId+")-";
 						}
 			    }
 		    }
@@ -2180,7 +2328,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 		}
 	}
 
-	var totalname="ThreatModel" +"-"+ nameval+"-" + threatname2;
+	var totalname="ThreatModel" +" : "+ nameval+"("+ndvlqe+")"+"-" + threatname2;
 	threatname2="";
 	//
 		//Threat model
@@ -2280,6 +2428,8 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 	};
 	//////////////////Reg cat second root///////////////
 	$scope.entervalueSubcatRegCat = function($event,ndvlq,nameval){
+		
+		$scope.tableReset();
 		//search criteria code
 		var regcatoname2=""
 		for(i=0;i<RegCat.length;i++){
@@ -2307,7 +2457,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 				
 			}
 		}
-		var totalname="RegCat" +"-"+nameval+"-"+regcatoname2;
+		var totalname="RegCat" +" : "+nameval+"-"+regcatoname2;
 		regcatoname2 = "";
 		//End search criteria code
 		
@@ -2358,6 +2508,8 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 	
 
 	$scope.RegCategor = function($event){
+		$scope.tableReset();
+		
 		var ndvl = angular.element($event.currentTarget).parent().parent().parent().children('input').val();
 		var nameval=angular.element($event.currentTarget).parent().parent().parent().children('div').text();
 
@@ -2432,6 +2584,42 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 		}
 		}		
 	
+	$scope.oobvaluegoes = function($event){
+		$scope.tableReset();
+		
+		var oobthis = angular.element($event.currentTarget).is(':checked');
+		var oobnext = angular.element($event.currentTarget).next().next().is(':checked');
+		var oobprev = angular.element($event.currentTarget).prev().prev().is(':checked');
+		
+		var value = angular.element($event.currentTarget).val();
+		if(angular.element($event.currentTarget).is(':checked') == true){
+			if((oobthis==true && oobnext==true)||(oobthis==true && oobprev==true)){
+				postjsonresult.oobParam = "";
+				console.log(postjsonresult.oobParam);
+			}
+			else{
+			postjsonresult.oobParam = value;
+			console.log(postjsonresult.oobParam);
+			}
+		}
+		else{
+
+			if(oobnext==true){
+				postjsonresult.oobParam = "No";
+				console.log(postjsonresult.oobParam);
+			}
+			else if(oobprev==true){
+				postjsonresult.oobParam = "Yes";
+				console.log(postjsonresult.oobParam);
+			}
+			else{
+				postjsonresult.oobParam = "";
+				console.log(postjsonresult.oobParam);
+			}
+
+		}
+		
+	}
 	////////////////////////////////////////////////////////
 	/////////////////////////////////////////// END OF NEW TREE///////////////////////////////////////////////// 
 	
@@ -2685,13 +2873,16 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
         $scope.inputDisplay = [];
 
         SearchResultService.getRuleSearchResult(id).then(function(result) {
+            //console.log(JSON.stringify(result, null,2));
             $scope.ruleResult = result.RuleDescription;
             $scope.logSource = result.LogSource[0].Value;
             $scope.input = result.Input;
             $scope.output = result.Output;
             $scope.thdgrp = result.ThreadModelGroup;
             $scope.responseText = result.ResponseText;
-
+            $scope.Transactionaldata = [];
+            $scope.ReferentialData = [];
+            $scope.EventNameCategory = [];
             for (var i = 0; i < $scope.input.length; i++) {
                 if ($scope.input[i].Label == "Event Attributes") {
                     var events = $scope.input[i].Value;
@@ -2706,13 +2897,72 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
                         }
                         $scope.inputDisplay.push(obj);
                     }
-                } else {
+                }else if($scope.input[i].Label == "Transactional Data"){
+                    $scope.Transactionaldata.push($scope.input[i]);
+                } else if($scope.input[i].Label == "Referential Data"){
+                    $scope.ReferentialData.push($scope.input[i]);
+                } else if($scope.input[i].Label == "Event Name/Category"){
+                    $scope.EventNameCategory.push($scope.input[i]);
+                }              
+                else {
                     var obj1 = {};
                     obj1["Label"] = $scope.input[i].Label;
                     obj1["Value"] = $scope.input[i].Value;
                     $scope.inputDisplay.push(obj1);
                 }
             }
+            
+            if($scope.Transactionaldata.length >0){
+                //console.log('Transactionaldata');
+                var trsndata = $scope.Transactionaldata;
+                for (var j = 0; j < trsndata.length; j++) {
+                    var objt = {};
+                    if (j == 0) {
+                        objt["Label"] = "Transactional Data";
+                        objt["Value"] = trsndata[j].Value;
+                    } else {
+                        objt["Label"] = "";
+                        objt["Value"] = trsndata[j].Value;
+                    }
+                    $scope.inputDisplay.push(objt);
+                }
+            }
+            
+            
+            if($scope.ReferentialData.length >0){
+                 //console.log('ReferentialData');
+                var refedata = $scope.ReferentialData;
+                for (var j = 0; j < refedata.length; j++) {
+                    var objr = {};
+                    if (j == 0) {
+                        objr["Label"] = "Referential Data";
+                        objr["Value"] = refedata[j].Value;
+                    } else {
+                        objr["Label"] = "";
+                        objr["Value"] = refedata[j].Value;
+                    }
+                    $scope.inputDisplay.push(objr);
+                }
+            }
+            
+            if($scope.EventNameCategory.length >0){
+                //console.log('EventNameCategory');
+                var evetdata = $scope.EventNameCategory;
+                for (var j = 0; j < evetdata.length; j++) {
+                    var obje = {};
+                    if (j == 0) {
+                        obje["Label"] = "Event Name/Category";
+                        obje["Value"] = evetdata[j].Value;
+                    } else {
+                        obje["Label"] = "";
+                        obje["Value"] = evetdata[j].Value;
+                    }
+                    $scope.inputDisplay.push(obje);
+                }
+            }
+            
+            $scope.inputDisplaydata = $scope.inputDisplay;
+            console.log(JSON.stringify($scope.inputDisplaydata, null, 2));
             $rootScope.loadinganimation = false;
 
         });
@@ -2870,6 +3120,19 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
     }
     
     $scope.ClikedResult = function(node) {
+    	//item populate
+    	/*var rules3d=[];
+    	rules3d = $scope.items;
+    	$scope.takeitem = rules3d;*/
+    	angular.element('#rateplanmapping-scroll tbody').scrollTop(0);
+    	//angular.element("#rateplanmapping-scroll tbody")[0].scrollTop=0; 
+    	$scope.selection =[];
+    	$scope.ruleLength =0;
+    	
+		//text field value
+    	postjsonresult.useCaseRuleIdName = $scope.seaValForEvery;
+		console.log(postjsonresult);
+		
     	  $scope.dimensionrule=false;
 	        $scope.dimensionrelationtable=false;
 
@@ -2886,13 +3149,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
         $scope.responseText = [];
         $scope.inputDisplay = [];
 
-        //starting loading animation
-        $rootScope.loadinganimation = true;
-
-        
-        $scope.datashown = false;
-
-        $scope.showResult = true;
+ 
         var trsv = $scope.displayTree;
         var datsv = JSON.stringify(trsv);
         var input_obj = JSON.parse(datsv);
@@ -3068,8 +3325,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
         chck(repostjson);
         var postJson = chck(repostjson);
 
-
-       
+     
 
         //alert("input1"+JSON.stringify(postJson[0])); 
 
@@ -3185,64 +3441,97 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
                 }
             }
         }
-        $scope.userMsg = "Please select search criteria from left";
-
         
-        var resultURL = $rootScope.url+'/getSearchByDimensionResult';
-        $scope.parsejson();
-        //console.log(JSON.stringify($scope.outputJson));
-   //    if($scope.outputJson.RegCat.length !=0 || $scope.outputJson.CyberSecFunc.length !=0 || $scope.outputJson.Industry.length !=0 || $scope.outputJson.EP.length !=0 | $scope.outputJson.ThreatModel.length !=0 | $scope.outputJson.LogSource.length !=0){
-        if(postjsonresult.RegCat.length !=0 || postjsonresult.CyberSecFunc.length !=0 || postjsonresult.Industry.length !=0 || postjsonresult.EP.length !=0 | postjsonresult.ThreatModel.length !=0 | postjsonresult.LogSource.length !=0){
+        $scope.callService = function() {
+            //starting loading animation
+            $rootScope.loadinganimation = true;
+            $scope.datashown = false;
+            $scope.showResult = true;
+       	 $scope.showModal = false;
+       	 var resultURL = $rootScope.url+'/getSearchByDimensionResult';
+            $scope.parsejson();
+            //console.log(JSON.stringify($scope.outputJson));
+       //    if($scope.outputJson.RegCat.length !=0 || $scope.outputJson.CyberSecFunc.length !=0 || $scope.outputJson.Industry.length !=0 || $scope.outputJson.EP.length !=0 | $scope.outputJson.ThreatModel.length !=0 | $scope.outputJson.LogSource.length !=0){
+            if(postjsonresult.RegCat.length !=0 || postjsonresult.CyberSecFunc.length !=0 || postjsonresult.Industry.length !=0 || postjsonresult.EP.length !=0 || postjsonresult.ThreatModel.length !=0 || postjsonresult.LogSource.length !=0 || postjsonresult.oobParam =="" || postjsonresult.useCaseRuleIdName ==""|| postjsonresult.oobParam =="Yes" || postjsonresult.oobParam =="No"){
 
-        $http.post(resultURL, postjsonresult/*$scope.outputJson*/).success(function(data, status, headers, config) {
-            $rootScope.loadinganimation = false; 
-            if (data.cateGory.length == 0) {
-                $scope.resultdata={
-                    cateGory:[]
-                };
-                $scope.chckresult();
+            $http.post(resultURL, postjsonresult).success(function(data, status, headers, config) {
+            	//clearing takeitem
+            	//rules3d = !$scope.items;
+            	//
+                $rootScope.loadinganimation = false; 
+                if (data.cateGory.length == 0) {
+                    $scope.resultdata={
+                        cateGory:[]
+                    };
+                    $scope.chckresult();
+                    $scope.showResult = false;
+                    $scope.dimensionrule=false;
+                    $scope.dimensionrelationtable=false;
+                    $scope.userMsg = "No result found";
+                } else {
+                    $scope.resultdata = data;
+                    $scope.tabledata = [];
+                    $scope.chckresult();
+                }
+                //end loading animation	
+                $rootScope.loadinganimation = false;
+            }).error(function(data, status, headers, config) {
+            	//clearing takeitem
+            	//rules3d = !$scope.items;
+                //end loading animation	
+                $rootScope.loadinganimation = false;
+                if (data.ErrCode != undefined) {
+                    $scope.resultdata={
+                        cateGory:[]
+                    };
+                    $scope.chckresult();
+                    $scope.showResult = false;
+                    $scope.dimensionrule=false;
+                    $scope.dimensionrelationtable=false;
+                    $scope.userMsg = data.ErrMsg;
+                }
+
+            });
+           }else{
+                
+                $rootScope.loadinganimation = false;
                 $scope.showResult = false;
                 $scope.dimensionrule=false;
                 $scope.dimensionrelationtable=false;
-                $scope.userMsg = "No result found";
-            } else {
-                $scope.resultdata = data;
-                $scope.tabledata = [];
-                $scope.chckresult();
-            }
-            //end loading animation	
-            $rootScope.loadinganimation = false;
-        }).error(function(data, status, headers, config) {
-            //end loading animation	
-            $rootScope.loadinganimation = false;
-            if (data.ErrCode != undefined) {
-                $scope.resultdata={
-                    cateGory:[]
-                };
-                $scope.chckresult();
-                $scope.showResult = false;
-                $scope.dimensionrule=false;
-                $scope.dimensionrelationtable=false;
-                $scope.userMsg = data.ErrMsg;
-            }
-
-        });
-       }else{
-            
-            $rootScope.loadinganimation = false;
-            $scope.showResult = false;
-            $scope.dimensionrule=false;
-            $scope.dimensionrelationtable=false;
-            alert('Please select search criteria from dimensions');
-//  
-      	$scope.chckresult();
-      	$scope.tabledata =[];
-          $scope.showResult = false;
-          $scope.userMsg = "Please select search criteria from left";
+             //   alert('Please select search criteria from dimensions');
+    //  
+          	$scope.chckresult();
+          	$scope.tabledata =[];
+              $scope.showResult = false;
+              $scope.userMsg = "Please select search criteria from left";
 
 
-            return false;
-       }
+                return false;
+           }
+     }
+       
+      $scope.modalMsg="";
+      $scope.showPopup = function() {
+        if(postjsonresult.RegCat.length ==0 && postjsonresult.CyberSecFunc.length ==0 && postjsonresult.Industry.length ==0 && postjsonresult.EP.length ==0 && postjsonresult.ThreatModel.length ==0 && postjsonresult.LogSource.length ==0 && (postjsonresult.useCaseRuleIdName == undefined || postjsonresult.useCaseRuleIdName == "")){ 
+      		  $scope.showModal = true; 
+      		  if(postjsonresult.oobParam==""){
+      			$scope.modalMsg ="Are you sure , you want to fetch full list of Use Case library ?"
+      		  }else if(postjsonresult.oobParam=="Yes"){
+      			$scope.modalMsg ="Are you sure you want to fetch all Out of Box Use Case Rules ?"
+      		  }else if(postjsonresult.oobParam=="No"){
+      			$scope.modalMsg ="Are you sure you want to fetch all Custom Use Case Rules ?" 
+      		  }
+      		  
+       		  $("#myModal").modal();
+       	  }else{
+       		  $scope.callService();
+       	  }
+        }
+      
+        $scope.userMsg = "Please select search criteria from left";
+        
+        $scope.showPopup();
+
 
         $scope.clearfun = function() {
             var postJson = [];
@@ -3298,7 +3587,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
                 }
             });
         }
-
+    	//rule count
     }
     
     
@@ -3384,7 +3673,8 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
       };
         
         
-    
+      
+      
     $scope.chckresult = function() {
         $scope.licreateruledetails = 'active';
         $scope.ruledetails = false;
@@ -3491,6 +3781,8 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
             }
 
         }
+        
+        $scope.ruleLength =  $scope.tabledata.length;
     }
 
     $scope.showAll = function() {
@@ -3618,5 +3910,6 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
               }
         });
     }
+	
 
 }]);

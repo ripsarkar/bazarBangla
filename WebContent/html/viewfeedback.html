@@ -11,6 +11,7 @@
             </div>
         </div>
     </div>
+    
     <div class="container">
         <div class="row">
             <div class="createnew-head" style="padding:0px;">
@@ -36,10 +37,24 @@
                     <button class="btn btn-primary" ng-click="orgcmpname()">Search</button>
                 </div>
             </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="pull-right" style="margin: 20px 0px;">
+                    <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous</button>
+                    {{currentPage+1}}/{{numberOfPages()}}
+                    <button ng-disabled="currentPage >= vfbPckg.length/pageSize - 1" ng-click="currentPage=currentPage+1">Next</button>
+                </div>
+                <div class="clear"></div>
+                <div class="pull-right">
+                    <h3 class="title-head pull-right forclearhover" style="margin-bottom: 2px;" style="margin-top: 10px;">
+                        <a ng-href="{{viewExceldownload}}" id="exporttoexcel"  target="_blank" ></a>
+                        <span ng-click="clickOnExport()" class="icon-export" ></span>
+                    </h3>
+                </div>
+            </div>
         </div>
-        <br><br>
+
         <div class="row" style="margin:0px;">
-            <table class="table table-striped searchtablerow fixed-header">
+            <table class="table table-striped searchtablerow fixed-header" style="max-height: 350px; display: block; overflow-y: scroll;">
                 <thead>
                     <tr class="tableheader">
                         <th ng-show="all_org">Organization Name</th>
@@ -51,12 +66,13 @@
                         <th>Organization Rule ID</th>
                         <th>Organization Rule Name</th>
                         <th>Implementation%</th>
+                        <th>Update date time</th>
                         <th>UserName</th>
                         <th width="200px">Comments</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!--| startFrom:currentPage*pageSize | limitTo:pageSize-->
+
                     <tr ng-repeat="viewfdb in vfbPckg | startFrom:currentPage*pageSize | limitTo:pageSize">
                         <td ng-show="all_org" align="left">{{viewfdb.company_name}}</td>
                         <td align="left">{{viewfdb.usecase_id}}</td>
@@ -67,6 +83,7 @@
                         <td align="left">{{viewfdb.client_rule_id}}</td>
                         <td align="left">{{viewfdb.client_rule_name}}</td>
                         <td align="left">{{viewfdb.rule_impl_percent}}</td>
+                        <td align="left">{{viewfdb.rule_impl_date_time}}</td>
                         <td align="left">{{viewfdb.username}}</td>
                         <td align="left">{{viewfdb.client_rule_comment}}</td>
                         <!--<td> <a href="javascript:void(0);" ng-click="open();" class="pull-right"></a></td>-->
@@ -74,6 +91,7 @@
                 </tbody>
             </table>
         </div>
+        
         
         <div class="hidden" id="export_feedback" style="margin:0px;">
             <table >
@@ -120,7 +138,10 @@
         </div>
         <div class="clear"></div>
         <div class="pull-right">
-            <h3 class="title-head pull-right forclearhover" style="margin-bottom: 2px;" ng-click="exportViewData(export_feedback)" style="margin-top: 10px;"><span class="icon-export" ></span></h3>
+            <h3 class="title-head pull-right forclearhover" style="margin-bottom: 2px;" style="margin-top: 10px;">
+                <a ng-href="{{viewExceldownload}}" id="exporttoexcel"  target="_blank" ></a>
+                <span ng-click="clickOnExport()" class="icon-export" ></span>
+            </h3>
         </div>
     </div>
 </div>

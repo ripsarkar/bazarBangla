@@ -21,6 +21,7 @@
         </div>
         <hr>
     </div>
+    
     <div class="container">
         <div class="row">
             <table class="table table-striped searchtablerow fixed-header">
@@ -35,10 +36,10 @@
                     <th>Implementation%</th>
                     <th>Feedback</th>
                </tr>
-               </table>
-				<div class="searchtable">
+               
+				<!--<div class="searchtable">
 				<div class="usecaselibtable">
-					<table class="table table-striped searchtablerow fixed-header">
+					<table class="table table-striped searchtablerow fixed-header">-->
                     <!--| startFrom:currentPage*pageSize | limitTo:pageSize-->
                     <tr ng-repeat="pkgdata in rulesPckg | startFrom:currentPage*pageSize | limitTo:pageSize">
                         <td  align="center">{{pkgdata.id_label}}</td>
@@ -49,14 +50,13 @@
                         <td  align="center">{{pkgdata.ruleclient_rule_id}}</td>
                         <td  align="center">{{pkgdata.ruleclient_rule_name}}</td>
                         <td  align="center">{{pkgdata.rulerule_impl_percent}}</td>
-                        <td><a href="javascript:void(0);" ng-click="open();feedbackForm(pkgdata.ruleid, pkgdata.ucId, pkgdata.ucName, $index)" data-toggle="modal" data-target="#myModal" class="pull-right"><span class="icon-feedback"></span></a>
+                        <td><a href="javascript:void(0);" ng-click="open();feedbackForm(pkgdata.ruleid, pkgdata.ruleid_label, pkgdata.rulename, $index)" data-toggle="modal" data-target="#myModal" class="pull-right"><span class="icon-feedback"></span></a>
                         </td>
                     </tr>
-
-                
-            </table>
+                </table>
+            <!--</table>
             </div>
-            </div>
+            </div>-->
         </div>
     </div>
     <div class="container">
@@ -106,9 +106,9 @@
                 <input type="text" class="form-control" maxlength="100" placeholder=" Organization Rule Name"  ng-model="feedbackFrm.orgrulename">
             </div>
             <div class="col-md-6 col-sm-6">
-                <label> Implementation update date time <span class="red"> *</span></label>
+                <label>Update date time <span class="red"> *</span></label>
                 <p class="input-group">
-                    <input type="text" class="form-control"  ng-change="onchangeUpdtDate()" required datepicker-popup="yyyy-MM-dd" ng-model="updatedt" is-open="Upopened" />
+                    <input type="text" class="form-control" min-date="minDate" ng-change="onchangeUpdtDate()" required datepicker-popup="yyyy-MM-dd" ng-model="updatedt" is-open="Upopened" />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="Upopen($event)"> <i class="glyphicon glyphicon-calendar"> </i></button>
                     </span>
@@ -140,22 +140,28 @@
             </div>
         </div>
     </form>
-
-<br><br>
+<hr style="margin:10px 0px;">
     <h3>Feedback History</h3>
     <hr style="margin:10px 0px;">
     <div class="tablehg">
         <table class="table table-striped">
-            <thead>
-                <th class="cursorbtn" ng-click="changeSorting('name')">Package Name </th>
-                <th class="cursorbtn" ng-click="changeSorting('date')">Export Date Time </th>
-                <th>User Name</th>
+            <thead class="tableheader">
+                <th class="cursorbtn" style="width: 100px;" ng-click="changeSorting('name')">Organization Rule ID</th>
+                <th class="cursorbtn" ng-click="changeSorting('name')">Organization Rule Name</th>
+                <th class="cursorbtn" ng-click="changeSorting('name')">User Name </th>
+                <th class="cursorbtn" ng-click="changeSorting('data')">Update date time </th>
+                <th class="cursorbtn" ng-click="changeSorting('date')">Implementation% </th>
+                <th class="cursorbtn" ng-click="changeSorting('name')">Comments </th>
+                
             </thead>
             <tbody>
                 <tr ng-repeat="pcklist in feedbackFrm.pcklists| orderBy:sort.column:sort.descending">
-                    <td>{{pcklist.rule_pkg_file_name}}</td>
-                    <td>{{pcklist.rule_pkg_export_date}}</td>
+                    <td>{{pcklist.client_rule_id}}</td>
+                    <td>{{pcklist.client_rule_name}}</td>
                     <td>{{pcklist.user_name}}</td>
+                    <td>{{pcklist.update_date_time}}</td>
+                    <td>{{pcklist.implementation_percent}}</td>
+                    <td>{{pcklist.client_comments}}</td>
                 </tr>
             </tbody>
 

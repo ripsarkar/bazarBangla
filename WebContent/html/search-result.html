@@ -3,7 +3,7 @@
 <div class="clear-fix"></div>
 <div class="accord accord1 searchcriteria"><ul><li ng-repeat="item in items">{{item.names}}<!-- -{{item.ids}} --></li></ul></div>
 <div class="clear-fix"></div>
-<h4>Result</h4>
+<h4 class="result">Result <span class="pull-right rulecountdisp">Rule Count : {{ruleLength}}</span></h4>
 <div class="clear-fix"></div>
 <div class="accord accord2">
 	<div class="pull-left col-md-12">
@@ -13,7 +13,7 @@
 	<div class="clear-fix"></div>
 	<div class="panel panel-default tablecontrol">
 		<div>
-			<table class="searchtable">
+			<table class="searchtable" id="rateplanmapping-scroll">
 				<thead>
 					<tr>
 						<th>Use Case Category</th>
@@ -31,7 +31,7 @@
 					</tr>
 				</thead>
 
-				<tbody>
+				<tbody class="searchtabBody">
 				<tr ng-repeat="result in tabledata" class="usecaseTable">
 						<td ng-model="datashown">{{result.Category}}</td>
 						<td>{{result.SubCategory}}</td>
@@ -42,8 +42,8 @@
 						</td>
 						<td><a class="dimensionTableBasic" href="javascript:void(0);"
 							ng-click="getResult(result)"> {{result.Rule}}</a></td>
-						<td align="center" class="oobvalue">{{result.oob_flag}}</td>
-						<td align="center" ng-hide="exported">
+						<td align="left" class="oobvalue">{{result.oob_flag}}</td>
+						<td align="left" ng-hide="exported">
 							<div ng-show="result.exportYes">
 								<input id="{{result.packageSurrId}}" type="checkbox"
 									value="{{result.packageSurrId}}"
@@ -59,7 +59,9 @@
 									ng-click="toggleSelection(result)" />
 							</div>
 						</td> -->
-						<td>{{result.RuleDescription}}</td>
+						<td>
+						 <p read-more content="{{result.RuleDescription}}" ></p> 
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -161,7 +163,7 @@
 					<div class="panel panel-default tablecontrol">
 
 						<table class="table table-striped">
-							<tr ng-repeat="rule in inputDisplay">
+							<tr ng-repeat="rule in inputDisplaydata track by $index">
 								<th class="tableheaderLeft">{{rule.Label}}</th>
 								</td>
 								<td>{{rule.Value}}</td>
@@ -313,7 +315,7 @@
 </div>
 </div>
 <!-- Modal -->
-<!-- <div class="modal fade" id="myModal" role="dialog">
+<!--  <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
         Modal content
         <div class="modal-content">
@@ -331,4 +333,4 @@
         </div>
 
     </div>
-</div> -->
+</div>  -->

@@ -28,7 +28,6 @@ app.controller("feedbackController", ["$scope", "$rootScope", "$state", '$http',
             $rootScope.loadinganimation = true;
 
             $http.get($rootScope.url + '/getRulePkgExportData/' + $scope.cmpyId).success(function(data, status, headers, config) {
-
                 if (typeof data.Usecase != 'undefined' && data.Usecase.length > 0) {
                     var fbrule = data.Usecase;
                     var fb_tb = [];
@@ -67,6 +66,7 @@ app.controller("feedbackController", ["$scope", "$rootScope", "$state", '$http',
                     }
 
                     $scope.rulesPckg = fb_tb;
+                    //console.log(JSON.stringify($scope.rulesPckg));
                     $scope.pgnation();
                     $rootScope.loadinganimation = false;
 
@@ -81,10 +81,7 @@ app.controller("feedbackController", ["$scope", "$rootScope", "$state", '$http',
 
         };
 
-
         $scope.pageLoad();
-
-
         $scope.feedbackForm = function(id, fdlabel, fdname, index) {
             var fb_id = {
                 fdlabel: fdlabel,
@@ -92,6 +89,7 @@ app.controller("feedbackController", ["$scope", "$rootScope", "$state", '$http',
                 id: id,
                 index: index
             };
+            //console.log(JSON.stringify(fb_id));
             feedback_model.setfbModal_data(fb_id);
             var modalInstance = $modal.open({
                 templateUrl: 'myModalContent.html',
@@ -144,9 +142,10 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '
     function($scope, $modalInstance, $rootScope, $state, $http, feedback_model, $filter) {
 
         /*fdlabel :$scope.fdlabel;
-    fdname :$scope.fdname;
-    id :$scope.ucruleid;*/
-
+          fdname :$scope.fdname;
+          id :$scope.ucruleid;*/
+        
+        $scope.usrId = localStorage.getItem("surrrip");
         var fdmodeldata = feedback_model.getfbModal_data();
         $scope.size = 'lg';
         $scope.open = function($event) {
@@ -166,8 +165,16 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '
         };
         $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
         $scope.format = $scope.formats[2];
+        
+        $scope.today = function() {
+        $scope.dt = new Date();
+      };
+      $scope.today();
 
-
+      $scope.toggleMin = function() {
+        $scope.minDate = $scope.minDate ? null : new Date();
+      };
+      $scope.toggleMin();
 
         $scope.Upopen = function($event) {
             $event.preventDefault();
@@ -199,10 +206,11 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '
             $scope.fdname = fdname;
             $scope.ucruleid = id;
             $scope.index = index;
+            //console.log(id);
             if (id != null && typeof id != 'undefined') {
                 $http.get($rootScope.url + '/getFeedbackData/' + id).success(function(data, status, headers, config) {
                     $rootScope.loadinganimation = false;
-
+                    //console.log(JSON.stringify(data));
                     if (typeof data.rulesFeedbackData != 'undefined' && data.rulesFeedbackData.length > 0) {
                         $scope.feedbackdetails = data.rulesFeedbackData;
                         var pcklists = $scope.feedbackdetails[0].DownloadedRules;
@@ -223,7 +231,7 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '
                             $scope.feedbackFrm.orgruleid = $scope.feedbackdetails[0].client_rule_id;
                             $scope.feedbackFrm.orgrulename = $scope.feedbackdetails[0].client_rule_name;
 
-                            $scope.feedbackFrm.Implper = $scope.feedbackdetails[0].rule_impl_percent.toString();
+                            //$scope.feedbackFrm.Implper = $scope.feedbackdetails[0].rule_impl_percent.toString();
                             //$scope.feedbackFrm.fedbckcomments = $scope.feedbackdetails[0].client_rule_comment;
                         } else {
                             $scope.feedbackFrm.impstrtdate = "";
@@ -261,47 +269,60 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '
 
 
         $scope.feedbacksubmit = function(id) {
+            $rootScope.loadinganimation = true;
             $scope.validation = false;
-            var stdt = false;
-            var updt = false;
+            var stdt = true;
+            var updt = true;
 
-            if ($scope.updatedt == undefined || $scope.updatedt == '') {
-                alert('Please enter a valid implementation update date');
+            /*if ($scope.updatedt == undefined || $scope.updatedt == '') {
+                alert('Please enter a valid update date');
                 $scope.validation = false;
             } else {
                 $scope.validation = true;
                 stdt = true;
             }
             if ($scope.startdt == undefined || $scope.startdt == '') {
-                alert('Please enter a valid implementation start date');
+                alert('Please enter a valid start date');
                 $scope.validation = false;
             } else {
                 $scope.validation = true;
                 updt = true;
-            }
+                
+            }*/
 
             $scope.feedbackFrm.impstrtdate = $scope.startdt;
             $scope.feedbackFrm.impupdate = $scope.updatedt;
 
-
+            //console.log("chck1 : "+$scope.validation);
             if (stdt && updt) {
+                //console.log("chck : "+$scope.validation);
                 stdt = false;
                 updt = false;
-                if ($scope.feedbackFrm.impupdate < $scope.feedbackFrm.impstrtdate) {
-                    alert("Please choose update date after start date");
+                if ($scope.feedbackFrm.impupdate < $scope.feedbackFrm.impstrtdate || $scope.feedbackFrm.Implper == undefined || $scope.feedbackFrm.Implper == '' || $scope.updatedt == undefined || $scope.updatedt == '' || $scope.startdt == undefined || $scope.startdt == '') {
+                    if($scope.feedbackFrm.impupdate < $scope.feedbackFrm.impstrtdate){
+                        alert("Update date time should be greater then start date time");
+                    }else if($scope.feedbackFrm.Implper == undefined || $scope.feedbackFrm.Implper == ''){
+                        alert("Please provide implementation percentage");
+                    }else if($scope.updatedt == undefined || $scope.updatedt == ''){
+                        alert('Please provide valid update date');
+                    }else if($scope.startdt == undefined || $scope.startdt == ''){
+                        alert('Please provide valid start date');
+                    }
                     $scope.validation = false;
+                    $rootScope.loadinganimation = false;
                 } else {
                     $scope.validation = true;
                 }
             }
 
-            if ($scope.feedbackFrm.Implper == undefined || $scope.feedbackFrm.Implper == '') {
+            /*if () {
                 alert("Please give implementation percentage");
                 $scope.validation = false;
             } else {
                 $scope.validation = true;
-            }
-
+            }*/
+            //console.log("before : "+ $scope.validation);
+            
             if ($scope.validation) {
                 $scope.validation = false;
                 $scope.PostJson_feedback = {
@@ -314,21 +335,21 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '
                     clientcomments: $scope.feedbackFrm.fedbckcomments,
                     usersurrid: $scope.usrId
                 }
-
                 $http.post($rootScope.url + '/saveFeedbackDetails/', $scope.PostJson_feedback).success(function(data, status, headers, config) {
+                    $rootScope.loadinganimation = false;
                     $rootScope.dataUpdated = true;
-                    alert(data);
                     $scope.startdt = "";
                     $scope.updatedt = "";
                     $scope.ucruleid = "";
                     $scope.feedbackFrm.orgruleid = "";
                     $scope.feedbackFrm.orgrulename = "";
                     $scope.feedbackFrm.impupdate = "";
-                    $scope.feedbackFrm.Implper = "";
+                    $scope.feedbackFrm.Implper = " ";
                     $scope.feedbackFrm.fedbckcomments = "";
                     //$("#myModal").modal("hide");
                     $scope.cancel();
-
+                    alert("Package Rule feedback saved successfully");
+                    $state.go($state.current, {}, {reload: true});
                 }).error(function(data, status, headers, config) {
                     //  alert(data);
                     $scope.startdt = "";
@@ -341,9 +362,9 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '
                         $scope.feedbackFrm.Implper = "";
                         $scope.feedbackFrm.fedbckcomments = "";
                     }
-
                     //$("#myModal").modal("hide");
                     $scope.cancel();
+                    alert(data.ErrMsg);
                 });
 
             }
@@ -403,6 +424,7 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
 
    }*/
 
+        
         $scope.cpmysurrid = function() {
             var URLviewpage = $rootScope.url+'/getCompany';
             $http.get(URLviewpage).success(function(data, status, headers, config) {
@@ -416,7 +438,7 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
                     $scope.orgName = 'adm';
                 }
             }).error(function(data, status, headers, config) {
-                alert("Please contact your admin");
+                alert("Please contact your adminstrator");
             });
         }
 
@@ -435,6 +457,7 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
             $rootScope.loadinganimation = true;
             var vfb = null;
             $http.get(URLviewpage).success(function(data, status, headers, config) {
+            	//console.log(JSON.stringify(data));
                 if (typeof data.rulesFeedbackData != 'undefined' && data.rulesFeedbackData.length > 0) {
                     vfb = data.rulesFeedbackData;
                     $scope.vfb_tb.length = 0;
@@ -451,6 +474,7 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
                             vfbdata.client_rule_id = vfb[i].client_rule_id;
                             vfbdata.client_rule_name = vfb[i].client_rule_name;
                             vfbdata.rule_impl_percent = vfb[i].rule_impl_percent;
+                            vfbdata.rule_impl_date_time = vfb[i].rule_impl_date_time;
                             vfbdata.client_rule_comment = vfb[i].client_rule_comment;
                             vfbdata.username = vfb[i].username;
                             $scope.vfb_tb.push(vfbdata);
@@ -478,11 +502,14 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
         	 $scope.currentPage = 0;
              $scope.pageSize = 20;
             $scope.cmpyId = $scope.orgName;
+            $scope.viewExceldownload  = $rootScope.url+'/downloadViewFeedbackData/';
             if ($rootScope.role == "ADMIN") {
-            URLviewpage = viewPagedata + $scope.orgName;
+                URLviewpage = viewPagedata + $scope.orgName;
+                $scope.viewExceldownload = $scope.viewExceldownload + $scope.orgName;
                 $scope.all_org = true;
             } else {
                 URLviewpage = viewPagedata + $scope.cmpyId;
+                $scope.viewExceldownload = $scope.viewExceldownload + $scope.cmpyId;
                 $scope.all_org = false;
             }
             $scope.pageLoad();
@@ -512,14 +539,22 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
             $state.go("home.viewfeedback");
         }
 
-        $scope.exportViewData = function() {
-            var blob = new Blob([document.getElementById('export_feedback').innerHTML], {
-                type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
-            });
-            saveAs(blob, "feedback_Report.xls");
+        $scope.viewExceldownload  = $rootScope.url+'/downloadViewFeedbackData/';
+        if ($rootScope.role == "ADMIN") {
+        $scope.viewExceldownload = $scope.viewExceldownload + $scope.orgName;
+        //console.log("admin : "+$scope.viewExceldownload);
+        } else {
+        $scope.viewExceldownload = $scope.viewExceldownload + $scope.cmpyId;
+        //console.log("compId : "+ $scope.viewExceldownload);
+        }
+        
+        $scope.clickOnExport = function() {
+            document.getElementById('exporttoexcel').click();
+            console.clear();
         };
-    }
-]);
+    
+    }]);
+
 
 app.filter('startFrom', function() {
     return function(input, start) {
@@ -528,5 +563,5 @@ app.filter('startFrom', function() {
         if (typeof input != 'undefined') {
             return input.slice(start);
         }
-    }
+    };
 });

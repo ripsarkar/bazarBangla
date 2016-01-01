@@ -13,28 +13,24 @@
 			<div class="col-md-3 col-sm-4 treewidthpan">
 				<div class="panel-group" id="accordion">
 					<div class="panel panel-default panelheadinstyle">
-						<div class="panel-heading panelbottomborder">
-							<h4 class="panel-title">
-								<a style="padding-right: 71px;" class="accordListrotate accordList" href="javascript:;" data-toggle="collapse" ng-click="onClickTree()"
-									data-parent="#accordion" data-target="#collapseOne">
-									Use Case Dimension Filters </a>
-							</h4>
+						<div class="panel-heading panelstyle">
+						<strong>Use Case Dimension Filters</strong>
+						<!-- 	<h4 class="panel-title dimensionClass">
+							
+							
+							</h4> -->
+							</div>
+							<div class="panelbottomborder">
+							<strong>Use Case/Rule ID/Name</strong>
+							<input type="text" class="inputforall" ng-model="seaValForEvery" type="text"
+								ng-keydown="$event.which === 13 && ClikedResult()">
 						</div>
 						<div id="collapseOne" class="panel-collapse collapse in">
 							<div class="panel-body">
-								<!-- <div class="article-tree">
-									<div ng-style="{'overflow': 'auto'}">
-										<div class="filter-tree">
-											<ul>
-											<li ng-repeat="typecast in displayTree">{{typecast.Type}}</li>
-												<node-tree ng-model="displayTree"></node-tree>
-											</ul>
-										</div>
-									</div>
-								</div> -->
+
 								
 								<!-- new tree -->
-<div class="tree well parenttreenone">
+					<div class="tree well parenttreenone">
     <ul>
         <li>
           <input type="checkbox" ng-click="caAll()" class="allclass">Select All<div class="collapall glyphicon glyphicon-resize-small forclearhover" style="float:right;padding:0px 6px"></div><div class="alltreeclear" ng-click="clear()" style="float:right;padding:0px 6px">clear</div>
@@ -117,7 +113,7 @@
             <!-- EP-->
             <ul>
                 <li>
-                	<input type="checkbox" ng-click="entervalueSubcatEPTop($event)">EP<span class="start"><i class="icon-minus-sign headPlus">+</i></span>
+                	<input type="checkbox" ng-click="entervalueSubcatEPTop($event)">IBM 10 Essential Practices<span class="start"><i class="icon-minus-sign headPlus">+</i></span>
                     <ul>
                         <li ng-repeat="ep in eepp">
                         	<input type="checkbox" ng-click="entervalueSubcatEP($event,ep.SurrId,ep.Name)" value="{{ep.SurrId}}"><div style="display:inline">{{ep.Name}}</div>
@@ -164,119 +160,49 @@
     </ul>
 </div>
 								<!-- /new tree -->
-								
-								
-								
-								
-								<button class="result-search btn pull-right" ng-click="ClikedResult()">Refresh Result</button>
-							</div>
-						</div>
-					</div>
-					<!-- code for usecases -->
-					<div class="panel panel-default panelheadinstyle">
-						<div class="panel-heading panelbottomborder">
-							<h4 class="panel-title">
-								<a style="padding-right: 131px;" class="accordListrotate"  href="javascript:;" data-toggle="collapse" ng-click="onClickTab()"
-									data-parent="#accordion" data-target="#collapseTwo">Search by Name/ID</a>
-							</h4>
-						</div>
-						<div id="collapseTwo" class="panel-collapse collapse">
-							<div class="panel-body">
-								<ul class="sidemenu-nav treelevel">
-									<li class="usectree"><a herf="" class="activesidenav" ng-click="onClickTab()"> Use Case</a></li>
-									<li><a herf="" ng-click="onClickTabRule()"> Use Case Rule</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- /code for usecases -->
-					<!-- code for library customview -->
-					<div ng-show="searchOOBCri"  class="panel panel-default panelheadinstyle">
-						<div class="panel-heading panelbottomborder">
-							<h4 class="panel-title">
-								<a style="padding-right: 177px;" class="accordListrotate"  href="javascript:;" data-toggle="collapse" ng-click="onShowlibrary()"
-									data-parent="#accordion" data-target="#collapseThree">Show Library</a>
-							</h4>
-						</div>
-						<div id="collapseThree" class="panel-collapse collapse">
-							<div class="panel-body">
-								<ul class="sidemenu-nav treelevel">
-									<li><a herf="" data-toggle="modal" data-target="#myModal">ALL</a></li>
-									<li><a herf="" data-toggle="modal" data-target="#myModal2">Custom</a></li>
-									<li><a herf="" data-toggle="modal" data-target="#myModal3">Out of Box</a></li>
-								</ul>
-
-							</div>
-						</div>
-					</div>
-
-					<!-- /code for library customview -->					
 				</div>
+				<div class="chkboxarea">
+					<!-- code for library customview -->
+					<input type="checkbox" name="oobv" class="outOBYes" checked ="checked" value="Yes" ng-click="oobvaluegoes($event)"> Out of Box Rules
+					<br>
+					<input type="checkbox" name="oobv" class="outOBNo" checked ="checked" value="No" ng-click="oobvaluegoes($event)"> Custom Rules
+					<!-- /code for library customview -->								
+								
+				</div>				
+		
+								
+						
+						</div>
+					</div>
+								
+				</div>
+					<button class="result-search btn pull-right" ng-click="ClikedResult()">Refresh Result</button>
 			</div>
 			<div ng-include="currentTab"></div>
 		</div>
 	</div>
 </div>
-<!-- Moda1_all -->
-<div class="modal fade" id="myModal" role="dialog">
+
+
+ <div class="modal fade" id="myModal" role="dialog" visible="showModal">
     <div class="modal-dialog">
-        Modal content
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Show All</h4>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to fetch entire library?</p>
+                <p>{{modalMsg}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="showAll();">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="callService();">Yes</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
             </div>
         </div>
 
     </div>
-</div>
-<!-- Moda2_all -->
-<div class="modal fade" id="myModal2" role="dialog">
-    <div class="modal-dialog">
-        Modal content
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Show All</h4>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure you want to fetch all Custom Use Case Rules?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"  ng-click="oobN()">Yes</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-            </div>
-        </div>
+</div>  
 
-    </div>
-</div>
-<!-- Moda3_all -->
-<div class="modal fade" id="myModal3" role="dialog">
-    <div class="modal-dialog">
-        Modal content
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Show All</h4>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure you want to fetch all Out of Box Use Case Rules?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="oobY()">Yes</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-            </div>
-        </div>
-
-    </div>
-</div>
   <script>
      angular.element("ul.sidemenu-nav li a").click(function(){
  	 angular.element("ul.sidemenu-nav li a").removeClass("activesidenav");
