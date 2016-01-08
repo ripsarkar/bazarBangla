@@ -5,6 +5,7 @@ app.service("UsecaseService", function() {
     var UpdataUsedata = '';
     var indsty = '';
     var Updtindsty = '';
+    var btnback = '';
 
     instance.getUsecasecrtdata = function() {
         return Usecasecrtdata;
@@ -21,7 +22,13 @@ app.service("UsecaseService", function() {
     instance.getUpdtindsty = function() {
         return Updtindsty;
     };
+    instance.getbtnbackUC = function() {
+        return btnback;
+    };
 
+    instance.setbtnbackUC = function(data) {
+        btnback = data;
+    };
     instance.setUpdtindsty = function(data) {
         Updtindsty = data;
     };
@@ -64,11 +71,14 @@ app.controller("UsecaseCtrlController", ["$scope", "$rootScope", "$state", "$htt
             rule: true
         }
     }
+    var defaultcount = 0;
     $rootScope.loadinganimation = true;
     $http.get($rootScope.url + '/populateCyberFuncDropDown').success(function(data, status, headers, config) {
         if (typeof data.CyberFunc != 'undefined' && data.CyberFunc.length != 0) {
             $rootScope.loadinganimation = false;
             $scope.UsecaseFramework = data.CyberFunc;
+            defaultcount++;
+            $scope.defaultchck();
         } else {
             $rootScope.loadinganimation = false;
             alert("Sorry no data found");
@@ -125,6 +135,8 @@ app.controller("UsecaseCtrlController", ["$scope", "$rootScope", "$state", "$htt
             $rootScope.loadinganimation = false;
             //$scope.EPdatas = data.EP;
             $scope.industrydatas = data.industry;
+            defaultcount++;
+            $scope.defaultchck();
         } else {
             $rootScope.loadinganimation = false;
             //$scope.EPdatas = [];
@@ -179,9 +191,42 @@ app.controller("UsecaseCtrlController", ["$scope", "$rootScope", "$state", "$htt
             alert("Please fill all mandatory fields");
         }
     }
+    
+    $scope.backtousecase = function(){
+        var backassgin = UsecaseService.getUsecasecrtdata();
+        console.log(JSON.stringify(backassgin, null,2));
+        $scope.usecaseID = backassgin.id;
+        $scope.usecaseName =  backassgin.name;
+        $scope.usecaseDescrip =  backassgin.description;
+        $scope.frameWork =  backassgin.cyberFuncSurrId;
+        $scope.useCaseCat =  backassgin.UCCatSurrId;
+        $scope.useCaseSubcat =  backassgin.UCSubCatSurrId;
+        var indsarry = UsecaseService.getindsty();
+        console.log(JSON.stringify(indsarry, null,2));
+        $scope.UsecaseIntry = [];
+        $scope.UsecaseIntry.length =0;
+        for(var i=0;i<indsarry.length;i++){
+            $scope.UsecaseIntry.push(indsarry[i].surrId);
+        }
+        UsecaseService.setbtnbackUC("");
+    };
+    
+    
+    
+    $scope.defaultchck =  function(){
+        if(defaultcount == 2){
+            if(UsecaseService.getbtnbackUC() == 1){
+                $scope.backtousecase();
+            }
+        }
+    };
+    
+    
+    
 }]);
 
 app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http', 'UsecaseService', function($scope, $rootScope, $state, $http, UsecaseService) {
+    UsecaseService.setbtnbackUC("");
     $scope.pagemain = {
         main: true,
         usecase: false,
@@ -252,6 +297,7 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
     $http.get($rootScope.url + '/populateRegCatDropDown').success(function(data, status, headers, config) {
         if (data.RegCat.length != 0 && typeof data.RegCat != 'undefined') {
             $scope.RegcatCrtdatas = data.RegCat;
+            
         } else {
             $scope.RegcatCrtdatas = [];
         }
@@ -460,6 +506,7 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
         if (CategoryGr.length != 0) {
             if (UsecaseService.getUpdateUsecase().SurrId != '' && UsecaseService.getUpdateUsecase().SurrId != 'undefined') {
                 $http.post($rootScope.url + '/saveUseCase', UsecasePostJson).success(function(data, status, headers, config) {
+                    UsecaseService.setbtnbackUC("");
                     alert("Uescase Created Successfully ");
                     $scope.goTo();
                 }).error(function(data, status, headers, config) {
@@ -474,6 +521,11 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
             alert("Please fill all mandatory fields");
         }
     }
+    
+    $scope.isBack = function(){
+        UsecaseService.setbtnbackUC(1);
+        $state.go("home.createusecase");
+    };
 
 
 }]);
