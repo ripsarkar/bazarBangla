@@ -448,7 +448,7 @@ body {
 }
 
 .searchtable th {width: 10.6%}
-.searchtable td {width: 10.6%;}
+.searchtable td {width: 11.1%;float:left;}
 .searchtable td:last-child {padding-right: 14px;}
 .searchtabBody tr{
 	width:102%;
@@ -1518,4 +1518,9 @@ span.more-text.show {
 }
 .result{
 	padding-left:1%
+}
+.searchtableUser {
+    overflow-y: auto;
+    max-height: 250px;
+    color: rgb(136, 136, 136) !important;
 }
