@@ -16,18 +16,18 @@
 			<table class="searchtable" id="rateplanmapping-scroll">
 				<thead>
 					<tr>
-						<th>Use Case Category</th>
-						<th>Use Case Sub Category</th>
-						<th>Use Case#</th>
-						<th>Use Case</th>
-						<th>Use Case Rule #</th>
-						<th>Use Case Rule</th>
+						<th>Category</th>
+						<th>Sub Category</th>
+						<th>Use Case ID</th>
+						<th>Use Case Name</th>
+						<th>Rule ID</th>
+						<th>Rule Name</th>
 						<th>Out of Box</th>
 						<!-- <th ng-hide="exported">Export<a href="javascript:void(0);"
 							class="exprticon" ng-click="exportFiles();"></th> -->
 						<th ng-hide="exported">Export<a href="javascript:void(0);"
 							class="exprticon" ng-click="exportFiles();"></th>
-						<th>Use Case Rule Description</th>
+						<th>Rule Description</th>
 					</tr>
 				</thead>
 
@@ -51,14 +51,6 @@
 									ng-click="toggleSelection(result)" />
 							</div>
 						</td>
-						<!-- <td align="center" ng-hide="exported">
-							<div ng-show="result.exportYes">
-								<input id="{{result.packageSurrId}}" type="checkbox"
-									value="{{result.packageSurrId}}"
-									ng-checked="selection.indexOf(result.packageSurrId) > -1"
-									ng-click="toggleSelection(result)" />
-							</div>
-						</td> -->
 						<td>
 						 <p read-more content="{{result.RuleDescription}}" ></p> 
 						</td>
@@ -67,29 +59,7 @@
 			</table>
 		<div  ng-hide="showResult" align="center" class="nosearchFnaly">{{userMsg}}</div>
 </div>
-		<!-- <div ng-hide="showResult">
-			<table class="searchtable">
-				<thead>
-					<tr>
-						<th>Use Case Category</th>
-						<th>Use Case Sub Category</th>
-						<th>Use Case#</th>
-						<th>Use Case</th>
-						<th>Use Case Rule #</th>
-						<th>Use Case Rule</th>
-						<th>Out of Box</th>
-						<th ng-hide="exported">Export<a href="javascript:void(0);"
-							class="exprticon" ng-click="exportFiles();"></th>
-						<th>Use Case Rule Description</th>
-					</tr>
-				</thead>
-				<tbody>
-				<tr align="middle">
-					<td colspan="7">{{userMsg}}</td>
-				</tr>
-				</tbody>
-			</table>
-		</div> -->
+
 
 
 	</div>
