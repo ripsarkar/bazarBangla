@@ -157,11 +157,7 @@
 </div>
 								<!-- /new tree -->
 				</div>
-                        <div class="panelbottomborder">
-                            <strong>Use Case/Rule ID/Name</strong>
-                            <input type="text" class="inputforall" ng-model="seaValForEvery" type="text"
-                                ng-keydown="$event.which === 13 && ClikedResult()">
-                        </div>                
+
 				<div class="chkboxarea">
 					<!-- code for library customview -->
 					<input type="checkbox" name="oobv" class="outOBYes bothoob" checked ="checked" value="Yes" ng-click="oobvaluegoes($event)"> Out of Box Rules
@@ -174,6 +170,12 @@
 								
 						
 						</div>
+<div class="panelbottomborder">
+                            <strong>Use Case/Rule ID/Name</strong>
+                            <input class="inputforall ng-pristine ng-valid ng-touched" ng-model="seaValForEvery" ng-keydown="$event.which === 13 &amp;&amp; ClikedResult()" type="text">
+                        </div>
+
+                        
 					</div>
 								
 				</div>

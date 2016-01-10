@@ -382,7 +382,7 @@ body {
     padding-bottom: 5px;
     padding-left: 15px;
     padding-right: 15px;
-    border-bottom: 1px solid #ccc !important;
+    border-top: 1px solid #ccc !important;
 }
 .panelstyle{
 	background-color: #CCC !important;
