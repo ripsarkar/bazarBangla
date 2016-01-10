@@ -20,11 +20,7 @@
 							
 							</h4> -->
 							</div>
-							<div class="panelbottomborder">
-							<strong>Use Case/Rule ID/Name</strong>
-							<input type="text" class="inputforall" ng-model="seaValForEvery" type="text"
-								ng-keydown="$event.which === 13 && ClikedResult()">
-						</div>
+
 						<div id="collapseOne" class="panel-collapse collapse in">
 							<div class="panel-body">
 
@@ -161,6 +157,11 @@
 </div>
 								<!-- /new tree -->
 				</div>
+                        <div class="panelbottomborder">
+                            <strong>Use Case/Rule ID/Name</strong>
+                            <input type="text" class="inputforall" ng-model="seaValForEvery" type="text"
+                                ng-keydown="$event.which === 13 && ClikedResult()">
+                        </div>                
 				<div class="chkboxarea">
 					<!-- code for library customview -->
 					<input type="checkbox" name="oobv" class="outOBYes bothoob" checked ="checked" value="Yes" ng-click="oobvaluegoes($event)"> Out of Box Rules
