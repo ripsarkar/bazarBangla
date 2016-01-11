@@ -120,7 +120,7 @@
         // $rootScope.url = 'http://uclapireleasetwo.mybluemix.net';
         
         // UAT test url       
-        $rootScope.url = 'http://uclapistage.mybluemix.net';
+        $rootScope.url = 'http://devuclapi.mybluemix.net';
          
   //    $location.path('/login');
   	//  initController();
