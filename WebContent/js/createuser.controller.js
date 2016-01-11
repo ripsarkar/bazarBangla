@@ -176,6 +176,10 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     		    $scope.industryName="";
     		    $scope.contractId="";
     			//--------------clearing the fields---------------//
+                    
+                /*back botton set clear*/
+                $rootScope.backcmplist = ""; 
+                    
     			alert("User account created successfully. User name/password sent to registered email");
     	 		}
     	 		else{

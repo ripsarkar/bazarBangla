@@ -12,19 +12,22 @@
     </div>
     <div class="clearfix"></div>
 
-    <div class="mainmenu">
+    <div ng-class="(menu.menu == true) ? 'mainmenu-sub' : 'mainmenu'">
         <div class="container">
             <div class="row userspeMenustyle">
                 <div class="col-md-12 col-sm-12 text-center">
                 <ul class="mainlinks">
-                    <li ng-show = "useCaseMaintain"><a class="forallnotsear forallnotFedd" ui-sref=".createusecase"><span class="glyphicon glyphicon-list-alt" style="float:left;font-size:20px;padding-right:5px"></span><div style="float:left">Use Case Maintenance</div></a> </li>
-                    <li ng-show = "userAccountManagement"><a class="forallnotsear forallnotFedd" ui-sref=".uamanagement"  ><span class="glyphicon glyphicon-user" style="float:left;font-size:20px;padding-right:5px"></span><div style="float:left">User Account Management</div></a></li>
+                	<li ng-show = "searchMenu"><a ui-sref=".search" ng-click="defaultmenu()" class="forallnotFedd searchlibrarymenuI activemainlinks"><span class="icon-search"></span>Search Library</a></li>
+                	<li ng-show = "feedback"><a ng-click="feedbackmenu()" class="forallnotsear feedbackmenu"><span class="icon-usermanage"></span> Feedback </a></li>
+                    <li ng-show = "useCaseMaintain"><a class="forallnotsear forallnotFedd" ng-click="menuUseRule()" ><span class="glyphicon glyphicon-list-alt" style="float:left;font-size:20px;padding-right:5px"></span><div style="float:left">Use Case Maintenance</div></a> </li>
+                    <li ng-show = "userAccountManagement"><a class="forallnotsear forallnotFedd" ui-sref=".uamanagement" ng-click="uamanagement();" ><span class="glyphicon glyphicon-user" style="float:left;font-size:20px;padding-right:5px"></span><div style="float:left">User Account Management</div></a></li>
                     <!-- <li ng-show = "ucrlPackage"><a href="" ><span class="glyphicon glyphicon-folder-open" style="float:left;font-size:20px;padding-right:10px"></span><div style="float:left">UCSRL Package</div></a></li> -->
                     <!-- <li ng-show = "alertMenu"><a href="" ><span class="glyphicon glyphicon-bell" style="float:left;font-size:20px;padding-right:10px"></span><div style="float:left">Alert</div></a></li> -->
-                    <li ng-show = "feedback"><a ui-sref=".feedback" class="forallnotsear feedbackmenu"><span class="icon-usermanage"></span> Feedback </a></li> 
-                    <li ng-show = "searchMenu"><a ui-sref=".search"  class="forallnotFedd searchlibrarymenuI activemainlinks"><span class="icon-search"></span>Search Library</a></li>
+                     
+                    
                 </ul>                
                 </div>
+	            
                 <script>
                     angular.element("ul.mainlinks li a").click(function() {
                         angular.element("ul.mainlinks li a").removeClass("activemainlinks");
@@ -32,6 +35,50 @@
                     });
                 </script>
             </div>
+        </div>
+        <div class="container-fluid">
+        	<div class="row">
+        		<div ng-show="menu.usecaserule">
+	                <div class="sub_menu">
+	                    <ul class="submainlinks">
+	                        <li class="btn btn-sub-menu"> <a ng-click="pageUsecase()">Use Cases</a></li>
+	                        <li class="btn btn-sub-menu"> <a ng-click="pageRule()">Rule</a></li>
+	                    </ul>
+	                </div>
+	            </div>
+	            <div ng-show="menu.usecase">
+	                <div class="sub_menu">
+	                    <ul class="submainlinks">
+	                        <li class="btn btn-sub-menu"> <a ng-click="menuUseRule()" ui-sref=".createusecase" >Create</a></li>
+	                        <li class="btn btn-sub-menu"> <a ng-click="menuUseRule();updateusecaseReload();" ui-sref=".updateUsecase">Update</a></li>
+	                    </ul>
+	                </div>
+	            </div>
+	            <div ng-show="menu.rule">
+	                <div class="sub_menu">
+	                    <ul class="submainlinks">
+	                        <li class="btn btn-sub-menu"> <a ng-click="menuUseRule();" ui-sref=".createrule" >Create</a></li>
+	                        <li class="btn btn-sub-menu"> <a ng-click="menuUseRule();updateruleReload();" ui-sref=".updateRule">Update</a></li>
+	                    </ul>
+	                </div>
+	            </div>
+	            <div ng-show="menu.feedback">
+	                <div class="sub_menu">
+	                    <ul class="submainlinks">
+	                        <li class="btn btn-sub-menu"> <a ui-sref=".feedback">Edit</a></li>
+	                        <li class="btn btn-sub-menu"> <a ui-sref=".viewfeedback">View</a></li>
+	                    </ul>
+	                </div>
+	            </div>
+	            <div ng-show="menu.uaman">
+	                <div class="sub_menu">
+						<ul>
+							 <li class="active btn btn-sub-menu" id="createusertab" ng-click="uamanager()"> <a herf="">Create New</a></li>
+			                <li class="btn btn-sub-menu" ng-click="uaviewer()"> <a herf="">Manage User</a></li>
+						</ul>
+					</div>
+	            </div>
+        	</div>
         </div>
     </div>
 </div>

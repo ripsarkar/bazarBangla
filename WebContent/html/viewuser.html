@@ -17,7 +17,7 @@
 						<label>Organization Name</label> 
 						<select class="form-control" ng-model="selectedCompany" ng-options="company.name for company in companyList  track by company.id "
 							 ng-change=getDetails()>
-							<option style="display: none" value="">--Please Select--</option>
+							<option ng-selected="selectedCompany.id == company.id" style="display: none" value="">--Please Select--</option>
 							
 						</select>
 						
@@ -48,7 +48,7 @@
 			<h4 class="title-head">Users List</h4>
 		</div>
 		<div class="panel panel-default tablecontrol">
-			<div class="searchtable uamtable">
+			<div class="searchtableUser uamtable">
 
 				<table class="table table-striped searchtablerow" fixed-header>
 					<tr class="tableheader">

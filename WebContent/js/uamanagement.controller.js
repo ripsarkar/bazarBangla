@@ -2,6 +2,9 @@
 app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$rootScope,$http){
 		//base view is view user
 	$rootScope.currentUserTab = 'html/viewuser.html';
+    
+    
+    
 		//go to create user
 	$scope.onuamcreateuser = function(id) {
 	    //change to createuser
@@ -56,6 +59,7 @@ app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$r
 	       $rootScope.updatecompanyName=result.companyName;
 	       $rootScope.Industryname=result.industryName;
 	       $rootScope.updatecontractId=result.contractId;
+           
 	       //move to edit user page
 	       $rootScope.currentUserTab = 'html/uamcreateuser.html';
 	  	}).error(function(error) {
@@ -63,6 +67,12 @@ app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$r
 		       //error
 		});
    };
+    
+    $scope.isBack = function(){
+        $rootScope.backcmplist = $rootScope.compId;
+        $scope.onviewuser();
+    }
+    
    $scope.onviewuser = function() {//alert(2);
 		//edituser control vacating
 		$rootScope.updateuserName="";
@@ -81,12 +91,14 @@ app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$r
 	    $rootScope.currentUserTab = 'html/viewuser.html';
        
    }
+   
+   $rootScope.$on("uamanagerpage", function() {
+        $scope.onuamcreateuser();
+    });
+    
+    $rootScope.$on("uaviewerpage", function() {
+        $scope.onviewuser();
+    });
 
 
 }]);
-    	    
-
-
-
-
-    

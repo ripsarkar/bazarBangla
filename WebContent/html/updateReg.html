@@ -1,32 +1,4 @@
 <div class="createnewpage pagebg" ng-controller="updateRegController">
-    <div class="container-fluid">
-        <div class="row">
-            <div ng-show="pagemain.main">
-                <div class="sub_menu">
-                    <ul>
-                        <li class="active btn btn-sub-menu"> <a ng-click="pageUsecase()">Use Cases</a></li>
-                        <li class="btn btn-sub-menu"> <a ng-click="pageRule()">Rule</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div ng-show="pagemain.usecase">
-                <div class="sub_menu">
-                    <ul>
-                        <li class="active btn btn-sub-menu"> <a ui-sref="home.createusecase">Create Use Cases</a></li>
-                        <li class="btn btn-sub-menu"> <a ng-click="SamePageReload()" ui-sref="home.updateUsecase">Update Use Cases</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div ng-show="pagemain.rule">
-                <div class="sub_menu">
-                    <ul>
-                        <li class="btn btn-sub-menu"> <a ui-sref="home.createrule">Create Rule</a></li>
-                        <li class="btn btn-sub-menu"> <a ui-sref="home.updateRule">Update Rule</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="container">
         <div class="row">
             <div class="createnew-head">
@@ -114,7 +86,8 @@
                         </div>-->
                         <div class="clearfix"></div>
                         <div class="margintp1 col-md-12">
-                            <div class="col-md-offset-4 col-md-4">
+                            <div class="col-md-offset-3 col-md-6">
+                                <button type="button" class="btn btn-primary tabsbtn" ng-click="isBackUp()" id="backbtn"> Back</button>
                                 <button class="btn btn-none tabsbtn" ng-click="reSet()" id="reSet"> Clear</button>
                                 <button class="btn btn-primary tabsbtn" type="submit" ng-click="UseCaseformSubmit()"> Submit </button>
                             </div>

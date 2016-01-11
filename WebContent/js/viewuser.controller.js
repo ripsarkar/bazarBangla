@@ -7,11 +7,26 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", f
 	$scope.industryName = "";
 	$scope.contractId = "";
 	
+    /*back botton*/
+    $scope.backbtnusermanager = function(){
+        if(typeof $rootScope.backcmplist != 'undefined' && $rootScope.backcmplist !=""){
+        ViewUserService.getUserDetails($rootScope.backcmplist).then(function(resultname)
+                {
+                    $scope.userList = resultname.Users;
+                    $scope.selectedCompany = {
+                        id :$rootScope.backcmplist
+                    };
+                    $scope.getDetails();
+                    $rootScope.backcmplist="";
+                });
+        }
+    }
 	
 		ViewUserService.getCompanyName().success(function(resultname)
 				{		 
 					$rootScope.loadinganimation=false;	
 					$scope.companyList = resultname.Company;
+                    $scope.backbtnusermanager();
 				}).error(function (error) {
        	         //error
 			  		alert("There is some problem as reported by the backend. Please contact the administrator");
@@ -37,6 +52,7 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", f
 				});
 
     }
+    
 	/*-----------------/search function ends-----------------*/
 	
 	//red green dot styling

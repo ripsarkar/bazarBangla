@@ -283,6 +283,101 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 //                loadAllUsers();
 //            });
 //    }
+    $scope.defaultmenu = function(){
+        $scope.menu = {
+            usecaserule :false,
+            feedback : false,
+            usecase:false,
+            rule:false,
+            uaman:false,
+            feedbackedit:false,
+            feedbackview:false,
+            menu:false
+        };
+    };
+    $scope.defaultmenu();
+    
+    $scope.menuUseRule =  function(){
+        $scope.menu = {
+            usecaserule :true,
+            feedback : false,
+            usecase:false,
+            rule:false,
+            uaman:false,
+            feedbackedit:false,
+            feedbackview:false,
+            menu:true
+        };
+    };
+    
+    $scope.pageUsecase = function(){
+        $scope.menu = {
+            usecaserule :false,
+            feedback : false,
+            usecase:true,
+            rule:false,
+            uaman:false,
+            feedbackedit:false,
+            feedbackview:false,
+            menu:true
+        };
+    };
+    $scope.pageRule = function(){
+        $scope.menu = {
+            usecaserule :false,
+            feedback : false,
+            usecase:false,
+            rule:true,
+            uaman:false,
+            feedbackedit:false,
+            feedbackview:false,
+            menu:true
+        };
+    };
+    
+    $scope.feedbackmenu = function(){
+        $scope.menu = {
+            usecaserule :false,
+            feedback : true,
+            usecase:false,
+            rule:false,
+            uaman:false,
+            feedbackedit:false,
+            feedbackview:false,
+            menu:true
+        };
+    };
+    
+    $scope.uamanagement = function(){
+    	$scope.menu = {
+                usecaserule :false,
+                feedback : false,
+                usecase:false,
+                rule:false,
+                uaman:true,
+                feedbackedit:false,
+                feedbackview:false,
+                menu:true
+            };
+    }
+    
+    $scope.updateruleReload = function(){
+        $rootScope.$emit("updateruleReset", {});
+    };
+    
+    $scope.updateusecaseReload = function(){
+        $rootScope.$emit("updateusecaseReset", {});
+    };
+    
+    $scope.uamanager = function(){
+        $rootScope.$emit("uamanagerpage", {});
+    };
+    
+    $scope.uaviewer = function(){
+        $rootScope.$emit("uaviewerpage", {});
+    };
+    
 
+    
   $scope.selection=[];
 }
