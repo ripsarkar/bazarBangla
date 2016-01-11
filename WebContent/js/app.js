@@ -121,6 +121,7 @@
         
         // UAT test url       
         $rootScope.url = 'http://devuclapi.mybluemix.net';
+        
          
   //    $location.path('/login');
   	//  initController();
