@@ -1,0 +1,19 @@
+{
+  "ServiceId": "com.ibm.cloudoe.orion.client.deploy",
+  "Params": {
+    "Target": {
+      "Url": "https://api.ng.bluemix.net",
+      "Org": "rfkundin_org",
+      "Space": "UCL-DEV"
+    },
+    "Name": "DEVUCL",
+    "Instrumentation": {
+      "host": "devucl",
+      "services": [
+        "ucldevdb"
+      ]
+    }
+  },
+  "Path": "manifest.yml",
+  "Type": "Cloud Foundry"
+}
