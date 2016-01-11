@@ -766,6 +766,14 @@ a {
     background: #353535;
 }
 
+.mainmenu-sub {
+			    height: 118px;
+			    color: #EFEFEF;
+			    text-align: center;
+			    background: #353535;
+			}
+			
+			
 ul.mainlinks {
     /*margin: 0 auto;*/
     text-align: center;
@@ -776,7 +784,7 @@ ul.mainlinks li {
     list-style: none;
     text-decoration: none;
     float: left;
-    padding: 15px 15px 0px 15px;
+    padding: 15px 15px 10px 15px;
 }
 
 .mainlinks li > a {
@@ -789,6 +797,32 @@ ul.mainlinks li {
 .mainlinks li > a:hover {
     color: rgb(5, 168, 230);
 }
+
+
+/*Sub menu*/
+			
+			ul.submainlinks {
+			    /*margin: 0 auto;*/
+			    text-align: center;
+			}
+			
+			ul.submainlinks li {
+			    list-style: outside none none;
+			    text-decoration: none;
+			    padding: 5px 20px 5px;
+			    margin: 0px 10px;
+			}
+			
+			.submainlinks li > a {
+			    text-decoration: none;
+			    display: block;
+			    padding: 5px;
+			    color: #ECECEC;
+			}
+			
+			.submainlinks li > a:hover {
+			    color: rgb(5, 168, 230);
+			}
 
 .homepage {
     padding: 0px 15px;
