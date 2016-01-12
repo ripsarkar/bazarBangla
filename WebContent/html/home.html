@@ -31,7 +31,7 @@
                 <script>
                     angular.element("ul.mainlinks li a").click(function() {
                         angular.element("ul.mainlinks li a").removeClass("activemainlinks");
-                        angular.element(this).addClass(" activemainlinks");
+                        angular.element(this).addClass("activemainlinks");
                     });
                 </script>
             </div>
@@ -41,44 +41,38 @@
         		<div ng-show="menu.usecaserule">
 	                <div class="sub_menu">
 	                    <ul class="submainlinks">
-	                        <li class="btn btn-sub-menu"> <a ng-click="pageUsecase()">Use Cases</a></li>
-	                        <li class="btn btn-sub-menu"> <a ng-click="pageRule()">Rule</a></li>
+                            <li class="btn btn-sub-menu"> <a ui-sref=".createusecase" >Create Use cases</a></li>
+	                        <li class="btn btn-sub-menu"> <a ng-click="updateusecaseReload();" ui-sref=".updateUsecase">Update Use cases</a></li>
+                            <li class="btn btn-sub-menu"> <a ui-sref=".createrule" >Create Rule</a></li>
+	                        <li class="btn btn-sub-menu"> <a ng-click="updateruleReload();" ui-sref=".updateRule">Update Rule</a></li>
 	                    </ul>
 	                </div>
 	            </div>
-	            <div ng-show="menu.usecase">
-	                <div class="sub_menu">
-	                    <ul class="submainlinks">
-	                        <li class="btn btn-sub-menu"> <a ng-click="menuUseRule()" ui-sref=".createusecase" >Create</a></li>
-	                        <li class="btn btn-sub-menu"> <a ng-click="menuUseRule();updateusecaseReload();" ui-sref=".updateUsecase">Update</a></li>
-	                    </ul>
-	                </div>
-	            </div>
-	            <div ng-show="menu.rule">
-	                <div class="sub_menu">
-	                    <ul class="submainlinks">
-	                        <li class="btn btn-sub-menu"> <a ng-click="menuUseRule();" ui-sref=".createrule" >Create</a></li>
-	                        <li class="btn btn-sub-menu"> <a ng-click="menuUseRule();updateruleReload();" ui-sref=".updateRule">Update</a></li>
-	                    </ul>
-	                </div>
-	            </div>
+
 	            <div ng-show="menu.feedback">
 	                <div class="sub_menu">
 	                    <ul class="submainlinks">
-	                        <li class="btn btn-sub-menu"> <a ui-sref=".feedback">Edit</a></li>
-	                        <li class="btn btn-sub-menu"> <a ui-sref=".viewfeedback">View</a></li>
+	                        <li class="btn btn-sub-menu"> <a ui-sref=".feedback">Edit feedback</a></li>
+	                        <li class="btn btn-sub-menu"> <a ui-sref=".viewfeedback">View feedback</a></li>
 	                    </ul>
 	                </div>
 	            </div>
 	            <div ng-show="menu.uaman">
 	                <div class="sub_menu">
-						<ul>
+						<ul class="submainlinks">
 							 <li class="active btn btn-sub-menu" id="createusertab" ng-click="uamanager()"> <a herf="">Create New</a></li>
 			                <li class="btn btn-sub-menu" ng-click="uaviewer()"> <a herf="">Manage User</a></li>
 						</ul>
 					</div>
 	            </div>
         	</div>
+            
+            <script>
+                    angular.element("ul.submainlinks li").click(function() {
+                        angular.element("ul.submainlinks li").removeClass("subactive");
+                        angular.element(this).addClass("subactive");
+                    });
+                </script>
         </div>
     </div>
 </div>

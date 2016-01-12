@@ -492,7 +492,6 @@ body {
     font-size: 14px !important;
 }
 
-.case-menu {}
 
 .activemainlinks {
     color: rgb(5, 168, 230) !important;
@@ -801,28 +800,28 @@ ul.mainlinks li {
 
 /*Sub menu*/
 			
-			ul.submainlinks {
-			    /*margin: 0 auto;*/
-			    text-align: center;
-			}
-			
-			ul.submainlinks li {
-			    list-style: outside none none;
-			    text-decoration: none;
-			    padding: 5px 20px 5px;
-			    margin: 0px 10px;
-			}
-			
-			.submainlinks li > a {
-			    text-decoration: none;
-			    display: block;
-			    padding: 5px;
-			    color: #ECECEC;
-			}
-			
-			.submainlinks li > a:hover {
-			    color: rgb(5, 168, 230);
-			}
+ul.submainlinks {
+    /*margin: 0 auto;*/
+    text-align: center;
+}
+
+ul.submainlinks li {
+    list-style: outside none none;
+    text-decoration: none;
+    padding: 0px;
+    margin: 0px 10px;
+}
+
+.submainlinks li > a {
+    text-decoration: none;
+    display: block;
+    padding: 8px 15px;
+    color: #ECECEC;
+}
+
+.submainlinks li > a:hover {
+    color: rgb(5, 168, 230);
+}
 
 .homepage {
     padding: 0px 15px;
@@ -1273,12 +1272,6 @@ button.result-search {
     text-align: center;
 }
 
-.btn-sub-menu {
-    padding: 8px 15px;
-    outline: 0px none !important;
-    box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.51) inset !important;
-}
-
 li.btn-sub-menu {
     background: rgb(59, 59, 59) none repeat scroll 0% 0%;
     color: rgb(255, 255, 255);
@@ -1291,6 +1284,16 @@ li.btn-sub-menu {
     color: #a1a1a1;
     text-decoration: none;
     font-weight: 600;
+}
+
+li.subactive{
+    padding: 8px 15px;
+    outline: 0px none !important;
+    box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.51) inset !important;
+}
+
+li.subactive a{
+    color: #05A8E6 !important;
 }
 
 
