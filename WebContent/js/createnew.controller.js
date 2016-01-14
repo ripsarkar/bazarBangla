@@ -271,12 +271,21 @@ $scope.goTo = function() {
     }
 }
 
-
+angular.element('form').click(function(event){
+    event.preventDefault();
+    if(event.which === 13){
+        if($state.current == 'home.createusecase'){
+            $scope.goTo();
+        }
+    }
+});
 
 }]);
 
 app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http', 'UsecaseService',
     function($scope, $rootScope, $state, $http, UsecaseService) {
+
+		
         UsecaseService.setbtnbackUC("");
         $scope.pagemain = {
             main: true,
@@ -604,7 +613,14 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
             UsecaseService.setcreateregbackuc(regset);
             $state.go("home.createusecase");
         };
-        
+        angular.element('form').click(function(event){
+		    event.preventDefault();
+			if(event.which === 13){
+			    if($state.current == 'home.createReg'){
+			        $scope.UseCaseformSubmit();
+			    }
+			}
+		});
        
             
     }
@@ -612,7 +628,9 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
 
 app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http', 'UsecaseService',
     function($scope, $rootScope, $state, $http, UsecaseService) {
-
+		
+	angular.element("ul.submainlinks li").removeClass("subactive");
+    angular.element('li.createrule').addClass("subactive");
         $scope.formcontrolYN = "No";
         UsecaseService.setbtnbackUC("");
         $scope.chckfunction = function() {
@@ -665,6 +683,8 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                         }
                     }
                 }).error(function(data, status, headers, config) {
+                	$scope.crtUsercaseId="";
+                    $scope.crtUsercaseName="";
                     alert("Sorry, No data found");
                 });
             }
@@ -683,6 +703,8 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                         }
                     }
                 }).error(function(data, status, headers, config) {
+                	$scope.crtUsercaseId="";
+                    $scope.crtUsercaseName="";
                     alert("Sorry, No data found");
                 });
             }
@@ -708,9 +730,13 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                             }
                         }
                     } else {
+                    	$scope.crtUsercaseId="";
+	                    $scope.crtUsercaseName="";
                         alert('Sorry, No data found');
                     }
                 }).error(function(data, status, headers, config) {
+                	$scope.crtUsercaseId="";
+                    $scope.crtUsercaseName="";
                     alert('Sorry Application error in serverside');
                 });
             }
@@ -1205,6 +1231,15 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 alert('Please fill all mandatory* fields');
             }
         }
+        
+        angular.element('form').click(function(event){
+            event.preventDefault();
+            if(event.which === 13){
+                if($state.current == 'home.createrule'){
+                    $scope.crtRuleSubmit();
+                }
+            }
+        });
 
         $rootScope.loadinganimation = true;
         $http.get($rootScope.url + '/getRuleTabData').success(function(data, status, headers, config) {
@@ -1684,7 +1719,14 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     }
                 }
 
-                
+                angular.element('form').click(function(event){
+	                event.preventDefault();
+	                if(event.which === 13){
+	                    if($state.current == 'home.updateUsecase'){
+	                        $scope.goTo();
+	                    }
+	                }
+	            });
                 
             }]);
 
@@ -2051,6 +2093,14 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 UsecaseService.setcreateregbackuc(upregset);
                 $state.go("home.updateUsecase");
             }
+            angular.element('form').click(function(event){
+                event.preventDefault();
+                if(event.which === 13){
+                    if($state.current == 'home.updateReg'){
+                        $scope.UseCaseformSubmit();
+                    }
+                }
+            });
         }
     ]);
 
@@ -2848,6 +2898,15 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     alert("Please fill all mandatory fields");
                 }
             }
+            
+            angular.element('form').click(function(event){
+                event.preventDefault();
+                if(event.which === 13){
+                    if($state.current == 'home.updateRule'){
+                        $scope.crtRuleSubmit();
+                    }
+                }
+            });
 
             $rootScope.loadinganimation = true;
             $http.get($rootScope.url + '/getRuleTabData').success(function(data, status, headers, config) {
