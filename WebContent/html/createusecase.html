@@ -83,6 +83,14 @@
                             </div>
                         </div>
                     </form>
+                    <script>
+                    angular.element("form").keypress(function(event) {
+						if(event.which == 13){
+							event.preventDefault();
+							goTo();
+						}
+                    });
+                </script>
                 </div>
             </div>
         </div>
