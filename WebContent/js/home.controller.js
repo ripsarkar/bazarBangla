@@ -292,6 +292,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
             uaman:false,
             menu:false
         };
+        angular.element("ul.submainlinks li").removeClass("subactive");
     };
     $scope.defaultmenu();
     
@@ -304,6 +305,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
             uaman:false,
             menu:true
         };
+        angular.element("ul.submainlinks li").removeClass("subactive");
     };
 
     
@@ -316,6 +318,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
             uaman:false,
             menu:true
         };
+        angular.element("ul.submainlinks li").removeClass("subactive");
     };
     
     $scope.uamanagement = function(){
@@ -327,6 +330,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
                 uaman:true,
                 menu:true
             };
+    	angular.element("ul.submainlinks li").removeClass("subactive");
     }
     
     $scope.updateruleReload = function(){
