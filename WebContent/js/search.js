@@ -2615,6 +2615,16 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 			else{
 				postjsonresult.oobParam = "";
 				console.log(postjsonresult.oobParam);
+                if(oobnext==false){
+                    angular.element($event.currentTarget).next().next().prop('checked',true);
+                    postjsonresult.oobParam = "No";
+                    console.log(postjsonresult.oobParam);
+                }
+                if(oobprev==false){
+                    angular.element($event.currentTarget).prev().prev().prop('checked',true);
+                    postjsonresult.oobParam = "Yes";
+                    console.log(postjsonresult.oobParam);
+                }
 			}
 
 		}
