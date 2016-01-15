@@ -7,27 +7,24 @@
 <div class="clear-fix"></div>
 <div class="accord accord2">
 	<div class="pull-left col-md-12">
-		<!-- <h4 class="pull-left">Result</h4> -->
-		<!-- <a href="javascript:void(0);" ng-show="showAllmode" data-toggle="modal" data-target="#myModal" class="pull-right showallstyle">Show Entire Library</a> -->
+
 	</div>
 	<div class="clear-fix"></div>
 	<div class="panel panel-default tablecontrol">
 		<div>
 			<table class="searchtable" id="rateplanmapping-scroll">
 				<thead>
-					<tr>
-						<th>Use Case Category</th>
-						<th>Use Case Sub Category</th>
-						<th>Use Case#</th>
-						<th>Use Case</th>
-						<th>Use Case Rule #</th>
-						<th>Use Case Rule</th>
-						<th>Out of Box</th>
-						<!-- <th ng-hide="exported">Export<a href="javascript:void(0);"
-							class="exprticon" ng-click="exportFiles();"></th> -->
-						<th ng-hide="exported">Export<a href="javascript:void(0);"
+					<tr style="float: left; width: 100%;">
+						<th>Category</th>
+						<th>Sub Category</th>
+						<th>Use Case ID</th>
+						<th style="width: 15%;">Use Case Name</th>
+						<th style="width: 7%;">Rule ID</th>
+						<th>Rule Name</th>
+						<th style="width: 9%;">Out of Box</th>
+						<th ng-hide="exported" style="width: 7%;">Export<a href="javascript:void(0);"
 							class="exprticon" ng-click="exportFiles();"></th>
-						<th>Use Case Rule Description</th>
+						<th style="width: 16%;">Rule Description</th>
 					</tr>
 				</thead>
 
@@ -36,14 +33,14 @@
 						<td ng-model="datashown">{{result.Category}}</td>
 						<td>{{result.SubCategory}}</td>
 						<td>{{result.IdLabel}}</td>
-						<td><a class="dimensionTableBasic" href="javascript:void(0);"
+						<td style="width: 15%;"><a class="dimensionTableBasic" href="javascript:void(0);"
 							ng-click='dimensionRelationship(result)'>{{result.UseCase}}</a></td>
-						<td>{{result.RuleIdValue}}</a>
+						<td style="width: 7%;">{{result.RuleIdValue}}</a>
 						</td>
 						<td><a class="dimensionTableBasic" href="javascript:void(0);"
 							ng-click="getResult(result)"> {{result.Rule}}</a></td>
-						<td align="left" class="oobvalue">{{result.oob_flag}}</td>
-						<td align="left" ng-hide="exported">
+						<td style="width: 9%;" align="left" class="oobvalue">{{result.oob_flag}}</td>
+						<td style="width: 7%;" align="left" ng-hide="exported">
 							<div ng-show="result.exportYes">
 								<input id="{{result.packageSurrId}}" type="checkbox"
 									value="{{result.packageSurrId}}"
@@ -51,15 +48,7 @@
 									ng-click="toggleSelection(result)" />
 							</div>
 						</td>
-						<!-- <td align="center" ng-hide="exported">
-							<div ng-show="result.exportYes">
-								<input id="{{result.packageSurrId}}" type="checkbox"
-									value="{{result.packageSurrId}}"
-									ng-checked="selection.indexOf(result.packageSurrId) > -1"
-									ng-click="toggleSelection(result)" />
-							</div>
-						</td> -->
-						<td>
+						<td style="width: 16%;">
 						 <p read-more content="{{result.RuleDescription}}" ></p> 
 						</td>
 					</tr>
@@ -67,29 +56,7 @@
 			</table>
 		<div  ng-hide="showResult" align="center" class="nosearchFnaly">{{userMsg}}</div>
 </div>
-		<!-- <div ng-hide="showResult">
-			<table class="searchtable">
-				<thead>
-					<tr>
-						<th>Use Case Category</th>
-						<th>Use Case Sub Category</th>
-						<th>Use Case#</th>
-						<th>Use Case</th>
-						<th>Use Case Rule #</th>
-						<th>Use Case Rule</th>
-						<th>Out of Box</th>
-						<th ng-hide="exported">Export<a href="javascript:void(0);"
-							class="exprticon" ng-click="exportFiles();"></th>
-						<th>Use Case Rule Description</th>
-					</tr>
-				</thead>
-				<tbody>
-				<tr align="middle">
-					<td colspan="7">{{userMsg}}</td>
-				</tr>
-				</tbody>
-			</table>
-		</div> -->
+
 
 
 	</div>
@@ -120,8 +87,7 @@
 							</li>
 							<li class="tabshead"><a herf="" ng-class="licreaterulethd"
 								ng-click="lithd()"> Threat Model</a></li>
-							<!--   <li class="tabshead"><a herf="" ng-class="licreateruleresponse" ng-click="liresponse()">Response</a>
-                            </li> -->
+
 						</div>
 					</div>
 				</div>
@@ -169,11 +135,7 @@
 								<td>{{rule.Value}}</td>
 							</tr>
 
-							<!-- 	<tr ng-repeat="event in events">
-								<th class="tableheaderLeft">Event Attributes</th>
-								</td>
-								<td>{{event.key}}-{{event.value}}</td>
-							</tr> -->
+
 
 						</table>
 					</div>
@@ -215,18 +177,7 @@
 					<div class="clearfix"></div>
 				</div>
 
-				<!--          <div class="ruleinput" ng-show="ruleresponse">
-                    <div class="panel panel-default tablecontrol">
-                        <table class="table table-striped">
-                            <tr ng-repeat="rule in responseText">
-                                <th class="tableheaderLeft">{{rule.Label}}</th>
-                                </td>
-                                <td>{{rule.Value}}</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="clearfix"></div>
-                </div> -->
+
 			</div>
 		</div>
 	</div>
@@ -251,15 +202,11 @@
 							<td>
 								<li class="relaList">
 									<div id="regcatallinucresult" class="tooltiphov"></div>
-							</li> <!--  <td><li ng-repeat="rcata in dimensionregulatorycatagory" class="relaList"><a data-toggle="tooltip" data-placement="left" title="{{rcata.desc}}" tooltip-placement="left">{{rcata.name}},</a> -->
+							</li> 
 							</td>
 
 						</tr>
-						<!--<tr>
-					          <th class="tableheaderLeft">Threat category:</th>
-					            <td><li ng-repeat="tcatagory in dimensionthreatcategory" class="relaList"><a data-toggle="tooltip" data-placement="left" title="{{tcatagory.desc}}" tooltip-placement="left">{{tcatagory.name}}({{tcatagory.id}}),</a>
-                            </li></td>
-					        </tr>-->
+
 						<tr>
 							<th class="tableheaderLeft">Essential Practice:</th>
 							<td>

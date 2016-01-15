@@ -20,11 +20,7 @@
 							
 							</h4> -->
 							</div>
-							<div class="panelbottomborder">
-							<strong>Use Case/Rule ID/Name</strong>
-							<input type="text" class="inputforall" ng-model="seaValForEvery" type="text"
-								ng-keydown="$event.which === 13 && ClikedResult()">
-						</div>
+
 						<div id="collapseOne" class="panel-collapse collapse in">
 							<div class="panel-body">
 
@@ -33,7 +29,7 @@
 					<div class="tree well parenttreenone">
     <ul>
         <li>
-          <input type="checkbox" ng-click="caAll()" class="allclass">Select All<div class="collapall glyphicon glyphicon-resize-small forclearhover" style="float:right;padding:0px 6px"></div><div class="alltreeclear" ng-click="clear()" style="float:right;padding:0px 6px">clear</div>
+          <input type="checkbox" ng-click="caAll()" class="allclass">Select All Filters<div class="collapall glyphicon glyphicon-resize-small forclearhover" style="float:right;padding:0px 6px"></div><div class="alltreeclear" ng-click="clear()" style="float:right;padding:0px 6px">clear</div>
             <!-- cybersec -->
             <ul>
                 <li>
@@ -161,11 +157,12 @@
 </div>
 								<!-- /new tree -->
 				</div>
+
 				<div class="chkboxarea">
 					<!-- code for library customview -->
-					<input type="checkbox" name="oobv" class="outOBYes" checked ="checked" value="Yes" ng-click="oobvaluegoes($event)"> Out of Box Rules
+					<input type="checkbox" name="oobv" class="outOBYes bothoob" checked ="checked" value="Yes" ng-click="oobvaluegoes($event)"> Out of Box Rules
 					<br>
-					<input type="checkbox" name="oobv" class="outOBNo" checked ="checked" value="No" ng-click="oobvaluegoes($event)"> Custom Rules
+					<input type="checkbox" name="oobv" class="outOBNo bothoob" checked ="checked" value="No" ng-click="oobvaluegoes($event)"> Custom Rules
 					<!-- /code for library customview -->								
 								
 				</div>				
@@ -173,6 +170,12 @@
 								
 						
 						</div>
+<div class="panelbottomborder">
+                            <strong>Use case/Rule ID or Name</strong>
+                            <input class="inputforall ng-pristine ng-valid ng-touched" ng-model="seaValForEvery" ng-keydown="$event.which === 13 &amp;&amp; ClikedResult()" type="text">
+                        </div>
+
+                        
 					</div>
 								
 				</div>
