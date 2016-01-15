@@ -3,6 +3,6 @@ applications:
   memory: 1024M
   instances: 1
   domain: mybluemix.net
-  name: DEVUCL
-  host: devucl
+  name: UAT-UCL
+  host: uat-ucl
   disk_quota: 1024M
