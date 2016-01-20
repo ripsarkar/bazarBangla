@@ -176,7 +176,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     		    $scope.industryName="";
     		    $scope.contractId="";
     			//--------------clearing the fields---------------//
-    			alert("User account created successfully. User name/password sent to registered email");
+    			alert("User account created successfully, details sent to registered email");
     	 		}
     	 		else{
     	 		$rootScope.currentUserTab = 'html/viewuser.html';
