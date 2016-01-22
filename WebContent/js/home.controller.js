@@ -8,7 +8,12 @@ HomeController.$inject = ['UserService', '$rootScope', '$scope', '$http','$locat
 
 
 function HomeController(UserService,  $rootScope, $scope, $http,$location) {
-	
+		var usernameId;
+		angular.element(document).ready(function(){
+		usernameId = window.location.href;
+		});
+		var mj = usernameId.split("=");
+		alert(mj[1]);
 	console.log("dataloading value::"+$rootScope.dataLoading);
 	
     if($rootScope.dataLoading == undefined || $rootScope.dataLoading==false) {
