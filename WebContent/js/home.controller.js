@@ -13,7 +13,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		usernameId = window.location.href;
 		});
 		var mj = usernameId.split("=");
-		alert(mj[1]);
+		//alert(mj[1]);
 	console.log("dataloading value::"+$rootScope.dataLoading);
 	
     if($rootScope.dataLoading == undefined || $rootScope.dataLoading==false) {
@@ -21,7 +21,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		  $rootScope.loadinganimation = true;
 		  var loadUserdetails = {
  	                method: "GET",
- 	                url: $rootScope.url+"/getUserDetails",
+ 	                url: $rootScope.url+"/getUserDetails/"+mj[1]
  	            };
  	            $http(loadUserdetails).success(function(result) {
  	             $rootScope.dataLoading=true; 	            
