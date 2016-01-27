@@ -19,12 +19,10 @@
                 <ul class="mainlinks">
                     <li ng-show = "searchMenu"><a ui-sref=".search" ng-click="defaultmenu()" class="forallnotFedd searchlibrarymenuI activemainlinks"><span class="icon-search"></span>Search Library</a></li>
                     <li ng-show = "feedback"><a ng-click="feedbackmenu()" class="forallnotsear feedbackmenu"><span class="icon-usermanage"></span> Feedback </a></li>
+                    <!-- <li ng-show = "alertMenu"><a href="" ><span class="glyphicon glyphicon-bell" style="float:left;font-size:20px;padding-right:10px"></span><div style="float:left">Alert</div></a></li> -->
                     <li ng-show = "useCaseMaintain"><a class="forallnotsear forallnotFedd" ng-click="menuUseRule()" ><span class="glyphicon glyphicon-list-alt" style="float:left;font-size:20px;padding-right:5px"></span><div style="float:left">Use Case Maintenance</div></a> </li>
                     <li ng-show = "userAccountManagement"><a class="forallnotsear forallnotFedd" ui-sref=".uamanagement" ng-click="uamanagement();" ><span class="glyphicon glyphicon-user" style="float:left;font-size:20px;padding-right:5px"></span><div style="float:left">User Account Management</div></a></li>
-                    <!-- <li ng-show = "ucrlPackage"><a href="" ><span class="glyphicon glyphicon-folder-open" style="float:left;font-size:20px;padding-right:10px"></span><div style="float:left">UCSRL Package</div></a></li> -->
-                    <!-- <li ng-show = "alertMenu"><a href="" ><span class="glyphicon glyphicon-bell" style="float:left;font-size:20px;padding-right:10px"></span><div style="float:left">Alert</div></a></li> -->
-                     
-                    
+                    <li ng-show = "organization"><a ng-click="manageOrg()" class="forallnotsear"><span class="glyphicon glyphicon-gift" style="float:left;font-size:20px;padding-right:5px"></span><span>Manage org</span></a></li>
                 </ul>
                 </div>
 	            
@@ -65,6 +63,15 @@
 						</ul>
 					</div>
 	            </div>
+                <div ng-show="menu.organisation">
+                    <div class="sub_menu">
+                        <ul class="submainlinks">
+                            <li class="btn btn-sub-menu createusecase"> <a ui-sref=".organization" >Organisation Details</a></li>
+                            <li class="btn btn-sub-menu updateUsecase"> <a ui-sref=".subscription">Create Subscription/Contract </a></li>
+                            <li class="btn btn-sub-menu createrule"> <a ui-sref=".UpdateSubscription" >Update Subscription/Contract</a></li>
+                        </ul>
+                    </div>
+                </div>
         	</div>
             
             <script>

@@ -68,7 +68,12 @@
     	      url:"/viewfeedback",
               //controller:'viewfeedbackController',
               templateUrl: "html/viewfeedback.html"
-    	    });
+    	    })
+          .state("home.organization", {
+            url:"/organization",
+              //controller:'viewfeedbackController',
+              templateUrl: "html/organization.html"
+          });
     	    })
         .run(run);
 

@@ -13,7 +13,6 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		usernameId = window.location.href;
 		});
 		var mj = usernameId.split("=");
-		//alert(mj[1]);
 	console.log("dataloading value::"+$rootScope.dataLoading);
 	
     if($rootScope.dataLoading == undefined || $rootScope.dataLoading==false) {
@@ -199,6 +198,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		        $scope.searchMenu = true;
 		        $scope.feedback = true;
 		        $scope.showAllmode=true;
+		        $scope.organization=true;
 		        $rootScope.exported = false;
 		        $rootScope.searchOOBCri=true;
 		    }
@@ -209,6 +209,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=true;
 		        $scope.feedback = true;
+		        $scope.organization=true;
 		        $rootScope.searchOOBCri=true;
 		    }
 		    if ($rootScope.role == "USER_VIEW") {
@@ -217,6 +218,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		        $scope.feedback = true;
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=true;
+		        $scope.organization=true;
 		        $rootScope.searchOOBCri=true;
 		    }
 		    if ($rootScope.role == "USER_EXPORT") {
@@ -225,6 +227,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		        $rootScope.exported = false;
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=true;
+		        $scope.organization=true;
 		        $rootScope.searchOOBCri=true;
 		    }
 		});
@@ -321,11 +324,23 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
             usecase:false,
             rule:false,
             uaman:false,
+            organisation:false,
             menu:true
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
     };
-    
+    $scope.manageOrg = function(){
+        $scope.menu = {
+            usecaserule :false,
+            feedback : false,
+            usecase:false,
+            rule:false,
+            uaman:false,
+            organisation:true,
+            menu:true
+        };
+        angular.element("ul.submainlinks li").removeClass("subactive");
+    };
     $scope.uamanagement = function(){
     	$scope.menu = {
                 usecaserule :false,
@@ -333,6 +348,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
                 usecase:false,
                 rule:false,
                 uaman:true,
+                organisation:false,
                 menu:true
             };
     	angular.element("ul.submainlinks li").removeClass("subactive");
