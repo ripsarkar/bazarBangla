@@ -73,6 +73,11 @@
             url:"/organization",
               //controller:'viewfeedbackController',
               templateUrl: "html/organization.html"
+          })
+          .state("home.subscription", {
+            url:"/subscription",
+              //controller:'viewfeedbackController',
+              templateUrl: "html/subscription.html"
           });
     	    })
         .run(run);
