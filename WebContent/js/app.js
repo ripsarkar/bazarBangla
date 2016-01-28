@@ -5,7 +5,7 @@
         .module('app', ['ngCookies','ui.router','ui.bootstrap'])
         .config(function($stateProvider, $urlRouterProvider) {
     	  // For any unmatched url, redirect to /login
-    	  $urlRouterProvider.otherwise("/login");
+    	  $urlRouterProvider.otherwise("/home");
     	  // Now set up the states
     	  $stateProvider
     	    .state('home', {
