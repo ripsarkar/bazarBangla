@@ -1561,3 +1561,7 @@ span.more-text.show {
     max-height: 250px;
     color: rgb(136, 136, 136) !important;
 }
+ .btnBottom{
+  	margin-bottom:25px;
+   
+  }
