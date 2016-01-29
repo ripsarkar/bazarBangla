@@ -4,22 +4,53 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
         templateUrl:"html/templates/organization-template.html",
         link: function(scope, element, attr, mCtrl) {
 
-
+       $rootScope.loadinganimation=true; 
        $http.get("https://restcountries.eu/rest/v1/all")
       .success(function(data, status, config, headers){
                 scope.countryName = data;
-
+        $rootScope.loadinganimation=false; 
       })
       .error(function(){ //handler errors here
         alert("Server error");
+        $rootScope.loadinganimation=false; 
       });
 
-              // scope.countryName2 = MyAPIService.getData();
+          scope.$watch(function () {
+
+          organiseParam = {
+                "companyid": scope.organID,
+                "companyname": scope.organName,
+                "companyadd1": scope.compAdd1,
+                "companyadd2": scope.compAdd2,
+                "companyadd3": scope.compAdd3,
+                "companyadd_city": scope.city,
+                "companyadd_state": scope.state,
+                "companyadd_country": scope.country,
+                "companyadd_zip": scope.zip,
+                "companyadd_geocode": scope.geocode,
+                "company_industries" : [{"SurrId" : 4502},{"SurrId" : 4503}],
+                "user_surr_id" : $rootScope.surrId
+              }
+
+        });
+
 
             scope.sendOrganizationVal = function(){
-                alert("Server not found");
 
-            }
+             var callpost = {
+              method : "POST",
+              url: $rootScope.url + "/createNewCompany",
+              headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+              data: JSON.stringify(organiseParam)
+            };
+            $http(callpost).success(function(data){
+              alert("A request for Organisation sent");
+            }).error(function(error){
+              alert("Registering Organisation failure");
+            });
+          }
+
+
         }
     };
 }]);

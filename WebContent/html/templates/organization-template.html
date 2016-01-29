@@ -9,43 +9,43 @@
     <form role="form" class="">
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="org_id" class="form-group pull-right">Organization ID<span style="color:red">*</span></label></div>
-      <div class="col-md-6"><input type="text" class="form-control" id="org_id"></div>
+      <div class="col-md-6"><input type="text" ng-model="organID" class="form-control" id="org_id"></div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="org_name" class="form-group pull-right">Organization Name<span style="color:red">*</span></label></div>
-      <div class="col-md-6"><input type="text" class="form-control" id="org_name"></div>
+      <div class="col-md-6"><input type="text" ng-model="organName" class="form-control" id="org_name"></div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="address_1" class="form-group pull-right">Address 1<span style="color:red">*</span></label></div>
-      <div class="col-md-6"><input type="text" class="form-control" id="address_1"></div>
+      <div class="col-md-6"><input type="text" ng-model="compAdd1" class="form-control" id="address_1"></div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="address_2" class="form-group pull-right">Address 2</label></div>
-      <div class="col-md-6"><input type="text" class="form-control" id="address_2"></div>
+      <div class="col-md-6"><input type="text" ng-model="compAdd2" class="form-control" id="address_2"></div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="address_3" class="form-group pull-right">Address 3</label></div>
-      <div class="col-md-6"><input type="text" class="form-control" id="address_3"></div>
+      <div class="col-md-6"><input type="text" ng-model="compAdd3" class="form-control" id="address_3"></div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="city" class="form-group pull-right">City<span style="color:red">*</span></label></div>
-      <div class="col-md-6"><input type="text" class="form-control" id="city"></div>
+      <div class="col-md-6"><input type="text" ng-model="city" class="form-control" id="city"></div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="state" class="form-group pull-right">State/Province</label></div>
-      <div class="col-md-6"><input type="text" class="form-control" id="state"></div>
+      <div class="col-md-6"><input type="text" ng-model="state" class="form-control" id="state"></div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label class="form-group pull-right">Country<span style="color:red">*</span></label></div>
-      <div class="col-md-6"><select class="form-control"><!-- <option>{{countryName}}</option> --><option ng-repeat="countrylist in countryName">{{countrylist.name}}</option></select></div>
+      <div class="col-md-6"><select ng-model="country" class="form-control"><option ng-repeat="countrylist in countryName">{{countrylist.name}}</option></select></div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="zip" class="form-group pull-right">ZIP/PIN<span style="color:red">*</span></label></div>
-      <div class="col-md-6"><input type="text" class="form-control" id="zip"></div>
+      <div class="col-md-6"><input ng-model="zip" type="text" class="form-control" id="zip"></div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="geo_code" class="form-group pull-right">Geo Code</label></div>
-      <div class="col-md-6"><input type="text" class="form-control" id="geo_code"></div>
+      <div class="col-md-6"><input ng-model="geocode" type="text" class="form-control" id="geo_code"></div>
     </div>
     <div class="col-md-6 col-md-offset-4 submitButtonOrganization"><input type="button" class="btn btn-default pull-left" ng-click="sendOrganizationVal()" value="Submit"></div>
     </form>
