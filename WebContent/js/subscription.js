@@ -75,6 +75,13 @@ app.directive('subscription', ['apiforsubscription','$http','$rootScope', functi
            scope.maxUser="";
           }
 
+
+
+
+
+
+
+
         }
     };
 }]);

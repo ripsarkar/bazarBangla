@@ -8,13 +8,49 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
        $http.get("https://restcountries.eu/rest/v1/all")
       .success(function(data, status, config, headers){
                 scope.countryName = data;
-        $rootScope.loadinganimation=false; 
+        //$rootScope.loadinganimation=false; 
+              //industry
+    $http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
+            $rootScope.loadinganimation = false;
+            //$scope.EPdatas = data.EP;
+            scope.industrydatas = data.industry;
+
+    }).error(function(data, status, headers, config) {
+        $rootScope.loadinganimation = false;
+        alert('Sorry Application error in serverside');
+    });
       })
       .error(function(){ //handler errors here
         alert("Server error");
         $rootScope.loadinganimation=false; 
       });
 
+
+
+            
+            //industry
+            var Indtsyarray = [];
+            var Indtsy = {};
+            var inlastvalue;
+            scope.chckindustry = function(){
+            Indtsyarray = [];
+            
+            for (var i=0;i<scope.UsecaseIntry.length-1;i++){
+              if(scope.UsecaseIntry[i] == scope.UsecaseIntry[scope.UsecaseIntry.length-1]){
+                scope.UsecaseIntry.splice(-1);
+              }
+            }
+            for (var j=0;j<scope.UsecaseIntry.length;j++){
+
+              Indtsy = {};
+              Indtsy.SurrId = parseInt(scope.UsecaseIntry[j]);
+              Indtsyarray.push(Indtsy);
+            }
+            
+            
+
+          }
+    //
           scope.$watch(function () {
 
           organiseParam = {
@@ -28,14 +64,49 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
                 "companyadd_country": scope.country,
                 "companyadd_zip": scope.zip,
                 "companyadd_geocode": scope.geocode,
-                "company_industries" : [{"SurrId" : 4502},{"SurrId" : 4503}],
+                "company_industries" : Indtsyarray/*[{"SurrId" : 4502},{"SurrId" : 4503}]*/,
                 "user_surr_id" : $rootScope.surrId
               }
 
         });
+            
+
 
 
             scope.sendOrganizationVal = function(){
+
+
+
+      
+      if(scope.organID == ''){
+        alert('Please enter a valid Company Id');
+          return false;
+      }
+      else if(scope.organName == ''){
+        alert('Please enter a valid Company Name');
+          return false;
+      }
+      else if(scope.compAdd1 == ''){
+        alert('Please enter atleast one address');
+          return false;
+      }
+            else if(scope.city == ''){
+        alert('Please enter city');
+          return false;
+      }
+            else if(scope.country == ''){
+        alert('Please enter country');
+          return false;
+      }
+            else if(scope.zip == ''){
+        alert('Please enter zipcode');
+          return false;
+      }
+      else{
+
+
+
+
 
              var callpost = {
               method : "POST",
@@ -43,11 +114,29 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
               headers: { 'Content-Type': 'application/json; charset=UTF-8' },
               data: JSON.stringify(organiseParam)
             };
+                /*scope.organID="";
+                scope.organName="";
+                scope.compAdd1="";
+                scope.compAdd2="";
+                scope.compAdd3="";
+                scope.city="";
+                scope.state="";
+                scope.country="";
+                scope.zip="";
+                scope.geocode="";
+                Indtsyarray=[];
+                scope.UsecaseIntry=[];*/
             $http(callpost).success(function(data){
               alert("A request for Organisation sent");
             }).error(function(error){
               alert("Registering Organisation failure");
             });
+
+
+}
+
+
+
           }
 
 
