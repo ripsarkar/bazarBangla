@@ -62,12 +62,9 @@ app.directive('subscription', ['apiforsubscription','$http','$rootScope', functi
             $http(callpost).success(function(data){
               alert("A request for subscription sent");
             }).error(function(error){
-            	if(data.ErrMsg!=undefined){
-            		alert(error.ErrMsg);
-            	}else{
-            		alert("Subscription failure");
-            	}
-              
+            	alert("Subscription failure");
+            	alert(JSON.stringify(error));
+            	
             });
           }
 
