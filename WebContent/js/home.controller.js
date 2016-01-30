@@ -354,6 +354,8 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
     	angular.element("ul.submainlinks li").removeClass("subactive");
     }
     
+    
+    
     $scope.updateruleReload = function(){
         $rootScope.$emit("updateruleReset", {});
     };

@@ -5,7 +5,7 @@
         .module('app', ['ngCookies','ui.router','ui.bootstrap'])
         .config(function($stateProvider, $urlRouterProvider) {
     	  // For any unmatched url, redirect to /login
-    	  $urlRouterProvider.otherwise("/home");
+    	  $urlRouterProvider.otherwise("/login");
     	  // Now set up the states
     	  $stateProvider
     	    .state('home', {
@@ -61,26 +61,25 @@
     	    })
             .state("home.feedback", {
     	      url:"/feedback",
-              //controller:'feedbackController',
               templateUrl: "html/feedback.html"
     	    })
     	    .state("home.viewfeedback", {
     	      url:"/viewfeedback",
-              //controller:'viewfeedbackController',
               templateUrl: "html/viewfeedback.html"
     	    })
           .state("home.organization", {
             url:"/organization",
-              //controller:'viewfeedbackController',
               templateUrl: "html/organization.html"
           })
           .state("home.subscription", {
             url:"/subscription",
-              //controller:'viewfeedbackController',
               templateUrl: "html/subscription.html"
-          });
-    	    })
-        .run(run);
+          })
+          .state("home.updatesubscription", {
+    	      url:"/updatesubscription",
+              templateUrl: "html/viewsubscription.html"
+    	    });
+        }).run(run);
 
 
     
@@ -133,13 +132,9 @@
         $rootScope.url = 'http://devuclapi.mybluemix.net';
         
          
-  //    $location.path('/login');
+        //    $location.path('/login');
   	//  initController();
-  	 
-        
 
-   	 
-  	
     }
 
 })();
