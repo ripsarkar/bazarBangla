@@ -11,7 +11,6 @@
     	    .state('home', {
     	      url: "/home",
     	      templateUrl: "html/home.html",
-            //  controller: 'HomeController',
              autoActivateChild: 'home.search'
     	    })
     	     .state("home.search", {
@@ -43,9 +42,9 @@
                 templateUrl:"html/createrule.html"
             })
             .state("home.uamanagement", {
-    	      url:"/uamanagement",
-              templateUrl: "html/uamanagement.html",
-              controller:'uamanagement'
+            	url:"/uamanagement",
+            	templateUrl: "html/uamanagement.html",
+            	controller:'uamanagement'
     	    })
             .state("home.updateUsecase", {
     	      url:"/updateUsecase",
@@ -67,18 +66,22 @@
     	      url:"/viewfeedback",
               templateUrl: "html/viewfeedback.html"
     	    })
-          .state("home.organization", {
-            url:"/organization",
-              templateUrl: "html/organization.html"
-          })
-          .state("home.subscription", {
-            url:"/subscription",
-              templateUrl: "html/subscription.html"
-          })
-          .state("home.updatesubscription", {
-    	      url:"/updatesubscription",
-              templateUrl: "html/viewsubscription.html"
-    	    });
+			  .state("home.organization", {
+			url:"/organization",
+			  templateUrl: "html/organization.html"
+			  })
+			  .state("home.subscription", {
+			url:"/subscription",
+			  templateUrl: "html/subscription.html"
+			  })
+			  .state("home.updatesubscription", {
+			  url:"/updatesubscription",
+			  templateUrl: "html/viewsubscription.html"
+			})
+			.state("home.createrole", {
+			  url:"/createrole",
+			  templateUrl: "html/createrole.html"
+			});
         }).run(run);
 
 

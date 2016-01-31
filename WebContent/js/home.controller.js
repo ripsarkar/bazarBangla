@@ -1,10 +1,6 @@
 'use strict';
-//var app = angular.module('app', ["ui.bootstrap"]);
-//app.controller('HomeController', HomeController);
 var app = angular.module('app').controller('HomeController', HomeController);
-//var ucrsui = angular.module("app", ["ui.bootstrap"]).config();
 HomeController.$inject = ['UserService', '$rootScope', '$scope', '$http','$location'];
-//angular.module("app", ["ui.bootstrap"]).config();
 
 
 function HomeController(UserService,  $rootScope, $scope, $http,$location) {
@@ -199,6 +195,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		        $scope.feedback = true;
 		        $scope.showAllmode=true;
 		        $scope.organization=true;
+                $scope.rolemenu=true;
 		        $rootScope.exported = false;
 		        $rootScope.searchOOBCri=true;
 		    }
@@ -210,6 +207,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		        $scope.showAllmode=true;
 		        $scope.feedback = true;
 		        $scope.organization=true;
+                $scope.rolemenu=true;
 		        $rootScope.searchOOBCri=true;
 		    }
 		    if ($rootScope.role == "USER_VIEW") {
@@ -219,6 +217,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=true;
 		        $scope.organization=true;
+                $scope.rolemenu=true;
 		        $rootScope.searchOOBCri=true;
 		    }
 		    if ($rootScope.role == "USER_EXPORT") {
@@ -228,6 +227,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=true;
 		        $scope.organization=true;
+                $scope.rolemenu=true;
 		        $rootScope.searchOOBCri=true;
 		    }
 		});
@@ -298,6 +298,8 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
             usecase:false,
             rule:false,
             uaman:false,
+            organisation:false,
+            subrolemenu:false,
             menu:false
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
@@ -311,6 +313,8 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
             usecase:false,
             rule:false,
             uaman:false,
+            organisation:false,
+            subrolemenu:false,
             menu:true
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
@@ -325,6 +329,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
             rule:false,
             uaman:false,
             organisation:false,
+            subrolemenu:false,
             menu:true
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
@@ -337,6 +342,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
             rule:false,
             uaman:false,
             organisation:true,
+            subrolemenu:false,
             menu:true
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
@@ -349,10 +355,24 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
                 rule:false,
                 uaman:true,
                 organisation:false,
+                subrolemenu:false,
                 menu:true
             };
     	angular.element("ul.submainlinks li").removeClass("subactive");
-    }
+    };
+    $scope.roleMnu = function(){
+    	$scope.menu = {
+                usecaserule :false,
+                feedback : false,
+                usecase:false,
+                rule:false,
+                uaman:false,
+                organisation:false,
+                subrolemenu:true,
+                menu:true
+            };
+    	angular.element("ul.submainlinks li").removeClass("subactive");
+    };
     
     
     
