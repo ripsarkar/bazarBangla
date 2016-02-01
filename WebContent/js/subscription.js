@@ -1,46 +1,45 @@
-app.directive('subscription', ['apiforsubscription','$http','$rootScope', function(apiforsubscription,$http,$rootScope) {
-    return {
-        restrict: "E",
-        templateUrl:"html/templates/subscription-template.html",
-        link: function(scope, element, attr, mCtrl) {
-
-           scope.compList="";
-           scope.subID="";
-           scope.effecDate="";
-           scope.expDate="";
-           scope.maxUser="";
-
+app.directive("xyzcomp", function($http,$rootScope){
+  return {
+    restrict: "E",
+    scope:{
+      ngModel: "=",
+      dateOptions: "=",
+      opened: "=",
+    },
+    link: function($scope, element, attrs) {
+/////////////////////////////////////////////////////////
 
 
-            angular.element(document).ready(function () {
-                
-                angular.element('.effecDate').datepicker({
-                    format: "yyyy-mm-dd"
-                });  
-            
-            });
+
+           $scope.compList="";
+           $scope.subID="";
+           $scope.effecDate="";
+           $scope.expDate="";
+           $scope.maxUser="";
 
 
-        scope.$watch(function () {
 
-            var effectdate = scope.effecDate;
-            var enddate = scope.expDate;
+
+        $scope.$watch(function () {
+
+            var effectdate = $scope.effecDate;
+            var enddate = $scope.expDate;
             
             var startDate = new Date(effectdate);
             var endDate = new Date(enddate);
 
             if (startDate > endDate){
             alert("please enter a valid expiry date");
-            scope.expDate="";
+            $scope.expDate="";
             angular.element('#expDate').val("");
             }
 
           subscripParam = {
-           "CompanySurrId": parseInt(scope.compList),
-           "SubContractId": scope.subID,
-           "SubConFromDt": scope.effecDate,
-           "SubConToDt": scope.expDate,
-           "MaxActiveUser": parseInt(scope.maxUser)
+           "CompanySurrId": parseInt($scope.compList),
+           "SubContractId": $scope.subID,
+           "SubConFromDt": $scope.effecDate,
+           "SubConToDt": $scope.expDate,
+           "MaxActiveUser": parseInt($scope.maxUser)
           }
 
         });
@@ -49,7 +48,7 @@ app.directive('subscription', ['apiforsubscription','$http','$rootScope', functi
             $rootScope.loadinganimation=true;
             //calling getcompany
             $http.get($rootScope.url+'/getCompany').success(function(resultnamecr) {
-              scope.complist = resultnamecr.Company;
+              $scope.complist = resultnamecr.Company;
                //starting loading animation 
                $rootScope.loadinganimation=false; 
                 }).error(function(error) {
@@ -59,25 +58,25 @@ app.directive('subscription', ['apiforsubscription','$http','$rootScope', functi
             });
 
       //sending data
-      scope.ceateContact = function(){
+      $scope.ceateContact = function(){
       var numbercheck = /^[0-9]+$/;
-      if(scope.compList == ''){
+      if($scope.compList == ''){
         alert('Please enter a valid Organization Name');
           return false;
       }
-      else if(scope.subID == ''){
+      else if($scope.subID == ''){
         alert('Please enter a valid Subscription Id');
           return false;
       }
-      else if(scope.effecDate == ''){
+      else if($scope.effecDate == ''){
         alert('Please enter a valid Effective Date');
           return false;
       }
-            else if(scope.expDate == ''){
+            else if($scope.expDate == ''){
         alert('Please enter a valid Expiration Date');
           return false;
       }
-            else if(scope.maxUser == ''|| !numbercheck.test(scope.maxUser)){
+            else if($scope.maxUser == ''|| !numbercheck.test($scope.maxUser)){
         alert('Please enter valid maximum no of users');
           return false;
       }
@@ -96,14 +95,14 @@ app.directive('subscription', ['apiforsubscription','$http','$rootScope', functi
               $rootScope.loadinganimation=false;
             }).error(function(error){
               $rootScope.loadinganimation=false;
-            	if(error.ErrMsg !='undefined'){
-                	var str = error.ErrMsg;
-                	alert(str);
-            	}else{
-            		alert("Subscription failure");	
-            	}
-            	
-            	
+              if(error.ErrMsg !='undefined'){
+                  var str = error.ErrMsg;
+                  alert(str);
+              }else{
+                alert("Subscription failure");  
+              }
+              
+              
             });
 
         }
@@ -111,24 +110,45 @@ app.directive('subscription', ['apiforsubscription','$http','$rootScope', functi
     }
 
           //clearing the form
-          scope.clearVal = function(){
-           scope.compList="";
-           scope.subID="";
-           scope.effecDate="";
-           scope.expDate="";
-           scope.maxUser="";
+          $scope.clearVal = function(){
+           $scope.compList="";
+           $scope.subID="";
+           $scope.effecDate="";
+           $scope.expDate="";
+           $scope.maxUser="";
           }
 
 
-        }
-    };
-}]);
+////////////////////////////////////////////////////////////
+      $scope.open = function(event){
+        console.log("open");
+        event.preventDefault();
+        event.stopPropagation();
+        $scope.opened = true;
+      };
+      $scope.open2 = function(event){
+        console.log("open");
+        event.preventDefault();
+        event.stopPropagation();
+        $scope.opened2 = true;
+      };
+      $scope.clear = function () {
+        $scope.ngModel = null;
+      };
+    },
+    templateUrl: 'html/templates/subscription-template.html'
+  }
+})
 
-app.factory('apiforsubscription', function($http,$rootScope){
-  var apiurl, myData;
-  return {
-    getData: function(){
-
-    }
+.controller('myCtrl', function ($scope, $http) {
+  
+  $scope.formData      = {};
+  $scope.formData.date = "";
+  $scope.opened        = false;
+  
+  //Datepicker
+  $scope.dateOptions = {
+    'year-format': "'yy'",
+    'show-weeks' : false
   };
 });

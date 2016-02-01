@@ -1,6 +1,6 @@
 <div class="container">
         <div class="col-md-12 pull-left">
-        <h2 class="title-head">Create Subscription / Contract</h2>
+        <h2 class="title-head">Create Subscription</h2>
       </div>
       <div class="clear-fix"></div>
              <div class="col-md-12 pull-left"> <hr></div>
@@ -19,12 +19,29 @@
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="effecDate" class="form-group pull-right">Effective Date<span style="color:red">*</span></label></div>
-      <div class="col-md-6"><input  type="text" ng-model="effecDate" class="form-control effecDate" placeholder="click to Enter Effective Date" id="effecDate">
+      <div class="col-md-6">
+<p class="input-group">
+<input type="text" class="form-control effecDate" placeholder="Please Enter Effective Date" id="effecDate" datepicker-popup="" ng-model="effecDate" is-open="opened"  datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+</p>
+
+
       </div>
     </div>
+
+    
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="expDate" class="form-group pull-right">Expiration Date<span style="color:red">*</span></label></div>
-      <div class="col-md-6"><input type="text" ng-model="expDate" class="form-control effecDate" placeholder="click to Enter Expiration Date" id="expDate"></div>
+      <div class="col-md-6">
+            <p class="input-group">
+              <input type="text" class="form-control effecDate" placeholder="Please Enter Expiration Date"  datepicker-popup="" ng-model="expDate" is-open="opened2"  datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="open2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+      </div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="mau" class="form-group pull-right">Maximum Active Users<span style="color:red">*</span></label></div>
@@ -37,24 +54,3 @@
      </form>
   </div>
 </div>
-<!-- <div class="createnewpage pagebg" ng-controller="subcripcrip">
-
-            <table class="table table-striped searchtablerow fixed-header">
-
-                    <tr ng-repeat="pkgdata in rulesPckg | startFrom:currentPage*pageSize | limitTo:pageSize">
-
-                        <td><a href="javascript:void(0);" ng-click="open();feedbackForm(pkgdata.ruleid, pkgdata.ruleid_label, pkgdata.rulename, $index)" data-toggle="modal" data-target="#myModal" class="pull-right"><span class="icon-feedback"></span></a>
-                        </td>
-                    </tr>
-            </table>
-
-    <script type="text/ng-template" id="myModalContent.html">
-
-
-                    <input type="text" class="form-control" required ng-change="onchangeStartDate()"  datepicker-popup="yyyy-MM-dd" ng-model="startdt" datepicker-options="dateOptions" is-open="opened" />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-
-    </script>
-</div> -->
