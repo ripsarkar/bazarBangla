@@ -1,4 +1,5 @@
 /*-------------ripunjoy css-------------*/
+
 .inputforall{
 	width:100%;
 }
@@ -1565,3 +1566,15 @@ span.more-text.show {
   	margin-bottom:25px;
    margin-left:60px;
   }
+/*---------------organization page----------------*/
+.buttonOrg{
+    margin-left:4px; 
+    float:left;
+}
+.clearOrg{
+    float: left; 
+    margin-top: 0; 
+    margin-left: 15px; 
+    width: auto;
+}
+/*-------------------------------*/

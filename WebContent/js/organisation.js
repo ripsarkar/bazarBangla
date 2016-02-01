@@ -4,6 +4,19 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
         templateUrl:"html/templates/organization-template.html",
         link: function(scope, element, attr, mCtrl) {
 
+                scope.organID="";
+                scope.organName="";
+                scope.compAdd1="";
+                scope.compAdd2="";
+                scope.compAdd3="";
+                scope.city="";
+                scope.state="";
+                scope.country="";
+                scope.zip="";
+                scope.geocode="";
+                Indtsyarray=[];
+                scope.UsecaseIntry=[];
+
        $rootScope.loadinganimation=true; 
        $http.get("https://restcountries.eu/rest/v1/all")
       .success(function(data, status, config, headers){
@@ -73,9 +86,7 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
 
 
 
-            scope.sendOrganizationVal = function(){
-
-
+      scope.sendOrganizationVal = function(){
 
       
       if(scope.organID == ''){
@@ -104,17 +115,27 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
       }
       else{
 
-
-
-
-
              var callpost = {
               method : "POST",
               url: $rootScope.url + "/createNewCompany",
               headers: { 'Content-Type': 'application/json; charset=UTF-8' },
               data: JSON.stringify(organiseParam)
             };
-                /*scope.organID="";
+
+            $http(callpost).success(function(data){
+              alert("A request for Organisation sent");
+            }).error(function(error){
+              alert("Registering Organisation failure");
+            });
+
+            }
+
+
+
+          }
+
+            scope.clearValOrganization = function(){
+                scope.organID="";
                 scope.organName="";
                 scope.compAdd1="";
                 scope.compAdd2="";
@@ -125,19 +146,8 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
                 scope.zip="";
                 scope.geocode="";
                 Indtsyarray=[];
-                scope.UsecaseIntry=[];*/
-            $http(callpost).success(function(data){
-              alert("A request for Organisation sent");
-            }).error(function(error){
-              alert("Registering Organisation failure");
-            });
-
-
-}
-
-
-
-          }
+                scope.UsecaseIntry=[];
+            }
 
 
         }
