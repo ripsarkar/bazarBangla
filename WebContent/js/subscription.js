@@ -3,6 +3,15 @@ app.directive('subscription', ['apiforsubscription','$http','$rootScope', functi
         restrict: "E",
         templateUrl:"html/templates/subscription-template.html",
         link: function(scope, element, attr, mCtrl) {
+
+           scope.compList="";
+           scope.subID="";
+           scope.effecDate="";
+           scope.expDate="";
+           scope.maxUser="";
+
+
+
             angular.element(document).ready(function () {
                 
                 angular.element('.effecDate').datepicker({
@@ -12,8 +21,6 @@ app.directive('subscription', ['apiforsubscription','$http','$rootScope', functi
             });
 
 
-
-        var compSurrid;
         scope.$watch(function () {
 
             var effectdate = scope.effecDate;
@@ -29,11 +36,11 @@ app.directive('subscription', ['apiforsubscription','$http','$rootScope', functi
             }
 
           subscripParam = {
-           "CompanySurrId": scope.compList,
+           "CompanySurrId": parseInt(scope.compList),
            "SubContractId": scope.subID,
            "SubConFromDt": scope.effecDate,
            "SubConToDt": scope.expDate,
-           "MaxActiveUser": scope.maxUser
+           "MaxActiveUser": parseInt(scope.maxUser)
           }
 
         });
@@ -51,8 +58,33 @@ app.directive('subscription', ['apiforsubscription','$http','$rootScope', functi
                   $rootScope.loadinganimation=false;
             });
 
-          //sending data
-          scope.ceateContact = function(){
+      //sending data
+      scope.ceateContact = function(){
+      var numbercheck = /^[0-9]+$/;
+      if(scope.compList == ''){
+        alert('Please enter a valid Organization Name');
+          return false;
+      }
+      else if(scope.subID == ''){
+        alert('Please enter a valid Subscription Id');
+          return false;
+      }
+      else if(scope.effecDate == ''){
+        alert('Please enter a valid Effective Date');
+          return false;
+      }
+            else if(scope.expDate == ''){
+        alert('Please enter a valid Expiration Date');
+          return false;
+      }
+            else if(scope.maxUser == ''|| !numbercheck.test(scope.maxUser)){
+        alert('Please enter valid maximum no of users');
+          return false;
+      }
+
+      else{
+        $rootScope.loadinganimation=true;
+
              var callpost = {
               method : "POST",
               url: $rootScope.url + "/createSubscription",
@@ -61,7 +93,9 @@ app.directive('subscription', ['apiforsubscription','$http','$rootScope', functi
             };
             $http(callpost).success(function(data){
               alert("A request for subscription sent");
+              $rootScope.loadinganimation=false;
             }).error(function(error){
+              $rootScope.loadinganimation=false;
             	if(error.ErrMsg !='undefined'){
                 	var str = error.ErrMsg;
                 	alert(str);
@@ -71,7 +105,10 @@ app.directive('subscription', ['apiforsubscription','$http','$rootScope', functi
             	
             	
             });
-          }
+
+        }
+
+    }
 
           //clearing the form
           scope.clearVal = function(){
@@ -81,12 +118,6 @@ app.directive('subscription', ['apiforsubscription','$http','$rootScope', functi
            scope.expDate="";
            scope.maxUser="";
           }
-
-
-
-
-
-
 
 
         }
