@@ -123,28 +123,36 @@ app.controller("feedbackController", ["$scope", "$rootScope", "$state", '$http',
 ]);
 
 app.service('feedback_model', ['$http', '$rootScope', function($http, $rootScope) {
-           var fbchk = this;
-           var fbModal_data = null;
-           var vsp_data =  null;
-           
-           fbchk.getfbModal_data = function() {
-               return fbModal_data;
-           };
+    var fbchk = this;
+    var fbModal_data = null;
+    var vsp_data =  null;
+    var roleselected_data = null;
+    fbchk.getfbModal_data = function() {
+        return fbModal_data;
+    };
 
-           fbchk.setfbModal_data = function(data) {
-               fbModal_data = data;
-           };
-           
-           fbchk.getvsp_data = function() {
-               return vsp_data;
-           };
+    fbchk.setfbModal_data = function(data) {
+        fbModal_data = data;
+    };
+    
+    fbchk.getvsp_data = function() {
+        return vsp_data;
+    };
 
-           fbchk.setvsp_data = function(data) {
-               vsp_data = data;
-           };
+    fbchk.setvsp_data = function(data) {
+        vsp_data = data;
+    };
 
-       }
-   ]);
+    fbchk.getroleselected_data = function() {
+        return roleselected_data;
+    };
+
+    fbchk.setroleselected_data = function(data) {
+        roleselected_data = data;
+    };
+
+}
+]);
 
 app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '$state', '$http', 'feedback_model', '$filter',
     function($scope, $modalInstance, $rootScope, $state, $http, feedback_model, $filter) {

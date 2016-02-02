@@ -1,0 +1,110 @@
+<div class="createnewpage pagebg" ng-controller="updaterole">
+    <div class="container">
+        <div class="row">
+            <div class="createnew-head" style="padding:0px;">
+                <div class="col-md-4 col-sm-4">
+                    <h2 class="title-head"> Update Role </h2>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                </div>
+            </div>
+        </div>
+        <hr style="margin-top:0px">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div>
+                    <span class="title-head"> Organization : </span> <!--ng-init="orgName = vspselPckg.id"-->
+                    <select ng-model="orgName" style="height: 30px; width: 300px; margin-top: 20px;" style="height: 30px; width: 300px; margin-top: 20px;" ng-options="vspselPckg.id as vspselPckg.name for vspselPckg in vspselPckgs | orderBy:'name'" ng-selected="{{vspselPckg.id == orgName}}">
+                    </select>
+                    <button class="btn btn-primary" ng-click="orgcmpname()">Search</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row" style="margin:0px;">
+            <table class="table table-striped searchtablerow fixed-header" style="max-height: 350px; overflow-y: auto;">
+                <thead>
+                    <tr class="tableheader">
+                        <th >Role Id</th>
+                        <th >Role Name</th>
+                        <th >Role Description</th>
+                        <th align="right" style="width:120px;">Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-show="rolePckg.length>0" ng-repeat="viewrole in rolePckg | startFrom:currentPage*pageSize | limitTo:pageSize">
+                        <td align="left">{{viewrole.role_id}}</td>
+                        <td align="left">{{viewrole.role_name}}</td>
+                        <td align="left">{{viewrole.role_desc}}</td>
+                        <td align="left"><a href="javascript:void(0);" ng-click="open();updateroleForm(viewrole.role_surr_id, viewrole.role_id, viewrole.role_name, viewrole.role_desc, $index)" data-toggle="modal" data-target="#myModal"><span class="icon-feedback"></span></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container">
+        <div class="pull-right" style="margin: 20px 0px;">
+            <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous</button>
+            {{currentPage+1}}/{{numberOfPages()}}
+            <button ng-disabled="currentPage >= vspPckg.length/pageSize - 1" ng-click="currentPage=currentPage+1">Next</button>
+        </div>
+    </div>
+<script type="text/ng-template" id="updaterolepop.html">
+
+        <div class="modal-header" style="background:#008CCE">
+            <button type="button" class="close" ng-click="cancel()">&times;</button>
+            <h4 class="modal-title model_tit"><span class="title-head" style="color:#fff;">Update Role</span></h4>
+        </div>
+        <div class="modal-body">
+        <form name="roleuptFrm" ng-submit="updatarolesubmit(roleuptFrm.id)" novalidate autocomplete="off" role="form" style="margin: 10px 35px;">
+        <div class="row form-group">
+            <div class="col-md-5">
+                <label> Role Id <span class="red">*</span></label>
+            </div>
+            <div class="col-md-7">
+                <input type="text" class="form-control" maxlength="50" ng-model="roleuptFrm.roleId">
+            </div>
+        </div>
+        
+        <div class="row form-group">
+            <div class="col-md-5">
+                <label>Role Name<span class="red">*</span></label>
+            </div>
+            <div class="col-md-7">
+                <input type="text" class="form-control" maxlength="50" ng-model="roleuptFrm.rolename">
+            </div>
+        </div>
+        
+        <div class="row form-group">
+            <div class="col-md-5">
+                <label> Role Description </label>
+            </div>
+            <div class="col-md-7">
+                <input type="text" class="form-control" maxlength="50" ng-model="roleuptFrm.role_desc">
+            </div>
+        </div>
+    </form>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-click="updatarolesubmit(roleuptFrm.id)">Submit</button>
+    <button type="button" class="btn btn-default" ng-click="cancel();reSet();">Cancel</button>
+    </div>
+
+    </script>
+</div>
+
+<style>
+    .full button span {
+        background-color: limegreen;
+        border-radius: 32px;
+        color: black;
+    }
+    
+    .partially button span {
+        background-color: orange;
+        border-radius: 32px;
+        color: black;
+    }
+</style>

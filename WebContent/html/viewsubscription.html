@@ -16,7 +16,7 @@
             <div class="col-md-6 col-sm-6">
                 <div>
                     <span class="title-head"> Organization : </span> 
-                    <select ng-model="orgName" ng-init="vspselPckg[0].id = orgName" style="height: 30px; width: 300px; margin-top: 20px;" style="height: 30px; width: 300px; margin-top: 20px;" ng-options="vspselPckg.id as vspselPckg.name for vspselPckg in vspselPckgs | orderBy:'name'">
+                    <select ng-model="orgName" ng-selected="{{vspselPckg.id == orgName}}" style="height: 30px; width: 300px; margin-top: 20px;" style="height: 30px; width: 300px; margin-top: 20px;" ng-options="vspselPckg.id as vspselPckg.name for vspselPckg in vspselPckgs | orderBy:'name'">
                     </select>
                     <button class="btn btn-primary" ng-click="orgcmpname()">Search</button>
                 </div>

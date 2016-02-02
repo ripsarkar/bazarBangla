@@ -74,7 +74,7 @@ app.controller("updatesubscription", ["$scope", "$rootScope", "$state", '$http',
             var URLviewpage = $rootScope.url+'/getCompany';
             $http.get(URLviewpage).success(function(data, status, headers, config) {
                 $scope.vspselPckgs = data.Company;
-                $scope.orgName = data.Company[0].id;
+                $scope.orgName = parseInt($scope.cmpyId);
                 $scope.pageLoad();
             }).error(function(data, status, headers, config) {
                 $rootScope.dataLoading=true;
@@ -162,7 +162,6 @@ app.controller('subscptpop', ['$scope', '$modalInstance', '$rootScope', '$state'
         };
 
         $scope.subscptForm = function(data) {
-            
             if (data.id != null && typeof data.id != 'undefined') {
                 $rootScope.loadinganimation = false;
                 $scope.subspcrtFrm.supsctpId = data.subsctpId;
@@ -170,7 +169,6 @@ app.controller('subscptpop', ['$scope', '$modalInstance', '$rootScope', '$state'
                 $scope.updatedt = data.expirationdate;
                 $scope.subspcrtFrm.maximumAcc = data.maxusers;
                 $scope.subspcrtFrm.subscprtsurrId = data.id;
-                
             } else {
                 
             }
@@ -223,9 +221,7 @@ app.controller('subscptpop', ['$scope', '$modalInstance', '$rootScope', '$state'
                     "effectiveDate": $scope.startdt,
                     "expirationdate": $scope.updatedt,
                     "maxUser": $scope.subspcrtFrm.maximumAcc
-                }
-                
-                
+                };
                 $http.post($rootScope.url + '/updateSubscription/', $scope.PostJson_updtscrtp).success(function(data, status, headers, config) {
                     $scope.cancel();
                     $scope.subspcrtFrm.subscprtsurrId ="";
@@ -247,12 +243,10 @@ app.controller('subscptpop', ['$scope', '$modalInstance', '$rootScope', '$state'
                     alert(data.ErrMsg);
                 });
                 }else{
-                	
                 	alert('Please fill all * mandatory fields');
                 }
             }
-
-        }
+        };
         
     }
 ]);
