@@ -60,7 +60,7 @@ app.controller("updaterole", ["$scope", "$rootScope", "$state", '$http', '$modal
      $scope.pgnation = function() {
          if (typeof $scope.rolePckg != 'undefined' && $scope.rolePckg.length > 0 && $scope.rolePckg != null) {
              $scope.numberOfPages = function() {
-                 //console.clear();
+                 console.clear();
                  if($scope.rolePckg != null){
                  return Math.ceil($scope.rolePckg.length / $scope.pageSize);
                  }else{
@@ -242,7 +242,7 @@ app.controller('updaterolepop', ['$scope', '$modalInstance', '$rootScope', '$sta
 app.filter('startFrom', function() {
  return function(input, start) {
      start = +start;
-     //console.clear();
+     console.clear();
      if (typeof input != 'undefined') {
          return input.slice(start);
      }
