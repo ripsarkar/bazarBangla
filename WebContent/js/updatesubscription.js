@@ -200,7 +200,7 @@ app.controller('subscptpop', ['$scope', '$modalInstance', '$rootScope', '$state'
                     if($scope.subspcrtFrm.impupdate < $scope.subspcrtFrm.impstrtdate){
                         alert("Update date time should be greater then start date time");
                     }else if($scope.subspcrtFrm.Implper == undefined || $scope.subspcrtFrm.Implper == ''){
-                        alert("Please provide implementation percentage");
+                        alert("Please provide valid date");
                     }else if($scope.updatedt == undefined || $scope.updatedt == ''){
                         alert('Please provide valid update date');
                     }else if($scope.startdt == undefined || $scope.startdt == ''){
@@ -216,6 +216,7 @@ app.controller('subscptpop', ['$scope', '$modalInstance', '$rootScope', '$state'
             
             if ($scope.validation) {
                 $scope.validation = false;
+                if($scope.subspcrtFrm.maximumAcc !="" && $scope.subspcrtFrm.maximumAcc !="" &&typeof $scope.subspcrtFrm.maximumAcc !='undefined' && $scope.updatedt !="" && $scope.updatedt !=null && typeof $scope.updatedt != 'undefined' ){
                 $scope.PostJson_updtscrtp = {
                     "subscprtsurrId": $scope.subspcrtFrm.subscprtsurrId,
                     "contractId": $scope.subspcrtFrm.supsctpId,
@@ -226,13 +227,13 @@ app.controller('subscptpop', ['$scope', '$modalInstance', '$rootScope', '$state'
                 
                 
                 $http.post($rootScope.url + '/updateSubscription/', $scope.PostJson_updtscrtp).success(function(data, status, headers, config) {
-                    $rootScope.loadinganimation = false;
                     $scope.cancel();
                     $scope.subspcrtFrm.subscprtsurrId ="";
                     $scope.subspcrtFrm.supsctpId ="";
                     $scope.startdt = "";
                     $scope.updatedt ="";
                     $scope.subspcrtFrm.maximumAcc = "";
+                    $rootScope.loadinganimation = false;
                     alert("Update Subscription saved successfully");
                     $rootScope.dataUpdated = true;
                 }).error(function(data, status, headers, config) {
@@ -242,9 +243,13 @@ app.controller('subscptpop', ['$scope', '$modalInstance', '$rootScope', '$state'
                     $scope.startdt = "";
                     $scope.updatedt ="";
                     $scope.subspcrtFrm.maximumAcc = "";
+                    $rootScope.loadinganimation = false;
                     alert(data.ErrMsg);
                 });
-
+                }else{
+                	
+                	alert('Please fill all * mandatory fields');
+                }
             }
 
         }
