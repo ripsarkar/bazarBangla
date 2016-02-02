@@ -21,7 +21,7 @@
       <div class="col-md-4"><label for="effecDate" class="form-group pull-right">Effective Date<span style="color:red">*</span></label></div>
       <div class="col-md-6">
 <p class="input-group">
-<input type="text" class="form-control effecDate" placeholder="Please Enter Effective Date" id="effecDate" datepicker-popup="" ng-model="effecDate" is-open="opened"  datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+<input type="text" class="form-control effecDate" placeholder="Please Enter Effective Date" id="effecDate" datepicker-popup="" ng-model="effecDate" is-open="opened"  datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-change="hititOnChange()" />
               <span class="input-group-btn">
                 <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
@@ -36,7 +36,7 @@
       <div class="col-md-4"><label for="expDate" class="form-group pull-right">Expiration Date<span style="color:red">*</span></label></div>
       <div class="col-md-6">
             <p class="input-group">
-              <input type="text" class="form-control effecDate" placeholder="Please Enter Expiration Date"  datepicker-popup="" ng-model="expDate" is-open="opened2"  datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <input type="text" class="form-control effecDate expDate" placeholder="Please Enter Expiration Date"  datepicker-popup="" ng-model="expDate" is-open="opened2"  datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
               <span class="input-group-btn">
                 <button class="btn btn-default" ng-click="open2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>

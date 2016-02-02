@@ -16,8 +16,8 @@ app.directive("xyzcomp", function($http,$rootScope){
            $scope.effecDate="";
            $scope.expDate="";
            $scope.maxUser="";
-
-
+           var constartdate = "";
+           var expiDate = "";
 
 
         $scope.$watch(function () {
@@ -29,16 +29,22 @@ app.directive("xyzcomp", function($http,$rootScope){
             var endDate = new Date(enddate);
 
             if (startDate > endDate){
-            alert("please enter a valid expiry date");
+            alert("Expiry date should be greater than Effective date");
             $scope.expDate="";
             angular.element('#expDate').val("");
             }
 
+
+
+            //asign exp date
+            expiDate = angular.element(".expDate").val();
+
+            // Subscription create api data
           subscripParam = {
            "CompanySurrId": parseInt($scope.compList),
            "SubContractId": $scope.subID,
-           "SubConFromDt": $scope.effecDate,
-           "SubConToDt": $scope.expDate,
+           "SubConFromDt": constartdate,
+           "SubConToDt": expiDate,
            "MaxActiveUser": parseInt($scope.maxUser)
           }
 
@@ -69,7 +75,7 @@ app.directive("xyzcomp", function($http,$rootScope){
           return false;
       }
       else if($scope.effecDate == ''){
-        alert('Please enter a valid Effective Date');
+        alert('Please enter a valid Effective Date which is not less than current date');
           return false;
       }
             else if($scope.expDate == ''){
@@ -91,7 +97,7 @@ app.directive("xyzcomp", function($http,$rootScope){
               data: JSON.stringify(subscripParam)
             };
             $http(callpost).success(function(data){
-              alert("A request for subscription sent");
+              alert("Subcription created successfully");
               $rootScope.loadinganimation=false;
             }).error(function(error){
               $rootScope.loadinganimation=false;
@@ -118,13 +124,50 @@ app.directive("xyzcomp", function($http,$rootScope){
            $scope.maxUser="";
           }
 
+            //comparing curretn and effective date
+          $scope.hititOnChange =function(){
+
+            //comparing curretn and effective date
+            var currentDate = new Date();
+            var day = currentDate.getDate();
+            var month = currentDate.getMonth() + 1;
+            var year = currentDate.getFullYear();
+
+            var effectiDate = angular.element(".effecDate").val();
+            var splitDate = effectiDate.split("-");
+            var effectiYear = splitDate[0];
+            var effectiMonth = splitDate[1];
+            var effectiDate = splitDate[2];
+
+            if(effectiYear<year){
+              alert("Effective Date cannot be lesser than current date");
+              angular.element(".effecDate").val("");
+              $scope.effecDate = "";
+            }
+            else if(effectiMonth<month){
+              alert("Effective Date cannot be lesser than current date");
+              angular.element(".effecDate").val("");
+              $scope.effecDate = "";
+            }
+            else if(effectiDate<day){
+              alert("Effective Date cannot be lesser than current date");
+              angular.element(".effecDate").val("");
+              $scope.effecDate = "";
+            }
+            else{
+              //assign effective date
+              constartdate = angular.element(".effecDate").val();
+            }
+          }
 
 ////////////////////////////////////////////////////////////
       $scope.open = function(event){
+
         console.log("open");
         event.preventDefault();
         event.stopPropagation();
         $scope.opened = true;
+
       };
       $scope.open2 = function(event){
         console.log("open");
