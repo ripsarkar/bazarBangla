@@ -1,0 +1,134 @@
+<div class="createnewpage pagebg" ng-controller="updateOrgani">
+	
+	<div class="row zeroSpace">
+		<div class="createnew-head">
+			<div class="col-md-6 col-sm-6">
+				<h2 class="title-head">Update Organization</h2>
+			</div>
+			<div class="col-md-12" style="margin: 10px 0px 20px;">
+				<hr>
+			</div>
+		</div>
+	</div>
+	<div class="createnew-head">
+		<div class="panel panel-default tablecontrol">
+			<div class="searchtableUser uamtable">
+				<table class="table table-striped searchtablerow" fixed-header>
+					<tr class="tableheader">
+						<th>Org. Id</th>
+						<th>Org. Name</th>
+						<th>City</th>
+						<th>State</th>
+						<th>Country</th>
+						<th>Edit</th>
+					</tr>
+					<tr ng-repeat="orglist in organiUpdatetable" class="usecaseTable">
+						<td>{{orglist.company_id_}}</td>
+						<td>{{orglist.company_name}}</td>
+						<td>{{orglist.company_city}}</td>
+						<td>{{orglist.company_state}}</td>
+						<td>{{orglist.company_country}}</td>
+						<td><span class="icon-feedback"  data-toggle="modal" data-target="#myModalUpdateOrgani" ng-click="openUpdatePage(orglist.company_surr_id)"></span></a></td>
+					</tr>						
+				</table>
+			</div>
+		</div>
+	</div>
+
+<!-- -->
+<div id="myModalUpdateOrgani" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 70%;">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Update Organisation</h4>
+      </div>
+      <div class="modal-body">
+
+<div  style="background-color:#fff;width:100%;float:left">
+
+      <div class="clear-fix"></div>
+
+  <div  class="col-md-12 text-center">
+    <form role="form" class="">
+    <div class="form-group col-md-12">
+      <div class="col-md-4"><label for="org_id" class="form-group pull-right">Organization ID<span style="color:red">*</span></label></div>
+      <div class="col-md-6"><input type="text" ng-model="organID" class="form-control" id="org_id" ng-disabled="true"></div>
+    </div>
+    <div class="form-group col-md-12">
+      <div class="col-md-4"><label for="org_name" class="form-group pull-right">Organization Name<span style="color:red">*</span></label></div>
+      <div class="col-md-6"><input type="text" ng-model="organName" class="form-control" id="org_name" ng-disabled="true"></div>
+    </div>
+    <div class="form-group col-md-12">
+      <div class="col-md-4"><label for="address_1" class="form-group pull-right">Address 1<span style="color:red">*</span></label></div>
+      <div class="col-md-6"><input type="text" ng-model="compAdd1" class="form-control" id="address_1" ng-disabled="true"></div>
+    </div>
+    <div class="form-group col-md-12">
+      <div class="col-md-4"><label for="address_2" class="form-group pull-right">Address 2</label></div>
+      <div class="col-md-6"><input type="text" ng-model="compAdd2" class="form-control" id="address_2" ng-disabled="true"></div>
+    </div>
+    <div class="form-group col-md-12">
+      <div class="col-md-4"><label for="address_3" class="form-group pull-right">Address 3</label></div>
+      <div class="col-md-6"><input type="text" ng-model="compAdd3" class="form-control" id="address_3" ng-disabled="true"></div>
+    </div>
+    <div class="form-group col-md-12">
+      <div class="col-md-4"><label for="city" class="form-group pull-right">City<span style="color:red">*</span></label></div>
+      <div class="col-md-6"><input type="text" ng-model="city" class="form-control" id="city" ng-disabled="true"></div>
+    </div>
+    <div class="form-group col-md-12">
+      <div class="col-md-4"><label for="state" class="form-group pull-right">State/Province</label></div>
+      <div class="col-md-6"><input type="text" ng-model="state" class="form-control" id="state" ng-disabled="true"></div>
+    </div>
+    <div class="form-group col-md-12">
+      <div class="col-md-4"><label class="form-group pull-right">Country<span style="color:red">*</span></label></div>
+      <div class="col-md-6"><select ng-model="country" class="form-control" ng-disabled="true"><option ng-repeat="countrylist in countryName">{{countrylist.name}}</option></select></div>
+    </div>
+    <div class="form-group col-md-12">
+      <div class="col-md-4"><label for="zip" class="form-group pull-right">ZIP/PIN<span style="color:red">*</span></label></div>
+      <div class="col-md-6"><input ng-model="zip" type="text" class="form-control" id="zip" ng-disabled="true"></div>
+    </div>
+    <div class="form-group col-md-12">
+      <div class="col-md-4"><label for="geo_code" class="form-group pull-right">Geo Code</label></div>
+      <div class="col-md-6"><input ng-model="geocode" type="text" class="form-control" id="geo_code" ng-disabled="true"></div>
+    </div>
+                            <div class="form-group col-md-12">
+                                 <div class="col-md-4">
+                                        <label class="form-group pull-right">Industry</label>
+                                </div>
+                                <div class="col-md-6">
+                                        <select multiple class="form-control" required ng-model="UsecaseIntry" ng-change="chckindustry()" ng-disabled="true">
+                                            <option ng-repeat="industrydata in industrydatas" value="{{industrydata.SurrId}}">
+                                                {{industrydata.Name}}
+                                            </option>
+                                        </select>
+                                </div>
+                            </div>
+    	<div class="col-md-6 col-md-offset-4 pull-left">
+  		  <input type="button" class="btn btn-primary btnBottom buttonOrg" ng-click="sendOrganizationVal()" value="Submit" ng-disabled="true">
+            <input type="button" class="btn btn-primary tabsbtn clearOrg" ng-click="clearValOrganization()" value="Clear" ng-disabled="true">
+
+    	</div>
+    </form>
+  </div>
+</div> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+</div>

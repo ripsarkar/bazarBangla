@@ -81,7 +81,11 @@
 			.state("home.createrole", {
 			  url:"/createrole",
 			  templateUrl: "html/createrole.html"
-			});
+			})          
+            .state("home.UpdateOrganisation", {
+            url:"/UpdateOrganisation",
+              templateUrl: "html/updateOrganization.html"
+          });
         }).run(run);
 
 
