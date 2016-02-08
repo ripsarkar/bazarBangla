@@ -89,7 +89,11 @@
             .state("home.UpdateOrganisation", {
             url:"/UpdateOrganisation",
               templateUrl: "html/updateOrganization.html"
-          });
+          })            
+            .state("home.permissions", {
+              url:"/permissions",
+              templateUrl: "html/permissions.html"
+            });
         }).run(run);
 
 
