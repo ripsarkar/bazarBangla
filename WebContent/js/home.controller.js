@@ -46,6 +46,8 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
  	                	
  	                	localStorage.setItem("showallbutt", result.User[0].user_industry_name);
  	                	localStorage.setItem("cmpyId", result.User[0].company_surr_id);
+                        localStorage.setItem("industrySurrId", result.User[0].user_industry_surr_id);
+
 
  	                	$rootScope.role = result.User[0].user_role_name;
  	                	$rootScope.surrId = result.User[0].user_surr_id;

@@ -3136,12 +3136,32 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
         $scope.rulethd = false;
         $scope.ruleresponse = true;
     }
-    
+
+
+        if($rootScope.role == "USER_VIEW"){
+
+            $scope.indusDisCheckView = true;
+
+        }
+        $scope.$watch(function () {
+
+            angular.element(".hjdif").each(function(){
+                if(angular.element(this).val()==localStorage.getItem("industrySurrId")){
+                    angular.element(this).prop('checked',true);
+                }
+
+            });
+        });
+        var notpushed = true;
     $scope.ClikedResult = function(node) {
+        if($rootScope.role == "USER_VIEW" && notpushed ==true){
+            var indus ={};
+            indus["id"] = localStorage.getItem("industrySurrId");
+            postjsonresult.Industry.push(indus);
+            console.log(postjsonresult);
+            notpushed = false;
+        }
     	//item populate
-    	/*var rules3d=[];
-    	rules3d = $scope.items;
-    	$scope.takeitem = rules3d;*/
     	angular.element('#rateplanmapping-scroll tbody').scrollTop(0);
     	//angular.element("#rateplanmapping-scroll tbody")[0].scrollTop=0; 
     	$scope.selection =[];
