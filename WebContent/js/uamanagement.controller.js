@@ -1,7 +1,7 @@
 //wrting the controller for uamanage page
 app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$rootScope,$http){
 		//base view is view user
-	$rootScope.currentUserTab = 'html/viewuser.html';
+	  $rootScope.currentUserTab = 'html/viewuser.html';
     
     
     
@@ -68,6 +68,15 @@ app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$r
 		});
    };
     
+	$scope.fnOpenPermission=function(id,name,tabname){
+		     $rootScope.orgId=id;
+	         $rootScope.OrgName=name;
+			 $rootScope.tabName=tabname;
+			 $rootScope.currentUserTab = 'html/permissions.html';
+		   
+	  }
+	
+	
     $scope.isBack = function(){
         $rootScope.backcmplist = $rootScope.compId;
         $scope.onviewuser();
@@ -91,6 +100,8 @@ app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$r
 	    $rootScope.currentUserTab = 'html/viewuser.html';
        
    }
+   
+  
    
    $rootScope.$on("uamanagerpage", function() {
         $scope.onuamcreateuser();

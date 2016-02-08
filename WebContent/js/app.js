@@ -5,7 +5,7 @@
         .module('app', ['ngCookies','ui.router','ui.bootstrap'])
         .config(function($stateProvider, $urlRouterProvider) {
     	  // For any unmatched url, redirect to /login
-    	  $urlRouterProvider.otherwise("/login");
+    	  $urlRouterProvider.otherwise("/home");
     	  // Now set up the states
     	  $stateProvider
     	    .state('home', {
@@ -76,7 +76,9 @@
 			  })
 			  .state("home.updatesubscription", {
 			  url:"/updatesubscription",
-			  templateUrl: "html/viewsubscription.html"
+			 // templateUrl: "html/viewsubscription.html"
+			  templateUrl: "html/updatepermissions.html",
+			  controller: 'updateOrgCtrl'
 			})
 			.state("home.createrole", {
 			  url:"/createrole",
@@ -84,7 +86,9 @@
 			})
 			.state("home.updaterole", {
 			  url:"/updaterole",
-			  templateUrl: "html/updaterole.html"
+			  templateUrl: "html/updatepermissions.html",
+			  controller: 'updateRoleCtrl'
+			 // templateUrl: "html/updaterole.html"
 			}) 
             .state("home.UpdateOrganisation", {
             url:"/UpdateOrganisation",
