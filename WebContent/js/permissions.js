@@ -68,7 +68,7 @@ $scope.selectedroleList = "";
 ////////////////////////////////////////////////////
 var postjson = {
                   "PermissionFor": {
-                    "ObjectType": $rootScope.orgId,
+                    "ObjectType": $rootScope.tabName,
                     "ObjectValue": $rootScope.OrgName,
                     "Role": [
                       {
@@ -128,12 +128,13 @@ $scope.creaindAll = function($event){
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
         $scope.disableCreate = true;
-
+        $scope.disableCreateSpe = true;
       readSubscription.push(read);
       postjson.PermissionTo.UseCase = readSubscription;
     }
     else{
         $scope.disableCreate = false;
+        $scope.disableCreateSpe = false;
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
           if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == "ALL")
           {
@@ -152,12 +153,14 @@ $scope.readindAll = function($event){
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
         $scope.disableRead = true;
+        $scope.disableReadSpe = true;
 
       readSubscription.push(read);
       postjson.PermissionTo.UseCase = readSubscription;
     }
     else{
         $scope.disableRead = false;
+        $scope.disableReadSpe = false;
 
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
           if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == "ALL")
@@ -178,12 +181,15 @@ $scope.updaindAll = function($event){
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
               $scope.disableUpdate = true;
+              $scope.disableUpdateSpe = true;
 
       readSubscription.push(read);
       postjson.PermissionTo.UseCase = readSubscription;
     }
     else{
               $scope.disableUpdate = false;
+              $scope.disableUpdateSpe = false;
+
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
           if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == "ALL")
           {
@@ -202,12 +208,14 @@ $scope.deleindAll = function($event){
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
               $scope.disableDelete = true;
-
+              $scope.disableDeleteSpe = true;
       readSubscription.push(read);
       postjson.PermissionTo.UseCase = readSubscription;
     }
     else{
               $scope.disableDelete = false;
+              $scope.disableDeleteSpe = false;
+
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
           if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == "ALL")
           {
@@ -226,11 +234,14 @@ $scope.expoindAll = function($event){
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
               $scope.disableExport = true;
+              $scope.disableExportSpe = true;
+
       readSubscription.push(read);
       postjson.PermissionTo.UseCase = readSubscription;
     }
     else{              
-      $scope.disableExport = false;
+              $scope.disableExport = false;
+              $scope.disableExportSpe = false;
 
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
           if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == "ALL")

@@ -20,7 +20,7 @@
 <div class="row">
   <div class="col-md-4 col-sm-4">
       <strong>{{tabName}} Id:</strong>
-      <span>{{orgId}}</span> 
+      <span>{{tabName}}</span> 
 
     </div>
     <div class="col-md-4 col-sm-4">
@@ -95,11 +95,11 @@
      <tbody>
    <tr>
      <td>ALL Use Cases</td>
-     <td><input type="checkbox" value="Create" ng-click="creaindAll($event)"></td>
-     <td><input type="checkbox" value="Read" ng-click="readindAll($event)"></td>
-     <td><input type="checkbox" value="Update" ng-click="updaindAll($event)"></td>
-     <td><input type="checkbox" value="Delete" ng-click="deleindAll($event)"></td>
-     <td><input type="checkbox" value="Export" ng-click="expoindAll($event)"></td>
+     <td><input type="checkbox" value="Create" ng-click="creaindAll($event)" ng-disabled="disableCreateAll"></td>
+     <td><input type="checkbox" value="Read" ng-click="readindAll($event)" ng-disabled="disableReadAll"></td>
+     <td><input type="checkbox" value="Update" ng-click="updaindAll($event)" ng-disabled="disableUpdateAll"></td>
+     <td><input type="checkbox" value="Delete" ng-click="deleindAll($event)" ng-disabled="disableDeleteAll"></td>
+     <td><input type="checkbox" value="Export" ng-click="expoindAll($event)" ng-disabled="disableExportAll"></td>
    </tr>
    <tr>
      <td colspan="6" class="info">Use Case by Industry</td>
@@ -119,11 +119,11 @@
    </tr>
    <tr ng-repeat="usecaLi in alluselist">
      <td>{{usecaLi.usecase_id}}</td>
-     <td><input type="checkbox" value="Create" ng-click="createindSpe($event)" ng-disabled="disableCreate"></td>
-     <td><input type="checkbox" value="Read" ng-click="readindSpe($event)" ng-disabled="disableRead"></td>
-     <td><input type="checkbox" value="Update" ng-click="updaindSpe($event)" ng-disabled="disableUpdate"></td>
-     <td><input type="checkbox" value="Delete" ng-click="deleindSpe($event)" ng-disabled="disableDelete"></td>
-     <td><input type="checkbox" value="Export" ng-click="expoindSpe($event)" ng-disabled="disableExport"></td>
+     <td><input type="checkbox" value="Create" ng-click="createindSpe($event)" ng-disabled="disableCreateSpe"></td>
+     <td><input type="checkbox" value="Read" ng-click="readindSpe($event)" ng-disabled="disableReadSpe"></td>
+     <td><input type="checkbox" value="Update" ng-click="updaindSpe($event)" ng-disabled="disableUpdateSpe"></td>
+     <td><input type="checkbox" value="Delete" ng-click="deleindSpe($event)" ng-disabled="disableDeleteSpe"></td>
+     <td><input type="checkbox" value="Export" ng-click="expoindSpe($event)" ng-disabled="disableExportSpe"></td>
    </tr>
      </tbody>
    </table>
