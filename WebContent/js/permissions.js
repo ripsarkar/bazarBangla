@@ -1545,7 +1545,7 @@ $scope.createindRole = function($event){
   if(angular.element($event.currentTarget).is(':checked') == true){
   readRole.push(read);
   postjson.PermissionTo.Role = readRole;
-    }
+  }
     else{
         for(var i=0;i<=postjson.PermissionTo.Role.length;i++){
           if(postjson.PermissionTo.Role[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Role[i].objectval == angular.element($event.currentTarget).parent().prev().text())
