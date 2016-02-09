@@ -63,17 +63,15 @@ $http.get($rootScope.url + "/getAllRulesList").success(function(result){
 
 });
 $scope.selectedroleList = "";
-$scope.role_id = "1";
-$scope.role_name = "ADMIN";
-var num;
+
 $scope.$watch(function(){
-/*var txt = $scope.selectedroleList;*/
-num = $scope.selectedroleList;
+
+
 console.log($scope.selectedroleList);
 postjson = {
                   "PermissionFor": {
-                    "ObjectType": $scope.role_id,
-                    "ObjectValue": $scope.role_name,
+                    "ObjectType": $rootScope.orgId,
+                    "ObjectValue": $rootScope.OrgName,
                     "Role": [
                       {
                         "surrId": parseInt($scope.selectedroleList)
@@ -111,11 +109,11 @@ postjson = {
 ////////////////////////////////////////////////////
 var postjson = {
                   "PermissionFor": {
-                    "ObjectType": $scope.role_id,
-                    "ObjectValue": $scope.role_name,
+                    "ObjectType": $rootScope.orgId,
+                    "ObjectValue": $rootScope.OrgName,
                     "Role": [
                       {
-                        "surrId": $scope.selectedroleList
+                        "surrId": parseInt($scope.selectedroleList)
                       }
                     ]
                   },
