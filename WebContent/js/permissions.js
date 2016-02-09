@@ -64,48 +64,7 @@ $http.get($rootScope.url + "/getAllRulesList").success(function(result){
 });
 $scope.selectedroleList = "";
 
-$scope.$watch(function(){
 
-
-console.log($scope.selectedroleList);
-postjson = {
-                  "PermissionFor": {
-                    "ObjectType": $rootScope.orgId,
-                    "ObjectValue": $rootScope.OrgName,
-                    "Role": [
-                      {
-                        "surrId": parseInt($scope.selectedroleList)
-                      }
-                    ]
-                  },
-                  "PermissionTo": {
-                    "Subscription": [
-                      /*{
-                        "operation": "create",
-                        "objectval": "HSBC",
-                        "filterType": "OrganizationName"
-                      }*/
-                    ],
-                    "User": [],
-                    "Organization": [],
-                    "Role": [],
-                    "UseCase": [
-                      /*{
-                        "operation": "create",
-                        "objectval": "All",
-                        "filterType": "All"
-                      }*/
-                    ],
-                    "Rule": [
-                      /*{
-                        "operation": "create",
-                        "objectval": "ISA",
-                        "filterType": "RegCatName"
-                      }*/
-                    ]
-                  }
-                }
-});
 ////////////////////////////////////////////////////
 var postjson = {
                   "PermissionFor": {
