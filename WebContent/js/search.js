@@ -3143,13 +3143,16 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 
         }
         $scope.$watch(function () {
+        if($rootScope.role == "USER_VIEW"){
 
-            angular.element(".hjdif").each(function(){
+                angular.element(".hjdif").each(function(){
                 if(angular.element(this).val()==localStorage.getItem("industrySurrId")){
                     angular.element(this).prop('checked',true);
                 }
 
             });
+        }
+
         });
         var notpushed = true;
 
