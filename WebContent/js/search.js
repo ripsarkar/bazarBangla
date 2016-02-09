@@ -755,9 +755,19 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		}*/
 	});
 
+     $scope.$watch(function(){
+        if(postjsonresult.oobParam==""){
+                $scope.modalMsg ="Are you sure , you want to fetch full list of Use Case library ?"
+              }else if(postjsonresult.oobParam=="Yes"){
+                $scope.modalMsg ="Are you sure you want to fetch all Out of Box Use Case Rules ?"
+              }else if(postjsonresult.oobParam=="No"){
+                $scope.modalMsg ="Are you sure you want to fetch all Custom Use Case Rules ?" 
+              }
+     });
 	 
 	 
 	 $scope.clear = function() {
+		$scope.ruleLength=0; 
         $scope.items=[];
 		 $scope.currentTab = 'html/search-result.html';
 	        $scope.dimensionrule=false;
@@ -3483,7 +3493,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
             $scope.parsejson();
             //console.log(JSON.stringify($scope.outputJson));
        //    if($scope.outputJson.RegCat.length !=0 || $scope.outputJson.CyberSecFunc.length !=0 || $scope.outputJson.Industry.length !=0 || $scope.outputJson.EP.length !=0 | $scope.outputJson.ThreatModel.length !=0 | $scope.outputJson.LogSource.length !=0){
-            if(postjsonresult.RegCat.length !=0 || postjsonresult.CyberSecFunc.length !=0 || postjsonresult.Industry.length !=0 || postjsonresult.EP.length !=0 || postjsonresult.ThreatModel.length !=0 || postjsonresult.LogSource.length !=0 || postjsonresult.oobParam =="" || postjsonresult.useCaseRuleIdName ==""|| postjsonresult.oobParam =="Yes" || postjsonresult.oobParam =="No"){
+           // if(postjsonresult.RegCat.length !=0 || postjsonresult.CyberSecFunc.length !=0 || postjsonresult.Industry.length !=0 || postjsonresult.EP.length !=0 || postjsonresult.ThreatModel.length !=0 || postjsonresult.LogSource.length !=0 || postjsonresult.oobParam =="" || postjsonresult.useCaseRuleIdName ==""|| postjsonresult.oobParam =="Yes" || postjsonresult.oobParam =="No"){
 
             $http.post(resultURL, postjsonresult).success(function(data, status, headers, config) {
             	//clearing takeitem
@@ -3523,7 +3533,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
                 }
 
             });
-           }else{
+           /*}else{
                 
                 $rootScope.loadinganimation = false;
                 $scope.showResult = false;
@@ -3538,10 +3548,10 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 
 
                 return false;
-           }
-     }
+             }*/
+   }
        
-      $scope.modalMsg="";
+     // $scope.modalMsg="";
       $scope.showPopup = function() {
         if(postjsonresult.RegCat.length ==0 && postjsonresult.CyberSecFunc.length ==0 && postjsonresult.Industry.length ==0 && postjsonresult.EP.length ==0 && postjsonresult.ThreatModel.length ==0 && postjsonresult.LogSource.length ==0 && (postjsonresult.useCaseRuleIdName == undefined || postjsonresult.useCaseRuleIdName == "")){ 
       		  $scope.showModal = true; 
