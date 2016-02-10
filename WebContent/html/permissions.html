@@ -30,10 +30,13 @@
   <div class="col-md-4 col-sm-4" ng-hide="dropshowhide">
   <label class="col-md-4" for="textinput"><strong>Role Name:</strong></label>  
     <div class="col-md-8">  
-     <!-- <select class="form-control valselect" ng-model="selectedroleList">
-      <option ng-repeat="roleList in roleListli" value = "{{roleList.user_role_surr_id}}">{{roleList.user_role_name}}</option>
-    </select> -->
-<select class="col-md-12" ng-model="selectedroleList"><option ng-repeat="roleList in roleListli" value="{{roleList.user_role_surr_id}}">{{roleList.user_role_name}}</option></select>
+
+<!-- <select class="col-md-12" ng-model="selectedroleList" multiple><option ng-repeat="roleList in roleListli" value="{{roleList.user_role_surr_id}}">{{roleList.user_role_name}}-{{roleList.user_role_surr_id}}</option></select> -->
+
+
+                                        <select multiple class="form-control" required ng-model="selectedroleList" ng-change="chckRoleList()">
+                                            <option ng-repeat="roleList in roleListli" value="{{roleList.user_role_surr_id}}">{{roleList.user_role_name}}</option>
+                                        </select>
    </div>   
   </div>
 </div>
@@ -118,7 +121,7 @@
      
    </tr>
    <tr ng-repeat="usecaLi in alluselist">
-     <td>{{usecaLi.usecase_id}}</td>
+     <td value="{{usecaLi.usecase_surr_id}}">{{usecaLi.usecase_id}}</td>
      <td><input type="checkbox" value="Create" ng-click="createindSpe($event)" ng-disabled="disableCreateSpe"></td>
      <td><input type="checkbox" value="Read" ng-click="readindSpe($event)" ng-disabled="disableReadSpe"></td>
      <td><input type="checkbox" value="Update" ng-click="updaindSpe($event)" ng-disabled="disableUpdateSpe"></td>
@@ -169,7 +172,7 @@
      
    </tr>
  <tr ng-repeat="ruleall in allrulelist">
-     <td>{{ruleall.uc_rule_id}}</td>
+     <td value="{{ruleall.uc_rule_surr_id}}">{{ruleall.uc_rule_id}}</td>
      <td><input type="checkbox" value="Create" ng-click="createindRuleSpe($event)" ng-disabled="disableCreateRule"></td>
      <td><input type="checkbox" value="Read" ng-click="readindRuleSpe($event)" ng-disabled="disableReadRule"></td>
      <td><input type="checkbox" value="Update" ng-click="updaindRuleSpe($event)" ng-disabled="disableUpdateRule"></td>

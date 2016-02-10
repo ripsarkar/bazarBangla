@@ -62,18 +62,41 @@ $http.get($rootScope.url + "/getAllRulesList").success(function(result){
 }).error(function(err){
 
 });
-$scope.selectedroleList = "";
+var mm;
+$scope.$watch(function(){
+ mm = $scope.selectedroleList;
+});
+            //rolelist
+            var Indtsyarray = [];
+            var Indtsy = {};
 
+            $scope.chckRoleList = function(){
+              
+            Indtsyarray = [];
+            
+            for (var i=0;i<$scope.selectedroleList.length-1;i++){
+              if($scope.selectedroleList[i] == $scope.selectedroleList[$scope.selectedroleList.length-1]){
+                $scope.selectedroleList.splice(-1);
+              }
+            }
+            for (var j=0;j<$scope.selectedroleList.length;j++){
 
+              Indtsy = {};
+              Indtsy.SurrId = $scope.selectedroleList[j];
+              Indtsyarray.push(Indtsy);
+            }
+            postjson.PermissionFor.Role = Indtsyarray;
+
+          }
 ////////////////////////////////////////////////////
 var postjson = {
                   "PermissionFor": {
-                    "ObjectType": $rootScope.tabName,
-                    "ObjectValue": $rootScope.OrgName,
+                    "ObjectType": $rootScope.tabName.toString(),
+                    "ObjectValue": $rootScope.orgId.toString(),
                     "Role": [
-                      {
-                        "surrId": parseInt($scope.selectedroleList)
-                      }
+                      /*{
+                        "surrId": "9000"
+                      }*/
                     ]
                   },
                   "PermissionTo": {
@@ -365,7 +388,7 @@ $scope.expoind = function($event){
 $scope.createindSpe = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
-  read.objectval = angular.element($event.currentTarget).parent().prev().text();
+  read.objectval = angular.element($event.currentTarget).parent().prev().attr('value');
   read.filterType = "id";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
@@ -374,7 +397,7 @@ $scope.createindSpe = function($event){
     }
     else{
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
-          if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().text())
+          if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().attr('value'))
           {
             postjson.PermissionTo.UseCase.splice(i, 1);
             break;
@@ -388,7 +411,7 @@ $scope.createindSpe = function($event){
 $scope.readindSpe = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
-  read.objectval = angular.element($event.currentTarget).parent().prev().prev().text();
+  read.objectval = angular.element($event.currentTarget).parent().prev().prev().attr('value');
   read.filterType = "id";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
@@ -397,7 +420,7 @@ $scope.readindSpe = function($event){
     }
     else{
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
-          if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().prev().text())
+          if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().prev().attr('value'))
           {
             postjson.PermissionTo.UseCase.splice(i, 1);
             break;
@@ -411,7 +434,7 @@ $scope.readindSpe = function($event){
 $scope.updaindSpe = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
-  read.objectval = angular.element($event.currentTarget).parent().prev().prev().prev().text();
+  read.objectval = angular.element($event.currentTarget).parent().prev().prev().prev().attr('value');
   read.filterType = "id";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
@@ -420,7 +443,7 @@ $scope.updaindSpe = function($event){
     }
     else{
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
-          if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().text())
+          if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().attr('value'))
           {
             postjson.PermissionTo.UseCase.splice(i, 1);
             break;
@@ -432,7 +455,7 @@ $scope.updaindSpe = function($event){
 $scope.deleindSpe = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
-  read.objectval = angular.element($event.currentTarget).parent().prev().prev().prev().prev().text();
+  read.objectval = angular.element($event.currentTarget).parent().prev().prev().prev().prev().attr('value');
   read.filterType = "id";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
@@ -441,7 +464,7 @@ $scope.deleindSpe = function($event){
     }
     else{
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
-          if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().text())
+          if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().attr('value'))
           {
             postjson.PermissionTo.UseCase.splice(i, 1);
             break;
@@ -453,7 +476,7 @@ $scope.deleindSpe = function($event){
 $scope.expoindSpe = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
-  read.objectval = angular.element($event.currentTarget).parent().prev().prev().prev().prev().prev().text();
+  read.objectval = angular.element($event.currentTarget).parent().prev().prev().prev().prev().prev().attr('value');
   read.filterType = "id";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
@@ -462,7 +485,7 @@ $scope.expoindSpe = function($event){
     }
     else{
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
-          if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().prev().text())
+          if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().prev().attr('value'))
           {
             postjson.PermissionTo.UseCase.splice(i, 1);
             break;
@@ -699,7 +722,7 @@ $scope.expoindRule = function($event){
 $scope.createindRuleSpe = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
-  read.objectval = angular.element($event.currentTarget).parent().prev().text();
+  read.objectval = angular.element($event.currentTarget).parent().prev().attr('value');
   read.filterType = "id";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
@@ -708,7 +731,7 @@ $scope.createindRuleSpe = function($event){
     }
     else{
         for(var i=0;i<=postjson.PermissionTo.Rule.length;i++){
-          if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().text())
+          if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().attr('value'))
           {
             postjson.PermissionTo.Rule.splice(i, 1);
             break;
@@ -721,7 +744,7 @@ $scope.createindRuleSpe = function($event){
 $scope.readindRuleSpe = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
-  read.objectval = angular.element($event.currentTarget).parent().prev().prev().text();
+  read.objectval = angular.element($event.currentTarget).parent().prev().prev().attr('value');
   read.filterType = "id";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
@@ -730,7 +753,7 @@ $scope.readindRuleSpe = function($event){
     }
     else{
         for(var i=0;i<=postjson.PermissionTo.Rule.length;i++){
-          if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().prev().text())
+          if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().prev().attr('value'))
           {
             postjson.PermissionTo.Rule.splice(i, 1);
             break;
@@ -743,7 +766,7 @@ $scope.readindRuleSpe = function($event){
 $scope.updaindRuleSpe = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
-  read.objectval = angular.element($event.currentTarget).parent().prev().prev().prev().text();
+  read.objectval = angular.element($event.currentTarget).parent().prev().prev().prev().attr('value');
   read.filterType = "id";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
@@ -752,7 +775,7 @@ $scope.updaindRuleSpe = function($event){
     }
     else{
         for(var i=0;i<=postjson.PermissionTo.Rule.length;i++){
-          if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().text())
+          if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().attr('value'))
           {
             postjson.PermissionTo.Rule.splice(i, 1);
             break;
@@ -764,7 +787,7 @@ $scope.updaindRuleSpe = function($event){
 $scope.deleindRuleSpe = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
-  read.objectval = angular.element($event.currentTarget).parent().prev().prev().prev().prev().text();
+  read.objectval = angular.element($event.currentTarget).parent().prev().prev().prev().prev().attr('value');
   read.filterType = "id";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
@@ -773,7 +796,7 @@ $scope.deleindRuleSpe = function($event){
     }
     else{
         for(var i=0;i<=postjson.PermissionTo.Rule.length;i++){
-          if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().text())
+          if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().attr('value'))
           {
             postjson.PermissionTo.Rule.splice(i, 1);
             break;
@@ -785,7 +808,7 @@ $scope.deleindRuleSpe = function($event){
 $scope.expoindRuleSpe = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
-  read.objectval = angular.element($event.currentTarget).parent().prev().prev().prev().prev().prev().text();
+  read.objectval = angular.element($event.currentTarget).parent().prev().prev().prev().prev().prev().attr('value');
   read.filterType = "id";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
@@ -794,7 +817,7 @@ $scope.expoindRuleSpe = function($event){
     }
     else{
         for(var i=0;i<=postjson.PermissionTo.Rule.length;i++){
-          if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().prev().text())
+          if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().prev().attr('value'))
           {
             postjson.PermissionTo.Rule.splice(i, 1);
             break;
