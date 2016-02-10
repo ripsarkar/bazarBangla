@@ -82,7 +82,7 @@ $scope.$watch(function(){
             for (var j=0;j<$scope.selectedroleList.length;j++){
 
               Indtsy = {};
-              Indtsy.SurrId = $scope.selectedroleList[j];
+              Indtsy.surrId = $scope.selectedroleList[j];
               Indtsyarray.push(Indtsy);
             }
             postjson.PermissionFor.Role = Indtsyarray;
