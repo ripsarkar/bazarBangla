@@ -56,7 +56,8 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
                         $rootScope.companyNamee = localStorage.getItem("nameCompany");
 
  	                }
- 	            	 $rootScope.loadinganimation = false;
+ 	            	    $rootScope.loadinganimation = false;
+                        $location.path('/home/search');
 
                 /*$http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
                         
