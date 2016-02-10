@@ -43,22 +43,35 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
  	                	localStorage.setItem("showallbutt", result.User[0].user_industry_name);
  	                	localStorage.setItem("cmpyId", result.User[0].company_surr_id);
                         localStorage.setItem("industrySurrId", result.User[0].user_industry_surr_id);
+                        localStorage.setItem("nameCompany", result.User[0].company_name);
 
  	                	$rootScope.role = result.User[0].user_role_name;
  	                	$rootScope.surrId = result.User[0].user_surr_id;
  	                	$rootScope.user_name = result.User[0].user_name;
  	                    $rootScope.disabled=false;
  	                 //   $rootScope.username = result.User[0].user_name;
- 	                   $rootScope.username = localStorage.getItem("fullname");
- 	                   $rootScope.compSurrId = localStorage.getItem("surrComprip");
- 	                    $location.path('/home/search');
+ 	                    $rootScope.username = localStorage.getItem("fullname");
+ 	                    $rootScope.compSurrId = localStorage.getItem("surrComprip");
+                        $rootScope.user_name = result.User[0].user_name;
+                        $rootScope.companyNamee = localStorage.getItem("nameCompany");
+
  	                }
  	            	 $rootScope.loadinganimation = false;
- 	            	
+
+                /*$http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                        
+                        localStorage.setItem("fetchPermission", result);
+                        alert(localStorage.getItem("fetchPermission"));
+                        $location.path('/home/search');
+                        alert();
+
+                }).error(function (error) {
+
+                });*/
+
  	            }).error(function (error) {
  	             $rootScope.loadinganimation = false;
- 	            	$rootScope.loginError=true;
- 	            	$location.path('/login');
+
  	            });
 		  
 	  }

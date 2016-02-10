@@ -1,10 +1,10 @@
 //wrting the controller for viewuser page
-var aclinkROle = true;
+
 app.controller("permissionsCtrl",["$scope","$http", "$rootScope", function($scope, $http,$rootScope){
           $scope.membertabOrga = true;
 
   $scope.$watch(function(){
-      $scope.dropshowhide = aclinkROle;
+      
       if($rootScope.tabName == "User"){
         $scope.membertabOrga = false;
       }
@@ -1824,20 +1824,10 @@ $scope.deleindRole = function($event){
 .directive('showtab',
     function ($rootScope) {
         return {
-          controller:"permissionsCtrl",
             link: function (scope, element, attrs) {
                 element.click(function(e) {
 
-                  var mm = angular.element(this).text();
- 
-                  if(mm == "Subscription" || mm == "User"|| mm == "Role"){
-                    aclinkROle = false;                 
-                  }
-                  else{
-                    aclinkROle = true;
-                  }
-                   // e.preventDefault();   
-          //e.stopPropagation();  
+  
                     if(attrs.href == "#subscription" || attrs.href == "#user" || attrs.href == "#role") 
           {
           
