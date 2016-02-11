@@ -74,7 +74,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 
                         });*/
 
-                        $http.get($rootScope.url + "/getOrgListForUser/" + $rootScope.surrId).success(function(result) {
+                        $http.get($rootScope.url + "/getOrgListForUser/" + localStorage.getItem("surrrip")).success(function(result) {
                         
                             $scope.RfetchList = result.Organization;
                             $rootScope.loadinganimation = false;
