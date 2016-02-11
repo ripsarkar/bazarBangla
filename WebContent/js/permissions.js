@@ -94,7 +94,7 @@ $scope.$watch(function(){
 
           }
 ////////////////////////////////////////////////////
-var postjson = {
+ postjson = {
                   "PermissionFor": {
                     "ObjectType": $rootScope.tabName.toString(),
                     "ObjectValue": $rootScope.orgId.toString(),
@@ -134,7 +134,7 @@ var postjson = {
 
 $scope.sendPermissions = function(){
 
-                var postdata = {
+               var postdata = {
                   method : "POST",
                   url:$rootScope.url + "/createPermission",
                   data:JSON.stringify(postjson)
@@ -146,6 +146,698 @@ $scope.sendPermissions = function(){
                 });
 
 }
+
+
+/*start for fetch update code */
+
+
+//fetchPermissionsTemp/Subscription/825
+//$scope.chcked=false;
+$scope.fnFetchPermissions=function(id,name){
+
+		  $http.get($rootScope.url + "/fetchPermissions/"+$scope.tabName+"/"+$scope.orgId).success(function(result){      
+
+		            $scope.permissionJson = result;	 	  	
+					angular.extend(postjson.PermissionTo.UseCase, result.PermissionTo.UseCase);					
+					angular.extend(postjson.PermissionTo.Rule, result.PermissionTo.Rule);
+					angular.extend(postjson.PermissionTo.Organization, result.PermissionTo.Organization);
+					angular.extend(postjson.PermissionTo.Subscription, result.PermissionTo.Subscription);			
+					angular.extend(postjson.PermissionTo.User, result.PermissionTo.User);
+					angular.extend(postjson.PermissionTo.Role, result.PermissionTo.Role);
+					
+								
+					
+					
+				//usercase Tab  - createusecase
+					angular.forEach(document.querySelectorAll('.crtusecase'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");																		 
+                                          $scope.compile(outer[0]);										
+										
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+
+					
+					//usercase Tab  - readusecase
+					angular.forEach(document.querySelectorAll('.readusecase'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");																		 
+                                          $scope.compile(outer[0]);										
+										
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+					//usercase Tab  - updateusecase
+					angular.forEach(document.querySelectorAll('.updateusecase'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");
+										$scope.compile(outer[0]);	
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+					//usercase Tab  - deleteusecase
+					angular.forEach(document.querySelectorAll('.deleteusecase'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");
+										$scope.compile(outer[0]);							
+										
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+					//usercase Tab  - exportusecase
+					angular.forEach(document.querySelectorAll('.exportusecase'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");
+										$scope.compile(outer[0]);										
+										
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+					
+					
+					
+					//Rule Tab  - create-rule
+					angular.forEach(document.querySelectorAll('.ctrrule'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");																		 
+                                          $scope.compile(outer[0]);										
+										
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+					
+					
+					//Rule Tab  - readrule
+					angular.forEach(document.querySelectorAll('.readrule'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");																		 
+                                          $scope.compile(outer[0]);										
+										
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+					
+					
+					//Rule Tab  - updaterule
+					angular.forEach(document.querySelectorAll('.updaterule'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");																		 
+                                          $scope.compile(outer[0]);										
+										
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+					
+					
+					//Rule Tab  - deleterule
+					angular.forEach(document.querySelectorAll('.deleterule'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");																		 
+                                          $scope.compile(outer[0]);										
+										
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+					
+					
+					//Rule Tab  - exportrule
+					angular.forEach(document.querySelectorAll('.exportrule'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");																		 
+                                          $scope.compile(outer[0]);										
+										
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+					
+					
+					
+					
+					
+					
+					
+					//Subscription Tab  - Create
+					angular.forEach(document.querySelectorAll('.createsubs'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Subscription, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");
+										
+										 console.log("val.operation"+ val.operation);
+										 console.log("operation"+ operation);
+										 console.log("val.objectval"+ val.objectval);
+										  console.log("objectval"+ objectval);										 
+                                          $scope.compile(outer[0]);										
+										
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+
+					
+					
+					//Subscription Tab  - Read
+					angular.forEach(document.querySelectorAll('.readsubs'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Subscription, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");	
+                                          $scope.compile(outer[0]);										
+										
+										
+							  }
+							 
+			  
+						});
+						
+					});
+					
+					
+					//Subscription Tab  - Update
+					angular.forEach(document.querySelectorAll('.updatesubs'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Subscription, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");	
+                                          $scope.compile(outer[0]);										
+										
+										
+							  }
+							 
+			  
+						});
+						
+					});
+					
+					//Subscription Tab  - Delete
+					angular.forEach(document.querySelectorAll('.deletesubs'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Subscription, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");	
+                                          $scope.compile(outer[0]);										
+										
+										
+							  }
+							 
+			  
+						});
+						
+					});
+					
+					
+					
+				//Organization Tab  - create
+			      angular.forEach(document.querySelectorAll('.createorg'), function(value, key) {
+						 
+						var outer =angular.element(value);						
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Organization, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                    							
+										outer[0].setAttribute("checked", "checked");
+                                        $scope.compile(outer[0]);
+										//debugger;
+							  }
+							  else{
+								 
+							  }
+			  
+						});
+						
+					});
+		  
+		 
+		 
+		          //Organization Tab  - Read
+			      angular.forEach(document.querySelectorAll('.readorg'), function(value, key) {
+						 
+						var outer =angular.element(value);						
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Organization, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                    							
+										outer[0].setAttribute("checked", "checked");
+                                        $scope.compile(outer[0]);
+										//debugger;
+							  }
+							  else{
+								 
+							  }
+			  
+						});
+						
+					});
+					
+					
+					   //Organization Tab  - Update
+			      angular.forEach(document.querySelectorAll('.updateorg'), function(value, key) {
+						 
+						var outer =angular.element(value);						
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Organization, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                    							
+										outer[0].setAttribute("checked", "checked");
+                                        $scope.compile(outer[0]);
+										//debugger;
+							  }
+							  else{
+								 
+							  }
+			  
+						});
+						
+					});
+					
+					
+					
+					//Organization Tab  - delete
+			         angular.forEach(document.querySelectorAll('.deleteorg'), function(value, key) {
+						 
+						var outer =angular.element(value);						
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Organization, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                    							
+										outer[0].setAttribute("checked", "checked");
+                                        $scope.compile(outer[0]);
+										//debugger;
+							  }
+							  else{
+								 
+							  }
+			  
+						});
+						
+					});
+					
+					//Organization Tab  - Member
+			         angular.forEach(document.querySelectorAll('.memberorg'), function(value, key) {
+						 
+						var outer =angular.element(value);						
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Organization, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                    							
+										outer[0].setAttribute("checked", "checked");
+                                        $scope.compile(outer[0]);
+										//debugger;
+							  }
+							  else{
+								 
+							  }
+			  
+						});
+						
+					});
+					
+					
+					//user Tab  - createuser
+			         angular.forEach(document.querySelectorAll('.createuser'), function(value, key) {
+						 
+						var outer =angular.element(value);						
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.User, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                    							
+										outer[0].setAttribute("checked", "checked");
+                                        $scope.compile(outer[0]);
+										//debugger;
+							  }
+							  else{
+								 
+							  }
+			  
+						});
+						
+					});
+					
+					
+					//user Tab  - readuser
+			         angular.forEach(document.querySelectorAll('.readuser'), function(value, key) {
+						 
+						var outer =angular.element(value);						
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.User, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                    							
+										outer[0].setAttribute("checked", "checked");
+                                        $scope.compile(outer[0]);
+										//debugger;
+							  }
+							  else{
+								 
+							  }
+			  
+						});
+						
+					});
+					
+					
+					//user Tab  - updateuser
+			         angular.forEach(document.querySelectorAll('.updateuser'), function(value, key) {
+						 
+						var outer =angular.element(value);						
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.User, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                    							
+										outer[0].setAttribute("checked", "checked");
+                                        $scope.compile(outer[0]);
+										//debugger;
+							  }
+							  else{
+								 
+							  }
+			  
+						});
+						
+					});
+					
+					
+						//user Tab  - deleteuser
+			         angular.forEach(document.querySelectorAll('.deleteuser'), function(value, key) {
+						 
+						var outer =angular.element(value);						
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.User, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                    							
+										outer[0].setAttribute("checked", "checked");
+                                        $scope.compile(outer[0]);
+										//debugger;
+							  }
+							  else{
+								 
+							  }
+			  
+						});
+						
+					});
+					
+					
+						//Role Tab  - createrole
+			         angular.forEach(document.querySelectorAll('.createrole'), function(value, key) {
+						 
+						var outer =angular.element(value);						
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Role, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                    							
+										outer[0].setAttribute("checked", "checked");
+                                        $scope.compile(outer[0]);
+										//debugger;
+							  }
+							  else{
+								 
+							  }
+			  
+						});
+						
+					});
+					
+					//Role Tab  - readrole
+			         angular.forEach(document.querySelectorAll('.readrole'), function(value, key) {
+						 
+						var outer =angular.element(value);						
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Role, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                    							
+										outer[0].setAttribute("checked", "checked");
+                                        $scope.compile(outer[0]);
+										//debugger;
+							  }
+							  else{
+								 
+							  }
+			  
+						});
+						
+					});
+					
+					
+					//Role Tab  - updaterole
+			         angular.forEach(document.querySelectorAll('.updaterole'), function(value, key) {
+						 
+						var outer =angular.element(value);						
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Role, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                    							
+										outer[0].setAttribute("checked", "checked");
+                                        $scope.compile(outer[0]);
+										//debugger;
+							  }
+							  else{
+								 
+							  }
+			  
+						});
+						
+					});
+					
+						//Role Tab  - deleterole
+			         angular.forEach(document.querySelectorAll('.deleterole'), function(value, key) {
+						 
+						var outer =angular.element(value);						
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Role, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval) {	
+                                    							
+										outer[0].setAttribute("checked", "checked");
+                                        $scope.compile(outer[0]);
+										//debugger;
+							  }
+							  else{
+								 
+							  }
+			  
+						});
+						
+					});
+					
+					
+		  
+		}).error(function(err){
+			alert("Server side error");
+			
+	     });
+	
+	
+};
+  
+$scope.compile=function (element){
+	
+  var el = angular.element(element);    
+  $scope1 = el.scope();
+    $injector = el.injector();
+    $injector.invoke(function($compile){
+       $compile(el)($scope1)
+	   //alert("comp")
+    })     
+}
+
+
+
+/*end for fetch update code*/
+
 ///////////////////////////Usecase/////////////////////////////
 var readSubscription = [];
 $scope.creaindAll = function($event){
@@ -158,7 +850,8 @@ $scope.creaindAll = function($event){
         $scope.disableCreate = true;
         $scope.disableCreateSpe = true;
       readSubscription.push(read);
-      postjson.PermissionTo.UseCase = readSubscription;
+     // postjson.PermissionTo.UseCase = readSubscription;
+        postjson.PermissionTo.UseCase.push(read);
     }
     else{
         $scope.disableCreate = false;
@@ -184,7 +877,8 @@ $scope.readindAll = function($event){
         $scope.disableReadSpe = true;
 
       readSubscription.push(read);
-      postjson.PermissionTo.UseCase = readSubscription;
+      //postjson.PermissionTo.UseCase = readSubscription;
+	    postjson.PermissionTo.UseCase.push(read);
     }
     else{
         $scope.disableRead = false;
@@ -212,7 +906,8 @@ $scope.updaindAll = function($event){
               $scope.disableUpdateSpe = true;
 
       readSubscription.push(read);
-      postjson.PermissionTo.UseCase = readSubscription;
+     // postjson.PermissionTo.UseCase = readSubscription;
+	    postjson.PermissionTo.UseCase.push(read);
     }
     else{
               $scope.disableUpdate = false;
@@ -238,7 +933,8 @@ $scope.deleindAll = function($event){
               $scope.disableDelete = true;
               $scope.disableDeleteSpe = true;
       readSubscription.push(read);
-      postjson.PermissionTo.UseCase = readSubscription;
+      //postjson.PermissionTo.UseCase = readSubscription;
+	    postjson.PermissionTo.UseCase.push(read);
     }
     else{
               $scope.disableDelete = false;
@@ -265,7 +961,8 @@ $scope.expoindAll = function($event){
               $scope.disableExportSpe = true;
 
       readSubscription.push(read);
-      postjson.PermissionTo.UseCase = readSubscription;
+      //postjson.PermissionTo.UseCase = readSubscription;
+	  postjson.PermissionTo.UseCase.push(read);
     }
     else{              
               $scope.disableExport = false;
@@ -292,7 +989,11 @@ $scope.createind = function($event){
               $scope.disableCreateSpe = true;
 
       readSubscription.push(read);
-      postjson.PermissionTo.UseCase = readSubscription;
+	 	
+      //postjson.PermissionTo.UseCase = readSubscription;
+	
+	  postjson.PermissionTo.UseCase.push(read);
+	  
     }
     else{
               $scope.disableCreateAll = false;
@@ -321,7 +1022,8 @@ $scope.readind = function($event){
               $scope.disableReadSpe = true;
 
       readSubscription.push(read);
-      postjson.PermissionTo.UseCase = readSubscription;
+      //postjson.PermissionTo.UseCase = readSubscription;
+	    postjson.PermissionTo.UseCase.push(read);
     }
     else{
               $scope.disableReadAll = false;
@@ -350,7 +1052,8 @@ $scope.updaind = function($event){
               $scope.disableUpdateSpe = true;
 
       readSubscription.push(read);
-      postjson.PermissionTo.UseCase = readSubscription;
+      //postjson.PermissionTo.UseCase = readSubscription;
+	    postjson.PermissionTo.UseCase.push(read);
     }
     else{
               $scope.disableUpdateAll = false;
@@ -377,7 +1080,8 @@ $scope.deleind = function($event){
               $scope.disableDeleteSpe = true;
 
       readSubscription.push(read);
-      postjson.PermissionTo.UseCase = readSubscription;
+      //postjson.PermissionTo.UseCase = readSubscription;
+	    postjson.PermissionTo.UseCase.push(read);
     }
     else{
               $scope.disableDeleteAll = false;
@@ -404,7 +1108,8 @@ $scope.expoind = function($event){
               $scope.disableExportSpe = true;
 
       readSubscription.push(read);
-      postjson.PermissionTo.UseCase = readSubscription;
+     // postjson.PermissionTo.UseCase = readSubscription;
+	 postjson.PermissionTo.UseCase.push(read);
     }
     else{
               $scope.disableExportAll = false;
@@ -429,7 +1134,8 @@ $scope.createindSpe = function($event){
               $scope.disableCreateAll = true;
               $scope.disableCreate = true;
       readSubscription.push(read);
-      postjson.PermissionTo.UseCase = readSubscription;
+     // postjson.PermissionTo.UseCase = readSubscription;
+	 postjson.PermissionTo.UseCase.push(read);
     }
     else{
               $scope.disableCreateAll = false;
@@ -457,7 +1163,8 @@ $scope.readindSpe = function($event){
               $scope.disableRead = true;
 
       readSubscription.push(read);
-      postjson.PermissionTo.UseCase = readSubscription;
+      //postjson.PermissionTo.UseCase = readSubscription;
+	  postjson.PermissionTo.UseCase.push(read);
     }
     else{
               $scope.disableReadAll = false;
@@ -486,7 +1193,8 @@ $scope.updaindSpe = function($event){
               $scope.disableUpdate = true;
 
       readSubscription.push(read);
-      postjson.PermissionTo.UseCase = readSubscription;
+     // postjson.PermissionTo.UseCase = readSubscription;
+	 postjson.PermissionTo.UseCase.push(read);
     }
     else{
               $scope.disableUpdateAll = false;
@@ -514,7 +1222,8 @@ $scope.deleindSpe = function($event){
               $scope.disableDelete = true;
 
       readSubscription.push(read);
-      postjson.PermissionTo.UseCase = readSubscription;
+      //postjson.PermissionTo.UseCase = readSubscription;
+	  postjson.PermissionTo.UseCase.push(read);
     }
     else{
               $scope.disableDeleteAll = false;
@@ -541,7 +1250,8 @@ $scope.expoindSpe = function($event){
               $scope.disableExport = true;
 
       readSubscription.push(read);
-      postjson.PermissionTo.UseCase = readSubscription;
+      //postjson.PermissionTo.UseCase = readSubscription;
+	  postjson.PermissionTo.UseCase.push(read);
     }
     else{
               $scope.disableExportAll = false;
@@ -572,7 +1282,8 @@ $scope.creaindAllRule = function($event){
       $scope.disableCreateRuleSpe = true;
 
       readRule.push(read);
-      postjson.PermissionTo.Rule = readRule;
+      //postjson.PermissionTo.Rule = readRule;
+	  postjson.PermissionTo.Rule.push(read);
     }
     else{
       $scope.disableCreateRule = false;
@@ -599,7 +1310,8 @@ $scope.readindAllRule = function($event){
       $scope.disableReadRuleSpe = true;
 
       readRule.push(read);
-      postjson.PermissionTo.Rule = readRule;
+      //postjson.PermissionTo.Rule = readRule;
+	  postjson.PermissionTo.Rule.push(read);
     }
     else{
       $scope.disableReadRule = false;
@@ -626,7 +1338,8 @@ $scope.updaindAllRule = function($event){
       $scope.disableUpdateRuleSpe = true;
 
       readRule.push(read);
-      postjson.PermissionTo.Rule = readRule;
+      //postjson.PermissionTo.Rule = readRule;
+	  postjson.PermissionTo.Rule.push(read);
     }
     else{
       $scope.disableUpdateRule = false;
@@ -652,7 +1365,8 @@ $scope.deleindAllRule = function($event){
       $scope.disableDeleteRuleSpe = true;
 
       readRule.push(read);
-      postjson.PermissionTo.Rule = readRule;
+     // postjson.PermissionTo.Rule = readRule;
+	 postjson.PermissionTo.Rule.push(read);
     }
     else{
       $scope.disableDeleteRule = false;
@@ -679,7 +1393,8 @@ $scope.expoindAllRule = function($event){
       $scope.disableExportRuleSpe = true;
 
       readRule.push(read);
-      postjson.PermissionTo.Rule = readRule;
+     // postjson.PermissionTo.Rule = readRule;
+	 postjson.PermissionTo.Rule.push(read);
     }
     else{
       $scope.disableExportRule = false;
@@ -706,7 +1421,8 @@ $scope.createindRule = function($event){
       $scope.disableCreateRuleSpe = true;
 
       readRule.push(read);
-      postjson.PermissionTo.Rule = readRule;
+     // postjson.PermissionTo.Rule = readRule;
+	 postjson.PermissionTo.Rule.push(read);
     }
     else{
       $scope.disableCreateRuleAll = false;
@@ -732,7 +1448,8 @@ $scope.readindRule = function($event){
       $scope.disableReadRuleAll = true;
       $scope.disableReadRuleSpe = true;
       readRule.push(read);
-      postjson.PermissionTo.Rule = readRule;
+      //postjson.PermissionTo.Rule = readRule;
+	  postjson.PermissionTo.Rule.push(read);
     }
     else{
       $scope.disableReadRuleAll = false;
@@ -758,7 +1475,8 @@ $scope.updaindRule = function($event){
       $scope.disableUpdateRuleAll = true;
       $scope.disableUpdateRuleSpe = true;
       readRule.push(read);
-      postjson.PermissionTo.Rule = readRule;
+      //postjson.PermissionTo.Rule = readRule;
+	  postjson.PermissionTo.Rule.push(read);
     }
     else{
       $scope.disableUpdateRuleAll = false;
@@ -783,7 +1501,8 @@ $scope.deleindRule = function($event){
       $scope.disableDeleteRuleAll = true;
       $scope.disableDeleteRuleSpe = true;
       readRule.push(read);
-      postjson.PermissionTo.Rule = readRule;
+      //postjson.PermissionTo.Rule = readRule;
+	  postjson.PermissionTo.Rule.push(read);
     }
     else{
       $scope.disableDeleteRuleAll = false;
@@ -809,7 +1528,8 @@ $scope.expoindRule = function($event){
       $scope.disableExportRuleSpe = true;
 
       readRule.push(read);
-      postjson.PermissionTo.Rule = readRule;
+      //postjson.PermissionTo.Rule = readRule;
+	  postjson.PermissionTo.Rule.push(read);
     }
     else{
       $scope.disableExportRuleAll = false;
@@ -835,7 +1555,8 @@ $scope.createindRuleSpe = function($event){
       $scope.disableCreateRule = true;
 
       readRule.push(read);
-      postjson.PermissionTo.Rule = readRule;
+     // postjson.PermissionTo.Rule = readRule;
+	 postjson.PermissionTo.Rule.push(read);
     }
     else{
       $scope.disableCreateRuleAll = false;
@@ -861,7 +1582,8 @@ $scope.readindRuleSpe = function($event){
       $scope.disableReadRuleAll = true;
       $scope.disableReadRule = true;
       readRule.push(read);
-      postjson.PermissionTo.Rule = readRule;
+      //postjson.PermissionTo.Rule = readRule;
+	  postjson.PermissionTo.Rule.push(read);
     }
     else{
       $scope.disableReadRuleAll = false;
@@ -887,7 +1609,8 @@ $scope.updaindRuleSpe = function($event){
       $scope.disableUpdateRuleAll = true;
       $scope.disableUpdateRule = true;
       readRule.push(read);
-      postjson.PermissionTo.Rule = readRule;
+     // postjson.PermissionTo.Rule = readRule;
+	 postjson.PermissionTo.Rule.push(read);
     }
     else{
       $scope.disableUpdateRuleAll = false;
@@ -912,7 +1635,8 @@ $scope.deleindRuleSpe = function($event){
       $scope.disableDeleteRuleAll = true;
       $scope.disableDeleteRule = true;
       readRule.push(read);
-      postjson.PermissionTo.Rule = readRule;
+      //postjson.PermissionTo.Rule = readRule;
+	  postjson.PermissionTo.Rule.push(read);
     }
     else{
       $scope.disableDeleteRuleAll = false;
@@ -937,7 +1661,8 @@ $scope.expoindRuleSpe = function($event){
       $scope.disableExportRuleAll = true;
       $scope.disableExportRule = true;
       readRule.push(read);
-      postjson.PermissionTo.Rule = readRule;
+      //postjson.PermissionTo.Rule = readRule;
+	  postjson.PermissionTo.Rule.push(read);
     }
     else{
       $scope.disableExportRuleAll = false;
@@ -965,7 +1690,8 @@ $scope.creaindAllOrg = function($event){
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableCreateOrg=true;
   readOrg.push(read);
-  postjson.PermissionTo.Organization = readOrg;
+  //postjson.PermissionTo.Organization = readOrg;
+   postjson.PermissionTo.Organization.push(read);
     }
     else{
             $scope.disableCreateOrg=false;
@@ -990,7 +1716,8 @@ $scope.readindAllOrg = function($event){
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableReadOrg = true;
   readOrg.push(read);
-  postjson.PermissionTo.Organization = readOrg;
+  //postjson.PermissionTo.Organization = readOrg;
+   postjson.PermissionTo.Organization.push(read);
     }
     else{
       $scope.disableReadOrg = false;
@@ -1014,7 +1741,8 @@ $scope.updaindAllOrg = function($event){
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableUpdateOrg = true;
   readOrg.push(read);
-  postjson.PermissionTo.Organization = readOrg;
+ // postjson.PermissionTo.Organization = readOrg;
+  postjson.PermissionTo.Organization.push(read);
     }
     else{
       $scope.disableUpdateOrg = false;
@@ -1037,7 +1765,8 @@ $scope.deleindAllOrg = function($event){
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableDeleteOrg = true;
   readOrg.push(read);
-  postjson.PermissionTo.Organization = readOrg;
+  //postjson.PermissionTo.Organization = readOrg;
+   postjson.PermissionTo.Organization.push(read);
     }
     else{
       $scope.disableDeleteOrg = false;
@@ -1062,7 +1791,8 @@ $scope.membindAllOrg = function($event){
       $scope.disableMemberOrg = true;
 
   readOrg.push(read);
-  postjson.PermissionTo.Organization = readOrg;
+  //postjson.PermissionTo.Organization = readOrg;
+   postjson.PermissionTo.Organization.push(read);
     }
     else{
       $scope.disableMemberOrg = false;
@@ -1087,7 +1817,8 @@ $scope.createindOrg = function($event){
       $scope.disableCreateOrgAll=true;
 
     readOrg.push(read);
-    postjson.PermissionTo.Organization = readOrg;
+    //postjson.PermissionTo.Organization = readOrg;
+	 postjson.PermissionTo.Organization.push(read);
     }
     else{
       $scope.disableCreateOrgAll=false;
@@ -1113,7 +1844,8 @@ $scope.readindOrg = function($event){
       $scope.disableReadOrgAll=true;
 
     readOrg.push(read);
-    postjson.PermissionTo.Organization = readOrg;
+    //postjson.PermissionTo.Organization = readOrg;
+	 postjson.PermissionTo.Organization.push(read);
     }
     else{
       $scope.disableReadOrgAll=false;
@@ -1139,7 +1871,8 @@ $scope.updaindOrg = function($event){
       $scope.disableUpdateOrgAll=true;
 
     readOrg.push(read);
-    postjson.PermissionTo.Organization = readOrg;
+    //postjson.PermissionTo.Organization = readOrg;
+	 postjson.PermissionTo.Organization.push(read);
     }
     else{
       $scope.disableUpdateOrgAll=false;
@@ -1164,7 +1897,8 @@ $scope.deleindOrg = function($event){
       $scope.disableDeleteOrgAll=true;
 
     readOrg.push(read);
-    postjson.PermissionTo.Organization = readOrg;
+    //postjson.PermissionTo.Organization = readOrg;
+	 postjson.PermissionTo.Organization.push(read);
     }
     else{
       $scope.disableDeleteOrgAll=false;
@@ -1189,7 +1923,8 @@ $scope.membindOrg = function($event){
       $scope.disableMemberOrgAll=true;
 
     readOrg.push(read);
-    postjson.PermissionTo.Organization = readOrg;
+   // postjson.PermissionTo.Organization = readOrg;
+    postjson.PermissionTo.Organization.push(read);
     }
     else{
       $scope.disableMemberOrgAll=false;
@@ -1217,7 +1952,8 @@ $scope.creaindAllSub = function($event){
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableCreateSub = true;
   readSub.push(read);
-  postjson.PermissionTo.Subscription = readSub;
+  //postjson.PermissionTo.Subscription = readSub;
+   postjson.PermissionTo.Subscription.push(read);
     }
     else{
             $scope.disableCreateSub = false;
@@ -1242,7 +1978,8 @@ $scope.readindAllSub = function($event){
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableReadSub=true;
   readSub.push(read);
-  postjson.PermissionTo.Subscription = readSub;
+ // postjson.PermissionTo.Subscription = readSub;
+   postjson.PermissionTo.Subscription.push(read);
     }
     else{
       $scope.disableReadSub=false;
@@ -1266,7 +2003,8 @@ $scope.updaindAllSub = function($event){
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableUpdateSub=true;
   readSub.push(read);
-  postjson.PermissionTo.Subscription = readSub;
+  //postjson.PermissionTo.Subscription = readSub;
+    postjson.PermissionTo.Subscription.push(read);
     }
     else{
       $scope.disableUpdateSub=false;
@@ -1289,7 +2027,8 @@ $scope.deleindAllSub = function($event){
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableDeleteSub=true;
   readSub.push(read);
-  postjson.PermissionTo.Subscription = readSub;
+ // postjson.PermissionTo.Subscription = readSub;
+   postjson.PermissionTo.Subscription.push(read);
     }
     else{
       $scope.disableDeleteSub=false;
@@ -1314,7 +2053,8 @@ $scope.createindSub = function($event){
             $scope.disableCreateSubAll=true;
 
     readSub.push(read);
-    postjson.PermissionTo.Subscription = readSub;
+    //postjson.PermissionTo.Subscription = readSub;
+	  postjson.PermissionTo.Subscription.push(read);
     }
     else{
             $scope.disableCreateSubAll=false;
@@ -1341,7 +2081,8 @@ $scope.readindSub = function($event){
             $scope.disableReadSubAll=true;
 
     readSub.push(read);
-    postjson.PermissionTo.Subscription = readSub;
+    //postjson.PermissionTo.Subscription = readSub;
+	  postjson.PermissionTo.Subscription.push(read);
     }
     else{
             $scope.disableReadSubAll=false;
@@ -1367,7 +2108,8 @@ $scope.updaindSub = function($event){
             $scope.disableUpdateSubAll=true;
 
     readSub.push(read);
-    postjson.PermissionTo.Subscription = readSub;
+    //postjson.PermissionTo.Subscription = readSub;
+	  postjson.PermissionTo.Subscription.push(read);
     }
     else{
             $scope.disableUpdateSubAll=false;
@@ -1392,7 +2134,8 @@ $scope.deleindSub = function($event){
             $scope.disableDeleteSubAll=true;
 
     readSub.push(read);
-    postjson.PermissionTo.Subscription = readSub;
+    //postjson.PermissionTo.Subscription = readSub;
+	  postjson.PermissionTo.Subscription.push(read);
     }
     else{
             $scope.disableDeleteSubAll=false;
@@ -1421,7 +2164,8 @@ $scope.creaindAllUser = function($event){
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableCreateUser=true;
   readUser.push(read);
-  postjson.PermissionTo.User = readUser;
+  //postjson.PermissionTo.User = readUser;
+    postjson.PermissionTo.User.push(read);
     }
     else{
             $scope.disableCreateUser=false;
@@ -1446,7 +2190,8 @@ $scope.readindAllUser = function($event){
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableReadUser=true;
   readUser.push(read);
-  postjson.PermissionTo.User = readUser;
+  //postjson.PermissionTo.User = readUser;
+   postjson.PermissionTo.User.push(read);
     }
     else{
       $scope.disableReadUser=false;
@@ -1470,7 +2215,9 @@ $scope.updaindAllUser = function($event){
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableUpdateUser=true;
   readUser.push(read);
-  postjson.PermissionTo.User = readUser;
+  
+  //postjson.PermissionTo.User = readUser;
+   postjson.PermissionTo.User.push(read);
     }
     else{
       $scope.disableUpdateUser=false;
@@ -1493,7 +2240,8 @@ $scope.deleindAllUser = function($event){
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableDeleteUser=true;
   readUser.push(read);
-  postjson.PermissionTo.User = readUser;
+  //postjson.PermissionTo.User = readUser;
+   postjson.PermissionTo.User.push(read);
     }
     else{
       $scope.disableDeleteUser=false;
@@ -1516,7 +2264,8 @@ $scope.createindUser = function($event){
             $scope.disableCreateUserAll=true;
 
   readUser.push(read);
-  postjson.PermissionTo.User = readUser;
+  //postjson.PermissionTo.User = readUser;
+   postjson.PermissionTo.User.push(read);
     }
     else{
             $scope.disableCreateUserAll=false;
@@ -1541,7 +2290,8 @@ $scope.readindUser = function($event){
             $scope.disableReadUserAll=true;
 
   readUser.push(read);
-  postjson.PermissionTo.User = readUser;
+  //postjson.PermissionTo.User = readUser;
+   postjson.PermissionTo.User.push(read);
     }
     else{
             $scope.disableReadUserAll=false;
@@ -1566,7 +2316,8 @@ $scope.updaindUser = function($event){
             $scope.disableUpdateUserAll=true;
 
   readUser.push(read);
-  postjson.PermissionTo.User = readUser;
+  //postjson.PermissionTo.User = readUser;
+   postjson.PermissionTo.User.push(read);
     }
     else{
             $scope.disableUpdateUserAll=false;
@@ -1591,7 +2342,8 @@ $scope.deleindUser = function($event){
             $scope.disableDeleteUserAll=true;
 
   readUser.push(read);
-  postjson.PermissionTo.User = readUser;
+ // postjson.PermissionTo.User = readUser;
+  postjson.PermissionTo.User.push(read);
     }
     else{
             $scope.disableDeleteUserAll=false;
@@ -1620,7 +2372,8 @@ $scope.creaindAllRole = function($event){
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableCreateRole=true;
   readRole.push(read);
-  postjson.PermissionTo.Role = readRole;
+  //postjson.PermissionTo.Role = readRole;
+   postjson.PermissionTo.Role.push(read);
     }
     else{
       $scope.disableCreateRole=false;
@@ -1644,7 +2397,8 @@ $scope.readindAllRole = function($event){
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableReadRole=true;
   readRole.push(read);
-  postjson.PermissionTo.Role = readRole;
+  //postjson.PermissionTo.Role = readRole;
+   postjson.PermissionTo.Role.push(read);
     }
     else{
       $scope.disableReadRole=false;
@@ -1668,7 +2422,8 @@ $scope.updaindAllRole = function($event){
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableUpdateRole=true;
   readRole.push(read);
-  postjson.PermissionTo.Role = readRole;
+  //postjson.PermissionTo.Role = readRole;
+   postjson.PermissionTo.Role.push(read);
     }
     else{
       $scope.disableUpdateRole=false;
@@ -1691,7 +2446,8 @@ $scope.deleindAllRole = function($event){
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableDeleteRole=true;
   readRole.push(read);
-  postjson.PermissionTo.Role = readRole;
+  //postjson.PermissionTo.Role = readRole;
+   postjson.PermissionTo.Role.push(read);
     }
     else{
       $scope.disableDeleteRole=false;
@@ -1715,7 +2471,8 @@ $scope.createindRole = function($event){
             $scope.disableCreateRoleAll=true;
 
   readRole.push(read);
-  postjson.PermissionTo.Role = readRole;
+  //postjson.PermissionTo.Role = readRole;
+   postjson.PermissionTo.Role.push(read);
   }
     else{
             $scope.disableCreateRoleAll=false;
@@ -1741,7 +2498,8 @@ $scope.readindRole = function($event){
             $scope.disableReadRoleAll=true;
 
   readRole.push(read);
-  postjson.PermissionTo.Role = readRole;
+  //postjson.PermissionTo.Role = readRole;
+   postjson.PermissionTo.Role.push(read);
     }
     else{
             $scope.disableReadRoleAll=false;
@@ -1767,7 +2525,8 @@ $scope.updaindRole = function($event){
             $scope.disableUpdateRoleAll=true;
 
   readRole.push(read);
-  postjson.PermissionTo.Role = readRole;
+  //postjson.PermissionTo.Role = readRole;
+   postjson.PermissionTo.Role.push(read);
     }
     else{
             $scope.disableUpdateRoleAll=false;
@@ -1792,7 +2551,8 @@ $scope.deleindRole = function($event){
             $scope.disableDeleteRoleAll=true;
 
   readRole.push(read);
-  postjson.PermissionTo.Role = readRole;
+  //postjson.PermissionTo.Role = readRole;
+   postjson.PermissionTo.Role.push(read);
     }
     else{
             $scope.disableDeleteRoleAll=false;
@@ -1827,14 +2587,6 @@ $scope.deleindRole = function($event){
             link: function (scope, element, attrs) {
                 element.click(function(e) {
 
-  
-                    if(attrs.href == "#subscription" || attrs.href == "#user" || attrs.href == "#role") 
-          {
-          
-                        //$scope.dropshowhide = true;
-                        //$scope.$apply();
-               // }]
-          }           
                     $(element).tab('show');
           
                 });

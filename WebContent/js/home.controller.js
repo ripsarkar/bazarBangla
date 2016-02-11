@@ -53,17 +53,28 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
  	                    $rootScope.username = localStorage.getItem("fullname");
  	                    $rootScope.compSurrId = localStorage.getItem("surrComprip");
                         $rootScope.user_name = result.User[0].user_name;
-                        $rootScope.companyNamee = localStorage.getItem("nameCompany");
+                        $rootScope.companyNamee = result.User[0].company_name;
 
  	                }
  	            	    $rootScope.loadinganimation = false;
+                        console.log($rootScope.user_name);
+                        console.log($rootScope.companyNamee);
+
                         $location.path('/home/search');
 
                         /*$http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
                         
-                            sessionStorage.setItem("fetchPermission", result);
-                            console.log(sessionStorage.getItem("fetchPermission"));
+                            localStorage.setItem("fetchPermission", result);
+                            console.log(localStorage.getItem("fetchPermission"));
                             $location.path('/home/search');
+
+                        }).error(function (error) {
+
+                        });*/
+
+                        /*$http.get($rootScope.url + "/getOrgListForUser/" + $rootScope.surrId).success(function(result) {
+                        
+                            $scope.RfetchList = result;
 
                         }).error(function (error) {
 
