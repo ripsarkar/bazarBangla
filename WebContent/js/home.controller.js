@@ -59,26 +59,28 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
  	            	    $rootScope.loadinganimation = false;
                         console.log($rootScope.user_name);
                         console.log($rootScope.companyNamee);
+                        console.log(localStorage.getItem("fullname"));
 
                         $location.path('/home/search');
 
                         /*$http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
                         
-                            localStorage.setItem("fetchPermission", result);
-                            console.log(localStorage.getItem("fetchPermission"));
+                            sessionStorage.setItem("fetchPermission", result);
+                            //$rootScope.indussession = sessionStorage.getItem("fetchPermission");
+                            console.log(sessionStorage.getItem("fetchPermission"));
                             $location.path('/home/search');
-
+                            $rootScope.loadinganimation = false;
                         }).error(function (error) {
 
                         });*/
 
-                        /*$http.get($rootScope.url + "/getOrgListForUser/" + $rootScope.surrId).success(function(result) {
+                        $http.get($rootScope.url + "/getOrgListForUser/" + $rootScope.surrId).success(function(result) {
                         
-                            $scope.RfetchList = result;
-
+                            $scope.RfetchList = result.Organization;
+                            $rootScope.loadinganimation = false;
                         }).error(function (error) {
 
-                        });*/
+                        });
 
  	            }).error(function (error) {
  	             $rootScope.loadinganimation = false;

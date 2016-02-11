@@ -1,5 +1,10 @@
 /*-------------ripunjoy css-------------*/
-
+/*-------css for top right corner organization list-------*/
+.selectlistTopOrg{
+    width:150px;
+    margin-left: 0px 5px;
+}
+/*-------------------*/
 .inputforall{
 	width:100%;
 }

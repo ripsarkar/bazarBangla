@@ -7,7 +7,7 @@
             <img alt="logo" src="img/ibmlogoheader.png" style="width: 100px;height: auto;"><span class="usecaselogo"><img alt="logo" src="img/logotophdr.png"></span>
         </div>
         <div class="col-md-6 col-sm-6 text-right">
-            <h4 class="User-name"><img src="img/loginicon.png">Welcome  {{username}} | <a href="#/login" class="" ng-click="localStorageclear()">Logout</a></h4>
+            <h4 class="User-name"><img src="img/loginicon.png">Welcome  {{username}} | <select class="selectlistTopOrg"><option ng-repeat="neOrLi in RfetchList">{{neOrLi.company_name}}</option></select><a style="margin-left:5px" href="#/login" class="" ng-click="localStorageclear()">Logout</a></h4>
         </div>
     </div>
     <div class="clearfix"></div>
