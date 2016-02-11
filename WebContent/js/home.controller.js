@@ -16,7 +16,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		  $rootScope.loadinganimation = true;
 		  var loadUserdetails = {
  	                method: "GET",
- 	                url: $rootScope.url+"/getUserDetails/"+mj[1] 
+ 	                url: $rootScope.url+"/getUserDetails/"+mj[1]
  	            };
  	            $http(loadUserdetails).success(function(result) {
  	             $rootScope.dataLoading=true; 	            
@@ -59,16 +59,15 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
  	            	    $rootScope.loadinganimation = false;
                         $location.path('/home/search');
 
-                /*$http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                        /*$http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
                         
-                        localStorage.setItem("fetchPermission", result);
-                        alert(localStorage.getItem("fetchPermission"));
-                        $location.path('/home/search');
-                        alert();
+                            sessionStorage.setItem("fetchPermission", result);
+                            console.log(sessionStorage.getItem("fetchPermission"));
+                            $location.path('/home/search');
 
-                }).error(function (error) {
+                        }).error(function (error) {
 
-                });*/
+                        });*/
 
  	            }).error(function (error) {
  	             $rootScope.loadinganimation = false;

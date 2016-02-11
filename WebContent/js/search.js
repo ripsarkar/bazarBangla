@@ -3137,13 +3137,13 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
         $scope.ruleresponse = true;
     }
     //code for user specific Industry selection
-            if($rootScope.role == "USER_VIEW"){
+        if($rootScope.role == "USER_VIEW" || $rootScope.role == "USER_EXPORT"){
 
             $scope.indusDisCheckView = true;
 
         }
         $scope.$watch(function () {
-        if($rootScope.role == "USER_VIEW"){
+        if($rootScope.role == "USER_VIEW" || $rootScope.role == "USER_EXPORT"){
 
                 angular.element(".hjdif").each(function(){
                 if(angular.element(this).val()==localStorage.getItem("industrySurrId")){
@@ -3158,7 +3158,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 
     $scope.ClikedResult = function(node) {
         //code for user specific Industry selection
-        if($rootScope.role == "USER_VIEW" && notpushed ==true){
+        if(($rootScope.role == "USER_VIEW" || $rootScope.role == "USER_EXPORT") && notpushed ==true){
             var indus ={};
             indus["id"] = localStorage.getItem("industrySurrId");
             postjsonresult.Industry.push(indus);
