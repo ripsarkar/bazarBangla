@@ -255,7 +255,7 @@ $scope.getDetailscr=function(){
 	};
 	
 	
-	$http.get($rootScope.url+'/getpopulateRoleforLogin/'+localStorage.getItem("surrrip")).success(function(resultrole) {
+	$http.get($rootScope.url+'/getpopulateRoleforLogin/'+localStorage.getItem("surrComprip")).success(function(resultrole) {
 		
 		$scope.rolelist = resultrole.Roles;
 		
