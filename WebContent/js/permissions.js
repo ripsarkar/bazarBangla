@@ -25,7 +25,7 @@ app.controller("permissionsCtrl",["$scope","$http", "$rootScope", function($scop
   $rootScope.loadinganimation = true;
 
      //$scope.fnPopulateRoleList=function(){
-            $http.get($rootScope.url + '/getpopulateRoleforLogin').success(function(data) {
+            $http.get($rootScope.url + '/getpopulateRoleforLogin/'+localStorage.getItem("surrrip")).success(function(data) {
               $scope.roleListli = data.Roles;             
               $rootScope.loadinganimation = false;
             }).error(function(data, status, headers, config) {                
@@ -848,14 +848,14 @@ $scope.creaindAll = function($event){
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
         $scope.disableCreate = true;
-        $scope.disableCreateSpe = true;
+        //$scope.disableCreateSpe = true;
       readSubscription.push(read);
      // postjson.PermissionTo.UseCase = readSubscription;
         postjson.PermissionTo.UseCase.push(read);
     }
     else{
         $scope.disableCreate = false;
-        $scope.disableCreateSpe = false;
+        //$scope.disableCreateSpe = false;
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
           if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == "ALL")
           {
@@ -986,7 +986,7 @@ $scope.createind = function($event){
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
               $scope.disableCreateAll = true;
-              $scope.disableCreateSpe = true;
+              //$scope.disableCreateSpe = true;
 
       readSubscription.push(read);
 	 	
@@ -997,7 +997,7 @@ $scope.createind = function($event){
     }
     else{
               $scope.disableCreateAll = false;
-              $scope.disableCreateSpe = false;
+              //$scope.disableCreateSpe = false;
 
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
           if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().text())
@@ -1124,7 +1124,7 @@ $scope.expoind = function($event){
     }
   console.log(postjson);
 }
-$scope.createindSpe = function($event){
+/*$scope.createindSpe = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
   read.objectval = angular.element($event.currentTarget).parent().prev().attr('value');
@@ -1151,7 +1151,7 @@ $scope.createindSpe = function($event){
 
   console.log(postjson);
 
-}
+}*/
 $scope.readindSpe = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
@@ -1278,16 +1278,16 @@ $scope.creaindAllRule = function($event){
   read.filterType = "ALL";
 
     if(angular.element($event.currentTarget).is(':checked') == true){
-      $scope.disableCreateRule = true;
-      $scope.disableCreateRuleSpe = true;
+      //$scope.disableCreateRule = true;
+      //$scope.disableCreateRuleSpe = true;
 
       readRule.push(read);
       //postjson.PermissionTo.Rule = readRule;
 	  postjson.PermissionTo.Rule.push(read);
     }
     else{
-      $scope.disableCreateRule = false;
-      $scope.disableCreateRuleSpe = false;
+      //$scope.disableCreateRule = false;
+      //$scope.disableCreateRuleSpe = false;
 
         for(var i=0;i<=postjson.PermissionTo.Rule.length;i++){
           if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == "ALL")
@@ -1410,7 +1410,7 @@ $scope.expoindAllRule = function($event){
     }
   console.log(postjson);
 }
-$scope.createindRule = function($event){
+/*$scope.createindRule = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
   read.objectval = angular.element($event.currentTarget).parent().prev().text();
@@ -1418,7 +1418,7 @@ $scope.createindRule = function($event){
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableCreateRuleAll = true;
-      $scope.disableCreateRuleSpe = true;
+      //$scope.disableCreateRuleSpe = true;
 
       readRule.push(read);
      // postjson.PermissionTo.Rule = readRule;
@@ -1426,7 +1426,7 @@ $scope.createindRule = function($event){
     }
     else{
       $scope.disableCreateRuleAll = false;
-      $scope.disableCreateRuleSpe = false;
+      //$scope.disableCreateRuleSpe = false;
         for(var i=0;i<=postjson.PermissionTo.Rule.length;i++){
           if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().text())
           {
@@ -1437,7 +1437,7 @@ $scope.createindRule = function($event){
     }
   console.log(postjson);
 
-}
+}*/
 $scope.readindRule = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
@@ -1544,7 +1544,7 @@ $scope.expoindRule = function($event){
     }
   console.log(postjson);
 }
-$scope.createindRuleSpe = function($event){
+/*$scope.createindRuleSpe = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
   read.objectval = angular.element($event.currentTarget).parent().prev().attr('value');
@@ -1552,7 +1552,7 @@ $scope.createindRuleSpe = function($event){
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableCreateRuleAll = true;
-      $scope.disableCreateRule = true;
+      //$scope.disableCreateRule = true;
 
       readRule.push(read);
      // postjson.PermissionTo.Rule = readRule;
@@ -1560,7 +1560,7 @@ $scope.createindRuleSpe = function($event){
     }
     else{
       $scope.disableCreateRuleAll = false;
-      $scope.disableCreateRule = false;
+      //$scope.disableCreateRule = false;
         for(var i=0;i<=postjson.PermissionTo.Rule.length;i++){
           if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().attr('value'))
           {
@@ -1571,7 +1571,7 @@ $scope.createindRuleSpe = function($event){
     }
   console.log(postjson);
 
-}
+}*/
 $scope.readindRuleSpe = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
@@ -1688,13 +1688,13 @@ $scope.creaindAllOrg = function($event){
 
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
-      $scope.disableCreateOrg=true;
+      //$scope.disableCreateOrg=true;
   readOrg.push(read);
   //postjson.PermissionTo.Organization = readOrg;
    postjson.PermissionTo.Organization.push(read);
     }
     else{
-            $scope.disableCreateOrg=false;
+            //$scope.disableCreateOrg=false;
 
         for(var i=0;i<=postjson.PermissionTo.Organization.length;i++){
           if(postjson.PermissionTo.Organization[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Organization[i].objectval == "ALL")
@@ -1807,7 +1807,7 @@ $scope.membindAllOrg = function($event){
       console.log(postjson);
 
 }
-$scope.createindOrg = function($event){
+/*$scope.createindOrg = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
   read.objectval = angular.element($event.currentTarget).parent().prev().text();
@@ -1833,7 +1833,7 @@ $scope.createindOrg = function($event){
     }
   console.log(postjson);
 
-}
+}*/
 $scope.readindOrg = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
