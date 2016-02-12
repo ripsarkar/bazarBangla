@@ -63,16 +63,16 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 
                         $location.path('/home/search');
 
-                        /*$http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                        $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
                         
                             sessionStorage.setItem("fetchPermission", result);
-                            //$rootScope.indussession = sessionStorage.getItem("fetchPermission");
+                            $rootScope.indussession = sessionStorage.getItem("fetchPermission");
                             console.log(sessionStorage.getItem("fetchPermission"));
                             $location.path('/home/search');
                             $rootScope.loadinganimation = false;
                         }).error(function (error) {
 
-                        });*/
+                        });
 
                         $http.get($rootScope.url + "/getOrgListForUser/" + localStorage.getItem("surrrip")).success(function(result) {
                         
