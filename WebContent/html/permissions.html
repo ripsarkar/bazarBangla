@@ -98,11 +98,11 @@
      <tbody>
    <tr>
      <td>ALL Use Cases</td>
-     <td><input type="checkbox" value="create" class="crtusecase"    data-objectval="ALL" ng-click="creaindAll($event)" ng-disabled="disableCreateAll"></td>
-     <td><input type="checkbox" value="read"   class="readusecase"   data-objectval="ALL"  ng-click="readindAll($event)" ng-disabled="disableReadAll"></td>
-     <td><input type="checkbox" value="update" class="updateusecase" data-objectval="ALL" ng-click="updaindAll($event)" ng-disabled="disableUpdateAll"></td>
-     <td><input type="checkbox" value="delete" class="deleteusecase" data-objectval="ALL" ng-click="deleindAll($event)" ng-disabled="disableDeleteAll"></td>
-     <td><input type="checkbox" value="export" class="exportusecase" data-objectval="ALL" ng-click="expoindAll($event)" ng-disabled="disableExportAll"></td>
+     <td><input type="checkbox" value="create" class="crtusecase"    data-filterType="ALL"   data-objectval="ALL" ng-click="creaindAll($event)" ng-disabled="disableCreateAll"></td>
+     <td><input type="checkbox" value="read"   class="readusecase"   data-filterType="ALL"  data-objectval="ALL"  ng-click="readindAll($event)" ng-disabled="disableReadAll"></td>
+     <td><input type="checkbox" value="update" class="updateusecase" data-filterType="ALL" data-objectval="ALL" ng-click="updaindAll($event)" ng-disabled="disableUpdateAll"></td>
+     <td><input type="checkbox" value="delete" class="deleteusecase" data-filterType="ALL" data-objectval="ALL" ng-click="deleindAll($event)" ng-disabled="disableDeleteAll"></td>
+     <td><input type="checkbox" value="export" class="exportusecase" data-filterType="ALL" data-objectval="ALL" ng-click="expoindAll($event)" ng-disabled="disableExportAll"></td>
    </tr>
    <tr>
      <td colspan="6" class="info">Use Case by Industry</td>
@@ -111,11 +111,11 @@
    <tr ng-repeat="industry in usecInduLi">
    
     <td>{{industry.Name}}</td>
-     <td><input type="checkbox" value="create" class="crtusecase"    data-objectval="{{industry.Name}}"  ng-click="createind($event)" ng-disabled="disableCreate"></td>
-     <td><input type="checkbox" value="read"   class="readusecase"   data-objectval="{{industry.Name}}"   ng-click="readind($event)" ng-disabled="disableRead"></td>
-     <td><input type="checkbox" value="update" class="updateusecase" data-objectval="{{industry.Name}}" ng-click="updaind($event)" ng-disabled="disableUpdate"></td>
-     <td><input type="checkbox" value="delete" class="deleteusecase" data-objectval="{{industry.Name}}" ng-click="deleind($event)" ng-disabled="disableDelete"></td>
-     <td><input type="checkbox" value="export" class="exportusecase" data-objectval="{{industry.Name}}" ng-click="expoind($event)" ng-disabled="disableExport"></td>
+     <td><input type="checkbox" value="create" class="crtusecase"  data-filterType="IndustryName"  data-objectval="{{industry.Name}}"  ng-click="createind($event)" ng-disabled="disableCreate"></td>
+     <td><input type="checkbox" value="read"   class="readusecase"  data-filterType="IndustryName" data-objectval="{{industry.Name}}"   ng-click="readind($event)" ng-disabled="disableRead"></td>
+     <td><input type="checkbox" value="update" class="updateusecase" data-filterType="IndustryName" data-objectval="{{industry.Name}}" ng-click="updaind($event)" ng-disabled="disableUpdate"></td>
+     <td><input type="checkbox" value="delete" class="deleteusecase" data-filterType="IndustryName" data-objectval="{{industry.Name}}" ng-click="deleind($event)" ng-disabled="disableDelete"></td>
+     <td><input type="checkbox" value="export" class="exportusecase" data-filterType="IndustryName" data-objectval="{{industry.Name}}" ng-click="expoind($event)" ng-disabled="disableExport"></td>
    </tr>
     
    <tr>
@@ -125,11 +125,11 @@
    <tr ng-repeat="usecaLi in alluselist">
    
     <td value="{{usecaLi.usecase_surr_id}}">{{usecaLi.usecase_id}}</td>
-     <td><!-- <input type="checkbox" value="create"  class="crtusecase"  data-objectval="{{usecaLi.usecase_surr_id}}"   ng-click="createindSpe($event)" ng-disabled="disableCreateSpe"> --></td>
-     <td><input type="checkbox" value="read"   class="readusecase" data-objectval="{{usecaLi.usecase_surr_id}}"   ng-click="readindSpe($event)" ng-disabled="disableReadSpe"></td>
-     <td><input type="checkbox" value="update" class="updateusecase" data-objectval="{{usecaLi.usecase_surr_id}}" ng-click="updaindSpe($event)" ng-disabled="disableUpdateSpe"></td>
-     <td><input type="checkbox" value="delete" class="deleteusecase" data-objectval="{{usecaLi.usecase_surr_id}}"  ng-click="deleindSpe($event)" ng-disabled="disableDeleteSpe"></td>
-     <td><input type="checkbox" value="export" class="exportusecase"  data-objectval="{{usecaLi.usecase_surr_id}}" ng-click="expoindSpe($event)" ng-disabled="disableExportSpe"></td>
+     <td><!-- <input type="checkbox" value="create"  class="crtusecase" data-filterType="id"  data-objectval="{{usecaLi.usecase_surr_id}}"   ng-click="createindSpe($event)" ng-disabled="disableCreateSpe"> --></td>
+     <td><input type="checkbox" value="read"   class="readusecase"   data-filterType="id" data-objectval="{{usecaLi.usecase_surr_id}}"   ng-click="readindSpe($event)" ng-disabled="disableReadSpe"></td>
+     <td><input type="checkbox" value="update" class="updateusecase" data-filterType="id" data-objectval="{{usecaLi.usecase_surr_id}}" ng-click="updaindSpe($event)" ng-disabled="disableUpdateSpe"></td>
+     <td><input type="checkbox" value="delete" class="deleteusecase" data-filterType="id" data-objectval="{{usecaLi.usecase_surr_id}}"  ng-click="deleindSpe($event)" ng-disabled="disableDeleteSpe"></td>
+     <td><input type="checkbox" value="export" class="exportusecase" data-filterType="id"  data-objectval="{{usecaLi.usecase_surr_id}}" ng-click="expoindSpe($event)" ng-disabled="disableExportSpe"></td>
    </tr>    
      </tbody>
    </table>
@@ -152,11 +152,11 @@
      <tbody>
    <tr>
      <td>ALL Rules</td>
-     <td><input type="checkbox" value="create" class="ctrrule" data-objectval="ALL"  ng-click="creaindAllRule($event)" ng-disabled="disableCreateRuleAll"></td>
-     <td><input type="checkbox" value="read"   class="readrule" data-objectval="ALL"  ng-click="readindAllRule($event)" ng-disabled="disableReadRuleAll"></td>
-     <td><input type="checkbox" value="update" class="updaterule" data-objectval="ALL"  ng-click="updaindAllRule($event)" ng-disabled="disableUpdateRuleAll"></td>
-     <td><input type="checkbox" value="delete" class="deleterule" data-objectval="ALL" ng-click="deleindAllRule($event)" ng-disabled="disableDeleteRuleAll"></td>
-     <td><input type="checkbox" value="export" class="exportrule" data-objectval="ALL" ng-click="expoindAllRule($event)" ng-disabled="disableExportRuleAll"></td>
+     <td><input type="checkbox" value="create" class="ctrrule"    data-objectval="ALL"  ng-click="creaindAllRule($event)" ng-disabled="disableCreateRuleAll"></td>
+     <td><input type="checkbox" value="read"   class="readrule"   data-filterType="ALL"  data-objectval="ALL"  ng-click="readindAllRule($event)" ng-disabled="disableReadRuleAll"></td>
+     <td><input type="checkbox" value="update" class="updaterule" data-filterType="ALL" data-objectval="ALL"  ng-click="updaindAllRule($event)" ng-disabled="disableUpdateRuleAll"></td>
+     <td><input type="checkbox" value="delete" class="deleterule" data-filterType="ALL" data-objectval="ALL" ng-click="deleindAllRule($event)" ng-disabled="disableDeleteRuleAll"></td>
+     <td><input type="checkbox" value="export" class="exportrule" data-filterType="ALL" data-objectval="ALL" ng-click="expoindAllRule($event)" ng-disabled="disableExportRuleAll"></td>
    </tr>
    <tr>
      <td colspan="6" class="info">Rules By Regulatory Category</td>
@@ -165,10 +165,10 @@
    <tr ng-repeat="regucat in regcatlist">   
     <td>{{regucat.Name}}</td>
      <td><!-- <input type="checkbox" value="create" class="ctrrule"     data-objectval="{{regucat.Name}}" ng-click="createindRule($event)" ng-disabled="disableCreateRule"> --></td>
-     <td><input type="checkbox" value="read"  class="readrule"     data-objectval="{{regucat.Name}}" ng-click="readindRule($event)" ng-disabled="disableReadRule"></td>
-     <td><input type="checkbox" value="update" class="updaterule"  data-objectval="{{regucat.Name}}" ng-click="updaindRule($event)" ng-disabled="disableUpdateRule"></td>
-     <td><input type="checkbox" value="delete" class="deleterule"  data-objectval="{{regucat.Name}}" ng-click="deleindRule($event)" ng-disabled="disableDeleteRule"></td>
-     <td><input type="checkbox" value="export" class="exportrule"  data-objectval="{{regucat.Name}}" ng-click="expoindRule($event)" ng-disabled="disableExportRule"></td>   
+     <td><input type="checkbox" value="read"  class="readrule"     data-filterType="RegCatName"  data-objectval="{{regucat.Name}}" ng-click="readindRule($event)" ng-disabled="disableReadRule"></td>
+     <td><input type="checkbox" value="update" class="updaterule" data-filterType="RegCatName" data-objectval="{{regucat.Name}}" ng-click="updaindRule($event)" ng-disabled="disableUpdateRule"></td>
+     <td><input type="checkbox" value="delete" class="deleterule" data-filterType="RegCatName" data-objectval="{{regucat.Name}}" ng-click="deleindRule($event)" ng-disabled="disableDeleteRule"></td>
+     <td><input type="checkbox" value="export" class="exportrule"  data-filterType="RegCatName" data-objectval="{{regucat.Name}}" ng-click="expoindRule($event)" ng-disabled="disableExportRule"></td>   
    </tr>    
    <tr>
      <td colspan="6" class="info">Specific Rules</td>
@@ -177,10 +177,10 @@
  <tr ng-repeat="ruleall in allrulelist"> 
  <td value="{{ruleall.uc_rule_surr_id}}">{{ruleall.uc_rule_id}}</td>
      <td><!-- <input type="checkbox" value="create" class="ctrrule"  data-objectval="{{ruleall.uc_rule_surr_id}}" ng-click="createindRuleSpe($event)" ng-disabled="disableCreateRuleSpe"> --></td>
-     <td><input type="checkbox" value="read"   class="readrule"     data-objectval="{{ruleall.uc_rule_surr_id}}" ng-click="readindRuleSpe($event)" ng-disabled="disableReadRuleSpe"></td>
-     <td><input type="checkbox" value="update" class="updaterule"  data-objectval="{{ruleall.uc_rule_surr_id}}" ng-click="updaindRuleSpe($event)" ng-disabled="disableUpdateRuleSpe"></td>
-     <td><input type="checkbox" value="delete" class="deleterule"  data-objectval="{{ruleall.uc_rule_surr_id}}" ng-click="deleindRuleSpe($event)" ng-disabled="disableDeleteRuleSpe"></td>
-     <td><input type="checkbox" value="export" class="exportrule"  data-objectval="{{ruleall.uc_rule_surr_id}}" ng-click="expoindRuleSpe($event)" ng-disabled="disableExportRuleSpe"></td>  
+     <td><input type="checkbox" value="read"   class="readrule"   data-filterType="id"    data-objectval="{{ruleall.uc_rule_surr_id}}" ng-click="readindRuleSpe($event)" ng-disabled="disableReadRuleSpe"></td>
+     <td><input type="checkbox" value="update" class="updaterule" data-filterType="id"  data-objectval="{{ruleall.uc_rule_surr_id}}" ng-click="updaindRuleSpe($event)" ng-disabled="disableUpdateRuleSpe"></td>
+     <td><input type="checkbox" value="delete" class="deleterule" data-filterType="id" data-objectval="{{ruleall.uc_rule_surr_id}}" ng-click="deleindRuleSpe($event)" ng-disabled="disableDeleteRuleSpe"></td>
+     <td><input type="checkbox" value="export" class="exportrule" data-filterType="id"  data-objectval="{{ruleall.uc_rule_surr_id}}" ng-click="expoindRuleSpe($event)" ng-disabled="disableExportRuleSpe"></td>  
    </tr>     
      </tbody>
    </table>  
