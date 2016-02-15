@@ -3156,15 +3156,18 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
         }
 
         });
-        var notpushed = true;
+        //var notpushed = true;
+
     $scope.ClikedResult = function(node) {
         //code for user specific Industry selection
-        if(($rootScope.role == "USER_VIEW" || $rootScope.role == "USER_EXPORT") && notpushed ==true){
+        //if(($rootScope.role == "USER_VIEW" || $rootScope.role == "USER_EXPORT") && notpushed ==true){
+        if($rootScope.role == "USER_VIEW" || $rootScope.role == "USER_EXPORT"){
+
             var indus ={};
             indus["id"] = localStorage.getItem("industrySurrId");
             postjsonresult.Industry.push(indus);
             console.log(postjsonresult);
-            notpushed = false;
+            //notpushed = false;
         }
     	//item populate
     	angular.element('#rateplanmapping-scroll tbody').scrollTop(0);
