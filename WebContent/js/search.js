@@ -3164,7 +3164,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
             indus["id"] = localStorage.getItem("industrySurrId");
             postjsonresult.Industry.push(indus);
             console.log(postjsonresult);
-            notpushed = false;
+            //notpushed = false;
         }
     	//item populate
     	angular.element('#rateplanmapping-scroll tbody').scrollTop(0);
