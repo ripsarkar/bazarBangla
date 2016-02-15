@@ -1584,3 +1584,7 @@ span.more-text.show {
     width: auto;
 }
 /*-------------------------------*/
+
+.disabfuncCUcColor, .disabfuncCUcColor:hover{
+	 color:white;
+}

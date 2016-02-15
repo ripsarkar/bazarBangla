@@ -7,7 +7,7 @@
             <img alt="logo" src="img/ibmlogoheader.png" style="width: 100px;height: auto;"><span class="usecaselogo"><img alt="logo" src="img/logotophdr.png"></span>
         </div>
         <div class="col-md-6 col-sm-6 text-right">
-            <h4 class="User-name"><img src="img/loginicon.png">Welcome  {{username}} | <select class="selectlistTopOrg"><option ng-repeat="neOrLi in RfetchList">{{neOrLi.company_name}}</option></select><a style="margin-left:5px" href="#/login" class="" ng-click="localStorageclear()">Logout</a></h4>
+            <h4 class="User-name"><img src="img/loginicon.png">Welcome  {{username}} | <select ng-model="userIndustChVa" ng-change="userIndustCh()" class="selectlistTopOrg"><option ng-repeat="neOrLi in RfetchList">{{neOrLi.company_name}}</option></select><a style="margin-left:5px" href="#/login" class="" ng-click="localStorageclear()">Logout</a></h4>
         </div>
     </div>
     <div class="clearfix"></div>
@@ -67,13 +67,14 @@
                 <div ng-show="menu.organisation">
                     <div class="sub_menu">
                         <ul class="submainlinks">
-                            <li class="btn btn-sub-menu createusecase"> <a ui-sref=".organization" >Create Orgnization</a></li>
-                            <li class="btn btn-sub-menu updateUsecase"> <a ui-sref=".subscription">Create Subscription</a></li>
-                            <li class="btn btn-sub-menu createrule"> <a ui-sref=".UpdateOrganisation" >Update Organisation</a></li>
-                            <li class="btn btn-sub-menu createrule"> <a ui-sref=".updatesubscription" >Update Subscription</a></li>
+                            <li class="btn btn-sub-menu createusecase" > <a ui-sref=".organization"  class=" disabfuncCUc1" >Create Orgnization</a></li>
+                            <li class="btn btn-sub-menu updateUsecase"> <a ui-sref=".subscription" class=" disabfuncCUc2">Create Subscription</a></li>
+                            <li class="btn btn-sub-menu createrule"> <a ui-sref=".UpdateOrganisation" class=" disabfuncCUc3">Update Organisation</a></li>
+                            <li class="btn btn-sub-menu createrule"> <a ui-sref=".updatesubscription" class=" disabfuncCUc4">Update Subscription</a></li>
                         </ul>
                     </div>
                 </div>
+
                 <div ng-show="menu.subrolemenu">
                     <div class="sub_menu">
                         <ul class="submainlinks">
