@@ -412,7 +412,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
         angular.element("ul.submainlinks li").removeClass("subactive");
     };
     $scope.manageOrg = function(){
-    	if($scope.UpdateOrgzd){
+    	if(!$scope.CreateOrgzd){
     	//	alert(1);
     	    angular.element(".disabfuncCUc1").attr("ui-sref","");
             angular.element(".disabfuncCUc1").attr("disabled","disabled");
@@ -423,7 +423,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
  		   }); 
     	}
     	
-    	if(!$scope.CreateOrgzd){
+    	if(!$scope.CreateSubzd){
     		//alert(2);
     	    angular.element(".disabfuncCUc2").attr("ui-sref","");
             angular.element(".disabfuncCUc2").attr("disabled","disabled");
@@ -434,7 +434,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
  		   }); 
     	}
     	
-    	if(!$scope.CreateSubzd){
+    	if(!$scope.UpdateOrgzd){
     		//alert(3);
     	    angular.element(".disabfuncCUc3").attr("ui-sref","");
             angular.element(".disabfuncCUc3").attr("disabled","disabled");
