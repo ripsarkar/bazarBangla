@@ -70,21 +70,20 @@ app.controller("updatesubscription", ["$scope", "$rootScope", "$state", '$http',
             $scope.pageLoad();
         }
         
-      	var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
-    	var list = obj.Users.PermissionObjDet;
-		for (var int = 0; int < list.length; int++) {
-			if(list[int].PermissionFor=="Subscription"){
-				var permissiontypeList = list[int].PermissionTypeDet;
-				for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
-					if(permissiontypeList[int2].PermissionName=="update"){
-						// $scope.complist=permissiontypeList[int2].ObjectList;
-						  $scope.vspselPckgs = permissiontypeList[int2].ObjectList;
-		              //  $scope.orgName = parseInt($scope.cmpyId);
-					}
+     
+    
+		var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+		if(obj.Users.Subscription !=undefined){
+			var permissiontypeList = obj.Users.Subscription.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				if(permissiontypeList[int2].PermissionName=="update"){
+					 $scope.vspselPckgs = permissiontypeList[int2].ObjectList;
+				
 				}
 			}
+
 		}
-    
+		
 //        $scope.cpmysurrid = function() {
 //            var URLviewpage = $rootScope.url+'/getCompany';
 //            $http.get(URLviewpage).success(function(data, status, headers, config) {

@@ -239,6 +239,22 @@ $timeout(function(){
 	  		$rootScope.loadinganimation=false;
 
 	});*/
+	
+	var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+	if(obj.Users.User !=undefined){
+
+		var permissiontypeList = obj.Users.User.PermissionTypeDet;
+		for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+			 if(permissiontypeList[int2].PermissionName=="create"){
+				  $scope.companyListli=permissiontypeList[int2].ObjectList;
+				  $rootScope.loadinganimation=false;
+			}
+		}
+	
+	}
+
+	
+	
                         $http.get($rootScope.url + "/getOrgListForUser/" + localStorage.getItem("surrrip")).success(function(result) {
                             $scope.companyListli = result.Organization;
                             //starting loading animation   
