@@ -2147,6 +2147,22 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 			};
 	
 	}
+setTimeout(function(){ 
+
+
+        if(localStorage.getItem("rolerip") == "USER_VIEW" || localStorage.getItem("rolerip") == "USER_EXPORT"){
+                angular.element(".indryRoot").prop('checked',false);
+                angular.element(".hjdif").each(function(){
+                if(angular.element(this).val()==localStorage.getItem("industrySurrId")){
+                    angular.element(this).prop('checked',true);
+                }
+                else{
+                   angular.element(this).prop('checked',false);
+                }
+                });
+        }
+
+}, 10);
 	}
 	//////////////////cyber security second root///////////////
 	$scope.entervalueSubcatCyberSecFunc = function($event,ndvl,nameval){
@@ -3162,7 +3178,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
         //code for user specific Industry selection
         //if(($rootScope.role == "USER_VIEW" || $rootScope.role == "USER_EXPORT") && notpushed ==true){
         if($rootScope.role == "USER_VIEW" || $rootScope.role == "USER_EXPORT"){
-
+            postjsonresult.Industry = [];
             var indus ={};
             indus["id"] = localStorage.getItem("industrySurrId");
             postjsonresult.Industry.push(indus);
