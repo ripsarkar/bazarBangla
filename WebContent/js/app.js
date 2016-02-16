@@ -13,12 +13,12 @@
               templateUrl: "login.html",
               controller: 'LoginController'
             //  controllerAs: 'vm'
-            })
-    	    .state('home', {
-    	      url: "/home",
-    	      templateUrl: "html/home.html",
+          })
+          .state('home', {
+            url: "/home",
+            templateUrl: "html/home.html",
              autoActivateChild: 'home.search'
-    	    })
+          })
     	     .state("home.search", {
     	      url:"/search",
               controller: 'searchController',

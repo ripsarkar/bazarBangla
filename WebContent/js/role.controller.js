@@ -115,9 +115,13 @@ app.controller("updaterole", ["$scope", "$rootScope", "$state", '$http', '$modal
          });
      };
  
-     $scope.orgcmpname = function(){
+/*     $scope.orgcmpname = function(){
          $rootScope.loadinganimation = true;
          
+     }*/
+       $scope.orgcmpname = function(){
+         $rootScope.loadinganimation = true;
+         $scope.pageLoad();
      }
     /*$scope.cmpinit =  function(){
         $scope.orgName = $scope.cmpyId;
