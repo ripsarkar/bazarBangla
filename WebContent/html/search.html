@@ -97,7 +97,7 @@
             <!-- Industry-->
             <ul>
                 <li>
-                    <input type="checkbox" ng-disabled="indusDisCheckView" ng-click="entervalueSubcatIndustryTop($event)">Industry<span class="start"><i class="icon-minus-sign headPlus">+</i></span>
+                    <input type="checkbox" ng-disabled="indusDisCheckView" ng-click="entervalueSubcatIndustryTop($event)" class="indryRoot">Industry<span class="start"><i class="icon-minus-sign headPlus">+</i></span>
                     <ul>
                         <li ng-repeat="indus in industry">
                             <input type="checkbox" class="hjdif" ng-disabled="indusDisCheckView" ng-click="entervalueSubcatIndustry($event,indus.SurrId,indus.Name)" value="{{indus.SurrId}}"><div class="inyAccorRole" style="display:inline">{{indus.Name}}</div>
