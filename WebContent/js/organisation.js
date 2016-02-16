@@ -89,6 +89,7 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
       $scope.sendOrganizationVal = function(){
       var testAlpNu = /^[a-zA-Z0-9]+$/;
       var testAlp = /^[a-zA-Z]+$/;
+      var testAddress = /^[a-zA-Z\s\d\/]+$/;
       if($scope.organID == ''  || !testAlpNu.test($scope.organID)){
         alert('Please enter a valid Company Id(no special character)');
           return false;
@@ -97,20 +98,36 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
         alert('Please enter a valid Company Name');
           return false;
       }
-      else if($scope.compAdd1 == ''){
-        alert('Please enter atleast one address');
+      else if($scope.compAdd1 == '' || !testAddress.test($scope.compAdd1)){
+        alert('Please enter atleast one valid address');
+          return false;
+      }
+      else if($scope.compAdd2 != '' && !testAddress.test($scope.compAdd2)){
+        alert('Please enter valid 2nd address');
+          return false;
+      }
+      else if($scope.compAdd3 != '' && !testAddress.test($scope.compAdd3)){
+        alert('Please enter valid 3rd address');
           return false;
       }
             else if($scope.city == ''  || !testAlp.test($scope.city)){
-        alert('Please enter city');
+        alert('Please enter valid city');
+          return false;
+      }
+            else if($scope.state != ''  && !testAlp.test($scope.state)){
+        alert('Please enter valid state');
           return false;
       }
             else if($scope.country == ''  || !testAlp.test($scope.country)){
-        alert('Please enter country');
+        alert('Please enter valid country');
           return false;
       }
             else if($scope.zip == '' || !testAlpNu.test($scope.zip)){
-        alert('Please enter zipcode');
+        alert('Please enter valid zipcode');
+          return false;
+      }
+            else if($scope.geocode != '' || !testAlpNu.test($scope.geocode)){
+        alert('Please enter valid zipcode');
           return false;
       }
       else{

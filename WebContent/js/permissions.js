@@ -2652,7 +2652,7 @@ $scope.creaindAllSub = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
   read.objectval = "ALL";
-  read.filterType = "ALL";
+  read.filterType = "OrganizationName";
 
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
@@ -2679,7 +2679,7 @@ $scope.readindAllSub = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
   read.objectval = "ALL";
-  read.filterType = "ALL";
+  read.filterType = "OrganizationName";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableReadSub=true;
@@ -2704,7 +2704,7 @@ $scope.updaindAllSub = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
   read.objectval = "ALL";
-  read.filterType = "ALL";
+  read.filterType = "OrganizationName";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableUpdateSub=true;
@@ -2728,7 +2728,7 @@ $scope.deleindAllSub = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
   read.objectval = "ALL";
-  read.filterType = "ALL";
+  read.filterType = "OrganizationName";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableDeleteSub=true;
@@ -2864,7 +2864,7 @@ $scope.creaindAllUser = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
   read.objectval = "ALL";
-  read.filterType = "ALL";
+  read.filterType = "OrganizationName";
 
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
@@ -2891,7 +2891,7 @@ $scope.readindAllUser = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
   read.objectval = "ALL";
-  read.filterType = "ALL";
+  read.filterType = "OrganizationName";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableReadUser=true;
@@ -2916,7 +2916,7 @@ $scope.updaindAllUser = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
   read.objectval = "ALL";
-  read.filterType = "ALL";
+  read.filterType = "OrganizationName";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableUpdateUser=true;
@@ -2941,7 +2941,7 @@ $scope.deleindAllUser = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
   read.objectval = "ALL";
-  read.filterType = "ALL";
+  read.filterType = "OrganizationName";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableDeleteUser=true;
@@ -3072,7 +3072,7 @@ $scope.creaindAllRole = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
   read.objectval = "ALL";
-  read.filterType = "ALL";
+  read.filterType = "OrganizationName";
 
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
@@ -3098,7 +3098,7 @@ $scope.readindAllRole = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
   read.objectval = "ALL";
-  read.filterType = "ALL";
+  read.filterType = "OrganizationName";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableReadRole=true;
@@ -3123,7 +3123,7 @@ $scope.updaindAllRole = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
   read.objectval = "ALL";
-  read.filterType = "ALL";
+  read.filterType = "OrganizationName";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableUpdateRole=true;
@@ -3147,7 +3147,7 @@ $scope.deleindAllRole = function($event){
   var read = {};
   read.operation = angular.element($event.currentTarget).val();
   read.objectval = "ALL";
-  read.filterType = "ALL";
+  read.filterType = "OrganizationName";
 //push and pop data
     if(angular.element($event.currentTarget).is(':checked') == true){
       $scope.disableDeleteRole=true;

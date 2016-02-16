@@ -1,0 +1,21 @@
+{
+	"User": [{
+		"user_surr_id": 874,
+		"company_surr_id": 7000,
+		"company_name": "IBM India Private Limited",
+		"user_name": "ripsarka@in.ibm.com",
+		"user_first_name": "Ripunjoy",
+		"user_middle_name": "",
+		"user_last_name": "Sarkar",
+		"user_is_active": "Y",
+		"user_sub_cntrct_id": "CONTRACT-1",
+		"user_sub_cntrct_isActive": "Y",
+		"user_role_surr_id": 9000,
+		"user_role_id": "1",
+		"user_role_name": "ADMIN",
+		"user_role_delete_ind": "Y",
+		"user_industry_surr_id": 4507,
+		"user_industry_id": "Technology",
+		"user_industry_name": "Technology"
+	}]
+}
