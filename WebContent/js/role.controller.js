@@ -243,7 +243,7 @@ app.filter('startFrom', function() {
  return function(input, start) {
      start = +start;
      console.clear();
-     if (typeof input != 'undefined') {
+     if (input != null && typeof input != 'undefined') {
          return input.slice(start);
      }
  };

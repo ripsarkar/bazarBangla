@@ -50,18 +50,31 @@ app.directive("xyzcomp", function($http,$rootScope){
 
         });
 
+    	var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+    	var list = obj.Users.PermissionObjDet;
+		for (var int = 0; int < list.length; int++) {
+			if(list[int].PermissionFor=="Subscription"){
+				var permissiontypeList = list[int].PermissionTypeDet;
+				for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+					 if(permissiontypeList[int2].PermissionName=="create"){
+						 $scope.complist=permissiontypeList[int2].ObjectList;
+					}
+				}
+			}
+		}
+        
 
-            $rootScope.loadinganimation=true;
-            //calling getcompany
-            $http.get($rootScope.url+'/getCompany').success(function(resultnamecr) {
-              $scope.complist = resultnamecr.Company;
-               //starting loading animation 
-               $rootScope.loadinganimation=false; 
-                }).error(function(error) {
-                   //error
-                  alert("There is some problem as reported by the backend. Please contact the administrator");
-                  $rootScope.loadinganimation=false;
-            });
+//            $rootScope.loadinganimation=true;
+//            //calling getcompany
+//            $http.get($rootScope.url+'/getCompany').success(function(resultnamecr) {
+//              $scope.complist = resultnamecr.Company;
+//               //starting loading animation 
+//               $rootScope.loadinganimation=false; 
+//                }).error(function(error) {
+//                   //error
+//                  alert("There is some problem as reported by the backend. Please contact the administrator");
+//                  $rootScope.loadinganimation=false;
+//            });
 
       //sending data
       $scope.ceateContact = function(){

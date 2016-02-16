@@ -2,7 +2,7 @@ app.controller("updatesubscription", ["$scope", "$rootScope", "$state", '$http',
     
         $scope.cmpyId = localStorage.getItem("cmpyId");
         $scope.usrId = localStorage.getItem("surrrip");
-        $rootScope.loadinganimation = true;
+     //   $rootScope.loadinganimation = true;
     
         $scope.currentPage = 0;
         $scope.pageSize = 20;
@@ -69,20 +69,35 @@ app.controller("updatesubscription", ["$scope", "$rootScope", "$state", '$http',
             $rootScope.loadinganimation = true;
             $scope.pageLoad();
         }
+        
+      	var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+    	var list = obj.Users.PermissionObjDet;
+		for (var int = 0; int < list.length; int++) {
+			if(list[int].PermissionFor=="Subscription"){
+				var permissiontypeList = list[int].PermissionTypeDet;
+				for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+					if(permissiontypeList[int2].PermissionName=="update"){
+						 $scope.complist=permissiontypeList[int2].ObjectList;
+						  $scope.vspselPckgs = permissiontypeList[int2].ObjectList;
+		              //  $scope.orgName = parseInt($scope.cmpyId);
+					}
+				}
+			}
+		}
     
-        $scope.cpmysurrid = function() {
-            var URLviewpage = $rootScope.url+'/getCompany';
-            $http.get(URLviewpage).success(function(data, status, headers, config) {
-                $scope.vspselPckgs = data.Company;
-                $scope.orgName = parseInt($scope.cmpyId);
-                $scope.pageLoad();
-            }).error(function(data, status, headers, config) {
-                $rootScope.dataLoading=true;
-                alert("Please contact your adminstrator");
-            });
-        }
+//        $scope.cpmysurrid = function() {
+//            var URLviewpage = $rootScope.url+'/getCompany';
+//            $http.get(URLviewpage).success(function(data, status, headers, config) {
+//                $scope.vspselPckgs = data.Company;
+//                $scope.orgName = parseInt($scope.cmpyId);
+//                $scope.pageLoad();
+//            }).error(function(data, status, headers, config) {
+//                $rootScope.dataLoading=true;
+//                alert("Please contact your adminstrator");
+//            });
+//        }
 
-        $scope.cpmysurrid();
+      //  $scope.cpmysurrid();
     
         $scope.subscptForm = function(id, subsctpId, effectdate, expirationdate, maxusers, index) {
             var subscptdata = {
