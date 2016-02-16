@@ -19,19 +19,19 @@ app.factory('MyAPIServiceUpOrg', function($http,$rootScope){
 app.controller('updateOrgani',function($scope,$http,$rootScope){
              //   $rootScope.loadinganimation=true;
                 
+
 var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
-var list = obj.Users.PermissionObjDet;
-for (var int = 0; int < list.length; int++) {
-	if(list[int].PermissionFor=="Organization"){
-		var permissiontypeList = list[int].PermissionTypeDet;
-		for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
-			if(permissiontypeList[int2].PermissionName=="update"){
-				 $scope.organiUpdatetable=permissiontypeList[int2].ObjectList;
-			
-			}
+if(obj.Users.Organization !=undefined){
+	var permissiontypeList = obj.Users.Organization.PermissionTypeDet;
+	for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+		if(permissiontypeList[int2].PermissionName=="update"){
+			 $scope.organiUpdatetable=permissiontypeList[int2].ObjectList;
+		
 		}
 	}
-}                
+
+}
+              
 
 //$http.get( $rootScope.url + "/listCompanies").success(function(data){
 //                $rootScope.loadinganimation=false;

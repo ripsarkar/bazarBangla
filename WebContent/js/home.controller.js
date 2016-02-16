@@ -17,7 +17,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		  var loadUserdetails = {
  	                method: "GET",
  	               url: $rootScope.url+"/getUserDetails/"+mj[1]
- 	               // url: "data/userdtail.json"
+ 	              //  url: "data/userdtail.json"
  	            };
  	            $http(loadUserdetails).success(function(result) {
  	             $rootScope.dataLoading=true; 	            
@@ -124,30 +124,33 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		$scope.CreateSubzd = false;
 		
 		var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
-    	var list = obj.Users.PermissionObjDet;
-		for (var int = 0; int < list.length; int++) {
-			if(list[int].PermissionFor=="Organization"){
-				var permissiontypeList = list[int].PermissionTypeDet;
-				for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
-					if(permissiontypeList[int2].PermissionName=="update"){
-						$scope.UpdateOrgzd = true;
-					}else if(permissiontypeList[int2].PermissionName=="create"){
-						$scope.CreateOrgzd = true;
-					}
-				}
-			}else if(list[int].PermissionFor=="Subscription"){
-				var permissiontypeList = list[int].PermissionTypeDet;
-				for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
-					if(permissiontypeList[int2].PermissionName=="update"){
-						$scope.UpdateSubzd = true;
-					}else if(permissiontypeList[int2].PermissionName=="create"){
-						$scope.CreateSubzd = true;
-					}
+		if(obj.Users.Subscription !=undefined){
+
+			var permissiontypeList = obj.Users.Subscription.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				if(permissiontypeList[int2].PermissionName=="update"){
+					$scope.UpdateSubzd = true;
+				}else if(permissiontypeList[int2].PermissionName=="create"){
+					$scope.CreateSubzd = true;
 				}
 			}
 		}
+		if(obj.Users.Organization !=undefined){
+
+			var permissiontypeList = obj.Users.Organization.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				if(permissiontypeList[int2].PermissionName=="update"){
+					$scope.UpdateOrgzd = true;
+				}else if(permissiontypeList[int2].PermissionName=="create"){
+					$scope.CreateOrgzd = true;
+				}
+			}
+		
+		}
+    	
 		
 	}
+	
 	//logout
 	$scope.localStorageclear=function(){
 		
