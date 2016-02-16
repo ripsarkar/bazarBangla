@@ -2093,18 +2093,6 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	
 	////////////////////////selecting main root/////////////////////////
 	$scope.caAll = function(){
-        if(localStorage.getItem("rolerip") == "USER_VIEW" || localStorage.getItem("rolerip") == "USER_EXPORT"){
-                angular.element(".indryRoot").prop('checked',false);
-                angular.element(".hjdif").each(function(){
-                if(angular.element(this).val()==localStorage.getItem("industrySurrId")){
-                    angular.element(this).prop('checked',true);
-                }
-                else{
-                   angular.element(this).prop('checked',false);
-                }
-                });
-        }
-
 		$scope.tableReset();
 		
 		if(angular.element(".allclass").is(':checked') == true){
@@ -2158,7 +2146,22 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 			};
 
 	}
+setTimeout(function(){ 
 
+
+        if(localStorage.getItem("rolerip") == "USER_VIEW" || localStorage.getItem("rolerip") == "USER_EXPORT"){
+                angular.element(".indryRoot").prop('checked',false);
+                angular.element(".hjdif").each(function(){
+                if(angular.element(this).val()==localStorage.getItem("industrySurrId")){
+                    angular.element(this).prop('checked',true);
+                }
+                else{
+                   angular.element(this).prop('checked',false);
+                }
+                });
+        }
+
+}, 10);
 	}
 	//////////////////cyber security second root///////////////
 	$scope.entervalueSubcatCyberSecFunc = function($event,ndvl,nameval){
