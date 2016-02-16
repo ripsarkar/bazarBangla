@@ -77,7 +77,7 @@ app.controller("updatesubscription", ["$scope", "$rootScope", "$state", '$http',
 				var permissiontypeList = list[int].PermissionTypeDet;
 				for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
 					if(permissiontypeList[int2].PermissionName=="update"){
-						 $scope.complist=permissiontypeList[int2].ObjectList;
+						// $scope.complist=permissiontypeList[int2].ObjectList;
 						  $scope.vspselPckgs = permissiontypeList[int2].ObjectList;
 		              //  $scope.orgName = parseInt($scope.cmpyId);
 					}
