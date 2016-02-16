@@ -16,8 +16,8 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		  $rootScope.loadinganimation = true;
 		  var loadUserdetails = {
  	                method: "GET",
- 	                url: $rootScope.url+"/getUserDetails/"+mj[1]
- 	                //url: "data/userdtail.json"
+ 	               url: $rootScope.url+"/getUserDetails/"+mj[1]
+ 	               // url: "data/userdtail.json"
  	            };
  	            $http(loadUserdetails).success(function(result) {
  	             $rootScope.dataLoading=true; 	            
@@ -69,7 +69,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
                             sessionStorage.setItem("fetchPermission", JSON.stringify(result));
                             $scope.permission = sessionStorage.getItem("fetchPermission");
                             console.log(sessionStorage.getItem("fetchPermission"));
-                            $scope.managePermission();
+                          
                             $location.path('/home/search');
                             $rootScope.loadinganimation = false;
                         }).error(function (error) {
@@ -412,6 +412,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
         angular.element("ul.submainlinks li").removeClass("subactive");
     };
     $scope.manageOrg = function(){
+    	 $scope.managePermission();
     	if(!$scope.CreateOrgzd){
     	//	alert(1);
     	    angular.element(".disabfuncCUc1").attr("ui-sref","");
