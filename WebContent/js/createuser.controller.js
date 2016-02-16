@@ -229,7 +229,7 @@ $rootScope.loadinganimation=true;
 
 $timeout(function(){
 	 //calling getcompany
-	$http.get($rootScope.url+'/getCompany').success(function(resultnamecr) {
+	/*$http.get($rootScope.url+'/getCompany').success(function(resultnamecr) {
 		$scope.companyListli = resultnamecr.Company;
 		 //starting loading animation	
 		 $rootScope.loadinganimation=false;	
@@ -238,7 +238,16 @@ $timeout(function(){
 	  		alert("There is some problem as reported by the backend. Please contact the administrator");
 	  		$rootScope.loadinganimation=false;
 
-	});
+	});*/
+                        $http.get($rootScope.url + "/getOrgListForUser/" + localStorage.getItem("surrrip")).success(function(result) {
+                            $scope.companyListli = result.Organization;
+                            //starting loading animation   
+                            $rootScope.loadinganimation=false;
+                        }).error(function (error) {
+                            //error
+                            alert("There is some problem as reported by the backend. Please contact the administrator");
+                            $rootScope.loadinganimation=false;
+                        });
 },3000);
 
 $scope.getDetailscr=function(){
