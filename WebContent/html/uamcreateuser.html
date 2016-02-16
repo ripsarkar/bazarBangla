@@ -69,30 +69,30 @@
  							<option style="display: none" value="">--Please Select--</option>
 						</select> -->
 						<select class="form-control valselect" ng-model="selectedCompanycr" ng-change=getDetailscr()>
-							<option ng-repeat="companycr in companyListli| orderBy : 'name'">{{companycr.company_name}}</option>
+							<option ng-repeat="companycr in companyListli| orderBy : 'Name'">{{companycr.Name}}</option>
 						</select>
 
                                     </div>
-                                    <div class="col-md-4 col-sm-6">
+                              <!--       <div class="col-md-4 col-sm-6">
                                     <label> Industry</label>
 									<p>{{industryName}}</p>
-									<!-- <input ng-model="industryName">Hospitality -->
+									<input ng-model="industryName">Hospitality
 
                                     </div>
                                         <div class="col-md-4 col-sm-6">
                                         <label> Contract ID </label> 
 										<p>{{contractId}}</p>
-										<!-- <input ng-model="contractId">CONTRACT-1 -->
-                                        </div>
+										<input ng-model="contractId">CONTRACT-1
+                                        </div> -->
                                     <div class="clearfix"></div>
                                     <div class="margintp2">
 
-                                        <div class="col-md-4 col-sm-6">
+                                 <!--        <div class="col-md-4 col-sm-6">
                                             <label> Role<span style="color:red">*</span> </label>
                                             <select class="form-control" ng-model="role">
                                                 <option ng-repeat="rolemain in rolelist| orderBy : 'user_role_name'">{{rolemain.user_role_name}}</option>
                                             </select>
-                                        </div>
+                                        </div> -->
 
                                     </div>
                                     <div class="clearfix"></div>
