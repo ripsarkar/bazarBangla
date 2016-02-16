@@ -1,7 +1,7 @@
 //wrting the controller for viewuser page
 app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", function($scope, ViewUserService, $rootScope){
 	
-	 $rootScope.loadinganimation=true;	
+	// $rootScope.loadinganimation=true;	
 
 	
 	$scope.industryName = "";
@@ -21,17 +21,31 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", f
                 });
         }
     }
+    
+	var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+	if(obj.Users.User !=undefined){
+
+		var permissiontypeList = obj.Users.Subscription.PermissionTypeDet;
+		for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+			 if(permissiontypeList[int2].PermissionName=="update"){
+				 $scope.companyList=permissiontypeList[int2].OrgList;
+			
+                 $scope.backbtnusermanager();
+			}
+		}
 	
-		ViewUserService.getCompanyName().success(function(resultname)
-				{		 
-					$rootScope.loadinganimation=false;	
-					$scope.companyList = resultname.Company;
-                    $scope.backbtnusermanager();
-				}).error(function (error) {
-       	         //error
-			  		alert("There is some problem as reported by the backend. Please contact the administrator");
-			  		$rootScope.loadinganimation=false;
-			  	})
+	}
+	
+//		ViewUserService.getCompanyName().success(function(resultname)
+//				{		 
+//					$rootScope.loadinganimation=false;	
+//					$scope.companyList = resultname.Company;
+//                    $scope.backbtnusermanager();
+//				}).error(function (error) {
+//       	         //error
+//			  		alert("There is some problem as reported by the backend. Please contact the administrator");
+//			  		$rootScope.loadinganimation=false;
+//			  	})
 
 	
 	$scope.getDetails=function(){

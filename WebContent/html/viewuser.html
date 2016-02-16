@@ -15,9 +15,9 @@
 				<div class="row">
 					<div class="col-md-3 col-sm-6">
 						<label>Organization Name</label> 
-						<select class="form-control" ng-model="selectedCompany" ng-options="company.name for company in companyList  track by company.id "
+						<select class="form-control" ng-model="selectedCompany" ng-options="company.Name for company in companyList  track by company.SurrId "
 							 ng-change=getDetails()>
-							<option ng-selected="selectedCompany.id == company.id" style="display: none" value="">--Please Select--</option>
+							<option ng-selected="selectedCompany.SurrId == company.SurrId" style="display: none" value="">--Please Select--</option>
 							
 						</select>
 						
