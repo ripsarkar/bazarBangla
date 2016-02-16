@@ -51,17 +51,17 @@ app.directive("xyzcomp", function($http,$rootScope){
         });
 
     	var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
-    	var list = obj.Users.PermissionObjDet;
-		for (var int = 0; int < list.length; int++) {
-			if(list[int].PermissionFor=="Subscription"){
-				var permissiontypeList = list[int].PermissionTypeDet;
-				for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
-					 if(permissiontypeList[int2].PermissionName=="create"){
-						 $scope.complist=permissiontypeList[int2].ObjectList;
-					}
+    	if(obj.Users.Subscription !=undefined){
+
+			var permissiontypeList = obj.Users.Subscription.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				 if(permissiontypeList[int2].PermissionName=="create"){
+					 $scope.complist=permissiontypeList[int2].ObjectList;
 				}
 			}
-		}
+		
+    	}
+    
         
 
 //            $rootScope.loadinganimation=true;
