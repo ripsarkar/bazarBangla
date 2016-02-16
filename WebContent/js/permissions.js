@@ -176,19 +176,23 @@ $scope.fnFetchPermissions=function(id,name){
 						var operation= outer[0].attributes['value'].value;
 						var filterType=outer[0].attributes['data-filterType'].value;
 						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {						             
-								if (val.operation == operation && val.objectval==objectval && val.filterType==filterType) {	
+								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                         //alert("if")	
 										  outer[0].setAttribute("checked", "checked");																		 
                                           $scope.compile(outer[0]);
 										  
-										 if(val.objectval =='ALL' && val.filterType == 'ALL'){											
+										
+										 
+										 if(filterType == 'ALL'){											
 											 $scope.disableCreate = true;
-											 $scope.disableCreateAll=false
+											 									 
 										 } 
-										 else{
-											  $scope.disableCreateAll=true
-											  $scope.disableCreate = false;
-										 }
+									   if(filterType == 'IndustryName')
+										 {
+                                              	     $scope.disableCreateAll=true													 
+												
+								          }
+										
 										
 							  }
 							  else{
@@ -207,38 +211,32 @@ $scope.fnFetchPermissions=function(id,name){
 						var operation= outer[0].attributes['value'].value;
 						var filterType=outer[0].attributes['data-filterType'].value;
 						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
-					 
-								if (val.operation == operation && val.objectval==objectval && val.filterType==filterType) {	
-                                        //alert("if")	
+					       //alert(operation+"-----"+val.operation)
+								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
+                                
 										  outer[0].setAttribute("checked", "checked");																		 
                                           $scope.compile(outer[0]);										
 										
-										if(val.objectval =='ALL' && val.filterType == 'ALL'){											
+										if(filterType == 'ALL'){											
 											 $scope.disableRead = true;
-											 $scope.disableReadSpe= true;
-											 $scope.disableReadAll=false
+											 $scope.disableReadSpe= true;											 
 										 } 
-										 else{
-                                                if(val.objectval =='ALL' && val.filterType == 'IndustryName'){
-													
-													 $scope.disableReadAll=true
-													 $scope.disableRead = false;
+									   if(filterType == 'IndustryName')
+										 {
+                                              	     $scope.disableReadAll=true													 
 													 $scope.disableReadSpe= true;
-												}
-                                                else{
-													$scope.disableReadAll=true
+								          }
+										if(filterType == 'id')
+										  {
+													 $scope.disableReadAll=true;													 
 													 $scope.disableRead = true;
-													 $scope.disableReadSpe= false;
 													
-												}												
-											 
-											  
 										 }
+                                                												
+											 
 										
 							  }
-							  else{
-								
-							  }
+							  
 			  
 						});
 						
@@ -251,30 +249,31 @@ $scope.fnFetchPermissions=function(id,name){
 						var filterType=outer[0].attributes['data-filterType'].value;
 						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
 					 //debugger;
-								if (val.operation == operation && val.objectval==objectval && val.filterType==filterType) {	
+								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                        
 										outer[0].setAttribute("checked", "checked");
 										$scope.compile(outer[0]);	
 										
-										if(val.objectval =='ALL' && val.filterType == 'ALL'){
-											
-											$scope.disableUpdate=true;
-											$scope.disableUpdateSpe=true;
-										}
-										else{
-											
-											if(val.objectval =='ALL' && val.filterType == 'IndustryName'){
-												
-											    $scope.disableUpdateSpe=true;
-												$scope.disableUpdateAll=true;
-											}
-											else{												
-												$scope.disableUpdate=true;
-												$scope.disableUpdateAll=true;
-											}
-											
-											
-										}
+										
+										
+										
+										if(filterType == 'ALL'){											
+											 $scope.disableUpdate = true;
+											 $scope.disableUpdateSpe= true;											 
+										 } 
+									   if(filterType == 'IndustryName')
+										 {
+                                              	     $scope.disableUpdateAll=true													 
+													 $scope.disableUpdateSpe= true;
+								          }
+										if(filterType == 'id')
+										  {
+													 $scope.disableUpdateAll=true;													 
+													 $scope.disableUpdate = true;
+													
+										 }
+										
+										
 										
 							  }
 							  else{
@@ -292,30 +291,30 @@ $scope.fnFetchPermissions=function(id,name){
 						var filterType=outer[0].attributes['data-filterType'].value;
 						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval && val.filterType==filterType) {	
+								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                         //alert("if")	
 										outer[0].setAttribute("checked", "checked");
 										$scope.compile(outer[0]);	
 										
-										if(val.objectval =='ALL' && val.filterType == 'ALL'){
 											
-											$scope.disableDelete=true;
-											$scope.disableDeleteSpe=true;
-										}
-										else{
+										if(filterType == 'ALL'){											
+											 $scope.disableDelete = true;
+											 $scope.disableDeleteSpe= true;											 
+										 } 
+									   if(filterType == 'IndustryName')
+										 {
+                                              	     $scope.disableDeleteAll=true													 
+													 $scope.disableDeleteSpe= true;
+								          }
+										if(filterType == 'id')
+										  {
+													 $scope.disableDeleteAll=true;													 
+													 $scope.disableDelete = true;
+													
+										 }
+										
 											
-											if(val.objectval =='ALL' && val.filterType == 'IndustryName'){
-												
-											    $scope.disableDeleteSpe=true;
-												$scope.disableDeleteAll=true;
-											}
-											else{												
-												$scope.disableDelete=true;
-												$scope.disableDeleteAll=true;
-											}
-											
-											
-										}
+										
 										
 							  }
 							  else{
@@ -338,25 +337,25 @@ $scope.fnFetchPermissions=function(id,name){
 										outer[0].setAttribute("checked", "checked");
 										$scope.compile(outer[0]);										
 										
-										if(val.objectval =='ALL' && val.filterType == 'ALL'){
-											
-											$scope.disableExport=true;
-											$scope.disableExportSpe=true;
-										}
-										else{
-											
-											if(val.objectval =='ALL' && val.filterType == 'IndustryName'){
-												
-											    $scope.disableExportSpe=true;
-												$scope.disableExportAll=true;
-											}
-											else{												
-												$scope.disableExport=true;
-												$scope.disableExportAll=true;
-											}
-											
-											
-										}
+										
+										if(filterType == 'ALL'){											
+											 $scope.disableExport = true;
+											 $scope.disableExportSpe= true;											 
+										 } 
+									   if(filterType == 'IndustryName')
+										 {
+                                              	     $scope.disableExportAll=true													 
+													 $scope.disableExportSpe= true;
+								          }
+										if(filterType == 'id')
+										  {
+													 $scope.disableExportAll=true;													 
+													 $scope.disableExport = true;
+													
+										 }
+										
+										
+										
 										
 							  }
 							  else{
@@ -369,6 +368,214 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					
+							
+					/****************START Specific Use case*******************/
+					
+					//usercase Tab  - createusecase
+					angular.forEach(document.querySelectorAll('.crtusecasesp'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						var filterType=outer[0].attributes['data-filterType'].value;
+						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {						             
+								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
+                                        //alert("if")	
+										  outer[0].setAttribute("checked", "checked");																		 
+                                          $scope.compile(outer[0]);
+										  
+										
+										 
+										 if(filterType == 'ALL'){											
+											 $scope.disableCreate = true;
+											 									 
+										 } 
+									   if(filterType == 'IndustryName')
+										 {
+                                              	     $scope.disableCreateAll=true													 
+												
+								          }
+										
+										
+							  }
+							  else{
+								  
+							  }
+			  
+						});
+						
+					});
+
+					
+					//usercase Tab  - readusecase
+					angular.forEach(document.querySelectorAll('.readusecasesp'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						var filterType=outer[0].attributes['data-filterType'].value;
+						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
+					       //alert(operation+"-----"+val.operation)
+								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
+                                
+										  outer[0].setAttribute("checked", "checked");																		 
+                                          $scope.compile(outer[0]);										
+										
+										if(filterType == 'ALL'){											
+											 $scope.disableRead = true;
+											 $scope.disableReadSpe= true;											 
+										 } 
+									   if(filterType == 'IndustryName')
+										 {
+                                              	     $scope.disableReadAll=true													 
+													 $scope.disableReadSpe= true;
+								          }
+										if(filterType == 'id')
+										  {
+													 $scope.disableReadAll=true;													 
+													 $scope.disableRead = true;
+													
+										 }
+                                                												
+											 
+										
+							  }
+							  
+			  
+						});
+						
+					});
+					//usercase Tab  - updateusecase
+					angular.forEach(document.querySelectorAll('.updateusecasesp'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						var filterType=outer[0].attributes['data-filterType'].value;
+						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
+					 //debugger;
+								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
+                                       
+										outer[0].setAttribute("checked", "checked");
+										$scope.compile(outer[0]);	
+										
+										
+										
+										
+										if(filterType == 'ALL'){											
+											 $scope.disableUpdate = true;
+											 $scope.disableUpdateSpe= true;											 
+										 } 
+									   if(filterType == 'IndustryName')
+										 {
+                                              	     $scope.disableUpdateAll=true													 
+													 $scope.disableUpdateSpe= true;
+								          }
+										if(filterType == 'id')
+										  {
+													 $scope.disableUpdateAll=true;													 
+													 $scope.disableUpdate = true;
+													
+										 }
+										
+										
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+					//usercase Tab  - deleteusecase
+					angular.forEach(document.querySelectorAll('.deleteusecasesp'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						var filterType=outer[0].attributes['data-filterType'].value;
+						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
+					 
+								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");
+										$scope.compile(outer[0]);	
+										
+											
+										if(filterType == 'ALL'){											
+											 $scope.disableDelete = true;
+											 $scope.disableDeleteSpe= true;											 
+										 } 
+									   if(filterType == 'IndustryName')
+										 {
+                                              	     $scope.disableDeleteAll=true													 
+													 $scope.disableDeleteSpe= true;
+								          }
+										if(filterType == 'id')
+										  {
+													 $scope.disableDeleteAll=true;													 
+													 $scope.disableDelete = true;
+													
+										 }
+										
+											
+										
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+					//usercase Tab  - exportusecase
+					angular.forEach(document.querySelectorAll('.exportusecasesp'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						var filterType=outer[0].attributes['data-filterType'].value;
+						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval && val.filterType==filterType) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");
+										$scope.compile(outer[0]);										
+										
+										
+										if(filterType == 'ALL'){											
+											 $scope.disableExport = true;
+											 $scope.disableExportSpe= true;											 
+										 } 
+									   if(filterType == 'IndustryName')
+										 {
+                                              	     $scope.disableExportAll=true													 
+													 $scope.disableExportSpe= true;
+								          }
+										if(filterType == 'id')
+										  {
+													 $scope.disableExportAll=true;													 
+													 $scope.disableExport = true;
+													
+										 }
+										
+										
+										
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+					
+							
+					/****************END Specific Use case*******************/
+					
+					
+					
+					
+					//alert(JSON.stringify(result))
+					
 					//Rule Tab  - create-rule
 					angular.forEach(document.querySelectorAll('.ctrrule'), function(value, key) {						 
 						var outer =angular.element(value);							
@@ -378,7 +585,7 @@ $scope.fnFetchPermissions=function(id,name){
 						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
 					 
 								if (val.operation == operation && val.objectval==objectval ) {	
-                                        //alert("if")	
+                                        
 										outer[0].setAttribute("checked", "checked");																		 
                                           $scope.compile(outer[0]);						
 										  
@@ -395,36 +602,37 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					//Rule Tab  - readrule
-					angular.forEach(document.querySelectorAll('.readrule'), function(value, key) {						 
+					angular.forEach(document.querySelectorAll('.readrule'), function(value, key) {
+							
 						var outer =angular.element(value);							
 						var objectval= outer[0].attributes['data-objectval'].value;
 						var operation= outer[0].attributes['value'].value;
 					    var filterType=outer[0].attributes['data-filterType'].value;
 						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
-					 
-								if (val.operation == operation && val.objectval==objectval) {	
-                                        //alert("if")	
+					   
+					            //alert(operation +"=="+ val.operation +"&&"+ objectval+"=="+val.objectval)
+								if (operation == val.operation && objectval==val.objectval) {	
+                                     	
 										outer[0].setAttribute("checked", "checked");																		 
                                           $scope.compile(outer[0]);										
-										if(val.objectval =='ALL' && val.filterType == 'ALL'){
-											
-											$scope.disableReadRule=true;
-											$scope.disableReadRuleSpe=true;
-										}
-										else{
-											
-											if(filterType == 'RegCatName'){
-												
-											    $scope.disableReadRuleSpe=true;
-												$scope.disableReadRuleAll=true;
-											}
-											else{												
-												$scope.disableReadRule=true;
-												$scope.disableReadRuleAll=true;
-											}
-											
-											
-										}
+										
+										
+										if(filterType == 'ALL'){											
+											 $scope.disableReadRule = true;
+											 $scope.disableReadRuleSpe= true;											 
+										 } 
+									   if(filterType == 'RegCatName')
+										 {
+                                              	     $scope.disableReadRuleAll=true													 
+													 $scope.disableReadRuleSpe= true;
+								          }
+										if(filterType == 'id')
+										  {
+													 $scope.disableReadRuleAll=true;													 
+													 $scope.disableReadRule = true;
+													
+										 }
+										/// break; 
 										
 							  }
 							  else{
@@ -444,29 +652,26 @@ $scope.fnFetchPermissions=function(id,name){
 						 var filterType=outer[0].attributes['data-filterType'].value;
 						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval && val.filterType==filterType) {	
+								if (operation == val.operation && objectval== val.objectval && filterType==val.filterType) {	
                                         //alert("if")	
 										outer[0].setAttribute("checked", "checked");																		 
-                                          $scope.compile(outer[0]);										
-										if(val.objectval =='ALL' && val.filterType == 'ALL'){
-											
-											$scope.disableUpdateRule=true;
-											$scope.disableUpdateRuleSpe=true;
-										}
-										else{
-											
-											if(filterType == 'RegCatName'){
-												
-											    $scope.disableUpdateRuleSpe=true;
-												$scope.disableUpdateRuleAll=true;
-											}
-											else{												
-												$scope.disableUpdateRule=true;
-												$scope.disableUpdateRuleAll=true;
-											}
-											
-											
-										}
+                                          $scope.compile(outer[0]);		
+										  
+										if(filterType == 'ALL'){											
+											 $scope.disableUpdateRule = true;
+											 $scope.disableUpdateRuleSpe= true;											 
+										 } 
+									   if(filterType == 'RegCatName')
+										 {
+                                              	     $scope.disableUpdateRuleAll=true													 
+													 $scope.disableUpdateRuleSpe= true;
+								          }
+										if(filterType == 'id')
+										  {
+													 $scope.disableUpdateRuleAll=true;													 
+													 $scope.disableUpdateRule = true;
+													
+										 }
 										
 							  }
 							  else{
@@ -486,29 +691,26 @@ $scope.fnFetchPermissions=function(id,name){
 						 var filterType=outer[0].attributes['data-filterType'].value;
 						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval && val.filterType==filterType) {	
+								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                         //alert("if")	
 										outer[0].setAttribute("checked", "checked");																		 
                                           $scope.compile(outer[0]);										
-										if(val.objectval =='ALL' && val.filterType == 'ALL'){
-											
-											$scope.disableDeleteRule=true;
-											$scope.disableDeleteRuleSpe=true;
-										}
-										else{
-											
-											if(filterType == 'RegCatName'){
-												
-											    $scope.disableDeleteRuleSpe=true;
-												$scope.disableDeleteRuleAll=true;
-											}
-											else{												
-												$scope.disableDeleteRule=true;
-												$scope.disableDeleteRuleAll=true;
-											}
-											
-											
-										}
+										
+										if(filterType == 'ALL'){											
+											 $scope.disableDeleteRule = true;
+											 $scope.disableDeleteRuleSpe= true;											 
+										 } 
+									   if(filterType == 'RegCatName')
+										 {
+                                              	     $scope.disableDeleteRuleAll=true													 
+													 $scope.disableDeleteRuleSpe= true;
+								          }
+										if(filterType == 'id')
+										  {
+													 $scope.disableDeleteRuleAll=true;													 
+													 $scope.disableDeleteRule = true;
+													
+										 }
 										
 							  }
 							  else{
@@ -525,32 +727,30 @@ $scope.fnFetchPermissions=function(id,name){
 						var outer =angular.element(value);							
 						var objectval= outer[0].attributes['data-objectval'].value;
 						var operation= outer[0].attributes['value'].value;
-					var filterType=outer[0].attributes['data-filterType'].value;
+					    var filterType=outer[0].attributes['data-filterType'].value;
 						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval && val.filterType==filterType) {	
+								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                         //alert("if")	
-										outer[0].setAttribute("checked", "checked");																		 
-                                          $scope.compile(outer[0]);										
-										if(val.objectval =='ALL' && val.filterType == 'ALL'){
-											
-											$scope.disableExportRule=true;
-											$scope.disableExportRuleSpe=true;
-										}
-										else{
-											
-											if(filterType == 'RegCatName'){
-												
-											    $scope.disableExportRuleSpe=true;
-												$scope.disableExportRuleAll=true;
-											}
-											else{												
-												$scope.disableExportRule=true;
-												$scope.disableExportRuleAll=true;
-											}
-											
-											
-										}
+										 outer[0].setAttribute("checked", "checked");																		 
+                                          $scope.compile(outer[0]);		
+										  
+										if(filterType == 'ALL'){											
+											 $scope.disableExportRule = true;
+											 $scope.disableExportRuleSpe= true;											 
+										 } 
+									   if(filterType == 'RegCatName')
+										 {
+                                              	     $scope.disableExportRuleSpe=true													 
+													 $scope.disableExportRuleSpe= true;
+								          }
+										if(filterType == 'id')
+										  {
+													 $scope.disableExportRuleAll=true;													 
+													 $scope.disableExportRule = true;
+													
+										 }
+										
 										
 							  }
 							  else{
@@ -564,6 +764,198 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					
+					/****************Specific Rules*******************/
+					
+					//Rule Tab  - create-rule
+					angular.forEach(document.querySelectorAll('.ctrrulesp'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						
+						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
+					 
+								if (val.operation == operation && val.objectval==objectval ) {	
+                                        
+										outer[0].setAttribute("checked", "checked");																		 
+                                          $scope.compile(outer[0]);						
+										  
+										
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+					
+					
+					//Rule Tab  - readrule
+					angular.forEach(document.querySelectorAll('.readrulesp'), function(value, key) {
+							
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+					    var filterType=outer[0].attributes['data-filterType'].value;
+						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
+					   
+					            //alert(operation +"=="+ val.operation +"&&"+ objectval+"=="+val.objectval)
+								if (operation == val.operation && objectval==val.objectval) {	
+                                     	
+										outer[0].setAttribute("checked", "checked");																		 
+                                          $scope.compile(outer[0]);										
+										
+										
+										if(filterType == 'ALL'){											
+											 $scope.disableReadRule = true;
+											 $scope.disableReadRuleSpe= true;											 
+										 } 
+									   if(filterType == 'RegCatName')
+										 {
+                                              	     $scope.disableReadRuleAll=true													 
+													 $scope.disableReadRuleSpe= true;
+								          }
+										if(filterType == 'id')
+										  {
+													 $scope.disableReadRuleAll=true;													 
+													 $scope.disableReadRule = true;
+													
+										 }
+										/// break; 
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+					
+					
+					//Rule Tab  - updaterule
+					angular.forEach(document.querySelectorAll('.updaterulesp'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						 var filterType=outer[0].attributes['data-filterType'].value;
+						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
+					 
+								if (operation == val.operation && objectval== val.objectval && filterType==val.filterType) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");																		 
+                                          $scope.compile(outer[0]);		
+										  
+										if(filterType == 'ALL'){											
+											 $scope.disableUpdateRule = true;
+											 $scope.disableUpdateRuleSpe= true;											 
+										 } 
+									   if(filterType == 'RegCatName')
+										 {
+                                              	     $scope.disableUpdateRuleAll=true													 
+													 $scope.disableUpdateRuleSpe= true;
+								          }
+										if(filterType == 'id')
+										  {
+													 $scope.disableUpdateRuleAll=true;													 
+													 $scope.disableUpdateRule = true;
+													
+										 }
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+					
+					
+					//Rule Tab  - deleterule
+					angular.forEach(document.querySelectorAll('.deleterulesp'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+						 var filterType=outer[0].attributes['data-filterType'].value;
+						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
+					 
+								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
+                                        //alert("if")	
+										outer[0].setAttribute("checked", "checked");																		 
+                                          $scope.compile(outer[0]);										
+										
+										if(filterType == 'ALL'){											
+											 $scope.disableDeleteRule = true;
+											 $scope.disableDeleteRuleSpe= true;											 
+										 } 
+									   if(filterType == 'RegCatName')
+										 {
+                                              	     $scope.disableDeleteRuleAll=true													 
+													 $scope.disableDeleteRuleSpe= true;
+								          }
+										if(filterType == 'id')
+										  {
+													 $scope.disableDeleteRuleAll=true;													 
+													 $scope.disableDeleteRule = true;
+													
+										 }
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+					
+					
+					//Rule Tab  - exportrule
+					angular.forEach(document.querySelectorAll('.exportrulesp'), function(value, key) {						 
+						var outer =angular.element(value);							
+						var objectval= outer[0].attributes['data-objectval'].value;
+						var operation= outer[0].attributes['value'].value;
+					    var filterType=outer[0].attributes['data-filterType'].value;
+						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
+					 
+								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
+                                        //alert("if")	
+										 outer[0].setAttribute("checked", "checked");																		 
+                                          $scope.compile(outer[0]);		
+										  
+										if(filterType == 'ALL'){											
+											 $scope.disableExportRule = true;
+											 $scope.disableExportRuleSpe= true;											 
+										 } 
+									   if(filterType == 'RegCatName')
+										 {
+                                              	     $scope.disableExportRuleSpe=true													 
+													 $scope.disableExportRuleSpe= true;
+								          }
+										if(filterType == 'id')
+										  {
+													 $scope.disableExportRuleAll=true;													 
+													 $scope.disableExportRule = true;
+													
+										 }
+										
+										
+							  }
+							  else{
+								
+							  }
+			  
+						});
+						
+					});
+					
+					
+					
+					/*********************************/
+					
+					
 					
 					
 					
@@ -575,16 +967,11 @@ $scope.fnFetchPermissions=function(id,name){
 						
 						 angular.forEach(result.PermissionTo.Subscription, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval) {	
+								if (operation == val.operation && objectval== val.objectval) {	
                                         //alert("if")	
 										outer[0].setAttribute("checked", "checked");
-										
-										 console.log("val.operation"+ val.operation);
-										 console.log("operation"+ operation);
-										 console.log("val.objectval"+ val.objectval);
-										  console.log("objectval"+ objectval);										 
                                           $scope.compile(outer[0]);										
-										if(val.objectval =='ALL'){
+										if(objectval =='ALL'){
 											
 											
 											$scope.disableCreateSub=true;
@@ -614,12 +1001,12 @@ $scope.fnFetchPermissions=function(id,name){
 						
 						 angular.forEach(result.PermissionTo.Subscription, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval) {	
+								if (operation == val.operation && objectval==val.objectval) {	
                                         //alert("if")	
 										outer[0].setAttribute("checked", "checked");	
                                           $scope.compile(outer[0]);										
 										
-										if(val.objectval =='ALL'){
+										if(objectval =='ALL'){
 											
 											
 											$scope.disableReadSub=true;
@@ -645,11 +1032,11 @@ $scope.fnFetchPermissions=function(id,name){
 						
 						 angular.forEach(result.PermissionTo.Subscription, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval) {	
+								if (operation == val.operation && objectval==val.objectval) {	
                                         //alert("if")	
 										outer[0].setAttribute("checked", "checked");	
                                           $scope.compile(outer[0]);										
-										if(val.objectval =='ALL'){
+										if(objectval =='ALL'){
 											
 											
 											$scope.disableUpdateSub=true;
@@ -675,17 +1062,17 @@ $scope.fnFetchPermissions=function(id,name){
 						
 						 angular.forEach(result.PermissionTo.Subscription, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval) {	
+								if (operation == val.operation && objectval==val.objectval) {	
                                         //alert("if")	
 										outer[0].setAttribute("checked", "checked");	
                                           $scope.compile(outer[0]);										
-										if(val.objectval =='ALL'){
+										if(objectval =='ALL'){
 											
 											
 											$scope.disableDeleteSub=true;
 										}
 										else{
-												$scope.disableUpdateSubAll=true;
+												$scope.disableDeleteSubAll=true;
 												
 											
 										}
@@ -708,7 +1095,7 @@ $scope.fnFetchPermissions=function(id,name){
 						
 						 angular.forEach(result.PermissionTo.Organization, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval) {	
+								if (operation == val.operation && objectval==val.objectval) {	
                                     							
 										outer[0].setAttribute("checked", "checked");
                                         $scope.compile(outer[0]);
@@ -735,12 +1122,12 @@ $scope.fnFetchPermissions=function(id,name){
 						
 						 angular.forEach(result.PermissionTo.Organization, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval) {	
+								if (operation == val.operation && objectval==val.objectval) {	
                                     							
 										outer[0].setAttribute("checked", "checked");
                                         $scope.compile(outer[0]);
 										//debugger;
-										if(val.objectval =='ALL'){
+										if(objectval =='ALL'){
 											
 											
 											$scope.disableReadOrg=true;
@@ -769,12 +1156,12 @@ $scope.fnFetchPermissions=function(id,name){
 						
 						 angular.forEach(result.PermissionTo.Organization, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval) {	
+								if (operation == val.operation && objectval== val.objectval) {	
                                     							
 										outer[0].setAttribute("checked", "checked");
                                         $scope.compile(outer[0]);
 										//debugger;
-										if(val.objectval =='ALL'){
+										if(objectval =='ALL'){
 											
 											
 											$scope.disableUpdateOrg=true;
@@ -804,12 +1191,12 @@ $scope.fnFetchPermissions=function(id,name){
 						
 						 angular.forEach(result.PermissionTo.Organization, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval) {	
+								if (operation == val.operation && objectval==val.objectval) {	
                                     							
 										outer[0].setAttribute("checked", "checked");
                                         $scope.compile(outer[0]);
 										//debugger;
-										if(val.objectval =='ALL'){
+										if(objectval =='ALL'){
 											
 											
 											$scope.disableDeleteOrg=true;
@@ -837,18 +1224,18 @@ $scope.fnFetchPermissions=function(id,name){
 						
 						 angular.forEach(result.PermissionTo.Organization, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval) {	
+								if (operation == val.operation && objectval==val.objectval) {	
                                     							
 										outer[0].setAttribute("checked", "checked");
                                         $scope.compile(outer[0]);
 										//debugger;
-										if(val.objectval =='ALL'){
+										if(objectval =='ALL'){
 											
 											
-											$scope.disableDeleteOrg=true;
+											$scope.disableMemberOrg=true;
 										}
 										else{
-												$scope.disableDeleteOrgAll=true;
+												$scope.disableMemberOrgAll=true;
 												
 											
 										}
@@ -871,13 +1258,13 @@ $scope.fnFetchPermissions=function(id,name){
 						
 						 angular.forEach(result.PermissionTo.User, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval) {	
+								if (operation == val.operation && objectval==val.objectval) {	
                                     							
 										outer[0].setAttribute("checked", "checked");
                                         $scope.compile(outer[0]);
 										//debugger;
 										
-										if(val.objectval =='ALL'){
+										if(objectval =='ALL'){
 											
 											
 											$scope.disableCreateUser=true;
@@ -906,12 +1293,12 @@ $scope.fnFetchPermissions=function(id,name){
 						
 						 angular.forEach(result.PermissionTo.User, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval) {	
+								if (operation == val.operation && objectval==val.objectval) {	
                                     							
 										outer[0].setAttribute("checked", "checked");
                                         $scope.compile(outer[0]);
 										//debugger;
-										if(val.objectval =='ALL'){
+										if(objectval =='ALL'){
 											
 											
 											$scope.disableReadUser=true;
@@ -940,12 +1327,12 @@ $scope.fnFetchPermissions=function(id,name){
 						
 						 angular.forEach(result.PermissionTo.User, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval) {	
+								if (operation == val.operation && objectval==val.objectval) {	
                                     							
 										outer[0].setAttribute("checked", "checked");
                                         $scope.compile(outer[0]);
-										//debugger;
-										if(val.objectval =='ALL'){
+									
+										if(objectval =='ALL'){
 											
 											
 											$scope.disableUpdateUser=true;
@@ -974,12 +1361,12 @@ $scope.fnFetchPermissions=function(id,name){
 						
 						 angular.forEach(result.PermissionTo.User, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval) {	
+								if (operation == val.operation && objectval==val.objectval) {	
                                     							
 										outer[0].setAttribute("checked", "checked");
                                         $scope.compile(outer[0]);
 										//debugger;
-										if(val.objectval =='ALL'){
+										if(objectval =='ALL'){
 											
 											
 											$scope.disableDeleteUser=true;
@@ -1008,11 +1395,11 @@ $scope.fnFetchPermissions=function(id,name){
 						
 						 angular.forEach(result.PermissionTo.Role, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval) {	
+								if (operation == val.operation && objectval==val.objectval) {	
                                     							
 										outer[0].setAttribute("checked", "checked");
                                         $scope.compile(outer[0]);
-										if(val.objectval =='ALL'){
+										if(objectval =='ALL'){
 											
 											
 											$scope.disableCreateRole=true;
@@ -1040,7 +1427,7 @@ $scope.fnFetchPermissions=function(id,name){
 						
 						 angular.forEach(result.PermissionTo.Role, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval) {	
+								if (operation == val.operation && objectval==val.objectval) {	
                                     							
 										outer[0].setAttribute("checked", "checked");
                                         $scope.compile(outer[0]);
@@ -1073,11 +1460,11 @@ $scope.fnFetchPermissions=function(id,name){
 						
 						 angular.forEach(result.PermissionTo.Role, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval) {	
+								if (operation == val.operation && objectval==val.objectval) {	
                                     							
 										outer[0].setAttribute("checked", "checked");
                                         $scope.compile(outer[0]);
-										if(val.objectval =='ALL'){
+										if(objectval =='ALL'){
 											
 											
 											$scope.disableUpdateRole=true;
@@ -1105,11 +1492,11 @@ $scope.fnFetchPermissions=function(id,name){
 						
 						 angular.forEach(result.PermissionTo.Role, function(val,key) {	
 					 
-								if (val.operation == operation && val.objectval==objectval) {	
+								if (operation == val.operation && objectval==val.objectval) {	
                                     							
 										outer[0].setAttribute("checked", "checked");
                                         $scope.compile(outer[0]);
-										if(val.objectval =='ALL'){
+										if(objectval =='ALL'){
 											
 											
 											$scope.disableDeleteRole=true;
