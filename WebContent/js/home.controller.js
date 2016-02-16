@@ -17,7 +17,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		  var loadUserdetails = {
  	                method: "GET",
  	               url: $rootScope.url+"/getUserDetails/"+mj[1]
- 	               //url: "data/userdtail.json"
+ 	          //     url: "data/userdtail.json"
  	            };
  	            $http(loadUserdetails).success(function(result) {
  	             $rootScope.dataLoading=true; 	            
@@ -117,39 +117,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		$scope.showAllmode=true;
 	}
 	
-	$scope.managePermission=function(){
-		$scope.UpdateOrgzd = false;
-		$scope.CreateOrgzd = false;
-		$scope.UpdateSubzd = false;
-		$scope.CreateSubzd = false;
-		
-		var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
-		if(obj.Users.Subscription !=undefined){
-
-			var permissiontypeList = obj.Users.Subscription.PermissionTypeDet;
-			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
-				if(permissiontypeList[int2].PermissionName=="update"){
-					$scope.UpdateSubzd = true;
-				}else if(permissiontypeList[int2].PermissionName=="create"){
-					$scope.CreateSubzd = true;
-				}
-			}
-		}
-		if(obj.Users.Organization !=undefined){
-
-			var permissiontypeList = obj.Users.Organization.PermissionTypeDet;
-			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
-				if(permissiontypeList[int2].PermissionName=="update"){
-					$scope.UpdateOrgzd = true;
-				}else if(permissiontypeList[int2].PermissionName=="create"){
-					$scope.CreateOrgzd = true;
-				}
-			}
-		
-		}
-    	
-		
-	}
+	
 	
 	//logout
 	$scope.localStorageclear=function(){
@@ -371,6 +339,76 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 //                loadAllUsers();
 //            });
 //    }
+    
+    /**********************************/
+    $scope.managePermissionOrg=function(){
+		$scope.UpdateOrgzd = false;
+		$scope.CreateOrgzd = false;
+		$scope.UpdateSubzd = false;
+		$scope.CreateSubzd = false;
+		
+		var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+		if(obj.Users.Subscription !=undefined){
+
+			var permissiontypeList = obj.Users.Subscription.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				if(permissiontypeList[int2].PermissionName=="update"){
+					if(permissiontypeList[int2].ObjectList.length==0){
+					$scope.UpdateSubzd = true;
+					}
+				}else if(permissiontypeList[int2].PermissionName=="create"){
+					if(permissiontypeList[int2].ObjectList.length==0){
+					$scope.CreateSubzd = true;
+					}
+				}
+			}
+		}
+		if(obj.Users.Organization !=undefined){
+
+			var permissiontypeList = obj.Users.Organization.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				if(permissiontypeList[int2].PermissionName=="update"){
+					if(permissiontypeList[int2].ObjectList.length==0){
+					$scope.UpdateOrgzd = true;
+					}
+				}else if(permissiontypeList[int2].PermissionName=="create"){
+					if(permissiontypeList[int2].ObjectList.length==0){
+					$scope.CreateOrgzd = true;
+					}
+				}
+			}
+		
+		}
+    	
+		
+	}
+	
+	$scope.managePermissionForUserAccount=function(){
+		$scope.UpdateUserzd = false;
+		$scope.CreateUserzd = false;
+		
+		
+		var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+		if(obj.Users.User !=undefined){
+
+			var permissiontypeList = obj.Users.User.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				if(permissiontypeList[int2].PermissionName=="update"){
+					if(permissiontypeList[int2].ObjectList.length==0){
+						$scope.UpdateUserzd = true;
+					}
+				}else if(permissiontypeList[int2].PermissionName=="create"){
+					if(permissiontypeList[int2].ObjectList.length==0){
+					$scope.CreateUserzd = true;
+					}
+				}
+			}
+		}
+		    	
+		
+	}
+     
+   /***************************** */
     $scope.defaultmenu = function(){
         $scope.menu = {
             usecaserule :false,
@@ -415,7 +453,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
         angular.element("ul.submainlinks li").removeClass("subactive");
     };
     $scope.manageOrg = function(){
-    	 $scope.managePermission();
+    	 $scope.managePermissionOrg();
     	if(!$scope.CreateOrgzd){
     	//	alert(1);
     	    angular.element(".disabfuncCUc1").attr("ui-sref","");
@@ -474,6 +512,29 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
         angular.element("ul.submainlinks li").removeClass("subactive");
     };
     $scope.uamanagement = function(){
+    	 $scope.managePermissionForUserAccount();
+     	if(!$scope.CreateUserzd){
+     	//	alert(1);
+     	    angular.element(".disabfuncCUc5").attr("ui-sref","");
+             angular.element(".disabfuncCUc5").attr("disabled","disabled");
+             angular.element(".disabfuncCUc5").addClass(" btn btn-disabled");
+             angular.element(".disabfuncCUc5").addClass("disabfuncCUcColor");
+             angular.element(".disabfuncCUc5").click(function(ev) {
+  		       ev.preventDefault();
+  		   }); 
+     	}
+     	
+     	if(!$scope.UpdateUserzd){
+     		//alert(2);
+     	    angular.element(".disabfuncCUc6").attr("ui-sref","");
+             angular.element(".disabfuncCUc6").attr("disabled","disabled");
+             angular.element(".disabfuncCUc6").addClass(" btn btn-disabled");
+             angular.element(".disabfuncCUc6").addClass("disabfuncCUcColor");
+             angular.element(".disabfuncCUc6").click(function(ev) {
+  		       ev.preventDefault();
+  		   }); 
+     	}
+    	
     	$scope.menu = {
                 usecaserule :false,
                 feedback : false,
