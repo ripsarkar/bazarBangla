@@ -21,7 +21,7 @@
                     <li ng-show = "feedback"><a ng-click="feedbackmenu()" class="forallnotsear feedbackmenu"><span class="icon-usermanage"></span> Feedback </a></li>
                     <!-- <li ng-show = "alertMenu"><a href="" ><span class="glyphicon glyphicon-bell" style="float:left;font-size:20px;padding-right:10px"></span><div style="float:left">Alert</div></a></li> -->
                     <li ng-show = "useCaseMaintain"><a class="forallnotsear forallnotFedd" ng-click="menuUseRule()" ><span class="glyphicon glyphicon-list-alt" style="float:left;font-size:20px;padding-right:5px"></span><div style="float:left">Use Case Maintenance</div></a> </li>
-                    <li ng-show = "userAccountManagement"><a class="forallnotsear forallnotFedd" ui-sref=".uamanagement" ng-click="uamanagement();" ><span class="glyphicon glyphicon-user" style="float:left;font-size:20px;padding-right:5px"></span><div style="float:left">User Account Management</div></a></li>
+                    <li ng-show = "userAccountManagement"><a class="forallnotsear forallnotFedd" ng-click="uamanagement();" ><span class="glyphicon glyphicon-user" style="float:left;font-size:20px;padding-right:5px"></span><div style="float:left">User Account Management</div></a></li>
                     <li ng-show = "organization"><a ng-click="manageOrg()" class="forallnotsear"><span class="glyphicon glyphicon-gift" style="float:left;font-size:20px;padding-right:5px"></span><span>Manage org</span></a></li>
                     <li ng-show = "rolemenu"><a ng-click="roleMnu()" class="forallnotsear"><span class="glyphicon glyphicon-gift" style="float:left;font-size:20px;padding-right:5px"></span><span>Role</span></a></li>
                 </ul>
@@ -59,8 +59,8 @@
 	            <div ng-show="menu.uaman">
 	                <div class="sub_menu">
 						<ul class="submainlinks">
-							 <li class="active btn btn-sub-menu" id="createusertab" ng-click="uamanager()"> <a herf="">Create New</a></li>
-			                <li class="btn btn-sub-menu" ng-click="uaviewer()"> <a herf="">Manage User</a></li>
+							 <li class="active btn btn-sub-menu" id="createusertab" ng-click="uamanager()"> <a ui-sref=".createuser"  class=" disabfuncCUc5" >Create New</a></li>
+			                <li class="btn btn-sub-menu" ng-click="uaviewer()"> <a  ui-sref=".uamanagement" class=" disabfuncCUc6">Manage User</a></li>
 						</ul>
 					</div>
 	            </div>
