@@ -68,8 +68,12 @@
 							 ng-change=getDetailscr()>
  							<option style="display: none" value="">--Please Select--</option>
 						</select> -->
-						<select class="form-control valselect" ng-model="selectedCompanycr" ng-change=getDetailscr()>
-							<option ng-repeat="companycr in companyListli| orderBy : 'Name'">{{companycr.Name}}</option>
+						<!-- <select class="form-control" ng-model="selectedCompanycr" >
+							<option ng-repeat="companycr in companyListli.SurrId| orderBy : 'Name'">{{companycr.Name}}</option>
+						</select> -->
+						<select class="form-control" ng-model="selectedCompanycr" ng-options="company.Name for company in companyList  track by company.SurrId ">
+							<option ng-selected="selectedCompany.SurrId == company.SurrId" style="display: none" value="">--Please Select--</option>
+							
 						</select>
 
                                     </div>

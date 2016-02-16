@@ -242,11 +242,13 @@ $timeout(function(){
 	
 	var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
 	if(obj.Users.User !=undefined){
+		
 
 		var permissiontypeList = obj.Users.User.PermissionTypeDet;
 		for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
 			 if(permissiontypeList[int2].PermissionName=="create"){
-				  $scope.companyListli=permissiontypeList[int2].ObjectList;
+				 alert(permissiontypeList[int2].ObjectList[0].Name);
+				  $scope.companyList=permissiontypeList[int2].ObjectList;
 				  $rootScope.loadinganimation=false;
 			}
 		}
@@ -255,40 +257,40 @@ $timeout(function(){
 
 	
 	
-                        $http.get($rootScope.url + "/getOrgListForUser/" + localStorage.getItem("surrrip")).success(function(result) {
-                            $scope.companyListli = result.Organization;
-                            //starting loading animation   
-                            $rootScope.loadinganimation=false;
-                        }).error(function (error) {
-                            //error
-                            alert("There is some problem as reported by the backend. Please contact the administrator");
-                            $rootScope.loadinganimation=false;
-                        });
+//                        $http.get($rootScope.url + "/getOrgListForUser/" + localStorage.getItem("surrrip")).success(function(result) {
+//                            $scope.companyListli = result.Organization;
+//                            //starting loading animation   
+//                            $rootScope.loadinganimation=false;
+//                        }).error(function (error) {
+//                            //error
+//                            alert("There is some problem as reported by the backend. Please contact the administrator");
+//                            $rootScope.loadinganimation=false;
+//                        });
 },3000);
 
-$scope.getDetailscr=function(){
-		for(var i=0;i<$scope.companyListli.length;i++){
-			if($scope.companyListli[i].name==$scope.selectedCompanycr){
-				idcompanyget=$scope.companyListli[i].id;
-			}
-		}
-		createUserService.getCompDetails(idcompanyget).success(function(resultname)
-				{
-					$scope.industryName = resultname.industryName;
-					$scope.contractId = resultname.contractId;
-				});
-	};
+//$scope.getDetailscr=function(){
+//		for(var i=0;i<$scope.companyListli.length;i++){
+//			if($scope.companyListli[i].name==$scope.selectedCompanycr){
+//				idcompanyget=$scope.companyListli[i].id;
+//			}
+//		}
+//		createUserService.getCompDetails(idcompanyget).success(function(resultname)
+//				{
+//					$scope.industryName = resultname.industryName;
+//					$scope.contractId = resultname.contractId;
+//				});
+//	};
 	
 	
-	$http.get($rootScope.url+'/getpopulateRoleforLogin/'+localStorage.getItem("surrComprip")).success(function(resultrole) {
-		
-		$scope.rolelist = resultrole.Roles;
-		
-      	 }).error(function(error) {
-        //error
-      		 alert("There is some problem as reported by the backend. Please contact the administrator");
- 	  		$rootScope.loadinganimation=false;
-    	 });
+//	$http.get($rootScope.url+'/getpopulateRoleforLogin/'+localStorage.getItem("surrComprip")).success(function(resultrole) {
+//		
+//		$scope.rolelist = resultrole.Roles;
+//		
+//      	 }).error(function(error) {
+//        //error
+//      		 alert("There is some problem as reported by the backend. Please contact the administrator");
+// 	  		$rootScope.loadinganimation=false;
+//    	 });
 
 /*	createUserService.getRoles(data).success(function(resultrole)
 		{

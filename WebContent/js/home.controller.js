@@ -17,7 +17,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		  var loadUserdetails = {
  	                method: "GET",
  	               url: $rootScope.url+"/getUserDetails/"+mj[1]
- 	         //  url: "data/userdtail.json"
+ 	         // url: "data/userdtail.json"
  	            };
  	            $http(loadUserdetails).success(function(result) {
  	             $rootScope.dataLoading=true; 	            
@@ -353,11 +353,11 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 			var permissiontypeList = obj.Users.Subscription.PermissionTypeDet;
 			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
 				if(permissiontypeList[int2].PermissionName=="update"){
-					if(permissiontypeList[int2].ObjectList.length==0){
-					$scope.UpdateSubzd = true;
+					if(permissiontypeList[int2].ObjectList.length > 0){
+						$scope.UpdateSubzd = true;
 					}
 				}else if(permissiontypeList[int2].PermissionName=="create"){
-					if(permissiontypeList[int2].ObjectList.length==0){
+					if(permissiontypeList[int2].ObjectList.length > 0){
 					$scope.CreateSubzd = true;
 					}
 				}
@@ -368,11 +368,11 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 			var permissiontypeList = obj.Users.Organization.PermissionTypeDet;
 			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
 				if(permissiontypeList[int2].PermissionName=="update"){
-					if(permissiontypeList[int2].ObjectList.length==0){
+					if(permissiontypeList[int2].ObjectList.length > 0){
 					$scope.UpdateOrgzd = true;
 					}
 				}else if(permissiontypeList[int2].PermissionName=="create"){
-					if(permissiontypeList[int2].ObjectList.length==0){
+					if(permissiontypeList[int2].ObjectList.length > 0){
 					$scope.CreateOrgzd = true;
 					}
 				}
@@ -394,11 +394,11 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 			var permissiontypeList = obj.Users.User.PermissionTypeDet;
 			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
 				if(permissiontypeList[int2].PermissionName=="update"){
-					if(permissiontypeList[int2].ObjectList.length==0){
+					if(permissiontypeList[int2].ObjectList.length > 0){
 						$scope.UpdateUserzd = true;
 					}
 				}else if(permissiontypeList[int2].PermissionName=="create"){
-					if(permissiontypeList[int2].ObjectList.length==0){
+					if(permissiontypeList[int2].ObjectList.length > 0){
 					$scope.CreateUserzd = true;
 					}
 				}
@@ -514,8 +514,9 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
     $scope.uamanagement = function(){
     	 $scope.managePermissionForUserAccount();
      	if(!$scope.CreateUserzd){
+     		
      	//	alert(1);
-     	    angular.element(".disabfuncCUc5").attr("ui-sref","");
+     	  //  angular.element(".disabfuncCUc5").attr("ui-sref","");
              angular.element(".disabfuncCUc5").attr("disabled","disabled");
              angular.element(".disabfuncCUc5").addClass(" btn btn-disabled");
              angular.element(".disabfuncCUc5").addClass("disabfuncCUcColor");
