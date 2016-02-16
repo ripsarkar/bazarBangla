@@ -118,16 +118,16 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
         alert('Please enter valid state');
           return false;
       }
-            else if($scope.country == ''  || !testAlp.test($scope.country)){
-        alert('Please enter valid country');
+            else if($scope.country == ''){
+        alert('Please enter country');
           return false;
       }
             else if($scope.zip == '' || !testAlpNu.test($scope.zip)){
         alert('Please enter valid zipcode');
           return false;
       }
-            else if($scope.geocode != '' || !testAlpNu.test($scope.geocode)){
-        alert('Please enter valid zipcode');
+            else if($scope.geocode != '' && !testAlpNu.test($scope.geocode)){
+        alert('Please enter valid geocode');
           return false;
       }
       else{
