@@ -2,31 +2,31 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
     return {
         restrict: "E",
         templateUrl:"html/templates/organization-template.html",
-        link: function(scope, element, attr, mCtrl) {
+        link: function($scope, element, attr, mCtrl) {
 
-                scope.organID="";
-                scope.organName="";
-                scope.compAdd1="";
-                scope.compAdd2="";
-                scope.compAdd3="";
-                scope.city="";
-                scope.state="";
-                scope.country="";
-                scope.zip="";
-                scope.geocode="";
+                $scope.organID="";
+                $scope.organName="";
+                $scope.compAdd1="";
+                $scope.compAdd2="";
+                $scope.compAdd3="";
+                $scope.city="";
+                $scope.state="";
+                $scope.country="";
+                $scope.zip="";
+                $scope.geocode="";
                 Indtsyarray=[];
-                scope.UsecaseIntry=[];
+                $scope.UsecaseIntry=[];
 
        $rootScope.loadinganimation=true; 
        $http.get("https://restcountries.eu/rest/v1/all")
       .success(function(data, status, config, headers){
-                scope.countryName = data;
+                $scope.countryName = data;
         //$rootScope.loadinganimation=false; 
               //industry
     $http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
             $rootScope.loadinganimation = false;
             //$scope.EPdatas = data.EP;
-            scope.industrydatas = data.industry;
+            $scope.industrydatas = data.industry;
 
     }).error(function(data, status, headers, config) {
         $rootScope.loadinganimation = false;
@@ -45,18 +45,18 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
             var Indtsyarray = [];
             var Indtsy = {};
             var inlastvalue;
-            scope.chckindustry = function(){
+            $scope.chckindustry = function(){
             Indtsyarray = [];
             
-            for (var i=0;i<scope.UsecaseIntry.length-1;i++){
-              if(scope.UsecaseIntry[i] == scope.UsecaseIntry[scope.UsecaseIntry.length-1]){
-                scope.UsecaseIntry.splice(-1);
+            for (var i=0;i<$scope.UsecaseIntry.length-1;i++){
+              if($scope.UsecaseIntry[i] == $scope.UsecaseIntry[$scope.UsecaseIntry.length-1]){
+                $scope.UsecaseIntry.splice(-1);
               }
             }
-            for (var j=0;j<scope.UsecaseIntry.length;j++){
+            for (var j=0;j<$scope.UsecaseIntry.length;j++){
 
               Indtsy = {};
-              Indtsy.SurrId = parseInt(scope.UsecaseIntry[j]);
+              Indtsy.SurrId = parseInt($scope.UsecaseIntry[j]);
               Indtsyarray.push(Indtsy);
             }
             
@@ -64,19 +64,19 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
 
           }
     //
-          scope.$watch(function () {
+          $scope.$watch(function () {
 
           organiseParam = {
-                "companyid": scope.organID,
-                "companyname": scope.organName,
-                "companyadd1": scope.compAdd1,
-                "companyadd2": scope.compAdd2,
-                "companyadd3": scope.compAdd3,
-                "companyadd_city": scope.city,
-                "companyadd_state": scope.state,
-                "companyadd_country": scope.country,
-                "companyadd_zip": scope.zip,
-                "companyadd_geocode": scope.geocode,
+                "companyid": $scope.organID,
+                "companyname": $scope.organName,
+                "companyadd1": $scope.compAdd1,
+                "companyadd2": $scope.compAdd2,
+                "companyadd3": $scope.compAdd3,
+                "companyadd_city": $scope.city,
+                "companyadd_state": $scope.state,
+                "companyadd_country": $scope.country,
+                "companyadd_zip": $scope.zip,
+                "companyadd_geocode": $scope.geocode,
                 "company_industries" : Indtsyarray/*[{"SurrId" : 4502},{"SurrId" : 4503}]*/,
                 "user_surr_id" : $rootScope.surrId
               }
@@ -86,30 +86,30 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
 
 
 
-      scope.sendOrganizationVal = function(){
-
-      
-      if(scope.organID == ''){
-        alert('Please enter a valid Company Id');
+      $scope.sendOrganizationVal = function(){
+      var testAlpNu = /^[a-zA-Z0-9]+$/;
+      var testAlp = /^[a-zA-Z]+$/;
+      if($scope.organID == ''  || !testAlpNu.test($scope.organID)){
+        alert('Please enter a valid Company Id(no special character)');
           return false;
       }
-      else if(scope.organName == ''){
+      else if($scope.organName == ''  || !testAlpNu.test($scope.organName)){
         alert('Please enter a valid Company Name');
           return false;
       }
-      else if(scope.compAdd1 == ''){
+      else if($scope.compAdd1 == ''){
         alert('Please enter atleast one address');
           return false;
       }
-            else if(scope.city == ''){
+            else if($scope.city == ''  || !testAlp.test($scope.city)){
         alert('Please enter city');
           return false;
       }
-            else if(scope.country == ''){
+            else if($scope.country == ''  || !testAlp.test($scope.country)){
         alert('Please enter country');
           return false;
       }
-            else if(scope.zip == ''){
+            else if($scope.zip == '' || !testAlpNu.test($scope.zip)){
         alert('Please enter zipcode');
           return false;
       }
@@ -134,19 +134,19 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
 
           }
 
-            scope.clearValOrganization = function(){
-                scope.organID="";
-                scope.organName="";
-                scope.compAdd1="";
-                scope.compAdd2="";
-                scope.compAdd3="";
-                scope.city="";
-                scope.state="";
-                scope.country="";
-                scope.zip="";
-                scope.geocode="";
+            $scope.clearValOrganization = function(){
+                $scope.organID="";
+                $scope.organName="";
+                $scope.compAdd1="";
+                $scope.compAdd2="";
+                $scope.compAdd3="";
+                $scope.city="";
+                $scope.state="";
+                $scope.country="";
+                $scope.zip="";
+                $scope.geocode="";
                 Indtsyarray=[];
-                scope.UsecaseIntry=[];
+                $scope.UsecaseIntry=[];
             }
 
 
