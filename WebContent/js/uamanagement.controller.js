@@ -101,7 +101,24 @@ app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$r
        
    }
    
-  
+   $scope.onviewMainuser = function() {//alert(2);
+		//edituser control vacating
+		$rootScope.updateuserName="";
+	    $rootScope.passWord="";
+	    $rootScope.updatefirstName="";
+	    $rootScope.updatemiddleName="";
+	    $rootScope.updatelastName="";
+	    $rootScope.updatecontactNo="";
+	    $rootScope.updateemail="";
+	    $rootScope.updaterole="";
+	    $rootScope.isACTIVE="";
+	    $rootScope.updatecompanyName="";
+	    $rootScope.Industryname="";
+	    $rootScope.updatecontractId="";
+	    //go to view user
+	    $rootScope.currentUserTab = 'html/viewuser_main.html';
+       
+   }
    
    $rootScope.$on("uamanagerpage", function() {
         $scope.onuamcreateuser();
@@ -110,6 +127,8 @@ app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$r
     $rootScope.$on("uaviewerpage", function() {
         $scope.onviewuser();
     });
-
+    $rootScope.$on("uaviewerMainpage", function() {
+        $scope.onviewMainuser();
+    });
 
 }]);

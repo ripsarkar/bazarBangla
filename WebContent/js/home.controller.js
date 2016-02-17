@@ -17,7 +17,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		  var loadUserdetails = {
  	                method: "GET",
  	               url: $rootScope.url+"/getUserDetails/"+mj[1]
- 	         // url: "data/userdtail.json"
+ 	         	   //url: "data/userdtail.json"
  	            };
  	            $http(loadUserdetails).success(function(result) {
  	             $rootScope.dataLoading=true; 	            
@@ -579,7 +579,9 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
     $scope.uaviewer = function(){
         $rootScope.$emit("uaviewerpage", {});
     };
-    
+    $scope.uaviewerMain = function(){
+        $rootScope.$emit("uaviewerMainpage", {});
+    };
 
     
   $scope.selection=[];
