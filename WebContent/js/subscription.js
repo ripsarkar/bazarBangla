@@ -79,24 +79,26 @@ app.directive("xyzcomp", function($http,$rootScope){
       //sending data
       $scope.ceateContact = function(){
       var numbercheck = /^[0-9]+$/;
+      var testAlpNu = /^[a-zA-Z0-9]+$/;
+
       if($scope.compList == ''){
-        alert('Please enter a valid Organization Name');
+        alert('Please select an Organization Name');
           return false;
       }
-      else if($scope.subID == ''){
-        alert('Please enter a valid Subscription Id');
+      else if($scope.subID == '' || !testAlpNu.test($scope.subID)){
+        alert('Please enter a valid Subscription Id(no special character)');
           return false;
       }
       else if($scope.effecDate == ''){
-        alert('Please enter a valid Effective Date which is not less than current date');
+        alert('Please enter a valid Effective Date(not less than current date)');
           return false;
       }
             else if($scope.expDate == ''){
-        alert('Please enter a valid Expiration Date');
+        alert('Please enter a valid Expiration Date(not less than effective date)');
           return false;
       }
             else if($scope.maxUser == ''|| !numbercheck.test($scope.maxUser)){
-        alert('Please enter valid maximum no of users');
+        alert('Please enter valid maximum no of users(only numbers)');
           return false;
       }
 
