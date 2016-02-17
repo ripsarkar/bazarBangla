@@ -8,33 +8,34 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", f
 	$scope.contractId = "";
 	
     /*back botton*/
-    $scope.backbtnusermanager = function(){
-        if(typeof $rootScope.backcmplist != 'undefined' && $rootScope.backcmplist !=""){
-        ViewUserService.getUserDetails($rootScope.backcmplist).then(function(resultname)
-                {
-                    $scope.userList = resultname.Users;
-                    $scope.selectedCompany = {
-                        id :$rootScope.backcmplist
-                    };
-                    $scope.getDetails();
-                    $rootScope.backcmplist="";
-                });
-        }
-    }
+//    $scope.backbtnusermanager = function(){
+//        if(typeof $rootScope.backcmplist != 'undefined' && $rootScope.backcmplist !=""){
+//        ViewUserService.getUserDetails($rootScope.backcmplist).then(function(resultname)
+//                {
+//                    $scope.userList = resultname.Users;
+//                    $scope.selectedCompany = {
+//                        id :$rootScope.backcmplist
+//                    };
+//                    $scope.getDetails();
+//                    $rootScope.backcmplist="";
+//                });
+//        }
+//    }
     
 	var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
 	if(obj.Users.User !=undefined){
 
-		var permissiontypeList = obj.Users.Subscription.PermissionTypeDet;
+		var permissiontypeList = obj.Users.User.PermissionTypeDet;
 		for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
 			 if(permissiontypeList[int2].PermissionName=="update"){
 				 $scope.companyList=permissiontypeList[int2].OrgList;
-			
-                 $scope.backbtnusermanager();
+				// $scope.backbtnusermanager();
 			}
 		}
 	
 	}
+	
+	
 	
 //		ViewUserService.getCompanyName().success(function(resultname)
 //				{		 
@@ -49,7 +50,7 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", f
 
 	
 	$scope.getDetails=function(){
-		ViewUserService.getCompDetails($scope.selectedCompany.id).then(function(resultname)
+		ViewUserService.getCompDetails($scope.selectedCompany.SurrId).then(function(resultname)
 				{
 					$scope.industryName = resultname.industryName;
 					$scope.contractId = resultname.contractId;
@@ -60,7 +61,7 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", f
 	$scope.userList=[];
 	$scope.clickme=function(){
 		
-		ViewUserService.getUserDetails($scope.selectedCompany.id).then(function(resultname)
+		ViewUserService.getUserDetails($scope.selectedCompany.SurrId).then(function(resultname)
 				{
 					$scope.userList = resultname.Users;					
 				});
