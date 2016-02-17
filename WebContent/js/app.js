@@ -80,6 +80,12 @@
 			  templateUrl: "html/updatepermissions.html",
 			  controller: 'updateOrgCtrl'
 			})
+        .state("home.viewsubscription", {
+        url:"/viewsubscription",
+       // templateUrl: "html/viewsubscription.html"
+        templateUrl: "html/viewsubscription.html",
+        controller: 'updateOrgCtrl'
+      })
 			.state("home.createrole", {
 			  url:"/createrole",
 			  templateUrl: "html/createrole.html"
@@ -89,7 +95,13 @@
 			  templateUrl: "html/updatepermissions.html",
 			  controller: 'updateRoleCtrl'
 			 // templateUrl: "html/updaterole.html"
-			}) 
+			})
+      .state("home.viewrole", {
+        url:"/viewrole",
+        templateUrl: "html/viewrole.html",
+        controller: 'updateRoleCtrl'
+       // templateUrl: "html/updaterole.html"
+      }) 
             .state("home.UpdateOrganisation", {
             url:"/UpdateOrganisation",
               templateUrl: "html/updateOrganization.html"

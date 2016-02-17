@@ -1713,8 +1713,14 @@ $scope.createind = function($event){
 	  
     }
     else{
-              $scope.disableCreateAll = false;
-              //$scope.disableCreateSpe = false;
+
+        $scope.disableCreateAll = false;
+    	angular.element(".crtusecase").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableCreateAll = true;
+
+    		}
+    	})
 //alert(angular.element($event.currentTarget).parent().prev().text())
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
           if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().text())
@@ -1744,9 +1750,15 @@ $scope.readind = function($event){
 	    postjson.PermissionTo.UseCase.push(read);
     }
     else{
+
               $scope.disableReadAll = false;
               $scope.disableReadSpe = false;
-
+    	angular.element(".readusecase").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableReadAll = true;
+              $scope.disableReadSpe = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
           if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().prev().text())
           {
@@ -1776,7 +1788,12 @@ $scope.updaind = function($event){
     else{
               $scope.disableUpdateAll = false;
               $scope.disableUpdateSpe = false;
-
+    	angular.element(".updateusecase").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableUpdateAll = true;
+              $scope.disableUpdateSpe = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
           if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().text())
           {
@@ -1804,7 +1821,12 @@ $scope.deleind = function($event){
     else{
               $scope.disableDeleteAll = false;
               $scope.disableDeleteSpe = false;
-
+    	angular.element(".deleteusecase").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableDeleteAll = true;
+              $scope.disableDeleteSpe = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
           if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().text())
           {
@@ -1832,6 +1854,12 @@ $scope.expoind = function($event){
     else{
               $scope.disableExportAll = false;
               $scope.disableExportSpe = false;
+    	angular.element(".exportusecase").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableExportAll = true;
+              $scope.disableExportSpe = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
           if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().prev().text())
           {
@@ -1887,7 +1915,12 @@ $scope.readindSpe = function($event){
     else{
               $scope.disableReadAll = false;
               $scope.disableRead = false;
-
+    	angular.element(".readusecasesp").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableReadAll = true;
+              $scope.disableRead = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
           if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().prev().attr('value'))
           {
@@ -1917,8 +1950,12 @@ $scope.updaindSpe = function($event){
     else{
               $scope.disableUpdateAll = false;
               $scope.disableUpdate = false;
-              
-
+    	angular.element(".updateusecasesp").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableUpdateAll = true;
+              $scope.disableUpdate = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
           if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().attr('value'))
           {
@@ -1946,8 +1983,13 @@ $scope.deleindSpe = function($event){
     else{
               $scope.disableDeleteAll = false;
               $scope.disableDelete = false;
-
-        for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
+    	angular.element(".deleteusecasesp").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableDeleteAll = true;
+              $scope.disableDelete = true;
+    		}
+    	});        
+    	for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
           if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().attr('value'))
           {
             postjson.PermissionTo.UseCase.splice(i, 1);
@@ -1974,7 +2016,12 @@ $scope.expoindSpe = function($event){
     else{
               $scope.disableExportAll = false;
               $scope.disableExport = false;
-
+    	angular.element(".exportusecasesp").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableExportAll = true;
+              $scope.disableExport = true;
+    		}
+    	}); 
         for(var i=0;i<=postjson.PermissionTo.UseCase.length;i++){
           if(postjson.PermissionTo.UseCase[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.UseCase[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().prev().attr('value'))
           {
