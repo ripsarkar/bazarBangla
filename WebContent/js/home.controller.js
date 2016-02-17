@@ -17,7 +17,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		  var loadUserdetails = {
  	                method: "GET",
  	               url: $rootScope.url+"/getUserDetails/"+mj[1]
- 	         	   //url: "data/userdtail.json"
+ 	         	//   url: "data/userdtail.json"
  	            };
  	            $http(loadUserdetails).success(function(result) {
  	             $rootScope.dataLoading=true; 	            
@@ -407,6 +407,31 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		    	
 		
 	}
+	
+	$scope.managePermissionForRole=function(){
+		$scope.UpdateRolezd = false;
+		$scope.CreateRolezd = false;
+		
+		
+		var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+		if(obj.Users.Role !=undefined){
+
+			var permissiontypeList = obj.Users.Role.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				if(permissiontypeList[int2].PermissionName=="update"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+						$scope.UpdateRolezd = true;
+					}
+				}else if(permissiontypeList[int2].PermissionName=="create"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+					$scope.CreateRolezd = true;
+					}
+				}
+			}
+		}
+		    	
+		
+	}
      
    /***************************** */
     $scope.defaultmenu = function(){
@@ -512,7 +537,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
         angular.element("ul.submainlinks li").removeClass("subactive");
     };
     $scope.uamanagement = function(){
-    	 $scope.managePermissionForUserAccount();
+    	 $scope.managePermissionForRole();
      	if(!$scope.CreateUserzd){
      		
      	//	alert(1);
@@ -549,6 +574,29 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
     	angular.element("ul.submainlinks li").removeClass("subactive");
     };
     $scope.roleMnu = function(){
+    	 $scope.managePermissionForRole();
+      	if(!$scope.CreateRolezd){
+      		
+      	//	alert(1);
+      		  angular.element(".disabfuncCUc7").attr("ui-sref","");
+              angular.element(".disabfuncCUc7").attr("disabled","disabled");
+              angular.element(".disabfuncCUc7").addClass(" btn btn-disabled");
+              angular.element(".disabfuncCUc7").addClass("disabfuncCUcColor");
+              angular.element(".disabfuncCUc7").click(function(ev) {
+   		       ev.preventDefault();
+   		   }); 
+      	}
+      	
+      	if(!$scope.UpdateRolezd){
+      		//alert(2);
+      	    angular.element(".disabfuncCUc8").attr("ui-sref","");
+              angular.element(".disabfuncCUc8").attr("disabled","disabled");
+              angular.element(".disabfuncCUc8").addClass(" btn btn-disabled");
+              angular.element(".disabfuncCUc8").addClass("disabfuncCUcColor");
+              angular.element(".disabfuncCUc8").click(function(ev) {
+   		       ev.preventDefault();
+   		   }); 
+      	}
     	$scope.menu = {
                 usecaserule :false,
                 feedback : false,
