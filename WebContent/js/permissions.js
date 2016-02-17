@@ -156,6 +156,7 @@ $scope.sendPermissions = function(){
 //$scope.chcked=false;
 $scope.fnFetchPermissions=function(id,name){
  //var read = {};
+ var usecase=postjson.PermissionTo.UseCase;
 		  $http.get($rootScope.url + "/fetchPermissions/"+$scope.tabName+"/"+$scope.orgId).success(function(result){      
 
 		            $scope.permissionJson = result;	 	  	
@@ -170,16 +171,23 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 				//usercase Tab  - createusecase
-					angular.forEach(document.querySelectorAll('.crtusecase'), function(value, key) {						 
+				//var queryResult = element[0].querySelector('.multi-files');
+				//var res = document.getElementsByClassName("crtusecase");
+				//var wrappedResult = angular.element(document.getElementsByClassName("crtusecase"));
+				//console.log(wrappedResult)
+				//debugger;
+					angular.forEach(angular.element(document.getElementsByClassName("crtusecase")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-						var filterType=outer[0].attributes['data-filterType'].value;
-						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {						             
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+						var filterType=value.attributes['data-filterType'].value;
+						//alert("createusecase");
+							console.log("createusecase" +value.attributes['data-objectval'].value);
+						 angular.forEach(usecase, function(val,key) {						             
 								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                         //alert("if")	
-										  outer[0].setAttribute("checked", "checked");																		 
-                                          $scope.compile(outer[0]);
+										  value.setAttribute("checked", "checked");																		 
+                                          $scope.compile(value);
 										  
 										
 										 
@@ -205,17 +213,18 @@ $scope.fnFetchPermissions=function(id,name){
 
 					
 					//usercase Tab  - readusecase
-					angular.forEach(document.querySelectorAll('.readusecase'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("readusecase")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-						var filterType=outer[0].attributes['data-filterType'].value;
-						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+						var filterType=value.attributes['data-filterType'].value;
+							//console.log(value.attributes['data-objectval'].value);
+						 angular.forEach(usecase, function(val,key) {	
 					       //alert(operation+"-----"+val.operation)
 								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                 
-										  outer[0].setAttribute("checked", "checked");																		 
-                                          $scope.compile(outer[0]);										
+										  value.setAttribute("checked", "checked");																		 
+                                          $scope.compile(value);										
 										
 										if(filterType == 'ALL'){											
 											 $scope.disableRead = true;
@@ -242,17 +251,17 @@ $scope.fnFetchPermissions=function(id,name){
 						
 					});
 					//usercase Tab  - updateusecase
-					angular.forEach(document.querySelectorAll('.updateusecase'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("updateusecase")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-						var filterType=outer[0].attributes['data-filterType'].value;
-						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+						var filterType=value.attributes['data-filterType'].value;
+						 angular.forEach(usecase, function(val,key) {	
 					 //debugger;
 								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                        
-										outer[0].setAttribute("checked", "checked");
-										$scope.compile(outer[0]);	
+										value.setAttribute("checked", "checked");
+										$scope.compile(value);	
 										
 										
 										
@@ -284,17 +293,17 @@ $scope.fnFetchPermissions=function(id,name){
 						
 					});
 					//usercase Tab  - deleteusecase
-					angular.forEach(document.querySelectorAll('.deleteusecase'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("deleteusecase")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-						var filterType=outer[0].attributes['data-filterType'].value;
-						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+						var filterType=value.attributes['data-filterType'].value;
+						 angular.forEach(usecase, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                         //alert("if")	
-										outer[0].setAttribute("checked", "checked");
-										$scope.compile(outer[0]);	
+										value.setAttribute("checked", "checked");
+										$scope.compile(value);	
 										
 											
 										if(filterType == 'ALL'){											
@@ -325,17 +334,17 @@ $scope.fnFetchPermissions=function(id,name){
 						
 					});
 					//usercase Tab  - exportusecase
-					angular.forEach(document.querySelectorAll('.exportusecase'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("exportusecase")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-						var filterType=outer[0].attributes['data-filterType'].value;
-						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+						var filterType=value.attributes['data-filterType'].value;
+						 angular.forEach(usecase, function(val,key) {	
 					 
 								if (val.operation == operation && val.objectval==objectval && val.filterType==filterType) {	
                                         //alert("if")	
-										outer[0].setAttribute("checked", "checked");
-										$scope.compile(outer[0]);										
+										value.setAttribute("checked", "checked");
+										$scope.compile(value);										
 										
 										
 										if(filterType == 'ALL'){											
@@ -372,16 +381,17 @@ $scope.fnFetchPermissions=function(id,name){
 					/****************START Specific Use case*******************/
 					
 					//usercase Tab  - createusecase
-					angular.forEach(document.querySelectorAll('.crtusecasesp'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("crtusecasesp")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-						var filterType=outer[0].attributes['data-filterType'].value;
-						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {						             
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+						var filterType=value.attributes['data-filterType'].value;
+							//console.log(value.attributes['data-objectval'].value);
+						 angular.forEach(usecase, function(val,key) {						             
 								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                         //alert("if")	
-										  outer[0].setAttribute("checked", "checked");																		 
-                                          $scope.compile(outer[0]);
+										  value.setAttribute("checked", "checked");																		 
+                                          $scope.compile(value);
 										  
 										
 										 
@@ -407,17 +417,18 @@ $scope.fnFetchPermissions=function(id,name){
 
 					
 					//usercase Tab  - readusecase
-					angular.forEach(document.querySelectorAll('.readusecasesp'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("readusecasesp")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-						var filterType=outer[0].attributes['data-filterType'].value;
-						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+						var filterType=value.attributes['data-filterType'].value
+							//console.log(value.attributes['data-objectval'].value);
+						 angular.forEach(usecase, function(val,key) {	
 					       //alert(operation+"-----"+val.operation)
 								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                 
-										  outer[0].setAttribute("checked", "checked");																		 
-                                          $scope.compile(outer[0]);										
+										  value.setAttribute("checked", "checked");																		 
+                                          $scope.compile(value);										
 										
 										if(filterType == 'ALL'){											
 											 $scope.disableRead = true;
@@ -444,17 +455,18 @@ $scope.fnFetchPermissions=function(id,name){
 						
 					});
 					//usercase Tab  - updateusecase
-					angular.forEach(document.querySelectorAll('.updateusecasesp'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("updateusecasesp")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-						var filterType=outer[0].attributes['data-filterType'].value;
-						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+						var filterType=value.attributes['data-filterType'].value;
+							//console.log(value.attributes['data-objectval'].value);
+						 angular.forEach(usecase, function(val,key) {	
 					 //debugger;
 								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                        
-										outer[0].setAttribute("checked", "checked");
-										$scope.compile(outer[0]);	
+										value.setAttribute("checked", "checked");
+										$scope.compile(value);	
 										
 										
 										
@@ -486,17 +498,18 @@ $scope.fnFetchPermissions=function(id,name){
 						
 					});
 					//usercase Tab  - deleteusecase
-					angular.forEach(document.querySelectorAll('.deleteusecasesp'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("deleteusecasesp")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-						var filterType=outer[0].attributes['data-filterType'].value;
-						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+						var filterType=value.attributes['data-filterType'].value;
+						//console.log(value.attributes['data-objectval'].value);
+						 angular.forEach(usecase, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                         //alert("if")	
-										outer[0].setAttribute("checked", "checked");
-										$scope.compile(outer[0]);	
+										value.setAttribute("checked", "checked");
+										$scope.compile(value);	
 										
 											
 										if(filterType == 'ALL'){											
@@ -527,17 +540,17 @@ $scope.fnFetchPermissions=function(id,name){
 						
 					});
 					//usercase Tab  - exportusecase
-					angular.forEach(document.querySelectorAll('.exportusecasesp'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("exportusecasesp")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-						var filterType=outer[0].attributes['data-filterType'].value;
-						 angular.forEach(result.PermissionTo.UseCase, function(val,key) {	
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+						var filterType=value.attributes['data-filterType'].value;
+						 angular.forEach(usecase, function(val,key) {	
 					 
 								if (val.operation == operation && val.objectval==objectval && val.filterType==filterType) {	
                                         //alert("if")	
-										outer[0].setAttribute("checked", "checked");
-										$scope.compile(outer[0]);										
+										value.setAttribute("checked", "checked");
+										$scope.compile(value);										
 										
 										
 										if(filterType == 'ALL'){											
@@ -577,17 +590,17 @@ $scope.fnFetchPermissions=function(id,name){
 					//alert(JSON.stringify(result))
 					
 					//Rule Tab  - create-rule
-					angular.forEach(document.querySelectorAll('.ctrrule'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("ctrrule")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-						
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+						console.log(value.attributes['value'].value)
 						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
 					 
 								if (val.operation == operation && val.objectval==objectval ) {	
                                         
-										outer[0].setAttribute("checked", "checked");																		 
-                                          $scope.compile(outer[0]);						
+										value.setAttribute("checked", "checked");																		 
+                                          $scope.compile(value);						
 										  
 										
 										
@@ -602,19 +615,19 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					//Rule Tab  - readrule
-					angular.forEach(document.querySelectorAll('.readrule'), function(value, key) {
+					angular.forEach(angular.element(document.getElementsByClassName("readrule")), function(value, key) {
 							
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-					    var filterType=outer[0].attributes['data-filterType'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+					    var filterType=value.attributes['data-filterType'].value;
 						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
 					   
 					            //alert(operation +"=="+ val.operation +"&&"+ objectval+"=="+val.objectval)
 								if (operation == val.operation && objectval==val.objectval) {	
                                      	
-										outer[0].setAttribute("checked", "checked");																		 
-                                          $scope.compile(outer[0]);										
+										value.setAttribute("checked", "checked");																		 
+                                          $scope.compile(value);										
 										
 										
 										if(filterType == 'ALL'){											
@@ -645,17 +658,17 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					//Rule Tab  - updaterule
-					angular.forEach(document.querySelectorAll('.updaterule'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("updaterule")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-						 var filterType=outer[0].attributes['data-filterType'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+						 var filterType=value.attributes['data-filterType'].value;
 						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
 					 
 								if (operation == val.operation && objectval== val.objectval && filterType==val.filterType) {	
                                         //alert("if")	
-										outer[0].setAttribute("checked", "checked");																		 
-                                          $scope.compile(outer[0]);		
+										value.setAttribute("checked", "checked");																		 
+                                          $scope.compile(value);		
 										  
 										if(filterType == 'ALL'){											
 											 $scope.disableUpdateRule = true;
@@ -684,17 +697,17 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					//Rule Tab  - deleterule
-					angular.forEach(document.querySelectorAll('.deleterule'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("deleterule")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-						 var filterType=outer[0].attributes['data-filterType'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+						 var filterType=value.attributes['data-filterType'].value;
 						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                         //alert("if")	
-										outer[0].setAttribute("checked", "checked");																		 
-                                          $scope.compile(outer[0]);										
+										value.setAttribute("checked", "checked");																		 
+                                          $scope.compile(value);										
 										
 										if(filterType == 'ALL'){											
 											 $scope.disableDeleteRule = true;
@@ -723,17 +736,17 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					//Rule Tab  - exportrule
-					angular.forEach(document.querySelectorAll('.exportrule'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("exportrule")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-					    var filterType=outer[0].attributes['data-filterType'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+					    var filterType=value.attributes['data-filterType'].value;
 						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                         //alert("if")	
-										 outer[0].setAttribute("checked", "checked");																		 
-                                          $scope.compile(outer[0]);		
+										 value.setAttribute("checked", "checked");																		 
+                                          $scope.compile(value);		
 										  
 										if(filterType == 'ALL'){											
 											 $scope.disableExportRule = true;
@@ -767,17 +780,17 @@ $scope.fnFetchPermissions=function(id,name){
 					/****************Specific Rules*******************/
 					
 					//Rule Tab  - create-rule
-					angular.forEach(document.querySelectorAll('.ctrrulesp'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("ctrrulesp")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
 					 
 								if (val.operation == operation && val.objectval==objectval ) {	
                                         
-										outer[0].setAttribute("checked", "checked");																		 
-                                          $scope.compile(outer[0]);						
+										value.setAttribute("checked", "checked");																		 
+                                          $scope.compile(value);						
 										  
 										
 										
@@ -792,19 +805,19 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					//Rule Tab  - readrule
-					angular.forEach(document.querySelectorAll('.readrulesp'), function(value, key) {
+					angular.forEach(angular.element(document.getElementsByClassName("readrulesp")), function(value, key) {
 							
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-					    var filterType=outer[0].attributes['data-filterType'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+					    var filterType=value.attributes['data-filterType'].value;
 						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
 					   
 					            //alert(operation +"=="+ val.operation +"&&"+ objectval+"=="+val.objectval)
 								if (operation == val.operation && objectval==val.objectval) {	
                                      	
-										outer[0].setAttribute("checked", "checked");																		 
-                                          $scope.compile(outer[0]);										
+										value.setAttribute("checked", "checked");																		 
+                                          $scope.compile(value);										
 										
 										
 										if(filterType == 'ALL'){											
@@ -835,17 +848,17 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					//Rule Tab  - updaterule
-					angular.forEach(document.querySelectorAll('.updaterulesp'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("updaterulesp")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-						 var filterType=outer[0].attributes['data-filterType'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+						 var filterType=value.attributes['data-filterType'].value;
 						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
 					 
 								if (operation == val.operation && objectval== val.objectval && filterType==val.filterType) {	
                                         //alert("if")	
-										outer[0].setAttribute("checked", "checked");																		 
-                                          $scope.compile(outer[0]);		
+										value.setAttribute("checked", "checked");																		 
+                                          $scope.compile(value);		
 										  
 										if(filterType == 'ALL'){											
 											 $scope.disableUpdateRule = true;
@@ -874,17 +887,17 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					//Rule Tab  - deleterule
-					angular.forEach(document.querySelectorAll('.deleterulesp'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("deleterulesp")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-						 var filterType=outer[0].attributes['data-filterType'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+						 var filterType=value.attributes['data-filterType'].value;
 						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                         //alert("if")	
-										outer[0].setAttribute("checked", "checked");																		 
-                                          $scope.compile(outer[0]);										
+										value.setAttribute("checked", "checked");																		 
+                                          $scope.compile(value);										
 										
 										if(filterType == 'ALL'){											
 											 $scope.disableDeleteRule = true;
@@ -913,17 +926,17 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					//Rule Tab  - exportrule
-					angular.forEach(document.querySelectorAll('.exportrulesp'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("exportrulesp")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
-					    var filterType=outer[0].attributes['data-filterType'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
+					    var filterType=value.attributes['data-filterType'].value;
 						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                         //alert("if")	
-										 outer[0].setAttribute("checked", "checked");																		 
-                                          $scope.compile(outer[0]);		
+										 value.setAttribute("checked", "checked");																		 
+                                          $scope.compile(value);		
 										  
 										if(filterType == 'ALL'){											
 											 $scope.disableExportRule = true;
@@ -960,17 +973,17 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					//Subscription Tab  - Create
-					angular.forEach(document.querySelectorAll('.createsubs'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("createsubs")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.Subscription, function(val,key) {	
 					 
 								if (operation == val.operation && objectval== val.objectval) {	
                                         //alert("if")	
-										outer[0].setAttribute("checked", "checked");
-                                          $scope.compile(outer[0]);										
+										value.setAttribute("checked", "checked");
+                                          $scope.compile(value);										
 										if(objectval =='ALL'){
 											
 											
@@ -994,17 +1007,17 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					//Subscription Tab  - Read
-					angular.forEach(document.querySelectorAll('.readsubs'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("readsubs")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.Subscription, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval) {	
                                         //alert("if")	
-										outer[0].setAttribute("checked", "checked");	
-                                          $scope.compile(outer[0]);										
+										value.setAttribute("checked", "checked");	
+                                          $scope.compile(value);										
 										
 										if(objectval =='ALL'){
 											
@@ -1025,17 +1038,17 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					//Subscription Tab  - Update
-					angular.forEach(document.querySelectorAll('.updatesubs'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("updatesubs")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.Subscription, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval) {	
                                         //alert("if")	
-										outer[0].setAttribute("checked", "checked");	
-                                          $scope.compile(outer[0]);										
+										value.setAttribute("checked", "checked");	
+                                          $scope.compile(value);										
 										if(objectval =='ALL'){
 											
 											
@@ -1055,17 +1068,17 @@ $scope.fnFetchPermissions=function(id,name){
 					});
 					
 					//Subscription Tab  - Delete
-					angular.forEach(document.querySelectorAll('.deletesubs'), function(value, key) {						 
+					angular.forEach(angular.element(document.getElementsByClassName("deletesubs")), function(value, key) {						 
 						var outer =angular.element(value);							
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.Subscription, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval) {	
                                         //alert("if")	
-										outer[0].setAttribute("checked", "checked");	
-                                          $scope.compile(outer[0]);										
+										value.setAttribute("checked", "checked");	
+                                          $scope.compile(value);										
 										if(objectval =='ALL'){
 											
 											
@@ -1087,18 +1100,18 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 				//Organization Tab  - create
-			      angular.forEach(document.querySelectorAll('.createorg'), function(value, key) {
+			      angular.forEach(angular.element(document.getElementsByClassName("createorg")), function(value, key) {
 						 
 						var outer =angular.element(value);						
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.Organization, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval) {	
                                     							
-										outer[0].setAttribute("checked", "checked");
-                                        $scope.compile(outer[0]);
+										value.setAttribute("checked", "checked");
+                                        $scope.compile(value);
 										//debugger;
 										
 										
@@ -1114,18 +1127,18 @@ $scope.fnFetchPermissions=function(id,name){
 		 
 		 
 		          //Organization Tab  - Read
-			      angular.forEach(document.querySelectorAll('.readorg'), function(value, key) {
+			      angular.forEach(angular.element(document.getElementsByClassName("readorg")), function(value, key) {
 						 
 						var outer =angular.element(value);						
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.Organization, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval) {	
                                     							
-										outer[0].setAttribute("checked", "checked");
-                                        $scope.compile(outer[0]);
+										value.setAttribute("checked", "checked");
+                                        $scope.compile(value);
 										//debugger;
 										if(objectval =='ALL'){
 											
@@ -1148,18 +1161,18 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					   //Organization Tab  - Update
-			      angular.forEach(document.querySelectorAll('.updateorg'), function(value, key) {
+			      angular.forEach(angular.element(document.getElementsByClassName("updateorg")), function(value, key) {
 						 
 						var outer =angular.element(value);						
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.Organization, function(val,key) {	
 					 
 								if (operation == val.operation && objectval== val.objectval) {	
                                     							
-										outer[0].setAttribute("checked", "checked");
-                                        $scope.compile(outer[0]);
+										value.setAttribute("checked", "checked");
+                                        $scope.compile(value);
 										//debugger;
 										if(objectval =='ALL'){
 											
@@ -1183,18 +1196,18 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					//Organization Tab  - delete
-			         angular.forEach(document.querySelectorAll('.deleteorg'), function(value, key) {
+			         angular.forEach(angular.element(document.getElementsByClassName("deleteorg")), function(value, key) {
 						 
 						var outer =angular.element(value);						
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.Organization, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval) {	
                                     							
-										outer[0].setAttribute("checked", "checked");
-                                        $scope.compile(outer[0]);
+										value.setAttribute("checked", "checked");
+                                        $scope.compile(value);
 										//debugger;
 										if(objectval =='ALL'){
 											
@@ -1216,18 +1229,18 @@ $scope.fnFetchPermissions=function(id,name){
 					});
 					
 					//Organization Tab  - Member
-			         angular.forEach(document.querySelectorAll('.memberorg'), function(value, key) {
+			         angular.forEach(angular.element(document.getElementsByClassName("memberorg")), function(value, key) {
 						 
 						var outer =angular.element(value);						
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.Organization, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval) {	
                                     							
-										outer[0].setAttribute("checked", "checked");
-                                        $scope.compile(outer[0]);
+										value.setAttribute("checked", "checked");
+                                        $scope.compile(value);
 										//debugger;
 										if(objectval =='ALL'){
 											
@@ -1250,18 +1263,18 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					//user Tab  - createuser
-			         angular.forEach(document.querySelectorAll('.createuser'), function(value, key) {
+			         angular.forEach(angular.element(document.getElementsByClassName("createuser")), function(value, key) {
 						 
 						var outer =angular.element(value);						
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.User, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval) {	
                                     							
-										outer[0].setAttribute("checked", "checked");
-                                        $scope.compile(outer[0]);
+										value.setAttribute("checked", "checked");
+                                        $scope.compile(value);
 										//debugger;
 										
 										if(objectval =='ALL'){
@@ -1285,18 +1298,18 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					//user Tab  - readuser
-			         angular.forEach(document.querySelectorAll('.readuser'), function(value, key) {
+			         angular.forEach(angular.element(document.getElementsByClassName("readuser")), function(value, key) {
 						 
 						var outer =angular.element(value);						
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.User, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval) {	
                                     							
-										outer[0].setAttribute("checked", "checked");
-                                        $scope.compile(outer[0]);
+										value.setAttribute("checked", "checked");
+                                        $scope.compile(value);
 										//debugger;
 										if(objectval =='ALL'){
 											
@@ -1319,18 +1332,18 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					//user Tab  - updateuser
-			         angular.forEach(document.querySelectorAll('.updateuser'), function(value, key) {
+			         angular.forEach(angular.element(document.getElementsByClassName("updateuser")), function(value, key) {
 						 
 						var outer =angular.element(value);						
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.User, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval) {	
                                     							
-										outer[0].setAttribute("checked", "checked");
-                                        $scope.compile(outer[0]);
+										value.setAttribute("checked", "checked");
+                                        $scope.compile(value);
 									
 										if(objectval =='ALL'){
 											
@@ -1353,18 +1366,18 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 						//user Tab  - deleteuser
-			         angular.forEach(document.querySelectorAll('.deleteuser'), function(value, key) {
+			         angular.forEach(angular.element(document.getElementsByClassName("deleteuser")), function(value, key) {
 						 
 						var outer =angular.element(value);						
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.User, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval) {	
                                     							
-										outer[0].setAttribute("checked", "checked");
-                                        $scope.compile(outer[0]);
+										value.setAttribute("checked", "checked");
+                                        $scope.compile(value);
 										//debugger;
 										if(objectval =='ALL'){
 											
@@ -1387,18 +1400,18 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 						//Role Tab  - createrole
-			         angular.forEach(document.querySelectorAll('.createrole'), function(value, key) {
+			         angular.forEach(angular.element(document.getElementsByClassName("createrole")), function(value, key) {
 						 
 						var outer =angular.element(value);						
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.Role, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval) {	
                                     							
-										outer[0].setAttribute("checked", "checked");
-                                        $scope.compile(outer[0]);
+										value.setAttribute("checked", "checked");
+                                        $scope.compile(value);
 										if(objectval =='ALL'){
 											
 											
@@ -1419,18 +1432,18 @@ $scope.fnFetchPermissions=function(id,name){
 					});
 					
 					//Role Tab  - readrole
-			         angular.forEach(document.querySelectorAll('.readrole'), function(value, key) {
+			         angular.forEach(angular.element(document.getElementsByClassName("readrole")), function(value, key) {
 						 
 						var outer =angular.element(value);						
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.Role, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval) {	
                                     							
-										outer[0].setAttribute("checked", "checked");
-                                        $scope.compile(outer[0]);
+										value.setAttribute("checked", "checked");
+                                        $scope.compile(value);
 										if(val.objectval =='ALL'){
 											
 											
@@ -1452,18 +1465,18 @@ $scope.fnFetchPermissions=function(id,name){
 					
 					
 					//Role Tab  - updaterole
-			         angular.forEach(document.querySelectorAll('.updaterole'), function(value, key) {
+			         angular.forEach(angular.element(document.getElementsByClassName("updaterole")), function(value, key) {
 						 
 						var outer =angular.element(value);						
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.Role, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval) {	
                                     							
-										outer[0].setAttribute("checked", "checked");
-                                        $scope.compile(outer[0]);
+										value.setAttribute("checked", "checked");
+                                        $scope.compile(value);
 										if(objectval =='ALL'){
 											
 											
@@ -1484,18 +1497,18 @@ $scope.fnFetchPermissions=function(id,name){
 					});
 					
 						//Role Tab  - deleterole
-			         angular.forEach(document.querySelectorAll('.deleterole'), function(value, key) {
+			         angular.forEach(angular.element(document.getElementsByClassName("deleterole")), function(value, key) {
 						 
 						var outer =angular.element(value);						
-						var objectval= outer[0].attributes['data-objectval'].value;
-						var operation= outer[0].attributes['value'].value;
+						var objectval= value.attributes['data-objectval'].value;
+						var operation= value.attributes['value'].value;
 						
 						 angular.forEach(result.PermissionTo.Role, function(val,key) {	
 					 
 								if (operation == val.operation && objectval==val.objectval) {	
                                     							
-										outer[0].setAttribute("checked", "checked");
-                                        $scope.compile(outer[0]);
+										value.setAttribute("checked", "checked");
+                                        $scope.compile(value);
 										if(objectval =='ALL'){
 											
 											
@@ -3298,8 +3311,7 @@ $scope.deleindRole = function($event){
                 });
             }
         };
-    });
-
+    })
 
 
     
