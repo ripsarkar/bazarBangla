@@ -1715,7 +1715,7 @@ $scope.createind = function($event){
     else{
 
         $scope.disableCreateAll = false;
-    	angular.element(".crtusecase").each(function(){
+    	angular.element(".crtusecaseGen").each(function(){
     		if(angular.element(this).is(":checked")){
               $scope.disableCreateAll = true;
 
@@ -1753,7 +1753,7 @@ $scope.readind = function($event){
 
               $scope.disableReadAll = false;
               $scope.disableReadSpe = false;
-    	angular.element(".readusecase").each(function(){
+    	angular.element(".readusecaseGen").each(function(){
     		if(angular.element(this).is(":checked")){
               $scope.disableReadAll = true;
               $scope.disableReadSpe = true;
@@ -1788,7 +1788,7 @@ $scope.updaind = function($event){
     else{
               $scope.disableUpdateAll = false;
               $scope.disableUpdateSpe = false;
-    	angular.element(".updateusecase").each(function(){
+    	angular.element(".updateusecaseGen").each(function(){
     		if(angular.element(this).is(":checked")){
               $scope.disableUpdateAll = true;
               $scope.disableUpdateSpe = true;
@@ -1821,7 +1821,7 @@ $scope.deleind = function($event){
     else{
               $scope.disableDeleteAll = false;
               $scope.disableDeleteSpe = false;
-    	angular.element(".deleteusecase").each(function(){
+    	angular.element(".deleteusecaseGen").each(function(){
     		if(angular.element(this).is(":checked")){
               $scope.disableDeleteAll = true;
               $scope.disableDeleteSpe = true;
@@ -1854,7 +1854,7 @@ $scope.expoind = function($event){
     else{
               $scope.disableExportAll = false;
               $scope.disableExportSpe = false;
-    	angular.element(".exportusecase").each(function(){
+    	angular.element(".exportusecaseGen").each(function(){
     		if(angular.element(this).is(":checked")){
               $scope.disableExportAll = true;
               $scope.disableExportSpe = true;
@@ -2220,6 +2220,12 @@ $scope.readindRule = function($event){
     else{
       $scope.disableReadRuleAll = false;
       $scope.disableReadRuleSpe = false;
+    	angular.element(".readruleGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableReadRuleAll = true;
+              $scope.disableReadRuleSpe = true;
+    		}
+    	}); 
         for(var i=0;i<=postjson.PermissionTo.Rule.length;i++){
           if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().prev().text())
           {
@@ -2247,6 +2253,12 @@ $scope.updaindRule = function($event){
     else{
       $scope.disableUpdateRuleAll = false;
       $scope.disableUpdateRuleSpe = false;
+    	angular.element(".updateruleGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableUpdateRuleAll = true;
+              $scope.disableUpdateRuleSpe = true;
+    		}
+    	}); 
         for(var i=0;i<=postjson.PermissionTo.Rule.length;i++){
           if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().text())
           {
@@ -2273,6 +2285,12 @@ $scope.deleindRule = function($event){
     else{
       $scope.disableDeleteRuleAll = false;
       $scope.disableDeleteRuleSpe = false;
+    	angular.element(".deleteruleGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableDeleteRuleAll = true;
+              $scope.disableDeleteRuleSpe = true;
+    		}
+    	}); 
         for(var i=0;i<=postjson.PermissionTo.Rule.length;i++){
           if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().text())
           {
@@ -2300,6 +2318,12 @@ $scope.expoindRule = function($event){
     else{
       $scope.disableExportRuleAll = false;
       $scope.disableExportRuleSpe = false;
+    	angular.element(".exportruleGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableExportRuleAll = true;
+              $scope.disableExportRuleSpe = true;
+    		}
+    	}); 
         for(var i=0;i<=postjson.PermissionTo.Rule.length;i++){
           if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().prev().text())
           {
@@ -2354,6 +2378,12 @@ $scope.readindRuleSpe = function($event){
     else{
       $scope.disableReadRuleAll = false;
       $scope.disableReadRule = false;
+    	angular.element(".readrulesp").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableReadRuleAll = true;
+              $scope.disableReadRule = true;
+    		}
+    	}); 
         for(var i=0;i<=postjson.PermissionTo.Rule.length;i++){
           if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().prev().attr('value'))
           {
@@ -2381,6 +2411,12 @@ $scope.updaindRuleSpe = function($event){
     else{
       $scope.disableUpdateRuleAll = false;
       $scope.disableUpdateRule = false;
+    	angular.element(".updaterulesp").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableUpdateRuleAll = true;
+              $scope.disableUpdateRule = true;
+    		}
+    	}); 
         for(var i=0;i<=postjson.PermissionTo.Rule.length;i++){
           if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().attr('value'))
           {
@@ -2407,6 +2443,12 @@ $scope.deleindRuleSpe = function($event){
     else{
       $scope.disableDeleteRuleAll = false;
       $scope.disableDeleteRule = false;
+    	angular.element(".deleterulesp").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableDeleteRuleAll = true;
+              $scope.disableDeleteRule = true;
+    		}
+    	}); 
         for(var i=0;i<=postjson.PermissionTo.Rule.length;i++){
           if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().attr('value'))
           {
@@ -2433,6 +2475,12 @@ $scope.expoindRuleSpe = function($event){
     else{
       $scope.disableExportRuleAll = false;
       $scope.disableExportRule = false;
+    	angular.element(".exportrulesp").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableExportRuleAll = true;
+              $scope.disableExportRule = true;
+    		}
+    	}); 
         for(var i=0;i<=postjson.PermissionTo.Rule.length;i++){
           if(postjson.PermissionTo.Rule[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Rule[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().prev().attr('value'))
           {

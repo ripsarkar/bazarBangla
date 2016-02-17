@@ -111,11 +111,11 @@
    <tr ng-repeat="industry in usecInduLi">
    
     <td>{{industry.Name}}</td>
-     <td><input type="checkbox" value="create" class="crtusecase"  data-filterType="IndustryName"  data-objectval="{{industry.Name}}"  ng-click="createind($event)" ng-disabled="disableCreate"></td>
-     <td><input type="checkbox" value="read"   class="readusecase"  data-filterType="IndustryName" data-objectval="{{industry.Name}}"   ng-click="readind($event)" ng-disabled="disableRead"></td>
-     <td><input type="checkbox" value="update" class="updateusecase" data-filterType="IndustryName" data-objectval="{{industry.Name}}" ng-click="updaind($event)" ng-disabled="disableUpdate"></td>
-     <td><input type="checkbox" value="delete" class="deleteusecase" data-filterType="IndustryName" data-objectval="{{industry.Name}}" ng-click="deleind($event)" ng-disabled="disableDelete"></td>
-     <td><input type="checkbox" value="export" class="exportusecase" data-filterType="IndustryName" data-objectval="{{industry.Name}}" ng-click="expoind($event)" ng-disabled="disableExport"></td>
+     <td><input type="checkbox" value="create" class="crtusecase crtusecaseGen"  data-filterType="IndustryName"  data-objectval="{{industry.Name}}"  ng-click="createind($event)" ng-disabled="disableCreate"></td>
+     <td><input type="checkbox" value="read"   class="readusecase readusecaseGen"  data-filterType="IndustryName" data-objectval="{{industry.Name}}"   ng-click="readind($event)" ng-disabled="disableRead"></td>
+     <td><input type="checkbox" value="update" class="updateusecase updateusecaseGen" data-filterType="IndustryName" data-objectval="{{industry.Name}}" ng-click="updaind($event)" ng-disabled="disableUpdate"></td>
+     <td><input type="checkbox" value="delete" class="deleteusecase deleteusecaseGen" data-filterType="IndustryName" data-objectval="{{industry.Name}}" ng-click="deleind($event)" ng-disabled="disableDelete"></td>
+     <td><input type="checkbox" value="export" class="exportusecase exportusecaseGen" data-filterType="IndustryName" data-objectval="{{industry.Name}}" ng-click="expoind($event)" ng-disabled="disableExport"></td>
    </tr>
     
    <tr>
@@ -165,10 +165,10 @@
    <tr ng-repeat="regucat in regcatlist">   
     <td>{{regucat.Name}}</td>
      <td><!-- <input type="checkbox" value="create" class="ctrrule"     data-objectval="{{regucat.Name}}" ng-click="createindRule($event)" ng-disabled="disableCreateRule"> --></td>
-     <td><input type="checkbox" value="read"  class="readrule"     data-filterType="RegCatName"  data-objectval="{{regucat.Name}}" ng-click="readindRule($event)" ng-disabled="disableReadRule"></td>
-     <td><input type="checkbox" value="update" class="updaterule" data-filterType="RegCatName" data-objectval="{{regucat.Name}}" ng-click="updaindRule($event)" ng-disabled="disableUpdateRule"></td>
-     <td><input type="checkbox" value="delete" class="deleterule" data-filterType="RegCatName" data-objectval="{{regucat.Name}}" ng-click="deleindRule($event)" ng-disabled="disableDeleteRule"></td>
-     <td><input type="checkbox" value="export" class="exportrule"  data-filterType="RegCatName" data-objectval="{{regucat.Name}}" ng-click="expoindRule($event)" ng-disabled="disableExportRule"></td>   
+     <td><input type="checkbox" value="read"  class="readrule readruleGen"     data-filterType="RegCatName"  data-objectval="{{regucat.Name}}" ng-click="readindRule($event)" ng-disabled="disableReadRule"></td>
+     <td><input type="checkbox" value="update" class="updaterule updateruleGen" data-filterType="RegCatName" data-objectval="{{regucat.Name}}" ng-click="updaindRule($event)" ng-disabled="disableUpdateRule"></td>
+     <td><input type="checkbox" value="delete" class="deleterule deleteruleGen" data-filterType="RegCatName" data-objectval="{{regucat.Name}}" ng-click="deleindRule($event)" ng-disabled="disableDeleteRule"></td>
+     <td><input type="checkbox" value="export" class="exportrule exportruleGen"  data-filterType="RegCatName" data-objectval="{{regucat.Name}}" ng-click="expoindRule($event)" ng-disabled="disableExportRule"></td>   
    </tr>    
    <tr>
      <td colspan="6" class="info">Specific Rules</td>
