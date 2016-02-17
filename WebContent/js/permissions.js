@@ -2663,7 +2663,11 @@ $scope.readindOrg = function($event){
     }
     else{
       $scope.disableReadOrgAll=false;
-
+    	angular.element(".readorgGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableReadOrgAll = true;
+    		}
+    	}); 
         for(var i=0;i<=postjson.PermissionTo.Organization.length;i++){
           if(postjson.PermissionTo.Organization[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Organization[i].objectval == angular.element($event.currentTarget).parent().prev().prev().text())
           {
@@ -2690,7 +2694,11 @@ $scope.updaindOrg = function($event){
     }
     else{
       $scope.disableUpdateOrgAll=false;
-
+    	angular.element(".updateorgGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableUpdateOrgAll = true;
+    		}
+    	}); 
         for(var i=0;i<=postjson.PermissionTo.Organization.length;i++){
           if(postjson.PermissionTo.Organization[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Organization[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().text())
           {
@@ -2716,7 +2724,11 @@ $scope.deleindOrg = function($event){
     }
     else{
       $scope.disableDeleteOrgAll=false;
-
+    	angular.element(".deleteorgGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableDeleteOrgAll = true;
+    		}
+    	}); 
         for(var i=0;i<=postjson.PermissionTo.Organization.length;i++){
           if(postjson.PermissionTo.Organization[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Organization[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().text())
           {
@@ -2742,7 +2754,11 @@ $scope.membindOrg = function($event){
     }
     else{
       $scope.disableMemberOrgAll=false;
-
+    	angular.element(".memberorgGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableMemberOrgAll = true;
+    		}
+    	}); 
         for(var i=0;i<=postjson.PermissionTo.Organization.length;i++){
           if(postjson.PermissionTo.Organization[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Organization[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().prev().text())
           {
@@ -2872,7 +2888,11 @@ $scope.createindSub = function($event){
     }
     else{
             $scope.disableCreateSubAll=false;
-
+    	angular.element(".createsubsGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableCreateSubAll = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.Subscription.length;i++){
           if(postjson.PermissionTo.Subscription[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Subscription[i].objectval == angular.element($event.currentTarget).parent().prev().text())
           {
@@ -2900,7 +2920,11 @@ $scope.readindSub = function($event){
     }
     else{
             $scope.disableReadSubAll=false;
-
+    	angular.element(".readsubsGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableReadSubAll = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.Subscription.length;i++){
           if(postjson.PermissionTo.Subscription[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Subscription[i].objectval == angular.element($event.currentTarget).parent().prev().prev().text())
           {
@@ -2927,7 +2951,11 @@ $scope.updaindSub = function($event){
     }
     else{
             $scope.disableUpdateSubAll=false;
-
+    	angular.element(".updatesubsGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableUpdateSubAll = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.Subscription.length;i++){
           if(postjson.PermissionTo.Subscription[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Subscription[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().text())
           {
@@ -2953,7 +2981,11 @@ $scope.deleindSub = function($event){
     }
     else{
             $scope.disableDeleteSubAll=false;
-
+    	angular.element(".deletesubsGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableDeleteSubAll = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.Subscription.length;i++){
           if(postjson.PermissionTo.Subscription[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Subscription[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().text())
           {
@@ -3083,7 +3115,11 @@ $scope.createindUser = function($event){
     }
     else{
             $scope.disableCreateUserAll=false;
-
+    	angular.element(".createuserGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableCreateUserAll = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.User.length;i++){
           if(postjson.PermissionTo.User[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.User[i].objectval == angular.element($event.currentTarget).parent().prev().text())
           {
@@ -3109,7 +3145,11 @@ $scope.readindUser = function($event){
     }
     else{
             $scope.disableReadUserAll=false;
-
+    	angular.element(".readuserGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableReadUserAll = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.User.length;i++){
           if(postjson.PermissionTo.User[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.User[i].objectval == angular.element($event.currentTarget).parent().prev().prev().text())
           {
@@ -3135,7 +3175,11 @@ $scope.updaindUser = function($event){
     }
     else{
             $scope.disableUpdateUserAll=false;
-
+    	angular.element(".updateuserGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableUpdateUserAll = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.User.length;i++){
           if(postjson.PermissionTo.User[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.User[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().text())
           {
@@ -3161,7 +3205,11 @@ $scope.deleindUser = function($event){
     }
     else{
             $scope.disableDeleteUserAll=false;
-
+    	angular.element(".deleteuserGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableDeleteUserAll = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.User.length;i++){
           if(postjson.PermissionTo.User[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.User[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().text())
           {
@@ -3290,7 +3338,11 @@ $scope.createindRole = function($event){
   }
     else{
             $scope.disableCreateRoleAll=false;
-
+    	angular.element(".createroleGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableCreateRoleAll = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.Role.length;i++){
           if(postjson.PermissionTo.Role[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Role[i].objectval == angular.element($event.currentTarget).parent().prev().text())
           {
@@ -3317,7 +3369,11 @@ $scope.readindRole = function($event){
     }
     else{
             $scope.disableReadRoleAll=false;
-
+    	angular.element(".readroleGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableReadRoleAll = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.Role.length;i++){
           if(postjson.PermissionTo.Role[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Role[i].objectval == angular.element($event.currentTarget).parent().prev().prev().text())
           {
@@ -3344,7 +3400,11 @@ $scope.updaindRole = function($event){
     }
     else{
             $scope.disableUpdateRoleAll=false;
-
+    	angular.element(".updateroleGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableUpdateRoleAll = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.Role.length;i++){
           if(postjson.PermissionTo.Role[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Role[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().text())
           {
@@ -3370,7 +3430,11 @@ $scope.deleindRole = function($event){
     }
     else{
             $scope.disableDeleteRoleAll=false;
-
+    	angular.element(".deleteroleGen").each(function(){
+    		if(angular.element(this).is(":checked")){
+              $scope.disableDeleteRoleAll = true;
+    		}
+    	});
         for(var i=0;i<=postjson.PermissionTo.Role.length;i++){
           if(postjson.PermissionTo.Role[i].operation == angular.element($event.currentTarget).val() && postjson.PermissionTo.Role[i].objectval == angular.element($event.currentTarget).parent().prev().prev().prev().prev().text())
           {

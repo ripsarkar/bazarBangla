@@ -5,19 +5,19 @@
         .module('app', ['ngCookies','ui.router','ui.bootstrap'])
         .config(function($stateProvider, $urlRouterProvider) {
     	  // For any unmatched url, redirect to /login
-    	  $urlRouterProvider.otherwise("/login");
+    	  $urlRouterProvider.otherwise("/home");
     	  // Now set up the states
     	  $stateProvider
+          .state('home', {
+            url: "/home",
+            templateUrl: "html/home.html",
+             autoActivateChild: 'home.search'
+          })
             .state('login', {
               url: "/login",
               templateUrl: "login.html",
               controller: 'LoginController'
             //  controllerAs: 'vm'
-          })
-          .state('home', {
-            url: "/home",
-            templateUrl: "html/home.html",
-             autoActivateChild: 'home.search'
           })
     	     .state("home.search", {
     	      url:"/search",
