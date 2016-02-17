@@ -1,6 +1,6 @@
 //wrting the controller for viewuser page
 
-app.controller("permissionsCtrl",["$scope","$http", "$rootScope", function($scope, $http,$rootScope){
+app.controller("permissionsCtrl",["$scope","$http", "$rootScope","$q", function($scope, $http,$rootScope,$q){
           $scope.membertabOrga = true;
 
   $scope.$watch(function(){
@@ -14,7 +14,7 @@ app.controller("permissionsCtrl",["$scope","$http", "$rootScope", function($scop
       //$scope.dropshowhide = true;
       //$scope.fnSubsTab=function(){       
             
-            $http.get($rootScope.url + '/getCompany').success(function(data) {
+             var promise1=  $http.get($rootScope.url + '/getCompany').success(function(data) {
               $scope.companyListli = data.Company;            
             }).error(function(data, status, headers, config) {
                 alert('Sorry Application error in serverside');
@@ -45,7 +45,7 @@ app.controller("permissionsCtrl",["$scope","$http", "$rootScope", function($scop
             };
 ///////////////////////////////////////////////////////////
 	$rootScope.loadinganimation = true;
-$http.get($rootScope.url + "/populateEPIndutry").success(function(result){
+var promise2= $http.get($rootScope.url + "/populateEPIndutry").success(function(result){
   $scope.usecInduLi = result.industry;
   $rootScope.loadinganimation = false;
 }).error(function(err){
@@ -57,12 +57,12 @@ $http.get($rootScope.url + "/populateRegCatDropDown").success(function(result){
 
 });
 ///////////////////////////////////////////////////
-$http.get($rootScope.url + "/getAllUseCaseList").success(function(result){
+var promise3= $http.get($rootScope.url + "/getAllUseCaseList").success(function(result){
   $scope.alluselist = result.Usecases;
 }).error(function(err){
 
 });
-$http.get($rootScope.url + "/getAllRulesList").success(function(result){
+var promise4=$http.get($rootScope.url + "/getAllRulesList").success(function(result){
   $scope.allrulelist = result.Rules;
 }).error(function(err){
 
@@ -168,21 +168,40 @@ $scope.fnFetchPermissions=function(id,name){
 					angular.extend(postjson.PermissionTo.Role, result.PermissionTo.Role);
 					
 								
+				 $q.all([promise1, promise2, promise3, promise4]).then(function(data){
+
+					 $scope.fnLoadCheckBox(result);
+				});
 					
 					
-				//usercase Tab  - createusecase
-				//var queryResult = element[0].querySelector('.multi-files');
-				//var res = document.getElementsByClassName("crtusecase");
-				//var wrappedResult = angular.element(document.getElementsByClassName("crtusecase"));
-				//console.log(wrappedResult)
-				//debugger;
-					angular.forEach(angular.element(document.getElementsByClassName("crtusecase")), function(value, key) {						 
-						var outer =angular.element(value);							
+		  
+		}).error(function(err){
+			alert("Server side error");
+			
+	     });
+	
+	
+};
+  
+  
+  $scope.fnLoadCheckBox=function(result){
+	
+	 var usecase=result.PermissionTo.UseCase;
+                  
+       
+				var wrappedResult = angular.element(document.getElementsByClassName("crtusecase"));
+				
+		
+			
+					angular.forEach(wrappedResult, function(value, key) {
+							//for(i=0;i<angular.element(document.getElementsByClassName("crtusecase")).length;i++){
+								//debugger;
+						//var outer =angular.element(value);							
 						var objectval= value.attributes['data-objectval'].value;
 						var operation= value.attributes['value'].value;
 						var filterType=value.attributes['data-filterType'].value;
 						//alert("createusecase");
-							console.log("createusecase" +value.attributes['data-objectval'].value);
+							console.log("createusecase" +value.attributes['data-filtertype'].value);
 						 angular.forEach(usecase, function(val,key) {						             
 								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                         //alert("if")	
@@ -208,8 +227,8 @@ $scope.fnFetchPermissions=function(id,name){
 							  }
 			  
 						});
-						
-					});
+						});
+					//}
 
 					
 					//usercase Tab  - readusecase
@@ -594,7 +613,7 @@ $scope.fnFetchPermissions=function(id,name){
 						var outer =angular.element(value);							
 						var objectval= value.attributes['data-objectval'].value;
 						var operation= value.attributes['value'].value;
-						console.log(value.attributes['value'].value)
+						//console.log(value.attributes['value'].value)
 						 angular.forEach(result.PermissionTo.Rule, function(val,key) {	
 					 
 								if (val.operation == operation && val.objectval==objectval ) {	
@@ -1527,17 +1546,7 @@ $scope.fnFetchPermissions=function(id,name){
 						});
 						
 					});
-					
-					
-		  
-		}).error(function(err){
-			alert("Server side error");
-			
-	     });
-	
-	
 };
-  
 $scope.compile=function (element){
 	
   var el = angular.element(element);    
