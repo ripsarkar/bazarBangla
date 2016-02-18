@@ -7,13 +7,14 @@
     	  // For any unmatched url, redirect to /login
     	  $urlRouterProvider.otherwise("/login");
     	  // Now set up the states
+
+        $stateProvider
             .state('login', {
               url: "/login",
               templateUrl: "login.html",
               controller: 'LoginController'
             //  controllerAs: 'vm'
           })
-        $stateProvider
           .state('home', {
             url: "/home",
             templateUrl: "html/home.html",
