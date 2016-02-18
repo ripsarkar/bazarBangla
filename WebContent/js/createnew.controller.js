@@ -224,7 +224,17 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
         $rootScope.loadinganimation = false;
         alert('Sorry Application error in serverside');
     });
-
+        /*var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(obj.Users.Role !=undefined){
+            var permissiontypeList = obj.Users.Role.PermissionTypeDet;
+            for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                if(permissiontypeList[int2].PermissionName=="read"){
+                     $scope.vspselPckgs = permissiontypeList[int2].OrgList;
+                     $scope.orgName = parseInt($scope.cmpyId);
+                     $scope.pageLoad();
+                }
+            }
+        }*/
 
 var Indtsyarray = [];
 $scope.reSet = function() {
@@ -1498,10 +1508,25 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
     $scope.updatedata = {};
     var dataset = null;
-    $scope.Search_UpdateUsecase = function() {
-        if ($scope.UpdateusecaseID != '' && typeof $scope.UpdateusecaseID != 'undefined') {
+
+
+        var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(obj.Users.UseCase !=undefined){
+            var permissiontypeList = obj.Users.UseCase.PermissionTypeDet;
+            for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                if(permissiontypeList[int2].PermissionName=="update"){
+                     $scope.usecasetable = permissiontypeList[int2].ObjectList;
+                }
+            }
+        }
+
+
+
+    $scope.Search_UpdateUsecase = function(usecaseIDVal) {
+
+        if (usecaseIDVal != '' && typeof usecaseIDVal != 'undefined') {
             $rootScope.loadinganimation = true;
-            $http.get($rootScope.url + '/getUseCase/' + $scope.UpdateusecaseID).success(function(data, status, headers, config) {
+            $http.get($rootScope.url + '/getUseCase/' + usecaseIDVal).success(function(data, status, headers, config) {
                 $rootScope.loadinganimation = false;
                 if (typeof data.UseCase != 'undefined' && data.UseCase != '' && data.UseCase.length > 0) {
 
@@ -2232,13 +2257,25 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 $rootScope.loadinganimation = false;
                 alert("Sorry Application error in serverside");
             });
-            $scope.Search_RuleUsecase = function() {
-                if ($scope.UpdateRuleID != '' && typeof $scope.UpdateRuleID != 'undefined') {
+
+        var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(obj.Users.Rule !=undefined){
+            var permissiontypeList = obj.Users.Rule.PermissionTypeDet;
+            for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                if(permissiontypeList[int2].PermissionName=="update"){
+                     $scope.rulestable = permissiontypeList[int2].ObjectList;
+                }
+            }
+        }
+
+
+            $scope.Search_RuleUsecase = function(ruleidtakeval) {
+                if (ruleidtakeval != '' && typeof ruleidtakeval != 'undefined') {
                     $rootScope.loadinganimation = true;
 
                     var appstatuesoob;
 
-                    $http.get($rootScope.url + '/getDetailsbyUcRuleID/' + $scope.UpdateRuleID).success(function(data, status, headers, config) {
+                    $http.get($rootScope.url + '/getDetailsbyUcRuleID/' + ruleidtakeval).success(function(data, status, headers, config) {
                         //console.log(JSON.stringify(data, null,2));
                         $rootScope.loadinganimation = false;
                         //for oob value

@@ -1,6 +1,40 @@
 <div class="createnewpage pagebg" ng-controller="UpdateusecaseController">
-    
-    <div class="container">
+
+        <div class="row zeroSpace">
+        <div class="createnew-head">
+            <div class="col-md-6 col-sm-6">
+                <h2 class="title-head">Update Usecase</h2>
+            </div>
+            <div class="col-md-12" style="margin: 10px 0px 20px;">
+                <hr>
+            </div>
+        </div>
+    </div>
+<div ng-show='updateUsecase.SearchPage'>
+    <div class="createnew-head">
+        <div class="panel panel-default tablecontrol">
+            <div class="searchtableUser uamtable">
+                <table class="table table-striped searchtablerow" fixed-header>
+                    <thead>
+                    <tr class="tableheader">
+                        <th>Use Case</th>
+                        <th>Use Case Id</th>
+                        <th>Edit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="usecaselist in usecasetable" class="usecaseTable">
+                        <td><!-- {{usecaselist.Name}} --></td>
+                        <td>{{usecaselist.Id}}</td>
+                        <td><span class="icon-feedback" ng-click="Search_UpdateUsecase(usecaselist.Id)"></span></td>
+                    </tr>
+                    </tbody>                       
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- <div class="container">
         <div class="row">
             <div class="createnew-head">
                 <div class="col-md-6 col-sm-6">
@@ -25,7 +59,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div ng-show='updateUsecase.updatePage'>
         <div class="container">
             <div class="row">

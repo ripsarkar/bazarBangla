@@ -20,7 +20,7 @@
                                 </label>
                             </div>
                             <div class="col-md-5">
-                                <select ng-model="orgName" ng-init="orgName = vfbselPckg[0].id" style="height: 30px; width: 320px;" ng-options="vfbselPckg.id as vfbselPckg.name for vfbselPckg in vfbselPckg | orderBy:'name'">
+                                <select ng-model="orgName" ng-init="orgName = vfbselPckg[0].SurrId" style="height: 30px; width: 320px;" ng-options="vfbselPckg.SurrId as vfbselPckg.Name for vfbselPckg in vfbselPckg | orderBy:'Name'">
                                     <option value="">- Please Choose -</option>
                                 </select>
                             </div>

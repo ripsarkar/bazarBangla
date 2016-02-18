@@ -25,7 +25,7 @@ app.controller("permissionsCtrl",["$scope","$http", "$rootScope","$q","$timeout"
   $rootScope.loadinganimation = true;
 
      //$scope.fnPopulateRoleList=function(){
-            $http.get($rootScope.url + '/getpopulateRoleforLogin/'+localStorage.getItem("surrComprip")).success(function(data) {
+          var promise5= $http.get($rootScope.url + '/getpopulateRoleforLogin/'+localStorage.getItem("surrComprip")).success(function(data) {
               $scope.roleListli = data.Roles;             
               $rootScope.loadinganimation = false;
             }).error(function(data, status, headers, config) {                
@@ -156,6 +156,7 @@ $scope.sendPermissions = function(){
 //$scope.chcked=false;
 $scope.fnFetchPermissions=function(id,name){
  //var read = {};
+ var roleselectedval=[];
  var usecase=postjson.PermissionTo.UseCase;
 		  $http.get($rootScope.url + "/fetchPermissions/"+$scope.tabName+"/"+$scope.orgId).success(function(result){      
 
@@ -166,11 +167,17 @@ $scope.fnFetchPermissions=function(id,name){
 					angular.extend(postjson.PermissionTo.Subscription, result.PermissionTo.Subscription);			
 					angular.extend(postjson.PermissionTo.User, result.PermissionTo.User);
 					angular.extend(postjson.PermissionTo.Role, result.PermissionTo.Role);
-					
+					angular.extend(postjson.PermissionFor.Role, result.PermissionFor.Role);
 								
-				 $q.all([promise1, promise2, promise3, promise4]).then(function(data){
+				 $q.all([promise1, promise2, promise3, promise4,promise5]).then(function(data){
 
 					$timeout(function () { $scope.fnLoadCheckBox(result); }, 4000);
+					
+					angular.forEach(result.PermissionFor.Role, function(value, key) {
+						roleselectedval.push(""+value.surrId+"")
+					});
+					//console.log(roleselectedval);
+					$scope.selectedroleList = roleselectedval;
 				});
 					
 					

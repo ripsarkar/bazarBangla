@@ -13,11 +13,21 @@ app.controller("createrolecrt", ["$scope", "$rootScope", "$state", '$http', '$mo
     
     $scope.cpmysurrid = function() {
         var URLviewcomp = $rootScope.url+'/getCompany';
-        $http.get(URLviewcomp).success(function(data, status, headers, config) {
+        var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(obj.Users.Role !=undefined){
+            var permissiontypeList = obj.Users.Role.PermissionTypeDet;
+            for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                if(permissiontypeList[int2].PermissionName=="create"){
+                     $scope.vfbselPckg = permissiontypeList[int2].ObjectList;
+                }
+            }
+        }
+
+        /*$http.get(URLviewcomp).success(function(data, status, headers, config) {
                 $scope.vfbselPckg = data.Company;
         }).error(function(data, status, headers, config) {
             alert("Please contact your adminstrator");
-        });
+        });*/
     }
 
     $scope.cpmysurrid();
@@ -128,14 +138,27 @@ app.controller("updaterole", ["$scope", "$rootScope", "$state", '$http', '$modal
      }*/
      $scope.cpmysurrid = function() {
          var URLviewpage = $rootScope.url+'/getCompany';
-         $http.get(URLviewpage).success(function(data, status, headers, config) {
+
+        var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(obj.Users.Role !=undefined){
+            var permissiontypeList = obj.Users.Role.PermissionTypeDet;
+            for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                if(permissiontypeList[int2].PermissionName=="update"){
+                     $scope.vspselPckgs = permissiontypeList[int2].OrgList;
+                     $scope.orgName = parseInt($scope.cmpyId);
+                     $scope.pageLoad();
+                }
+            }
+        }
+
+         /*$http.get(URLviewpage).success(function(data, status, headers, config) {
              $scope.vspselPckgs = data.Company;
              $scope.orgName = parseInt($scope.cmpyId);
              $scope.pageLoad();
          }).error(function(data, status, headers, config) {
              $rootScope.dataLoading=true;
              alert("Please contact your adminstrator");
-         });
+         });*/
      }
 
      $scope.cpmysurrid();
@@ -252,3 +275,126 @@ app.filter('startFrom', function() {
      }
  };
 });
+app.controller("viewrole", ["$scope", "$rootScope", "$state", '$http', '$modal', 'feedback_model', '$filter',function($scope, $rootScope, $state, $http, $modal, feedback_model, $filter) {
+    
+     $scope.cmpyId = localStorage.getItem("cmpyId");
+     $scope.usrId = localStorage.getItem("surrrip");
+     $rootScope.loadinganimation = true;
+     //$scope.orgName ={};
+     $scope.orgName = parseInt($scope.cmpyId);
+     $scope.currentPage = 0;
+     $scope.pageSize = 20;
+     $scope.pgnation = function() {
+         if (typeof $scope.rolePckg != 'undefined' && $scope.rolePckg.length > 0 && $scope.rolePckg != null) {
+             $scope.numberOfPages = function() {
+                 console.clear();
+                 if($scope.rolePckg != null){
+                 return Math.ceil($scope.rolePckg.length / $scope.pageSize);
+                 }else{
+                 return null;
+                 }
+             };
+         }
+     };
+     $rootScope.dataUpdated = false;
+     $scope.$watch(function() {
+         if ($rootScope.dataUpdated) {
+             $rootScope.dataUpdated = false;
+             $scope.pageLoad();
+         }
+     });
+                                                                                    
+     $scope.pageLoad = function() {
+         var URLviewpage = null;
+         var viewPagedata = $rootScope.url+'/listRoles/';
+         URLviewpage = viewPagedata + $scope.orgName;
+         $scope.rolePckg = null;
+         $scope.role_tb= [];
+         var pckgrole = null;
+         $http.get(URLviewpage).success(function(data, status, headers, config) {
+             $rootScope.loadinganimation = false;
+             if (typeof data != 'undefined' && data.rolesView.length > 0) {
+                 $rootScope.dataLoading=true;
+                 pckgrole = data.rolesView;
+                 $scope.role_tb.length = 0;
+                 $scope.rolePckg = null;
+                 for (var i = 0; i < pckgrole.length; i++) {
+                     var roledata = {};
+                     roledata.role_id = pckgrole[i].role_id;
+                     roledata.role_name = pckgrole[i].role_name;
+                     roledata.role_desc = pckgrole[i].role_desc;
+                     roledata.role_surr_id = pckgrole[i].role_surr_id;
+                     $scope.role_tb.push(roledata);
+                 }
+
+                 $scope.rolePckg = $scope.role_tb;
+                 $scope.pgnation();
+                 $rootScope.loadinganimation = false;
+             } else {
+                 $rootScope.loadinganimation = false;
+                 $scope.rolePckg= null;
+                 alert("Sorry, No subscription under this company");
+             }
+         }).error(function(data, status, headers, config) {
+             $rootScope.loadinganimation = false;
+             $scope.rolePckg= null;
+             alert("Technical Error.Please contact administrator for further details");
+         });
+     };
+ 
+/*     $scope.orgcmpname = function(){
+         $rootScope.loadinganimation = true;
+         
+     }*/
+       $scope.orgcmpname = function(){
+         $rootScope.loadinganimation = true;
+         $scope.pageLoad();
+     }
+    /*$scope.cmpinit =  function(){
+        $scope.orgName = $scope.cmpyId;
+     }*/
+     $scope.cpmysurrid = function() {
+         var URLviewpage = $rootScope.url+'/getCompany';
+
+        var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(obj.Users.Role !=undefined){
+            var permissiontypeList = obj.Users.Role.PermissionTypeDet;
+            for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                if(permissiontypeList[int2].PermissionName=="read"){
+                     $scope.vspselPckgs = permissiontypeList[int2].OrgList;
+                     $scope.orgName = parseInt($scope.cmpyId);
+                     $scope.pageLoad();
+                }
+            }
+        }
+
+         /*$http.get(URLviewpage).success(function(data, status, headers, config) {
+             $scope.vspselPckgs = data.Company;
+             $scope.orgName = parseInt($scope.cmpyId);
+             $scope.pageLoad();
+         }).error(function(data, status, headers, config) {
+             $rootScope.dataLoading=true;
+             alert("Please contact your adminstrator");
+         });*/
+     }
+
+     $scope.cpmysurrid();
+ 
+     $scope.updateroleForm = function(id, roleId, roleName, roleDesc, index) {
+         var roleselecteddata = {
+             id: id,
+             roleid:roleId,
+             rolename:roleName,
+             roleDesc:roleDesc,
+             index:index,
+             orgName:$scope.orgName
+         };
+         feedback_model.setroleselected_data(roleselecteddata);
+         var modalInstance = $modal.open({
+             templateUrl: 'updaterolepop.html',
+             controller: 'updaterolepop',
+             size: 'md'
+         });
+     };
+    
+}]);

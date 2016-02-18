@@ -1,7 +1,7 @@
 //wrting the controller for uamanage page
 app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$rootScope,$http){
 		//base view is view user
-	  $rootScope.currentUserTab = 'html/viewuser.html';
+	  //$rootScope.currentUserTab = 'html/viewuser.html';
     
     
     

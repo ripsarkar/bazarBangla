@@ -7,13 +7,13 @@
     	  // For any unmatched url, redirect to /login
     	  $urlRouterProvider.otherwise("/login");
     	  // Now set up the states
-    	  $stateProvider
             .state('login', {
               url: "/login",
               templateUrl: "login.html",
               controller: 'LoginController'
             //  controllerAs: 'vm'
           })
+        $stateProvider
           .state('home', {
             url: "/home",
             templateUrl: "html/home.html",
@@ -83,7 +83,7 @@
         .state("home.viewsubscription", {
         url:"/viewsubscription",
        // templateUrl: "html/viewsubscription.html"
-        templateUrl: "html/viewsubscription.html",
+        templateUrl: "html/viewsubscriptionMain.html",
         controller: 'updateOrgCtrl'
       })
 			.state("home.createrole", {
@@ -98,8 +98,8 @@
 			})
       .state("home.viewrole", {
         url:"/viewrole",
-        templateUrl: "html/viewrole.html",
-        controller: 'updateRoleCtrl'
+        templateUrl: "html/viewroleMain.html",
+        controller: 'viewrole'
        // templateUrl: "html/updaterole.html"
       }) 
             .state("home.UpdateOrganisation", {

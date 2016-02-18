@@ -65,7 +65,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
                         $location.path('/home/search');
 
                         $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
-                        
+                        //$http.get("data/dummyjson.json").success(function(result) {
                             sessionStorage.setItem("fetchPermission", JSON.stringify(result));
                             $scope.permission = sessionStorage.getItem("fetchPermission");
                             console.log(sessionStorage.getItem("fetchPermission"));
@@ -346,7 +346,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		$scope.CreateOrgzd = false;
 		$scope.UpdateSubzd = false;
 		$scope.CreateSubzd = false;
-		
+		$scope.ReadSubzd = false;
 		var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
 		if(obj.Users.Subscription !=undefined){
 
@@ -359,6 +359,10 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 				}else if(permissiontypeList[int2].PermissionName=="create"){
 					if(permissiontypeList[int2].ObjectList.length > 0){
 					$scope.CreateSubzd = true;
+					}
+				}else if(permissiontypeList[int2].PermissionName=="read"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+					$scope.ReadSubzd = true;
 					}
 				}
 			}
@@ -527,7 +531,16 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
  		       ev.preventDefault();
  		   }); 
     	}
-
+    	if(!$scope.ReadSubzd){
+    	//	alert(4);
+    	    angular.element(".disabfuncCUc5").attr("ui-sref","");
+            angular.element(".disabfuncCUc5").attr("disabled","disabled");
+            angular.element(".disabfuncCUc5").addClass(" btn btn-disabled");
+            angular.element(".disabfuncCUc5").addClass("disabfuncCUcColor");
+            angular.element(".disabfuncCUc5").click(function(ev) {
+ 		       ev.preventDefault();
+ 		   }); 
+    	}
     	
         $scope.menu = {
             usecaserule :false,
@@ -639,13 +652,16 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
     
     $scope.uamanager = function(){
         $rootScope.$emit("uamanagerpage", {});
+		//$rootScope.currentUserTab = 'html/uamcreateuser.html'
     };
     
     $scope.uaviewer = function(){
         $rootScope.$emit("uaviewerpage", {});
+        $rootScope.currentUserTab = 'html/viewuser.html';
     };
     $scope.uaviewerMain = function(){
         $rootScope.$emit("uaviewerMainpage", {});
+        $rootScope.currentUserTab = 'html/viewuser_main.html'
     };
 
     

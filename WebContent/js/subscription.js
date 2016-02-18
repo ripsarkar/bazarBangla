@@ -80,7 +80,7 @@ app.directive("xyzcomp", function($http,$rootScope){
       $scope.ceateContact = function(){
       var numbercheck = /^[0-9]+$/;
       var testAlpNu = /^[a-zA-Z0-9]+$/;
-
+      var dateValidator = /^(\d{4})[-\/](\d{2})[-\/](\d{2})$/;
       if($scope.compList == ''){
         alert('Please select an Organization Name');
           return false;
@@ -89,11 +89,11 @@ app.directive("xyzcomp", function($http,$rootScope){
         alert('Please enter a valid Subscription Id(no special character)');
           return false;
       }
-      else if($scope.effecDate == ''){
+      else if($scope.effecDate == '' || !dateValidator.test(angular.element(".effecDateMain").val())){
         alert('Please enter a valid Effective Date(not less than current date)');
           return false;
       }
-            else if($scope.expDate == ''){
+            else if($scope.expDate == '' || !dateValidator.test(angular.element(".expDate").val())){
         alert('Please enter a valid Expiration Date(not less than effective date)');
           return false;
       }
