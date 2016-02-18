@@ -16,8 +16,8 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		  $rootScope.loadinganimation = true;
 		  var loadUserdetails = {
  	                method: "GET",
- 	               url: $rootScope.url+"/getUserDetails/"+mj[1]
- 	         		//url: "data/userdtail.json"
+ 	               //url: $rootScope.url+"/getUserDetails/"+mj[1]
+ 	         		url: "data/userdtail.json"
  	            };
  	            $http(loadUserdetails).success(function(result) {
  	             $rootScope.dataLoading=true; 	            
@@ -420,6 +420,8 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 	$scope.managePermissionForRole=function(){
 		$scope.UpdateRolezd = false;
 		$scope.CreateRolezd = false;
+		$scope.ReadRolezd = false;
+
 		
 		
 		var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
@@ -434,6 +436,11 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 				}else if(permissiontypeList[int2].PermissionName=="create"){
 					if(permissiontypeList[int2].ObjectList.length > 0){
 					$scope.CreateRolezd = true;
+					}
+				}
+				else if(permissiontypeList[int2].PermissionName=="read"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+					$scope.ReadRolezd = true;
 					}
 				}
 			}
@@ -624,6 +631,16 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
               angular.element(".disabfuncCUc9").addClass(" btn btn-disabled");
               angular.element(".disabfuncCUc9").addClass("disabfuncCUcColor");
               angular.element(".disabfuncCUc9").click(function(ev) {
+   		       ev.preventDefault();
+   		   }); 
+      	}
+      	if(!$scope.ReadRolezd){
+      		//alert(2);
+      	    angular.element(".disabfuncCUc10").attr("ui-sref","");
+              angular.element(".disabfuncCUc10").attr("disabled","disabled");
+              angular.element(".disabfuncCUc10").addClass(" btn btn-disabled");
+              angular.element(".disabfuncCUc10").addClass("disabfuncCUcColor");
+              angular.element(".disabfuncCUc10").click(function(ev) {
    		       ev.preventDefault();
    		   }); 
       	}
