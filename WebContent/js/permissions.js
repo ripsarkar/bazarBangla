@@ -1,6 +1,6 @@
 //wrting the controller for viewuser page
 
-app.controller("permissionsCtrl",["$scope","$http", "$rootScope","$q", function($scope, $http,$rootScope,$q){
+app.controller("permissionsCtrl",["$scope","$http", "$rootScope","$q","$timeout", function($scope, $http,$rootScope,$q,$timeout){
           $scope.membertabOrga = true;
 
   $scope.$watch(function(){
@@ -170,7 +170,7 @@ $scope.fnFetchPermissions=function(id,name){
 								
 				 $q.all([promise1, promise2, promise3, promise4]).then(function(data){
 
-					 $scope.fnLoadCheckBox(result);
+					$timeout(function () { $scope.fnLoadCheckBox(result); }, 4000);
 				});
 					
 					
