@@ -204,7 +204,27 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
         }
     }
 
-    $http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
+        var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(obj.Users.UseCase !=undefined){
+            var permissiontypeList = obj.Users.UseCase.PermissionTypeDet;
+            for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                if(permissiontypeList[int2].PermissionName=="create"){
+                    $rootScope.loadinganimation = false;
+
+                    $scope.industrydatas = permissiontypeList[int2].ObjectList;
+                    defaultcount++;
+                    $scope.defaultchk();
+                    if(loadccker ==1){
+                        $scope.chckindustry();
+                    }
+                
+                }
+            }
+
+        }
+
+
+/*    $http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
         if (typeof data.industry != 'undefined' && data.industry.length != 0) {
             $rootScope.loadinganimation = false;
             //$scope.EPdatas = data.EP;
@@ -223,7 +243,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
     }).error(function(data, status, headers, config) {
         $rootScope.loadinganimation = false;
         alert('Sorry Application error in serverside');
-    });
+    });*/
         /*var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
         if(obj.Users.Role !=undefined){
             var permissiontypeList = obj.Users.Role.PermissionTypeDet;
@@ -295,7 +315,7 @@ angular.element('form').click(function(event){
 app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http', 'UsecaseService',
     function($scope, $rootScope, $state, $http, UsecaseService) {
 
-		
+        
         UsecaseService.setbtnbackUC("");
         $scope.pagemain = {
             main: true,
@@ -382,7 +402,19 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
 
         });
 
-        $http.get($rootScope.url + '/populateRegCatDropDown').success(function(data, status, headers, config) {
+        var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(obj.Users.Rule !=undefined){
+            var permissiontypeList = obj.Users.Rule.PermissionTypeDet;
+            for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                if(permissiontypeList[int2].PermissionName=="update"){
+                     $scope.RegcatCrtdatas = permissiontypeList[int2].RegCatList;
+                
+                }
+            }
+
+        }
+
+        /*$http.get($rootScope.url + '/populateRegCatDropDown').success(function(data, status, headers, config) {
             if (data.RegCat.length != 0 && typeof data.RegCat != 'undefined') {
                 $scope.RegcatCrtdatas = data.RegCat;
             } else {
@@ -390,7 +422,7 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
             }
         }).error(function(data, status, headers, config) {
             alert('Sorry Application error in serverside');
-        });
+        });*/
         $scope.globalUseCase_data = {};
 
         $scope.UsecaseRegcat_extch = function() {
@@ -624,13 +656,13 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
             $state.go("home.createusecase");
         };
         angular.element('form').click(function(event){
-		    event.preventDefault();
-			if(event.which === 13){
-			    if($state.current == 'home.createReg'){
-			        $scope.UseCaseformSubmit();
-			    }
-			}
-		});
+            event.preventDefault();
+            if(event.which === 13){
+                if($state.current == 'home.createReg'){
+                    $scope.UseCaseformSubmit();
+                }
+            }
+        });
        
             
     }
@@ -638,8 +670,8 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
 
 app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http', 'UsecaseService',
     function($scope, $rootScope, $state, $http, UsecaseService) {
-		
-	angular.element("ul.submainlinks li").removeClass("subactive");
+        
+    angular.element("ul.submainlinks li").removeClass("subactive");
     angular.element('li.createrule').addClass("subactive");
         $scope.formcontrolYN = "No";
         UsecaseService.setbtnbackUC("");
@@ -693,7 +725,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                         }
                     }
                 }).error(function(data, status, headers, config) {
-                	$scope.crtUsercaseId="";
+                    $scope.crtUsercaseId="";
                     $scope.crtUsercaseName="";
                     alert("Sorry, No data found");
                 });
@@ -713,7 +745,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                         }
                     }
                 }).error(function(data, status, headers, config) {
-                	$scope.crtUsercaseId="";
+                    $scope.crtUsercaseId="";
                     $scope.crtUsercaseName="";
                     alert("Sorry, No data found");
                 });
@@ -740,12 +772,12 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                             }
                         }
                     } else {
-                    	$scope.crtUsercaseId="";
-	                    $scope.crtUsercaseName="";
+                        $scope.crtUsercaseId="";
+                        $scope.crtUsercaseName="";
                         alert('Sorry, No data found');
                     }
                 }).error(function(data, status, headers, config) {
-                	$scope.crtUsercaseId="";
+                    $scope.crtUsercaseId="";
                     $scope.crtUsercaseName="";
                     alert('Sorry Application error in serverside');
                 });
@@ -1745,13 +1777,13 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 }
 
                 angular.element('form').click(function(event){
-	                event.preventDefault();
-	                if(event.which === 13){
-	                    if($state.current == 'home.updateUsecase'){
-	                        $scope.goTo();
-	                    }
-	                }
-	            });
+                    event.preventDefault();
+                    if(event.which === 13){
+                        if($state.current == 'home.updateUsecase'){
+                            $scope.goTo();
+                        }
+                    }
+                });
                 
             }]);
 
@@ -2775,12 +2807,12 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
             //OOB update selection
             /*$scope.obbUpdate = function () {
-    	if($scope.uformcontrolYN=="Yes"){
-    		statusOOBu="Y";
-    	}
-    	else if($scope.uformcontrolYN=="No"){
-    		statusOOBu="N";
-    	}
+        if($scope.uformcontrolYN=="Yes"){
+            statusOOBu="Y";
+        }
+        else if($scope.uformcontrolYN=="No"){
+            statusOOBu="N";
+        }
     }*/
 
 
