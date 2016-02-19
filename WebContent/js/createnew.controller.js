@@ -406,8 +406,8 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
         if(obj.Users.Rule !=undefined){
             var permissiontypeList = obj.Users.Rule.PermissionTypeDet;
             for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
-                if(permissiontypeList[int2].PermissionName=="update"){
-                     $scope.RegcatCrtdatas = permissiontypeList[int2].RegCatList;
+                if(permissiontypeList[int2].PermissionName=="create"){
+                     $scope.RegcatCrtdatas = permissiontypeList[int2].ObjectList;
                 
                 }
             }
@@ -1709,7 +1709,21 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     }
                 }
 
-                $http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
+
+                var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+                if(obj.Users.UseCase !=undefined){
+                    var permissiontypeList = obj.Users.UseCase.PermissionTypeDet;
+                    for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                        if(permissiontypeList[int2].PermissionName=="update"){
+                            $rootScope.loadinganimation = false;
+
+                            $scope.industrydatas = permissiontypeList[int2].IndustryList;
+                            defaultcount++;
+                            $scope.defaultchk();
+                        }
+                    }
+                }
+                /*$http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
                     if (typeof data.industry != 'undefined' && data.industry.length != 0) {
                         $rootScope.loadinganimation = false;
                         //$scope.EPdatas = data.EP;
@@ -1725,7 +1739,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 }).error(function(data, status, headers, config) {
                     $rootScope.loadinganimation = false;
                     alert('Sorry Application error in serverside');
-                });
+                });*/
 
 
                 var Indtsyarray = [];
@@ -1888,7 +1902,20 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             });
 
             $rootScope.loadinganimation = true;
-            $http.get($rootScope.url + '/populateRegCatDropDown').success(function(data, status, headers, config) {
+
+        var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(obj.Users.Rule !=undefined){
+            var permissiontypeList = obj.Users.Rule.PermissionTypeDet;
+            for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                if(permissiontypeList[int2].PermissionName=="update"){
+                    $scope.RegcatCrtdatas = permissiontypeList[int2].RegCatList;
+                    $rootScope.loadinganimation = false;
+                    $scope.defaultloadedess();
+                }
+            }
+
+        }
+            /*$http.get($rootScope.url + '/populateRegCatDropDown').success(function(data, status, headers, config) {
                 if (data.RegCat.length != 0 && typeof data.RegCat != 'undefined') {
                     $rootScope.loadinganimation = false;
                     $scope.RegcatCrtdatas = data.RegCat;
@@ -1900,7 +1927,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             }).error(function(data, status, headers, config) {
                 $rootScope.loadinganimation = false;
                 alert("Sorry Application error in serverside");
-            });
+            });*/
 
 
             $scope.UsecaseRegcat_extch = function() {
