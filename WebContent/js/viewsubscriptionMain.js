@@ -77,7 +77,7 @@ app.controller("viewsubscriptionMain", ["$scope", "$rootScope", "$state", '$http
 			var permissiontypeList = obj.Users.Subscription.PermissionTypeDet;
 			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
 				if(permissiontypeList[int2].PermissionName=="read"){
-					 $scope.vspselPckgs = permissiontypeList[int2].ObjectList;
+					 $scope.vspselPckgs = permissiontypeList[int2].OrgList;
 				
 				}
 			}
