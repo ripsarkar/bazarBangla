@@ -114,10 +114,10 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
         alert('Please enter valid city');
           return false;
       }
-            else if($scope.state != ''  && !testAlp.test($scope.state)){
+            /*else if($scope.state != ''  && !testAlp.test($scope.state)){
         alert('Please enter valid state');
           return false;
-      }
+      }*/
             else if($scope.country == ''){
         alert('Please enter country');
           return false;
