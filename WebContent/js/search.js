@@ -3834,7 +3834,11 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
                             if($scope.rule.package_details !=undefined){
                             	  $scope.jsonObj["packageSurrId"] = $scope.rule.package_details.UC_RULE_PKG_SURR_ID;
                             	  $scope.jsonObj["fileName"] = $scope.rule.package_details.UC_RULE_PKG_FILE_NAME;
-                            	  $scope.jsonObj["exportYes"] = true;
+                            	 var exp = $scope.chckPermissionForExport($scope.usecase.id,$scope.rule.id);
+                            	 if(exp){
+                            		 $scope.jsonObj["exportYes"] = true; 
+                            	 }
+                            	 
                             }else{
                             	$scope.jsonObj["packageSurrId"] = "";
                            	  	$scope.jsonObj["fileName"] = "";
@@ -3855,6 +3859,56 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
         $scope.ruleLength =  $scope.tabledata.length;
     }
 
+    $scope.chckPermissionForExport = function(usecaseid,ruleid) {
+    	var usecaseexport = false;
+    	var ruleeexport = false;
+    	
+    	var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+		if(obj.Users.UseCase !=undefined){
+
+			var permissiontypeList = obj.Users.UseCase.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				if(permissiontypeList[int2].PermissionName=="export"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+						var list =permissiontypeList[int2].ObjectList;
+						for (var int = 0; int < list.length; int++) {
+							if(list.SurrId == usecaseid){
+								usecaseexport = true;
+								
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		if(obj.Users.Rule !=undefined){
+
+			var permissiontypeList = obj.Users.Rule.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				if(permissiontypeList[int2].PermissionName=="export"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+						var list =permissiontypeList[int2].ObjectList;
+						for (var int = 0; int < list.length; int++) {
+							if(list.SurrId == ruleid){
+								ruleeexport = true;
+								
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		if(usecaseexport && ruleeexport){
+			return true;
+		}else{
+			return false;
+		}
+    	
+    }
+    
+    
     $scope.showAll = function() {
     	//hiding rule and relation table
     	$scope.dimensionrule=false;
