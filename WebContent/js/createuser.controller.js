@@ -35,6 +35,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     $rootScope.updatecontractId="";
     $rootScope.currentUserTab = 'html/uamcreateuser.html';
     $scope.disableusername=false;
+    $scope.orgalistusercrea=false;
 
 });
 	//is active declaraion
