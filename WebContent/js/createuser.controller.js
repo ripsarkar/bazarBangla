@@ -67,6 +67,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
 	}	
 	//passing data for update
 	if($rootScope.updateuserName!=""){
+    $scope.orgalistusercrea = true;
 	$scope.disableusername=true;
 	$scope.usernamemain=$rootScope.updateuserName;
 	$scope.firstname=$rootScope.updatefirstName;
@@ -118,16 +119,16 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     	    alert('Please enter a valid email address');
     	    return false;
     	}
-    	else if ($scope.selectedCompanycr == '')
+    	else if ($rootScope.updateuserName=="" && $scope.selectedCompanycr == '')
     	{
     	    alert('Please select a Company');
     	    return false;
     	}
-    	else if ($scope.role == '')
+    	/*else if ($scope.role == '')
     	{
     	    alert('Please select a Role');
     	    return false;
-    	}
+    	}*/
     	else{
     	var createupdateapi=$rootScope.url+"/createNewUser";
     	if($rootScope.updateuserName!=""){
@@ -144,9 +145,9 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
         		contactnum:$scope.contactnum,
         		emailadd:$scope.emailadd,
         		companyname:$scope.selectedCompanycr,
-        		industry:$scope.industryName,
-        		contractid:$scope.contractId,
-        		role:$scope.role,
+        		//industry:$scope.industryName,
+        		//contractid:$scope.contractId,
+        		//role:$scope.role,
         		isactive:activestatus
         };
     var	 callpost = {
@@ -227,7 +228,6 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
 //starting loading animation	
 $rootScope.loadinganimation=true;
 
-$timeout(function(){
 	 //calling getcompany
 	/*$http.get($rootScope.url+'/getCompany').success(function(resultnamecr) {
 		$scope.companyListli = resultnamecr.Company;
@@ -265,7 +265,6 @@ $timeout(function(){
 //                            alert("There is some problem as reported by the backend. Please contact the administrator");
 //                            $rootScope.loadinganimation=false;
 //                        });
-},3000);
 
 //$scope.getDetailscr=function(){
 //		for(var i=0;i<$scope.companyListli.length;i++){
