@@ -16,7 +16,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		  $rootScope.loadinganimation = true;
 		  var loadUserdetails = {
  	                method: "GET",
- 	               url: $rootScope.url+"/getUserDetails/"+mj[1]
+ 	                url: $rootScope.url+"/getUserDetails/"+mj[1]
  	         		//url: "data/userdtail.json"
  	            };
  	            $http(loadUserdetails).success(function(result) {
@@ -62,8 +62,9 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
                         console.log($rootScope.companyNamee);
                         console.log(localStorage.getItem("fullname"));
 
-                        $location.path('/home/search');
+                        //$location.path('/home/search');
 
+                        if($rootScope.user_name != undefined && $rootScope.companyNamee != undefined){
                         $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
                         //$http.get("data/dummyjson.json").success(function(result) {
                             sessionStorage.setItem("fetchPermission", JSON.stringify(result));
@@ -75,7 +76,9 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
                         }).error(function (error) {
 
                         });
-
+	                    }else{
+	                        $location.path('/login');
+	                    }
                         $http.get($rootScope.url + "/getOrgListForUser/" + localStorage.getItem("surrrip")).success(function(result) {
                         
                             $scope.RfetchList = result.Organization;
@@ -90,6 +93,16 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
  	            });
 		  
 	  }
+
+				$scope.$watch(function(){
+					if($rootScope.user_name == undefined || $rootScope.companyNamee == undefined){
+				        $location.path('/login');
+					}
+				});
+
+
+
+
 
 //changing the user undustry
     $scope.userIndustCh = function(){
@@ -123,6 +136,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 	$scope.localStorageclear=function(){
 		
 	   localStorage.clear();
+	   sessionStorage.clear();
 	   $location.path('/login');
 //	   $rootScope.loadinganimation = true;
 //	   var logout =   {
