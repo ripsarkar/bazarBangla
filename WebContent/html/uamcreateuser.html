@@ -62,17 +62,11 @@
                                     <div class="clearfix"></div>
                                     <hr>
 
-                                    <div class="col-md-4 col-sm-6">
+                                    <div class="col-md-4 col-sm-6" ng-hide="orgalistusercrea">
                                     <label>Organization Name<span style="color:red">*</span></label> 
- 						<!-- <select class="form-control" ng-model="selectedCompanycr" ng-options="company.name for company in companyListli  track by company.id "
-							 ng-change=getDetailscr()>
- 							<option style="display: none" value="">--Please Select--</option>
-						</select> -->
-						<!-- <select class="form-control" ng-model="selectedCompanycr" >
-							<option ng-repeat="companycr in companyListli.SurrId| orderBy : 'Name'">{{companycr.Name}}</option>
-						</select> -->
-						<select class="form-control" ng-model="selectedCompanycr" ng-options="company.Name for company in companyList  track by company.SurrId ">
-							<option ng-selected="selectedCompany.SurrId == company.SurrId" style="display: none" value="">--Please Select--</option>
+
+						<select class="form-control" ng-model="selectedCompanycr">
+							<option ng-repeat="company in companyList">{{company.Name}}</option>
 							
 						</select>
 
