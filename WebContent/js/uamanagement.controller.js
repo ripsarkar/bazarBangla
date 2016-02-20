@@ -119,9 +119,43 @@ app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$r
 	    $rootScope.currentUserTab = 'html/viewuser_main.html';
        
    }
-   
+   	$scope.onuamcreateuser2 = function(id) {
+	       $rootScope.currentUserTab = 'html/uamcreateuser.html';
+	       	//change to createuser
+	$scope.titleforuser = "Create New User Account";
+	$scope.usernamemain="";
+	$scope.firstname="";
+	$scope.middlename="";
+	$scope.lastname="";
+	$scope.contactnum="";
+	$scope.emailadd="";
+	$scope.role="";
+	$scope.password="";
+	//check box
+	$scope.isactive=true;
+	$scope.master=true;
+	//
+	$scope.selectedCompanycr="";
+    $scope.industryName="";
+    $scope.contractId="";
+    //go to create user
+	$rootScope.updateuserName="";
+    $rootScope.passWord="";
+    $rootScope.updatefirstName="";
+    $rootScope.updatemiddleName="";
+    $rootScope.updatelastName="";
+    $rootScope.updatecontactNo="";
+    $rootScope.updateemail="";
+    $rootScope.updaterole="";
+    $rootScope.isACTIVE="";	
+    $rootScope.updatecompanyName="";
+    $rootScope.Industryname="";
+    $rootScope.updatecontractId="";
+    $rootScope.currentUserTab = 'html/uamcreateuser.html';
+    $scope.disableusername=false;
+	}
    $rootScope.$on("uamanagerpage", function() {
-        $scope.onuamcreateuser();
+        $scope.onuamcreateuser2();
     });
     
     $rootScope.$on("uaviewerpage", function() {
