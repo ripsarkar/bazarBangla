@@ -94,11 +94,11 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		  
 	  }
 
-				$scope.$watch(function(){
+				/*$scope.$watch(function(){
 					if($rootScope.user_name == undefined || $rootScope.companyNamee == undefined){
 				        $location.path('/login');
 					}
-				});
+				});*/
 
 
 
