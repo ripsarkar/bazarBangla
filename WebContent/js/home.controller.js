@@ -77,7 +77,16 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 
                         });
 	                    }else{
-	                        $location.path('/login');
+	                    	timer = setInterval(function() {
+                            $rootScope.loadinganimation = true;
+	                        //$location.path('/login');
+								if ($rootScope.user_name == undefined && $rootScope.companyNamee == undefined) {
+								    clearInterval( timer );
+		                            $rootScope.loadinganimation = false;
+                        			$location.path('/login');
+								  }
+
+							}, 16);
 	                    }
                         $http.get($rootScope.url + "/getOrgListForUser/" + localStorage.getItem("surrrip")).success(function(result) {
                         
