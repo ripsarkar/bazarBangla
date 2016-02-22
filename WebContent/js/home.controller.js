@@ -364,6 +364,46 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 //    }
     
     /**********************************/
+    
+
+    $scope.managePermissionUsecaseMaintain=function(){
+		$scope.CreateUseMaiCae = false;
+		$scope.UpdateUseMaiCae = false;
+		$scope.CreateRegcatMa = false;
+		$scope.UpdateRegcatMa = false;
+		var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+		if(obj.Users.UseCase !=undefined){
+
+			var permissiontypeList = obj.Users.UseCase.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				if(permissiontypeList[int2].PermissionName=="create"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+						$scope.CreateUseMaiCae = true;
+					}
+				}else if(permissiontypeList[int2].PermissionName=="update"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+						$scope.UpdateUseMaiCae = true;
+					}
+				}
+			}
+		}
+		if(obj.Users.Rule !=undefined){
+
+			var permissiontypeList = obj.Users.Rule.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				if(permissiontypeList[int2].PermissionName=="create"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+					$scope.CreateRegcatMa = true;
+					}
+				}else if(permissiontypeList[int2].PermissionName=="update"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+					$scope.UpdateRegcatMa = true;
+					}
+				}
+			}
+		}
+	}
+
     $scope.managePermissionOrg=function(){
 		$scope.UpdateOrgzd = false;
 		$scope.CreateOrgzd = false;
@@ -489,6 +529,52 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
     $scope.defaultmenu();
     
     $scope.menuUseRule =  function(){
+
+    	 $scope.managePermissionUsecaseMaintain();
+    	if(!$scope.CreateUseMaiCae){
+    	//	alert(1);
+    	    angular.element(".createUsecaseEnDi").attr("ui-sref","");
+            angular.element(".createUsecaseEnDi").attr("disabled","disabled");
+            angular.element(".createUsecaseEnDi").addClass(" btn btn-disabled");
+            angular.element(".createUsecaseEnDi").addClass("disabfuncCUcColor");
+            angular.element(".createUsecaseEnDi").click(function(ev) {
+ 		       ev.preventDefault();
+ 		   }); 
+    	}
+    	
+    	if(!$scope.UpdateUseMaiCae){
+    		//alert(2);
+    	    angular.element(".updateUsecaseEnDi").attr("ui-sref","");
+            angular.element(".updateUsecaseEnDi").attr("disabled","disabled");
+            angular.element(".updateUsecaseEnDi").addClass(" btn btn-disabled");
+            angular.element(".updateUsecaseEnDi").addClass("disabfuncCUcColor");
+            angular.element(".updateUsecaseEnDi").click(function(ev) {
+ 		       ev.preventDefault();
+ 		   }); 
+    	}
+    	
+    	if(!$scope.CreateRegcatMa){
+    		//alert(3);
+    	    angular.element(".createRuleEnDi").attr("ui-sref","");
+            angular.element(".createRuleEnDi").attr("disabled","disabled");
+            angular.element(".createRuleEnDi").addClass(" btn btn-disabled");
+            angular.element(".createRuleEnDi").addClass("disabfuncCUcColor");
+            angular.element(".createRuleEnDi").click(function(ev) {
+ 		       ev.preventDefault();
+ 		   }); 
+    	}
+    	
+    	if(!$scope.UpdateRegcatMa){
+    	//	alert(4);
+    	    angular.element(".updateRuleEnDi").attr("ui-sref","");
+            angular.element(".updateRuleEnDi").attr("disabled","disabled");
+            angular.element(".updateRuleEnDi").addClass(" btn btn-disabled");
+            angular.element(".updateRuleEnDi").addClass("disabfuncCUcColor");
+            angular.element(".updateRuleEnDi").click(function(ev) {
+ 		       ev.preventDefault();
+ 		   }); 
+    	}
+
         $scope.menu = {
             usecaserule :true,
             feedback : false,
@@ -516,6 +602,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
     };
+
     $scope.manageOrg = function(){
     	 $scope.managePermissionOrg();
     	if(!$scope.CreateOrgzd){
@@ -563,11 +650,11 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
     	}
     	if(!$scope.ReadSubzd){
     	//	alert(4);
-    	    angular.element(".disabfuncCUc5").attr("ui-sref","");
-            angular.element(".disabfuncCUc5").attr("disabled","disabled");
-            angular.element(".disabfuncCUc5").addClass(" btn btn-disabled");
-            angular.element(".disabfuncCUc5").addClass("disabfuncCUcColor");
-            angular.element(".disabfuncCUc5").click(function(ev) {
+    	    angular.element(".disabfuncCUc50").attr("ui-sref","");
+            angular.element(".disabfuncCUc50").attr("disabled","disabled");
+            angular.element(".disabfuncCUc50").addClass(" btn btn-disabled");
+            angular.element(".disabfuncCUc50").addClass("disabfuncCUcColor");
+            angular.element(".disabfuncCUc50").click(function(ev) {
  		       ev.preventDefault();
  		   }); 
     	}
@@ -589,7 +676,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
      	if(!$scope.CreateUserzd){
      		
      	//	alert(1);
-     	  //  angular.element(".disabfuncCUc5").attr("ui-sref","");
+     	     angular.element(".disabfuncCUc5").attr("ui-sref","");
              angular.element(".disabfuncCUc5").attr("disabled","disabled");
              angular.element(".disabfuncCUc5").addClass(" btn btn-disabled");
              angular.element(".disabfuncCUc5").addClass("disabfuncCUcColor");
