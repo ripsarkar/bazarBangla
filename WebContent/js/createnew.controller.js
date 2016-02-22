@@ -402,7 +402,7 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
 
         });
 
-        var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        /*var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
         if(obj.Users.Rule !=undefined){
             var permissiontypeList = obj.Users.Rule.PermissionTypeDet;
             for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
@@ -412,9 +412,9 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
                 }
             }
 
-        }
+        }*/
 
-        /*$http.get($rootScope.url + '/populateRegCatDropDown').success(function(data, status, headers, config) {
+        $http.get($rootScope.url + '/populateRegCatDropDown').success(function(data, status, headers, config) {
             if (data.RegCat.length != 0 && typeof data.RegCat != 'undefined') {
                 $scope.RegcatCrtdatas = data.RegCat;
             } else {
@@ -422,7 +422,7 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
             }
         }).error(function(data, status, headers, config) {
             alert('Sorry Application error in serverside');
-        });*/
+        });
         $scope.globalUseCase_data = {};
 
         $scope.UsecaseRegcat_extch = function() {
@@ -1903,7 +1903,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
             $rootScope.loadinganimation = true;
 
-        var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        /*var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
         if(obj.Users.Rule !=undefined){
             var permissiontypeList = obj.Users.Rule.PermissionTypeDet;
             for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
@@ -1914,8 +1914,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 }
             }
 
-        }
-            /*$http.get($rootScope.url + '/populateRegCatDropDown').success(function(data, status, headers, config) {
+        }*/
+            $http.get($rootScope.url + '/populateRegCatDropDown').success(function(data, status, headers, config) {
                 if (data.RegCat.length != 0 && typeof data.RegCat != 'undefined') {
                     $rootScope.loadinganimation = false;
                     $scope.RegcatCrtdatas = data.RegCat;
@@ -1927,7 +1927,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             }).error(function(data, status, headers, config) {
                 $rootScope.loadinganimation = false;
                 alert("Sorry Application error in serverside");
-            });*/
+            });
 
 
             $scope.UsecaseRegcat_extch = function() {
