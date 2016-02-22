@@ -691,8 +691,9 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
     };
     
     $scope.uamanager = function(){
+		$rootScope.updateuserName = "";
+		$rootScope.currentUserTab = 'html/uamcreateuser.html';
         $rootScope.$emit("uamanagerpage", {});
-		//$rootScope.currentUserTab = 'html/uamcreateuser.html'
     };
     
     $scope.uaviewer = function(){
@@ -701,7 +702,7 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
     };
     $scope.uaviewerMain = function(){
         $rootScope.$emit("uaviewerMainpage", {});
-        $rootScope.currentUserTab = 'html/viewuser_main.html'
+        $rootScope.currentUserTab = 'html/viewuser_main.html';
     };
 
     
