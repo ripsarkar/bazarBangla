@@ -18,7 +18,7 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
                 $scope.UsecaseIntry=[];
 
        $rootScope.loadinganimation=true; 
-       $http.get("https://restcountries.eu/rest/v1/all")
+       $http.get("data/restcountries.json")
       .success(function(data, status, config, headers){
                 $scope.countryName = data;
         //$rootScope.loadinganimation=false; 
