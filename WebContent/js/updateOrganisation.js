@@ -32,6 +32,7 @@ if(obj.Users.Organization !=undefined){
   for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
     if(permissiontypeList[int2].PermissionName=="update"){
        $scope.organiUpdatetable=permissiontypeList[int2].ObjectList;
+                $rootScope.loadinganimation=false;
 
     }
   }
