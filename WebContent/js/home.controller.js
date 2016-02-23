@@ -1,9 +1,9 @@
 'use strict';
 var app = angular.module('app').controller('HomeController', HomeController);
-HomeController.$inject = ['UserService', '$rootScope', '$scope', '$http','$location'];
+HomeController.$inject = ['UserService', 'UserAuthFactory','AuthenticationFactory','$rootScope', '$scope', '$http','$location','$window'];
 
 
-function HomeController(UserService,  $rootScope, $scope, $http,$location) {
+function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $rootScope, $scope, $http,$location,$window) {
 		var usernameId;
 		angular.element(document).ready(function(){
 		usernameId = window.location.href;
@@ -64,6 +64,19 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 
                         //$location.path('/home/search');
 
+                        
+                    	UserAuthFactory.login($rootScope.user_name).success(function(data) {   						  
+	  						  AuthenticationFactory.isLogged = true;
+	  						  AuthenticationFactory.user = data.user;  						 
+	  						  $window.sessionStorage.token = data.token;
+	  						  $window.sessionStorage.user = data.user; // to fetch the user details on refresh
+	  						  $location.path('/home/search');
+                              $rootScope.loadinganimation = false;
+  						}).error(function(status) {
+  						  alert('Oops something went wrong!');
+  						});
+                        
+                        
                         if($rootScope.user_name != undefined && $rootScope.companyNamee != undefined){
                         $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
                         //$http.get("data/dummyjson.json").success(function(result) {
