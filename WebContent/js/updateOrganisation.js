@@ -101,7 +101,7 @@ $scope.updateOrganizationVal = function(compsurrID){
         alert('Please enter a valid Company Name');
           return false;
       }
-      else if($scope.compAdd1 == '' || !testAddress.test($scope.compAdd1)){
+      /*else if($scope.compAdd1 == '' || !testAddress.test($scope.compAdd1)){
         alert('Please enter atleast one valid address');
           return false;
       }
@@ -111,6 +111,10 @@ $scope.updateOrganizationVal = function(compsurrID){
       }
       else if($scope.compAdd3 != '' && !testAddress.test($scope.compAdd3)){
         alert('Please enter valid 3rd address');
+          return false;
+      }*/
+            else if($scope.compAdd1 == ''){
+        alert('Please enter atleast one valid address');
           return false;
       }
             else if($scope.city == ''  || !testAlp.test($scope.city)){
