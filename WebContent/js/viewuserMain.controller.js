@@ -28,7 +28,7 @@ app.controller("viewUserMainController",["$scope","ViewUserService", "$rootScope
 		var permissiontypeList = obj.Users.User.PermissionTypeDet;
 		for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
 			 if(permissiontypeList[int2].PermissionName=="read"){
-				 $scope.companyList=permissiontypeList[int2].OrgList;
+				 $scope.companyList=permissiontypeList[int2].ObjectList;
 				// $scope.backbtnusermanager();
 			}
 		}

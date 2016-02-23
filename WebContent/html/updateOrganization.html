@@ -22,13 +22,13 @@
 						<th>Country</th>
 						<th>Edit</th>
 					</tr>
-					<tr ng-repeat="orglist in organiUpdatetable" class="usecaseTable">
-						<td>{{orglist.company_id_}}</td>
-						<td>{{orglist.company_name}}</td>
-						<td>{{orglist.company_city}}</td>
-						<td>{{orglist.company_state}}</td>
-						<td>{{orglist.company_country}}</td>
-						<td><span class="icon-feedback"  data-toggle="modal" data-target="#myModalUpdateOrgani" ng-click="openUpdatePage(orglist.company_surr_id)"></span></td>
+					<tr ng-repeat="objectlist in organiUpdatetable" class="usecaseTable">
+						<td>{{objectlist.company_id_}}</td>
+						<td>{{objectlist.company_name}}</td>
+						<td>{{objectlist.company_city}}</td>
+						<td>{{objectlist.company_state}}</td>
+						<td>{{objectlist.company_country}}</td>
+						<td><span class="icon-feedback"  data-toggle="modal" data-target="#myModalUpdateOrgani" ng-click="openUpdatePage(objectlist.company_surr_id)"></span></td>
 					</tr>						
 				</table>
 			</div>
