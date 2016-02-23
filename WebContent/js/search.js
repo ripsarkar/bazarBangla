@@ -3173,17 +3173,20 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 
     $scope.ClikedResult = function(node) {
         var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
-
+        if(usecaselist.Users.UseCase != undefined){
         for(var i=0;i<usecaselist.Users.UseCase.PermissionTypeDet.length;i++){
             if(usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "read"){
                 postjsonresult.useCaseList = usecaselist.Users.UseCase.PermissionTypeDet[i].ObjectList;
             }
         }
+    }
+        if(usecaselist.Users.Rule != undefined){
         for(var i=0;i<usecaselist.Users.Rule.PermissionTypeDet.length;i++){
             if(usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "read"){
                 postjsonresult.ruleList = usecaselist.Users.Rule.PermissionTypeDet[i].ObjectList;
             }
         }
+    }
         //code for user specific Industry selection
         //if(($rootScope.role == "USER_VIEW" || $rootScope.role == "USER_EXPORT") && notpushed ==true){
         if($rootScope.role == "USER_VIEW" || $rootScope.role == "USER_EXPORT"){
