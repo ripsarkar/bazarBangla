@@ -11,6 +11,18 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 		var mj = usernameId.split("=");
 	console.log("dataloading value::"+$rootScope.dataLoading);
 	
+	
+	UserAuthFactory.login(mj[1]).success(function(data) {   						  
+		  AuthenticationFactory.isLogged = true;
+		  AuthenticationFactory.user = data.user;  						 
+		  $window.sessionStorage.token = data.token;
+		  $window.sessionStorage.user = data.user; // to fetch the user details on refresh
+		  $location.path('/home/search');
+        $rootScope.loadinganimation = false;
+	}).error(function(status) {
+	  alert('Oops something went wrong!');
+	});
+	
     if($rootScope.dataLoading == undefined || $rootScope.dataLoading==false) {
     	console.log("data loading GET called");
 		  $rootScope.loadinganimation = true;
@@ -61,20 +73,11 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                         console.log($rootScope.user_name);
                         console.log($rootScope.companyNamee);
                         console.log(localStorage.getItem("fullname"));
-
+                        $rootScope.loadinganimation = false;
                         //$location.path('/home/search');
 
                         
-                    	UserAuthFactory.login($rootScope.user_name).success(function(data) {   						  
-	  						  AuthenticationFactory.isLogged = true;
-	  						  AuthenticationFactory.user = data.user;  						 
-	  						  $window.sessionStorage.token = data.token;
-	  						  $window.sessionStorage.user = data.user; // to fetch the user details on refresh
-	  						  $location.path('/home/search');
-                              $rootScope.loadinganimation = false;
-  						}).error(function(status) {
-  						  alert('Oops something went wrong!');
-  						});
+                    
                         
                         
                         if($rootScope.user_name != undefined && $rootScope.companyNamee != undefined){
@@ -157,6 +160,10 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 	//logout
 	$scope.localStorageclear=function(){
 		
+		AuthenticationFactory.isLogged = false;
+        delete AuthenticationFactory.user;
+        delete $window.sessionStorage.token;
+        delete $window.sessionStorage.user;		
 	   localStorage.clear();
 	   sessionStorage.clear();
 	   $location.path('/login');
