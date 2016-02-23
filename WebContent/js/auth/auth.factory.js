@@ -16,7 +16,7 @@
 
  angular.module('app').factory('UserAuthFactory', function($window, $location, $http, AuthenticationFactory) {
   return {
-    login: function(username, password) {
+    login: function(username) {
       return $http.post('http://devuclapi.mybluemix.net/test/login', {
         UserID: username,
         //Password: password
