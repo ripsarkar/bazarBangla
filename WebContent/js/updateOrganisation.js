@@ -40,7 +40,7 @@ if(obj.Users.Organization !=undefined){
 
 
 
-       $http.get("https://restcountries.eu/rest/v1/all")
+       $http.get("data/restcountries.json")
       .success(function(data, status, config, headers){
                 $scope.countryNameUp = data;
             }).error(function(data, status, headers, config) {
