@@ -1,39 +1,39 @@
 <div class="createnewpage pagebg" ng-controller="updateOrgani">
-	
-	<div class="row zeroSpace">
-		<div class="createnew-head">
-			<div class="col-md-6 col-sm-6">
-				<h2 class="title-head">Update Organization</h2>
-			</div>
-			<div class="col-md-12" style="margin: 10px 0px 20px;">
-				<hr>
-			</div>
-		</div>
-	</div>
-	<div class="createnew-head">
-		<div class="panel panel-default tablecontrol">
-			<div class="searchtableUser uamtable">
-				<table class="table table-striped searchtablerow" fixed-header>
-					<tr class="tableheader">
-						<th>Org. Id</th>
-						<th>Org. Name</th>
-						<th>City</th>
-						<th>State</th>
-						<th>Country</th>
-						<th>Edit</th>
-					</tr>
-					<tr ng-repeat="objectlist in organiUpdatetable" class="usecaseTable">
-						<td>{{objectlist.company_id_}}</td>
-						<td>{{objectlist.company_name}}</td>
-						<td>{{objectlist.company_city}}</td>
-						<td>{{objectlist.company_state}}</td>
-						<td>{{objectlist.company_country}}</td>
-						<td><span class="icon-feedback"  data-toggle="modal" data-target="#myModalUpdateOrgani" ng-click="openUpdatePage(objectlist.company_surr_id)"></span></td>
-					</tr>						
-				</table>
-			</div>
-		</div>
-	</div>
+  
+  <div class="row zeroSpace">
+    <div class="createnew-head">
+      <div class="col-md-6 col-sm-6">
+        <h2 class="title-head">Update Organization</h2>
+      </div>
+      <div class="col-md-12" style="margin: 10px 0px 20px;">
+        <hr>
+      </div>
+    </div>
+  </div>
+  <div class="createnew-head">
+    <div class="panel panel-default tablecontrol">
+      <div class="searchtableUser uamtable">
+        <table class="table table-striped searchtablerow" fixed-header>
+          <tr class="tableheader">
+            <th>Org. Id</th>
+            <th>Org. Name</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Country</th>
+            <th>Edit</th>
+          </tr>
+          <tr ng-repeat="orglist in organiUpdatetable" class="usecaseTable">
+            <td>{{orglist.company_id_}}</td>
+            <td>{{orglist.company_name}}</td>
+            <td>{{orglist.company_city}}</td>
+            <td>{{orglist.company_state}}</td>
+            <td>{{orglist.company_country}}</td>
+            <td><span class="icon-feedback"  data-toggle="modal" data-target="#myModalUpdateOrgani" ng-click="openUpdatePage(orglist.company_surr_id)"></span></td>
+          </tr>           
+        </table>
+      </div>
+    </div>
+  </div>
 
 <!-- -->
 <div id="myModalUpdateOrgani" class="modal fade" role="dialog">
@@ -55,61 +55,61 @@
     <form role="form" class="">
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="org_id" class="form-group pull-right">Organization ID<span style="color:red">*</span></label></div>
-      <div class="col-md-6"><input type="text" ng-model="organID" maxlength="20" class="form-control" id="org_id" ng-disabled="true"></div>
+      <div class="col-md-6"><input type="text" ng-model="organID" maxlength="20" class="form-control" id="org_id"></div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="org_name" class="form-group pull-right">Organization Name<span style="color:red">*</span></label></div>
-      <div class="col-md-6"><input type="text" ng-model="organName" maxlength="50" class="form-control" id="org_name" ng-disabled="true"></div>
+      <div class="col-md-6"><input type="text" ng-model="organName" maxlength="50" class="form-control" id="org_name"></div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="address_1" class="form-group pull-right">Address 1<span style="color:red">*</span></label></div>
-      <div class="col-md-6"><input type="text" ng-model="compAdd1" maxlength="100" class="form-control" id="address_1" ng-disabled="true"></div>
+      <div class="col-md-6"><input type="text" ng-model="compAdd1" maxlength="100" class="form-control" id="address_1"></div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="address_2" class="form-group pull-right">Address 2</label></div>
-      <div class="col-md-6"><input type="text" ng-model="compAdd2" maxlength="100" class="form-control" id="address_2" ng-disabled="true"></div>
+      <div class="col-md-6"><input type="text" ng-model="compAdd2" maxlength="100" class="form-control" id="address_2"></div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="address_3" class="form-group pull-right">Address 3</label></div>
-      <div class="col-md-6"><input type="text" ng-model="compAdd3" maxlength="100" class="form-control" id="address_3" ng-disabled="true"></div>
+      <div class="col-md-6"><input type="text" ng-model="compAdd3" maxlength="100" class="form-control" id="address_3"></div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="city" class="form-group pull-right">City<span style="color:red">*</span></label></div>
-      <div class="col-md-6"><input type="text" ng-model="city" maxlength="50" class="form-control" id="city" ng-disabled="true"></div>
+      <div class="col-md-6"><input type="text" ng-model="city" maxlength="50" class="form-control" id="city"></div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="state" class="form-group pull-right">State/Province</label></div>
-      <div class="col-md-6"><input type="text" ng-model="state" maxlength="50" class="form-control" id="state" ng-disabled="true"></div>
+      <div class="col-md-6"><input type="text" ng-model="state" maxlength="50" class="form-control" id="state"></div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label class="form-group pull-right">Country<span style="color:red">*</span></label></div>
-      <div class="col-md-6"><select ng-model="country222" class="form-control" ng-disabled="true"><option ng-repeat="countrylist in countryNameUp">{{countrylist.name}}</option></select>
+      <div class="col-md-6"><select ng-model="country222" class="form-control"><option ng-repeat="countrylist in countryNameUp">{{countrylist.name}}</option></select>
       </div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="zip" class="form-group pull-right">ZIP/PIN<span style="color:red">*</span></label></div>
-      <div class="col-md-6"><input ng-model="zip" type="text" maxlength="20" class="form-control" id="zip" ng-disabled="true"></div>
+      <div class="col-md-6"><input ng-model="zip" type="text" maxlength="20" class="form-control" id="zip"></div>
     </div>
     <div class="form-group col-md-12">
       <div class="col-md-4"><label for="geo_code" class="form-group pull-right">Geo Code</label></div>
-      <div class="col-md-6"><input ng-model="geocode" type="text" maxlength="20" class="form-control" id="geo_code" ng-disabled="true"></div>
+      <div class="col-md-6"><input ng-model="geocode" type="text" maxlength="20" class="form-control" id="geo_code"></div>
     </div>
                             <div class="form-group col-md-12">
                                  <div class="col-md-4">
                                         <label class="form-group pull-right">Industry</label>
                                 </div>
                                 <div class="col-md-6">
-                                        <select multiple class="form-control" required ng-model="UsecaseIntry" ng-change="chckindustry()" ng-disabled="true">
+                                        <select multiple class="form-control" required ng-model="UsecaseIntry" ng-change="chckindustry()">
                                             <option class="bgcolorOptn" ng-repeat="industrydata in industrydatas" value="{{industrydata.SurrId}}">{{industrydata.Name}}</option>
                                         </select>
 
                                 </div>
                             </div>
-    	<div class="col-md-6 col-md-offset-4 pull-left">
-  		  <input type="button" class="btn btn-primary btnBottom buttonOrg" ng-click="updateOrganizationVal()" value="Submit" ng-disabled="true">
+      <div class="col-md-6 col-md-offset-4 pull-left">
+        <input type="button" class="btn btn-primary btnBottom buttonOrg" ng-click="updateOrganizationVal()" value="Submit">
             <!-- <input type="button" class="btn btn-primary tabsbtn clearOrg" ng-click="clearValOrganization()" value="Clear" ng-disabled="true"> -->
 
-    	</div>
+      </div>
     </form>
   </div>
 </div> 
