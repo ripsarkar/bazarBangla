@@ -3173,6 +3173,8 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 
     $scope.ClikedResult = function(node) {
         var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
+if(usecaselist != undefined){
+    if(usecaselist.Users != undefined){
         if(usecaselist.Users.UseCase != undefined){
         for(var i=0;i<usecaselist.Users.UseCase.PermissionTypeDet.length;i++){
             if(usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "read"){
@@ -3180,6 +3182,10 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
             }
         }
     }
+}
+}
+if(usecaselist != undefined){
+    if(usecaselist.Users != undefined){
         if(usecaselist.Users.Rule != undefined){
         for(var i=0;i<usecaselist.Users.Rule.PermissionTypeDet.length;i++){
             if(usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "read"){
@@ -3187,6 +3193,8 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
             }
         }
     }
+}
+}
         //code for user specific Industry selection
         //if(($rootScope.role == "USER_VIEW" || $rootScope.role == "USER_EXPORT") && notpushed ==true){
         if($rootScope.role == "USER_VIEW" || $rootScope.role == "USER_EXPORT"){
