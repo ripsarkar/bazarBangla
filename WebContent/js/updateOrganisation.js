@@ -74,6 +74,7 @@ $scope.openUpdatePage = function(compsurrID){
                 $scope.country222=result.company_add_country;
                 $scope.zip=result.company_add_zip;
                 $scope.geocode=result.company_geo_code;
+                $scope.companySurrId = result.company_surr_id;
                 
                 for(var i=0;i<result.company_industries.length;i++){
                   $scope.UsecaseIntry[i]=result.company_industries[i].industry_surr_id;
@@ -167,7 +168,8 @@ var updateorgjson = {
   "companyadd_zip": $scope.zip,
   "companyadd_geocode": $scope.geocode,
   "company_industries" : [],
-  "user_surr_id" : localStorage.getItem("surrrip")
+  "user_surr_id" : localStorage.getItem("surrrip"),
+  "company_surr_id" : $scope.companySurrId
 
 }
                 for(var i=0;i<$scope.UsecaseIntry.length;i++){
