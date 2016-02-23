@@ -93,6 +93,9 @@ $scope.updateOrganizationVal = function(compsurrID){
       var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
       var testAlp = /^[a-zA-Z\s\d\/]+$/;
       var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+      if($scope.geocode == null){
+        $scope.geocode = "";
+      }
       if($scope.organID == ''  || !testAlpNu.test($scope.organID)){
         alert('Please enter a valid Company Id(no special character)');
           return false;
