@@ -19,13 +19,25 @@ app.factory('MyAPIServiceUpOrg', function($http,$rootScope){
 app.controller('updateOrgani',function($scope,$http,$rootScope){
                 $rootScope.loadinganimation=true;
 
-$http.get( $rootScope.url + "/listCompanies").success(function(data){
+/*$http.get( $rootScope.url + "/listCompanies").success(function(data){
                 $rootScope.loadinganimation=false;
 
 $scope.organiUpdatetable = data.companiesView;
 }).error(function(err){
 
-});
+});*/
+var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+if(obj.Users.Organization !=undefined){
+  var permissiontypeList = obj.Users.Organization.PermissionTypeDet;
+  for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+    if(permissiontypeList[int2].PermissionName=="update"){
+       $scope.organiUpdatetable=permissiontypeList[int2].ObjectList;
+
+    }
+  }
+}
+
+
 
        $http.get("https://restcountries.eu/rest/v1/all")
       .success(function(data, status, config, headers){
