@@ -104,11 +104,24 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
     var defaultcount = 0;
     var loadccker = 0;
     var backassgin =  null;
+    var Indtsyarray = [];
+    
+    $scope.reSet = function() {
+        $scope.frameWork = '';
+        $scope.useCaseCat = '';
+        $scope.useCaseSubcat = '';
+        if (typeof $scope.UsecaseIntry != 'undefined' && $scope.UsecaseIntry.length > 0) {
+            $scope.UsecaseIntry.length = 0;
+            Indtsyarray.length = 0;
+        }
+    }
     $scope.defaultchk = function() {
         if (defaultcount == 2) {
             if (UsecaseService.getbtnbackUC() == 1) {
                 loadccker = 1;
                 $scope.backtousecase();
+            }else{
+                $scope.reSet();
             }
         }
     }
@@ -279,16 +292,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             }
         }*/
 
-var Indtsyarray = [];
-$scope.reSet = function() {
-    $scope.frameWork = '';
-    $scope.useCaseCat = '';
-    $scope.useCaseSubcat = '';
-    if (typeof $scope.UsecaseIntry != 'undefined' && $scope.UsecaseIntry.length > 0) {
-        $scope.UsecaseIntry.length = 0;
-        Indtsyarray.length = 0;
-    }
-}
+
 
 $scope.chckindustry = function() {
     if (typeof $scope.UsecaseIntry != 'undefined' && $scope.UsecaseIntry.length > 0) {
@@ -613,7 +617,7 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
         }
 
         $scope.goTo = function() {
-            $state.go("home.createrule");
+            $state.go("home.createusecase");
         }
 
         $scope.UseCaseformSubmit = function() {
