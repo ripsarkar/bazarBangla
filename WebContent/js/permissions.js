@@ -25,7 +25,7 @@ app.controller("permissionsCtrl",["$scope","$http", "$rootScope","$q","$timeout"
   $rootScope.loadinganimation = true;
 
      //$scope.fnPopulateRoleList=function(){
-          var promise5= $http.get($rootScope.url + '/getpopulateRoleforLogin/'+localStorage.getItem("surrComprip")).success(function(data) {
+          var promise5= $http.get($rootScope.url + '/getpopulateRoleforLogin/'+localStorage.getItem("surrrip")).success(function(data) {
               $scope.roleListli = data.Roles;             
               $rootScope.loadinganimation = false;
             }).error(function(data, status, headers, config) {                
