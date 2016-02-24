@@ -91,7 +91,7 @@ function HomeController(UserService, $rootScope, $scope, $http,$location,$window
 
                           });
   	                    }else{
-  	                    	timer = setInterval(function() {
+  	                    	var timer = setInterval(function() {
                               $rootScope.loadinganimation = true;
   	                        //$location.path('/login');
   								if ($rootScope.user_name == undefined && $rootScope.companyNamee == undefined) {
