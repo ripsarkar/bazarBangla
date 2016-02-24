@@ -1,123 +1,18 @@
 'use strict';
 var app = angular.module('app').controller('HomeController', HomeController);
-HomeController.$inject = ['UserService', 'UserAuthFactory','AuthenticationFactory','$rootScope', '$scope', '$http','$location','$window'];
+HomeController.$inject = ['UserService','$rootScope', '$scope', '$http','$location','$window'];
 
 
-function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $rootScope, $scope, $http,$location,$window) {
+function HomeController(UserService, $rootScope, $scope, $http,$location,$window) {
 		var usernameId;
 		angular.element(document).ready(function(){
 		usernameId = window.location.href;
 		});
 		var mj = usernameId.split("=");
-	console.log("dataloading value::"+$rootScope.dataLoading);
+	    console.log("dataloading value::"+$rootScope.dataLoading);
 	
 	
-	UserAuthFactory.login(mj[1]).success(function(data) {   						  
-		  AuthenticationFactory.isLogged = true;
-		  AuthenticationFactory.user = data.user;  						 
-		  $window.sessionStorage.token = data.token;
-		  $window.sessionStorage.user = data.user; // to fetch the user details on refresh
-		  $location.path('/home/search');
-        $rootScope.loadinganimation = false;
-        
-        if($rootScope.dataLoading == undefined || $rootScope.dataLoading==false) {
-        	console.log("data loading GET called");
-    		  $rootScope.loadinganimation = true;
-    		  var loadUserdetails = {
-     	                method: "GET",
-     	                url: $rootScope.url+"/getUserDetails/"+mj[1]
-     	         		//url: "data/userdtail.json"
-     	            };
-     	            $http(loadUserdetails).success(function(result) {
-     	             $rootScope.dataLoading=true; 	            
-     	            	if (result.User[0].error!=undefined) {
-     	            		if(result.User[0].error=="Username not populated"){
-     	            			$rootScope.loginError=false;
-     	            		}else{
-     	            			$rootScope.loginError=true;
-     	            		}
-     	            		$location.path('/login');
-     	                }else{
-     	                	$rootScope.loginError=false;
-     	                	// Store
-     	                	localStorage.setItem("rolerip", result.User[0].user_role_name);
-     	                	localStorage.setItem("surrrip", result.User[0].user_surr_id);
-     	                	localStorage.setItem("surrComprip", result.User[0].company_surr_id);
-     	                	localStorage.setItem("namerip", result.User[0].user_name);
-     	                	if(result.User[0].user_middle_name!=null){
-     	                		localStorage.setItem("fullname", (result.User[0].user_first_name+" "+result.User[0].user_middle_name+" "+result.User[0].user_last_name));	
-     	                	}else{
-     	                		localStorage.setItem("fullname", (result.User[0].user_first_name+" "+result.User[0].user_last_name));
-     	                	}
-     	                	
-     	                	localStorage.setItem("showallbutt", result.User[0].user_industry_name);
-     	                	localStorage.setItem("cmpyId", result.User[0].company_surr_id);
-                            localStorage.setItem("industrySurrId", result.User[0].user_industry_surr_id);
-                            localStorage.setItem("nameCompany", result.User[0].company_name);
-
-     	                	$rootScope.role = result.User[0].user_role_name;
-     	                	$rootScope.surrId = result.User[0].user_surr_id;
-     	                	$rootScope.user_name = result.User[0].user_name;
-     	                    $rootScope.disabled=false;
-     	                 //   $rootScope.username = result.User[0].user_name;
-     	                    $rootScope.username = localStorage.getItem("fullname");
-     	                    $rootScope.compSurrId = localStorage.getItem("surrComprip");
-                            $rootScope.user_name = result.User[0].user_name;
-                            $rootScope.companyNamee = result.User[0].company_name;
-
-     	                }
-     	            	    $rootScope.loadinganimation = false;
-                            console.log($rootScope.user_name);
-                            console.log($rootScope.companyNamee);
-                            console.log(localStorage.getItem("fullname"));
-                            $rootScope.loadinganimation = false;
-                            //$location.path('/home/search');
-
-                            
-                        
-                            
-                            
-                            if($rootScope.user_name != undefined && $rootScope.companyNamee != undefined){
-                            $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
-                            //$http.get("data/dummyjson.json").success(function(result) {
-                                sessionStorage.setItem("fetchPermission", JSON.stringify(result));
-                                $scope.permission = sessionStorage.getItem("fetchPermission");
-                                console.log(sessionStorage.getItem("fetchPermission"));
-                              
-                                $location.path('/home/search');
-                                $rootScope.loadinganimation = false;
-                            }).error(function (error) {
-
-                            });
-    	                    }else{
-    	                    	timer = setInterval(function() {
-                                $rootScope.loadinganimation = true;
-    	                        //$location.path('/login');
-    								if ($rootScope.user_name == undefined && $rootScope.companyNamee == undefined) {
-    								    clearInterval( timer );
-    		                            $rootScope.loadinganimation = false;
-                            			$location.path('/login');
-    								  }
-
-    							}, 16);
-    	                    }
-                            $http.get($rootScope.url + "/getOrgListForUser/" + localStorage.getItem("surrrip")).success(function(result) {
-                            
-                                $scope.RfetchList = result.Organization;
-                                $rootScope.loadinganimation = false;
-                            }).error(function (error) {
-
-                            });
-
-     	            }).error(function (error) {
-     	             $rootScope.loadinganimation = false;
-
-     	            });
-    		  
-    	  }
-	}).error(function(status) {
-	  alert('Oops something went wrong!');
-	});
+	
 	
     
 
@@ -128,7 +23,99 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 				});*/
 
 
+	  if($rootScope.dataLoading == undefined || $rootScope.dataLoading==false) {
+      	console.log("data loading GET called");
+  		  $rootScope.loadinganimation = true;
+  		  var loadUserdetails = {
+   	                method: "GET",
+   	                url: $rootScope.url+"/getUserDetails/"+mj[1]
+   	         		//url: "data/userdtail.json"
+   	            };
+   	            $http(loadUserdetails).success(function(result) {
+   	             $rootScope.dataLoading=true; 	            
+   	            	if (result.User[0].error!=undefined) {
+   	            		if(result.User[0].error=="Username not populated"){
+   	            			$rootScope.loginError=false;
+   	            		}else{
+   	            			$rootScope.loginError=true;
+   	            		}
+   	            		$location.path('/login');
+   	                }else{
+   	                	$rootScope.loginError=false;
+   	                	// Store
+   	                	localStorage.setItem("rolerip", result.User[0].user_role_name);
+   	                	localStorage.setItem("surrrip", result.User[0].user_surr_id);
+   	                	localStorage.setItem("surrComprip", result.User[0].company_surr_id);
+   	                	localStorage.setItem("namerip", result.User[0].user_name);
+   	                	if(result.User[0].user_middle_name!=null){
+   	                		localStorage.setItem("fullname", (result.User[0].user_first_name+" "+result.User[0].user_middle_name+" "+result.User[0].user_last_name));	
+   	                	}else{
+   	                		localStorage.setItem("fullname", (result.User[0].user_first_name+" "+result.User[0].user_last_name));
+   	                	}
+   	                	
+   	                	localStorage.setItem("showallbutt", result.User[0].user_industry_name);
+   	                	localStorage.setItem("cmpyId", result.User[0].company_surr_id);
+                          localStorage.setItem("industrySurrId", result.User[0].user_industry_surr_id);
+                          localStorage.setItem("nameCompany", result.User[0].company_name);
 
+   	                	$rootScope.role = result.User[0].user_role_name;
+   	                	$rootScope.surrId = result.User[0].user_surr_id;
+   	                	$rootScope.user_name = result.User[0].user_name;
+   	                    $rootScope.disabled=false;
+   	                 //   $rootScope.username = result.User[0].user_name;
+   	                    $rootScope.username = localStorage.getItem("fullname");
+   	                    $rootScope.compSurrId = localStorage.getItem("surrComprip");
+                          $rootScope.user_name = result.User[0].user_name;
+                          $rootScope.companyNamee = result.User[0].company_name;
+
+   	                }
+   	            	    $rootScope.loadinganimation = false;
+                          console.log($rootScope.user_name);
+                          console.log($rootScope.companyNamee);
+                          console.log(localStorage.getItem("fullname"));
+                          $rootScope.loadinganimation = false;
+                          $location.path('/home/search');
+
+                          
+                          
+                          if($rootScope.user_name != undefined && $rootScope.companyNamee != undefined){
+                          $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                          //$http.get("data/dummyjson.json").success(function(result) {
+                              sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                              $scope.permission = sessionStorage.getItem("fetchPermission");
+                              console.log(sessionStorage.getItem("fetchPermission"));
+                            
+                              $location.path('/home/search');
+                              $rootScope.loadinganimation = false;
+                          }).error(function (error) {
+
+                          });
+  	                    }else{
+  	                    	timer = setInterval(function() {
+                              $rootScope.loadinganimation = true;
+  	                        //$location.path('/login');
+  								if ($rootScope.user_name == undefined && $rootScope.companyNamee == undefined) {
+  								    clearInterval( timer );
+  		                            $rootScope.loadinganimation = false;
+                          			$location.path('/login');
+  								  }
+
+  							}, 16);
+  	                    }
+                          $http.get($rootScope.url + "/getOrgListForUser/" + localStorage.getItem("surrrip")).success(function(result) {
+                          
+                              $scope.RfetchList = result.Organization;
+                              $rootScope.loadinganimation = false;
+                          }).error(function (error) {
+
+                          });
+
+   	            }).error(function (error) {
+   	             $rootScope.loadinganimation = false;
+
+   	            });
+  		  
+  	  }
 
 
 //changing the user undustry
@@ -162,10 +149,10 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 	//logout
 	$scope.localStorageclear=function(){
 		
-		AuthenticationFactory.isLogged = false;
-        delete AuthenticationFactory.user;
-        delete $window.sessionStorage.token;
-        delete $window.sessionStorage.user;		
+		//AuthenticationFactory.isLogged = false;
+       // delete AuthenticationFactory.user;
+        //delete $window.sessionStorage.token;
+       // delete $window.sessionStorage.user;		
 	   localStorage.clear();
 	   sessionStorage.clear();
 	   $location.path('/login');
