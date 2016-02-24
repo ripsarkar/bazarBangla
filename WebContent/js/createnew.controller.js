@@ -203,6 +203,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             });
         }
     }
+        var industryNotThere = true;
 
         var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
         if(obj.Users.UseCase !=undefined){
@@ -217,12 +218,34 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
                     if(loadccker ==1){
                         $scope.chckindustry();
                     }
-                
+                    industryNotThere = false;
+
                 }
             }
 
         }
-
+        else if(industryNotThere == true){
+        $http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
+        if (typeof data.industry != 'undefined' && data.industry.length != 0) {
+            $rootScope.loadinganimation = false;
+            //$scope.EPdatas = data.EP;
+            $scope.industrydatas = data.industry;
+            defaultcount++;
+            $scope.defaultchk();
+            if(loadccker ==1){
+                $scope.chckindustry();
+            }
+        } else {
+            $rootScope.loadinganimation = false;
+            //$scope.EPdatas = [];
+            $scope.industrydatas = [];
+            alert('Sorry Application error in serverside');
+        }
+        }).error(function(data, status, headers, config) {
+            $rootScope.loadinganimation = false;
+            alert('Sorry Application error in serverside');
+        });
+        }
 
 /*    $http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
         if (typeof data.industry != 'undefined' && data.industry.length != 0) {
@@ -1709,7 +1732,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     }
                 }
 
-
+                var industryNotThere2 = true;
                 var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
                 if(obj.Users.UseCase !=undefined){
                     var permissiontypeList = obj.Users.UseCase.PermissionTypeDet;
@@ -1720,8 +1743,30 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                             $scope.industrydatas = permissiontypeList[int2].IndustryList;
                             defaultcount++;
                             $scope.defaultchk();
+                            industryNotThere2 = false;
+
                         }
                     }
+                }
+                else if(industryNotThere2 == true){
+                    $http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
+                    if (typeof data.industry != 'undefined' && data.industry.length != 0) {
+                        $rootScope.loadinganimation = false;
+                        //$scope.EPdatas = data.EP;
+                        $scope.industrydatas = data.industry;
+                        defaultcount++;
+                        $scope.defaultchk();
+                    } else {
+                        $rootScope.loadinganimation = false;
+                        //$scope.EPdatas = [];
+                        $scope.industrydatas = [];
+                        alert('Sorry Application error in serverside');
+                    }
+                }).error(function(data, status, headers, config) {
+                    $rootScope.loadinganimation = false;
+                    alert('Sorry Application error in serverside');
+                });
+
                 }
                 /*$http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
                     if (typeof data.industry != 'undefined' && data.industry.length != 0) {
