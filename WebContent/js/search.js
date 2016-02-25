@@ -3911,7 +3911,7 @@ if(usecaselist != undefined){
 			}
 		}
 		
-		if(usecaseexport && ruleeexport){
+		if(usecaseexport || ruleeexport){
 			return true;
 		}else{
 			return false;
