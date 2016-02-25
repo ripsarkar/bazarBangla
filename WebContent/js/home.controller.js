@@ -105,6 +105,9 @@ function HomeController(UserService, $rootScope, $scope, $http,$location,$window
                           $http.get($rootScope.url + "/getOrgListForUser/" + localStorage.getItem("surrrip")).success(function(result) {
                           
                               $scope.RfetchList = result.Organization;
+                              var objComp = {};
+                              objComp.company_name =localStorage.getItem("nameCompany");
+                              $scope.RfetchList.push(objComp);
                               $rootScope.loadinganimation = false;
                           }).error(function (error) {
 
