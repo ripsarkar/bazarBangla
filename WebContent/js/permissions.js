@@ -133,6 +133,7 @@ $scope.$watch(function(){
                 }
 
 $scope.sendPermissions = function(){
+    $rootScope.loadinganimation = true;
 
 //alert(JSON.stringify(postjson))
           var postdata = {
@@ -141,6 +142,14 @@ $scope.sendPermissions = function(){
                   data:JSON.stringify(postjson)
                 }
                 $http(postdata).success(function(result){
+                          $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                              sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                              $scope.permission = sessionStorage.getItem("fetchPermission");
+                              console.log(sessionStorage.getItem("fetchPermission"));
+                              $rootScope.loadinganimation = false;
+                          }).error(function (error) {
+                  				alert("Server side error");
+                          });
                   alert("Data saved for permission changes");
                 }).error(function(err){
                   alert("Server side error");
