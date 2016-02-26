@@ -806,4 +806,35 @@ function HomeController(UserService, $rootScope, $scope, $http,$location,$window
 
     
   $scope.selection=[];
+// change for session out
+
+  var idleTime = 0;
+  var idleInterval;
+angular.element(document).ready(function(){
+  //Increment the idle time counter every minute.
+  idleInterval = setInterval(timerIncrement, 60000); // 1 minute
+
+  //Zero the idle timer on mouse movement.
+  angular.element(this).mousemove(function (e) {
+      idleTime = 0;
+  });
+  angular.element(this).keypress(function (e) {
+      idleTime = 0;
+  });
+
+});
+function timerIncrement() {
+	var getUrl = window.location;
+	var baseUrl = getUrl.protocol + "//" + getUrl.host;
+  idleTime = idleTime + 1;
+
+  if (idleTime > 14) { // 20 minutes
+	window.location= baseUrl+"/#/login";
+	localStorage.clear();
+	sessionStorage.clear();
+	clearInterval(idleInterval);
+	$location.path('/login');
+  }
+}
+// end of change for session out
 }
