@@ -50,22 +50,23 @@ var promise2= $http.get($rootScope.url + "/populateEPIndutry").success(function(
   $rootScope.loadinganimation = false;
 }).error(function(err){
   $rootScope.loadinganimation = false;
+  alert('Sorry Application error in serverside');
 });
 $http.get($rootScope.url + "/populateRegCatDropDown").success(function(result){
   $scope.regcatlist = result.RegCat;
 }).error(function(err){
-
+    alert('Sorry Application error in serverside');
 });
 ///////////////////////////////////////////////////
 var promise3= $http.get($rootScope.url + "/getAllUseCaseList").success(function(result){
   $scope.alluselist = result.Usecases;
 }).error(function(err){
-
+    alert('Sorry Application error in serverside');
 });
 var promise4=$http.get($rootScope.url + "/getAllRulesList").success(function(result){
   $scope.allrulelist = result.Rules;
 }).error(function(err){
-
+    alert('Sorry Application error in serverside');
 });
 var mm;
 $scope.$watch(function(){
