@@ -3,8 +3,8 @@
 
     angular.module('app').controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService','$rootScope'];
-    function LoginController($location, AuthenticationService, FlashService, $rootScope) {
+    LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService','$rootScope','$window'];
+    function LoginController($location, AuthenticationService, FlashService, $rootScope,$window) {
     	
     	if ($location.protocol() !== 'https') {
             $window.location.href = $location.absUrl().replace('http', 'https');
