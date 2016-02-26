@@ -43,6 +43,7 @@ if(obj.Users.Organization !=undefined){
        $http.get("data/restcountries.json")
       .success(function(data, status, config, headers){
                 $scope.countryNameUp = data;
+                $rootScope.loadinganimation = false;
             }).error(function(data, status, headers, config) {
         $rootScope.loadinganimation = false;
         alert('Sorry Application error in serverside');
@@ -50,7 +51,7 @@ if(obj.Users.Organization !=undefined){
     $http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
             //$scope.EPdatas = data.EP;
             $scope.industrydatas = data.industry;
-
+            $rootScope.loadinganimation = false;
     }).error(function(data, status, headers, config) {
         $rootScope.loadinganimation = false;
         alert('Sorry Application error in serverside');
@@ -88,7 +89,8 @@ $scope.openUpdatePage = function(compsurrID){
                 }
 
 }).error(function(err){
-
+	$rootScope.loadinganimation=false;
+	 alert("Internal server error"); 
 });
 
 }
@@ -193,6 +195,8 @@ var updarorg = {
 
         alert("Organization updated");
 
+}).error(function(error){
+	alert("Internal server error");
 });
 }
 }

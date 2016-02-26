@@ -97,6 +97,7 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", f
        	         return responsename.data;
        	       	}).error(function (error) {
        	         //error
+       	       		alert("Internal server error");
        	     	})
        	     	return promisename;
        	    	}
@@ -107,6 +108,7 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", f
           	         return responsename.data;
           	       	}, function (error) {
           	         //error
+          	       	alert("Internal server error");
           	     	})
           	     	return promisename;
           	    	}
@@ -117,6 +119,7 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", f
          	         return responsename.data;
          	       	}, function (error) {
          	         //error
+         	       	alert("Internal server error");
          	     	})
          	     	return promisename;
          	    	}
