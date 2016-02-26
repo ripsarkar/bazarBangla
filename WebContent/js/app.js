@@ -3,8 +3,8 @@
     
     angular
         .module('app', ['ngCookies','ui.router','ui.bootstrap'])
-        .config(function($stateProvider, $urlRouterProvider) {
-        	//$httpProvider.interceptors.push('TokenInterceptor');
+        .config(function($stateProvider, $urlRouterProvider,$httpProvider) {
+        	$httpProvider.interceptors.push('TokenInterceptor');
     	  // For any unmatched url, redirect to /login
     	  $urlRouterProvider.otherwise("/login");
     	  // Now set up the states
@@ -19,38 +19,62 @@
           .state('home', {
             url: "/home",
             templateUrl: "html/home.html",
-             autoActivateChild: 'home.search'
+             //autoActivateChild: 'home.search'
+            access: {
+		        requiredLogin: true
+		      }
           })
     	     .state("home.search", {
     	      url:"/search",
               controller: 'searchController',
               templateUrl: "html/search.html",
+              access: {
+			        requiredLogin: true
+			      }
     	    })
     	    .state('register', {
     	      url: "/register",
     	      templateUrl: "html/reg.html",
     	      controller:'RegisterController',
+    	      access: {
+			        requiredLogin: true
+			      }
     	    })
           .state('home.createusecase',{
                 url:"/createusecase",
-                templateUrl:"html/createusecase.html"
+                templateUrl:"html/createusecase.html",
+                access: {
+			        requiredLogin: true
+			      }
             })
             .state('home.createReg',{
                 url:"/createReg",
-                templateUrl:"html/createReg.html"
+                templateUrl:"html/createReg.html",
+                access: {
+			        requiredLogin: true
+			      }
             })
             .state('home.createrule',{
                 url:"/createrule",
-                templateUrl:"html/createrule.html"
+                templateUrl:"html/createrule.html",
+                access: {
+			        requiredLogin: true
+			      }
             })
             .state("home.uamanagement", {
             	url:"/uamanagement",
             	templateUrl: "html/uamanagement.html",
-            	controller:'uamanagement'
+            	controller:'uamanagement',
+            	access: {
+			        requiredLogin: true
+			      }
     	    })
             .state("home.updateUsecase", {
     	      url:"/updateUsecase",
-              templateUrl: "html/updateUsecase.html"
+              templateUrl: "html/updateUsecase.html",
+              access: {
+			        requiredLogin: true
+			      }
     	    })
             .state("home.updateReg", {
     	      url:"/updateReg",
@@ -58,23 +82,38 @@
     	    })
             .state("home.updateRule", {
     	      url:"/updateRule",
-              templateUrl: "html/updateRule.html"
+              templateUrl: "html/updateRule.html",
+              access: {
+			        requiredLogin: true
+			      }
     	    })
             .state("home.feedback", {
     	      url:"/feedback",
-              templateUrl: "html/feedback.html"
+              templateUrl: "html/feedback.html",
+              access: {
+			        requiredLogin: true
+			      }
     	    })
     	    .state("home.viewfeedback", {
     	      url:"/viewfeedback",
-              templateUrl: "html/viewfeedback.html"
+              templateUrl: "html/viewfeedback.html",
+              access: {
+			        requiredLogin: true
+			      }
     	    })
 			  .state("home.organization", {
 			url:"/organization",
-			  templateUrl: "html/organization.html"
+			  templateUrl: "html/organization.html",
+			  access: {
+			        requiredLogin: true
+			      }
 			  })
 			  .state("home.subscription", {
 			url:"/subscription",
-			  templateUrl: "html/subscription.html"
+			  templateUrl: "html/subscription.html",
+			  access: {
+			        requiredLogin: true
+			      }
 			  })
 			  .state("home.updatesubscription", {
 			  url:"/updatesubscription",
@@ -86,39 +125,72 @@
         url:"/viewsubscription",
        // templateUrl: "html/viewsubscription.html"
         templateUrl: "html/viewsubscriptionMain.html",
-        controller: 'updateOrgCtrl'
+        controller: 'updateOrgCtrl',
+        access: {
+	        requiredLogin: true
+	      }
       })
 			.state("home.createrole", {
 			  url:"/createrole",
-			  templateUrl: "html/createrole.html"
+			  templateUrl: "html/createrole.html",
+			  access: {
+			        requiredLogin: true
+			      }
 			})
 			.state("home.updaterole", {
 			  url:"/updaterole",
 			  templateUrl: "html/updatepermissions.html",
-			  controller: 'updateRoleCtrl'
+			  controller: 'updateRoleCtrl',
+			  access: {
+			        requiredLogin: true
+			      }
 			 // templateUrl: "html/updaterole.html"
 			})
       .state("home.viewrole", {
         url:"/viewrole",
         templateUrl: "html/viewroleMain.html",
-        controller: 'viewrole'
+        controller: 'viewrole',
+        access: {
+	        requiredLogin: true
+	      }
        // templateUrl: "html/updaterole.html"
       }) 
             .state("home.UpdateOrganisation", {
             url:"/UpdateOrganisation",
-              templateUrl: "html/updateOrganization.html"
+              templateUrl: "html/updateOrganization.html",
+              access: {
+			        requiredLogin: true
+			      }
           })            
             .state("home.permissions", {
               url:"/permissions",
-              templateUrl: "html/permissions.html"
+              templateUrl: "html/permissions.html",
+              access: {
+			        requiredLogin: true
+			      }
             });
         }).run(run);
 
 
     
     
-    run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
-    function run($rootScope, $location, $cookieStore, $http) {
+    run.$inject = ['$rootScope', '$location', '$cookieStore', '$http','AuthenticationFactory'];
+    function run($rootScope, $location, $cookieStore, $http,AuthenticationFactory) {
+    	
+    	AuthenticationFactory.check();
+    		$rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams, options){ 
+				if ((toState.access && toState.access.requiredLogin) && !AuthenticationFactory.isLogged) {
+				
+				 $location.path("/home");
+			    } else {
+			    	
+			      // check if user object exists else fetch it. This is incase of a page refresh
+			      //if (!AuthenticationFactory.user) AuthenticationFactory.user = $window.sessionStorage.user;
+			      
+			    }
+		
+				});
+    	
     	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     	    if(toState && toState.params && toState.params.autoActivateChild){
     	        $state.go(toState.params.autoActivateChild);
@@ -162,7 +234,7 @@
         // $rootScope.url = 'http://uclapireleasetwo.mybluemix.net';
         
         // UAT test url       
-        $rootScope.url = 'http://devuclapi.mybluemix.net';
+        $rootScope.url = 'https://devuclapi.mybluemix.net';
         
          
         //    $location.path('/login');

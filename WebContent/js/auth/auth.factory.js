@@ -2,7 +2,7 @@
   var auth = {
     isLogged: false,
     check: function() {
-      if ($window.sessionStorage.token && $window.sessionStorage.user) {
+      if ($window.sessionStorage.token) {
         this.isLogged = true;
       } else {
         this.isLogged = false;
@@ -17,7 +17,7 @@
  angular.module('app').factory('UserAuthFactory', function($window, $location, $http, AuthenticationFactory) {
   return {
     login: function(username) {
-      return $http.post('http://devuclapi.mybluemix.net/test/login', {
+      return $http.post('https://devuclapi.mybluemix.net/test/login', {
         UserID: username,
         //Password: password
       });
@@ -46,7 +46,7 @@
   return {
     request: function(config) {
       config.headers = config.headers || {};
-	  console.log($window.sessionStorage.token)
+	 // console.log($window.sessionStorage.token)
       if ($window.sessionStorage.token) {
           config.headers['authorization'] = $window.sessionStorage.token;
           config.headers['Content-Type'] = "application/json";

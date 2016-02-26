@@ -6,6 +6,10 @@
     LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService','$rootScope'];
     function LoginController($location, AuthenticationService, FlashService, $rootScope) {
     	
+    	if ($location.protocol() !== 'https') {
+            $window.location.href = $location.absUrl().replace('http', 'https');
+        }
+    	
     	if($rootScope.loginError){
     		$rootScope.loginError=false;
     		document.getElementById("logErr").className = "";

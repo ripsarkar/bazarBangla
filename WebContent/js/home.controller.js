@@ -1,16 +1,31 @@
 'use strict';
 var app = angular.module('app').controller('HomeController', HomeController);
-HomeController.$inject = ['UserService','$rootScope', '$scope', '$http','$location','$window'];
+HomeController.$inject = ['UserService', 'UserAuthFactory','AuthenticationFactory','$rootScope', '$scope', '$http','$location','$window',"$q"];
 
 
-function HomeController(UserService, $rootScope, $scope, $http,$location,$window) {
+function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $rootScope, $scope, $http,$location,$window,$q) {
+	if ($location.protocol() !== 'https') {
+        $window.location.href = $location.absUrl().replace('http', 'https');
+    }
 		var usernameId;
 		angular.element(document).ready(function(){
 		usernameId = window.location.href;
 		});
 		var mj = usernameId.split("=");
-	    console.log("dataloading value::"+$rootScope.dataLoading);
-	
+	   // console.log("dataloading value::"+$rootScope.dataLoading);
+	    if(!$window.sessionStorage.token){
+	   	 var promise1= UserAuthFactory.login(mj[1]).success(function(data) {
+	   	       
+	   	          AuthenticationFactory.isLogged = true;
+	   	          
+	   	          $window.sessionStorage.token = data.token;
+	   	         
+	   	             
+	   	        }).error(function(status) {
+	   	          alert('Oops something went wrong!');
+	   	        });
+	   	   
+	   	   }
 	
 	
 	
@@ -22,6 +37,7 @@ function HomeController(UserService, $rootScope, $scope, $http,$location,$window
 					}
 				});*/
 
+	    $q.all([promise1]).then(function(data){
 
 	  if($rootScope.dataLoading == undefined || $rootScope.dataLoading==false) {
       	console.log("data loading GET called");
@@ -120,7 +136,7 @@ function HomeController(UserService, $rootScope, $scope, $http,$location,$window
   		  
   	  }
 
-
+});
 //changing the user undustry
     $scope.userIndustCh = function(){
         var userIndustCh = $scope.userIndustChVa;
