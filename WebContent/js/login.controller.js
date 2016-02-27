@@ -12,8 +12,11 @@
     	
     	if(localStorage.isLoggedIn=="true"){
 			
-			 $location.path('/home/search');
-			 defaultmenu();
+			// $location.path('/home/search');
+    		   localStorage.clear();
+    		   sessionStorage.clear();
+    		   //$location.path('/login');
+			 
 		}
     	
     	if($rootScope.loginError){
