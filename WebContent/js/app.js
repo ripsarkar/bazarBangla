@@ -184,7 +184,7 @@
     		$rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams, options){ 
 				if ((toState.access && toState.access.requiredLogin) && !AuthenticationFactory.isLogged) {
 				
-				 $location.path("/login");
+				 $location.path("/home");
 			    } else {
 			    	
 			      // check if user object exists else fetch it. This is incase of a page refresh
@@ -200,7 +200,7 @@
     	    }
     	    if (AuthenticationFactory.isLogged == true && $location.path() == '/login') {
 				//alert();
-				  $location.path('/home');
+				 // $location.path('/home');
 				}
     	});
     	
