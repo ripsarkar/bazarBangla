@@ -694,7 +694,7 @@ if(usecaseBiglist != undefined){
 		 
 	 }).error(function(data, status, headers, config) {
          $rootScope.loadinganimation = false;
-        
+        alert("Internal server error");
      });
 	 
 	 

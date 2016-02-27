@@ -106,7 +106,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                               $location.path('/home/search');
                               $rootScope.loadinganimation = false;
                           }).error(function (error) {
-
+                          	alert("Internal server error");
                           });
   	                    }else{
   	                    	var timer = setInterval(function() {
@@ -128,12 +128,12 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                               $scope.RfetchList.push(objComp);
                               $rootScope.loadinganimation = false;
                           }).error(function (error) {
-
+                          	alert("Internal server error");
                           });
 
    	            }).error(function (error) {
    	             $rootScope.loadinganimation = false;
-
+   	             alert("Internal server error");
    	            });
   		  
   	  }
@@ -152,7 +152,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                                 //$location.path('/home/search');
                                 $rootScope.loadinganimation = false;
                             }).error(function (error) {
-
+                            	alert("Internal server error");
                             });
     }
 ////////////////////////////////////////////////

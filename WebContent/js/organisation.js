@@ -203,6 +203,7 @@ app.factory('MyAPIService', function($http,$rootScope){
         $rootScope.loadinganimation=false; 
       })
       .error(function(){ //handler errors here
+                alert("Internal server error");
       });
       return myData;
     },

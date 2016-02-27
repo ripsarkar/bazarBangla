@@ -350,6 +350,8 @@ app.service('createUserService', ['$http',"$rootScope",
  	         return responsename.data;
  	       	}).error(function(error) {
  	           //error
+                alert("Internal server error");
+
  	    	 });
  	     	return promisename;
  	    	};
