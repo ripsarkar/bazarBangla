@@ -19,6 +19,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 	   	          AuthenticationFactory.isLogged = true;
 	   	          
 	   	          $window.sessionStorage.token = data.token;
+	   	          localStorage.setItem("isLoggedIn", false);
 	   	         
 	   	             
 	   	        }).error(function(status) {

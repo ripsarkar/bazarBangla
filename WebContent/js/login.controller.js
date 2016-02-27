@@ -10,6 +10,11 @@
             $window.location.href = $location.absUrl().replace('http', 'https');
         }
     	
+    	if(localStorage.isLoggedIn=="true"){
+			
+			 $location.path('/home/search');
+		}
+    	
     	if($rootScope.loginError){
     		$rootScope.loginError=false;
     		document.getElementById("logErr").className = "";
