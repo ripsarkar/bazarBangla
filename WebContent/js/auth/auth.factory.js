@@ -2,7 +2,7 @@
   var auth = {
     isLogged: false,
     check: function() {
-      if ($window.sessionStorage.token) {
+      if (localStorage.token) {
         this.isLogged = true;
       } else {
         this.isLogged = false;
@@ -47,8 +47,8 @@
     request: function(config) {
       config.headers = config.headers || {};
 	 // console.log($window.sessionStorage.token)
-      if ($window.sessionStorage.token) {
-          config.headers['authorization'] = $window.sessionStorage.token;
+      if (localStorage.token) {
+          config.headers['authorization'] = localStorage.token;
           config.headers['Content-Type'] = "application/json";
       }
       return config || $q.when(config);

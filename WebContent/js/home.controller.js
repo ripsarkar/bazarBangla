@@ -13,12 +13,13 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 		});
 		var mj = usernameId.split("=");
 	   // console.log("dataloading value::"+$rootScope.dataLoading);
-	    if(!$window.sessionStorage.token){
+	    if(!localStorage.token){
 	   	 var promise1= UserAuthFactory.login(mj[1]).success(function(data) {
 	   	       
 	   	          AuthenticationFactory.isLogged = true;
 	   	          
-	   	          $window.sessionStorage.token = data.token;
+	   	          //$window.sessionStorage.token = data.token;
+	   	          localStorage.setItem("token", data.token);
 	   	          localStorage.setItem("isLoggedIn", true);
 	   	         
 	   	             
