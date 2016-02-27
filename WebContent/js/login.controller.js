@@ -13,6 +13,7 @@
     	if(localStorage.isLoggedIn=="true"){
 			
 			 $location.path('/home/search');
+			 defaultmenu();
 		}
     	
     	if($rootScope.loginError){
