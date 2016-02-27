@@ -12,7 +12,7 @@
     	
     	if(localStorage.isLoggedIn=="true"){
 			
-			 $location.path('/home?userName='+localStorage.namerip);
+			 //$location.path('/home?userName='+localStorage.namerip);
     		   //localStorage.clear();
     		   //sessionStorage.clear();
     		   //$location.path('/login');

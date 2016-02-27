@@ -13,7 +13,10 @@
             .state('login', {
               url: "/login",
               templateUrl: "login.html",
-              controller: 'LoginController'
+              controller: 'LoginController',
+              access: {
+  		        requiredLogin: false
+  		      }
             //  controllerAs: 'vm'
           })
           .state('home', {
@@ -181,7 +184,7 @@
     		$rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams, options){ 
 				if ((toState.access && toState.access.requiredLogin) && !AuthenticationFactory.isLogged) {
 				
-				 $location.path("/home");
+				 $location.path("/login");
 			    } else {
 			    	
 			      // check if user object exists else fetch it. This is incase of a page refresh
@@ -195,6 +198,10 @@
     	    if(toState && toState.params && toState.params.autoActivateChild){
     	        $state.go(toState.params.autoActivateChild);
     	    }
+    	    if (AuthenticationFactory.isLogged == true && $location.path() == '/login') {
+				//alert();
+				  $location.path('/home');
+				}
     	});
     	
         // keep user logged in after page refresh
