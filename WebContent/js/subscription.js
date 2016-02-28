@@ -178,14 +178,14 @@ app.directive("xyzcomp", function($http,$rootScope){
 ////////////////////////////////////////////////////////////
       $scope.open = function(event){
 
-        console.log("open");
+        //console.log("open");
         event.preventDefault();
         event.stopPropagation();
         $scope.opened = true;
 
       };
       $scope.open2 = function(event){
-        console.log("open");
+        //console.log("open");
         event.preventDefault();
         event.stopPropagation();
         $scope.opened2 = true;

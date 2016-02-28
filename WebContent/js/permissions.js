@@ -146,7 +146,7 @@ $scope.sendPermissions = function(){
                           $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
                               sessionStorage.setItem("fetchPermission", JSON.stringify(result));
                               $scope.permission = sessionStorage.getItem("fetchPermission");
-                              console.log(sessionStorage.getItem("fetchPermission"));
+                             // console.log(sessionStorage.getItem("fetchPermission"));
                               $rootScope.loadinganimation = false;
                           }).error(function (error) {
                   				alert("Server side error");
@@ -218,7 +218,7 @@ $scope.fnFetchPermissions=function(id,name){
 						var operation= value.attributes['value'].value;
 						var filterType=value.attributes['data-filterType'].value;
 						//alert("createusecase");
-							console.log("createusecase" +value.attributes['data-filtertype'].value);
+							//console.log("createusecase" +value.attributes['data-filtertype'].value);
 						 angular.forEach(usecase, function(val,key) {						             
 								if (operation == val.operation && objectval==val.objectval && filterType==val.filterType) {	
                                         //alert("if")	
@@ -1606,7 +1606,7 @@ $scope.creaindAll = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
   $event.stopImmediatePropagation();
 }
 $scope.readindAll = function($event){
@@ -1635,7 +1635,7 @@ $scope.readindAll = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
   
 }
@@ -1665,7 +1665,7 @@ $scope.updaindAll = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.deleindAll = function($event){
@@ -1693,7 +1693,7 @@ $scope.deleindAll = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.expoindAll = function($event){
@@ -1722,7 +1722,7 @@ $scope.expoindAll = function($event){
           }
         }
     }
-      console.log(postjson);
+      //console.log(postjson);
         $event.stopImmediatePropagation();
 }
 $scope.createind = function($event){
@@ -1763,7 +1763,7 @@ $scope.createind = function($event){
         }
     }
 
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 
 }
@@ -1800,7 +1800,7 @@ $scope.readind = function($event){
         }
     }
 
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 
 }
@@ -1835,7 +1835,7 @@ $scope.updaind = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.deleind = function($event){
@@ -1869,7 +1869,7 @@ $scope.deleind = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.expoind = function($event){
@@ -1903,7 +1903,7 @@ $scope.expoind = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 /*$scope.createindSpe = function($event){
@@ -1966,7 +1966,7 @@ $scope.readindSpe = function($event){
         }
     }
 
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 
 }
@@ -2001,7 +2001,7 @@ $scope.updaindSpe = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.deleindSpe = function($event){
@@ -2035,7 +2035,7 @@ $scope.deleindSpe = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.expoindSpe = function($event){
@@ -2069,7 +2069,7 @@ $scope.expoindSpe = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 ///////////////////////////////////////////////////////////
@@ -2103,7 +2103,7 @@ $scope.creaindAllRule = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
   
 }
@@ -2132,7 +2132,7 @@ $scope.readindAllRule = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
   
 }
@@ -2161,7 +2161,7 @@ $scope.updaindAllRule = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.deleindAllRule = function($event){
@@ -2189,7 +2189,7 @@ $scope.deleindAllRule = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.expoindAllRule = function($event){
@@ -2218,7 +2218,7 @@ $scope.expoindAllRule = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 /*$scope.createindRule = function($event){
@@ -2246,7 +2246,7 @@ $scope.expoindAllRule = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
 
 }*/
 $scope.readindRule = function($event){
@@ -2279,7 +2279,7 @@ $scope.readindRule = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 
 }
@@ -2313,7 +2313,7 @@ $scope.updaindRule = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.deleindRule = function($event){
@@ -2346,7 +2346,7 @@ $scope.deleindRule = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.expoindRule = function($event){
@@ -2380,7 +2380,7 @@ $scope.expoindRule = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 /*$scope.createindRuleSpe = function($event){
@@ -2408,7 +2408,7 @@ $scope.expoindRule = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
 
 }*/
 $scope.readindRuleSpe = function($event){
@@ -2441,7 +2441,7 @@ $scope.readindRuleSpe = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 
 }
@@ -2475,7 +2475,7 @@ $scope.updaindRuleSpe = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.deleindRuleSpe = function($event){
@@ -2508,7 +2508,7 @@ $scope.deleindRuleSpe = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.expoindRuleSpe = function($event){
@@ -2541,7 +2541,7 @@ $scope.expoindRuleSpe = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 ///////////////////////////////////////////////////////////
@@ -2571,7 +2571,7 @@ $scope.creaindAllOrg = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
   
 }
@@ -2597,7 +2597,7 @@ $scope.readindAllOrg = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
   
 }
@@ -2623,7 +2623,7 @@ $scope.updaindAllOrg = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.deleindAllOrg = function($event){
@@ -2649,7 +2649,7 @@ $scope.deleindAllOrg = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.membindAllOrg = function($event){
@@ -2675,7 +2675,7 @@ $scope.membindAllOrg = function($event){
           }
         }
     }
-      console.log(postjson);
+      //console.log(postjson);
         $event.stopImmediatePropagation();
 
 }
@@ -2703,7 +2703,7 @@ $scope.membindAllOrg = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
 
 }*/
 $scope.readindOrg = function($event){
@@ -2734,7 +2734,7 @@ $scope.readindOrg = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 
 }
@@ -2766,7 +2766,7 @@ $scope.updaindOrg = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.deleindOrg = function($event){
@@ -2797,7 +2797,7 @@ $scope.deleindOrg = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.membindOrg = function($event){
@@ -2828,7 +2828,7 @@ $scope.membindOrg = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 ///////////////////////////////////////////////////////////
@@ -2858,7 +2858,7 @@ $scope.creaindAllSub = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
   
 }
@@ -2884,7 +2884,7 @@ $scope.readindAllSub = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
   
 }
@@ -2910,7 +2910,7 @@ $scope.updaindAllSub = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.deleindAllSub = function($event){
@@ -2935,7 +2935,7 @@ $scope.deleindAllSub = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.createindSub = function($event){
@@ -2967,7 +2967,7 @@ $scope.createindSub = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 
 }
@@ -3000,7 +3000,7 @@ $scope.readindSub = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 
 }
@@ -3032,7 +3032,7 @@ $scope.updaindSub = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.deleindSub = function($event){
@@ -3063,7 +3063,7 @@ $scope.deleindSub = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 
@@ -3094,7 +3094,7 @@ $scope.creaindAllUser = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
   
 }
@@ -3120,7 +3120,7 @@ $scope.readindAllUser = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
   
 }
@@ -3147,7 +3147,7 @@ $scope.updaindAllUser = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.deleindAllUser = function($event){
@@ -3172,7 +3172,7 @@ $scope.deleindAllUser = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.createindUser = function($event){
@@ -3202,7 +3202,7 @@ $scope.createindUser = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 
 }
@@ -3233,7 +3233,7 @@ $scope.readindUser = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 
 }
@@ -3264,7 +3264,7 @@ $scope.updaindUser = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.deleindUser = function($event){
@@ -3295,7 +3295,7 @@ $scope.deleindUser = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 
@@ -3325,7 +3325,7 @@ $scope.creaindAllRole = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
   
 }
@@ -3351,7 +3351,7 @@ $scope.readindAllRole = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
   
 }
@@ -3377,7 +3377,7 @@ $scope.updaindAllRole = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.deleindAllRole = function($event){
@@ -3402,7 +3402,7 @@ $scope.deleindAllRole = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.createindRole = function($event){
@@ -3433,7 +3433,7 @@ $scope.createindRole = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 
 }
@@ -3465,7 +3465,7 @@ $scope.readindRole = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 
 }
@@ -3497,7 +3497,7 @@ $scope.updaindRole = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 $scope.deleindRole = function($event){
@@ -3528,7 +3528,7 @@ $scope.deleindRole = function($event){
           }
         }
     }
-  console.log(postjson);
+  //console.log(postjson);
     $event.stopImmediatePropagation();
 }
 

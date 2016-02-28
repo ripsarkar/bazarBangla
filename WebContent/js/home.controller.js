@@ -42,7 +42,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 	    $q.all([promise1]).then(function(data){
 
 	  if($rootScope.dataLoading == undefined || $rootScope.dataLoading==false) {
-      	console.log("data loading GET called");
+      	//console.log("data loading GET called");
   		  $rootScope.loadinganimation = true;
   		  var loadUserdetails = {
    	                method: "GET",
@@ -88,9 +88,9 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 
    	                }
    	            	    $rootScope.loadinganimation = false;
-                          console.log($rootScope.user_name);
-                          console.log($rootScope.companyNamee);
-                          console.log(localStorage.getItem("fullname"));
+                         // console.log($rootScope.user_name);
+                         // console.log($rootScope.companyNamee);
+                         // console.log(localStorage.getItem("fullname"));
                           $rootScope.loadinganimation = false;
                           $location.path('/home/search');
 
@@ -101,7 +101,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                           //$http.get("data/dummyjson.json").success(function(result) {
                               sessionStorage.setItem("fetchPermission", JSON.stringify(result));
                               $scope.permission = sessionStorage.getItem("fetchPermission");
-                              console.log(sessionStorage.getItem("fetchPermission"));
+                             // console.log(sessionStorage.getItem("fetchPermission"));
                             
                               $location.path('/home/search');
                               $rootScope.loadinganimation = false;
@@ -148,7 +148,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 
                             	sessionStorage.setItem("fetchPermission", JSON.stringify(result));
                                 $rootScope.indussession = sessionStorage.getItem("fetchPermission");
-                                console.log(sessionStorage.getItem("fetchPermission"));
+                               // console.log(sessionStorage.getItem("fetchPermission"));
                                 //$location.path('/home/search');
                                 $rootScope.loadinganimation = false;
                             }).error(function (error) {
@@ -856,3 +856,39 @@ function timerIncrement() {
 }
 // end of change for session out
 }
+
+
+app.directive(
+		"bnDocumentClick",
+		function( $document, $parse){
+			// I connect the Angular context to the DOM events.
+			var linkFunction = function( $scope, $element, $attributes){					
+				var scopeExpression = $attributes.bnDocumentClick;					
+				var invoker = $parse( scopeExpression );
+				// Bind to the document click event.
+				$document.on(
+					"click",
+					function( event ){							
+						if(localStorage.isLoggedIn==undefined){
+								//$location.path('/login');
+								window.location = "#/login";
+						}
+						
+						$scope.$apply(
+							function(){									
+								invoker(
+									$scope,
+									{
+										$event: event
+									}
+								);
+							}
+						);
+					}
+				);
+
+			};
+			// Return the linking function.
+			return( linkFunction );
+		}
+	);

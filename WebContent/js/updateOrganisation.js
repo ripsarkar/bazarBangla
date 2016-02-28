@@ -177,7 +177,7 @@ var updateorgjson = {
                 for(var i=0;i<$scope.UsecaseIntry.length;i++){
                 var cOpI = {};
                 cOpI.SurrId = $scope.UsecaseIntry[i];
-                console.log($scope.UsecaseIntry[i]);
+                //console.log($scope.UsecaseIntry[i]);
                     updateorgjson.company_industries.push(cOpI);
                 }
 

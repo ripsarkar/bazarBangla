@@ -387,7 +387,7 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', '$rootScope', '
 
         }
         $scope.feedbacksubmitchck = function(id) {
-            console.log("entered");
+            //console.log("entered");
 
         }
     }

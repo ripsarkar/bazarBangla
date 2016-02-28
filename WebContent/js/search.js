@@ -546,8 +546,8 @@ if(usecaseBiglist != undefined){
 			    }
 		    	CyberSecFunc.push(UseCaseCatX);
 			}
-			console.log("cyber");
-			console.log(cybertoname);
+			//console.log("cyber");
+			//console.log(cybertoname);
 
 			//regcat
 			var RegPubtX={};
@@ -603,9 +603,9 @@ if(usecaseBiglist != undefined){
 			RegCat.push(RegPubtX);
 			}
 			
-			console.log("RegCat");
+			//console.log("RegCat");
 
-			console.log(RegCat);
+			//console.log(RegCat);
 			
 			
 			//Threat model
@@ -881,11 +881,11 @@ if(usecaseBiglist != undefined){
 				usecase["UseCaseCat"].push(UseCSubCat);
 				usecase["id"] = parseInt(ucSubCatSuID);
 			    postjsonresult.CyberSecFunc.push(usecase);
-			    console.log(postjsonresult);
+			    //console.log(postjsonresult);
 			}
 			if(semimatchfound == true){
 				postjsonresult.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat.push(subcatlast);
-			    console.log(postjsonresult);
+			    //console.log(postjsonresult);
 			}
 
 		}
@@ -912,7 +912,7 @@ if(usecaseBiglist != undefined){
 									if(postjsonresult.CyberSecFunc[i].UseCaseCat[j].UseCaseSubCat.length==1){
 										
 										postjsonresult.CyberSecFunc.splice(i, 1);
-									    console.log(postjsonresult);
+									    //console.log(postjsonresult);
 
 										break;
 									}
@@ -1003,7 +1003,7 @@ if(usecaseBiglist != undefined){
 				usecase["UseCaseCat"].push(UseCSubCat);
 				usecase["id"] = parseInt(ucSubCatSuID);
 			    postjsonresult.CyberSecFunc.push(usecase);
-			    console.log(postjsonresult);
+			    //console.log(postjsonresult);
 			}
 
 		}
@@ -1030,7 +1030,7 @@ if(usecaseBiglist != undefined){
 									if(postjsonresult.CyberSecFunc[i].UseCaseCat.length==1){
 										
 										postjsonresult.CyberSecFunc.splice(i, 1);
-									    console.log(postjsonresult);
+									    //console.log(postjsonresult);
 
 										break;
 									}
@@ -1126,7 +1126,7 @@ if(usecaseBiglist != undefined){
 				usecase["UseCaseCat"].push(UseCSubCat);
 				usecase["id"] = parseInt(ucSubCatSuID);
 			    postjsonresult.CyberSecFunc.push(usecase);
-			    console.log(postjsonresult);
+			    //console.log(postjsonresult);
 			}
 
 		}
@@ -1155,7 +1155,7 @@ if(usecaseBiglist != undefined){
 									if(postjsonresult.CyberSecFunc[i].UseCaseCat.length==1){
 										
 										postjsonresult.CyberSecFunc.splice(i, 1);
-									    console.log(postjsonresult);
+									    //console.log(postjsonresult);
 
 										break;
 									}
@@ -1236,11 +1236,11 @@ if(usecaseBiglist != undefined){
 				usecase2["RegPub"].push(UseCSubCat2);
 				usecase2["id"] = parseInt(ucSubCatSuID2);
 			    postjsonresult.RegCat.push(usecase2);
-			    console.log(postjsonresult);
+			    //console.log(postjsonresult);
 			}
 			if(semimatchfound2 == true){
 				postjsonresult.RegCat[i].RegPub[j].RegCntl.push(subcatlast2);
-			    console.log(postjsonresult);
+			    //console.log(postjsonresult);
 			}
 
 		}
@@ -1269,7 +1269,7 @@ if(usecaseBiglist != undefined){
 									if(postjsonresult.RegCat[i].RegPub[j].RegCntl.length==1){
 										
 										postjsonresult.RegCat.splice(i, 1);
-									    console.log(postjsonresult);
+									    //console.log(postjsonresult);
 
 										break;
 									}
@@ -1369,7 +1369,7 @@ if(usecaseBiglist != undefined){
 			usecase["RegPub"].push(UseCSubCat);
 			usecase["id"] = parseInt(ucSubCatSuID);
 		    postjsonresult.RegCat.push(usecase);
-		    console.log(postjsonresult);
+		    //console.log(postjsonresult);
 		}
 
 	}
@@ -1396,7 +1396,7 @@ if(usecaseBiglist != undefined){
 								if(postjsonresult.RegCat[i].RegPub.length==1){
 									
 									postjsonresult.RegCat.splice(i, 1);
-								    console.log(postjsonresult);
+								    //console.log(postjsonresult);
 
 									break;
 								}
@@ -1486,7 +1486,7 @@ if(usecaseBiglist != undefined){
 				usecase["RegPub"].push(UseCSubCat);
 				usecase["id"] = parseInt(ucSubCatSuID);
 			    postjsonresult.RegCat.push(usecase);
-			    console.log(postjsonresult);
+			    //console.log(postjsonresult);
 			}
 
 		}
@@ -1511,7 +1511,7 @@ if(usecaseBiglist != undefined){
 									if(postjsonresult.RegCat[i].RegPub.length==1){
 										
 										postjsonresult.RegCat.splice(i, 1);
-									    console.log(postjsonresult);
+									    //console.log(postjsonresult);
 
 										break;
 									}
@@ -1548,7 +1548,7 @@ if(usecaseBiglist != undefined){
 				
 				//search criteria
 				$scope.items.push({names:totalname, ids:ndval, idname:"Industry"});
-				console.log($scope.items);
+				//console.log($scope.items);
 				//pushing data in postjson
 					postjsonresult.Industry.push(subcatlast2);
 
@@ -1579,7 +1579,7 @@ if(usecaseBiglist != undefined){
 
 			}
 
-			console.log(postjsonresult);
+			//console.log(postjsonresult);
 		}
 	$scope.entervalueSubcatIndustryTop = function($event){
 		
@@ -1609,7 +1609,7 @@ if(usecaseBiglist != undefined){
 			}
 			//search criteria
 			$scope.items.push({names:totalname, ids:"Industry", idname:"Industry"});
-			console.log($scope.items);
+			//console.log($scope.items);
 			//
 			angular.element($event.currentTarget).parent().children('ul').children('li').each(function(){
 
@@ -1619,7 +1619,7 @@ if(usecaseBiglist != undefined){
 			usecase["id"]=parseInt(angular.element(this).children('input').val());
 
 			    postjsonresult.Industry.push(usecase);
-			    console.log(postjsonresult);
+			    //console.log(postjsonresult);
 
 			});
 			}
@@ -1637,7 +1637,7 @@ if(usecaseBiglist != undefined){
 				//code for poping element		
 				
 				postjsonresult.Industry = [];
-				console.log(postjsonresult);
+				//console.log(postjsonresult);
 			}
 	}
 	//////////////////END OF CODE FOR INDUSTRY///////////////
@@ -1687,7 +1687,7 @@ if(usecaseBiglist != undefined){
 
 			}
 
-			console.log(postjsonresult);
+			//console.log(postjsonresult);
 		}
 	$scope.entervalueSubcatEPTop = function($event){
 		
@@ -1727,7 +1727,7 @@ if(usecaseBiglist != undefined){
 			usecase["id"]=parseInt(angular.element(this).children('input').val());
 
 			    postjsonresult.EP.push(usecase);
-			    console.log(postjsonresult);
+			    //console.log(postjsonresult);
 
 		});
 				}
@@ -1743,7 +1743,7 @@ if(usecaseBiglist != undefined){
 				}
 				
 				postjsonresult.EP = [];
-				console.log(postjsonresult);
+				//console.log(postjsonresult);
 			}
 	}
 	//////////////////END OF CODE FOR EP///////////////
@@ -1794,7 +1794,7 @@ if(usecaseBiglist != undefined){
 
 			}
 
-			console.log(postjsonresult);
+			//console.log(postjsonresult);
 		}
 	$scope.entervalueSubcatLogSourceTop = function($event){
 		$scope.tableReset();
@@ -1831,7 +1831,7 @@ if(usecaseBiglist != undefined){
 			usecase["id"]=parseInt(angular.element(this).children('input').val());
 
 			    postjsonresult.LogSource.push(usecase);
-			    console.log(postjsonresult);
+			    //console.log(postjsonresult);
 
 		});
 				}
@@ -1845,7 +1845,7 @@ if(usecaseBiglist != undefined){
 					}
 				}
 				postjsonresult.LogSource = [];
-				console.log(postjsonresult);
+				//console.log(postjsonresult);
 			}
 	}
 	//////////////////END OF CODE FOR LogSource///////////////
@@ -1927,7 +1927,7 @@ if(usecaseBiglist != undefined){
 
 		}
 
-		console.log(postjsonresult);
+		//console.log(postjsonresult);
 	}
 	
 	
@@ -1976,7 +1976,7 @@ if(usecaseBiglist != undefined){
 
 		}
 
-		console.log(postjsonresult);
+		//console.log(postjsonresult);
 	}
 	
 	//////////////////CODE FOR Threat model///////////////
@@ -2020,7 +2020,7 @@ if(usecaseBiglist != undefined){
 				
 				postjsonresult.ThreatModel = [];
 			}
-		console.log(postjsonresult);
+		//console.log(postjsonresult);
 	}
 	///////////selecting Cyber Security root////////////////////
 	$scope.entervalueSubcatCyberSecFuncTop = function($event){
@@ -2061,7 +2061,7 @@ if(usecaseBiglist != undefined){
 				}
 				//pop result
 				postjsonresult.CyberSecFunc = [];
-				console.log(postjsonresult);
+				//console.log(postjsonresult);
 			}
 	}
 	///////////selecting RegCat root////////////////////
@@ -2103,7 +2103,7 @@ if(usecaseBiglist != undefined){
 				
 				
 				postjsonresult.RegCat = [];
-				console.log(postjsonresult);
+				//console.log(postjsonresult);
 			}
 	}
 	
@@ -2146,7 +2146,7 @@ if(usecaseBiglist != undefined){
 			
 		}
 
-		console.log(postjsonresult);
+		//console.log(postjsonresult);
 		}
 
 	//removing element from post json
@@ -2371,11 +2371,11 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 	threatname2="";
 	//
 		//Threat model
-	console.log(threatModelObj);
+	//console.log(threatModelObj);
 		//postjsonresult.ThreatModel = [];		
 		var thrtObj=null;
 			for(i=0;i<threatModelObj.length;i++){	
-				console.log("Threat model obj"+JSON.stringify(threatModelObj[i]));
+				//console.log("Threat model obj"+JSON.stringify(threatModelObj[i]));
 				if(threatModelObj[i].SurrId==ndvlqe){					
 					thrtObj=threatModelObj[i];
 					break;
@@ -2461,7 +2461,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 			   };	
 				
 			};			
-			console.log("The last selected value is"+JSON.stringify(postjsonresult));		
+			//console.log("The last selected value is"+JSON.stringify(postjsonresult));		
 	
 	
 	};
@@ -2634,35 +2634,35 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 		if(angular.element($event.currentTarget).is(':checked') == true){
 			if((oobthis==true && oobnext==true)||(oobthis==true && oobprev==true)){
 				postjsonresult.oobParam = "";
-				console.log(postjsonresult.oobParam);
+				//console.log(postjsonresult.oobParam);
 			}
 			else{
 			postjsonresult.oobParam = value;
-			console.log(postjsonresult.oobParam);
+			//console.log(postjsonresult.oobParam);
 			}
 		}
 		else{
 
 			if(oobnext==true){
 				postjsonresult.oobParam = "No";
-				console.log(postjsonresult.oobParam);
+				//console.log(postjsonresult.oobParam);
 			}
 			else if(oobprev==true){
 				postjsonresult.oobParam = "Yes";
-				console.log(postjsonresult.oobParam);
+				//console.log(postjsonresult.oobParam);
 			}
 			else{
 				postjsonresult.oobParam = "";
-				console.log(postjsonresult.oobParam);
+				//console.log(postjsonresult.oobParam);
                 if(oobnext==false){
                     angular.element($event.currentTarget).next().next().prop('checked',true);
                     postjsonresult.oobParam = "No";
-                    console.log(postjsonresult.oobParam);
+                    //console.log(postjsonresult.oobParam);
                 }
                 if(oobprev==false){
                     angular.element($event.currentTarget).prev().prev().prop('checked',true);
                     postjsonresult.oobParam = "Yes";
-                    console.log(postjsonresult.oobParam);
+                    //console.log(postjsonresult.oobParam);
                 }
 			}
 
@@ -2922,7 +2922,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
         $scope.inputDisplay = [];
 
         SearchResultService.getRuleSearchResult(id).then(function(result) {
-            //console.log(JSON.stringify(result, null,2));
+            ////console.log(JSON.stringify(result, null,2));
             $scope.ruleResult = result.RuleDescription;
             $scope.logSource = result.LogSource[0].Value;
             $scope.input = result.Input;
@@ -3011,7 +3011,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
             }
             
             $scope.inputDisplaydata = $scope.inputDisplay;
-            console.log(JSON.stringify($scope.inputDisplaydata, null, 2));
+            //console.log(JSON.stringify($scope.inputDisplaydata, null, 2));
             $rootScope.loadinganimation = false;
 
         });
@@ -3218,7 +3218,7 @@ if(usecaselist != undefined){
             var indus ={};
             indus["id"] = localStorage.getItem("industrySurrId");
             postjsonresult.Industry.push(indus);
-            console.log(postjsonresult);
+            //console.log(postjsonresult);
             //notpushed = false;
         }
     	//item populate
@@ -3229,7 +3229,7 @@ if(usecaselist != undefined){
     	
 		//text field value
     	postjsonresult.useCaseRuleIdName = $scope.seaValForEvery;
-		console.log(postjsonresult);
+		//console.log(postjsonresult);
 		
     	  $scope.dimensionrule=false;
 	        $scope.dimensionrelationtable=false;
