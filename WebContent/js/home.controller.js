@@ -105,6 +105,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                              // console.log(sessionStorage.getItem("fetchPermission"));
                             
                               $location.path('/home/search');
+                              $scope.fnTabsdisEnab();
                               $rootScope.loadinganimation = false;
                           }).error(function (error) {
                           	alert("Internal server error");
@@ -140,6 +141,29 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
   	  }
 
 });
+	    
+//Main Tabs disable enable
+	    $scope.fnTabsdisEnab=function(){
+
+	    var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+
+	    	if(obj.Users.User==undefined){
+	    		$scope.userAccountManagementdis= true;
+	    	}
+	    	if(obj.Users.UseCase==undefined && obj.Users.Rule==undefined){
+	    		$scope.useCaseMaintaindis= true;
+	    	}
+	    	
+	    	if(obj.Users.Subscription==undefined && obj.Users.Organization==undefined){
+	    		$scope.organizationdis= true;
+	    	}
+	    	
+	    	if(obj.Users.Role==undefined){
+	    		$scope.rolemenudis= true;		
+	    	}
+	    	
+	    	
+	    };
 //changing the user undustry
     $scope.userIndustCh = function(){
         var userIndustCh = $scope.userIndustChVa;
