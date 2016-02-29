@@ -4057,8 +4057,7 @@ if(usecaselist != undefined){
     }
 	
 $scope.searchResul = false;
-angular.element(window).load(function () {
-
+$scope.$watch(function(){
 var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
 if(usecaseBiglist != null){
         if(usecaseBiglist.Users.UseCase != undefined){
@@ -4083,5 +4082,4 @@ if(usecaseBiglist != null){
         }
     }
 });
-
 }]);
