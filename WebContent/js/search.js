@@ -420,7 +420,7 @@ app.factory('Items', ['$http','$rootScope', function($http, $rootScope) {
 app.controller("searchController",["$scope","SearchResultService","$rootScope", 'Items', '$http', function($scope, SearchResultService, $rootScope, Items, $http){
 
 $scope.searchResul = false;
-/*var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
+var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
 
         if(usecaseBiglist.Users.UseCase != undefined){
             for(var i=0;i<usecaseBiglist.Users.UseCase.PermissionTypeDet.length;i++){
@@ -441,7 +441,7 @@ $scope.searchResul = false;
         }
         else{
             $scope.searchResul = true;
-        }*/
+        }
 
      $scope.showModal = false;
 	
