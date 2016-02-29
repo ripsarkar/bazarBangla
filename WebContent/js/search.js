@@ -4058,7 +4058,7 @@ if(usecaselist != undefined){
 	
 $scope.searchResul = false;
 var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
-
+if(usecaseBiglist != null){
         if(usecaseBiglist.Users.UseCase != undefined){
             for(var i=0;i<usecaseBiglist.Users.UseCase.PermissionTypeDet.length;i++){
                 if(usecaseBiglist.Users.UseCase.PermissionTypeDet[i].PermissionName == "read"){
@@ -4079,4 +4079,5 @@ var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
         else{
             $scope.searchResul = true;
         }
+    }
 }]);
