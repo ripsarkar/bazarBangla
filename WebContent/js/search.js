@@ -3869,7 +3869,7 @@ if(usecaselist != undefined){
                             	  $scope.jsonObj["packageSurrId"] = $scope.rule.package_details.UC_RULE_PKG_SURR_ID;
                             	  $scope.jsonObj["fileName"] = $scope.rule.package_details.UC_RULE_PKG_FILE_NAME;
                             	 var exp = $scope.chckPermissionForExport($scope.usecase.id,$scope.rule.id);
-                            	 var exp= true;
+                            	// var exp= true;
                             	 if(exp){
                             		 $scope.jsonObj["exportYes"] = true; 
                             	 }
@@ -3895,6 +3895,7 @@ if(usecaselist != undefined){
     }
 
     $scope.chckPermissionForExport = function(usecaseid,ruleid) {
+    	console.log("USE CASE ID "+usecaseid +"RULE ID"+ ruleid);
     	var usecaseexport = false;
     	var ruleeexport = false;
     	
@@ -3907,9 +3908,11 @@ if(usecaselist != undefined){
 					if(permissiontypeList[int2].ObjectList.length > 0){
 						var list =permissiontypeList[int2].ObjectList;
 						for (var int = 0; int < list.length; int++) {
-							if(list.SurrId == usecaseid){
+							console.log("list.SurrId"+ list.SurrId);
+
+							if(list.SurrId === usecaseid){
 								usecaseexport = true;
-								
+								console.log("TRUE")
 							}
 						}
 					}
@@ -3925,9 +3928,10 @@ if(usecaselist != undefined){
 					if(permissiontypeList[int2].ObjectList.length > 0){
 						var list =permissiontypeList[int2].ObjectList;
 						for (var int = 0; int < list.length; int++) {
-							if(list.SurrId == ruleid){
+							console.log("list.SurrId"+ list.SurrId);
+							if(list.SurrId === ruleid){
 								ruleeexport = true;
-								
+								console.log("TRUE")
 							}
 						}
 					}
@@ -3936,8 +3940,10 @@ if(usecaselist != undefined){
 		}
 		
 		if(usecaseexport || ruleeexport){
+			console.log("TRUEVVVV")
 			return true;
 		}else{
+			console.log("FALSE")
 			return false;
 		}
     	
