@@ -3869,6 +3869,7 @@ if(usecaselist != undefined){
                             	  $scope.jsonObj["packageSurrId"] = $scope.rule.package_details.UC_RULE_PKG_SURR_ID;
                             	  $scope.jsonObj["fileName"] = $scope.rule.package_details.UC_RULE_PKG_FILE_NAME;
                             	 var exp = $scope.chckPermissionForExport($scope.usecase.id,$scope.rule.id);
+                            	 var exp= true;
                             	 if(exp){
                             		 $scope.jsonObj["exportYes"] = true; 
                             	 }
