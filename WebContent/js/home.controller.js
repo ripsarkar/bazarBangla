@@ -107,6 +107,33 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                               $location.path('/home/search');
                               $scope.fnTabsdisEnab();
                               $rootScope.loadinganimation = false;
+
+
+$scope.searchResul = false;
+var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
+
+        if(usecaseBiglist.Users.UseCase != undefined){
+            for(var i=0;i<usecaseBiglist.Users.UseCase.PermissionTypeDet.length;i++){
+                if(usecaseBiglist.Users.UseCase.PermissionTypeDet[i].PermissionName == "read"){
+                    $scope.searchResul = true;
+                }
+            }
+        }
+        else{
+            $scope.searchResul = true;
+        }
+        if(usecaseBiglist.Users.Rule != undefined){
+            for(var i=0;i<usecaseBiglist.Users.Rule.PermissionTypeDet.length;i++){
+                if(usecaseBiglist.Users.Rule.PermissionTypeDet[i].PermissionName == "read"){
+                    $scope.searchResul = true;
+                }
+            }
+        }
+        else{
+            $scope.searchResul = true;
+        }
+
+                              
                           }).error(function (error) {
                           	alert("Internal server error");
                           });
