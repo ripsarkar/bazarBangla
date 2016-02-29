@@ -3895,7 +3895,7 @@ if(usecaselist != undefined){
     }
 
     $scope.chckPermissionForExport = function(usecaseid,ruleid) {
-    	console.log("USE CASE ID "+usecaseid +"RULE ID"+ ruleid);
+    //	console.log("USE CASE ID "+usecaseid +"RULE ID"+ ruleid);
     	var usecaseexport = false;
     	var ruleeexport = false;
     	
@@ -3940,10 +3940,10 @@ if(usecaselist != undefined){
 		}
 		
 		if(usecaseexport || ruleeexport){
-			console.log("TRUEVVVV")
+			//console.log("TRUEVVVV")
 			return true;
 		}else{
-			console.log("FALSE")
+			//console.log("FALSE")
 			return false;
 		}
     	
