@@ -7,7 +7,7 @@
             <img alt="logo" src="img/ibmlogoheader.png" style="width: 100px;height: auto;"><span class="usecaselogo"><img alt="logo" src="img/logotophdr.png"></span>
         </div>
         <div class="col-md-6 col-sm-6 text-right">
-            <h4 class="User-name"><img src="img/loginicon.png">Welcome  {{username}} | <a href="#/login" class="" ng-click="localStorageclear()">Logout</a></h4>
+            <h4 class="User-name"><img src="img/loginicon.png">Welcome  {{username}} | <select ng-model="userIndustChVa" ng-change="userIndustCh()" class="selectlistTopOrg"><option ng-repeat="neOrLi in RfetchList">{{neOrLi.company_name}}</option></select><a style="margin-left:5px" href="#/login" class="" ng-click="localStorageclear()">Logout</a></h4>
         </div>
     </div>
     <div class="clearfix"></div>
@@ -19,12 +19,10 @@
                 <ul class="mainlinks">
                     <li ng-show = "searchMenu"><a ui-sref=".search" ng-click="defaultmenu()" class="forallnotFedd searchlibrarymenuI activemainlinks"><span class="icon-search"></span>Search Library</a></li>
                     <li ng-show = "feedback"><a ng-click="feedbackmenu()" class="forallnotsear feedbackmenu"><span class="icon-usermanage"></span> Feedback </a></li>
-                    <li ng-show = "useCaseMaintain"><a class="forallnotsear forallnotFedd" ng-click="menuUseRule()" ><span class="glyphicon glyphicon-list-alt" style="float:left;font-size:20px;padding-right:5px"></span><div style="float:left">Use Case Maintenance</div></a> </li>
-                    <li ng-show = "userAccountManagement"><a class="forallnotsear forallnotFedd" ui-sref=".uamanagement" ng-click="uamanagement();" ><span class="glyphicon glyphicon-user" style="float:left;font-size:20px;padding-right:5px"></span><div style="float:left">User Account Management</div></a></li>
-                    <!-- <li ng-show = "ucrlPackage"><a href="" ><span class="glyphicon glyphicon-folder-open" style="float:left;font-size:20px;padding-right:10px"></span><div style="float:left">UCSRL Package</div></a></li> -->
-                    <!-- <li ng-show = "alertMenu"><a href="" ><span class="glyphicon glyphicon-bell" style="float:left;font-size:20px;padding-right:10px"></span><div style="float:left">Alert</div></a></li> -->
-                     
-                    
+                    <li ng-show = "useCaseMaintain" ng-disabled="useCaseMaintaindis" class="mainli"><a class="forallnotsear forallnotFedd" ng-click="menuUseRule()" ><span class="glyphicon glyphicon-list-alt" style="float:left;font-size:20px;padding-right:5px"></span><div style="float:left">Use Case Maintenance</div></a> </li>
+                    <li ng-show = "userAccountManagement" ng-disabled="userAccountManagementdis" class="mainli"><a class="forallnotsear forallnotFedd" ng-click="uamanagement();" ><span class="glyphicon glyphicon-user" style="float:left;font-size:20px;padding-right:5px"></span><div style="float:left">User Account Management</div></a></li>
+                    <li ng-show = "organization" ng-disabled="organizationdis" class="mainli"><a ng-click="manageOrg()" class="forallnotsear"><span class="glyphicon glyphicon-gift" style="float:left;font-size:20px;padding-right:5px"></span><span>Manage org</span></a></li>
+                    <li ng-show = "rolemenu" ng-disabled="rolemenudis" class="mainli"><a ng-click="roleMnu()" class="forallnotsear"><span class="glyphicon glyphicon-gift" style="float:left;font-size:20px;padding-right:5px"></span><span>Role</span></a></li>
                 </ul>
                 </div>
 	            
@@ -41,10 +39,10 @@
         		<div ng-show="menu.usecaserule">
 	                <div class="sub_menu">
 	                    <ul class="submainlinks">
-                            <li class="btn btn-sub-menu createusecase"> <a ui-sref=".createusecase" >Create Use cases</a></li>
-	                        <li class="btn btn-sub-menu updateUsecase"> <a ng-click="updateusecaseReload();" ui-sref=".updateUsecase">Update Use cases</a></li>
-                            <li class="btn btn-sub-menu createrule"> <a ui-sref=".createrule" >Create Rule</a></li>
-	                        <li class="btn btn-sub-menu updateRule"> <a ng-click="updateruleReload();" ui-sref=".updateRule">Update Rule</a></li>
+                            <li class="btn btn-sub-menu createusecase"> <a ui-sref=".createusecase" class="createUsecaseEnDi">Create Use cases</a></li>
+	                        <li class="btn btn-sub-menu updateUsecase"> <a ng-click="updateusecaseReload();" ui-sref=".updateUsecase" class="updateUsecaseEnDi">Update Use cases</a></li>
+                            <li class="btn btn-sub-menu createrule"> <a ui-sref=".createrule"  class="createRuleEnDi">Create Rule</a></li>
+	                        <li class="btn btn-sub-menu updateRule"> <a ng-click="updateruleReload();" ui-sref=".updateRule"  class="updateRuleEnDi">Update Rule</a></li>
 	                    </ul>
 	                </div>
 	            </div>
@@ -60,11 +58,35 @@
 	            <div ng-show="menu.uaman">
 	                <div class="sub_menu">
 						<ul class="submainlinks">
-							 <li class="active btn btn-sub-menu" id="createusertab" ng-click="uamanager()"> <a herf="">Create New</a></li>
-			                <li class="btn btn-sub-menu" ng-click="uaviewer()"> <a herf="">Manage User</a></li>
+    						<li class="active btn btn-sub-menu" id="createusertab" ng-click="uamanager()"> <a herf="" ui-sref=".uamanagement" class=" disabfuncCUc5" >Create New</a></li>
+			                <li class="btn btn-sub-menu" ng-click="uaviewer()"> <a ui-sref=".uamanagement" class=" disabfuncCUc6">Manage User</a></li>
+                            <li class="btn btn-sub-menu" ng-click="uaviewerMain()"> <a ui-sref=".uamanagement" class=" disabfuncCUc7">View User</a></li>
 						</ul>
 					</div>
 	            </div>
+                <div ng-show="menu.organisation">
+                    <div class="sub_menu">
+                        <ul class="submainlinks">
+                            <li class="btn btn-sub-menu createusecase" > <a ui-sref=".organization"  class=" disabfuncCUc1" >Create Orgnization</a></li>
+                            <li class="btn btn-sub-menu updateUsecase"> <a ui-sref=".subscription" class=" disabfuncCUc2">Create Subscription</a></li>
+                            <li class="btn btn-sub-menu createrule"> <a ui-sref=".UpdateOrganisation" class=" disabfuncCUc3">Update Organisation</a></li>
+                            <li class="btn btn-sub-menu createrule"> <a ui-sref=".updatesubscription" class=" disabfuncCUc4">Update Subscription</a></li>
+                            <li class="btn btn-sub-menu createrule"> <a ui-sref=".viewsubscription" class=" disabfuncCUc50">View Subscription</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div ng-show="menu.subrolemenu">
+                    <div class="sub_menu">
+                        <ul class="submainlinks">
+                            <li class="btn btn-sub-menu createusecase"> <a ui-sref=".createrole"   class=" disabfuncCUc8">Create Role</a></li>
+                            <li class="btn btn-sub-menu updateUsecase"> <a ui-sref=".updaterole"  class=" disabfuncCUc9">Update Role </a></li>
+                            <li class="btn btn-sub-menu updateUsecase"> <a ui-sref=".viewrole"  class=" disabfuncCUc10">View Role </a></li>
+
+                        </ul>
+                    </div>
+                </div>
         	</div>
             
             <script>

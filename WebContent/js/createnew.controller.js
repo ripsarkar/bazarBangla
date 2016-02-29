@@ -104,11 +104,24 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
     var defaultcount = 0;
     var loadccker = 0;
     var backassgin =  null;
+    var Indtsyarray = [];
+    
+    $scope.reSet = function() {
+        $scope.frameWork = '';
+        $scope.useCaseCat = '';
+        $scope.useCaseSubcat = '';
+        if (typeof $scope.UsecaseIntry != 'undefined' && $scope.UsecaseIntry.length > 0) {
+            $scope.UsecaseIntry.length = 0;
+            Indtsyarray.length = 0;
+        }
+    }
     $scope.defaultchk = function() {
         if (defaultcount == 2) {
             if (UsecaseService.getbtnbackUC() == 1) {
                 loadccker = 1;
                 $scope.backtousecase();
+            }else{
+                $scope.reSet();
             }
         }
     }
@@ -203,8 +216,51 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             });
         }
     }
+        var industryNotThere = true;
 
-    $http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
+        var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(obj.Users.UseCase !=undefined){
+            var permissiontypeList = obj.Users.UseCase.PermissionTypeDet;
+            for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                if(permissiontypeList[int2].PermissionName=="create"){
+                    $rootScope.loadinganimation = false;
+
+                    $scope.industrydatas = permissiontypeList[int2].ObjectList;
+                    defaultcount++;
+                    $scope.defaultchk();
+                    if(loadccker ==1){
+                        $scope.chckindustry();
+                    }
+                    industryNotThere = false;
+
+                }
+            }
+
+        }
+        else if(industryNotThere == true){
+        $http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
+        if (typeof data.industry != 'undefined' && data.industry.length != 0) {
+            $rootScope.loadinganimation = false;
+            //$scope.EPdatas = data.EP;
+            $scope.industrydatas = data.industry;
+            defaultcount++;
+            $scope.defaultchk();
+            if(loadccker ==1){
+                $scope.chckindustry();
+            }
+        } else {
+            $rootScope.loadinganimation = false;
+            //$scope.EPdatas = [];
+            $scope.industrydatas = [];
+            alert('Sorry Application error in serverside');
+        }
+        }).error(function(data, status, headers, config) {
+            $rootScope.loadinganimation = false;
+            alert('Sorry Application error in serverside');
+        });
+        }
+
+/*    $http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
         if (typeof data.industry != 'undefined' && data.industry.length != 0) {
             $rootScope.loadinganimation = false;
             //$scope.EPdatas = data.EP;
@@ -223,19 +279,20 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
     }).error(function(data, status, headers, config) {
         $rootScope.loadinganimation = false;
         alert('Sorry Application error in serverside');
-    });
+    });*/
+        /*var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(obj.Users.Role !=undefined){
+            var permissiontypeList = obj.Users.Role.PermissionTypeDet;
+            for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                if(permissiontypeList[int2].PermissionName=="read"){
+                     $scope.vspselPckgs = permissiontypeList[int2].OrgList;
+                     $scope.orgName = parseInt($scope.cmpyId);
+                     $scope.pageLoad();
+                }
+            }
+        }*/
 
 
-var Indtsyarray = [];
-$scope.reSet = function() {
-    $scope.frameWork = '';
-    $scope.useCaseCat = '';
-    $scope.useCaseSubcat = '';
-    if (typeof $scope.UsecaseIntry != 'undefined' && $scope.UsecaseIntry.length > 0) {
-        $scope.UsecaseIntry.length = 0;
-        Indtsyarray.length = 0;
-    }
-}
 
 $scope.chckindustry = function() {
     if (typeof $scope.UsecaseIntry != 'undefined' && $scope.UsecaseIntry.length > 0) {
@@ -285,7 +342,7 @@ angular.element('form').click(function(event){
 app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http', 'UsecaseService',
     function($scope, $rootScope, $state, $http, UsecaseService) {
 
-		
+        
         UsecaseService.setbtnbackUC("");
         $scope.pagemain = {
             main: true,
@@ -371,6 +428,18 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
             alert('Sorry Application error in serverside');
 
         });
+
+        /*var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(obj.Users.Rule !=undefined){
+            var permissiontypeList = obj.Users.Rule.PermissionTypeDet;
+            for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                if(permissiontypeList[int2].PermissionName=="create"){
+                     $scope.RegcatCrtdatas = permissiontypeList[int2].ObjectList;
+                
+                }
+            }
+
+        }*/
 
         $http.get($rootScope.url + '/populateRegCatDropDown').success(function(data, status, headers, config) {
             if (data.RegCat.length != 0 && typeof data.RegCat != 'undefined') {
@@ -548,7 +617,7 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
         }
 
         $scope.goTo = function() {
-            $state.go("home.createrule");
+            $state.go("home.createusecase");
         }
 
         $scope.UseCaseformSubmit = function() {
@@ -614,13 +683,13 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
             $state.go("home.createusecase");
         };
         angular.element('form').click(function(event){
-		    event.preventDefault();
-			if(event.which === 13){
-			    if($state.current == 'home.createReg'){
-			        $scope.UseCaseformSubmit();
-			    }
-			}
-		});
+            event.preventDefault();
+            if(event.which === 13){
+                if($state.current == 'home.createReg'){
+                    $scope.UseCaseformSubmit();
+                }
+            }
+        });
        
             
     }
@@ -628,8 +697,8 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
 
 app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http', 'UsecaseService',
     function($scope, $rootScope, $state, $http, UsecaseService) {
-		
-	angular.element("ul.submainlinks li").removeClass("subactive");
+        
+    angular.element("ul.submainlinks li").removeClass("subactive");
     angular.element('li.createrule').addClass("subactive");
         $scope.formcontrolYN = "No";
         UsecaseService.setbtnbackUC("");
@@ -683,7 +752,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                         }
                     }
                 }).error(function(data, status, headers, config) {
-                	$scope.crtUsercaseId="";
+                    $scope.crtUsercaseId="";
                     $scope.crtUsercaseName="";
                     alert("Sorry, No data found");
                 });
@@ -703,7 +772,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                         }
                     }
                 }).error(function(data, status, headers, config) {
-                	$scope.crtUsercaseId="";
+                    $scope.crtUsercaseId="";
                     $scope.crtUsercaseName="";
                     alert("Sorry, No data found");
                 });
@@ -730,12 +799,12 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                             }
                         }
                     } else {
-                    	$scope.crtUsercaseId="";
-	                    $scope.crtUsercaseName="";
+                        $scope.crtUsercaseId="";
+                        $scope.crtUsercaseName="";
                         alert('Sorry, No data found');
                     }
                 }).error(function(data, status, headers, config) {
-                	$scope.crtUsercaseId="";
+                    $scope.crtUsercaseId="";
                     $scope.crtUsercaseName="";
                     alert('Sorry Application error in serverside');
                 });
@@ -1498,10 +1567,25 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
     $scope.updatedata = {};
     var dataset = null;
-    $scope.Search_UpdateUsecase = function() {
-        if ($scope.UpdateusecaseID != '' && typeof $scope.UpdateusecaseID != 'undefined') {
+
+
+        var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(obj.Users.UseCase !=undefined){
+            var permissiontypeList = obj.Users.UseCase.PermissionTypeDet;
+            for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                if(permissiontypeList[int2].PermissionName=="update"){
+                     $scope.usecasetable = permissiontypeList[int2].ObjectList;
+                }
+            }
+        }
+
+
+
+    $scope.Search_UpdateUsecase = function(usecaseIDVal) {
+
+        if (usecaseIDVal != '' && typeof usecaseIDVal != 'undefined') {
             $rootScope.loadinganimation = true;
-            $http.get($rootScope.url + '/getUseCase/' + $scope.UpdateusecaseID).success(function(data, status, headers, config) {
+            $http.get($rootScope.url + '/getUseCase/' + usecaseIDVal).success(function(data, status, headers, config) {
                 $rootScope.loadinganimation = false;
                 if (typeof data.UseCase != 'undefined' && data.UseCase != '' && data.UseCase.length > 0) {
 
@@ -1652,7 +1736,24 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     }
                 }
 
-                $http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
+                var industryNotThere2 = true;
+                var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+                if(obj.Users.UseCase !=undefined){
+                    var permissiontypeList = obj.Users.UseCase.PermissionTypeDet;
+                    for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                        if(permissiontypeList[int2].PermissionName=="update"){
+                            $rootScope.loadinganimation = false;
+
+                            $scope.industrydatas = permissiontypeList[int2].IndustryList;
+                            defaultcount++;
+                            $scope.defaultchk();
+                            industryNotThere2 = false;
+
+                        }
+                    }
+                }
+                else if(industryNotThere2 == true){
+                    $http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
                     if (typeof data.industry != 'undefined' && data.industry.length != 0) {
                         $rootScope.loadinganimation = false;
                         //$scope.EPdatas = data.EP;
@@ -1669,6 +1770,25 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     $rootScope.loadinganimation = false;
                     alert('Sorry Application error in serverside');
                 });
+
+                }
+                /*$http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
+                    if (typeof data.industry != 'undefined' && data.industry.length != 0) {
+                        $rootScope.loadinganimation = false;
+                        //$scope.EPdatas = data.EP;
+                        $scope.industrydatas = data.industry;
+                        defaultcount++;
+                        $scope.defaultchk();
+                    } else {
+                        $rootScope.loadinganimation = false;
+                        //$scope.EPdatas = [];
+                        $scope.industrydatas = [];
+                        alert('Sorry Application error in serverside');
+                    }
+                }).error(function(data, status, headers, config) {
+                    $rootScope.loadinganimation = false;
+                    alert('Sorry Application error in serverside');
+                });*/
 
 
                 var Indtsyarray = [];
@@ -1720,13 +1840,13 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 }
 
                 angular.element('form').click(function(event){
-	                event.preventDefault();
-	                if(event.which === 13){
-	                    if($state.current == 'home.updateUsecase'){
-	                        $scope.goTo();
-	                    }
-	                }
-	            });
+                    event.preventDefault();
+                    if(event.which === 13){
+                        if($state.current == 'home.updateUsecase'){
+                            $scope.goTo();
+                        }
+                    }
+                });
                 
             }]);
 
@@ -1831,6 +1951,19 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             });
 
             $rootScope.loadinganimation = true;
+
+        /*var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(obj.Users.Rule !=undefined){
+            var permissiontypeList = obj.Users.Rule.PermissionTypeDet;
+            for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                if(permissiontypeList[int2].PermissionName=="update"){
+                    $scope.RegcatCrtdatas = permissiontypeList[int2].RegCatList;
+                    $rootScope.loadinganimation = false;
+                    $scope.defaultloadedess();
+                }
+            }
+
+        }*/
             $http.get($rootScope.url + '/populateRegCatDropDown').success(function(data, status, headers, config) {
                 if (data.RegCat.length != 0 && typeof data.RegCat != 'undefined') {
                     $rootScope.loadinganimation = false;
@@ -2232,13 +2365,25 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 $rootScope.loadinganimation = false;
                 alert("Sorry Application error in serverside");
             });
-            $scope.Search_RuleUsecase = function() {
-                if ($scope.UpdateRuleID != '' && typeof $scope.UpdateRuleID != 'undefined') {
+
+        var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(obj.Users.Rule !=undefined){
+            var permissiontypeList = obj.Users.Rule.PermissionTypeDet;
+            for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                if(permissiontypeList[int2].PermissionName=="update"){
+                     $scope.rulestable = permissiontypeList[int2].ObjectList;
+                }
+            }
+        }
+
+
+            $scope.Search_RuleUsecase = function(ruleidtakeval) {
+                if (ruleidtakeval != '' && typeof ruleidtakeval != 'undefined') {
                     $rootScope.loadinganimation = true;
 
                     var appstatuesoob;
 
-                    $http.get($rootScope.url + '/getDetailsbyUcRuleID/' + $scope.UpdateRuleID).success(function(data, status, headers, config) {
+                    $http.get($rootScope.url + '/getDetailsbyUcRuleID/' + ruleidtakeval).success(function(data, status, headers, config) {
                         //console.log(JSON.stringify(data, null,2));
                         $rootScope.loadinganimation = false;
                         //for oob value
@@ -2738,12 +2883,12 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
             //OOB update selection
             /*$scope.obbUpdate = function () {
-    	if($scope.uformcontrolYN=="Yes"){
-    		statusOOBu="Y";
-    	}
-    	else if($scope.uformcontrolYN=="No"){
-    		statusOOBu="N";
-    	}
+        if($scope.uformcontrolYN=="Yes"){
+            statusOOBu="Y";
+        }
+        else if($scope.uformcontrolYN=="No"){
+            statusOOBu="N";
+        }
     }*/
 
 

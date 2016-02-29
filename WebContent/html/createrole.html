@@ -1,0 +1,70 @@
+<div class="createnewpage pagebg" ng-controller="createrolecrt">
+    <div class="container">
+        <div class="row">
+            <div class="createnew-head">
+                <div class="col-md-6 col-sm-6">
+                    <h2 class="title-head"> Create Role </h2>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="container">
+        <div class="row" style="margin:0px;">
+            <div class="tabs">
+                <div class="tabsreg">
+                    <form name="createrole" novalidate autocomplete="off">
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label>Organization <span class="red"> *</span> 
+                                </label>
+                            </div>
+                            <div class="col-md-5">
+                                <select ng-model="orgName" ng-init="orgName = vfbselPckg[0].SurrId" style="height: 30px; width: 320px;" ng-options="vfbselPckg.SurrId as vfbselPckg.Name for vfbselPckg in vfbselPckg | orderBy:'Name'">
+                                    <option value="">- Please Choose -</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label>Role ID <span class="red"> *</span>
+                                </label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" maxlength="50" required ng-model="createroleid">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label>Role Name <span class="red"> *</span>
+                                </label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" maxlength="50" required ng-model="createrolename">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label>Role Description</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" maxlength="500" ng-model="createroledescp">
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-8 text-right">
+                                <button type="button" class="btn btn-default" ng-click="reSet()">Clear</button>
+                                <button type="button" class="btn btn-primary" ng-click="submitrole()">Submit</button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

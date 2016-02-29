@@ -11,6 +11,29 @@
         <hr>
     </div>
     <div ng-show='updateUsecase.SearchPage'>
+    <div class="createnew-head">
+        <div class="panel panel-default tablecontrol">
+            <div class="searchtableUser uamtable">
+                <table class="table table-striped searchtablerow" fixed-header>
+                    <thead>
+                    <tr class="tableheader">
+                        <th>Rule</th>
+                        <th>Rule Id</th>
+                        <th>Edit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="ruleslist in rulestable" class="usecaseTable">
+                        <td>{{ruleslist.Name}}</td>
+                        <td>{{ruleslist.Id}}</td>
+                        <td><span class="icon-feedback" ng-click="Search_RuleUsecase(ruleslist.Id)"></span></td>
+                    </tr>
+                    </tbody>                       
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- <div ng-show='updateUsecase.SearchPage'>
         <div class="container">
             <div class="row">
                 <div class="col-md-offset-2 col-md-3 col-sm-3">
@@ -25,6 +48,7 @@
                 </div>
             </div>
         </div>
+    </div> -->
     </div>
     <div ng-show='updateUsecase.updatePage'>
         <div class="container">
@@ -136,7 +160,7 @@
                                 <div class="row margintp1">
                                     <div class="col-md-4">
                                         <label>Transactional Data </label>
-                                        </label>
+                                        
                                         <select multiple class="form-control" ng-model="crtRuleTrsn" name="crtRuleTrsn" ng-options="transdata.SurrId as transdata.Name for transdata in transdatas  | orderBy:'Name'">
                                         </select>
 

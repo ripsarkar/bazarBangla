@@ -533,7 +533,7 @@ app.controller("usecaseruleController",["$scope","ApiServicerule","$rootScope",'
 	    		}
 	    	}
 	    }
-	    console.log(rulefiles);
+	    //console.log(rulefiles);
 	    }
   
   var mm;

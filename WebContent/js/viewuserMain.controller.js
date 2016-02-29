@@ -1,5 +1,5 @@
 //wrting the controller for viewuser page
-app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", function($scope, ViewUserService, $rootScope){
+app.controller("viewUserMainController",["$scope","ViewUserService", "$rootScope", function($scope, ViewUserService, $rootScope){
 	
 	// $rootScope.loadinganimation=true;	
 
@@ -27,7 +27,7 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", f
 
 		var permissiontypeList = obj.Users.User.PermissionTypeDet;
 		for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
-			 if(permissiontypeList[int2].PermissionName=="update"){
+			 if(permissiontypeList[int2].PermissionName=="read"){
 				 $scope.companyList=permissiontypeList[int2].ObjectList;
 				// $scope.backbtnusermanager();
 			}
@@ -97,7 +97,7 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", f
        	         return responsename.data;
        	       	}).error(function (error) {
        	         //error
-       	       		alert("Internal server error");
+       	       	alert("Internal server error");
        	     	})
        	     	return promisename;
        	    	}
