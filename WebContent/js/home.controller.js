@@ -580,26 +580,29 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
             menu:false
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
-$scope.searchResul = true;
-var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
-if(usecaseBiglist != undefined){
-    if(usecaseBiglist.Users != undefined){
+
+	var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
+
         if(usecaseBiglist.Users.UseCase != undefined){
             for(var i=0;i<usecaseBiglist.Users.UseCase.PermissionTypeDet.length;i++){
                 if(usecaseBiglist.Users.UseCase.PermissionTypeDet[i].PermissionName == "read"){
-                    $scope.searchResul = false;
+                    $scope.searchResul = true;
                 }
             }
+        }
+        else{
+            $scope.searchResul = true;
         }
         if(usecaseBiglist.Users.Rule != undefined){
             for(var i=0;i<usecaseBiglist.Users.Rule.PermissionTypeDet.length;i++){
                 if(usecaseBiglist.Users.Rule.PermissionTypeDet[i].PermissionName == "read"){
-                    $scope.searchResul = false;
+                    $scope.searchResul = true;
                 }
             }
         }
-    }
-}
+        else{
+            $scope.searchResul = true;
+        }
     };
     $scope.defaultmenu();
     
