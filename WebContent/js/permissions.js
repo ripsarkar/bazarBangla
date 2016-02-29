@@ -25,13 +25,22 @@ app.controller("permissionsCtrl",["$scope","$http", "$rootScope","$q","$timeout"
   $rootScope.loadinganimation = true;
 
      //$scope.fnPopulateRoleList=function(){
+     	if($rootScope.tabName =="User" || $rootScope.tabName =="Role"){
           var promise5= $http.get($rootScope.url + '/getpopulateRoleforLogin/'+$rootScope.orgId).success(function(data) {
               $scope.roleListli = data.Roles;             
               $rootScope.loadinganimation = false;
             }).error(function(data, status, headers, config) {                
                 alert('Sorry Application error in serverside');
           });
-           
+           }
+        if($rootScope.tabName =="Subscription"){
+          var promise5= $http.get($rootScope.url + '/getpopulateRoleforSubscription/'+$rootScope.orgId).success(function(data) {
+              $scope.roleListli = data.Roles;             
+              $rootScope.loadinganimation = false;
+            }).error(function(data, status, headers, config) {                
+                alert('Sorry Application error in serverside');
+          });
+           }
         
    //  };
    
