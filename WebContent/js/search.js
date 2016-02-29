@@ -420,6 +420,7 @@ app.factory('Items', ['$http','$rootScope', function($http, $rootScope) {
 app.controller("searchController",["$scope","SearchResultService","$rootScope", 'Items', '$http', function($scope, SearchResultService, $rootScope, Items, $http){
 
 $scope.searchResul = true;
+$scope.$watch(function(){
 var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
 if(usecaseBiglist != undefined){
     if(usecaseBiglist.Users != undefined){
@@ -439,7 +440,7 @@ if(usecaseBiglist != undefined){
         }
     }
 }
-
+});
 
      $scope.showModal = false;
 	
