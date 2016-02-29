@@ -419,29 +419,7 @@ app.factory('Items', ['$http','$rootScope', function($http, $rootScope) {
 
 app.controller("searchController",["$scope","SearchResultService","$rootScope", 'Items', '$http', function($scope, SearchResultService, $rootScope, Items, $http){
 
-$scope.searchResul = false;
-var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
 
-        if(usecaseBiglist.Users.UseCase != undefined){
-            for(var i=0;i<usecaseBiglist.Users.UseCase.PermissionTypeDet.length;i++){
-                if(usecaseBiglist.Users.UseCase.PermissionTypeDet[i].PermissionName == "read"){
-                    $scope.searchResul = true;
-                }
-            }
-        }
-        else{
-            $scope.searchResul = true;
-        }
-        if(usecaseBiglist.Users.Rule != undefined){
-            for(var i=0;i<usecaseBiglist.Users.Rule.PermissionTypeDet.length;i++){
-                if(usecaseBiglist.Users.Rule.PermissionTypeDet[i].PermissionName == "read"){
-                    $scope.searchResul = true;
-                }
-            }
-        }
-        else{
-            $scope.searchResul = true;
-        }
 
      $scope.showModal = false;
 	
@@ -4078,5 +4056,27 @@ if(usecaselist != undefined){
         });
     }
 	
+$scope.searchResul = false;
+var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
 
+        if(usecaseBiglist.Users.UseCase != undefined){
+            for(var i=0;i<usecaseBiglist.Users.UseCase.PermissionTypeDet.length;i++){
+                if(usecaseBiglist.Users.UseCase.PermissionTypeDet[i].PermissionName == "read"){
+                    $scope.searchResul = true;
+                }
+            }
+        }
+        else{
+            $scope.searchResul = true;
+        }
+        if(usecaseBiglist.Users.Rule != undefined){
+            for(var i=0;i<usecaseBiglist.Users.Rule.PermissionTypeDet.length;i++){
+                if(usecaseBiglist.Users.Rule.PermissionTypeDet[i].PermissionName == "read"){
+                    $scope.searchResul = true;
+                }
+            }
+        }
+        else{
+            $scope.searchResul = true;
+        }
 }]);
