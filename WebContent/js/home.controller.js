@@ -85,6 +85,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
    	                    $rootScope.compSurrId = localStorage.getItem("surrComprip");
                           $rootScope.user_name = result.User[0].user_name;
                           $rootScope.companyNamee = result.User[0].company_name;
+                          $scope.userIndustChVa = localStorage.getItem("nameCompany");
 
    	                }
    	            	    $rootScope.loadinganimation = false;
