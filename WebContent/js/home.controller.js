@@ -581,7 +581,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
 
-	var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
+/*	var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
 
         if(usecaseBiglist.Users.UseCase != undefined){
             for(var i=0;i<usecaseBiglist.Users.UseCase.PermissionTypeDet.length;i++){
@@ -602,7 +602,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
         }
         else{
             $scope.searchResul = true;
-        }
+        }*/
     };
     $scope.defaultmenu();
     
