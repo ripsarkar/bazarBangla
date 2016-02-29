@@ -3908,9 +3908,9 @@ if(usecaselist != undefined){
 					if(permissiontypeList[int2].ObjectList.length > 0){
 						var list =permissiontypeList[int2].ObjectList;
 						for (var int = 0; int < list.length; int++) {
-							console.log("list.SurrId"+ list.SurrId);
+						//	console.log("list.SurrId"+ list[int].SurrId);
 
-							if(list.SurrId === usecaseid){
+							if(list[int].SurrId === usecaseid){
 								usecaseexport = true;
 								console.log("TRUE")
 							}
@@ -3928,8 +3928,8 @@ if(usecaselist != undefined){
 					if(permissiontypeList[int2].ObjectList.length > 0){
 						var list =permissiontypeList[int2].ObjectList;
 						for (var int = 0; int < list.length; int++) {
-							console.log("list.SurrId"+ list.SurrId);
-							if(list.SurrId === ruleid){
+							//console.log("list.SurrId"+ list[int].SurrId);
+							if(list[int].SurrId === ruleid){
 								ruleeexport = true;
 								console.log("TRUE")
 							}
