@@ -170,7 +170,7 @@ var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
 });
 	//tab enable disable
 
-$scope.$watch(function(){
+/*$scope.$watch(function(){
 var ruleUdisable = true;
 var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
 if(usecaseBiglist != null){
@@ -201,7 +201,7 @@ if(usecaseBiglist != null){
  		   }); 
         }
     }
-});
+});*/
 
 //Main Tabs disable enable
 	    $scope.fnTabsdisEnab=function(){
