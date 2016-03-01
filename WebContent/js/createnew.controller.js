@@ -2146,7 +2146,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             }
 
             $scope.goTo = function() {
-                $state.go("home.createrule");
+                $state.go("home.updateUsecase");
             }
 
             $scope.UpdatedataSet = function() {
