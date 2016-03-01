@@ -216,7 +216,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             });
         }
     }
-        var industryNotThere = true;
+        /*var industryNotThere = true;
 
         var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
         if(obj.Users.UseCase !=undefined){
@@ -235,9 +235,8 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
 
                 }
             }
-
         }
-        else if(industryNotThere == true){
+        else if(industryNotThere == true){*/
         $http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
         if (typeof data.industry != 'undefined' && data.industry.length != 0) {
             $rootScope.loadinganimation = false;
@@ -258,7 +257,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             $rootScope.loadinganimation = false;
             alert('Sorry Application error in serverside');
         });
-        }
+       // }
 
 /*    $http.get($rootScope.url + '/populateEPIndutry').success(function(data, status, headers, config) {
         if (typeof data.industry != 'undefined' && data.industry.length != 0) {
