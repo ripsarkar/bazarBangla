@@ -4091,7 +4091,7 @@ if(usecaseBiglist != null){
             }
         }
         else{
-            if(usecaseBiglist.Users.Rule != undefined){
+            if(usecaseBiglist.Users.Rule == undefined){
             $scope.searchResul = true;
             }
             else{
