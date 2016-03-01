@@ -4057,14 +4057,22 @@ if(usecaselist != undefined){
     }
 	
 $scope.searchResul = false;
+var checkPerJson = true;
+var checkPerJson2 = true;
+
 $scope.$watch(function(){
 var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
 if(usecaseBiglist != null){
         if(usecaseBiglist.Users.UseCase != undefined){
             for(var i=0;i<usecaseBiglist.Users.UseCase.PermissionTypeDet.length;i++){
                 if(usecaseBiglist.Users.UseCase.PermissionTypeDet[i].PermissionName == "read"){
-                    $scope.searchResul = true;
+                    $scope.searchResul = false;
+                    checkPerJson = false;
+                    break;
                 }
+            }
+            if(checkPerJson == true){
+            $scope.searchResul = true;
             }
         }
         else{
@@ -4073,8 +4081,13 @@ if(usecaseBiglist != null){
         if(usecaseBiglist.Users.Rule != undefined){
             for(var i=0;i<usecaseBiglist.Users.Rule.PermissionTypeDet.length;i++){
                 if(usecaseBiglist.Users.Rule.PermissionTypeDet[i].PermissionName == "read"){
-                    $scope.searchResul = true;
+                    $scope.searchResul = false;
+                    checkPerJson2 = false;
+                    break;
                 }
+            }
+            if(checkPerJson2 == true){
+            $scope.searchResul = true;
             }
         }
         else{

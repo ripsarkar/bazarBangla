@@ -109,13 +109,13 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                               $rootScope.loadinganimation = false;
 
 
-$scope.searchResul = false;
+/*$scope.searchResul = false;
 var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
 
         if(usecaseBiglist.Users.UseCase != undefined){
             for(var i=0;i<usecaseBiglist.Users.UseCase.PermissionTypeDet.length;i++){
                 if(usecaseBiglist.Users.UseCase.PermissionTypeDet[i].PermissionName == "read"){
-                    $scope.searchResul = true;
+                    $scope.searchResul = false;
                 }
             }
         }
@@ -125,13 +125,13 @@ var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
         if(usecaseBiglist.Users.Rule != undefined){
             for(var i=0;i<usecaseBiglist.Users.Rule.PermissionTypeDet.length;i++){
                 if(usecaseBiglist.Users.Rule.PermissionTypeDet[i].PermissionName == "read"){
-                    $scope.searchResul = true;
+                    $scope.searchResul = false;
                 }
             }
         }
         else{
             $scope.searchResul = true;
-        }
+        }*/
 
                               
                           }).error(function (error) {
