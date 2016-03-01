@@ -168,7 +168,41 @@ var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
   	  }
 
 });
-	    
+	//tab enable disable
+
+$scope.$watch(function(){
+var ruleUdisable = true;
+var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
+if(usecaseBiglist != null){
+        if(usecaseBiglist.Users.Rule != undefined){
+            for(var i=0;i<usecaseBiglist.Users.Rule.PermissionTypeDet.length;i++){
+                if(usecaseBiglist.Users.UseCase.PermissionTypeDet[i].PermissionName == "update"){
+                    ruleUdisable = false;
+                    break;
+                }
+            }
+            if(ruleUdisable == true){
+    	    angular.element(".updateRuleEnDi").attr("ui-sref","");
+            angular.element(".updateRuleEnDi").attr("disabled","disabled");
+            angular.element(".updateRuleEnDi").addClass(" btn btn-disabled");
+            angular.element(".updateRuleEnDi").addClass("disabfuncCUcColor");
+            angular.element(".updateRuleEnDi").click(function(ev) {
+ 		       ev.preventDefault();
+ 		   }); 
+            }
+        }
+        else{
+    	    angular.element(".updateRuleEnDi").attr("ui-sref","");
+            angular.element(".updateRuleEnDi").attr("disabled","disabled");
+            angular.element(".updateRuleEnDi").addClass(" btn btn-disabled");
+            angular.element(".updateRuleEnDi").addClass("disabfuncCUcColor");
+            angular.element(".updateRuleEnDi").click(function(ev) {
+ 		       ev.preventDefault();
+ 		   }); 
+        }
+    }
+});
+
 //Main Tabs disable enable
 	    $scope.fnTabsdisEnab=function(){
 
