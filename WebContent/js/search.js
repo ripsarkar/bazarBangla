@@ -4091,7 +4091,12 @@ if(usecaseBiglist != null){
             }
         }
         else{
+            if(usecaseBiglist.Users.Rule != undefined){
+            $scope.searchResul = true;
+            }
+            else{
             $scope.searchResul = false;
+            }
         }
     }
 });
