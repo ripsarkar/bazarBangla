@@ -4078,7 +4078,7 @@ if(usecaseBiglist != null){
         else{
             $scope.searchResul = true;
         }
-        if(usecaseBiglist.Users.Rule != undefined){
+        if(usecaseBiglist.Users.Rule != undefined && checkPerJson == true){
             for(var i=0;i<usecaseBiglist.Users.Rule.PermissionTypeDet.length;i++){
                 if(usecaseBiglist.Users.Rule.PermissionTypeDet[i].PermissionName == "read"){
                     $scope.searchResul = false;
@@ -4091,8 +4091,9 @@ if(usecaseBiglist != null){
             }
         }
         else{
-            $scope.searchResul = true;
+            $scope.searchResul = false;
         }
     }
 });
+
 }]);
