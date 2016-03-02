@@ -298,6 +298,7 @@ $scope.chckindustry = function() {
     if (typeof $scope.UsecaseIntry != 'undefined' && $scope.UsecaseIntry.length > 0) {
 
         for (var i=0;i<$scope.UsecaseIntry.length-1;i++){
+            alert(i);
             if($scope.UsecaseIntry[i] == $scope.UsecaseIntry[$scope.UsecaseIntry.length-1]){
                 $scope.UsecaseIntry.splice(-1);
             }
