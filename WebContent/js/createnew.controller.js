@@ -295,7 +295,16 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
 
 
 $scope.chckindustry = function() {
+    Indtsyarray = [];
     if (typeof $scope.UsecaseIntry != 'undefined' && $scope.UsecaseIntry.length > 0) {
+
+        for (var i=0;i<$scope.UsecaseIntry.length-1;i++){
+            //alert($scope.UsecaseIntry[i]);
+            if($scope.UsecaseIntry[i] == $scope.UsecaseIntry[$scope.UsecaseIntry.length-1]){
+                $scope.UsecaseIntry.splice(-1);
+            }
+        }
+
         for (var i = 0; i < $scope.UsecaseIntry.length; i++) {
             var Indtsy = {};
             Indtsy.surrId = $scope.UsecaseIntry[i];
@@ -1803,7 +1812,15 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 }
 
                 $scope.chckindustry = function() {
+                    Indtsyarray = [];
+
                     if (typeof $scope.UsecaseIntry != 'undefined' && $scope.UsecaseIntry.length > 0) {
+            
+                    for (var i=0;i<$scope.UsecaseIntry.length-1;i++){
+                      if($scope.UsecaseIntry[i] == $scope.UsecaseIntry[$scope.UsecaseIntry.length-1]){
+                        $scope.UsecaseIntry.splice(-1);
+                      }
+                    }
                         for (var i = 0; i < $scope.UsecaseIntry.length; i++) {
                             var Indtsy = {};
                             Indtsy.surrId = $scope.UsecaseIntry[i];
