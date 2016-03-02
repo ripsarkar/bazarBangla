@@ -295,10 +295,11 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
 
 
 $scope.chckindustry = function() {
+    Indtsyarray = [];
     if (typeof $scope.UsecaseIntry != 'undefined' && $scope.UsecaseIntry.length > 0) {
 
         for (var i=0;i<$scope.UsecaseIntry.length-1;i++){
-            alert(i);
+            //alert($scope.UsecaseIntry[i]);
             if($scope.UsecaseIntry[i] == $scope.UsecaseIntry[$scope.UsecaseIntry.length-1]){
                 $scope.UsecaseIntry.splice(-1);
             }
