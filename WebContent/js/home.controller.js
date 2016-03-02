@@ -214,6 +214,37 @@ if(usecaseBiglist != null){
 	    	if(obj.Users.UseCase==undefined && obj.Users.Rule==undefined){
 	    		$scope.useCaseMaintaindis= true;
 	    	}
+			else{
+				  if(obj.Users.UseCase!=undefined){
+						$scope.useCaseMaintaindis= true;
+						angular.forEach(obj.Users.UseCase.PermissionTypeDet, function(value, key) {					
+								var useCaseObj = obj.Users.UseCase.PermissionTypeDet;
+								for(var i in useCaseObj){
+									if(useCaseObj[i].PermissionName=='create' || useCaseObj[i].PermissionName=='update'){
+										$scope.useCaseMaintaindis= false;								
+										break;
+									}
+								} 
+								
+								
+					
+						});
+					}
+					if(obj.Users.Rule!=undefined){
+						angular.forEach(obj.Users.Rule.PermissionTypeDet, function(value, key) {		
+								var useRuleObj = obj.Users.Rule.PermissionTypeDet;
+								for(var i in useRuleObj){
+									if(useRuleObj[i].PermissionName=='create' || useRuleObj[i].PermissionName=='update'){
+										$scope.useCaseMaintaindis= false;								
+										break;
+									}
+								} 
+								
+								
+					
+						});
+				    }
+			}
 	    	
 	    	if(obj.Users.Subscription==undefined && obj.Users.Organization==undefined){
 	    		$scope.organizationdis= true;
