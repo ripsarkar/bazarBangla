@@ -208,8 +208,10 @@ $scope.fnFetchPermissions=function(id,name){
 	
 	
 };
-  
-  
+$scope.rolecheckNo = true;
+if($rootScope.tabName == "Role"){
+	$scope.rolecheckNo = false;
+}  
   $scope.fnLoadCheckBox=function(result){
 	
 	 var usecase=result.PermissionTo.UseCase;
