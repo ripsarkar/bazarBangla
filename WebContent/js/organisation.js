@@ -87,8 +87,8 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
 
 
       $scope.sendOrganizationVal = function(){
-      var testAlpNu = /^[a-zA-Z0-9]+$/;
-      var testAlp = /^[a-zA-Z]+$/;
+      var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
+      var testAlp = /^[a-zA-Z\s\d\/]+$/;
       var testAddress = /^[a-zA-Z\s\d\/]+$/;
       if($scope.organID == ''  || !testAlpNu.test($scope.organID)){
         alert('Please enter a valid Company Id(no special character)');
