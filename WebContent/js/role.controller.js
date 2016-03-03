@@ -116,7 +116,7 @@ app.controller("updaterole", ["$scope", "$rootScope", "$state", '$http', '$modal
              } else {
                  $rootScope.loadinganimation = false;
                  $scope.rolePckg= null;
-                 alert("Sorry, No subscription under this company");
+                 alert("Sorry, No role under this company");
              }
          }).error(function(data, status, headers, config) {
              $rootScope.loadinganimation = false;
@@ -333,7 +333,7 @@ app.controller("viewrole", ["$scope", "$rootScope", "$state", '$http', '$modal',
              } else {
                  $rootScope.loadinganimation = false;
                  $scope.rolePckg= null;
-                 alert("Sorry, No subscription under this company");
+                 alert("Sorry, No role under this company");
              }
          }).error(function(data, status, headers, config) {
              $rootScope.loadinganimation = false;
