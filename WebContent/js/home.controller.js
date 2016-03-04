@@ -119,31 +119,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                               $rootScope.loadinganimation = false;
 
 
-/*$scope.searchResul = false;
-var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
 
-        if(usecaseBiglist.Users.UseCase != undefined){
-            for(var i=0;i<usecaseBiglist.Users.UseCase.PermissionTypeDet.length;i++){
-                if(usecaseBiglist.Users.UseCase.PermissionTypeDet[i].PermissionName == "read"){
-                    $scope.searchResul = false;
-                }
-            }
-        }
-        else{
-            $scope.searchResul = true;
-        }
-        if(usecaseBiglist.Users.Rule != undefined){
-            for(var i=0;i<usecaseBiglist.Users.Rule.PermissionTypeDet.length;i++){
-                if(usecaseBiglist.Users.Rule.PermissionTypeDet[i].PermissionName == "read"){
-                    $scope.searchResul = false;
-                }
-            }
-        }
-        else{
-            $scope.searchResul = true;
-        }*/
-
-                              
                           }).error(function (error) {
                           	alert("Internal server error");
                           });
@@ -179,39 +155,6 @@ var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
 
 });
 	//tab enable disable
-
-/*$scope.$watch(function(){
-var ruleUdisable = true;
-var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
-if(usecaseBiglist != null){
-        if(usecaseBiglist.Users.Rule != undefined){
-            for(var i=0;i<usecaseBiglist.Users.Rule.PermissionTypeDet.length;i++){
-                if(usecaseBiglist.Users.UseCase.PermissionTypeDet[i].PermissionName == "update"){
-                    ruleUdisable = false;
-                    break;
-                }
-            }
-            if(ruleUdisable == true){
-    	    angular.element(".updateRuleEnDi").attr("ui-sref","");
-            angular.element(".updateRuleEnDi").attr("disabled","disabled");
-            angular.element(".updateRuleEnDi").addClass(" btn btn-disabled");
-            angular.element(".updateRuleEnDi").addClass("disabfuncCUcColor");
-            angular.element(".updateRuleEnDi").click(function(ev) {
- 		       ev.preventDefault();
- 		   }); 
-            }
-        }
-        else{
-    	    angular.element(".updateRuleEnDi").attr("ui-sref","");
-            angular.element(".updateRuleEnDi").attr("disabled","disabled");
-            angular.element(".updateRuleEnDi").addClass(" btn btn-disabled");
-            angular.element(".updateRuleEnDi").addClass("disabfuncCUcColor");
-            angular.element(".updateRuleEnDi").click(function(ev) {
- 		       ev.preventDefault();
- 		   }); 
-        }
-    }
-});*/
 
 //Main Tabs disable enable
 	    $scope.fnTabsdisEnab=function(){
@@ -268,6 +211,13 @@ if(usecaseBiglist != null){
 	    };
 //changing the user undustry
     $scope.userIndustCh = function(){
+$location.path('/home/search');
+$scope.menu.usecaserule = false;
+$scope.menu.feedback = false;
+$scope.menu.uaman = false;
+$scope.menu.organisation = false;
+$scope.menu.subrolemenu = false;
+$scope.menu.menu = false;
         var userIndustCh = $scope.userIndustChVa;
                             $rootScope.loadinganimation = true;
 
@@ -277,6 +227,7 @@ if(usecaseBiglist != null){
                                 $rootScope.indussession = sessionStorage.getItem("fetchPermission");
                                // console.log(sessionStorage.getItem("fetchPermission"));
                                 //$location.path('/home/search');
+                                $scope.fnTabsdisEnab();
                                 $rootScope.loadinganimation = false;
                             }).error(function (error) {
                             	alert("Internal server error");
@@ -712,47 +663,64 @@ if(usecaseBiglist != null){
 
     	 $scope.managePermissionUsecaseMaintain();
     	if(!$scope.CreateUseMaiCae){
-    	//	alert(1);
-    	    angular.element(".createUsecaseEnDi").attr("ui-sref","");
+    	    //angular.element(".createUsecaseEnDi").attr("ui-sref","");
             angular.element(".createUsecaseEnDi").attr("disabled","disabled");
             angular.element(".createUsecaseEnDi").addClass(" btn btn-disabled");
             angular.element(".createUsecaseEnDi").addClass("disabfuncCUcColor");
-            angular.element(".createUsecaseEnDi").click(function(ev) {
- 		       ev.preventDefault();
- 		   }); 
+    	    angular.element(".createUsecaseEnDi").attr("href","");
     	}
-    	
+    	else{
+    	    //angular.element(".createUsecaseEnDi").attr("ui-sref",".createusecase");
+            angular.element(".createUsecaseEnDi").attr("disabled","false");
+            angular.element(".createUsecaseEnDi").removeClass(" btn btn-disabled");
+            angular.element(".createUsecaseEnDi").removeClass("disabfuncCUcColor");
+    	    angular.element(".createUsecaseEnDi").attr("href","#/home/createusecase");
+
+    	}
     	if(!$scope.UpdateUseMaiCae){
-    		//alert(2);
-    	    angular.element(".updateUsecaseEnDi").attr("ui-sref","");
+    	    //angular.element(".updateUsecaseEnDi").attr("ui-sref","");
             angular.element(".updateUsecaseEnDi").attr("disabled","disabled");
             angular.element(".updateUsecaseEnDi").addClass(" btn btn-disabled");
             angular.element(".updateUsecaseEnDi").addClass("disabfuncCUcColor");
-            angular.element(".updateUsecaseEnDi").click(function(ev) {
- 		       ev.preventDefault();
- 		   }); 
+    	    angular.element(".updateUsecaseEnDi").attr("href","");
+
+        }
+    	else{
+    	    //angular.element(".updateUsecaseEnDi").attr("ui-sref",".updateUsecase");
+            angular.element(".updateUsecaseEnDi").attr("disabled","false");
+            angular.element(".updateUsecaseEnDi").removeClass(" btn btn-disabled");
+            angular.element(".updateUsecaseEnDi").removeClass("disabfuncCUcColor");
+    	    angular.element(".updateUsecaseEnDi").attr("href","#/home/updateUsecase");
     	}
-    	
     	if(!$scope.CreateRegcatMa){
-    		//alert(3);
-    	    angular.element(".createRuleEnDi").attr("ui-sref","");
+    	    //angular.element(".createRuleEnDi").attr("ui-sref","");
             angular.element(".createRuleEnDi").attr("disabled","disabled");
             angular.element(".createRuleEnDi").addClass(" btn btn-disabled");
             angular.element(".createRuleEnDi").addClass("disabfuncCUcColor");
-            angular.element(".createRuleEnDi").click(function(ev) {
- 		       ev.preventDefault();
- 		   }); 
+            angular.element(".createRuleEnDi").attr('href',"");
     	}
-    	
+    	else{
+    	    //angular.element(".createRuleEnDi").attr("ui-sref",".createrule");
+            angular.element(".createRuleEnDi").attr("disabled","false");
+            angular.element(".createRuleEnDi").removeClass(" btn btn-disabled");
+            angular.element(".createRuleEnDi").removeClass("disabfuncCUcColor");
+            angular.element(".createRuleEnDi").attr('href',"#/home/createrule");
+    	}
     	if(!$scope.UpdateRegcatMa){
-    	//	alert(4);
-    	    angular.element(".updateRuleEnDi").attr("ui-sref","");
+    	    //angular.element(".updateRuleEnDi").attr("ui-sref","");
             angular.element(".updateRuleEnDi").attr("disabled","disabled");
             angular.element(".updateRuleEnDi").addClass(" btn btn-disabled");
             angular.element(".updateRuleEnDi").addClass("disabfuncCUcColor");
-            angular.element(".updateRuleEnDi").click(function(ev) {
- 		       ev.preventDefault();
- 		   }); 
+            angular.element(".updateRuleEnDi").attr('href',"");
+
+    	}
+    	else{
+    	    //angular.element(".updateRuleEnDi").attr("ui-sref",".updateRule");
+            angular.element(".updateRuleEnDi").attr("disabled","false");
+            angular.element(".updateRuleEnDi").removeClass(" btn btn-disabled");
+            angular.element(".updateRuleEnDi").removeClass("disabfuncCUcColor");
+            angular.element(".updateRuleEnDi").attr('href',"#/home/updateRule");
+
     	}
 
         $scope.menu = {
@@ -786,57 +754,65 @@ if(usecaseBiglist != null){
     $scope.manageOrg = function(){
     	 $scope.managePermissionOrg();
     	if(!$scope.CreateOrgzd){
-    	//	alert(1);
-    	    angular.element(".disabfuncCUc1").attr("ui-sref","");
             angular.element(".disabfuncCUc1").attr("disabled","disabled");
             angular.element(".disabfuncCUc1").addClass(" btn btn-disabled");
             angular.element(".disabfuncCUc1").addClass("disabfuncCUcColor");
-            angular.element(".disabfuncCUc1").click(function(ev) {
- 		       ev.preventDefault();
- 		   }); 
+            angular.element(".disabfuncCUc1").attr("href","");
+    	}
+    	else{
+            angular.element(".disabfuncCUc1").attr("disabled","false");
+            angular.element(".disabfuncCUc1").removeClass(" btn btn-disabled");
+            angular.element(".disabfuncCUc1").removeClass("disabfuncCUcColor");
+            angular.element(".disabfuncCUc1").attr("href","#/home/organization");
     	}
     	
     	if(!$scope.CreateSubzd){
-    		//alert(2);
-    	    angular.element(".disabfuncCUc2").attr("ui-sref","");
             angular.element(".disabfuncCUc2").attr("disabled","disabled");
             angular.element(".disabfuncCUc2").addClass(" btn btn-disabled");
             angular.element(".disabfuncCUc2").addClass("disabfuncCUcColor");
-            angular.element(".disabfuncCUc2").click(function(ev) {
- 		       ev.preventDefault();
- 		   }); 
+            angular.element(".disabfuncCUc2").attr("href","");
     	}
-    	
+    	else{
+            angular.element(".disabfuncCUc2").attr("disabled","false");
+            angular.element(".disabfuncCUc2").removeClass(" btn btn-disabled");
+            angular.element(".disabfuncCUc2").removeClass("disabfuncCUcColor");
+            angular.element(".disabfuncCUc2").attr("href","#/home/subscription");
+    	}
     	if(!$scope.UpdateOrgzd){
-    		//alert(3);
-    	    angular.element(".disabfuncCUc3").attr("ui-sref","");
             angular.element(".disabfuncCUc3").attr("disabled","disabled");
             angular.element(".disabfuncCUc3").addClass(" btn btn-disabled");
             angular.element(".disabfuncCUc3").addClass("disabfuncCUcColor");
-            angular.element(".disabfuncCUc3").click(function(ev) {
- 		       ev.preventDefault();
- 		   }); 
+            angular.element(".disabfuncCUc3").attr("href","");
     	}
-    	
+    	else{
+            angular.element(".disabfuncCUc3").attr("disabled","false");
+            angular.element(".disabfuncCUc3").removeClass(" btn btn-disabled");
+            angular.element(".disabfuncCUc3").removeClass("disabfuncCUcColor");
+            angular.element(".disabfuncCUc3").attr("href","#/home/UpdateOrganisation");
+    	}
     	if(!$scope.UpdateSubzd){
-    	//	alert(4);
-    	    angular.element(".disabfuncCUc4").attr("ui-sref","");
             angular.element(".disabfuncCUc4").attr("disabled","disabled");
             angular.element(".disabfuncCUc4").addClass(" btn btn-disabled");
             angular.element(".disabfuncCUc4").addClass("disabfuncCUcColor");
-            angular.element(".disabfuncCUc4").click(function(ev) {
- 		       ev.preventDefault();
- 		   }); 
+            angular.element(".disabfuncCUc4").attr("href","");
+    	}
+    	else{
+            angular.element(".disabfuncCUc4").attr("disabled","false");
+            angular.element(".disabfuncCUc4").removeClass(" btn btn-disabled");
+            angular.element(".disabfuncCUc4").removeClass("disabfuncCUcColor");
+            angular.element(".disabfuncCUc4").attr("href","#/home/updatesubscription");
     	}
     	if(!$scope.ReadSubzd){
-    	//	alert(4);
-    	    angular.element(".disabfuncCUc50").attr("ui-sref","");
             angular.element(".disabfuncCUc50").attr("disabled","disabled");
             angular.element(".disabfuncCUc50").addClass(" btn btn-disabled");
             angular.element(".disabfuncCUc50").addClass("disabfuncCUcColor");
-            angular.element(".disabfuncCUc50").click(function(ev) {
- 		       ev.preventDefault();
- 		   }); 
+            angular.element(".disabfuncCUc50").attr("href","");
+    	}
+    	else{
+            angular.element(".disabfuncCUc50").attr("disabled","false");
+            angular.element(".disabfuncCUc50").removeClass(" btn btn-disabled");
+            angular.element(".disabfuncCUc50").removeClass("disabfuncCUcColor");
+            angular.element(".disabfuncCUc50").attr("href","#/home/viewsubscription");
     	}
     	
         $scope.menu = {
@@ -854,37 +830,46 @@ if(usecaseBiglist != null){
     $scope.uamanagement = function(){
     	 $scope.managePermissionForUserAccount();
      	if(!$scope.CreateUserzd){
-     		
-     	//	alert(1);
-     	     angular.element(".disabfuncCUc5").attr("ui-sref","");
+     	     //angular.element(".disabfuncCUc5").attr("ui-sref","");
              angular.element(".disabfuncCUc5").attr("disabled","disabled");
              angular.element(".disabfuncCUc5").addClass(" btn btn-disabled");
              angular.element(".disabfuncCUc5").addClass("disabfuncCUcColor");
-             angular.element(".disabfuncCUc5").click(function(ev) {
-  		       ev.preventDefault();
-  		   }); 
+     	     angular.element(".disabfuncCUc5").attr("href","");
      	}
-     	
+     	else{
+     		 //angular.element(".disabfuncCUc5").attr("ui-sref","");
+             angular.element(".disabfuncCUc5").attr("disabled","false");
+             angular.element(".disabfuncCUc5").removeClass(" btn btn-disabled");
+             angular.element(".disabfuncCUc5").removeClass("disabfuncCUcColor");
+     	     angular.element(".disabfuncCUc5").attr("href","#/home/uamanagement");
+     	}
      	if(!$scope.UpdateUserzd){
-     		//alert(2);
-     	    angular.element(".disabfuncCUc6").attr("ui-sref","");
+     	     //angular.element(".disabfuncCUc6").attr("ui-sref","");
              angular.element(".disabfuncCUc6").attr("disabled","disabled");
              angular.element(".disabfuncCUc6").addClass(" btn btn-disabled");
              angular.element(".disabfuncCUc6").addClass("disabfuncCUcColor");
-             angular.element(".disabfuncCUc6").click(function(ev) {
-  		       ev.preventDefault();
-  		   }); 
+     	     angular.element(".disabfuncCUc6").attr("href","");
      	}
-     	
+     	else{
+     	     //angular.element(".disabfuncCUc6").attr("ui-sref","");
+             angular.element(".disabfuncCUc6").attr("disabled","false");
+             angular.element(".disabfuncCUc6").removeClass(" btn btn-disabled");
+             angular.element(".disabfuncCUc6").removeClass("disabfuncCUcColor");
+     	     angular.element(".disabfuncCUc6").attr("href","#/home/uamanagement");
+     	}
      	if(!$scope.ViewUserzd){
-     		//alert(2);
-     	    angular.element(".disabfuncCUc7").attr("ui-sref","");
+     	     //angular.element(".disabfuncCUc7").attr("ui-sref","");
              angular.element(".disabfuncCUc7").attr("disabled","disabled");
              angular.element(".disabfuncCUc7").addClass(" btn btn-disabled");
              angular.element(".disabfuncCUc7").addClass("disabfuncCUcColor");
-             angular.element(".disabfuncCUc7").click(function(ev) {
-  		       ev.preventDefault();
-  		   }); 
+     	     angular.element(".disabfuncCUc7").attr("href","");
+     	}
+     	else{
+     	     //angular.element(".disabfuncCUc7").attr("ui-sref","");
+             angular.element(".disabfuncCUc7").attr("disabled","false");
+             angular.element(".disabfuncCUc7").removeClass(" btn btn-disabled");
+             angular.element(".disabfuncCUc7").removeClass("disabfuncCUcColor");
+     	     angular.element(".disabfuncCUc7").attr("href","#/home/uamanagement");
      	}
      	
     	
@@ -903,36 +888,47 @@ if(usecaseBiglist != null){
     $scope.roleMnu = function(){
     	 $scope.managePermissionForRole();
       	if(!$scope.CreateRolezd){
-      		
-      	//	alert(1);
-      		  angular.element(".disabfuncCUc8").attr("ui-sref","");
+      		  //angular.element(".disabfuncCUc8").attr("ui-sref","");
               angular.element(".disabfuncCUc8").attr("disabled","disabled");
               angular.element(".disabfuncCUc8").addClass(" btn btn-disabled");
               angular.element(".disabfuncCUc8").addClass("disabfuncCUcColor");
-              angular.element(".disabfuncCUc8").click(function(ev) {
-   		       ev.preventDefault();
-   		   }); 
+      		  angular.element(".disabfuncCUc8").attr("href","");
+      	}
+      	else{
+      		  //angular.element(".disabfuncCUc8").attr("ui-sref","");
+              angular.element(".disabfuncCUc8").attr("disabled","false");
+              angular.element(".disabfuncCUc8").removeClass(" btn btn-disabled");
+              angular.element(".disabfuncCUc8").removeClass("disabfuncCUcColor");
+      		  angular.element(".disabfuncCUc8").attr("href","#/home/createrole");
       	}
       	
       	if(!$scope.UpdateRolezd){
-      		//alert(2);
-      	    angular.element(".disabfuncCUc9").attr("ui-sref","");
+      	      //angular.element(".disabfuncCUc9").attr("ui-sref","");
               angular.element(".disabfuncCUc9").attr("disabled","disabled");
               angular.element(".disabfuncCUc9").addClass(" btn btn-disabled");
               angular.element(".disabfuncCUc9").addClass("disabfuncCUcColor");
-              angular.element(".disabfuncCUc9").click(function(ev) {
-   		       ev.preventDefault();
-   		   }); 
+      		  angular.element(".disabfuncCUc9").attr("href","");
+      	}
+      	else{
+      		  //angular.element(".disabfuncCUc8").attr("ui-sref","");
+              angular.element(".disabfuncCUc9").attr("disabled","false");
+              angular.element(".disabfuncCUc9").removeClass(" btn btn-disabled");
+              angular.element(".disabfuncCUc9").removeClass("disabfuncCUcColor");
+      		  angular.element(".disabfuncCUc9").attr("href","#/home/updaterole");
       	}
       	if(!$scope.ReadRolezd){
-      		//alert(2);
-      	    angular.element(".disabfuncCUc10").attr("ui-sref","");
+      	      //angular.element(".disabfuncCUc10").attr("ui-sref","");
               angular.element(".disabfuncCUc10").attr("disabled","disabled");
               angular.element(".disabfuncCUc10").addClass(" btn btn-disabled");
               angular.element(".disabfuncCUc10").addClass("disabfuncCUcColor");
-              angular.element(".disabfuncCUc10").click(function(ev) {
-   		       ev.preventDefault();
-   		   }); 
+      		  angular.element(".disabfuncCUc10").attr("href","");
+      	}
+      	else{
+      		  //angular.element(".disabfuncCUc8").attr("ui-sref","");
+              angular.element(".disabfuncCUc10").attr("disabled","false");
+              angular.element(".disabfuncCUc10").removeClass(" btn btn-disabled");
+              angular.element(".disabfuncCUc10").removeClass("disabfuncCUcColor");
+      		  angular.element(".disabfuncCUc10").attr("href","#/home/viewrole");
       	}
     	$scope.menu = {
                 usecaserule :false,
