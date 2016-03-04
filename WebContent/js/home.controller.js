@@ -168,8 +168,8 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 	    		$scope.useCaseMaintaindis= true;
 	    	}
 			else{
-				  if(obj.Users.UseCase!=undefined){
-						$scope.useCaseMaintaindis= true;
+				$scope.useCaseMaintaindis= true;
+				  if(obj.Users.UseCase!=undefined){						
 						angular.forEach(obj.Users.UseCase.PermissionTypeDet, function(value, key) {					
 								var useCaseObj = obj.Users.UseCase.PermissionTypeDet;
 								for(var i in useCaseObj){
