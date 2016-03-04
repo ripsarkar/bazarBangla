@@ -44,9 +44,17 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 	  if($rootScope.dataLoading == undefined || $rootScope.dataLoading==false) {
       	//console.log("data loading GET called");
   		  $rootScope.loadinganimation = true;
+  		 var mju;
+		  if(mj[1]!=undefined){
+			  mju=mj[1];
+			  
+			  }else{
+				  
+				mju=localStorage.namerip;  
+			  }
   		  var loadUserdetails = {
    	                method: "GET",
-   	                url: $rootScope.url+"/getUserDetails/"+mj[1]
+   	                url: $rootScope.url+"/getUserDetails/"+mju
    	         		//url: "data/userdtail.json"
    	            };
    	            $http(loadUserdetails).success(function(result) {
