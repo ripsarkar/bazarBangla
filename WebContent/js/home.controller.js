@@ -164,6 +164,10 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 	    	if(obj.Users.User==undefined){
 	    		$scope.userAccountManagementdis= true;
 	    	}
+	    	else{
+	    		
+	    		$scope.userAccountManagementdis= false;
+	    	}
 	    	if(obj.Users.UseCase==undefined && obj.Users.Rule==undefined){
 	    		$scope.useCaseMaintaindis= true;
 	    	}
@@ -201,10 +205,16 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 	    	
 	    	if(obj.Users.Subscription==undefined && obj.Users.Organization==undefined){
 	    		$scope.organizationdis= true;
+	    	}else{
+	    		
+	    		$scope.organizationdis= false;
 	    	}
 	    	
 	    	if(obj.Users.Role==undefined){
 	    		$scope.rolemenudis= true;		
+	    	}else{
+	    		
+	    		$scope.rolemenudis= false;	
 	    	}
 	    	
 	    	
