@@ -1160,168 +1160,186 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
         });
 
         $scope.crtRuleSubmit = function() {
-            var evtattri_SurrId = [];
-            var logSou_SurrId = [];
-            var crtRuleInput_SurrId = [];
-            var crtRuleOuput_SurrId = [];
+        	
+        	var testId = /^[a-z0-9_]{3,10}$/;
+        	var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
+            var testAlp = /^[a-zA-Z\s\d\/]+$/;
+            var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+            
+            if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
+                alert('Please enter a valid Rule Id(no special character)');
+                return false;
+            }
+            else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                alert('Please enter a valid Rule Name(no special character)');
+                return false;
+            }
+            else{
+
+            	
+                var evtattri_SurrId = [];
+                var logSou_SurrId = [];
+                var crtRuleInput_SurrId = [];
+                var crtRuleOuput_SurrId = [];
 
 
 
-            if (typeof $scope.crtRuleTrsn != 'undefined') {
-                for (var k = 0; k < $scope.crtRuleTrsn.length; k++) {
-                    var crtRuleTrsnId = {};
-                    crtRuleTrsnId.SurrId = $scope.crtRuleTrsn[k];
-                    crtRuleInput_SurrId.push(crtRuleTrsnId);
+                if (typeof $scope.crtRuleTrsn != 'undefined') {
+                    for (var k = 0; k < $scope.crtRuleTrsn.length; k++) {
+                        var crtRuleTrsnId = {};
+                        crtRuleTrsnId.SurrId = $scope.crtRuleTrsn[k];
+                        crtRuleInput_SurrId.push(crtRuleTrsnId);
+                    }
                 }
-            }
 
-            if (typeof $scope.crtRuleRefr != 'undefined') {
-                for (var z = 0; z < $scope.crtRuleRefr.length; z++) {
-                    var crtRuleRefrId = {};
-                    crtRuleRefrId.SurrId = $scope.crtRuleRefr[z];
-                    crtRuleInput_SurrId.push(crtRuleRefrId);
+                if (typeof $scope.crtRuleRefr != 'undefined') {
+                    for (var z = 0; z < $scope.crtRuleRefr.length; z++) {
+                        var crtRuleRefrId = {};
+                        crtRuleRefrId.SurrId = $scope.crtRuleRefr[z];
+                        crtRuleInput_SurrId.push(crtRuleRefrId);
+                    }
                 }
-            }
 
-            if (typeof $scope.crtRuleEventName != 'undefined') {
-                for (var w = 0; w < $scope.crtRuleEventName.length; w++) {
-                    var crtRuleEventNameId = {};
-                    crtRuleEventNameId.SurrId = $scope.crtRuleEventName[w];
-                    crtRuleInput_SurrId.push(crtRuleEventNameId);
+                if (typeof $scope.crtRuleEventName != 'undefined') {
+                    for (var w = 0; w < $scope.crtRuleEventName.length; w++) {
+                        var crtRuleEventNameId = {};
+                        crtRuleEventNameId.SurrId = $scope.crtRuleEventName[w];
+                        crtRuleInput_SurrId.push(crtRuleEventNameId);
+                    }
                 }
-            }
 
-            if (typeof $scope.crtRuleEventAttribute != 'undefined') {
-                for (var i = 0; i < $scope.crtRuleEventAttribute.length; i++) {
-                    var evtattri = {};
-                    evtattri.SurrId = $scope.crtRuleEventAttribute[i];
-                    evtattri_SurrId.push(evtattri);
+                if (typeof $scope.crtRuleEventAttribute != 'undefined') {
+                    for (var i = 0; i < $scope.crtRuleEventAttribute.length; i++) {
+                        var evtattri = {};
+                        evtattri.SurrId = $scope.crtRuleEventAttribute[i];
+                        evtattri_SurrId.push(evtattri);
+                    }
                 }
-            }
 
-            if (typeof $scope.crtRuleLogSource != 'undefined') {
-                for (var j = 0; j < $scope.crtRuleLogSource.length; j++) {
-                    var logSouId = {};
-                    logSouId.SurrId = $scope.crtRuleLogSource[j];
-                    logSou_SurrId.push(logSouId);
+                if (typeof $scope.crtRuleLogSource != 'undefined') {
+                    for (var j = 0; j < $scope.crtRuleLogSource.length; j++) {
+                        var logSouId = {};
+                        logSouId.SurrId = $scope.crtRuleLogSource[j];
+                        logSou_SurrId.push(logSouId);
+                    }
                 }
-            }
 
 
-            if (typeof $scope.crtRuleReport != 'undefined') {
-                for (var u = 0; u < $scope.crtRuleReport.length; u++) {
-                    var crtRuleReportId = {};
-                    crtRuleReportId.SurrId = $scope.crtRuleReport[u];
-                    crtRuleOuput_SurrId.push(crtRuleReportId);
+                if (typeof $scope.crtRuleReport != 'undefined') {
+                    for (var u = 0; u < $scope.crtRuleReport.length; u++) {
+                        var crtRuleReportId = {};
+                        crtRuleReportId.SurrId = $scope.crtRuleReport[u];
+                        crtRuleOuput_SurrId.push(crtRuleReportId);
+                    }
                 }
-            }
 
 
 
-            var ruleOutput = [{
-                SurrId: $scope.crtRuleDashBoard,
-            }, {
-                SurrId: $scope.crtRuleAlert,
-            }, {
-                SurrId: $scope.crtReferSet,
-            }, {
-                SurrId: $scope.crtRuleComments
-            }];
+                var ruleOutput = [{
+                    SurrId: $scope.crtRuleDashBoard,
+                }, {
+                    SurrId: $scope.crtRuleAlert,
+                }, {
+                    SurrId: $scope.crtReferSet,
+                }, {
+                    SurrId: $scope.crtRuleComments
+                }];
 
-            for (var w = 0; w < ruleOutput.length; w++) {
-                if (typeof ruleOutput[w].SurrId != 'undefined' && ruleOutput[w].SurrId != '') {
-                    crtRuleOuput_SurrId.push(ruleOutput[w]);
+                for (var w = 0; w < ruleOutput.length; w++) {
+                    if (typeof ruleOutput[w].SurrId != 'undefined' && ruleOutput[w].SurrId != '') {
+                        crtRuleOuput_SurrId.push(ruleOutput[w]);
+                    }
                 }
-            }
 
-            if (typeof $scope.crtRuleDsecpt == 'undefined') {
-                $scope.crtRuleDsecpt = "";
-            }
-            if (typeof $scope.crtRulepesducode == 'undefined') {
-                $scope.crtRulepesducode = "";
-            }
-            if (typeof $scope.crtRuletestlogic == 'undefined') {
-                $scope.crtRuletestlogic = "";
-            }
-            if (typeof $scope.crtRuleReportlogic == 'undefined') {
-                $scope.crtRuleReportlogic = "";
-            }
-            if (typeof $scope.crtRuleSaveSrchlogic == 'undefined') {
-                $scope.crtRuleSaveSrchlogic = "";
-            }
-            if (typeof $scope.crtRuleBuildlogic == 'undefined') {
-                $scope.crtRuleBuildlogic = "";
-            }
-            if (typeof $scope.crtRuleRefSetInc == 'undefined') {
-                $scope.crtRuleRefSetInc = "";
-            }
-            if (typeof $scope.crtRuleResponse == 'undefined') {
-                $scope.crtRuleResponse = "";
-            }
-            if (typeof $scope.crtRuleDsecpt == 'undefined') {
-                $scope.crtRuleDsecpt = "";
-            }
-            if (typeof $scope.crtRuleEventName == 'undefined') {
-                $scope.crtRuleEventName = "";
-            }
-            if (typeof $scope.crtReferSet == 'undefined') {
-                $scope.crtReferSet = "";
-            }
-
-            var ThdCrt = [];
-            if (typeof $scope.ThdCrttables != 'undefined' && $scope.ThdCrttables.length > 0) {
-                for (var g = 0; g < $scope.ThdCrttables.length; g++) {
-                    var ThdCrtda = {};
-                    ThdCrtda.CapecSurrId = $scope.ThdCrttables[g].Thdcat_SurrId;
-                    ThdCrtda.MetaSurrId = $scope.ThdCrttables[g].ThdPub_SurrId;
-                    ThdCrtda.StandardId = $scope.ThdCrttables[g].ThdCrtl_SurrId;
-                    ThdCrt.push(ThdCrtda);
+                if (typeof $scope.crtRuleDsecpt == 'undefined') {
+                    $scope.crtRuleDsecpt = "";
                 }
-            }
+                if (typeof $scope.crtRulepesducode == 'undefined') {
+                    $scope.crtRulepesducode = "";
+                }
+                if (typeof $scope.crtRuletestlogic == 'undefined') {
+                    $scope.crtRuletestlogic = "";
+                }
+                if (typeof $scope.crtRuleReportlogic == 'undefined') {
+                    $scope.crtRuleReportlogic = "";
+                }
+                if (typeof $scope.crtRuleSaveSrchlogic == 'undefined') {
+                    $scope.crtRuleSaveSrchlogic = "";
+                }
+                if (typeof $scope.crtRuleBuildlogic == 'undefined') {
+                    $scope.crtRuleBuildlogic = "";
+                }
+                if (typeof $scope.crtRuleRefSetInc == 'undefined') {
+                    $scope.crtRuleRefSetInc = "";
+                }
+                if (typeof $scope.crtRuleResponse == 'undefined') {
+                    $scope.crtRuleResponse = "";
+                }
+                if (typeof $scope.crtRuleDsecpt == 'undefined') {
+                    $scope.crtRuleDsecpt = "";
+                }
+                if (typeof $scope.crtRuleEventName == 'undefined') {
+                    $scope.crtRuleEventName = "";
+                }
+                if (typeof $scope.crtReferSet == 'undefined') {
+                    $scope.crtReferSet = "";
+                }
+
+                var ThdCrt = [];
+                if (typeof $scope.ThdCrttables != 'undefined' && $scope.ThdCrttables.length > 0) {
+                    for (var g = 0; g < $scope.ThdCrttables.length; g++) {
+                        var ThdCrtda = {};
+                        ThdCrtda.CapecSurrId = $scope.ThdCrttables[g].Thdcat_SurrId;
+                        ThdCrtda.MetaSurrId = $scope.ThdCrttables[g].ThdPub_SurrId;
+                        ThdCrtda.StandardId = $scope.ThdCrttables[g].ThdCrtl_SurrId;
+                        ThdCrt.push(ThdCrtda);
+                    }
+                }
 
 
-            var crtRule_postJson = {
-                "UseCase": {
-                    "SurrId": $scope.crtUsercaseSurrId
-                },
-                "Rule": {
-                    "id": $scope.crtRuleID,
-                    "name": $scope.crtRuleName,
-                    "description": $scope.crtRuleDsecpt,
-                    "pseudo_code": $scope.crtRulepesducode,
-                    "rule_tst_iogic": $scope.crtRuletestlogic,
-                    "report_logic": $scope.crtRuleReportlogic,
-                    "save_search_logic": $scope.crtRuleSaveSrchlogic,
-                    "building_blocks": $scope.crtRuleBuildlogic,
-                    "reference_set_ind": $scope.crtRuleRefSet, //crtRuleRefSet, crtReferSet
-                    "response_text": $scope.crtRuleResponse,
-                    "event_name": "",
-                    "rule_description": $scope.crtRuleDsecpt,
-                    "oob_flag": statusOOB
-                },
-                "input": crtRuleInput_SurrId,
-                "output": crtRuleOuput_SurrId,
-                "event_attribute": evtattri_SurrId,
-                "log_source": logSou_SurrId,
-                "ThreadModelGroup": ThdCrt
-            };
+                var crtRule_postJson = {
+                    "UseCase": {
+                        "SurrId": $scope.crtUsercaseSurrId
+                    },
+                    "Rule": {
+                        "id": $scope.crtRuleID,
+                        "name": $scope.crtRuleName,
+                        "description": $scope.crtRuleDsecpt,
+                        "pseudo_code": $scope.crtRulepesducode,
+                        "rule_tst_iogic": $scope.crtRuletestlogic,
+                        "report_logic": $scope.crtRuleReportlogic,
+                        "save_search_logic": $scope.crtRuleSaveSrchlogic,
+                        "building_blocks": $scope.crtRuleBuildlogic,
+                        "reference_set_ind": $scope.crtRuleRefSet, //crtRuleRefSet, crtReferSet
+                        "response_text": $scope.crtRuleResponse,
+                        "event_name": "",
+                        "rule_description": $scope.crtRuleDsecpt,
+                        "oob_flag": statusOOB
+                    },
+                    "input": crtRuleInput_SurrId,
+                    "output": crtRuleOuput_SurrId,
+                    "event_attribute": evtattri_SurrId,
+                    "log_source": logSou_SurrId,
+                    "ThreadModelGroup": ThdCrt
+                };
 
 
-            if (typeof $scope.crtUsercaseId != 'undefined' && $scope.crtUsercaseId != '' && typeof $scope.crtUsercaseName != 'undefined' && $scope.crtUsercaseName != '' && typeof $scope.crtRuleID != 'undefined' && $scope.crtRuleID != '' && typeof $scope.crtRuleName != 'undefined' && $scope.crtRuleName != '') {
-                $http.post($rootScope.url + '/saveRule', crtRule_postJson).success(function(data, status, headers, config) {
-                    alert('Usecase Rule Created Successfully');
-                    UsecaseService.setUsecasecrtdata('');
+                if (typeof $scope.crtUsercaseId != 'undefined' && $scope.crtUsercaseId != '' && typeof $scope.crtUsercaseName != 'undefined' && $scope.crtUsercaseName != '' && typeof $scope.crtRuleID != 'undefined' && $scope.crtRuleID != '' && typeof $scope.crtRuleName != 'undefined' && $scope.crtRuleName != '') {
+                    $http.post($rootScope.url + '/saveRule', crtRule_postJson).success(function(data, status, headers, config) {
+                        alert('Usecase Rule Created Successfully');
+                        UsecaseService.setUsecasecrtdata('');
 
-                    $scope.reSet();
-                    ThdCrt.length = 0;
-                    $state.go($state.current, {}, {
-                        reload: true
+                        $scope.reSet();
+                        ThdCrt.length = 0;
+                        $state.go($state.current, {}, {
+                            reload: true
+                        });
+                    }).error(function(data, status, headers, config) {
+
                     });
-                }).error(function(data, status, headers, config) {
-
-                });
-            } else {
-                alert('Please fill all mandatory* fields');
+                } else {
+                    alert('Please fill all mandatory* fields');
+                }
             }
         }
         
@@ -2942,153 +2960,169 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             // Update Rule post Json
             var ThdCrt = [];
             $scope.crtRuleSubmit = function() {
-                var evtattri_SurrId = [];
-                var logSou_SurrId = [];
-                var crtRuleInput_SurrId = [];
-                var crtRuleOuput_SurrId = [];
+            	var testId = /^[a-z0-9_]{3,10}$/;
+            	var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
+                var testAlp = /^[a-zA-Z\s\d\/]+$/;
+                var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+                
+                if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
+                    alert('Please enter a valid Rule Id(no special character)');
+                    return false;
+                }
+                else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                    alert('Please enter a valid Rule Name(no special character)');
+                    return false;
+                }
+                else{
+                	var evtattri_SurrId = [];
+                    var logSou_SurrId = [];
+                    var crtRuleInput_SurrId = [];
+                    var crtRuleOuput_SurrId = [];
 
-                if (typeof $scope.crtRuleTrsn != 'undefined') {
-                    for (var k = 0; k < $scope.crtRuleTrsn.length; k++) {
-                        var crtRuleTrsnId = {};
-                        crtRuleTrsnId.SurrId = $scope.crtRuleTrsn[k];
-                        crtRuleInput_SurrId.push(crtRuleTrsnId);
+                    if (typeof $scope.crtRuleTrsn != 'undefined') {
+                        for (var k = 0; k < $scope.crtRuleTrsn.length; k++) {
+                            var crtRuleTrsnId = {};
+                            crtRuleTrsnId.SurrId = $scope.crtRuleTrsn[k];
+                            crtRuleInput_SurrId.push(crtRuleTrsnId);
+                        }
+                    }
+
+                    if (typeof $scope.crtRuleRefr != 'undefined') {
+                        for (var z = 0; z < $scope.crtRuleRefr.length; z++) {
+                            var crtRuleRefrId = {};
+                            crtRuleRefrId.SurrId = $scope.crtRuleRefr[z];
+                            crtRuleInput_SurrId.push(crtRuleRefrId);
+                        }
+                    }
+
+                    if (typeof $scope.crtRuleEventName != 'undefined') {
+                        for (var w = 0; w < $scope.crtRuleEventName.length; w++) {
+                            var crtRuleEventNameId = {};
+                            crtRuleEventNameId.SurrId = $scope.crtRuleEventName[w];
+                            crtRuleInput_SurrId.push(crtRuleEventNameId);
+                        }
+                    }
+
+                    if (typeof $scope.crtRuleEventAttribute != 'undefined') {
+                        for (var i = 0; i < $scope.crtRuleEventAttribute.length; i++) {
+                            var evtattri = {};
+                            evtattri.SurrId = $scope.crtRuleEventAttribute[i];
+                            evtattri_SurrId.push(evtattri);
+                        }
+                    }
+
+                    if (typeof $scope.crtRuleLogSource != 'undefined') {
+                        for (var j = 0; j < $scope.crtRuleLogSource.length; j++) {
+                            var logSouId = {};
+                            logSouId.SurrId = $scope.crtRuleLogSource[j];
+                            logSou_SurrId.push(logSouId);
+                        }
+                    }
+
+
+                    if (typeof $scope.crtRuleReport != 'undefined') {
+                        for (var u = 0; u < $scope.crtRuleReport.length; u++) {
+                            var crtRuleReportId = {};
+                            crtRuleReportId.SurrId = $scope.crtRuleReport[u];
+                            crtRuleOuput_SurrId.push(crtRuleReportId);
+                        }
+                    }
+
+
+
+                    var ruleOutput = [{
+                        SurrId: $scope.crtRuleDashBoard,
+                    }, {
+                        SurrId: $scope.crtRuleAlert,
+                    }, {
+                        SurrId: $scope.crtReferSet,
+                    }];
+
+                    for (var w = 0; w < ruleOutput.length; w++) {
+                        //crtRuleOuput_SurrId.push(ruleOutput[w]);
+                        if (typeof ruleOutput[w].SurrId != 'undefined' && ruleOutput[w].SurrId != '') {
+                            crtRuleOuput_SurrId.push(ruleOutput[w]);
+                        }
+                    }
+
+                    for (var g = 0; g < $scope.ThdCrttables.length; g++) {
+                        var ThdCrtda = {};
+                        ThdCrtda.CapecSurrId = $scope.ThdCrttables[g].Thdcat_SurrId;
+                        ThdCrtda.MetaSurrId = $scope.ThdCrttables[g].ThdPub_SurrId;
+                        ThdCrtda.StandardId = $scope.ThdCrttables[g].ThdCrtl_SurrId;
+                        ThdCrt.push(ThdCrtda);
+                    }
+
+                    if (typeof $scope.crtRuleDsecpt == 'undefined') {
+                        $scope.crtRuleDsecpt = "";
+                    }
+                    if (typeof $scope.crtRulepesducode == 'undefined') {
+                        $scope.crtRulepesducode = "";
+                    }
+                    if (typeof $scope.crtRuletestlogic == 'undefined') {
+                        $scope.crtRuletestlogic = "";
+                    }
+                    if (typeof $scope.crtRuleReportlogic == 'undefined') {
+                        $scope.crtRuleReportlogic = "";
+                    }
+                    if (typeof $scope.crtRuleSaveSrchlogic == 'undefined') {
+                        $scope.crtRuleSaveSrchlogic = "";
+                    }
+                    if (typeof $scope.crtRuleBuildlogic == 'undefined') {
+                        $scope.crtRuleBuildlogic = "";
+                    }
+                    if (typeof $scope.crtRuleRefSetInc == 'undefined') {
+                        $scope.crtRuleRefSetInc = "";
+                    }
+                    if (typeof $scope.crtRuleResponse == 'undefined') {
+                        $scope.crtRuleResponse = "";
+                    }
+                    if (typeof $scope.crtRuleDsecpt == 'undefined') {
+                        $scope.crtRuleDsecpt = "";
+                    }
+                    if (typeof $scope.crtRuleEventName == 'undefined') {
+                        $scope.crtRuleEventName = "";
+                    }
+
+
+                    var crtRule_postJson = {
+                        ruleObj: {
+                            "ruleSurrId": $scope.updateRule_surrId,
+                            "usecaseSurrId": $scope.crtUsercaseSurrId,
+                            "id": $scope.crtRuleID,
+                            "name": $scope.crtRuleName,
+                            "description": $scope.crtRuleDsecpt,
+                            "pseudo_code": $scope.crtRulepesducode,
+                            "rule_tst_iogic": $scope.crtRuletestlogic,
+                            "report_logic": $scope.crtRuleReportlogic,
+                            "save_search_logic": $scope.crtRuleSaveSrchlogic,
+                            "building_blocks": $scope.crtRuleBuildlogic,
+                            "reference_set_ind": $scope.crtRuleRefSet,
+                            "event_name": "",
+                            "response_text": $scope.crtRuleResponse,
+                            "oob_flag": statusOOBu
+                        },
+                        "input": crtRuleInput_SurrId,
+                        "output": crtRuleOuput_SurrId,
+                        "event_attribute": evtattri_SurrId,
+                        "log_source": logSou_SurrId,
+                        "ThreadModelGroup": ThdCrt
+                    };
+                    if (typeof $scope.crtRuleID != 'undefined' && typeof $scope.crtRuleName != 'undefined' && $scope.crtRuleID != '' && typeof $scope.crtRuleName != '') {
+
+                        $http.post($rootScope.url + '/updateRule', crtRule_postJson).success(function(data, status, headers, config) {
+                            alert('Update Rule Successfully saved');
+                            ThdCrt.length = 0;
+                            $scope.ThdCrttables.length = 0;
+                            $scope.reSetupdate();
+                        }).error(function(data, status, headers, config) {
+                            alert("Sorry Application error in serverside");
+                        });
+                    } else {
+                        alert("Please fill all mandatory fields");
                     }
                 }
-
-                if (typeof $scope.crtRuleRefr != 'undefined') {
-                    for (var z = 0; z < $scope.crtRuleRefr.length; z++) {
-                        var crtRuleRefrId = {};
-                        crtRuleRefrId.SurrId = $scope.crtRuleRefr[z];
-                        crtRuleInput_SurrId.push(crtRuleRefrId);
-                    }
-                }
-
-                if (typeof $scope.crtRuleEventName != 'undefined') {
-                    for (var w = 0; w < $scope.crtRuleEventName.length; w++) {
-                        var crtRuleEventNameId = {};
-                        crtRuleEventNameId.SurrId = $scope.crtRuleEventName[w];
-                        crtRuleInput_SurrId.push(crtRuleEventNameId);
-                    }
-                }
-
-                if (typeof $scope.crtRuleEventAttribute != 'undefined') {
-                    for (var i = 0; i < $scope.crtRuleEventAttribute.length; i++) {
-                        var evtattri = {};
-                        evtattri.SurrId = $scope.crtRuleEventAttribute[i];
-                        evtattri_SurrId.push(evtattri);
-                    }
-                }
-
-                if (typeof $scope.crtRuleLogSource != 'undefined') {
-                    for (var j = 0; j < $scope.crtRuleLogSource.length; j++) {
-                        var logSouId = {};
-                        logSouId.SurrId = $scope.crtRuleLogSource[j];
-                        logSou_SurrId.push(logSouId);
-                    }
-                }
-
-
-                if (typeof $scope.crtRuleReport != 'undefined') {
-                    for (var u = 0; u < $scope.crtRuleReport.length; u++) {
-                        var crtRuleReportId = {};
-                        crtRuleReportId.SurrId = $scope.crtRuleReport[u];
-                        crtRuleOuput_SurrId.push(crtRuleReportId);
-                    }
-                }
-
-
-
-                var ruleOutput = [{
-                    SurrId: $scope.crtRuleDashBoard,
-                }, {
-                    SurrId: $scope.crtRuleAlert,
-                }, {
-                    SurrId: $scope.crtReferSet,
-                }];
-
-                for (var w = 0; w < ruleOutput.length; w++) {
-                    //crtRuleOuput_SurrId.push(ruleOutput[w]);
-                    if (typeof ruleOutput[w].SurrId != 'undefined' && ruleOutput[w].SurrId != '') {
-                        crtRuleOuput_SurrId.push(ruleOutput[w]);
-                    }
-                }
-
-                for (var g = 0; g < $scope.ThdCrttables.length; g++) {
-                    var ThdCrtda = {};
-                    ThdCrtda.CapecSurrId = $scope.ThdCrttables[g].Thdcat_SurrId;
-                    ThdCrtda.MetaSurrId = $scope.ThdCrttables[g].ThdPub_SurrId;
-                    ThdCrtda.StandardId = $scope.ThdCrttables[g].ThdCrtl_SurrId;
-                    ThdCrt.push(ThdCrtda);
-                }
-
-                if (typeof $scope.crtRuleDsecpt == 'undefined') {
-                    $scope.crtRuleDsecpt = "";
-                }
-                if (typeof $scope.crtRulepesducode == 'undefined') {
-                    $scope.crtRulepesducode = "";
-                }
-                if (typeof $scope.crtRuletestlogic == 'undefined') {
-                    $scope.crtRuletestlogic = "";
-                }
-                if (typeof $scope.crtRuleReportlogic == 'undefined') {
-                    $scope.crtRuleReportlogic = "";
-                }
-                if (typeof $scope.crtRuleSaveSrchlogic == 'undefined') {
-                    $scope.crtRuleSaveSrchlogic = "";
-                }
-                if (typeof $scope.crtRuleBuildlogic == 'undefined') {
-                    $scope.crtRuleBuildlogic = "";
-                }
-                if (typeof $scope.crtRuleRefSetInc == 'undefined') {
-                    $scope.crtRuleRefSetInc = "";
-                }
-                if (typeof $scope.crtRuleResponse == 'undefined') {
-                    $scope.crtRuleResponse = "";
-                }
-                if (typeof $scope.crtRuleDsecpt == 'undefined') {
-                    $scope.crtRuleDsecpt = "";
-                }
-                if (typeof $scope.crtRuleEventName == 'undefined') {
-                    $scope.crtRuleEventName = "";
-                }
-
-
-                var crtRule_postJson = {
-                    ruleObj: {
-                        "ruleSurrId": $scope.updateRule_surrId,
-                        "usecaseSurrId": $scope.crtUsercaseSurrId,
-                        "id": $scope.crtRuleID,
-                        "name": $scope.crtRuleName,
-                        "description": $scope.crtRuleDsecpt,
-                        "pseudo_code": $scope.crtRulepesducode,
-                        "rule_tst_iogic": $scope.crtRuletestlogic,
-                        "report_logic": $scope.crtRuleReportlogic,
-                        "save_search_logic": $scope.crtRuleSaveSrchlogic,
-                        "building_blocks": $scope.crtRuleBuildlogic,
-                        "reference_set_ind": $scope.crtRuleRefSet,
-                        "event_name": "",
-                        "response_text": $scope.crtRuleResponse,
-                        "oob_flag": statusOOBu
-                    },
-                    "input": crtRuleInput_SurrId,
-                    "output": crtRuleOuput_SurrId,
-                    "event_attribute": evtattri_SurrId,
-                    "log_source": logSou_SurrId,
-                    "ThreadModelGroup": ThdCrt
-                };
-                if (typeof $scope.crtRuleID != 'undefined' && typeof $scope.crtRuleName != 'undefined' && $scope.crtRuleID != '' && typeof $scope.crtRuleName != '') {
-
-                    $http.post($rootScope.url + '/updateRule', crtRule_postJson).success(function(data, status, headers, config) {
-                        alert('Update Rule Successfully saved');
-                        ThdCrt.length = 0;
-                        $scope.ThdCrttables.length = 0;
-                        $scope.reSetupdate();
-                    }).error(function(data, status, headers, config) {
-                        alert("Sorry Application error in serverside");
-                    });
-                } else {
-                    alert("Please fill all mandatory fields");
-                }
+                
             }
             
             angular.element('form').click(function(event){
