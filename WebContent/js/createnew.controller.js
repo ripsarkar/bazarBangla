@@ -1163,22 +1163,6 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
 
         $scope.crtRuleSubmit = function() {
         	
-        	var testId = /^[a-z0-9_]{3,10}$/;
-        	var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
-            var testAlp = /^[a-zA-Z\s\d\/]+$/;
-            var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
-            
-            if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                alert('Please enter a valid Rule Id(no special character)');
-                return false;
-            }
-            else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
-                alert('Please enter a valid Rule Name(no special character)');
-                return false;
-            }
-            else{
-
-            	
                 var evtattri_SurrId = [];
                 var logSou_SurrId = [];
                 var crtRuleInput_SurrId = [];
@@ -1342,7 +1326,6 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 } else {
                     alert('Please fill all mandatory* fields');
                 }
-            }
         }
         
         angular.element('form').click(function(event){
@@ -1455,19 +1438,36 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
 
         }
         $scope.liinput = function() {
-            $scope.licreateruledetails = 'no-active';
-            $scope.licreateruleinput = 'active';
-            $scope.licreateruleinputdata = 'no-active';
-            $scope.licreaterulelog = 'no-active';
-            $scope.licreateruleoutput = 'no-active';
-            $scope.licreateruleresponse = 'no-active';
-            $scope.licreaterulethd = 'no-active';
-            $scope.ruledetails = false;
-            $scope.ruleinput = true;
-            $scope.rulesource = false;
-            $scope.ruleinputdata = false;
-            $scope.ruleoutput = false;
-            $scope.rulethd = false;
+        	var testId = /^[a-z0-9_]{3,10}$/;
+        	var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
+            var testAlp = /^[a-zA-Z\s\d\/]+$/;
+            var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+            
+            if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
+                alert('Please enter a valid Rule Id(no special character)');
+                return false;
+            }
+            else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                alert('Please enter a valid Rule Name(no special character)');
+                return false;
+            }
+            else{
+            	$scope.licreateruledetails = 'no-active';
+                $scope.licreateruleinput = 'active';
+                $scope.licreateruleinputdata = 'no-active';
+                $scope.licreaterulelog = 'no-active';
+                $scope.licreateruleoutput = 'no-active';
+                $scope.licreateruleresponse = 'no-active';
+                $scope.licreaterulethd = 'no-active';
+                $scope.ruledetails = false;
+                $scope.ruleinput = true;
+                $scope.rulesource = false;
+                $scope.ruleinputdata = false;
+                $scope.ruleoutput = false;
+                $scope.rulethd = false;
+            }
+        	
+            
         }
 
         $scope.lioutput = function() {
@@ -2241,20 +2241,6 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
             $scope.UpdatedataSet();
             $scope.UseCaseformSubmit = function() {
-            	var testId = /^[a-z0-9_]{3,10}$/;
-            	var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
-                var testAlp = /^[a-zA-Z\s\d\/]+$/;
-                var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
-                
-                if($scope.usecaseID == ''  || !testId.test($scope.usecaseID)){
-                    alert('Please enter a valid Use Case Id(no special character)');
-                    return false;
-                }
-                else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
-                    alert('Please enter a valid Use Case Name(no special character)');
-                    return false;
-                }
-                else{
                 	var Indtsyarray = [];
                     var Essptarray = [];
                     var CategoryGr = [];
@@ -2297,7 +2283,6 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     } else {
                         alert("Please fill all mandatory fields");
                     }
-                }
             }
             
             $scope.isBackUp = function(){
@@ -2978,20 +2963,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             // Update Rule post Json
             var ThdCrt = [];
             $scope.crtRuleSubmit = function() {
-            	var testId = /^[a-z0-9_]{3,10}$/;
-            	var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
-                var testAlp = /^[a-zA-Z\s\d\/]+$/;
-                var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
-                
-                if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                    alert('Please enter a valid Rule Id(no special character)');
-                    return false;
-                }
-                else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
-                    alert('Please enter a valid Rule Name(no special character)');
-                    return false;
-                }
-                else{
+            	
                 	var evtattri_SurrId = [];
                     var logSou_SurrId = [];
                     var crtRuleInput_SurrId = [];
@@ -3138,8 +3110,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         });
                     } else {
                         alert("Please fill all mandatory fields");
-                    }
-                }
+                    }               
                 
             }
             
@@ -3246,19 +3217,35 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
             }
             $scope.liinput = function() {
-                $scope.licreateruledetails = 'no-active';
-                $scope.licreateruleinput = 'active';
-                $scope.licreateruleinputdata = 'no-active';
-                $scope.licreaterulelog = 'no-active';
-                $scope.licreateruleoutput = 'no-active';
-                $scope.licreateruleresponse = 'no-active';
-                $scope.licreaterulethd = 'no-active';
-                $scope.ruledetails = false;
-                $scope.ruleinput = true;
-                $scope.rulesource = false;
-                $scope.ruleinputdata = false;
-                $scope.ruleoutput = false;
-                $scope.rulethd = false;
+            	var testId = /^[a-z0-9_]{3,10}$/;
+            	var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
+                var testAlp = /^[a-zA-Z\s\d\/]+$/;
+                var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+                
+                if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
+                    alert('Please enter a valid Rule Id(no special character)');
+                    return false;
+                }
+                else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                    alert('Please enter a valid Rule Name(no special character)');
+                    return false;
+                }
+                else{
+                	$scope.licreateruledetails = 'no-active';
+                    $scope.licreateruleinput = 'active';
+                    $scope.licreateruleinputdata = 'no-active';
+                    $scope.licreaterulelog = 'no-active';
+                    $scope.licreateruleoutput = 'no-active';
+                    $scope.licreateruleresponse = 'no-active';
+                    $scope.licreaterulethd = 'no-active';
+                    $scope.ruledetails = false;
+                    $scope.ruleinput = true;
+                    $scope.rulesource = false;
+                    $scope.ruleinputdata = false;
+                    $scope.ruleoutput = false;
+                    $scope.rulethd = false;
+                }
+                
             }
 
             $scope.lioutput = function() {
