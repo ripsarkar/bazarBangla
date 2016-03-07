@@ -314,27 +314,44 @@ $scope.chckindustry = function() {
 }
 
 $scope.goTo = function() {
-    if (typeof $scope.usecaseDescrip == 'undefined') {
-        $scope.usecaseDescrip = "";
-    }
-    $scope.useCase = {
-        id: $scope.usecaseID,
-        name: $scope.usecaseName,
-        description: $scope.usecaseDescrip,
-        cyberFuncSurrId: $scope.frameWork,
-        UCCatSurrId: $scope.useCaseCat,
-        UCSubCatSurrId: $scope.useCaseSubcat
-    };
-    UsecaseService.setindsty(Indtsyarray);
-    UsecaseService.setUsecasecrtdata($scope.useCase);
+	
+	var testId = /^[a-z0-9_]{3,10}$/;
+	var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
+    var testAlp = /^[a-zA-Z\s\d\/]+$/;
+    var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
     
-    
-    if (typeof $scope.usecaseID != 'undefined' && typeof $scope.usecaseName != 'undefined' && typeof $scope.frameWork != 'undefined' && typeof $scope.useCaseCat != 'undefined' && typeof $scope.useCaseSubcat != 'undefined' && $scope.frameWork != '' && $scope.useCaseCat != '' && $scope.useCaseSubcat != '' && Indtsyarray.length != 0) {
-        UsecaseService.setpagesflag(chkflag);
-        $state.go("home.createReg");
-    } else {
-        alert("Please fill all mandatory fields");
+    if($scope.usecaseID == ''  || !testId.test($scope.usecaseID)){
+        alert('Please enter a valid Use Case Id(no special character)');
+        return false;
     }
+    else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
+        alert('Please enter a valid Use Case Name(no special character)');
+        return false;
+    }
+    else{
+    	if (typeof $scope.usecaseDescrip == 'undefined') {
+            $scope.usecaseDescrip = "";
+        }
+        $scope.useCase = {
+            id: $scope.usecaseID,
+            name: $scope.usecaseName,
+            description: $scope.usecaseDescrip,
+            cyberFuncSurrId: $scope.frameWork,
+            UCCatSurrId: $scope.useCaseCat,
+            UCSubCatSurrId: $scope.useCaseSubcat
+        };
+        UsecaseService.setindsty(Indtsyarray);
+        UsecaseService.setUsecasecrtdata($scope.useCase);
+        
+        
+        if (typeof $scope.usecaseID != 'undefined' && typeof $scope.usecaseName != 'undefined' && typeof $scope.frameWork != 'undefined' && typeof $scope.useCaseCat != 'undefined' && typeof $scope.useCaseSubcat != 'undefined' && $scope.frameWork != '' && $scope.useCaseCat != '' && $scope.useCaseSubcat != '' && Indtsyarray.length != 0) {
+            UsecaseService.setpagesflag(chkflag);
+            $state.go("home.createReg");
+        } else {
+            alert("Please fill all mandatory fields");
+        }
+    }
+    
 }
 
 angular.element('form').click(function(event){
@@ -631,20 +648,6 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
 
         $scope.UseCaseformSubmit = function() {
         	
-        	var testId = /^[a-z0-9_]{3,10}$/;
-        	var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
-            var testAlp = /^[a-zA-Z\s\d\/]+$/;
-            var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
-            
-            if($scope.usecaseID == ''  || !testId.test($scope.usecaseID)){
-                alert('Please enter a valid Use Case Id(no special character)');
-                return false;
-            }
-            else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
-                alert('Please enter a valid Use Case Name(no special character)');
-                return false;
-            }
-            else{
                 //var Indtsyarray = [];
                 var Essptarray = [];
                 var CategoryGr = [];
@@ -694,7 +697,6 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
                 } else {
                     alert("Please fill all mandatory fields");
                 }
-            }
         }
 
         $scope.isBack = function() {
