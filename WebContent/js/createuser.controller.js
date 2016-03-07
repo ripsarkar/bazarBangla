@@ -91,7 +91,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     $scope.sendcreateuser=function() {
     	//form validation
     	var usernameRegex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
-    	var name = /^[A-z ]+$/;
+    	var name = /^[a-zA-Z]+$/;
     	var contnumber = /^\+?([0-9]{1,5})\)?[-. ]?([0-9]{2,5})[-. ]?([0-9]{2,5})[-. ]?([0-9]{2,5})$/;  
     	var emailidfield = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
     	
