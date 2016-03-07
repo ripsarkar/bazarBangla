@@ -1438,7 +1438,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
 
         }
         $scope.liinput = function() {
-        	var testId = /^[a-z0-9_]{3,10}$/;
+        	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
         	var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
             var testAlp = /^[a-zA-Z\s\d\/]+$/;
             var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
@@ -3217,7 +3217,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
             }
             $scope.liinput = function() {
-            	var testId = /^[a-z0-9_]{3,10}$/;
+            	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
             	var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
                 var testAlp = /^[a-zA-Z\s\d\/]+$/;
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
