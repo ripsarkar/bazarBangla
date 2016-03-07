@@ -630,55 +630,70 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
         }
 
         $scope.UseCaseformSubmit = function() {
+        	
+        	var testId = /^[a-z0-9_]{3,10}$/;
+        	var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
+            var testAlp = /^[a-zA-Z\s\d\/]+$/;
+            var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+            
+            if($scope.usecaseID == ''  || !testId.test($scope.usecaseID)){
+                alert('Please enter a valid Use Case Id(no special character)');
+                return false;
+            }
+            else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
+                alert('Please enter a valid Use Case Name(no special character)');
+                return false;
+            }
+            else{
+                //var Indtsyarray = [];
+                var Essptarray = [];
+                var CategoryGr = [];
+                var ThdCrt = [];
 
-            //var Indtsyarray = [];
-            var Essptarray = [];
-            var CategoryGr = [];
-            var ThdCrt = [];
-
-            if (typeof $scope.UsecaseEsseprt != 'undefined' && $scope.UsecaseEsseprt.length > 0) {
-                for (var j = 0; j < $scope.UsecaseEsseprt.length; j++) {
-                    var Esspt = {};
-                    Esspt.surrId = $scope.UsecaseEsseprt[j];
-                    Essptarray.push(Esspt);
+                if (typeof $scope.UsecaseEsseprt != 'undefined' && $scope.UsecaseEsseprt.length > 0) {
+                    for (var j = 0; j < $scope.UsecaseEsseprt.length; j++) {
+                        var Esspt = {};
+                        Esspt.surrId = $scope.UsecaseEsseprt[j];
+                        Essptarray.push(Esspt);
+                    }
                 }
-            }
 
-            if (typeof $scope.RegCrtltables != 'undefined' && $scope.RegCrtltables.length > 0) {
-                for (var k = 0; k < $scope.RegCrtltables.length; k++) {
-                    var RegCrtldat = {};
-                    RegCrtldat.RegCatSurrId = $scope.RegCrtltables[k].Regcat_SurrId;
-                    RegCrtldat.RegPubSurrId = $scope.RegCrtltables[k].RegPub_SurrId;
-                    RegCrtldat.RegCntlSurrId = $scope.RegCrtltables[k].RegCrtl_SurrId;
-                    CategoryGr.push(RegCrtldat);
+                if (typeof $scope.RegCrtltables != 'undefined' && $scope.RegCrtltables.length > 0) {
+                    for (var k = 0; k < $scope.RegCrtltables.length; k++) {
+                        var RegCrtldat = {};
+                        RegCrtldat.RegCatSurrId = $scope.RegCrtltables[k].Regcat_SurrId;
+                        RegCrtldat.RegPubSurrId = $scope.RegCrtltables[k].RegPub_SurrId;
+                        RegCrtldat.RegCntlSurrId = $scope.RegCrtltables[k].RegCrtl_SurrId;
+                        CategoryGr.push(RegCrtldat);
+                    }
                 }
-            }
 
-            var UsecasePostJson = {
-                useCase: UsecaseService.getUsecasecrtdata(),
-                industry: UsecaseService.getindsty(),
-                EP: Essptarray,
-                CategoryGroup: CategoryGr
-            }
+                var UsecasePostJson = {
+                    useCase: UsecaseService.getUsecasecrtdata(),
+                    industry: UsecaseService.getindsty(),
+                    EP: Essptarray,
+                    CategoryGroup: CategoryGr
+                }
 
-            if (CategoryGr.length != 0) {
-                if (UsecaseService.getUpdateUsecase().SurrId != '' && UsecaseService.getUpdateUsecase().SurrId != 'undefined') {
-                    $http.post($rootScope.url + '/saveUseCase', UsecasePostJson).success(function(data, status, headers, config) {
-                        UsecaseService.setbtnbackUC("");
-                        UsecaseService.setcreateregbackuc("");
-                        UsecaseService.setpagesflag("");
-                        alert("Uescase Created Successfully ");
-                        $scope.goTo();
-                    }).error(function(data, status, headers, config) {
-                        alert("Sorry Application error in serverside");
-                    });
+                if (CategoryGr.length != 0) {
+                    if (UsecaseService.getUpdateUsecase().SurrId != '' && UsecaseService.getUpdateUsecase().SurrId != 'undefined') {
+                        $http.post($rootScope.url + '/saveUseCase', UsecasePostJson).success(function(data, status, headers, config) {
+                            UsecaseService.setbtnbackUC("");
+                            UsecaseService.setcreateregbackuc("");
+                            UsecaseService.setpagesflag("");
+                            alert("Uescase Created Successfully ");
+                            $scope.goTo();
+                        }).error(function(data, status, headers, config) {
+                            alert("Sorry Application error in serverside");
+                        });
+                    } else {
+                        alert("Please fill all mandatory fields");
+                        $state.go('home.updateUsecase');
+                    }
+
                 } else {
                     alert("Please fill all mandatory fields");
-                    $state.go('home.updateUsecase');
                 }
-
-            } else {
-                alert("Please fill all mandatory fields");
             }
         }
 
@@ -2200,7 +2215,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     return false;
                 }
                 else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
-                    alert('Please enter a valid Use Case Name');
+                    alert('Please enter a valid Use Case Name(no special character)');
                     return false;
                 }
                 else{
