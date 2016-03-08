@@ -2,11 +2,12 @@
 
 app.controller("permissionsCtrl",["$scope","$http", "$rootScope","$q","$timeout", function($scope, $http,$rootScope,$q,$timeout){
           $scope.membertabOrga = true;
-
+		  $scope.dummyMembertabOrga = false;
   $scope.$watch(function(){
       
-      if($rootScope.tabName == "User"){
+      if($rootScope.tabName == "User" || $rootScope.tabName == "Role"){
         $scope.membertabOrga = false;
+		$scope.dummyMembertabOrga = true;
       }
   });
   ///////////////////////////////////////////////////////////
