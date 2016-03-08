@@ -2863,7 +2863,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                             Thdctrltb.ThdPub = "  ";
                             Thdctrltb.ThdPub_SurrId = " ";
                         } else {
-                            checkthd = 1;
+                            //checkthd = 1;
                         }
                     }
 
@@ -2875,7 +2875,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                             Thdctrltb.ThdCrtl = "  ";
                             Thdctrltb.ThdCrtl_SurrId = " ";
                         } else {
-                            checkthd = 1;
+                            //checkthd = 1;
                         }
                     }
                     var arr = Thdctrltb;
@@ -2920,7 +2920,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         Thdctrltb.Thdcat = $scope.thdCapeName + "  " + $scope.thdCapeID;
                         Thdctrltb.Thdcat_SurrId = $scope.UsecasecapecCat;
                     } else {
-                        checkonethd = 1;
+                        //checkonethd = 1;
                     }
 
                     if (typeof $scope.thdMetaName != 'undefined' && $scope.thdMetaName != "" && $scope.UsecaseMetaAtt != "" && $scope.UsecaseMetaAtt.length != 0 && $scope.UsecaseMetaAtt != " ") {
@@ -2931,7 +2931,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                             Thdctrltb.ThdPub = "  ";
                             Thdctrltb.ThdPub_SurrId = " ";
                         } else {
-                            checkonethd = 1;
+                            //checkonethd = 1;
                         }
                     }
 
@@ -2943,7 +2943,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                             Thdctrltb.ThdCrtl = "  ";
                             Thdctrltb.ThdCrtl_SurrId = " ";
                         } else {
-                            checkonethd = 1;
+                            //checkonethd = 1;
                         }
                     }
 
