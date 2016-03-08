@@ -225,6 +225,7 @@
      <td><input type="checkbox" value="update" class="updateorg updateorgGen" data-objectval="{{companycr.name}}" ng-click="updaindOrg($event)" ng-disabled="disableUpdateOrg"></td>
      <td><input type="checkbox" value="delete" class="deleteorg deleteorgGen" data-objectval="{{companycr.name}}" ng-click="deleindOrg($event)" ng-disabled="disableDeleteOrg"></td>
      <td ng-hide="membertabOrga"><input type="checkbox" value="member" class="memberorg memberorgGen" data-objectval="{{companycr.name}}" ng-click="membindOrg($event)" ng-disabled="disableMemberOrg"></td>
+     <td ng-hide="dummyMembertabOrga"></td>
     </tr>
 	     
      </tbody>
