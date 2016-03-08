@@ -3218,7 +3218,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             }
             $scope.liinput = function() {
             	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-            	var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
+            	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
                 var testAlp = /^[a-zA-Z\s\d\/]+$/;
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                 
