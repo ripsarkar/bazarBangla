@@ -321,7 +321,7 @@ $scope.goTo = function() {
     var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
     
     if($scope.usecaseID == ''  || !testId.test($scope.usecaseID)){
-        alert('Please enter a valid Use Case Id(no special character)');
+        alert('Please enter a valid Use Case Id(special characters allowed: _-.)');
         return false;
     }
     else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
@@ -1179,7 +1179,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
             var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
             
             if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                alert('Please enter a valid Rule Id(no special character)');
+                alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                 return false;
             }
             else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
@@ -1480,7 +1480,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
             var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
             
             if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                alert('Please enter a valid Rule Id(no special character)');
+                alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                 return false;
             }
             else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
@@ -1513,7 +1513,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
             var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
             
             if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                alert('Please enter a valid Rule Id(no special character)');
+                alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                 return false;
             }
             else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
@@ -1923,7 +1923,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                     
                     if($scope.usecaseID == ''  || !testId.test($scope.usecaseID)){
-                        alert('Please enter a valid Use Case Id(no special character)');
+                        alert('Please enter a valid Use Case Id(special characters allowed: _-.)');
                         return false;
                     }
                     else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
@@ -3030,7 +3030,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                 
                 if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                    alert('Please enter a valid Rule Id(no special character)');
+                    alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                     return false;
                 }
                 else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
@@ -3308,7 +3308,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                 
                 if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                    alert('Please enter a valid Rule Id(no special character)');
+                    alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                     return false;
                 }
                 else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
@@ -3340,7 +3340,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                 
                 if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                    alert('Please enter a valid Rule Id(no special character)');
+                    alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                     return false;
                 }
                 else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
@@ -3387,7 +3387,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                 
                 if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                    alert('Please enter a valid Rule Id(no special character)');
+                    alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                     return false;
                 }
                 else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
@@ -3420,7 +3420,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
             
             if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                alert('Please enter a valid Rule Id(no special character)');
+                alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                 return false;
             }
             else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
