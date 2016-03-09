@@ -180,20 +180,35 @@ app.controller("updaterole", ["$scope", "$rootScope", "$state", '$http', '$modal
      $scope.cpmysurrid();
  
      $scope.updateroleForm = function(id, roleId, roleName, roleDesc, index) {
-         var roleselecteddata = {
-             id: id,
-             roleid:roleId,
-             rolename:roleName,
-             roleDesc:roleDesc,
-             index:index,
-             orgName:$scope.orgName
-         };
-         feedback_model.setroleselected_data(roleselecteddata);
-         var modalInstance = $modal.open({
-             templateUrl: 'updaterolepop.html',
-             controller: 'updaterolepop',
-             size: 'md'
-         });
+    	 var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
+     	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+         var testAlp = /^[a-zA-Z\s\d\/]+$/;
+         var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+         
+         if($scope.roleId == ''  || !testId.test($scope.roleId)){
+             alert('Please enter a valid Role Id(no special character)');
+             return false;
+         }
+         else if($scope.roleName == ''  || !testAlpNu.test($scope.roleName)){
+             alert('Please enter a valid Role Name');
+             return false;
+         }
+         else{
+        	 var roleselecteddata = {
+                     id: id,
+                     roleid:roleId,
+                     rolename:roleName,
+                     roleDesc:roleDesc,
+                     index:index,
+                     orgName:$scope.orgName
+                 };
+                 feedback_model.setroleselected_data(roleselecteddata);
+                 var modalInstance = $modal.open({
+                     templateUrl: 'updaterolepop.html',
+                     controller: 'updaterolepop',
+                     size: 'md'
+                 }); 
+         }
      };
     
 }]);
@@ -255,29 +270,45 @@ app.controller('updaterolepop', ['$scope', '$modalInstance', '$rootScope', '$sta
      $scope.roleForm(rolemodeldata);
 
      $scope.updatarolesubmit = function(id) {
-             if($scope.roleuptFrm.roleId !="" && $scope.roleuptFrm.roleId !="" &&typeof $scope.roleuptFrm.roleId !='undefined' && $scope.roleuptFrm.rolename !="" && $scope.roleuptFrm.rolename !=null && typeof $scope.roleuptFrm.rolename != 'undefined' ){
-             $scope.PostJson_role = {
-                 "role_id": $scope.roleuptFrm.roleId,
-                 "role_name": $scope.roleuptFrm.rolename,
-                 "role_desc": $scope.roleuptFrm.role_desc,
-                 "company_surr_id": rolemodeldata.orgName,
-                 "role_surr_id": $scope.roleuptFrm.id
-             };
-             $http.post($rootScope.url + '/updateRole/', $scope.PostJson_role).success(function(data, status, headers, config) {
-                 $scope.cancel();
-                 $scope.reSet();
-                 $rootScope.loadinganimation = false;
-                 alert("Update Role saved successfully");
-                 $rootScope.dataUpdated = true;
-             }).error(function(data, status, headers, config) {
-                 $scope.cancel();
-                 $scope.reSet();
-                 $rootScope.loadinganimation = false;
-                 alert(data.ErrMsg);
-             });
-             }else{
-             	alert('Please fill all *Mandatory fields');
-             }
+    	 var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
+      	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+          var testAlp = /^[a-zA-Z\s\d\/]+$/;
+          var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+          
+          if($scope.roleuptFrm.roleId == ''  || !testId.test($scope.roleuptFrm.roleId)){
+              alert('Please enter a valid Role Id(no special character)');
+              return false;
+          }
+          else if($scope.roleuptFrm.rolename == ''  || !testAlpNu.test($scope.roleuptFrm.rolename)){
+              alert('Please enter a valid Role Name');
+              return false;
+          }
+          else{
+        	  if($scope.roleuptFrm.roleId !="" && $scope.roleuptFrm.roleId !="" &&typeof $scope.roleuptFrm.roleId !='undefined' && $scope.roleuptFrm.rolename !="" && $scope.roleuptFrm.rolename !=null && typeof $scope.roleuptFrm.rolename != 'undefined' ){
+                  $scope.PostJson_role = {
+                      "role_id": $scope.roleuptFrm.roleId,
+                      "role_name": $scope.roleuptFrm.rolename,
+                      "role_desc": $scope.roleuptFrm.role_desc,
+                      "company_surr_id": rolemodeldata.orgName,
+                      "role_surr_id": $scope.roleuptFrm.id
+                  };
+                  $http.post($rootScope.url + '/updateRole/', $scope.PostJson_role).success(function(data, status, headers, config) {
+                      $scope.cancel();
+                      $scope.reSet();
+                      $rootScope.loadinganimation = false;
+                      alert("Update Role saved successfully");
+                      $rootScope.dataUpdated = true;
+                  }).error(function(data, status, headers, config) {
+                      $scope.cancel();
+                      $scope.reSet();
+                      $rootScope.loadinganimation = false;
+                      alert(data.ErrMsg);
+                  });
+                  }else{
+                  	alert('Please fill all *Mandatory fields');
+                  }
+          }
+             
          };
 
  }]);
