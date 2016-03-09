@@ -33,25 +33,41 @@ app.controller("createrolecrt", ["$scope", "$rootScope", "$state", '$http', '$mo
     $scope.cpmysurrid();
     
     $scope.submitrole = function(){
-        if( $scope.createroleid !="" && $scope.createroleid != 'undefined' && $scope.createrolename !="" && $scope.createrolename !='undefined'  && typeof $scope.orgName != 'undefined' && $scope.orgName !=""){
-            var crtrole = {
-                role_id : $scope.createroleid,
-                role_name : $scope.createrolename,
-                role_desc : $scope.createroledescp,
-                company_surr_id : $scope.orgName
-            }
-            
-            var postURLrole = $rootScope.url+'/createNewRole';
-           $http.post(postURLrole, crtrole).success(function(data, status, headers, config) {
-               alert('Role Created succesfully');
-               $scope.reSet();
-           }).error(function(data, status, headers, config) {
-               alert("Please contact your adminstrator");
-               $scope.reSet();
-           });
-        }else{
-            alert('Please fill all *mandatory fields')
+    	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
+    	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+        var testAlp = /^[a-zA-Z\s\d\/]+$/;
+        var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+        
+        if($scope.createroleid == ''  || !testId.test($scope.createroleid)){
+            alert('Please enter a valid Role Id(no special character)');
+            return false;
         }
+        else if($scope.createrolename == ''  || !testAlpNu.test($scope.createrolename)){
+            alert('Please enter a valid Role Name(no special character)');
+            return false;
+        }
+        else{
+        	if( $scope.createroleid !="" && $scope.createroleid != 'undefined' && $scope.createrolename !="" && $scope.createrolename !='undefined'  && typeof $scope.orgName != 'undefined' && $scope.orgName !=""){
+                var crtrole = {
+                    role_id : $scope.createroleid,
+                    role_name : $scope.createrolename,
+                    role_desc : $scope.createroledescp,
+                    company_surr_id : $scope.orgName
+                }
+                
+                var postURLrole = $rootScope.url+'/createNewRole';
+               $http.post(postURLrole, crtrole).success(function(data, status, headers, config) {
+                   alert('Role Created succesfully');
+                   $scope.reSet();
+               }).error(function(data, status, headers, config) {
+                   alert("Please contact your adminstrator");
+                   $scope.reSet();
+               });
+            }else{
+                alert('Please fill all *mandatory fields')
+            }
+        }
+        
     }
 
 }]);
