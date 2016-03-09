@@ -791,7 +791,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                     Thdctrltb.ThdPub = "  ";
                     Thdctrltb.ThdPub_SurrId = " ";
                 } else {
-                    checkthd = 1;
+                    //checkthd = 1;
                 }
             }
 
@@ -803,7 +803,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                     Thdctrltb.ThdCrtl = "  ";
                     Thdctrltb.ThdCrtl_SurrId = " ";
                 } else {
-                    checkthd = 1;
+                    //checkthd = 1;
                 }
             }
             var arr = Thdctrltb;
@@ -848,7 +848,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 Thdctrltb.Thdcat = $scope.thdCapeName + "  " + $scope.thdCapeID;
                 Thdctrltb.Thdcat_SurrId = $scope.UsecasecapecCat;
             } else {
-                checkonethd = 1;
+                //checkonethd = 1;
             }
 
             if (typeof $scope.thdMetaName != 'undefined' && $scope.thdMetaName != "" && $scope.UsecaseMetaAtt != "" && $scope.UsecaseMetaAtt.length != 0 && $scope.UsecaseMetaAtt != " ") {
@@ -859,7 +859,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                     Thdctrltb.ThdPub = "  ";
                     Thdctrltb.ThdPub_SurrId = " ";
                 } else {
-                    checkonethd = 1;
+                    //checkonethd = 1;
                 }
             }
 
@@ -871,7 +871,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                     Thdctrltb.ThdCrtl = "  ";
                     Thdctrltb.ThdCrtl_SurrId = " ";
                 } else {
-                    checkonethd = 1;
+                    //checkonethd = 1;
                 }
             }
 
@@ -2308,7 +2308,7 @@ app.controller("updateRuleController", ["$scope", "$rootScope", "$state", '$http
                     Thdctrltb.ThdPub = "  ";
                     Thdctrltb.ThdPub_SurrId = " ";
                 } else {
-                    checkthd = 1;
+                    //checkthd = 1;
                 }
             }
 
@@ -2320,7 +2320,7 @@ app.controller("updateRuleController", ["$scope", "$rootScope", "$state", '$http
                     Thdctrltb.ThdCrtl = "  ";
                     Thdctrltb.ThdCrtl_SurrId = " ";
                 } else {
-                    checkthd = 1;
+                    //checkthd = 1;
                 }
             }
             var arr = Thdctrltb;
@@ -2365,7 +2365,7 @@ app.controller("updateRuleController", ["$scope", "$rootScope", "$state", '$http
                 Thdctrltb.Thdcat = $scope.thdCapeName + "  " + $scope.thdCapeID;
                 Thdctrltb.Thdcat_SurrId = $scope.UsecasecapecCat;
             } else {
-                checkonethd = 1;
+                //checkonethd = 1;
             }
 
             if (typeof $scope.thdMetaName != 'undefined' && $scope.thdMetaName != "" && $scope.UsecaseMetaAtt != "" && $scope.UsecaseMetaAtt.length != 0 && $scope.UsecaseMetaAtt != " ") {
@@ -2376,7 +2376,7 @@ app.controller("updateRuleController", ["$scope", "$rootScope", "$state", '$http
                     Thdctrltb.ThdPub = "  ";
                     Thdctrltb.ThdPub_SurrId = " ";
                 } else {
-                    checkonethd = 1;
+                    //checkonethd = 1;
                 }
             }
 
@@ -2388,7 +2388,7 @@ app.controller("updateRuleController", ["$scope", "$rootScope", "$state", '$http
                     Thdctrltb.ThdCrtl = "  ";
                     Thdctrltb.ThdCrtl_SurrId = " ";
                 } else {
-                    checkonethd = 1;
+                    //checkonethd = 1;
                 }
             }
 
