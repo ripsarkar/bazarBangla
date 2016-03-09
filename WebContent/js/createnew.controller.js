@@ -316,7 +316,7 @@ $scope.chckindustry = function() {
 $scope.goTo = function() {
 	
 	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-.]+$/;
     var testAlp = /^[a-zA-Z\s\d\/]+$/;
     var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
     
@@ -1174,7 +1174,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
         $scope.crtRuleSubmit = function() {
         	
         	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-        	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+        	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-.]+$/;
             var testAlp = /^[a-zA-Z\s\d\/]+$/;
             var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
             
@@ -1475,7 +1475,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
         }
         $scope.liinput = function() {
         	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-        	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+        	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-.]+$/;
             var testAlp = /^[a-zA-Z\s\d\/]+$/;
             var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
             
@@ -1508,7 +1508,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
 
         $scope.lioutput = function() {
         	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-        	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+        	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-.]+$/;
             var testAlp = /^[a-zA-Z\s\d\/]+$/;
             var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
             
@@ -1918,7 +1918,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
                 $scope.goTo = function() {
                 	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-                	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+                	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-.]+$/;
                     var testAlp = /^[a-zA-Z\s\d\/]+$/;
                     var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                     
@@ -3025,7 +3025,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             var ThdCrt = [];
             $scope.crtRuleSubmit = function() {
             	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-            	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+            	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-.]+$/;
                 var testAlp = /^[a-zA-Z\s\d\/]+$/;
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                 
@@ -3303,7 +3303,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             }
             $scope.liinput = function() {
             	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-            	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+            	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-.]+$/;
                 var testAlp = /^[a-zA-Z\s\d\/]+$/;
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                 
@@ -3335,7 +3335,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
             $scope.lioutput = function() {
             	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-            	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+            	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-.]+$/;
                 var testAlp = /^[a-zA-Z\s\d\/]+$/;
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                 
@@ -3382,7 +3382,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             }
             $scope.lithd = function() {
             	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-            	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+            	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-.]+$/;
                 var testAlp = /^[a-zA-Z\s\d\/]+$/;
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                 
@@ -3415,7 +3415,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
         $scope.lithd = function() {
         	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-        	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+        	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-.]+$/;
             var testAlp = /^[a-zA-Z\s\d\/]+$/;
             var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
             
