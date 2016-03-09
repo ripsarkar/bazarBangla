@@ -194,7 +194,15 @@ var updarorg = {
     $http(updarorg).success(function(result){
 
         alert("Organization updated");
-
+              //fetch permission api
+                          $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                              sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                              $scope.permission = sessionStorage.getItem("fetchPermission");
+                             // console.log(sessionStorage.getItem("fetchPermission"));
+                              $rootScope.loadinganimation = false;
+                          }).error(function (error) {
+                          alert("Server side error");
+                          });
 }).error(function(error){
 	alert("Internal server error");
 });

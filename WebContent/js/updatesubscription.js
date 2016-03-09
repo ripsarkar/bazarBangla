@@ -246,6 +246,15 @@ app.controller('subscptpop', ['$scope', '$modalInstance', '$rootScope', '$state'
                     $rootScope.loadinganimation = false;
                     alert("Update Subscription saved successfully");
                     $rootScope.dataUpdated = true;
+              //fetch permission api
+                          $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                              sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                              $scope.permission = sessionStorage.getItem("fetchPermission");
+                             // console.log(sessionStorage.getItem("fetchPermission"));
+                              $rootScope.loadinganimation = false;
+                          }).error(function (error) {
+                          alert("Server side error");
+                          });
                 }).error(function(data, status, headers, config) {
                     $scope.cancel();
                     $scope.subspcrtFrm.subscprtsurrId ="";

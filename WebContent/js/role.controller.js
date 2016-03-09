@@ -59,6 +59,15 @@ app.controller("createrolecrt", ["$scope", "$rootScope", "$state", '$http', '$mo
                $http.post(postURLrole, crtrole).success(function(data, status, headers, config) {
                    alert('Role Created succesfully');
                    $scope.reSet();
+              //fetch permission api
+                          $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                              sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                              $scope.permission = sessionStorage.getItem("fetchPermission");
+                             // console.log(sessionStorage.getItem("fetchPermission"));
+                              $rootScope.loadinganimation = false;
+                          }).error(function (error) {
+                          alert("Server side error");
+                          });
                }).error(function(data, status, headers, config) {
                    alert("Please contact your adminstrator");
                    $scope.reSet();
@@ -298,6 +307,15 @@ app.controller('updaterolepop', ['$scope', '$modalInstance', '$rootScope', '$sta
                       $rootScope.loadinganimation = false;
                       alert("Update Role saved successfully");
                       $rootScope.dataUpdated = true;
+              //fetch permission api
+                          $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                              sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                              $scope.permission = sessionStorage.getItem("fetchPermission");
+                             // console.log(sessionStorage.getItem("fetchPermission"));
+                              $rootScope.loadinganimation = false;
+                          }).error(function (error) {
+                          alert("Server side error");
+                          });
                   }).error(function(data, status, headers, config) {
                       $scope.cancel();
                       $scope.reSet();
