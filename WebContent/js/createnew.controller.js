@@ -686,6 +686,16 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
                             UsecaseService.setpagesflag("");
                             alert("Uescase Created Successfully ");
                             $scope.goTo();
+                          //call fetch permission API
+                          $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                              sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                              $scope.permission = sessionStorage.getItem("fetchPermission");
+                             // console.log(sessionStorage.getItem("fetchPermission"));
+                              $rootScope.loadinganimation = false;
+                          }).error(function (error) {
+                                alert("Server side error");
+                          });
+
                         }).error(function(data, status, headers, config) {
                             alert("Sorry Application error in serverside");
                         });
@@ -1334,6 +1344,15 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                         $state.go($state.current, {}, {
                             reload: true
                         });
+                        //fetch permission API call
+                          $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                              sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                              $scope.permission = sessionStorage.getItem("fetchPermission");
+                             // console.log(sessionStorage.getItem("fetchPermission"));
+                              $rootScope.loadinganimation = false;
+                          }).error(function (error) {
+                                alert("Server side error");
+                          });
                     }).error(function(data, status, headers, config) {
 
                     });
@@ -2306,6 +2325,15 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                                 UsecaseService.setbtnbackUpUC("");
                                 alert("Usecase updated Successfully");
                                 $scope.goTo();
+                                //fetch permission api call
+                                  $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                                      sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                                      $scope.permission = sessionStorage.getItem("fetchPermission");
+                                     // console.log(sessionStorage.getItem("fetchPermission"));
+                                      $rootScope.loadinganimation = false;
+                                  }).error(function (error) {
+                                        alert("Server side error");
+                                  });
                             }).error(function(data, status, headers, config) {
                                 alert("Sorry Application error in serverside");
                             });
@@ -3151,6 +3179,15 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                             ThdCrt.length = 0;
                             $scope.ThdCrttables.length = 0;
                             $scope.reSetupdate();
+                            //fetch permission api call
+                          $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                              sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                              $scope.permission = sessionStorage.getItem("fetchPermission");
+                             // console.log(sessionStorage.getItem("fetchPermission"));
+                              $rootScope.loadinganimation = false;
+                          }).error(function (error) {
+                                alert("Server side error");
+                          });
                         }).error(function(data, status, headers, config) {
                             alert("Sorry Application error in serverside");
                         });
