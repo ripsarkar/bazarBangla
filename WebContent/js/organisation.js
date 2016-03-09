@@ -141,6 +141,15 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
 
             $http(callpost).success(function(data){
               alert("A request for Organisation sent");
+              //fetch permission
+                          $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                              sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                              $scope.permission = sessionStorage.getItem("fetchPermission");
+                             // console.log(sessionStorage.getItem("fetchPermission"));
+                              $rootScope.loadinganimation = false;
+                          }).error(function (error) {
+                          alert("Server side error");
+                          });
             }).error(function(error){
               alert("Registering Organisation failure");
             });

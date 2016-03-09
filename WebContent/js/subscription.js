@@ -114,6 +114,15 @@ app.directive("xyzcomp", function($http,$rootScope){
             $http(callpost).success(function(data){
               alert("Subcription created successfully");
               $rootScope.loadinganimation=false;
+              //fetch permission api
+                          $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                              sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                              $scope.permission = sessionStorage.getItem("fetchPermission");
+                             // console.log(sessionStorage.getItem("fetchPermission"));
+                              $rootScope.loadinganimation = false;
+                          }).error(function (error) {
+                          alert("Server side error");
+                          });
             }).error(function(error){
               $rootScope.loadinganimation=false;
               if(error.ErrMsg !='undefined'){
