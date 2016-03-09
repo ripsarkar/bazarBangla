@@ -314,27 +314,44 @@ $scope.chckindustry = function() {
 }
 
 $scope.goTo = function() {
-    if (typeof $scope.usecaseDescrip == 'undefined') {
-        $scope.usecaseDescrip = "";
-    }
-    $scope.useCase = {
-        id: $scope.usecaseID,
-        name: $scope.usecaseName,
-        description: $scope.usecaseDescrip,
-        cyberFuncSurrId: $scope.frameWork,
-        UCCatSurrId: $scope.useCaseCat,
-        UCSubCatSurrId: $scope.useCaseSubcat
-    };
-    UsecaseService.setindsty(Indtsyarray);
-    UsecaseService.setUsecasecrtdata($scope.useCase);
+	
+	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
+	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+    var testAlp = /^[a-zA-Z\s\d\/]+$/;
+    var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
     
-    
-    if (typeof $scope.usecaseID != 'undefined' && typeof $scope.usecaseName != 'undefined' && typeof $scope.frameWork != 'undefined' && typeof $scope.useCaseCat != 'undefined' && typeof $scope.useCaseSubcat != 'undefined' && $scope.frameWork != '' && $scope.useCaseCat != '' && $scope.useCaseSubcat != '' && Indtsyarray.length != 0) {
-        UsecaseService.setpagesflag(chkflag);
-        $state.go("home.createReg");
-    } else {
-        alert("Please fill all mandatory fields");
+    if($scope.usecaseID == ''  || !testId.test($scope.usecaseID)){
+        alert('Please enter a valid Use Case Id(no special character)');
+        return false;
     }
+    else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
+        alert('Please enter a valid Use Case Name');
+        return false;
+    }
+    else{
+    	if (typeof $scope.usecaseDescrip == 'undefined') {
+            $scope.usecaseDescrip = "";
+        }
+        $scope.useCase = {
+            id: $scope.usecaseID,
+            name: $scope.usecaseName,
+            description: $scope.usecaseDescrip,
+            cyberFuncSurrId: $scope.frameWork,
+            UCCatSurrId: $scope.useCaseCat,
+            UCSubCatSurrId: $scope.useCaseSubcat
+        };
+        UsecaseService.setindsty(Indtsyarray);
+        UsecaseService.setUsecasecrtdata($scope.useCase);
+        
+        
+        if (typeof $scope.usecaseID != 'undefined' && typeof $scope.usecaseName != 'undefined' && typeof $scope.frameWork != 'undefined' && typeof $scope.useCaseCat != 'undefined' && typeof $scope.useCaseSubcat != 'undefined' && $scope.frameWork != '' && $scope.useCaseCat != '' && $scope.useCaseSubcat != '' && Indtsyarray.length != 0) {
+            UsecaseService.setpagesflag(chkflag);
+            $state.go("home.createReg");
+        } else {
+            alert("Please fill all mandatory fields");
+        }
+    }
+    
 }
 
 angular.element('form').click(function(event){
@@ -630,56 +647,66 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
         }
 
         $scope.UseCaseformSubmit = function() {
+        	
+                //var Indtsyarray = [];
+                var Essptarray = [];
+                var CategoryGr = [];
+                var ThdCrt = [];
 
-            //var Indtsyarray = [];
-            var Essptarray = [];
-            var CategoryGr = [];
-            var ThdCrt = [];
-
-            if (typeof $scope.UsecaseEsseprt != 'undefined' && $scope.UsecaseEsseprt.length > 0) {
-                for (var j = 0; j < $scope.UsecaseEsseprt.length; j++) {
-                    var Esspt = {};
-                    Esspt.surrId = $scope.UsecaseEsseprt[j];
-                    Essptarray.push(Esspt);
+                if (typeof $scope.UsecaseEsseprt != 'undefined' && $scope.UsecaseEsseprt.length > 0) {
+                    for (var j = 0; j < $scope.UsecaseEsseprt.length; j++) {
+                        var Esspt = {};
+                        Esspt.surrId = $scope.UsecaseEsseprt[j];
+                        Essptarray.push(Esspt);
+                    }
                 }
-            }
 
-            if (typeof $scope.RegCrtltables != 'undefined' && $scope.RegCrtltables.length > 0) {
-                for (var k = 0; k < $scope.RegCrtltables.length; k++) {
-                    var RegCrtldat = {};
-                    RegCrtldat.RegCatSurrId = $scope.RegCrtltables[k].Regcat_SurrId;
-                    RegCrtldat.RegPubSurrId = $scope.RegCrtltables[k].RegPub_SurrId;
-                    RegCrtldat.RegCntlSurrId = $scope.RegCrtltables[k].RegCrtl_SurrId;
-                    CategoryGr.push(RegCrtldat);
+                if (typeof $scope.RegCrtltables != 'undefined' && $scope.RegCrtltables.length > 0) {
+                    for (var k = 0; k < $scope.RegCrtltables.length; k++) {
+                        var RegCrtldat = {};
+                        RegCrtldat.RegCatSurrId = $scope.RegCrtltables[k].Regcat_SurrId;
+                        RegCrtldat.RegPubSurrId = $scope.RegCrtltables[k].RegPub_SurrId;
+                        RegCrtldat.RegCntlSurrId = $scope.RegCrtltables[k].RegCrtl_SurrId;
+                        CategoryGr.push(RegCrtldat);
+                    }
                 }
-            }
 
-            var UsecasePostJson = {
-                useCase: UsecaseService.getUsecasecrtdata(),
-                industry: UsecaseService.getindsty(),
-                EP: Essptarray,
-                CategoryGroup: CategoryGr
-            }
+                var UsecasePostJson = {
+                    useCase: UsecaseService.getUsecasecrtdata(),
+                    industry: UsecaseService.getindsty(),
+                    EP: Essptarray,
+                    CategoryGroup: CategoryGr
+                }
 
-            if (CategoryGr.length != 0) {
-                if (UsecaseService.getUpdateUsecase().SurrId != '' && UsecaseService.getUpdateUsecase().SurrId != 'undefined') {
-                    $http.post($rootScope.url + '/saveUseCase', UsecasePostJson).success(function(data, status, headers, config) {
-                        UsecaseService.setbtnbackUC("");
-                        UsecaseService.setcreateregbackuc("");
-                        UsecaseService.setpagesflag("");
-                        alert("Uescase Created Successfully ");
-                        $scope.goTo();
-                    }).error(function(data, status, headers, config) {
-                        alert("Sorry Application error in serverside");
-                    });
+                if (CategoryGr.length != 0) {
+                    if (UsecaseService.getUpdateUsecase().SurrId != '' && UsecaseService.getUpdateUsecase().SurrId != 'undefined') {
+                        $http.post($rootScope.url + '/saveUseCase', UsecasePostJson).success(function(data, status, headers, config) {
+                            UsecaseService.setbtnbackUC("");
+                            UsecaseService.setcreateregbackuc("");
+                            UsecaseService.setpagesflag("");
+                            alert("Uescase Created Successfully ");
+                            $scope.goTo();
+                          //call fetch permission API
+                          $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                              sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                              $scope.permission = sessionStorage.getItem("fetchPermission");
+                             // console.log(sessionStorage.getItem("fetchPermission"));
+                              $rootScope.loadinganimation = false;
+                          }).error(function (error) {
+                                alert("Server side error");
+                          });
+
+                        }).error(function(data, status, headers, config) {
+                            alert("Sorry Application error in serverside");
+                        });
+                    } else {
+                        alert("Please fill all mandatory fields");
+                        $state.go('home.updateUsecase');
+                    }
+
                 } else {
                     alert("Please fill all mandatory fields");
-                    $state.go('home.updateUsecase');
                 }
-
-            } else {
-                alert("Please fill all mandatory fields");
-            }
         }
 
         $scope.isBack = function() {
@@ -1028,7 +1055,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                         Thdctrltb.ThdPub = "  ";
                         Thdctrltb.ThdPub_SurrId = " ";
                     } else {
-                        checkthd = 1;
+                        //checkthd = 1;
                     }
                 }
 
@@ -1040,7 +1067,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                         Thdctrltb.ThdCrtl = "  ";
                         Thdctrltb.ThdCrtl_SurrId = " ";
                     } else {
-                        checkthd = 1;
+                        //checkthd = 1;
                     }
                 }
                 var arr = Thdctrltb;
@@ -1085,7 +1112,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                     Thdctrltb.Thdcat = $scope.thdCapeName + "  " + $scope.thdCapeID;
                     Thdctrltb.Thdcat_SurrId = $scope.UsecasecapecCat;
                 } else {
-                    checkonethd = 1;
+                    //checkonethd = 1;
                 }
 
                 if (typeof $scope.thdMetaName != 'undefined' && $scope.thdMetaName != "" && $scope.UsecaseMetaAtt != "" && $scope.UsecaseMetaAtt.length != 0 && $scope.UsecaseMetaAtt != " ") {
@@ -1096,7 +1123,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                         Thdctrltb.ThdPub = "  ";
                         Thdctrltb.ThdPub_SurrId = " ";
                     } else {
-                        checkonethd = 1;
+                        //checkonethd = 1;
                     }
                 }
 
@@ -1108,7 +1135,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                         Thdctrltb.ThdCrtl = "  ";
                         Thdctrltb.ThdCrtl_SurrId = " ";
                     } else {
-                        checkonethd = 1;
+                        //checkonethd = 1;
                     }
                 }
 
@@ -1145,169 +1172,196 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
         });
 
         $scope.crtRuleSubmit = function() {
-            var evtattri_SurrId = [];
-            var logSou_SurrId = [];
-            var crtRuleInput_SurrId = [];
-            var crtRuleOuput_SurrId = [];
+        	
+        	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
+        	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+            var testAlp = /^[a-zA-Z\s\d\/]+$/;
+            var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+            
+            if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
+                alert('Please enter a valid Rule Id(no special character)');
+                return false;
+            }
+            else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                alert('Please enter a valid Rule Name');
+                return false;
+            }
+            else{
+            	var evtattri_SurrId = [];
+                var logSou_SurrId = [];
+                var crtRuleInput_SurrId = [];
+                var crtRuleOuput_SurrId = [];
 
 
 
-            if (typeof $scope.crtRuleTrsn != 'undefined') {
-                for (var k = 0; k < $scope.crtRuleTrsn.length; k++) {
-                    var crtRuleTrsnId = {};
-                    crtRuleTrsnId.SurrId = $scope.crtRuleTrsn[k];
-                    crtRuleInput_SurrId.push(crtRuleTrsnId);
+                if (typeof $scope.crtRuleTrsn != 'undefined') {
+                    for (var k = 0; k < $scope.crtRuleTrsn.length; k++) {
+                        var crtRuleTrsnId = {};
+                        crtRuleTrsnId.SurrId = $scope.crtRuleTrsn[k];
+                        crtRuleInput_SurrId.push(crtRuleTrsnId);
+                    }
                 }
-            }
 
-            if (typeof $scope.crtRuleRefr != 'undefined') {
-                for (var z = 0; z < $scope.crtRuleRefr.length; z++) {
-                    var crtRuleRefrId = {};
-                    crtRuleRefrId.SurrId = $scope.crtRuleRefr[z];
-                    crtRuleInput_SurrId.push(crtRuleRefrId);
+                if (typeof $scope.crtRuleRefr != 'undefined') {
+                    for (var z = 0; z < $scope.crtRuleRefr.length; z++) {
+                        var crtRuleRefrId = {};
+                        crtRuleRefrId.SurrId = $scope.crtRuleRefr[z];
+                        crtRuleInput_SurrId.push(crtRuleRefrId);
+                    }
                 }
-            }
 
-            if (typeof $scope.crtRuleEventName != 'undefined') {
-                for (var w = 0; w < $scope.crtRuleEventName.length; w++) {
-                    var crtRuleEventNameId = {};
-                    crtRuleEventNameId.SurrId = $scope.crtRuleEventName[w];
-                    crtRuleInput_SurrId.push(crtRuleEventNameId);
+                if (typeof $scope.crtRuleEventName != 'undefined') {
+                    for (var w = 0; w < $scope.crtRuleEventName.length; w++) {
+                        var crtRuleEventNameId = {};
+                        crtRuleEventNameId.SurrId = $scope.crtRuleEventName[w];
+                        crtRuleInput_SurrId.push(crtRuleEventNameId);
+                    }
                 }
-            }
 
-            if (typeof $scope.crtRuleEventAttribute != 'undefined') {
-                for (var i = 0; i < $scope.crtRuleEventAttribute.length; i++) {
-                    var evtattri = {};
-                    evtattri.SurrId = $scope.crtRuleEventAttribute[i];
-                    evtattri_SurrId.push(evtattri);
+                if (typeof $scope.crtRuleEventAttribute != 'undefined') {
+                    for (var i = 0; i < $scope.crtRuleEventAttribute.length; i++) {
+                        var evtattri = {};
+                        evtattri.SurrId = $scope.crtRuleEventAttribute[i];
+                        evtattri_SurrId.push(evtattri);
+                    }
                 }
-            }
 
-            if (typeof $scope.crtRuleLogSource != 'undefined') {
-                for (var j = 0; j < $scope.crtRuleLogSource.length; j++) {
-                    var logSouId = {};
-                    logSouId.SurrId = $scope.crtRuleLogSource[j];
-                    logSou_SurrId.push(logSouId);
+                if (typeof $scope.crtRuleLogSource != 'undefined') {
+                    for (var j = 0; j < $scope.crtRuleLogSource.length; j++) {
+                        var logSouId = {};
+                        logSouId.SurrId = $scope.crtRuleLogSource[j];
+                        logSou_SurrId.push(logSouId);
+                    }
                 }
-            }
 
 
-            if (typeof $scope.crtRuleReport != 'undefined') {
-                for (var u = 0; u < $scope.crtRuleReport.length; u++) {
-                    var crtRuleReportId = {};
-                    crtRuleReportId.SurrId = $scope.crtRuleReport[u];
-                    crtRuleOuput_SurrId.push(crtRuleReportId);
+                if (typeof $scope.crtRuleReport != 'undefined') {
+                    for (var u = 0; u < $scope.crtRuleReport.length; u++) {
+                        var crtRuleReportId = {};
+                        crtRuleReportId.SurrId = $scope.crtRuleReport[u];
+                        crtRuleOuput_SurrId.push(crtRuleReportId);
+                    }
                 }
-            }
 
 
 
-            var ruleOutput = [{
-                SurrId: $scope.crtRuleDashBoard,
-            }, {
-                SurrId: $scope.crtRuleAlert,
-            }, {
-                SurrId: $scope.crtReferSet,
-            }, {
-                SurrId: $scope.crtRuleComments
-            }];
+                var ruleOutput = [{
+                    SurrId: $scope.crtRuleDashBoard,
+                }, {
+                    SurrId: $scope.crtRuleAlert,
+                }, {
+                    SurrId: $scope.crtReferSet,
+                }, {
+                    SurrId: $scope.crtRuleComments
+                }];
 
-            for (var w = 0; w < ruleOutput.length; w++) {
-                if (typeof ruleOutput[w].SurrId != 'undefined' && ruleOutput[w].SurrId != '') {
-                    crtRuleOuput_SurrId.push(ruleOutput[w]);
+                for (var w = 0; w < ruleOutput.length; w++) {
+                    if (typeof ruleOutput[w].SurrId != 'undefined' && ruleOutput[w].SurrId != '') {
+                        crtRuleOuput_SurrId.push(ruleOutput[w]);
+                    }
                 }
-            }
 
-            if (typeof $scope.crtRuleDsecpt == 'undefined') {
-                $scope.crtRuleDsecpt = "";
-            }
-            if (typeof $scope.crtRulepesducode == 'undefined') {
-                $scope.crtRulepesducode = "";
-            }
-            if (typeof $scope.crtRuletestlogic == 'undefined') {
-                $scope.crtRuletestlogic = "";
-            }
-            if (typeof $scope.crtRuleReportlogic == 'undefined') {
-                $scope.crtRuleReportlogic = "";
-            }
-            if (typeof $scope.crtRuleSaveSrchlogic == 'undefined') {
-                $scope.crtRuleSaveSrchlogic = "";
-            }
-            if (typeof $scope.crtRuleBuildlogic == 'undefined') {
-                $scope.crtRuleBuildlogic = "";
-            }
-            if (typeof $scope.crtRuleRefSetInc == 'undefined') {
-                $scope.crtRuleRefSetInc = "";
-            }
-            if (typeof $scope.crtRuleResponse == 'undefined') {
-                $scope.crtRuleResponse = "";
-            }
-            if (typeof $scope.crtRuleDsecpt == 'undefined') {
-                $scope.crtRuleDsecpt = "";
-            }
-            if (typeof $scope.crtRuleEventName == 'undefined') {
-                $scope.crtRuleEventName = "";
-            }
-            if (typeof $scope.crtReferSet == 'undefined') {
-                $scope.crtReferSet = "";
-            }
-
-            var ThdCrt = [];
-            if (typeof $scope.ThdCrttables != 'undefined' && $scope.ThdCrttables.length > 0) {
-                for (var g = 0; g < $scope.ThdCrttables.length; g++) {
-                    var ThdCrtda = {};
-                    ThdCrtda.CapecSurrId = $scope.ThdCrttables[g].Thdcat_SurrId;
-                    ThdCrtda.MetaSurrId = $scope.ThdCrttables[g].ThdPub_SurrId;
-                    ThdCrtda.StandardId = $scope.ThdCrttables[g].ThdCrtl_SurrId;
-                    ThdCrt.push(ThdCrtda);
+                if (typeof $scope.crtRuleDsecpt == 'undefined') {
+                    $scope.crtRuleDsecpt = "";
                 }
-            }
+                if (typeof $scope.crtRulepesducode == 'undefined') {
+                    $scope.crtRulepesducode = "";
+                }
+                if (typeof $scope.crtRuletestlogic == 'undefined') {
+                    $scope.crtRuletestlogic = "";
+                }
+                if (typeof $scope.crtRuleReportlogic == 'undefined') {
+                    $scope.crtRuleReportlogic = "";
+                }
+                if (typeof $scope.crtRuleSaveSrchlogic == 'undefined') {
+                    $scope.crtRuleSaveSrchlogic = "";
+                }
+                if (typeof $scope.crtRuleBuildlogic == 'undefined') {
+                    $scope.crtRuleBuildlogic = "";
+                }
+                if (typeof $scope.crtRuleRefSetInc == 'undefined') {
+                    $scope.crtRuleRefSetInc = "";
+                }
+                if (typeof $scope.crtRuleResponse == 'undefined') {
+                    $scope.crtRuleResponse = "";
+                }
+                if (typeof $scope.crtRuleDsecpt == 'undefined') {
+                    $scope.crtRuleDsecpt = "";
+                }
+                if (typeof $scope.crtRuleEventName == 'undefined') {
+                    $scope.crtRuleEventName = "";
+                }
+                if (typeof $scope.crtReferSet == 'undefined') {
+                    $scope.crtReferSet = "";
+                }
+
+                var ThdCrt = [];
+                if (typeof $scope.ThdCrttables != 'undefined' && $scope.ThdCrttables.length > 0) {
+                    for (var g = 0; g < $scope.ThdCrttables.length; g++) {
+                        var ThdCrtda = {};
+                        ThdCrtda.CapecSurrId = $scope.ThdCrttables[g].Thdcat_SurrId;
+                        ThdCrtda.MetaSurrId = $scope.ThdCrttables[g].ThdPub_SurrId;
+                        ThdCrtda.StandardId = $scope.ThdCrttables[g].ThdCrtl_SurrId;
+                        ThdCrt.push(ThdCrtda);
+                    }
+                }
 
 
-            var crtRule_postJson = {
-                "UseCase": {
-                    "SurrId": $scope.crtUsercaseSurrId
-                },
-                "Rule": {
-                    "id": $scope.crtRuleID,
-                    "name": $scope.crtRuleName,
-                    "description": $scope.crtRuleDsecpt,
-                    "pseudo_code": $scope.crtRulepesducode,
-                    "rule_tst_iogic": $scope.crtRuletestlogic,
-                    "report_logic": $scope.crtRuleReportlogic,
-                    "save_search_logic": $scope.crtRuleSaveSrchlogic,
-                    "building_blocks": $scope.crtRuleBuildlogic,
-                    "reference_set_ind": $scope.crtRuleRefSet, //crtRuleRefSet, crtReferSet
-                    "response_text": $scope.crtRuleResponse,
-                    "event_name": "",
-                    "rule_description": $scope.crtRuleDsecpt,
-                    "oob_flag": statusOOB
-                },
-                "input": crtRuleInput_SurrId,
-                "output": crtRuleOuput_SurrId,
-                "event_attribute": evtattri_SurrId,
-                "log_source": logSou_SurrId,
-                "ThreadModelGroup": ThdCrt
-            };
+                var crtRule_postJson = {
+                    "UseCase": {
+                        "SurrId": $scope.crtUsercaseSurrId
+                    },
+                    "Rule": {
+                        "id": $scope.crtRuleID,
+                        "name": $scope.crtRuleName,
+                        "description": $scope.crtRuleDsecpt,
+                        "pseudo_code": $scope.crtRulepesducode,
+                        "rule_tst_iogic": $scope.crtRuletestlogic,
+                        "report_logic": $scope.crtRuleReportlogic,
+                        "save_search_logic": $scope.crtRuleSaveSrchlogic,
+                        "building_blocks": $scope.crtRuleBuildlogic,
+                        "reference_set_ind": $scope.crtRuleRefSet, //crtRuleRefSet, crtReferSet
+                        "response_text": $scope.crtRuleResponse,
+                        "event_name": "",
+                        "rule_description": $scope.crtRuleDsecpt,
+                        "oob_flag": statusOOB
+                    },
+                    "input": crtRuleInput_SurrId,
+                    "output": crtRuleOuput_SurrId,
+                    "event_attribute": evtattri_SurrId,
+                    "log_source": logSou_SurrId,
+                    "ThreadModelGroup": ThdCrt
+                };
 
 
-            if (typeof $scope.crtUsercaseId != 'undefined' && $scope.crtUsercaseId != '' && typeof $scope.crtUsercaseName != 'undefined' && $scope.crtUsercaseName != '' && typeof $scope.crtRuleID != 'undefined' && $scope.crtRuleID != '' && typeof $scope.crtRuleName != 'undefined' && $scope.crtRuleName != '') {
-                $http.post($rootScope.url + '/saveRule', crtRule_postJson).success(function(data, status, headers, config) {
-                    alert('Usecase Rule Created Successfully');
-                    UsecaseService.setUsecasecrtdata('');
+                if (typeof $scope.crtUsercaseId != 'undefined' && $scope.crtUsercaseId != '' && typeof $scope.crtUsercaseName != 'undefined' && $scope.crtUsercaseName != '' && typeof $scope.crtRuleID != 'undefined' && $scope.crtRuleID != '' && typeof $scope.crtRuleName != 'undefined' && $scope.crtRuleName != '') {
+                    $http.post($rootScope.url + '/saveRule', crtRule_postJson).success(function(data, status, headers, config) {
+                        alert('Usecase Rule Created Successfully');
+                        UsecaseService.setUsecasecrtdata('');
 
-                    $scope.reSet();
-                    ThdCrt.length = 0;
-                    $state.go($state.current, {}, {
-                        reload: true
+                        $scope.reSet();
+                        ThdCrt.length = 0;
+                        $state.go($state.current, {}, {
+                            reload: true
+                        });
+                        //fetch permission API call
+                          $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                              sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                              $scope.permission = sessionStorage.getItem("fetchPermission");
+                             // console.log(sessionStorage.getItem("fetchPermission"));
+                              $rootScope.loadinganimation = false;
+                          }).error(function (error) {
+                                alert("Server side error");
+                          });
+                    }).error(function(data, status, headers, config) {
+
                     });
-                }).error(function(data, status, headers, config) {
-
-                });
-            } else {
-                alert('Please fill all mandatory* fields');
+                } else {
+                    alert('Please fill all mandatory* fields');
+                }
             }
+        	
+                
         }
         
         angular.element('form').click(function(event){
@@ -1420,35 +1474,68 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
 
         }
         $scope.liinput = function() {
-            $scope.licreateruledetails = 'no-active';
-            $scope.licreateruleinput = 'active';
-            $scope.licreateruleinputdata = 'no-active';
-            $scope.licreaterulelog = 'no-active';
-            $scope.licreateruleoutput = 'no-active';
-            $scope.licreateruleresponse = 'no-active';
-            $scope.licreaterulethd = 'no-active';
-            $scope.ruledetails = false;
-            $scope.ruleinput = true;
-            $scope.rulesource = false;
-            $scope.ruleinputdata = false;
-            $scope.ruleoutput = false;
-            $scope.rulethd = false;
+        	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
+        	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+            var testAlp = /^[a-zA-Z\s\d\/]+$/;
+            var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+            
+            if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
+                alert('Please enter a valid Rule Id(no special character)');
+                return false;
+            }
+            else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                alert('Please enter a valid Rule Name');
+                return false;
+            }
+            else{
+            	$scope.licreateruledetails = 'no-active';
+                $scope.licreateruleinput = 'active';
+                $scope.licreateruleinputdata = 'no-active';
+                $scope.licreaterulelog = 'no-active';
+                $scope.licreateruleoutput = 'no-active';
+                $scope.licreateruleresponse = 'no-active';
+                $scope.licreaterulethd = 'no-active';
+                $scope.ruledetails = false;
+                $scope.ruleinput = true;
+                $scope.rulesource = false;
+                $scope.ruleinputdata = false;
+                $scope.ruleoutput = false;
+                $scope.rulethd = false;
+            }
+        	
+            
         }
 
         $scope.lioutput = function() {
-            $scope.licreateruledetails = 'no-active';
-            $scope.licreateruleinput = 'no-active';
-            $scope.licreateruleinputdata = 'no-active';
-            $scope.licreaterulelog = 'no-active';
-            $scope.licreateruleoutput = 'active';
-            $scope.licreateruleresponse = 'no-active';
-            $scope.licreaterulethd = 'no-active';
-            $scope.ruledetails = false;
-            $scope.rulesource = false;
-            $scope.ruleinput = false;
-            $scope.ruleoutput = true;
-            $scope.ruleresponse = false;
-            $scope.rulethd = false;
+        	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
+        	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+            var testAlp = /^[a-zA-Z\s\d\/]+$/;
+            var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+            
+            if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
+                alert('Please enter a valid Rule Id(no special character)');
+                return false;
+            }
+            else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                alert('Please enter a valid Rule Name');
+                return false;
+            }
+            else{
+            	 $scope.licreateruledetails = 'no-active';
+                 $scope.licreateruleinput = 'no-active';
+                 $scope.licreateruleinputdata = 'no-active';
+                 $scope.licreaterulelog = 'no-active';
+                 $scope.licreateruleoutput = 'active';
+                 $scope.licreateruleresponse = 'no-active';
+                 $scope.licreaterulethd = 'no-active';
+                 $scope.ruledetails = false;
+                 $scope.rulesource = false;
+                 $scope.ruleinput = false;
+                 $scope.ruleoutput = true;
+                 $scope.ruleresponse = false;
+                 $scope.rulethd = false;
+            }
+           
         }
 
         $scope.liresponse = function() {
@@ -1830,30 +1917,46 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 }
 
                 $scope.goTo = function() {
-                    $scope.chckindustry();
-                    if (typeof $scope.usecaseDescrip == 'undefined') {
-                        $scope.usecaseDescrip = "";
-                    }
-                    $scope.useCase = {
-                        SurrId:UsecaseService.getUpdataUsedata().UseCase[0].SurrId,
-                        id: $scope.usecaseID,
-                        name: $scope.usecaseName,
-                        description: $scope.usecaseDescrip,
-                        cyberFuncSurrId: $scope.frameWork,
-                        UCCatSurrId: $scope.useCaseCat,
-                        UCSubCatSurrId: $scope.useCaseSubcat
-                    };
-
-                    UsecaseService.setUpdateUsecase($scope.useCase);
-                    UsecaseService.setUpdtindsty(Indtsyarray);
+                	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
+                	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+                    var testAlp = /^[a-zA-Z\s\d\/]+$/;
+                    var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                     
-                    if (typeof $scope.usecaseID != 'undefined' && typeof $scope.usecaseName != 'undefined' && typeof $scope.frameWork != 'undefined' && typeof $scope.useCaseCat != 'undefined' && typeof $scope.useCaseSubcat != 'undefined' && $scope.frameWork != '' && $scope.useCaseCat != '' && $scope.useCaseSubcat != '' && Indtsyarray.length != 0) {
-                        UsecaseService.setpagesflag(chkflag);
-                        $state.go("home.updateReg");
-                        
-                    } else {
-                        alert("Please fill all mandatory fields");
+                    if($scope.usecaseID == ''  || !testId.test($scope.usecaseID)){
+                        alert('Please enter a valid Use Case Id(no special character)');
+                        return false;
                     }
+                    else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
+                        alert('Please enter a valid Use Case Name');
+                        return false;
+                    }
+                    else{
+                    	$scope.chckindustry();
+                        if (typeof $scope.usecaseDescrip == 'undefined') {
+                            $scope.usecaseDescrip = "";
+                        }
+                        $scope.useCase = {
+                            SurrId:UsecaseService.getUpdataUsedata().UseCase[0].SurrId,
+                            id: $scope.usecaseID,
+                            name: $scope.usecaseName,
+                            description: $scope.usecaseDescrip,
+                            cyberFuncSurrId: $scope.frameWork,
+                            UCCatSurrId: $scope.useCaseCat,
+                            UCSubCatSurrId: $scope.useCaseSubcat
+                        };
+
+                        UsecaseService.setUpdateUsecase($scope.useCase);
+                        UsecaseService.setUpdtindsty(Indtsyarray);
+                        
+                        if (typeof $scope.usecaseID != 'undefined' && typeof $scope.usecaseName != 'undefined' && typeof $scope.frameWork != 'undefined' && typeof $scope.useCaseCat != 'undefined' && typeof $scope.useCaseSubcat != 'undefined' && $scope.frameWork != '' && $scope.useCaseCat != '' && $scope.useCaseSubcat != '' && Indtsyarray.length != 0) {
+                            UsecaseService.setpagesflag(chkflag);
+                            $state.go("home.updateReg");
+                            
+                        } else {
+                            alert("Please fill all mandatory fields");
+                        }
+                    }
+                    
                 }
 
                 angular.element('form').click(function(event){
@@ -2190,48 +2293,57 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
             $scope.UpdatedataSet();
             $scope.UseCaseformSubmit = function() {
-                var Indtsyarray = [];
-                var Essptarray = [];
-                var CategoryGr = [];
-                var ThdCrt = [];
-                for (var j = 0; j < $scope.UsecaseEsseprt.length; j++) {
-                    var Esspt = {};
-                    Esspt.surrId = $scope.UsecaseEsseprt[j];
-                    Essptarray.push(Esspt);
-                }
-                for (var k = 0; k < $scope.RegCrtltables.length; k++) {
-                    var RegCrtldat = {};
-                    RegCrtldat.RegCatSurrId = $scope.RegCrtltables[k].Regcat_SurrId;
-                    RegCrtldat.RegPubSurrId = $scope.RegCrtltables[k].RegPub_SurrId;
-                    RegCrtldat.RegCntlSurrId = $scope.RegCrtltables[k].RegCrtl_SurrId;
-                    CategoryGr.push(RegCrtldat);
-                }
+                	var Indtsyarray = [];
+                    var Essptarray = [];
+                    var CategoryGr = [];
+                    var ThdCrt = [];
+                    for (var j = 0; j < $scope.UsecaseEsseprt.length; j++) {
+                        var Esspt = {};
+                        Esspt.surrId = $scope.UsecaseEsseprt[j];
+                        Essptarray.push(Esspt);
+                    }
+                    for (var k = 0; k < $scope.RegCrtltables.length; k++) {
+                        var RegCrtldat = {};
+                        RegCrtldat.RegCatSurrId = $scope.RegCrtltables[k].Regcat_SurrId;
+                        RegCrtldat.RegPubSurrId = $scope.RegCrtltables[k].RegPub_SurrId;
+                        RegCrtldat.RegCntlSurrId = $scope.RegCrtltables[k].RegCrtl_SurrId;
+                        CategoryGr.push(RegCrtldat);
+                    }
 
-                var UsecasePostJson = {
-                    useCase: UsecaseService.getUpdateUsecase(),
-                    industry: UsecaseService.getUpdtindsty(),
-                    EP: Essptarray,
-                    CategoryGroup: CategoryGr
-                }
-                
+                    var UsecasePostJson = {
+                        useCase: UsecaseService.getUpdateUsecase(),
+                        industry: UsecaseService.getUpdtindsty(),
+                        EP: Essptarray,
+                        CategoryGroup: CategoryGr
+                    }
+                    
 
-                if (CategoryGr.length != 0) {
-                    if (UsecaseService.getUpdateUsecase().SurrId != '' && typeof UsecaseService.getUpdateUsecase().SurrId != 'undefined') {
-                        $http.post($rootScope.url + '/updateUseCase', UsecasePostJson).success(function(data, status, headers, config) {                            
-                            UsecaseService.setpagesflag("");
-                            UsecaseService.setbtnbackUpUC("");
-                            alert("Usecase updated Successfully");
-                            $scope.goTo();
-                        }).error(function(data, status, headers, config) {
-                            alert("Sorry Application error in serverside");
-                        });
+                    if (CategoryGr.length != 0) {
+                        if (UsecaseService.getUpdateUsecase().SurrId != '' && typeof UsecaseService.getUpdateUsecase().SurrId != 'undefined') {
+                            $http.post($rootScope.url + '/updateUseCase', UsecasePostJson).success(function(data, status, headers, config) {                            
+                                UsecaseService.setpagesflag("");
+                                UsecaseService.setbtnbackUpUC("");
+                                alert("Usecase updated Successfully");
+                                $scope.goTo();
+                                //fetch permission api call
+                                  $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                                      sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                                      $scope.permission = sessionStorage.getItem("fetchPermission");
+                                     // console.log(sessionStorage.getItem("fetchPermission"));
+                                      $rootScope.loadinganimation = false;
+                                  }).error(function (error) {
+                                        alert("Server side error");
+                                  });
+                            }).error(function(data, status, headers, config) {
+                                alert("Sorry Application error in serverside");
+                            });
+                        } else {
+                            alert("Please fill all mandatory fields");
+                            $state.go('home.updateUsecase');
+                        }
                     } else {
                         alert("Please fill all mandatory fields");
-                        $state.go('home.updateUsecase');
                     }
-                } else {
-                    alert("Please fill all mandatory fields");
-                }
             }
             
             $scope.isBackUp = function(){
@@ -2779,7 +2891,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                             Thdctrltb.ThdPub = "  ";
                             Thdctrltb.ThdPub_SurrId = " ";
                         } else {
-                            checkthd = 1;
+                            //checkthd = 1;
                         }
                     }
 
@@ -2791,7 +2903,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                             Thdctrltb.ThdCrtl = "  ";
                             Thdctrltb.ThdCrtl_SurrId = " ";
                         } else {
-                            checkthd = 1;
+                            //checkthd = 1;
                         }
                     }
                     var arr = Thdctrltb;
@@ -2836,7 +2948,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         Thdctrltb.Thdcat = $scope.thdCapeName + "  " + $scope.thdCapeID;
                         Thdctrltb.Thdcat_SurrId = $scope.UsecasecapecCat;
                     } else {
-                        checkonethd = 1;
+                        //checkonethd = 1;
                     }
 
                     if (typeof $scope.thdMetaName != 'undefined' && $scope.thdMetaName != "" && $scope.UsecaseMetaAtt != "" && $scope.UsecaseMetaAtt.length != 0 && $scope.UsecaseMetaAtt != " ") {
@@ -2847,7 +2959,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                             Thdctrltb.ThdPub = "  ";
                             Thdctrltb.ThdPub_SurrId = " ";
                         } else {
-                            checkonethd = 1;
+                            //checkonethd = 1;
                         }
                     }
 
@@ -2859,7 +2971,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                             Thdctrltb.ThdCrtl = "  ";
                             Thdctrltb.ThdCrtl_SurrId = " ";
                         } else {
-                            checkonethd = 1;
+                            //checkonethd = 1;
                         }
                     }
 
@@ -2912,153 +3024,179 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             // Update Rule post Json
             var ThdCrt = [];
             $scope.crtRuleSubmit = function() {
-                var evtattri_SurrId = [];
-                var logSou_SurrId = [];
-                var crtRuleInput_SurrId = [];
-                var crtRuleOuput_SurrId = [];
+            	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
+            	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+                var testAlp = /^[a-zA-Z\s\d\/]+$/;
+                var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+                
+                if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
+                    alert('Please enter a valid Rule Id(no special character)');
+                    return false;
+                }
+                else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                    alert('Please enter a valid Rule Name');
+                    return false;
+                }
+                else{
+                	var evtattri_SurrId = [];
+                    var logSou_SurrId = [];
+                    var crtRuleInput_SurrId = [];
+                    var crtRuleOuput_SurrId = [];
 
-                if (typeof $scope.crtRuleTrsn != 'undefined') {
-                    for (var k = 0; k < $scope.crtRuleTrsn.length; k++) {
-                        var crtRuleTrsnId = {};
-                        crtRuleTrsnId.SurrId = $scope.crtRuleTrsn[k];
-                        crtRuleInput_SurrId.push(crtRuleTrsnId);
+                    if (typeof $scope.crtRuleTrsn != 'undefined') {
+                        for (var k = 0; k < $scope.crtRuleTrsn.length; k++) {
+                            var crtRuleTrsnId = {};
+                            crtRuleTrsnId.SurrId = $scope.crtRuleTrsn[k];
+                            crtRuleInput_SurrId.push(crtRuleTrsnId);
+                        }
+                    }
+
+                    if (typeof $scope.crtRuleRefr != 'undefined') {
+                        for (var z = 0; z < $scope.crtRuleRefr.length; z++) {
+                            var crtRuleRefrId = {};
+                            crtRuleRefrId.SurrId = $scope.crtRuleRefr[z];
+                            crtRuleInput_SurrId.push(crtRuleRefrId);
+                        }
+                    }
+
+                    if (typeof $scope.crtRuleEventName != 'undefined') {
+                        for (var w = 0; w < $scope.crtRuleEventName.length; w++) {
+                            var crtRuleEventNameId = {};
+                            crtRuleEventNameId.SurrId = $scope.crtRuleEventName[w];
+                            crtRuleInput_SurrId.push(crtRuleEventNameId);
+                        }
+                    }
+
+                    if (typeof $scope.crtRuleEventAttribute != 'undefined') {
+                        for (var i = 0; i < $scope.crtRuleEventAttribute.length; i++) {
+                            var evtattri = {};
+                            evtattri.SurrId = $scope.crtRuleEventAttribute[i];
+                            evtattri_SurrId.push(evtattri);
+                        }
+                    }
+
+                    if (typeof $scope.crtRuleLogSource != 'undefined') {
+                        for (var j = 0; j < $scope.crtRuleLogSource.length; j++) {
+                            var logSouId = {};
+                            logSouId.SurrId = $scope.crtRuleLogSource[j];
+                            logSou_SurrId.push(logSouId);
+                        }
+                    }
+
+
+                    if (typeof $scope.crtRuleReport != 'undefined') {
+                        for (var u = 0; u < $scope.crtRuleReport.length; u++) {
+                            var crtRuleReportId = {};
+                            crtRuleReportId.SurrId = $scope.crtRuleReport[u];
+                            crtRuleOuput_SurrId.push(crtRuleReportId);
+                        }
+                    }
+
+
+
+                    var ruleOutput = [{
+                        SurrId: $scope.crtRuleDashBoard,
+                    }, {
+                        SurrId: $scope.crtRuleAlert,
+                    }, {
+                        SurrId: $scope.crtReferSet,
+                    }];
+
+                    for (var w = 0; w < ruleOutput.length; w++) {
+                        //crtRuleOuput_SurrId.push(ruleOutput[w]);
+                        if (typeof ruleOutput[w].SurrId != 'undefined' && ruleOutput[w].SurrId != '') {
+                            crtRuleOuput_SurrId.push(ruleOutput[w]);
+                        }
+                    }
+
+                    for (var g = 0; g < $scope.ThdCrttables.length; g++) {
+                        var ThdCrtda = {};
+                        ThdCrtda.CapecSurrId = $scope.ThdCrttables[g].Thdcat_SurrId;
+                        ThdCrtda.MetaSurrId = $scope.ThdCrttables[g].ThdPub_SurrId;
+                        ThdCrtda.StandardId = $scope.ThdCrttables[g].ThdCrtl_SurrId;
+                        ThdCrt.push(ThdCrtda);
+                    }
+
+                    if (typeof $scope.crtRuleDsecpt == 'undefined') {
+                        $scope.crtRuleDsecpt = "";
+                    }
+                    if (typeof $scope.crtRulepesducode == 'undefined') {
+                        $scope.crtRulepesducode = "";
+                    }
+                    if (typeof $scope.crtRuletestlogic == 'undefined') {
+                        $scope.crtRuletestlogic = "";
+                    }
+                    if (typeof $scope.crtRuleReportlogic == 'undefined') {
+                        $scope.crtRuleReportlogic = "";
+                    }
+                    if (typeof $scope.crtRuleSaveSrchlogic == 'undefined') {
+                        $scope.crtRuleSaveSrchlogic = "";
+                    }
+                    if (typeof $scope.crtRuleBuildlogic == 'undefined') {
+                        $scope.crtRuleBuildlogic = "";
+                    }
+                    if (typeof $scope.crtRuleRefSetInc == 'undefined') {
+                        $scope.crtRuleRefSetInc = "";
+                    }
+                    if (typeof $scope.crtRuleResponse == 'undefined') {
+                        $scope.crtRuleResponse = "";
+                    }
+                    if (typeof $scope.crtRuleDsecpt == 'undefined') {
+                        $scope.crtRuleDsecpt = "";
+                    }
+                    if (typeof $scope.crtRuleEventName == 'undefined') {
+                        $scope.crtRuleEventName = "";
+                    }
+
+
+                    var crtRule_postJson = {
+                        ruleObj: {
+                            "ruleSurrId": $scope.updateRule_surrId,
+                            "usecaseSurrId": $scope.crtUsercaseSurrId,
+                            "id": $scope.crtRuleID,
+                            "name": $scope.crtRuleName,
+                            "description": $scope.crtRuleDsecpt,
+                            "pseudo_code": $scope.crtRulepesducode,
+                            "rule_tst_iogic": $scope.crtRuletestlogic,
+                            "report_logic": $scope.crtRuleReportlogic,
+                            "save_search_logic": $scope.crtRuleSaveSrchlogic,
+                            "building_blocks": $scope.crtRuleBuildlogic,
+                            "reference_set_ind": $scope.crtRuleRefSet,
+                            "event_name": "",
+                            "response_text": $scope.crtRuleResponse,
+                            "oob_flag": statusOOBu
+                        },
+                        "input": crtRuleInput_SurrId,
+                        "output": crtRuleOuput_SurrId,
+                        "event_attribute": evtattri_SurrId,
+                        "log_source": logSou_SurrId,
+                        "ThreadModelGroup": ThdCrt
+                    };
+                    if (typeof $scope.crtRuleID != 'undefined' && typeof $scope.crtRuleName != 'undefined' && $scope.crtRuleID != '' && typeof $scope.crtRuleName != '') {
+
+                        $http.post($rootScope.url + '/updateRule', crtRule_postJson).success(function(data, status, headers, config) {
+                            alert('Update Rule Successfully saved');
+                            ThdCrt.length = 0;
+                            $scope.ThdCrttables.length = 0;
+                            $scope.reSetupdate();
+                            //fetch permission api call
+                          $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                              sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                              $scope.permission = sessionStorage.getItem("fetchPermission");
+                             // console.log(sessionStorage.getItem("fetchPermission"));
+                              $rootScope.loadinganimation = false;
+                          }).error(function (error) {
+                                alert("Server side error");
+                          });
+                        }).error(function(data, status, headers, config) {
+                            alert("Sorry Application error in serverside");
+                        });
+                    } else {
+                        alert("Please fill all mandatory fields");
                     }
                 }
-
-                if (typeof $scope.crtRuleRefr != 'undefined') {
-                    for (var z = 0; z < $scope.crtRuleRefr.length; z++) {
-                        var crtRuleRefrId = {};
-                        crtRuleRefrId.SurrId = $scope.crtRuleRefr[z];
-                        crtRuleInput_SurrId.push(crtRuleRefrId);
-                    }
-                }
-
-                if (typeof $scope.crtRuleEventName != 'undefined') {
-                    for (var w = 0; w < $scope.crtRuleEventName.length; w++) {
-                        var crtRuleEventNameId = {};
-                        crtRuleEventNameId.SurrId = $scope.crtRuleEventName[w];
-                        crtRuleInput_SurrId.push(crtRuleEventNameId);
-                    }
-                }
-
-                if (typeof $scope.crtRuleEventAttribute != 'undefined') {
-                    for (var i = 0; i < $scope.crtRuleEventAttribute.length; i++) {
-                        var evtattri = {};
-                        evtattri.SurrId = $scope.crtRuleEventAttribute[i];
-                        evtattri_SurrId.push(evtattri);
-                    }
-                }
-
-                if (typeof $scope.crtRuleLogSource != 'undefined') {
-                    for (var j = 0; j < $scope.crtRuleLogSource.length; j++) {
-                        var logSouId = {};
-                        logSouId.SurrId = $scope.crtRuleLogSource[j];
-                        logSou_SurrId.push(logSouId);
-                    }
-                }
-
-
-                if (typeof $scope.crtRuleReport != 'undefined') {
-                    for (var u = 0; u < $scope.crtRuleReport.length; u++) {
-                        var crtRuleReportId = {};
-                        crtRuleReportId.SurrId = $scope.crtRuleReport[u];
-                        crtRuleOuput_SurrId.push(crtRuleReportId);
-                    }
-                }
-
-
-
-                var ruleOutput = [{
-                    SurrId: $scope.crtRuleDashBoard,
-                }, {
-                    SurrId: $scope.crtRuleAlert,
-                }, {
-                    SurrId: $scope.crtReferSet,
-                }];
-
-                for (var w = 0; w < ruleOutput.length; w++) {
-                    //crtRuleOuput_SurrId.push(ruleOutput[w]);
-                    if (typeof ruleOutput[w].SurrId != 'undefined' && ruleOutput[w].SurrId != '') {
-                        crtRuleOuput_SurrId.push(ruleOutput[w]);
-                    }
-                }
-
-                for (var g = 0; g < $scope.ThdCrttables.length; g++) {
-                    var ThdCrtda = {};
-                    ThdCrtda.CapecSurrId = $scope.ThdCrttables[g].Thdcat_SurrId;
-                    ThdCrtda.MetaSurrId = $scope.ThdCrttables[g].ThdPub_SurrId;
-                    ThdCrtda.StandardId = $scope.ThdCrttables[g].ThdCrtl_SurrId;
-                    ThdCrt.push(ThdCrtda);
-                }
-
-                if (typeof $scope.crtRuleDsecpt == 'undefined') {
-                    $scope.crtRuleDsecpt = "";
-                }
-                if (typeof $scope.crtRulepesducode == 'undefined') {
-                    $scope.crtRulepesducode = "";
-                }
-                if (typeof $scope.crtRuletestlogic == 'undefined') {
-                    $scope.crtRuletestlogic = "";
-                }
-                if (typeof $scope.crtRuleReportlogic == 'undefined') {
-                    $scope.crtRuleReportlogic = "";
-                }
-                if (typeof $scope.crtRuleSaveSrchlogic == 'undefined') {
-                    $scope.crtRuleSaveSrchlogic = "";
-                }
-                if (typeof $scope.crtRuleBuildlogic == 'undefined') {
-                    $scope.crtRuleBuildlogic = "";
-                }
-                if (typeof $scope.crtRuleRefSetInc == 'undefined') {
-                    $scope.crtRuleRefSetInc = "";
-                }
-                if (typeof $scope.crtRuleResponse == 'undefined') {
-                    $scope.crtRuleResponse = "";
-                }
-                if (typeof $scope.crtRuleDsecpt == 'undefined') {
-                    $scope.crtRuleDsecpt = "";
-                }
-                if (typeof $scope.crtRuleEventName == 'undefined') {
-                    $scope.crtRuleEventName = "";
-                }
-
-
-                var crtRule_postJson = {
-                    ruleObj: {
-                        "ruleSurrId": $scope.updateRule_surrId,
-                        "usecaseSurrId": $scope.crtUsercaseSurrId,
-                        "id": $scope.crtRuleID,
-                        "name": $scope.crtRuleName,
-                        "description": $scope.crtRuleDsecpt,
-                        "pseudo_code": $scope.crtRulepesducode,
-                        "rule_tst_iogic": $scope.crtRuletestlogic,
-                        "report_logic": $scope.crtRuleReportlogic,
-                        "save_search_logic": $scope.crtRuleSaveSrchlogic,
-                        "building_blocks": $scope.crtRuleBuildlogic,
-                        "reference_set_ind": $scope.crtRuleRefSet,
-                        "event_name": "",
-                        "response_text": $scope.crtRuleResponse,
-                        "oob_flag": statusOOBu
-                    },
-                    "input": crtRuleInput_SurrId,
-                    "output": crtRuleOuput_SurrId,
-                    "event_attribute": evtattri_SurrId,
-                    "log_source": logSou_SurrId,
-                    "ThreadModelGroup": ThdCrt
-                };
-                if (typeof $scope.crtRuleID != 'undefined' && typeof $scope.crtRuleName != 'undefined' && $scope.crtRuleID != '' && typeof $scope.crtRuleName != '') {
-
-                    $http.post($rootScope.url + '/updateRule', crtRule_postJson).success(function(data, status, headers, config) {
-                        alert('Update Rule Successfully saved');
-                        ThdCrt.length = 0;
-                        $scope.ThdCrttables.length = 0;
-                        $scope.reSetupdate();
-                    }).error(function(data, status, headers, config) {
-                        alert("Sorry Application error in serverside");
-                    });
-                } else {
-                    alert("Please fill all mandatory fields");
-                }
+                	               
+                
             }
             
             angular.element('form').click(function(event){
@@ -3164,35 +3302,67 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
             }
             $scope.liinput = function() {
-                $scope.licreateruledetails = 'no-active';
-                $scope.licreateruleinput = 'active';
-                $scope.licreateruleinputdata = 'no-active';
-                $scope.licreaterulelog = 'no-active';
-                $scope.licreateruleoutput = 'no-active';
-                $scope.licreateruleresponse = 'no-active';
-                $scope.licreaterulethd = 'no-active';
-                $scope.ruledetails = false;
-                $scope.ruleinput = true;
-                $scope.rulesource = false;
-                $scope.ruleinputdata = false;
-                $scope.ruleoutput = false;
-                $scope.rulethd = false;
+            	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
+            	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+                var testAlp = /^[a-zA-Z\s\d\/]+$/;
+                var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+                
+                if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
+                    alert('Please enter a valid Rule Id(no special character)');
+                    return false;
+                }
+                else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                    alert('Please enter a valid Rule Name');
+                    return false;
+                }
+                else{
+                	$scope.licreateruledetails = 'no-active';
+                    $scope.licreateruleinput = 'active';
+                    $scope.licreateruleinputdata = 'no-active';
+                    $scope.licreaterulelog = 'no-active';
+                    $scope.licreateruleoutput = 'no-active';
+                    $scope.licreateruleresponse = 'no-active';
+                    $scope.licreaterulethd = 'no-active';
+                    $scope.ruledetails = false;
+                    $scope.ruleinput = true;
+                    $scope.rulesource = false;
+                    $scope.ruleinputdata = false;
+                    $scope.ruleoutput = false;
+                    $scope.rulethd = false;
+                }
+                
             }
 
             $scope.lioutput = function() {
-                $scope.licreateruledetails = 'no-active';
-                $scope.licreateruleinput = 'no-active';
-                $scope.licreateruleinputdata = 'no-active';
-                $scope.licreaterulelog = 'no-active';
-                $scope.licreateruleoutput = 'active';
-                $scope.licreateruleresponse = 'no-active';
-                $scope.licreaterulethd = 'no-active';
-                $scope.ruledetails = false;
-                $scope.rulesource = false;
-                $scope.ruleinput = false;
-                $scope.ruleoutput = true;
-                $scope.ruleresponse = false;
-                $scope.rulethd = false;
+            	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
+            	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+                var testAlp = /^[a-zA-Z\s\d\/]+$/;
+                var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+                
+                if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
+                    alert('Please enter a valid Rule Id(no special character)');
+                    return false;
+                }
+                else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                    alert('Please enter a valid Rule Name');
+                    return false;
+                }
+                else{
+                	 $scope.licreateruledetails = 'no-active';
+                     $scope.licreateruleinput = 'no-active';
+                     $scope.licreateruleinputdata = 'no-active';
+                     $scope.licreaterulelog = 'no-active';
+                     $scope.licreateruleoutput = 'active';
+                     $scope.licreateruleresponse = 'no-active';
+                     $scope.licreaterulethd = 'no-active';
+                     $scope.ruledetails = false;
+                     $scope.rulesource = false;
+                     $scope.ruleinput = false;
+                     $scope.ruleoutput = true;
+                     $scope.ruleresponse = false;
+                     $scope.rulethd = false;
+                }
+               
             }
 
             $scope.liresponse = function() {
@@ -3211,35 +3381,67 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 $scope.rulethd = false;
             }
             $scope.lithd = function() {
-                $scope.licreateruledetails = 'no-active';
-                $scope.licreateruleinput = 'no-active';
-                $scope.licreateruleinputdata = 'no-active';
-                $scope.licreaterulelog = 'no-active';
-                $scope.licreateruleoutput = 'no-active';
-                $scope.licreateruleresponse = 'no-active';
-                $scope.licreaterulethd = 'active';
-                $scope.ruledetails = false;
-                $scope.rulesource = false;
-                $scope.ruleinput = false;
-                $scope.ruleoutput = false;
-                $scope.ruleresponse = false;
-                $scope.rulethd = true;
+            	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
+            	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+                var testAlp = /^[a-zA-Z\s\d\/]+$/;
+                var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+                
+                if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
+                    alert('Please enter a valid Rule Id(no special character)');
+                    return false;
+                }
+                else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                    alert('Please enter a valid Rule Name');
+                    return false;
+                }
+                else{
+                	$scope.licreateruledetails = 'no-active';
+                    $scope.licreateruleinput = 'no-active';
+                    $scope.licreateruleinputdata = 'no-active';
+                    $scope.licreaterulelog = 'no-active';
+                    $scope.licreateruleoutput = 'no-active';
+                    $scope.licreateruleresponse = 'no-active';
+                    $scope.licreaterulethd = 'active';
+                    $scope.ruledetails = false;
+                    $scope.rulesource = false;
+                    $scope.ruleinput = false;
+                    $scope.ruleoutput = false;
+                    $scope.ruleresponse = false;
+                    $scope.rulethd = true;
+                }
+                
             }
         
 
         $scope.lithd = function() {
-            $scope.licreateruledetails = 'no-active';
-            $scope.licreateruleinput = 'no-active';
-            $scope.licreateruleinputdata = 'no-active';
-            $scope.licreaterulelog = 'no-active';
-            $scope.licreateruleoutput = 'no-active';
-            $scope.licreateruleresponse = 'no-active';
-            $scope.licreaterulethd = 'active';
-            $scope.ruledetails = false;
-            $scope.rulesource = false;
-            $scope.ruleinput = false;
-            $scope.ruleoutput = false;
-            $scope.ruleresponse = false;
-            $scope.rulethd = true;
+        	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
+        	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+            var testAlp = /^[a-zA-Z\s\d\/]+$/;
+            var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+            
+            if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
+                alert('Please enter a valid Rule Id(no special character)');
+                return false;
+            }
+            else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                alert('Please enter a valid Rule Name');
+                return false;
+            }
+            else{
+            	 $scope.licreateruledetails = 'no-active';
+                 $scope.licreateruleinput = 'no-active';
+                 $scope.licreateruleinputdata = 'no-active';
+                 $scope.licreaterulelog = 'no-active';
+                 $scope.licreateruleoutput = 'no-active';
+                 $scope.licreateruleresponse = 'no-active';
+                 $scope.licreaterulethd = 'active';
+                 $scope.ruledetails = false;
+                 $scope.rulesource = false;
+                 $scope.ruleinput = false;
+                 $scope.ruleoutput = false;
+                 $scope.ruleresponse = false;
+                 $scope.rulethd = true;
+            }
+           
         }
     }]);
