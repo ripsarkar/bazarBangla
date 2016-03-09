@@ -93,7 +93,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     	var usernameRegex = /^([a-zA-Z][a-zA-Z0-9._-]+@[a-zA-Z][a-zA-Z0-9-]+.[a-zA-Z]{2,4})$/;
     	var name = /^[a-zA-Z][a-zA-Z\s]+$/;
     	var contnumber = /^\+?([0-9]{1,5})\)?[-. ]?([0-9]{2,5})[-. ]?([0-9]{2,5})[-. ]?([0-9]{2,5})$/;  
-    	var emailidfield = /[a-zA-Z][a-zA-Z0-9._-]+@[a-zA-Z][a-zA-Z0-9-]+.[a-zA-Z]{2,4}/igm;
+    	var emailidfield = /^([a-zA-Z][a-zA-Z0-9._-]+@[a-zA-Z][a-zA-Z0-9-]+.[a-zA-Z]{2,4})$/;
     	
     	if($scope.usernamemain == '' || !usernameRegex.test($scope.usernamemain)){
     		alert('Please enter a valid User name');
