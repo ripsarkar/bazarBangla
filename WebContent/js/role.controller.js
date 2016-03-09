@@ -33,8 +33,8 @@ app.controller("createrolecrt", ["$scope", "$rootScope", "$state", '$http', '$mo
     $scope.cpmysurrid();
     
     $scope.submitrole = function(){
-    	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-    	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+    	var testId = /^[A-Za-z][A-Za-z0-9_.-\s]{2,9}$/;
+    	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
         var testAlp = /^[a-zA-Z\s\d\/]+$/;
         var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
         
@@ -189,8 +189,8 @@ app.controller("updaterole", ["$scope", "$rootScope", "$state", '$http', '$modal
      $scope.cpmysurrid();
  
      $scope.updateroleForm = function(id, roleId, roleName, roleDesc, index) {
-    	 var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-     	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+    	var testId = /^[A-Za-z][A-Za-z0-9_.-\s]{2,9}$/;
+     	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
          var testAlp = /^[a-zA-Z\s\d\/]+$/;
          var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
          
@@ -279,8 +279,8 @@ app.controller('updaterolepop', ['$scope', '$modalInstance', '$rootScope', '$sta
      $scope.roleForm(rolemodeldata);
 
      $scope.updatarolesubmit = function(id) {
-    	 var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-      	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+    	 var testId = /^[A-Za-z][A-Za-z0-9_.-\s]{2,9}$/;
+      	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
           var testAlp = /^[a-zA-Z\s\d\/]+$/;
           var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
           
