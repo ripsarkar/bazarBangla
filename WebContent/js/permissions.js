@@ -89,17 +89,18 @@ $scope.$watch(function(){
             $scope.chckRoleList = function(){
               
             Indtsyarray = [];
-            
-            for (var i=0;i<$scope.selectedroleList.length-1;i++){
-              if($scope.selectedroleList[i] == $scope.selectedroleList[$scope.selectedroleList.length-1]){
-                $scope.selectedroleList.splice(-1);
-              }
-            }
-            for (var j=0;j<$scope.selectedroleList.length;j++){
-
-              Indtsy = {};
-              Indtsy.surrId = $scope.selectedroleList[j];
-              Indtsyarray.push(Indtsy);
+            if($scope.selectedroleList!=undefined){
+	            for (var i=0;i<$scope.selectedroleList.length-1;i++){
+	              if($scope.selectedroleList[i] == $scope.selectedroleList[$scope.selectedroleList.length-1]){
+	                $scope.selectedroleList.splice(-1);
+	              }
+	            }
+	            for (var j=0;j<$scope.selectedroleList.length;j++){
+	
+	              Indtsy = {};
+	              Indtsy.surrId = $scope.selectedroleList[j];
+	              Indtsyarray.push(Indtsy);
+	            }
             }
             postjson.PermissionFor.Role = Indtsyarray;
 
