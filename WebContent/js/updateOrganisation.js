@@ -60,7 +60,7 @@ if(obj.Users.Organization !=undefined){
 
 $scope.UsecaseIntry = [];
 $scope.openUpdatePage = function(compsurrID){
-
+	       var Indstryval=[];
                 $rootScope.loadinganimation=true;
             $http.get( $rootScope.url + "/retrieveCompany/"+compsurrID).success(function(result){
                 $rootScope.loadinganimation=false;
@@ -79,7 +79,7 @@ $scope.openUpdatePage = function(compsurrID){
                 
                 for(var i=0;i<result.company_industries.length;i++){
                   $scope.UsecaseIntry[i]=result.company_industries[i].industry_surr_id;
-                  
+                  Indstryval.push(""+result.company_industries[i].industry_surr_id+"");
                   angular.element(".bgcolorOptn").each(function(){
                     
                     if(angular.element(this).val() == result.company_industries[i].industry_surr_id){
@@ -87,7 +87,7 @@ $scope.openUpdatePage = function(compsurrID){
                     }
                   });
                 }
-
+                $scope.UsecaseIntry=Indstryval;
 }).error(function(err){
 	$rootScope.loadinganimation=false;
 	 alert("Internal server error"); 
@@ -96,13 +96,13 @@ $scope.openUpdatePage = function(compsurrID){
 }
             $scope.chckindustry = function(){
             Indtsyarray = [];
-            
-            for (var i=0;i<$scope.UsecaseIntry.length-1;i++){
-              if($scope.UsecaseIntry[i] == $scope.UsecaseIntry[$scope.UsecaseIntry.length-1]){
-                $scope.UsecaseIntry.splice(-1);
-              }
+            if($scope.UsecaseIntry!=undefined){ 
+	            for (var i=0;i<$scope.UsecaseIntry.length-1;i++){
+	              if($scope.UsecaseIntry[i] == $scope.UsecaseIntry[$scope.UsecaseIntry.length-1]){
+	                $scope.UsecaseIntry.splice(-1);
+	              }
+	            }
             }
-
           }
 
 $scope.updateOrganizationVal = function(compsurrID){
@@ -174,13 +174,14 @@ var updateorgjson = {
   "company_surr_id" : $scope.companySurrId
 
 }
-                for(var i=0;i<$scope.UsecaseIntry.length;i++){
-                var cOpI = {};
-                cOpI.SurrId = $scope.UsecaseIntry[i];
-                //console.log($scope.UsecaseIntry[i]);
-                    updateorgjson.company_industries.push(cOpI);
-                }
-
+            if($scope.UsecaseIntry!=undefined){
+	                for(var i=0;i<$scope.UsecaseIntry.length;i++){
+	                var cOpI = {};
+	                cOpI.SurrId = $scope.UsecaseIntry[i];
+	                //console.log($scope.UsecaseIntry[i]);
+	                    updateorgjson.company_industries.push(cOpI);
+	                }
+           }
 
 
 
