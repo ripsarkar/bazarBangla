@@ -3189,7 +3189,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                                 alert("Server side error");
                           });
                         }).error(function(data, status, headers, config) {
-                            alert("Sorry Application error in serverside");
+                            //alert("Sorry Application error in serverside");
+                        	alert(data.ErrMsg);
                         });
                     } else {
                         alert("Please fill all mandatory fields");
