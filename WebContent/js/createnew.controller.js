@@ -316,12 +316,12 @@ $scope.chckindustry = function() {
 $scope.goTo = function() {
 	
 	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
     var testAlp = /^[a-zA-Z\s\d\/]+$/;
     var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
     
     if($scope.usecaseID == ''  || !testId.test($scope.usecaseID)){
-        alert('Please enter a valid Use Case Id(no special character)');
+        alert('Please enter a valid Use Case Id (special characters allowed: _ - .)');
         return false;
     }
     else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
@@ -1174,12 +1174,12 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
         $scope.crtRuleSubmit = function() {
         	
         	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-        	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+        	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
             var testAlp = /^[a-zA-Z\s\d\/]+$/;
             var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
             
             if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                alert('Please enter a valid Rule Id(no special character)');
+                alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                 return false;
             }
             else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
@@ -1475,12 +1475,12 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
         }
         $scope.liinput = function() {
         	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-        	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+        	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
             var testAlp = /^[a-zA-Z\s\d\/]+$/;
             var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
             
             if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                alert('Please enter a valid Rule Id(no special character)');
+                alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                 return false;
             }
             else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
@@ -1508,12 +1508,12 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
 
         $scope.lioutput = function() {
         	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-        	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+        	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
             var testAlp = /^[a-zA-Z\s\d\/]+$/;
             var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
             
             if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                alert('Please enter a valid Rule Id(no special character)');
+                alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                 return false;
             }
             else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
@@ -1918,12 +1918,12 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
                 $scope.goTo = function() {
                 	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-                	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+                	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
                     var testAlp = /^[a-zA-Z\s\d\/]+$/;
                     var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                     
                     if($scope.usecaseID == ''  || !testId.test($scope.usecaseID)){
-                        alert('Please enter a valid Use Case Id(no special character)');
+                        alert('Please enter a valid Use Case Id (special characters allowed: _ - .)');
                         return false;
                     }
                     else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
@@ -3025,12 +3025,12 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             var ThdCrt = [];
             $scope.crtRuleSubmit = function() {
             	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-            	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+            	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
                 var testAlp = /^[a-zA-Z\s\d\/]+$/;
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                 
                 if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                    alert('Please enter a valid Rule Id(no special character)');
+                    alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                     return false;
                 }
                 else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
@@ -3303,12 +3303,12 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             }
             $scope.liinput = function() {
             	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-            	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+            	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
                 var testAlp = /^[a-zA-Z\s\d\/]+$/;
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                 
                 if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                    alert('Please enter a valid Rule Id(no special character)');
+                    alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                     return false;
                 }
                 else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
@@ -3335,12 +3335,12 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
             $scope.lioutput = function() {
             	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-            	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+            	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
                 var testAlp = /^[a-zA-Z\s\d\/]+$/;
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                 
                 if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                    alert('Please enter a valid Rule Id(no special character)');
+                    alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                     return false;
                 }
                 else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
@@ -3382,12 +3382,12 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             }
             $scope.lithd = function() {
             	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-            	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+            	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
                 var testAlp = /^[a-zA-Z\s\d\/]+$/;
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                 
                 if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                    alert('Please enter a valid Rule Id(no special character)');
+                    alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                     return false;
                 }
                 else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
@@ -3415,12 +3415,12 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
         $scope.lithd = function() {
         	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-        	var testAlpNu = /^[a-zA-Z0-9\s\d\/()_,-]+$/;
+        	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
             var testAlp = /^[a-zA-Z\s\d\/]+$/;
             var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
             
             if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                alert('Please enter a valid Rule Id(no special character)');
+                alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                 return false;
             }
             else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){

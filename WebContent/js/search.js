@@ -3748,7 +3748,7 @@ if(usecaselist != undefined){
     		postJson.rulefiles.length = 0;
         }).error(function(data, status, headers, config) {
             $rootScope.loadinganimation = false;
-            alert("no files found on server for this rule")
+        //    alert("no files found on server for this rule")
         });
 		}
 		else{
