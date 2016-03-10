@@ -321,7 +321,7 @@ $scope.goTo = function() {
     var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
     
     if($scope.usecaseID == ''  || !testId.test($scope.usecaseID)){
-        alert('Please enter a valid Use Case Id(special characters allowed: _-.)');
+        alert('Please enter a valid Use Case Id (special characters allowed: _ - .)');
         return false;
     }
     else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
@@ -1923,7 +1923,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                     
                     if($scope.usecaseID == ''  || !testId.test($scope.usecaseID)){
-                        alert('Please enter a valid Use Case Id(special characters allowed: _-.)');
+                        alert('Please enter a valid Use Case Id (special characters allowed: _ - .)');
                         return false;
                     }
                     else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
