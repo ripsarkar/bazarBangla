@@ -266,7 +266,7 @@ app.controller('subscptpop', ['$scope', '$modalInstance', '$rootScope', '$state'
                     alert(data.ErrMsg);
                 });
                 }else{
-                	alert('Please enter valid no. of Maximum Acive Users');
+                	alert('Please fill all * mandatory fields');
                 }
             }
         };
