@@ -158,7 +158,11 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 
 //Main Tabs disable enable
 	    $scope.fnTabsdisEnab=function(){
-
+	    		$scope.userAccountManagementdis= false;
+	    		$scope.useCaseMaintaindis = false;
+	    		$scope.organizationdis= false;
+	    		$scope.rolemenudis= false;	
+	    		
 	    var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
 
 	    	if(obj.Users.User==undefined){
