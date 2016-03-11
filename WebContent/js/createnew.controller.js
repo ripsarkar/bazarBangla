@@ -731,8 +731,8 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
     }
 ]);
 
-app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http', 'UsecaseService',
-    function($scope, $rootScope, $state, $http, UsecaseService) {
+app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http', 'UsecaseService','$filter',
+    function($scope, $rootScope, $state, $http, UsecaseService,$filter) {
         
     angular.element("ul.submainlinks li").removeClass("subactive");
     angular.element('li.createrule').addClass("subactive");
@@ -827,7 +827,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                     UsecaseIds_blur = data;
                     if (UsecaseIds_blur.UseCase.length != 0 && typeof UsecaseIds_blur.UseCase != 'undefined') {
                         for (var i = 0; i < UsecaseIds_blur.UseCase.length; i++) {
-                            if (UsecaseIds_blur.UseCase[i].Id == $scope.SearchRuleID) {
+                            if (UsecaseIds_blur.UseCase[i].Id == $filter('uppercase')($scope.SearchRuleID)) {
                                 $scope.crtUsercaseId = UsecaseIds_blur.UseCase[i].Id;
                                 $scope.crtUsercaseName = UsecaseIds_blur.UseCase[i].Name;
                                 $scope.crtUsercaseSurrId = UsecaseIds_blur.UseCase[i].SurrId;
