@@ -33,7 +33,7 @@ app.controller("createrolecrt", ["$scope", "$rootScope", "$state", '$http', '$mo
     $scope.cpmysurrid();
     
     $scope.submitrole = function(){
-    	var testId = /^[A-Za-z][A-Za-z0-9_.-\s]{2,9}$/;
+    	var testId = /^[A-Za-z][A-Za-z0-9_.-\s]+$/;
     	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
         var testAlp = /^[a-zA-Z\s\d\/]+$/;
         var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
@@ -279,7 +279,7 @@ app.controller('updaterolepop', ['$scope', '$modalInstance', '$rootScope', '$sta
      $scope.roleForm(rolemodeldata);
 
      $scope.updatarolesubmit = function(id) {
-    	 var testId = /^[A-Za-z][A-Za-z0-9_.-\s]{2,9}$/;
+    	 var testId = /^[A-Za-z][A-Za-z0-9_.-\s]+$/;
       	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
           var testAlp = /^[a-zA-Z\s\d\/]+$/;
           var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
