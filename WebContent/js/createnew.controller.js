@@ -2293,6 +2293,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
             $scope.UpdatedataSet();
             $scope.UseCaseformSubmit = function() {
+            	   $rootScope.loadinganimation = true;
                 	var Indtsyarray = [];
                     var Essptarray = [];
                     var CategoryGr = [];
@@ -2323,13 +2324,14 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                             $http.post($rootScope.url + '/updateUseCase', UsecasePostJson).success(function(data, status, headers, config) {                            
                                 UsecaseService.setpagesflag("");
                                 UsecaseService.setbtnbackUpUC("");
-                                alert("Usecase updated Successfully");
-                                $scope.goTo();
+                               
                                 //fetch permission api call
                                   $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
                                       sessionStorage.setItem("fetchPermission", JSON.stringify(result));
                                       $scope.permission = sessionStorage.getItem("fetchPermission");
                                      // console.log(sessionStorage.getItem("fetchPermission"));
+                                      alert("Usecase updated Successfully");
+                                      $scope.goTo();
                                       $rootScope.loadinganimation = false;
                                   }).error(function (error) {
                                         alert("Server side error");
@@ -3025,6 +3027,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             // Update Rule post Json
             var ThdCrt = [];
             $scope.crtRuleSubmit = function() {
+            	$rootScope.loadinganimation = true;
             	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
             	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
                 var testAlp = /^[a-zA-Z\s\d\/]+$/;
@@ -3176,15 +3179,18 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     if (typeof $scope.crtRuleID != 'undefined' && typeof $scope.crtRuleName != 'undefined' && $scope.crtRuleID != '' && typeof $scope.crtRuleName != '') {
 
                         $http.post($rootScope.url + '/updateRule', crtRule_postJson).success(function(data, status, headers, config) {
-                            alert('Update Rule Successfully saved');
-                            ThdCrt.length = 0;
-                            $scope.ThdCrttables.length = 0;
-                            $scope.reSetupdate();
+                           
+                           
                             //fetch permission api call
                           $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
                               sessionStorage.setItem("fetchPermission", JSON.stringify(result));
                               $scope.permission = sessionStorage.getItem("fetchPermission");
                              // console.log(sessionStorage.getItem("fetchPermission"));
+                              alert('Update Rule Successfully saved');
+                              ThdCrt.length = 0;
+                              $scope.ThdCrttables.length = 0;
+                              $state.reload();
+                              $scope.reSetupdate();
                               $rootScope.loadinganimation = false;
                           }).error(function (error) {
                                 alert("Server side error");
