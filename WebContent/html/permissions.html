@@ -1,0 +1,358 @@
+<style>
+.tabheader li.active a{
+    border-bottom: 3px solid #008cce;
+    color: #008cce;
+    text-decoration:none;
+  
+}
+</style>
+<div class="contentHome ng-scope" ng-controller="permissionsCtrl" data-ng-init="fnFetchPermissions(tabName,orgId)">
+  <!-- Nav tabs -->
+<div class="container">
+        <div class="row">
+           
+                <div class="col-md-6 col-sm-6">
+                    <h2 class="title-head"> Assign Permissions to </h2>
+                </div>
+     
+        </div>
+  
+<div class="row">
+  <div class="col-md-4 col-sm-4">
+      <strong>{{tabName}} Id:</strong>
+      <span>{{OrgName}}</span> 
+
+    </div>
+    <!-- <div class="col-md-4 col-sm-4">
+      <strong>{{tabName}} Name:</strong>
+      <span>{{OrgName}}</span>
+    </div> -->
+  <div class="col-md-4 col-sm-4">
+  <label class="col-md-4" for="textinput"><strong>Role Name:</strong></label>  
+    <div class="col-md-8">  
+
+<!-- <select class="col-md-12" ng-model="selectedroleList" multiple><option ng-repeat="roleList in roleListli" value="{{roleList.user_role_surr_id}}">{{roleList.user_role_name}}-{{roleList.user_role_surr_id}}</option></select> -->
+
+
+                                        <select multiple class="form-control" required ng-model="selectedroleList" ng-change="chckRoleList()">
+                                            <option ng-repeat="roleList in roleListli" value="{{roleList.user_role_surr_id}}">{{roleList.user_role_name}}</option>
+                                        </select>
+   </div>   
+  </div>
+</div>
+ <div class="row" style="margin-top: 12px;">
+    <div class="col-md-4 col-sm-6">
+      <h3 class="title-head">Permission Granted On</h3>
+    </div>
+</div> 
+  
+  <div class="row">
+        <div class="margintp1 col-md-12">
+          <div>
+      
+      <ul class="tabheader" role="tablist">
+    <li class="tabshead active"><a ng-click="$event.preventDefault();" href="#usercase" showtab="">Use Case</a></li>
+    <li class="tabshead"><a href="#rule" ng-click="$event.preventDefault();" showtab="">Rule</a></li>
+    <li class="tabshead"><a href="#org" ng-click="$event.preventDefault();" showtab="">Organization</a></li>
+    <li class="tabshead"><a href="#subscription" ng-click="$event.preventDefault();" showtab="">Subscription</a></li>
+  <li class="tabshead"><a href="#user" ng-click="$event.preventDefault();" showtab="">User</a></li>
+  <li class="tabshead"><a href="#role" ng-click="$event.preventDefault();" showtab="">Role</a></li>
+  </ul>
+      <!--
+           <ul class="tabheader">
+              <li class="tabshead"><a herf=""
+                ng-class="licreateruledetails" ng-click="lidetails()" class="active">Use Case</a></li>
+              <li class="tabshead"><a herf="" ng-class="licreateruleinput"
+                ng-click="liinput()">Rule</a></li>
+              <li class="tabshead"><a herf=""
+                ng-class="licreateruleinputdata" ng-click="liinputdata()">Organization
+              </a></li>
+              <li class="tabshead"><a herf=""
+                ng-class="licreateruleoutput" ng-click="lioutput()">Subscription</a>
+              </li>
+              <li class="tabshead"><a herf="" ng-class="licreaterulethd"
+                ng-click="lithd()">User</a></li>
+              <li class="tabshead"><a herf="" ng-class="licreaterulethd"
+                ng-click="lithd()">Role</a></li>
+            </ul>
+          </div>
+        </div>-->
+<!-- -->
+
+  <!-- Tab panes -->
+  <div class="tab-content">  
+    <div role="tabpanel" class="tab-pane active" id="usercase">
+  <div class="panel searchtableUser  panel-default">
+      
+   <table class="table table-striped">
+   <thead>
+   <tr class="tableheader">
+     <th></th>
+     <th>Create</th>
+     <th>Read</th>
+     <th>Update</th>
+     <th>Delete</th>
+     <th>Export</th>
+     </tr>
+   </thead>
+     <tbody>
+   <tr>
+     <td>ALL Use Cases</td>
+     <td><input type="checkbox" value="create" class="crtusecase"    data-filterType="ALL"   data-objectval="ALL" ng-click="creaindAll($event)" ng-disabled="disableCreateAll"></td>
+     <td><input type="checkbox" value="read"   class="readusecase"   data-filterType="ALL"  data-objectval="ALL"  ng-click="readindAll($event)" ng-disabled="disableReadAll"></td>
+     <td><input type="checkbox" value="update" class="updateusecase" data-filterType="ALL" data-objectval="ALL" ng-click="updaindAll($event)" ng-disabled="disableUpdateAll"></td>
+     <td><input type="checkbox" value="delete" class="deleteusecase" data-filterType="ALL" data-objectval="ALL" ng-click="deleindAll($event)" ng-disabled="disableDeleteAll"></td>
+     <td><input type="checkbox" value="export" class="exportusecase" data-filterType="ALL" data-objectval="ALL" ng-click="expoindAll($event)" ng-disabled="disableExportAll"></td>
+   </tr>
+   <tr>
+     <td colspan="6" class="info">Use Case by Industry</td>
+     
+   </tr>
+   <tr ng-repeat="industry in usecInduLi">
+   
+    <td>{{industry.Name}}</td>
+     <td><input type="checkbox" value="create" class="crtusecase crtusecaseGen"  data-filterType="IndustryName"  data-objectval="{{industry.Name}}"  ng-click="createind($event)" ng-disabled="disableCreate"></td>
+     <td><input type="checkbox" value="read"   class="readusecase readusecaseGen"  data-filterType="IndustryName" data-objectval="{{industry.Name}}"   ng-click="readind($event)" ng-disabled="disableRead"></td>
+     <td><input type="checkbox" value="update" class="updateusecase updateusecaseGen" data-filterType="IndustryName" data-objectval="{{industry.Name}}" ng-click="updaind($event)" ng-disabled="disableUpdate"></td>
+     <td><input type="checkbox" value="delete" class="deleteusecase deleteusecaseGen" data-filterType="IndustryName" data-objectval="{{industry.Name}}" ng-click="deleind($event)" ng-disabled="disableDelete"></td>
+     <td><input type="checkbox" value="export" class="exportusecase exportusecaseGen" data-filterType="IndustryName" data-objectval="{{industry.Name}}" ng-click="expoind($event)" ng-disabled="disableExport"></td>
+   </tr>
+    
+   <tr>
+     <td colspan="6" class="info">Specific Use case</td>
+     
+   </tr>
+   <tr ng-repeat="usecaLi in alluselist">
+   
+    <td value="{{usecaLi.usecase_surr_id}}">{{usecaLi.usecase_id}}</td>
+     <td><!-- <input type="checkbox" value="create"  class="crtusecase" data-filterType="id"  data-objectval="{{usecaLi.usecase_surr_id}}"   ng-click="createindSpe($event)" ng-disabled="disableCreateSpe"> --></td>
+     <td><input type="checkbox" value="read"   class="readusecasesp"   data-filterType="id" data-objectval="{{usecaLi.usecase_surr_id}}"   ng-click="readindSpe($event)" ng-disabled="disableReadSpe"></td>
+     <td><input type="checkbox" value="update" class="updateusecasesp" data-filterType="id" data-objectval="{{usecaLi.usecase_surr_id}}" ng-click="updaindSpe($event)" ng-disabled="disableUpdateSpe"></td>
+     <td><input type="checkbox" value="delete" class="deleteusecasesp" data-filterType="id" data-objectval="{{usecaLi.usecase_surr_id}}"  ng-click="deleindSpe($event)" ng-disabled="disableDeleteSpe"></td>
+     <td><input type="checkbox" value="export" class="exportusecasesp" data-filterType="id"  data-objectval="{{usecaLi.usecase_surr_id}}" ng-click="expoindSpe($event)" ng-disabled="disableExportSpe"></td>
+   </tr>    
+     </tbody>
+   </table>
+
+  </div>
+  </div>
+    <div role="tabpanel" class="tab-pane" id="rule">
+  <div class="panel searchtableUser  panel-default">      
+       <table class="table table-striped">
+   <thead>
+   <tr class="tableheader">
+     <th></th>
+     <th>Create</th>
+     <th>Read</th>
+     <th>Update</th>
+     <th>Delete</th>
+     <th>Export</th>
+     </tr>
+   </thead>
+     <tbody>
+   <tr>
+     <td>ALL Rules</td>
+     <td><input type="checkbox" value="create" class="ctrrule"    data-objectval="ALL"  ng-click="creaindAllRule($event)" ng-disabled="disableCreateRuleAll"></td>
+     <td><input type="checkbox" value="read"   class="readrule"   data-filterType="ALL"  data-objectval="ALL"  ng-click="readindAllRule($event)" ng-disabled="disableReadRuleAll"></td>
+     <td><input type="checkbox" value="update" class="updaterule" data-filterType="ALL" data-objectval="ALL"  ng-click="updaindAllRule($event)" ng-disabled="disableUpdateRuleAll"></td>
+     <td><input type="checkbox" value="delete" class="deleterule" data-filterType="ALL" data-objectval="ALL" ng-click="deleindAllRule($event)" ng-disabled="disableDeleteRuleAll"></td>
+     <td><input type="checkbox" value="export" class="exportrule" data-filterType="ALL" data-objectval="ALL" ng-click="expoindAllRule($event)" ng-disabled="disableExportRuleAll"></td>
+   </tr>
+   <tr>
+     <td colspan="6" class="info">Rules By Regulatory Category</td>
+     
+   </tr>
+   <tr ng-repeat="regucat in regcatlist">   
+    <td>{{regucat.Name}}</td>
+     <td><!-- <input type="checkbox" value="create" class="ctrrule"     data-objectval="{{regucat.Name}}" ng-click="createindRule($event)" ng-disabled="disableCreateRule"> --></td>
+     <td><input type="checkbox" value="read"  class="readrule readruleGen"     data-filterType="RegCatName"  data-objectval="{{regucat.Name}}" ng-click="readindRule($event)" ng-disabled="disableReadRule"></td>
+     <td><input type="checkbox" value="update" class="updaterule updateruleGen" data-filterType="RegCatName" data-objectval="{{regucat.Name}}" ng-click="updaindRule($event)" ng-disabled="disableUpdateRule"></td>
+     <td><input type="checkbox" value="delete" class="deleterule deleteruleGen" data-filterType="RegCatName" data-objectval="{{regucat.Name}}" ng-click="deleindRule($event)" ng-disabled="disableDeleteRule"></td>
+     <td><input type="checkbox" value="export" class="exportrule exportruleGen"  data-filterType="RegCatName" data-objectval="{{regucat.Name}}" ng-click="expoindRule($event)" ng-disabled="disableExportRule"></td>   
+   </tr>    
+   <tr>
+     <td colspan="6" class="info">Specific Rules</td>
+     
+   </tr>
+ <tr ng-repeat="ruleall in allrulelist"> 
+ <td value="{{ruleall.uc_rule_surr_id}}">{{ruleall.uc_rule_id}}</td>
+     <td><!-- <input type="checkbox" value="create" class="ctrrule"  data-objectval="{{ruleall.uc_rule_surr_id}}" ng-click="createindRuleSpe($event)" ng-disabled="disableCreateRuleSpe"> --></td>
+     <td><input type="checkbox" value="read"   class="readrulesp"   data-filterType="id"    data-objectval="{{ruleall.uc_rule_surr_id}}" ng-click="readindRuleSpe($event)" ng-disabled="disableReadRuleSpe"></td>
+     <td><input type="checkbox" value="update" class="updaterulesp" data-filterType="id"  data-objectval="{{ruleall.uc_rule_surr_id}}" ng-click="updaindRuleSpe($event)" ng-disabled="disableUpdateRuleSpe"></td>
+     <td><input type="checkbox" value="delete" class="deleterulesp" data-filterType="id" data-objectval="{{ruleall.uc_rule_surr_id}}" ng-click="deleindRuleSpe($event)" ng-disabled="disableDeleteRuleSpe"></td>
+     <td><input type="checkbox" value="export" class="exportrulesp" data-filterType="id"  data-objectval="{{ruleall.uc_rule_surr_id}}" ng-click="expoindRuleSpe($event)" ng-disabled="disableExportRuleSpe"></td>  
+   </tr>     
+     </tbody>
+   </table>  
+
+  </div>
+  
+  </div>
+    <div role="tabpanel" class="tab-pane" id="org"> 
+	<table class="table table-striped" >
+     <thead>
+     <tr class="tableheader">
+     <th></th>
+     <th>Create</th>
+     <th>Read</th>
+     <th>Update</th>
+     <th>Delete</th>
+     <th ng-hide="membertabOrga">Member</th>
+
+     </tr>
+     </thead>
+     <tbody>
+     <tr>
+     <td>All Organization</td>
+     <td><input type="checkbox" value="create" class="createorg" data-objectval="ALL" ng-click="creaindAllOrg($event)" ng-disabled="disableCreateOrgAll"></td> 
+     <td><input type="checkbox" value="read" class="readorg"  data-objectval="ALL"   ng-click="readindAllOrg($event)" ng-disabled="disableReadOrgAll"></td>
+     <td><input type="checkbox" value="update" class="updateorg" data-objectval="ALL" ng-click="updaindAllOrg($event)" ng-disabled="disableUpdateOrgAll"></td>
+     <td><input type="checkbox" value="delete" class="deleteorg" data-objectval="ALL" ng-click="deleindAllOrg($event)" ng-disabled="disableDeleteOrgAll"></td>
+     <td ng-hide="membertabOrga"><input type="checkbox" class="memberorg" value="member" data-objectval="ALL" ng-click="membindAllOrg($event)" ng-disabled="disableMemberOrgAll"></td>
+
+     </tr>
+     <tr class="info">
+     <td colspan="6" >Organization List</td>
+     <td> 
+      <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
+    </td>
+     </tr>
+     <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'">
+     
+	  <td>{{companycr.name}}</td>
+     <td><!-- <input type="checkbox" value="create" class="createorg" data-objectval="{{companycr.name}}" ng-click="createindOrg($event)" ng-disabled="disableCreateOrg"> --></td>
+     <td><input type="checkbox" value="read"   class="readorg readorgGen"   data-objectval="{{companycr.name}}" ng-click="readindOrg($event)" ng-disabled="disableReadOrg"></td>
+     <td><input type="checkbox" value="update" class="updateorg updateorgGen" data-objectval="{{companycr.name}}" ng-click="updaindOrg($event)" ng-disabled="disableUpdateOrg"></td>
+     <td><input type="checkbox" value="delete" class="deleteorg deleteorgGen" data-objectval="{{companycr.name}}" ng-click="deleindOrg($event)" ng-disabled="disableDeleteOrg"></td>
+     <td ng-hide="membertabOrga"><input type="checkbox" value="member" class="memberorg memberorgGen" data-objectval="{{companycr.name}}" ng-click="membindOrg($event)" ng-disabled="disableMemberOrg"></td>
+     <td ng-hide="dummyMembertabOrga"></td>
+    </tr>
+	     
+     </tbody>
+     </table></div>
+    <div role="tabpanel" class="tab-pane searchtableUser" id="subscription">
+  <table class="table table-striped" >
+     <thead>
+     <tr class="tableheader">
+     <th></th>
+     <th>Create</th>
+     <th>Read</th>
+     <th>Update</th>
+     <th>Delete</th>
+     </tr>
+     </thead>
+     <tbody>
+     <tr>
+     <td>All Organization</td>
+     <td><input type="checkbox" value="create" class="createsubs"  data-objectval="ALL" ng-click="creaindAllSub($event)" ng-disabled="disableCreateSubAll"></td> 
+     <td><input type="checkbox" value="read"   class="readsubs"    data-objectval="ALL" ng-click="readindAllSub($event)" ng-disabled="disableReadSubAll"></td>
+     <td><input type="checkbox" value="update" class="updatesubs"  data-objectval="ALL" ng-click="updaindAllSub($event)" ng-disabled="disableUpdateSubAll"></td>
+     <td><input type="checkbox" value="delete" class="deletesubs"  data-objectval="ALL" ng-click="deleindAllSub($event)" ng-disabled="disableDeleteSubAll"></td>
+     </tr>
+     <tr class="info">
+     <td colspan="4" >Organization List</td>
+     <td> 
+      <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
+    </td>
+     </tr>
+     <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'">
+     <td>{{companycr.name}}</td>
+     <td><input type="checkbox" value="create" class="createsubs createsubsGen"  data-objectval="{{companycr.name}}"   ng-click="createindSub($event)" ng-disabled="disableCreateSub"></td>
+     <td><input type="checkbox" value="read"   class="readsubs readsubsGen"    data-objectval="{{companycr.name}}"   ng-click="readindSub($event)" ng-disabled="disableReadSub"></td>
+     <td><input type="checkbox" value="update" class="updatesubs updatesubsGen"  data-objectval="{{companycr.name}}"   ng-click="updaindSub($event)" ng-disabled="disableUpdateSub"></td>
+     <td><input type="checkbox" value="delete" class="deletesubs deletesubsGen"  data-objectval="{{companycr.name}}"   ng-click="deleindSub($event)" ng-disabled="disableDeleteSub"></td>
+    </tr>
+	 
+	
+     </tbody>
+     </table>
+  
+  </div>
+  <div role="tabpanel" class="tab-pane searchtableUser" id="user">
+  <table class="table table-striped" >
+     <thead>
+     <tr class="tableheader">
+     <th></th>
+     <th>Create</th>
+     <th>Read</th>
+     <th>Update</th>
+     <th>Delete</th>
+     </tr>
+     </thead>
+     <tbody>
+     <tr>
+     <td>All Organization</td>
+     <td><input type="checkbox" value="create" class="createuser"  data-objectval="ALL" ng-click="creaindAllUser($event)" ng-disabled="disableCreateUserAll"></td> 
+     <td><input type="checkbox" value="read"   class="readuser"    data-objectval="ALL"  ng-click="readindAllUser($event)" ng-disabled="disableReadUserAll"></td>
+     <td><input type="checkbox" value="update" class="updateuser"  data-objectval="ALL" ng-click="updaindAllUser($event)" ng-disabled="disableUpdateUserAll"></td>
+     <td><input type="checkbox" value="delete" class="deleteuser"  data-objectval="ALL" ng-click="deleindAllUser($event)" ng-disabled="disableDeleteUserAll"></td>
+     </tr>
+     <tr class="info">
+     <td colspan="4" >Organization List</td>
+     <td> 
+      <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
+    </td>
+     </tr>
+     <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'">
+     
+	  
+     <td>{{companycr.name}}</td>
+     <td><input type="checkbox" value="create"  class="createuser createuserGen"  data-objectval="{{companycr.name}}"  ng-click="createindUser($event)" ng-disabled="disableCreateUser"></td>
+     <td><input type="checkbox" value="read"    class="readuser readuserGen"    data-objectval="{{companycr.name}}"    ng-click="readindUser($event)" ng-disabled="disableReadUser"></td>
+     <td><input type="checkbox" value="update"  class="updateuser updateuserGen"  data-objectval="{{companycr.name}}"  ng-click="updaindUser($event)" ng-disabled="disableUpdateUser"></td>
+     <td><input type="checkbox" value="delete"  class="deleteuser deleteuserGen"  data-objectval="{{companycr.name}}"  ng-click="deleindUser($event)" ng-disabled="disableDeleteUser"></td>
+    </tr>
+     </tbody>
+     </table
+     </div>
+  </div>
+  <div role="tabpanel" class="tab-pane searchtableUser" id="role">
+  
+  <table class="table table-striped" >
+     <thead>
+     <tr class="tableheader">
+     <th></th>
+     <th>Create</th>
+     <th>Read</th>
+     <th>Update</th>
+     <th>Delete</th>
+     </tr>
+     </thead>
+     <tbody>
+     <tr>
+     <td>All Organization</td>
+     <td><input type="checkbox" value="create" class="createrole"  data-objectval="ALL" ng-click="creaindAllRole($event)" ng-disabled="disableCreateRoleAll"></td> 
+     <td><input type="checkbox" value="read"   class="readrole"   data-objectval="ALL" ng-click="readindAllRole($event)" ng-disabled="disableReadRoleAll"></td>
+     <td><input type="checkbox" value="update" class="updaterole"  data-objectval="ALL" ng-click="updaindAllRole($event)" ng-disabled="disableUpdateRoleAll"></td>
+     <td><input type="checkbox" value="delete" class="deleterole"  data-objectval="ALL" ng-click="deleindAllRole($event)" ng-disabled="disableDeleteRoleAll"></td>
+     </tr>
+     <tr class="info">
+     <td colspan="4" >Organization List</td>
+     <td> 
+      <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
+    </td>
+     </tr>
+     <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'">
+     
+	  
+     <td>{{companycr.name}}</td>
+     <td><input type="checkbox" value="create" class="createrole createroleGen"  data-objectval="{{companycr.name}}"  ng-click="createindRole($event)" ng-disabled="disableCreateRole"></td>
+     <td><input type="checkbox" value="read"   class="readrole readroleGen"  data-objectval="{{companycr.name}}" ng-click="readindRole($event)" ng-disabled="disableReadRole"></td>
+     <td><input type="checkbox" value="update" class="updaterole updateroleGen"  data-objectval="{{companycr.name}}" ng-click="updaindRole($event)" ng-disabled="disableUpdateRole"></td>
+     <td><input type="checkbox" value="delete" class="deleterole deleteroleGen"  data-objectval="{{companycr.name}}" ng-click="deleindRole($event)" ng-disabled="disableDeleteRole"></td>
+    </tr>
+	 
+     </tbody>
+     </table>
+  </div>
+  </div>
+  <input type="button" style="margin-top:15px;" class="btn btn-primary btnBottom buttonOrg" ng-click="sendPermissions()" value="Submit">
+
+</div>
+  
+    
+    </div>
+    </div>
+  
+  
+ 

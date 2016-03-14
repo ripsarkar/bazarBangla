@@ -124,13 +124,13 @@
                 	<input type="checkbox"  ng-click="cliThreModTop($event)">Threat Model<span class="start"><i class="icon-minus-sign headPlus">+</i></span>
                     <ul>
                         <li ng-repeat="thrt1 in thrtmodl">
-                        	<input type="checkbox" ng-click="cliThreModMid($event,thrt1.SurrId,thrt1.Name)"><pre class="uccatagory"></pre><div style="display:inline">{{thrt1.Name}}</div>-<strong>{{thrt1.SurrId}}</strong><span><i class="icon-minus-sign">+</i></span>
+                        	<input type="checkbox" ng-click="cliThreModMid($event,thrt1.SurrId,thrt1.Name)"><pre class="uccatagory"></pre><div style="display:inline">{{thrt1.Name}}</div>-<strong>{{thrt1.ID}}</strong><span><i class="icon-minus-sign">+</i></span>
                             <ul>
 		                       <li ng-repeat="thrt2 in thrt1.children">
-			                      <input type="checkbox" ng-click="cliThreMod($event,thrt2.SurrId,thrt2.Name)"><pre class="threatScatagoryM" ng-if="thrt2.ThreadModelType=='M'"></pre><pre class="threatScatagoryS" ng-if="thrt2.ThreadModelType=='S'"></pre><div style="display:inline">{{thrt2.Name}}</div>-<strong>{{thrt2.SurrId}}</strong><span><i class="icon-minus-sign">+</i></span>
+			                      <input type="checkbox" ng-click="cliThreMod($event,thrt2.SurrId,thrt2.Name)"><pre class="threatScatagoryM" ng-if="thrt2.ThreadModelType=='M'"></pre><pre class="threatScatagoryS" ng-if="thrt2.ThreadModelType=='S'"></pre><div style="display:inline">{{thrt2.Name}}</div>-<strong>{{thrt2.ID}}</strong><span><i class="icon-minus-sign">+</i></span>
 			                      <ul>
 				                       <li ng-repeat="thrt3 in thrt2.children">
-					                      <input type="checkbox" ng-click="cliThreModInner($event,thrt3.SurrId,thrt3.Name)"  value="{{thrt3.SurrId}}"><pre class="threatScatagoryM" ng-if="thrt3.ThreadModelType=='M'"></pre><pre class="threatScatagoryS" ng-if="thrt3.ThreadModelType=='S'"></pre><div style="display:inline">{{thrt3.Name}}</div>-<strong>{{thrt3.SurrId}}</strong>
+					                      <input type="checkbox" ng-click="cliThreModInner($event,thrt3.SurrId,thrt3.Name)"  value="{{thrt3.SurrId}}"><pre class="threatScatagoryM" ng-if="thrt3.ThreadModelType=='M'"></pre><pre class="threatScatagoryS" ng-if="thrt3.ThreadModelType=='S'"></pre><div style="display:inline">{{thrt3.Name}}</div>-<strong>{{thrt3.ID}}</strong>
 				                       </li>
 		                          </ul>
 		                       </li>
@@ -179,7 +179,7 @@
 					</div>
 								
 				</div>
-					<button class="result-search btn pull-right" ng-click="ClikedResult()">Refresh Result</button>
+					<button class="result-search btn pull-right" ng-click="ClikedResult()" ng-disabled="searchResul">Refresh Result</button>
 			</div>
 			<div ng-include="currentTab"></div>
 		</div>

@@ -35,6 +35,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     $rootScope.updatecontractId="";
     $rootScope.currentUserTab = 'html/uamcreateuser.html';
     $scope.disableusername=false;
+    $scope.orgalistusercrea=false;
 
 });
 	//is active declaraion
@@ -67,6 +68,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
 	}	
 	//passing data for update
 	if($rootScope.updateuserName!=""){
+    $scope.orgalistusercrea = true;
 	$scope.disableusername=true;
 	$scope.usernamemain=$rootScope.updateuserName;
 	$scope.firstname=$rootScope.updatefirstName;
@@ -88,12 +90,12 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
 	}
     $scope.sendcreateuser=function() {
     	//form validation
-    	//var usernameRegex = /^[a-zA-Z0-9_-@]+$/;
-    	var name = /^[A-z ]+$/;
+    	var usernameRegex = /^([a-zA-Z][a-zA-Z0-9._-]+@[a-zA-Z][a-zA-Z0-9-.]+.[a-zA-Z]{2,4})$/;
+    	var name = /^[a-zA-Z][a-zA-Z\s]+$/;
     	var contnumber = /^\+?([0-9]{1,5})\)?[-. ]?([0-9]{2,5})[-. ]?([0-9]{2,5})[-. ]?([0-9]{2,5})$/;  
-    	var emailidfield = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
+    	var emailidfield = /^([a-zA-Z][a-zA-Z0-9._-]+@[a-zA-Z][a-zA-Z0-9-.]+.[a-zA-Z]{2,4})$/;
     	
-    	if($scope.usernamemain == '' /*|| !usernameRegex.test($scope.usernamemain)*/){
+    	if($scope.usernamemain == '' || !usernameRegex.test($scope.usernamemain)){
     		alert('Please enter a valid User name');
      	    return false;
     	}
@@ -118,16 +120,16 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     	    alert('Please enter a valid email address');
     	    return false;
     	}
-    	else if ($scope.selectedCompanycr == '')
+    	else if ($rootScope.updateuserName=="" && $scope.selectedCompanycr == '')
     	{
     	    alert('Please select a Company');
     	    return false;
     	}
-    	else if ($scope.role == '')
+    	/*else if ($scope.role == '')
     	{
     	    alert('Please select a Role');
     	    return false;
-    	}
+    	}*/
     	else{
     	var createupdateapi=$rootScope.url+"/createNewUser";
     	if($rootScope.updateuserName!=""){
@@ -144,9 +146,9 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
         		contactnum:$scope.contactnum,
         		emailadd:$scope.emailadd,
         		companyname:$scope.selectedCompanycr,
-        		industry:$scope.industryName,
-        		contractid:$scope.contractId,
-        		role:$scope.role,
+        		//industry:$scope.industryName,
+        		//contractid:$scope.contractId,
+        		//role:$scope.role,
         		isactive:activestatus
         };
     var	 callpost = {
@@ -176,7 +178,13 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     		    $scope.industryName="";
     		    $scope.contractId="";
     			//--------------clearing the fields---------------//
-    			alert("User account created successfully, details sent to registered email");
+
+                    
+                /*back botton set clear*/
+                $rootScope.backcmplist = ""; 
+                    
+    			alert("User account created successfully. User name/password sent to registered email");
+
     	 		}
     	 		else{
     	 		$rootScope.currentUserTab = 'html/viewuser.html';
@@ -223,9 +231,8 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
 //starting loading animation	
 $rootScope.loadinganimation=true;
 
-$timeout(function(){
 	 //calling getcompany
-	$http.get($rootScope.url+'/getCompany').success(function(resultnamecr) {
+	/*$http.get($rootScope.url+'/getCompany').success(function(resultnamecr) {
 		$scope.companyListli = resultnamecr.Company;
 		 //starting loading animation	
 		 $rootScope.loadinganimation=false;	
@@ -234,32 +241,57 @@ $timeout(function(){
 	  		alert("There is some problem as reported by the backend. Please contact the administrator");
 	  		$rootScope.loadinganimation=false;
 
-	});
-},3000);
+	});*/
+	
+	var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+	if(obj.Users.User !=undefined){
+		
 
-$scope.getDetailscr=function(){
-		for(var i=0;i<$scope.companyListli.length;i++){
-			if($scope.companyListli[i].name==$scope.selectedCompanycr){
-				idcompanyget=$scope.companyListli[i].id;
+		var permissiontypeList = obj.Users.User.PermissionTypeDet;
+		for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+			 if(permissiontypeList[int2].PermissionName=="create"){
+				  $scope.companyList=permissiontypeList[int2].ObjectList;
+				  $rootScope.loadinganimation=false;
 			}
 		}
-		createUserService.getCompDetails(idcompanyget).success(function(resultname)
-				{
-					$scope.industryName = resultname.industryName;
-					$scope.contractId = resultname.contractId;
-				});
-	};
+	
+	}
+
 	
 	
-	$http.get($rootScope.url+'/getpopulateRoleforLogin').success(function(resultrole) {
-		
-		$scope.rolelist = resultrole.Roles;
-		
-      	 }).error(function(error) {
-        //error
-      		 alert("There is some problem as reported by the backend. Please contact the administrator");
- 	  		$rootScope.loadinganimation=false;
-    	 });
+//                        $http.get($rootScope.url + "/getOrgListForUser/" + localStorage.getItem("surrrip")).success(function(result) {
+//                            $scope.companyListli = result.Organization;
+//                            //starting loading animation   
+//                            $rootScope.loadinganimation=false;
+//                        }).error(function (error) {
+//                            //error
+//                            alert("There is some problem as reported by the backend. Please contact the administrator");
+//                            $rootScope.loadinganimation=false;
+//                        });
+
+//$scope.getDetailscr=function(){
+//		for(var i=0;i<$scope.companyListli.length;i++){
+//			if($scope.companyListli[i].name==$scope.selectedCompanycr){
+//				idcompanyget=$scope.companyListli[i].id;
+//			}
+//		}
+//		createUserService.getCompDetails(idcompanyget).success(function(resultname)
+//				{
+//					$scope.industryName = resultname.industryName;
+//					$scope.contractId = resultname.contractId;
+//				});
+//	};
+	
+	
+//	$http.get($rootScope.url+'/getpopulateRoleforLogin/'+localStorage.getItem("surrComprip")).success(function(resultrole) {
+//		
+//		$scope.rolelist = resultrole.Roles;
+//		
+//      	 }).error(function(error) {
+//        //error
+//      		 alert("There is some problem as reported by the backend. Please contact the administrator");
+// 	  		$rootScope.loadinganimation=false;
+//    	 });
 
 /*	createUserService.getRoles(data).success(function(resultrole)
 		{
@@ -320,6 +352,8 @@ app.service('createUserService', ['$http',"$rootScope",
  	         return responsename.data;
  	       	}).error(function(error) {
  	           //error
+                alert("Internal server error");
+
  	    	 });
  	     	return promisename;
  	    	};

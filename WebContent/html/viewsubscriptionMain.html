@@ -1,0 +1,133 @@
+<div class="createnewpage pagebg" ng-controller="viewsubscriptionMain">
+    <div class="container">
+        <div class="row">
+            <div class="createnew-head" style="padding:0px;">
+                <div class="col-md-4 col-sm-4">
+                    <h2 class="title-head">View Subscription</h2>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                </div>
+            </div>
+        </div>
+        <hr style="margin-top:0px">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div>
+                    <span class="title-head"> Organization : </span> 
+                    <select ng-model="orgName" ng-selected="{{vspselPckg.SurrId}}" style="height: 30px; width: 300px; margin-top: 20px;" style="height: 30px; width: 300px; margin-top: 20px;" ng-options="vspselPckg.SurrId as vspselPckg.Name for vspselPckg in vspselPckgs | orderBy:'Name'">
+                    </select>
+                    <button class="btn btn-primary" ng-click="orgcmpname()">Search</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row" style="margin:0px;">
+            <table class="table table-striped searchtablerow fixed-header" style="max-height: 350px; overflow-y: auto;">
+                <thead>
+                    <tr class="tableheader">
+                        <th >Subscription Id</th>
+                        <th >Effective Date</th>
+                        <th >Expiration Date</th>
+                        <th >Maximum Acive Users</th>
+                        <!-- <th align="right" style="width:120px;">Edit</th>
+						<th>Permissions</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-show="vspPckg.length>0" ng-repeat="viewspb in vspPckg | startFrom:currentPage*pageSize | limitTo:pageSize">
+                        <td align="left">{{viewspb.subsctpId}}</td>
+                        <td align="left">{{viewspb.effectdate}}</td>
+                        <td align="left">{{viewspb.expirationdate}}</td>
+                        <td align="left">{{viewspb.maxusers}}</td>
+                        <!-- <td align="left"><a href="javascript:void(0);" ng-click="open();subscptForm(viewspb.subscprtsurrId, viewspb.subsctpId, viewspb.effectdate, viewspb.expirationdate, viewspb.maxusers, $index)" data-toggle="modal" data-target="#myModal"><span class="icon-feedback"></span></a>
+                        </td>
+						<td><a><span class="glyphicon glyphicon-thumbs-up" style="font-size: 22px;" ng-click="fnOpenPermission(viewspb.subscprtsurrId,viewspb.subsctpId,'Subscription')"></span></a></td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container">
+        <div class="pull-right" style="margin: 20px 0px;">
+            <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous</button>
+            {{currentPage+1}}/{{numberOfPages()}}
+            <button ng-disabled="currentPage >= vspPckg.length/pageSize - 1" ng-click="currentPage=currentPage+1">Next</button>
+        </div>
+    </div>
+<script type="text/ng-template" id="subscptContent.html">
+
+        <div class="modal-header" style="background:#008CCE">
+            <button type="button" class="close" ng-click="cancel()">&times;</button>
+            <h4 class="modal-title model_tit"><span class="title-head" style="color:#fff;">Update Subscription</span></h4>
+        </div>
+        <div class="modal-body">
+        <form name="SubscprtFrm" ng-submit="Subscrptsubmitchck(id)" novalidate autocomplete="off" role="form" style="margin: 10px 35px;">
+        <div class="row form-group">
+            <div class="col-md-5">
+                <label> Subscription / Contrtract Id <span class="red">*</span></label>
+            </div>
+            <div class="col-md-7">
+                <input type="text" class="form-control" maxlength="50" disabled ng-model="subspcrtFrm.supsctpId">
+            </div>
+        </div>
+        
+        <div class="row form-group">
+            <div class="col-md-5">
+                <label> Effective Date <span class="red">*</span></label>
+            </div>
+            <div class="col-md-7">
+                <p class="input-group">
+                    <input type="text" class="form-control" required ng-change="onchangeStartDate()" disabled datepicker-popup="yyyy-MM-dd" ng-model="startdt" datepicker-options="dateOptions" is-open="opened" />
+                    <span class="input-group-btn">
+                        <button type="button" disabled class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+        
+        <div class="row form-group">
+            <div class="col-md-5 ">
+                <label> Expiration Date <span class="red">*</span></label>
+            </div>
+            <div class="col-md-7">
+                <p class="input-group">
+                    <input type="text" class="form-control" min-date="minDate" ng-change="onchangeUpdtDate()" required datepicker-popup="yyyy-MM-dd" ng-model="updatedt" is-open="Upopened" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="Upopen($event)"> <i class="glyphicon glyphicon-calendar"> </i></button>
+                    </span>
+                </p>
+            </div>
+        </div>
+        
+        <div class="row form-group">
+            <div class="col-md-5">
+                <label>Maximum Acive Users<span class="red">*</span></label>
+            </div>
+            <div class="col-md-7">
+                <input type="text" class="form-control" maxlength="50" ng-model="subspcrtFrm.maximumAcc">
+            </div>
+        </div>
+    </form>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-click="updataSubscrptsubmit(subspcrtFrm.subscprtsurrId)">Submit</button>
+    <button type="button" class="btn btn-default" ng-click="cancel();reSet();">Cancel</button>
+    </div>
+
+    </script>
+</div>
+
+<style>
+    .full button span {
+        background-color: limegreen;
+        border-radius: 32px;
+        color: black;
+    }
+    
+    .partially button span {
+        background-color: orange;
+        border-radius: 32px;
+        color: black;
+    }
+</style>

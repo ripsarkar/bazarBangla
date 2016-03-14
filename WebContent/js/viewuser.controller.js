@@ -1,26 +1,56 @@
 //wrting the controller for viewuser page
 app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", function($scope, ViewUserService, $rootScope){
 	
-	 $rootScope.loadinganimation=true;	
+	// $rootScope.loadinganimation=true;	
 
 	
 	$scope.industryName = "";
 	$scope.contractId = "";
 	
+    /*back botton*/
+//    $scope.backbtnusermanager = function(){
+//        if(typeof $rootScope.backcmplist != 'undefined' && $rootScope.backcmplist !=""){
+//        ViewUserService.getUserDetails($rootScope.backcmplist).then(function(resultname)
+//                {
+//                    $scope.userList = resultname.Users;
+//                    $scope.selectedCompany = {
+//                        id :$rootScope.backcmplist
+//                    };
+//                    $scope.getDetails();
+//                    $rootScope.backcmplist="";
+//                });
+//        }
+//    }
+    
+	var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+	if(obj.Users.User !=undefined){
+
+		var permissiontypeList = obj.Users.User.PermissionTypeDet;
+		for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+			 if(permissiontypeList[int2].PermissionName=="update"){
+				 $scope.companyList=permissiontypeList[int2].ObjectList;
+				// $scope.backbtnusermanager();
+			}
+		}
 	
-		ViewUserService.getCompanyName().success(function(resultname)
-				{		 
-					$rootScope.loadinganimation=false;	
-					$scope.companyList = resultname.Company;
-				}).error(function (error) {
-       	         //error
-			  		alert("There is some problem as reported by the backend. Please contact the administrator");
-			  		$rootScope.loadinganimation=false;
-			  	})
+	}
+	
+	
+	
+//		ViewUserService.getCompanyName().success(function(resultname)
+//				{		 
+//					$rootScope.loadinganimation=false;	
+//					$scope.companyList = resultname.Company;
+//                    $scope.backbtnusermanager();
+//				}).error(function (error) {
+//       	         //error
+//			  		alert("There is some problem as reported by the backend. Please contact the administrator");
+//			  		$rootScope.loadinganimation=false;
+//			  	})
 
 	
 	$scope.getDetails=function(){
-		ViewUserService.getCompDetails($scope.selectedCompany.id).then(function(resultname)
+		ViewUserService.getCompDetails($scope.selectedCompany.SurrId).then(function(resultname)
 				{
 					$scope.industryName = resultname.industryName;
 					$scope.contractId = resultname.contractId;
@@ -31,12 +61,13 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", f
 	$scope.userList=[];
 	$scope.clickme=function(){
 		
-		ViewUserService.getUserDetails($scope.selectedCompany.id).then(function(resultname)
+		ViewUserService.getUserDetails($scope.selectedCompany.SurrId).then(function(resultname)
 				{
 					$scope.userList = resultname.Users;					
 				});
 
     }
+    
 	/*-----------------/search function ends-----------------*/
 	
 	//red green dot styling
@@ -66,6 +97,7 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", f
        	         return responsename.data;
        	       	}).error(function (error) {
        	         //error
+       	       		alert("Internal server error");
        	     	})
        	     	return promisename;
        	    	}
@@ -76,6 +108,7 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", f
           	         return responsename.data;
           	       	}, function (error) {
           	         //error
+          	       	alert("Internal server error");
           	     	})
           	     	return promisename;
           	    	}
@@ -86,6 +119,7 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", f
          	         return responsename.data;
          	       	}, function (error) {
          	         //error
+         	       	alert("Internal server error");
          	     	})
          	     	return promisename;
          	    	}

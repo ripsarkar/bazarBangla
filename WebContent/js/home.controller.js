@@ -1,74 +1,254 @@
 'use strict';
-//var app = angular.module('app', ["ui.bootstrap"]);
-//app.controller('HomeController', HomeController);
 var app = angular.module('app').controller('HomeController', HomeController);
-//var ucrsui = angular.module("app", ["ui.bootstrap"]).config();
-HomeController.$inject = ['UserService', '$rootScope', '$scope', '$http','$location'];
-//angular.module("app", ["ui.bootstrap"]).config();
+HomeController.$inject = ['UserService', 'UserAuthFactory','AuthenticationFactory','$rootScope', '$scope', '$http','$location','$window',"$q"];
 
 
-function HomeController(UserService,  $rootScope, $scope, $http,$location) {
+function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $rootScope, $scope, $http,$location,$window,$q) {
+	if ($location.protocol() !== 'https') {
+        $window.location.href = $location.absUrl().replace('http', 'https');
+    }
 		var usernameId;
 		angular.element(document).ready(function(){
 		usernameId = window.location.href;
 		});
 		var mj = usernameId.split("=");
-	console.log("dataloading value::"+$rootScope.dataLoading);
+	   // console.log("dataloading value::"+$rootScope.dataLoading);
+	    if(!localStorage.token){
+	   	 var promise1= UserAuthFactory.login(mj[1]).success(function(data) {
+	   	       
+	   	          AuthenticationFactory.isLogged = true;
+	   	          
+	   	          //$window.sessionStorage.token = data.token;
+	   	          localStorage.setItem("token", data.token);
+	   	          localStorage.setItem("isLoggedIn", true);
+	   	         
+	   	             
+	   	        }).error(function(status) {
+	   	          alert('Oops something went wrong!');
+	   	        });
+	   	   
+	   	   }
 	
-    if($rootScope.dataLoading == undefined || $rootScope.dataLoading==false) {
-    	console.log("data loading GET called");
-		  $rootScope.loadinganimation = true;
-		  var loadUserdetails = {
- 	                method: "GET",
- 	                url: $rootScope.url+"/getUserDetails/"+mj[1]
- 	            };
- 	            $http(loadUserdetails).success(function(result) {
- 	             $rootScope.dataLoading=true; 	            
- 	            	if (result.User[0].error!=undefined) {
- 	            		if(result.User[0].error=="Username not populated"){
- 	            			$rootScope.loginError=false;
- 	            		}else{
- 	            			$rootScope.loginError=true;
- 	            		}
- 	            		$location.path('/login');
- 	                }else{
- 	                	$rootScope.loginError=false;
- 	                	// Store
- 	                	localStorage.setItem("rolerip", result.User[0].user_role_name);
- 	                	localStorage.setItem("surrrip", result.User[0].user_surr_id);
- 	                	localStorage.setItem("surrComprip", result.User[0].company_surr_id);
- 	                	localStorage.setItem("namerip", result.User[0].user_name);
- 	                	if(result.User[0].user_middle_name!=null){
- 	                		localStorage.setItem("fullname", (result.User[0].user_first_name+" "+result.User[0].user_middle_name+" "+result.User[0].user_last_name));	
- 	                	}else{
- 	                		localStorage.setItem("fullname", (result.User[0].user_first_name+" "+result.User[0].user_last_name));
- 	                	}
- 	                	
- 	                	localStorage.setItem("showallbutt", result.User[0].user_industry_name);
- 	                	localStorage.setItem("cmpyId", result.User[0].company_surr_id);
-                        localStorage.setItem("industrySurrId", result.User[0].user_industry_surr_id);
+	
+	
+    
+
+				/*$scope.$watch(function(){
+					if($rootScope.user_name == undefined || $rootScope.companyNamee == undefined){
+				        $location.path('/login');
+					}
+				});*/
+
+	    $q.all([promise1]).then(function(data){
+
+	  if($rootScope.dataLoading == undefined || $rootScope.dataLoading==false) {
+      	//console.log("data loading GET called");
+  		  $rootScope.loadinganimation = true;
+  		  
+  		  var mju;
+  		 if(mj[1]!=undefined){
+			  mju=mj[1];
+			  
+			  }else{
+				  
+				mju=localStorage.namerip;  
+			  }
+			  
+  		  var loadUserdetails = {
+   	                method: "GET",
+   	                url: $rootScope.url+"/getUserDetails/"+mju
+   	         		//url: "data/userdtail.json"
+   	            };
+   	            $http(loadUserdetails).success(function(result) {
+   	             $rootScope.dataLoading=true; 	            
+   	            	if (result.User[0].error!=undefined) {
+   	            		if(result.User[0].error=="Username not populated"){
+   	            			$rootScope.loginError=false;
+   	            		}else{
+   	            			$rootScope.loginError=true;
+   	            		}
+   	            		$location.path('/login');
+   	                }else{
+   	                	$rootScope.loginError=false;
+   	                	// Store
+   	                	localStorage.setItem("rolerip", result.User[0].user_role_name);
+   	                	localStorage.setItem("surrrip", result.User[0].user_surr_id);
+   	                	localStorage.setItem("surrComprip", result.User[0].company_surr_id);
+   	                	localStorage.setItem("namerip", result.User[0].user_name);
+   	                	if(result.User[0].user_middle_name!=null){
+   	                		localStorage.setItem("fullname", (result.User[0].user_first_name+" "+result.User[0].user_middle_name+" "+result.User[0].user_last_name));	
+   	                	}else{
+   	                		localStorage.setItem("fullname", (result.User[0].user_first_name+" "+result.User[0].user_last_name));
+   	                	}
+   	                	
+   	                	localStorage.setItem("showallbutt", result.User[0].user_industry_name);
+   	                	localStorage.setItem("cmpyId", result.User[0].company_surr_id);
+                          localStorage.setItem("industrySurrId", result.User[0].user_industry_surr_id);
+                          localStorage.setItem("nameCompany", result.User[0].company_name);
+
+   	                	$rootScope.role = result.User[0].user_role_name;
+   	                	$rootScope.surrId = result.User[0].user_surr_id;
+   	                	$rootScope.user_name = result.User[0].user_name;
+   	                    $rootScope.disabled=false;
+   	                 //   $rootScope.username = result.User[0].user_name;
+   	                    $rootScope.username = localStorage.getItem("fullname");
+   	                    $rootScope.compSurrId = localStorage.getItem("surrComprip");
+                          $rootScope.user_name = result.User[0].user_name;
+                          $rootScope.companyNamee = result.User[0].company_name;
+                          $scope.userIndustChVa = localStorage.getItem("nameCompany");
+
+   	                }
+   	            	    $rootScope.loadinganimation = false;
+                         // console.log($rootScope.user_name);
+                         // console.log($rootScope.companyNamee);
+                         // console.log(localStorage.getItem("fullname"));
+                          $rootScope.loadinganimation = false;
+                          $location.path('/home/search');
+
+                          
+                          
+                          if($rootScope.user_name != undefined && $rootScope.companyNamee != undefined){
+                          $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
+                          //$http.get("data/dummyjson.json").success(function(result) {
+                              sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                              $scope.permission = sessionStorage.getItem("fetchPermission");
+                             // console.log(sessionStorage.getItem("fetchPermission"));
+                            
+                              $location.path('/home/search');
+                              $scope.fnTabsdisEnab();
+                              $rootScope.loadinganimation = false;
 
 
- 	                	$rootScope.role = result.User[0].user_role_name;
- 	                	$rootScope.surrId = result.User[0].user_surr_id;
- 	                	$rootScope.user_name = result.User[0].user_name;
- 	                    $rootScope.disabled=false;
- 	                 //   $rootScope.username = result.User[0].user_name;
- 	                   $rootScope.username = localStorage.getItem("fullname");
- 	                   $rootScope.compSurrId = localStorage.getItem("surrComprip");
- 	                    $location.path('/home/search');
- 	                }
- 	            	 $rootScope.loadinganimation = false;
- 	            	
- 	            }).error(function (error) {
- 	             $rootScope.loadinganimation = false;
- 	            	$rootScope.loginError=true;
- 	            	$location.path('/login');
- 	            });
-		  
-	  }
 
-     	   
+                          }).error(function (error) {
+                          	alert("Internal server error");
+                          });
+  	                    }else{
+  	                    	var timer = setInterval(function() {
+                              $rootScope.loadinganimation = true;
+  	                        //$location.path('/login');
+  								if ($rootScope.user_name == undefined && $rootScope.companyNamee == undefined) {
+  								    clearInterval( timer );
+  		                            $rootScope.loadinganimation = false;
+                          			$location.path('/login');
+  								  }
+
+  							}, 16);
+  	                    }
+                          $http.get($rootScope.url + "/getOrgListForUser/" + localStorage.getItem("surrrip")).success(function(result) {
+                          
+                              $scope.RfetchList = result.Organization;
+                              var objComp = {};
+                              objComp.company_name =localStorage.getItem("nameCompany");
+                              $scope.RfetchList.push(objComp);
+                              $rootScope.loadinganimation = false;
+                          }).error(function (error) {
+                          	alert("Internal server error");
+                          });
+
+   	            }).error(function (error) {
+   	             $rootScope.loadinganimation = false;
+   	             alert("Internal server error");
+   	            });
+  		  
+  	  }
+
+});
+	//tab enable disable
+
+//Main Tabs disable enable
+	    $scope.fnTabsdisEnab=function(){
+	    		$scope.userAccountManagementdis= false;
+	    		$scope.useCaseMaintaindis = false;
+	    		$scope.organizationdis= false;
+	    		$scope.rolemenudis= false;	
+	    		
+	    var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+
+	    	if(obj.Users.User==undefined){
+	    		$scope.userAccountManagementdis= true;
+	    	}
+	    	else{
+	    		$scope.userAccountManagementdis= false;
+	    		
+	    	}
+	    	if(obj.Users.UseCase==undefined && obj.Users.Rule==undefined){
+	    		$scope.useCaseMaintaindis= true;
+	    	}
+			else{
+				$scope.useCaseMaintaindis= true;
+				  if(obj.Users.UseCase!=undefined){						
+						angular.forEach(obj.Users.UseCase.PermissionTypeDet, function(value, key) {					
+								var useCaseObj = obj.Users.UseCase.PermissionTypeDet;
+								for(var i in useCaseObj){
+									if(useCaseObj[i].PermissionName=='create' || useCaseObj[i].PermissionName=='update'){
+										$scope.useCaseMaintaindis= false;								
+										break;
+									}
+								} 
+								
+								
+					
+						});
+					}
+					if(obj.Users.Rule!=undefined){
+						angular.forEach(obj.Users.Rule.PermissionTypeDet, function(value, key) {		
+								var useRuleObj = obj.Users.Rule.PermissionTypeDet;
+								for(var i in useRuleObj){
+									if(useRuleObj[i].PermissionName=='create' || useRuleObj[i].PermissionName=='update'){
+										$scope.useCaseMaintaindis= false;								
+										break;
+									}
+								} 
+								
+								
+					
+						});
+				    }
+			}
+	    	
+	    	if(obj.Users.Subscription==undefined && obj.Users.Organization==undefined){
+	    		$scope.organizationdis= true;
+	    	}
+	    	else{
+	    		
+	    		$scope.organizationdis= false;
+	    	}
+	    	
+	    	if(obj.Users.Role==undefined){
+	    		$scope.rolemenudis= true;		
+	    	}
+	    	else{
+	    		$scope.rolemenudis= false;	
+	    	}
+	    	
+	    	
+	    };
+//changing the user undustry
+    $scope.userIndustCh = function(){
+$location.path('/home/search');
+$scope.menu.usecaserule = false;
+$scope.menu.feedback = false;
+$scope.menu.uaman = false;
+$scope.menu.organisation = false;
+$scope.menu.subrolemenu = false;
+$scope.menu.menu = false;
+        var userIndustCh = $scope.userIndustChVa;
+                            $rootScope.loadinganimation = true;
+
+                            $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + userIndustCh).success(function(result) {
+
+                            	sessionStorage.setItem("fetchPermission", JSON.stringify(result));
+                                $rootScope.indussession = sessionStorage.getItem("fetchPermission");
+                               // console.log(sessionStorage.getItem("fetchPermission"));
+                                //$location.path('/home/search');
+                                $scope.fnTabsdisEnab();
+                                $rootScope.loadinganimation = false;
+                            }).error(function (error) {
+                            	alert("Internal server error");
+                            });
+    }
+////////////////////////////////////////////////
 	  
 	//  initController();
 	//code for showall button visibility
@@ -77,10 +257,18 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 	if($rootScope.userIndustryName =="ALL"){
 		$scope.showAllmode=true;
 	}
+	
+	
+	
 	//logout
 	$scope.localStorageclear=function(){
 		
+		//AuthenticationFactory.isLogged = false;
+       // delete AuthenticationFactory.user;
+        //delete $window.sessionStorage.token;
+       // delete $window.sessionStorage.user;		
 	   localStorage.clear();
+	   sessionStorage.clear();
 	   $location.path('/login');
 //	   $rootScope.loadinganimation = true;
 //	   var logout =   {
@@ -200,6 +388,8 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		        $scope.searchMenu = true;
 		        $scope.feedback = true;
 		        $scope.showAllmode=true;
+		        $scope.organization=true;
+                $scope.rolemenu=true;
 		        $rootScope.exported = false;
 		        $rootScope.searchOOBCri=true;
 		    }
@@ -210,6 +400,8 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=true;
 		        $scope.feedback = true;
+		        $scope.organization=true;
+                $scope.rolemenu=true;
 		        $rootScope.searchOOBCri=true;
 		    }
 		    if ($rootScope.role == "USER_VIEW") {
@@ -218,6 +410,8 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		        $scope.feedback = true;
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=true;
+		        $scope.organization=true;
+                $scope.rolemenu=true;
 		        $rootScope.searchOOBCri=true;
 		    }
 		    if ($rootScope.role == "USER_EXPORT") {
@@ -226,6 +420,8 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 		        $rootScope.exported = false;
 		        $scope.userAccountManagement = false;
 		        $scope.showAllmode=true;
+		        $scope.organization=true;
+                $scope.rolemenu=true;
 		        $rootScope.searchOOBCri=true;
 		    }
 		});
@@ -289,6 +485,571 @@ function HomeController(UserService,  $rootScope, $scope, $http,$location) {
 //                loadAllUsers();
 //            });
 //    }
+    
+    /**********************************/
+    
 
+    $scope.managePermissionUsecaseMaintain=function(){
+		$scope.CreateUseMaiCae = false;
+		$scope.UpdateUseMaiCae = false;
+		$scope.CreateRegcatMa = false;
+		$scope.UpdateRegcatMa = false;
+		var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+		if(obj.Users.UseCase !=undefined){
+
+			var permissiontypeList = obj.Users.UseCase.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				if(permissiontypeList[int2].PermissionName=="create"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+						$scope.CreateUseMaiCae = true;
+					}
+				}else if(permissiontypeList[int2].PermissionName=="update"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+						$scope.UpdateUseMaiCae = true;
+					}
+				}
+			}
+		}
+		if(obj.Users.Rule !=undefined){
+
+			var permissiontypeList = obj.Users.Rule.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				if(permissiontypeList[int2].PermissionName=="create"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+					$scope.CreateRegcatMa = true;
+					}
+				}else if(permissiontypeList[int2].PermissionName=="update"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+					$scope.UpdateRegcatMa = true;
+					}
+				}
+			}
+		}
+	}
+
+    $scope.managePermissionOrg=function(){
+		$scope.UpdateOrgzd = false;
+		$scope.CreateOrgzd = false;
+		$scope.UpdateSubzd = false;
+		$scope.CreateSubzd = false;
+		$scope.ReadSubzd = false;
+		var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+		if(obj.Users.Subscription !=undefined){
+
+			var permissiontypeList = obj.Users.Subscription.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				if(permissiontypeList[int2].PermissionName=="update"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+						$scope.UpdateSubzd = true;
+					}
+				}else if(permissiontypeList[int2].PermissionName=="create"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+					$scope.CreateSubzd = true;
+					}
+				}else if(permissiontypeList[int2].PermissionName=="read"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+					$scope.ReadSubzd = true;
+					}
+				}
+			}
+		}
+		if(obj.Users.Organization !=undefined){
+
+			var permissiontypeList = obj.Users.Organization.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				if(permissiontypeList[int2].PermissionName=="update"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+					$scope.UpdateOrgzd = true;
+					}
+				}else if(permissiontypeList[int2].PermissionName=="create"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+					$scope.CreateOrgzd = true;
+					}
+				}
+			}
+		
+		}
+    	
+		
+	}
+	
+	$scope.managePermissionForUserAccount=function(){
+		$scope.UpdateUserzd = false;
+		$scope.CreateUserzd = false;
+		$scope.ViewUserzd = false;
+		
+		
+		var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+		if(obj.Users.User !=undefined){
+
+			var permissiontypeList = obj.Users.User.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				if(permissiontypeList[int2].PermissionName=="update"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+						$scope.UpdateUserzd = true;
+					}
+				}else if(permissiontypeList[int2].PermissionName=="create"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+					$scope.CreateUserzd = true;
+					}
+				}else if(permissiontypeList[int2].PermissionName=="read"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+						$scope.ViewUserzd = true;
+						}
+					}
+			}
+		}
+		    	
+		
+	}
+	
+	$scope.managePermissionForRole=function(){
+		$scope.UpdateRolezd = false;
+		$scope.CreateRolezd = false;
+		$scope.ReadRolezd = false;
+
+		
+		
+		var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+		if(obj.Users.Role !=undefined){
+
+			var permissiontypeList = obj.Users.Role.PermissionTypeDet;
+			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+				if(permissiontypeList[int2].PermissionName=="update"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+						$scope.UpdateRolezd = true;
+					}
+				}else if(permissiontypeList[int2].PermissionName=="create"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+					$scope.CreateRolezd = true;
+					}
+				}
+				else if(permissiontypeList[int2].PermissionName=="read"){
+					if(permissiontypeList[int2].ObjectList.length > 0){
+					$scope.ReadRolezd = true;
+					}
+				}
+			}
+		}
+		    	
+		
+	}
+     
+   /***************************** */
+    $scope.defaultmenu = function(){
+        $scope.menu = {
+            usecaserule :false,
+            feedback : false,
+            usecase:false,
+            rule:false,
+            uaman:false,
+            organisation:false,
+            subrolemenu:false,
+            menu:false
+        };
+        angular.element("ul.submainlinks li").removeClass("subactive");
+
+/*	var usecaseBiglist =JSON.parse(sessionStorage.getItem("fetchPermission"));
+
+        if(usecaseBiglist.Users.UseCase != undefined){
+            for(var i=0;i<usecaseBiglist.Users.UseCase.PermissionTypeDet.length;i++){
+                if(usecaseBiglist.Users.UseCase.PermissionTypeDet[i].PermissionName == "read"){
+                    $scope.searchResul = true;
+                }
+            }
+        }
+        else{
+            $scope.searchResul = true;
+        }
+        if(usecaseBiglist.Users.Rule != undefined){
+            for(var i=0;i<usecaseBiglist.Users.Rule.PermissionTypeDet.length;i++){
+                if(usecaseBiglist.Users.Rule.PermissionTypeDet[i].PermissionName == "read"){
+                    $scope.searchResul = true;
+                }
+            }
+        }
+        else{
+            $scope.searchResul = true;
+        }*/
+    };
+    $scope.defaultmenu();
+    
+    $scope.menuUseRule =  function(){
+
+    	 $scope.managePermissionUsecaseMaintain();
+    	if(!$scope.CreateUseMaiCae){
+    	    //angular.element(".createUsecaseEnDi").attr("ui-sref","");
+            angular.element(".createUsecaseEnDi").attr("disabled","disabled");
+            angular.element(".createUsecaseEnDi").addClass(" btn btn-disabled");
+            angular.element(".createUsecaseEnDi").addClass("disabfuncCUcColor");
+    	    angular.element(".createUsecaseEnDi").attr("href","");
+    	}
+    	else{
+    	    //angular.element(".createUsecaseEnDi").attr("ui-sref",".createusecase");
+            angular.element(".createUsecaseEnDi").attr("disabled","false");
+            angular.element(".createUsecaseEnDi").removeClass(" btn btn-disabled");
+            angular.element(".createUsecaseEnDi").removeClass("disabfuncCUcColor");
+    	    angular.element(".createUsecaseEnDi").attr("href","#/home/createusecase");
+
+    	}
+    	if(!$scope.UpdateUseMaiCae){
+    	    //angular.element(".updateUsecaseEnDi").attr("ui-sref","");
+            angular.element(".updateUsecaseEnDi").attr("disabled","disabled");
+            angular.element(".updateUsecaseEnDi").addClass(" btn btn-disabled");
+            angular.element(".updateUsecaseEnDi").addClass("disabfuncCUcColor");
+    	    angular.element(".updateUsecaseEnDi").attr("href","");
+
+        }
+    	else{
+    	    //angular.element(".updateUsecaseEnDi").attr("ui-sref",".updateUsecase");
+            angular.element(".updateUsecaseEnDi").attr("disabled","false");
+            angular.element(".updateUsecaseEnDi").removeClass(" btn btn-disabled");
+            angular.element(".updateUsecaseEnDi").removeClass("disabfuncCUcColor");
+    	    angular.element(".updateUsecaseEnDi").attr("href","#/home/updateUsecase");
+    	}
+    	if(!$scope.CreateRegcatMa){
+    	    //angular.element(".createRuleEnDi").attr("ui-sref","");
+            angular.element(".createRuleEnDi").attr("disabled","disabled");
+            angular.element(".createRuleEnDi").addClass(" btn btn-disabled");
+            angular.element(".createRuleEnDi").addClass("disabfuncCUcColor");
+            angular.element(".createRuleEnDi").attr('href',"");
+    	}
+    	else{
+    	    //angular.element(".createRuleEnDi").attr("ui-sref",".createrule");
+            angular.element(".createRuleEnDi").attr("disabled","false");
+            angular.element(".createRuleEnDi").removeClass(" btn btn-disabled");
+            angular.element(".createRuleEnDi").removeClass("disabfuncCUcColor");
+            angular.element(".createRuleEnDi").attr('href',"#/home/createrule");
+    	}
+    	if(!$scope.UpdateRegcatMa){
+    	    //angular.element(".updateRuleEnDi").attr("ui-sref","");
+            angular.element(".updateRuleEnDi").attr("disabled","disabled");
+            angular.element(".updateRuleEnDi").addClass(" btn btn-disabled");
+            angular.element(".updateRuleEnDi").addClass("disabfuncCUcColor");
+            angular.element(".updateRuleEnDi").attr('href',"");
+
+    	}
+    	else{
+    	    //angular.element(".updateRuleEnDi").attr("ui-sref",".updateRule");
+            angular.element(".updateRuleEnDi").attr("disabled","false");
+            angular.element(".updateRuleEnDi").removeClass(" btn btn-disabled");
+            angular.element(".updateRuleEnDi").removeClass("disabfuncCUcColor");
+            angular.element(".updateRuleEnDi").attr('href',"#/home/updateRule");
+
+    	}
+
+        $scope.menu = {
+            usecaserule :true,
+            feedback : false,
+            usecase:false,
+            rule:false,
+            uaman:false,
+            organisation:false,
+            subrolemenu:false,
+            menu:true
+        };
+        angular.element("ul.submainlinks li").removeClass("subactive");
+    };
+
+    
+    $scope.feedbackmenu = function(){
+        $scope.menu = {
+            usecaserule :false,
+            feedback : true,
+            usecase:false,
+            rule:false,
+            uaman:false,
+            organisation:false,
+            subrolemenu:false,
+            menu:true
+        };
+        angular.element("ul.submainlinks li").removeClass("subactive");
+    };
+
+    $scope.manageOrg = function(){
+    	 $scope.managePermissionOrg();
+    	if(!$scope.CreateOrgzd){
+            angular.element(".disabfuncCUc1").attr("disabled","disabled");
+            angular.element(".disabfuncCUc1").addClass(" btn btn-disabled");
+            angular.element(".disabfuncCUc1").addClass("disabfuncCUcColor");
+            angular.element(".disabfuncCUc1").attr("href","");
+    	}
+    	else{
+            angular.element(".disabfuncCUc1").attr("disabled","false");
+            angular.element(".disabfuncCUc1").removeClass(" btn btn-disabled");
+            angular.element(".disabfuncCUc1").removeClass("disabfuncCUcColor");
+            angular.element(".disabfuncCUc1").attr("href","#/home/organization");
+    	}
+    	
+    	if(!$scope.CreateSubzd){
+            angular.element(".disabfuncCUc2").attr("disabled","disabled");
+            angular.element(".disabfuncCUc2").addClass(" btn btn-disabled");
+            angular.element(".disabfuncCUc2").addClass("disabfuncCUcColor");
+            angular.element(".disabfuncCUc2").attr("href","");
+    	}
+    	else{
+            angular.element(".disabfuncCUc2").attr("disabled","false");
+            angular.element(".disabfuncCUc2").removeClass(" btn btn-disabled");
+            angular.element(".disabfuncCUc2").removeClass("disabfuncCUcColor");
+            angular.element(".disabfuncCUc2").attr("href","#/home/subscription");
+    	}
+    	if(!$scope.UpdateOrgzd){
+            angular.element(".disabfuncCUc3").attr("disabled","disabled");
+            angular.element(".disabfuncCUc3").addClass(" btn btn-disabled");
+            angular.element(".disabfuncCUc3").addClass("disabfuncCUcColor");
+            angular.element(".disabfuncCUc3").attr("href","");
+    	}
+    	else{
+            angular.element(".disabfuncCUc3").attr("disabled","false");
+            angular.element(".disabfuncCUc3").removeClass(" btn btn-disabled");
+            angular.element(".disabfuncCUc3").removeClass("disabfuncCUcColor");
+            angular.element(".disabfuncCUc3").attr("href","#/home/UpdateOrganisation");
+    	}
+    	if(!$scope.UpdateSubzd){
+            angular.element(".disabfuncCUc4").attr("disabled","disabled");
+            angular.element(".disabfuncCUc4").addClass(" btn btn-disabled");
+            angular.element(".disabfuncCUc4").addClass("disabfuncCUcColor");
+            angular.element(".disabfuncCUc4").attr("href","");
+    	}
+    	else{
+            angular.element(".disabfuncCUc4").attr("disabled","false");
+            angular.element(".disabfuncCUc4").removeClass(" btn btn-disabled");
+            angular.element(".disabfuncCUc4").removeClass("disabfuncCUcColor");
+            angular.element(".disabfuncCUc4").attr("href","#/home/updatesubscription");
+    	}
+    	if(!$scope.ReadSubzd){
+            angular.element(".disabfuncCUc50").attr("disabled","disabled");
+            angular.element(".disabfuncCUc50").addClass(" btn btn-disabled");
+            angular.element(".disabfuncCUc50").addClass("disabfuncCUcColor");
+            angular.element(".disabfuncCUc50").attr("href","");
+    	}
+    	else{
+            angular.element(".disabfuncCUc50").attr("disabled","false");
+            angular.element(".disabfuncCUc50").removeClass(" btn btn-disabled");
+            angular.element(".disabfuncCUc50").removeClass("disabfuncCUcColor");
+            angular.element(".disabfuncCUc50").attr("href","#/home/viewsubscription");
+    	}
+    	
+        $scope.menu = {
+            usecaserule :false,
+            feedback : false,
+            usecase:false,
+            rule:false,
+            uaman:false,
+            organisation:true,
+            subrolemenu:false,
+            menu:true
+        };
+        angular.element("ul.submainlinks li").removeClass("subactive");
+    };
+    $scope.uamanagement = function(){
+    	 $scope.managePermissionForUserAccount();
+     	if(!$scope.CreateUserzd){
+     	     //angular.element(".disabfuncCUc5").attr("ui-sref","");
+             angular.element(".disabfuncCUc5").attr("disabled","disabled");
+             angular.element(".disabfuncCUc5").addClass(" btn btn-disabled");
+             angular.element(".disabfuncCUc5").addClass("disabfuncCUcColor");
+     	     angular.element(".disabfuncCUc5").attr("href","");
+     	}
+     	else{
+     		 //angular.element(".disabfuncCUc5").attr("ui-sref","");
+             angular.element(".disabfuncCUc5").attr("disabled","false");
+             angular.element(".disabfuncCUc5").removeClass(" btn btn-disabled");
+             angular.element(".disabfuncCUc5").removeClass("disabfuncCUcColor");
+     	     angular.element(".disabfuncCUc5").attr("href","#/home/uamanagement");
+     	}
+     	if(!$scope.UpdateUserzd){
+     	     //angular.element(".disabfuncCUc6").attr("ui-sref","");
+             angular.element(".disabfuncCUc6").attr("disabled","disabled");
+             angular.element(".disabfuncCUc6").addClass(" btn btn-disabled");
+             angular.element(".disabfuncCUc6").addClass("disabfuncCUcColor");
+     	     angular.element(".disabfuncCUc6").attr("href","");
+     	}
+     	else{
+     	     //angular.element(".disabfuncCUc6").attr("ui-sref","");
+             angular.element(".disabfuncCUc6").attr("disabled","false");
+             angular.element(".disabfuncCUc6").removeClass(" btn btn-disabled");
+             angular.element(".disabfuncCUc6").removeClass("disabfuncCUcColor");
+     	     angular.element(".disabfuncCUc6").attr("href","#/home/uamanagement");
+     	}
+     	if(!$scope.ViewUserzd){
+     	     //angular.element(".disabfuncCUc7").attr("ui-sref","");
+             angular.element(".disabfuncCUc7").attr("disabled","disabled");
+             angular.element(".disabfuncCUc7").addClass(" btn btn-disabled");
+             angular.element(".disabfuncCUc7").addClass("disabfuncCUcColor");
+     	     angular.element(".disabfuncCUc7").attr("href","");
+     	}
+     	else{
+     	     //angular.element(".disabfuncCUc7").attr("ui-sref","");
+             angular.element(".disabfuncCUc7").attr("disabled","false");
+             angular.element(".disabfuncCUc7").removeClass(" btn btn-disabled");
+             angular.element(".disabfuncCUc7").removeClass("disabfuncCUcColor");
+     	     angular.element(".disabfuncCUc7").attr("href","#/home/uamanagement");
+     	}
+     	
+    	
+    	$scope.menu = {
+                usecaserule :false,
+                feedback : false,
+                usecase:false,
+                rule:false,
+                uaman:true,
+                organisation:false,
+                subrolemenu:false,
+                menu:true
+            };
+    	angular.element("ul.submainlinks li").removeClass("subactive");
+    };
+    $scope.roleMnu = function(){
+    	 $scope.managePermissionForRole();
+      	if(!$scope.CreateRolezd){
+      		  //angular.element(".disabfuncCUc8").attr("ui-sref","");
+              angular.element(".disabfuncCUc8").attr("disabled","disabled");
+              angular.element(".disabfuncCUc8").addClass(" btn btn-disabled");
+              angular.element(".disabfuncCUc8").addClass("disabfuncCUcColor");
+      		  angular.element(".disabfuncCUc8").attr("href","");
+      	}
+      	else{
+      		  //angular.element(".disabfuncCUc8").attr("ui-sref","");
+              angular.element(".disabfuncCUc8").attr("disabled","false");
+              angular.element(".disabfuncCUc8").removeClass(" btn btn-disabled");
+              angular.element(".disabfuncCUc8").removeClass("disabfuncCUcColor");
+      		  angular.element(".disabfuncCUc8").attr("href","#/home/createrole");
+      	}
+      	
+      	if(!$scope.UpdateRolezd){
+      	      //angular.element(".disabfuncCUc9").attr("ui-sref","");
+              angular.element(".disabfuncCUc9").attr("disabled","disabled");
+              angular.element(".disabfuncCUc9").addClass(" btn btn-disabled");
+              angular.element(".disabfuncCUc9").addClass("disabfuncCUcColor");
+      		  angular.element(".disabfuncCUc9").attr("href","");
+      	}
+      	else{
+      		  //angular.element(".disabfuncCUc8").attr("ui-sref","");
+              angular.element(".disabfuncCUc9").attr("disabled","false");
+              angular.element(".disabfuncCUc9").removeClass(" btn btn-disabled");
+              angular.element(".disabfuncCUc9").removeClass("disabfuncCUcColor");
+      		  angular.element(".disabfuncCUc9").attr("href","#/home/updaterole");
+      	}
+      	if(!$scope.ReadRolezd){
+      	      //angular.element(".disabfuncCUc10").attr("ui-sref","");
+              angular.element(".disabfuncCUc10").attr("disabled","disabled");
+              angular.element(".disabfuncCUc10").addClass(" btn btn-disabled");
+              angular.element(".disabfuncCUc10").addClass("disabfuncCUcColor");
+      		  angular.element(".disabfuncCUc10").attr("href","");
+      	}
+      	else{
+      		  //angular.element(".disabfuncCUc8").attr("ui-sref","");
+              angular.element(".disabfuncCUc10").attr("disabled","false");
+              angular.element(".disabfuncCUc10").removeClass(" btn btn-disabled");
+              angular.element(".disabfuncCUc10").removeClass("disabfuncCUcColor");
+      		  angular.element(".disabfuncCUc10").attr("href","#/home/viewrole");
+      	}
+    	$scope.menu = {
+                usecaserule :false,
+                feedback : false,
+                usecase:false,
+                rule:false,
+                uaman:false,
+                organisation:false,
+                subrolemenu:true,
+                menu:true
+            };
+    	angular.element("ul.submainlinks li").removeClass("subactive");
+    };
+    
+    
+    
+    $scope.updateruleReload = function(){
+        $rootScope.$emit("updateruleReset", {});
+    };
+    
+    $scope.updateusecaseReload = function(){
+        $rootScope.$emit("updateusecaseReset", {});
+    };
+    
+    $scope.uamanager = function(){
+		$rootScope.updateuserName = "";
+		$rootScope.currentUserTab = 'html/uamcreateuser.html';
+        $rootScope.$emit("uamanagerpage", {});
+    };
+    
+    $scope.uaviewer = function(){
+        $rootScope.$emit("uaviewerpage", {});
+        $rootScope.currentUserTab = 'html/viewuser.html';
+    };
+    $scope.uaviewerMain = function(){
+        $rootScope.$emit("uaviewerMainpage", {});
+        $rootScope.currentUserTab = 'html/viewuser_main.html';
+    };
+
+    
   $scope.selection=[];
+// change for session out
+
+  var idleTime = 0;
+  var idleInterval;
+angular.element(document).ready(function(){
+  //Increment the idle time counter every minute.
+  idleInterval = setInterval(timerIncrement, 60000); // 1 minute
+
+  //Zero the idle timer on mouse movement.
+  angular.element(this).mousemove(function (e) {
+      idleTime = 0;
+  });
+  angular.element(this).keypress(function (e) {
+      idleTime = 0;
+  });
+
+});
+function timerIncrement() {
+	var getUrl = window.location;
+	var baseUrl = getUrl.protocol + "//" + getUrl.host;
+  idleTime = idleTime + 1;
+
+  if (idleTime > 14) { // 20 minutes
+	window.location= baseUrl+"/#/login";
+	localStorage.clear();
+	sessionStorage.clear();
+	clearInterval(idleInterval);
+	$location.path('/login');
+  }
 }
+// end of change for session out
+}
+
+
+app.directive(
+		"bnDocumentClick",
+		function( $document, $parse){
+			// I connect the Angular context to the DOM events.
+			var linkFunction = function( $scope, $element, $attributes){					
+				var scopeExpression = $attributes.bnDocumentClick;					
+				var invoker = $parse( scopeExpression );
+				// Bind to the document click event.
+				$document.on(
+					"click",
+					function( event ){							
+						if(localStorage.isLoggedIn==undefined){
+								//$location.path('/login');
+								window.location = "#/login";
+						}
+						
+						$scope.$apply(
+							function(){									
+								invoker(
+									$scope,
+									{
+										$event: event
+									}
+								);
+							}
+						);
+					}
+				);
+
+			};
+			// Return the linking function.
+			return( linkFunction );
+		}
+	);

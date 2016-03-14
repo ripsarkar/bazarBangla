@@ -3,7 +3,7 @@
 	<div class="row zeroSpace">
 		<div class="createnew-head">
 			<div class="col-md-6 col-sm-6">
-				<h2 class="title-head">View User</h2>
+				<h2 class="title-head">Manage Users</h2>
 			</div>
 
 			<div class="col-md-12">
@@ -15,19 +15,21 @@
 				<div class="row">
 					<div class="col-md-3 col-sm-6">
 						<label>Organization Name</label> 
-						<select class="form-control" ng-model="selectedCompany" ng-options="company.name for company in companyList  track by company.id "
+						 <select class="form-control" ng-model="selectedCompany" ng-options="company.Name for company in companyList  track by company.SurrId "
 							 ng-change=getDetails()>
-							<option style="display: none" value="">--Please Select--</option>
+							<option ng-selected="selectedCompany.SurrId == company.SurrId" style="display: none" value="">--Please Select--</option>
 							
-						</select>
+						</select> 
+						
+						
 						
 					</div>
-					<div class="col-md-3 col-sm-6">
+					<div class="col-md-3 col-sm-6" style="display:none">
 					<label> Industry</label>
 						<p>{{industryName}}</p>
 						
 					</div>
-					<div class="col-md-3 col-sm-6">
+					<div class="col-md-3 col-sm-6" style="display:none">
 						<label> Contract ID </label> 
 						<p>{{contractId}}</p>
 					</div>
@@ -58,9 +60,11 @@
 						<th>Last Name</th>
 						<th>Contact Number</th>
 						<th>Email Address</th>
-						<th>Role</th>
+						<!-- <th>Role</th> -->
 						<th>Active</th>
-						<th colspan="2">Action</th>
+						<th>Edit</th>
+						<th>Permissions</th>
+						<th>Delete</th>
 					</tr>
 					<tr ng-repeat="user in userList" class="usecaseTable">
 						<td ng-model="datashown">{{user.userName}}</td>
@@ -69,9 +73,10 @@
 						<td>{{user.lastName}}</td>
 						<td>{{user.contactNo}}</td>
 						<td>{{user.email}}</td>
-						<td>{{user.role}}</td>
+						<!-- <td>{{user.role}}</td> -->
 						<td class="activeprev">{{user.isActive}}</td>
 						 <td><a ng-click="onuamedituser(user.id)"><i class="glyphicon glyphicon-edit"></i></a></td>
+						 <td ><a  ng-click="fnOpenPermission(user.id,user.userName,'User')"><span class="glyphicon glyphicon-thumbs-up" style="font-size: 12px;"></span></a></td>
 						 <td><i class="glyphicon glyphicon-trash"></i></td>
 					</tr>						
 

@@ -1,4 +1,11 @@
 /*-------------ripunjoy css-------------*/
+/*-------css for top right corner organization list-------*/
+.selectlistTopOrg{
+    width:150px;
+    margin-left: 0px 5px;
+    color:#999;
+}
+/*-------------------*/
 .inputforall{
 	width:100%;
 }
@@ -328,7 +335,7 @@ height: 240px;
 .gifanimation {
     position: absolute;
     width: 100%;
-    z-index: 2000;
+    z-index: 3000;
     min-height: 100%;
     /* min. height for modern browser */
     height: auto !important;
@@ -492,7 +499,6 @@ body {
     font-size: 14px !important;
 }
 
-.case-menu {}
 
 .activemainlinks {
     color: rgb(5, 168, 230) !important;
@@ -766,6 +772,14 @@ a {
     background: #353535;
 }
 
+.mainmenu-sub {
+			    height: 118px;
+			    color: #EFEFEF;
+			    text-align: center;
+			    background: #353535;
+			}
+			
+			
 ul.mainlinks {
     /*margin: 0 auto;*/
     text-align: center;
@@ -776,7 +790,7 @@ ul.mainlinks li {
     list-style: none;
     text-decoration: none;
     float: left;
-    padding: 15px 15px 0px 15px;
+    padding: 15px 15px 10px 15px;
 }
 
 .mainlinks li > a {
@@ -787,6 +801,32 @@ ul.mainlinks li {
 }
 
 .mainlinks li > a:hover {
+    color: rgb(5, 168, 230);
+}
+
+
+/*Sub menu*/
+			
+ul.submainlinks {
+    /*margin: 0 auto;*/
+    text-align: center;
+}
+
+ul.submainlinks li {
+    list-style: outside none none;
+    text-decoration: none;
+    padding: 0px;
+    margin: 0px 10px;
+}
+
+.submainlinks li > a {
+    text-decoration: none;
+    display: block;
+    padding: 8px 15px;
+    color: #ECECEC;
+}
+
+.submainlinks li > a:hover {
     color: rgb(5, 168, 230);
 }
 
@@ -1239,12 +1279,6 @@ button.result-search {
     text-align: center;
 }
 
-.btn-sub-menu {
-    padding: 8px 15px;
-    outline: 0px none !important;
-    box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.51) inset !important;
-}
-
 li.btn-sub-menu {
     background: rgb(59, 59, 59) none repeat scroll 0% 0%;
     color: rgb(255, 255, 255);
@@ -1257,6 +1291,16 @@ li.btn-sub-menu {
     color: #a1a1a1;
     text-decoration: none;
     font-weight: 600;
+}
+
+li.subactive{
+    padding: 8px 15px;
+    outline: 0px none !important;
+    box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.51) inset !important;
+}
+
+li.subactive a{
+    color: #05A8E6 !important;
 }
 
 
@@ -1523,4 +1567,24 @@ span.more-text.show {
     overflow-y: auto;
     max-height: 250px;
     color: rgb(136, 136, 136) !important;
+}
+ .btnBottom{
+  	margin-bottom:25px;
+   margin-left:60px;
+  }
+/*---------------organization page----------------*/
+.buttonOrg{
+    margin-left:4px; 
+    float:left;
+}
+.clearOrg{
+    float: left; 
+    margin-top: 0; 
+    margin-left: 15px; 
+    width: auto;
+}
+/*-------------------------------*/
+
+.disabfuncCUcColor, .disabfuncCUcColor:hover{
+	 color:white;
 }

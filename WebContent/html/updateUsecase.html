@@ -1,33 +1,40 @@
 <div class="createnewpage pagebg" ng-controller="UpdateusecaseController">
-    <div class="container-fluid">
-        <div class="row">
-            <div ng-show="pagemain.main">
-                <div class="sub_menu">
-                    <ul>
-                        <li class="active btn btn-sub-menu"> <a ng-click="pageUsecase()">Use Cases</a></li>
-                        <li class="btn btn-sub-menu"> <a ng-click="pageRule()">Rule</a></li>
-                    </ul>
-                </div>
+
+        <div class="row zeroSpace">
+        <div class="createnew-head">
+            <div class="col-md-6 col-sm-6">
+                <h2 class="title-head">Update Usecase</h2>
             </div>
-            <div ng-show="pagemain.usecase">
-                <div class="sub_menu">
-                    <ul>
-                        <li class="active btn btn-sub-menu"> <a ui-sref="home.createusecase">Create Use Cases</a></li>
-                        <li class="btn btn-sub-menu"> <a ng-click="SamePageReload()" ui-sref="home.updateUsecase">Update Use Cases</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div ng-show="pagemain.rule">
-                <div class="sub_menu">
-                    <ul>
-                        <li class="btn btn-sub-menu"> <a ui-sref="home.createrule">Create Rule</a></li>
-                        <li class="btn btn-sub-menu"> <a ui-sref="home.updateRule">Update Rule</a></li>
-                    </ul>
-                </div>
+            <div class="col-md-12" style="margin: 10px 0px 20px;">
+                <hr>
             </div>
         </div>
     </div>
-    <div class="container">
+<div ng-show='updateUsecase.SearchPage'>
+    <div class="createnew-head">
+        <div class="panel panel-default tablecontrol">
+            <div class="searchtableUser uamtable">
+                <table class="table table-striped searchtablerow" fixed-header>
+                    <thead>
+                    <tr class="tableheader">
+                        <th>Use Case</th>
+                        <th>Use Case Id</th>
+                        <th>Edit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="usecaselist in usecasetable" class="usecaseTable">
+                        <td>{{usecaselist.Name}}</td>
+                        <td>{{usecaselist.Id}}</td>
+                        <td><span class="icon-feedback" ng-click="Search_UpdateUsecase(usecaselist.Id)"></span></td>
+                    </tr>
+                    </tbody>                       
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- <div class="container">
         <div class="row">
             <div class="createnew-head">
                 <div class="col-md-6 col-sm-6">
@@ -52,7 +59,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div ng-show='updateUsecase.updatePage'>
         <div class="container">
             <div class="row">
@@ -78,6 +85,7 @@
                                                 </option>
                                             </select>
                                         </div>
+                                        
                                         <div class="col-md-4 col-sm-6">
                                             <label> Use Case SubCategory <span class="red"> *</span></label>
                                             <select class="form-control" required ng-model="useCaseSubcat">
@@ -90,14 +98,14 @@
                                         <div class="margintp2">
                                             <div class="col-md-4 col-sm-6">
                                                 <label> Use Case ID <span class="red"> *</span></label>
-                                                <input type="text" class="form-control" required disabled placeholder="Use Case ID" ng-model="usecaseID">
+                                                <input type="text" class="form-control" required maxlength="10" placeholder="Use Case ID" ng-model="usecaseID">
                                             </div>
                                             <div class="col-md-4 col-sm-6">
                                                 <label> Use Case Name <span class="red"> *</span></label>
-                                                <input type="text" class="form-control" required placeholder="Use Case Name" ng-model="usecaseName">
+                                                <input type="text" class="form-control" required maxlength="100" placeholder="Use Case Name" ng-model="usecaseName">
                                             </div>
                                             <div class="col-md-4 col-sm-6">
-                                                <label> Use Case Description <span class="red"> *</span></label>
+                                                <label> Use Case Description </label>
                                                 <textarea class="form-control" maxlength="1000" ng-model="usecaseDescrip">
                                                 </textarea>
                                             </div>

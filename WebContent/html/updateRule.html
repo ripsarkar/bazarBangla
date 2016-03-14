@@ -1,32 +1,5 @@
 <div class="createnewpage pagebg" ng-controller="updateRuleController">
-    <div class="container-fluid">
-        <div class="row">
-            <div ng-show="pagemain.main">
-                <div class="sub_menu">
-                    <ul>
-                        <li class="active btn btn-sub-menu"> <a ng-click="pageUsecase()">Use Cases</a></li>
-                        <li class="btn btn-sub-menu"> <a ng-click="pageRule()">Rule</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div ng-show="pagemain.usecase">
-                <div class="sub_menu">
-                    <ul>
-                        <li class="active btn btn-sub-menu"> <a ui-sref="home.createusecase">Create Use Cases</a></li>
-                        <li class="btn btn-sub-menu"> <a ui-sref="home.updateUsecase">Update Use Cases</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div ng-show="pagemain.rule">
-                <div class="sub_menu">
-                    <ul>
-                        <li class="btn btn-sub-menu"> <a ui-sref="home.createrule">Create Rule</a></li>
-                        <li class="btn btn-sub-menu"> <a ui-sref="home.updateRule">Update Rule</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <div class="container">
         <div class="row">
             <div class="createnew-head">
@@ -38,6 +11,29 @@
         <hr>
     </div>
     <div ng-show='updateUsecase.SearchPage'>
+    <div class="createnew-head">
+        <div class="panel panel-default tablecontrol">
+            <div class="searchtableUser uamtable">
+                <table class="table table-striped searchtablerow" fixed-header>
+                    <thead>
+                    <tr class="tableheader">
+                        <th>Rule</th>
+                        <th>Rule Id</th>
+                        <th>Edit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="ruleslist in rulestable" class="usecaseTable">
+                        <td>{{ruleslist.Name}}</td>
+                        <td>{{ruleslist.Id}}</td>
+                        <td><span class="icon-feedback" ng-click="Search_RuleUsecase(ruleslist.Id)"></span></td>
+                    </tr>
+                    </tbody>                       
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- <div ng-show='updateUsecase.SearchPage'>
         <div class="container">
             <div class="row">
                 <div class="col-md-offset-2 col-md-3 col-sm-3">
@@ -52,6 +48,7 @@
                 </div>
             </div>
         </div>
+    </div> -->
     </div>
     <div ng-show='updateUsecase.updatePage'>
         <div class="container">
@@ -76,7 +73,7 @@
                                 <div class="row">
                                     <div class="col-md-4 col-sm-6 form-group" ng-class="{ 'has-error': updateRuleFrom.crtRuleID.$error.required }">
                                         <label> Rule ID <span style="color:red">*</span></label>
-                                        <input type="text" class="form-control" maxlength="20" placeholder="Rule ID" id="crtRuleID" name="crtRuleID" ng-model="crtRuleID" required>
+                                        <input type="text" class="form-control" maxlength="20" placeholder="Rule ID" id="crtRuleID" name="crtRuleID"  ng-model="crtRuleID" required>
                                         <span ng-show="updateRuleFrom.crtRuleID.$error.required" class="help-block">This field is required</span>
                                     </div>
                                     <div class="col-md-4 col-sm-6 form-group" ng-class="{ 'has-error': updateRuleFrom.crtRuleName.$error.required }">
@@ -88,6 +85,7 @@
                                     <label> Out of Box </label><br>
 								<select class="form-control valselect" ng-model="uformcontrolYN">
 								<!-- ng-change=uyngetDetailscr() -->
+								
 									<option>Yes</option>
 									<option>No</option>
 								</select>
@@ -162,7 +160,7 @@
                                 <div class="row margintp1">
                                     <div class="col-md-4">
                                         <label>Transactional Data </label>
-                                        </label>
+                                        
                                         <select multiple class="form-control" ng-model="crtRuleTrsn" name="crtRuleTrsn" ng-options="transdata.SurrId as transdata.Name for transdata in transdatas  | orderBy:'Name'">
                                         </select>
 

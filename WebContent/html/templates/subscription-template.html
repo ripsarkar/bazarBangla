@@ -1,0 +1,56 @@
+<div class="container">
+        <div class="col-md-12 pull-left">
+        <h2 class="title-head">Create Subscription</h2>
+      </div>
+      <div class="clear-fix"></div>
+             <div class="col-md-12 pull-left"> <hr></div>
+
+  <div  class="col-md-12 text-center">
+    <form role="form" class="">
+    <div class="form-group col-md-12">
+      <div class="col-md-4"><label for="org_id" class="form-group pull-right">Organization  Name<span style="color:red">*</span></label></div>
+      <div class="col-md-6"><select class="col-md-12" ng-model="compList"><option ng-repeat="companylist in complist" value="{{companylist.SurrId}}">{{companylist.Name}}</option></select></div>
+    </div>
+
+
+    <div class="form-group col-md-12">
+      <div class="col-md-4"><label for="org_id" class="form-group pull-right">Subscription/Contract Id<span style="color:red">*</span></label></div>
+      <div class="col-md-6"><input type="text" ng-model="subID" class="form-control" id="org_id"></div>
+    </div>
+    <div class="form-group col-md-12">
+      <div class="col-md-4"><label for="effecDate" class="form-group pull-right">Effective Date<span style="color:red">*</span></label></div>
+      <div class="col-md-6">
+<p class="input-group">
+<input type="text" class="form-control effecDate effecDateMain" placeholder="Please Enter Effective Date" id="effecDate" datepicker-popup="" ng-model="effecDate" is-open="opened"  datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-change="hititOnChange()" />
+              <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+</p>
+
+
+      </div>
+    </div>
+
+    
+    <div class="form-group col-md-12">
+      <div class="col-md-4"><label for="expDate" class="form-group pull-right">Expiration Date<span style="color:red">*</span></label></div>
+      <div class="col-md-6">
+            <p class="input-group">
+              <input type="text" class="form-control effecDate expDate" placeholder="Please Enter Expiration Date"  datepicker-popup="" ng-model="expDate" is-open="opened2"  datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="open2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <div class="col-md-4"><label for="mau" class="form-group pull-right">Maximum Active Users<span style="color:red">*</span></label></div>
+      <div class="col-md-6"><input type="number" min="1" max="50" ng-model="maxUser" class="form-control" id="mau"></div>
+    </div>
+    <div class="col-md-6 col-md-offset-4 pull-left">
+    <input type="button" class="btn btn-primary tabsbtn buttonOrg" style="margin-top:0px;" ng-click="ceateContact()" value="Submit">
+    <input type="button" class="btn btn-primary tabsbtn clearOrg" ng-click="clearVal()" value="Clear">
+    </div>
+     </form>
+  </div>
+</div>
