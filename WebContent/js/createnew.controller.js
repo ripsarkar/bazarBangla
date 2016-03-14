@@ -3027,6 +3027,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             // Update Rule post Json
             var ThdCrt = [];
             $scope.crtRuleSubmit = function() {
+            	$rootScope.loadinganimation = true;
             	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
             	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
                 var testAlp = /^[a-zA-Z\s\d\/]+$/;
@@ -3178,14 +3179,16 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     if (typeof $scope.crtRuleID != 'undefined' && typeof $scope.crtRuleName != 'undefined' && $scope.crtRuleID != '' && typeof $scope.crtRuleName != '') {
 
                         $http.post($rootScope.url + '/updateRule', crtRule_postJson).success(function(data, status, headers, config) {
-                            alert('Update Rule Successfully saved');
-                            ThdCrt.length = 0;
-                            $scope.ThdCrttables.length = 0;
-                            $scope.reSetupdate();
+                           
                             //fetch permission api call
                           $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
                               sessionStorage.setItem("fetchPermission", JSON.stringify(result));
                               $scope.permission = sessionStorage.getItem("fetchPermission");
+                              alert('Update Rule Successfully saved');
+                              ThdCrt.length = 0;
+                              $scope.ThdCrttables.length = 0;
+                              $state.reload();
+                              $scope.reSetupdate();
                              // console.log(sessionStorage.getItem("fetchPermission"));
                               $rootScope.loadinganimation = false;
                           }).error(function (error) {
