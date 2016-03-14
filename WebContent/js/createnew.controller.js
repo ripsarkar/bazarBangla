@@ -3192,7 +3192,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                              // console.log(sessionStorage.getItem("fetchPermission"));
                               $rootScope.loadinganimation = false;
                           }).error(function (error) {
-                                alert("Server side error");
+                                alert("Server side error"); 
                           });
                         }).error(function(data, status, headers, config) {
                             //alert("Sorry Application error in serverside");
