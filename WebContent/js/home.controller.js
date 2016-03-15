@@ -749,6 +749,7 @@ $scope.menu.menu = false;
             menu:true
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
+        $location.path('/home/createusecase');
     };
 
     
@@ -764,6 +765,7 @@ $scope.menu.menu = false;
             menu:true
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
+        $location.path('/home/feedback');
     };
 
     $scope.manageOrg = function(){
