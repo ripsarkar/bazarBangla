@@ -24,11 +24,11 @@
                     <li ng-show = "organization" ng-disabled="organizationdis" class="mainli"><a ng-click="manageOrg()" class="forallnotsear"><span class="glyphicon glyphicon-gift" style="float:left;font-size:20px;padding-right:5px"></span><span>Manage org</span></a></li>
                     <li ng-show = "rolemenu" ng-disabled="rolemenudis" class="mainli"><a ng-click="roleMnu()" class="forallnotsear"><span class="glyphicon glyphicon-gift" style="float:left;font-size:20px;padding-right:5px"></span><span>Role</span></a></li> -->
                     <li><a ui-sref=".search" ng-click="defaultmenu()" class="forallnotFedd searchlibrarymenuI activemainlinks"><span class="icon-search"></span>Search Library</a></li>
-                    <li><a ng-click="feedbackmenu()" class="forallnotsear feedbackmenu"><span class="icon-usermanage"></span> Feedback </a></li>
-                    <li ng-hide="useCaseMaintaindis" class="mainli"><a class="forallnotsear forallnotFedd" ng-click="menuUseRule()" ><span class="glyphicon glyphicon-list-alt" style="float:left;font-size:20px;padding-right:5px"></span><div style="float:left">Use Case Maintenance</div></a> </li>
-                    <li ng-hide="userAccountManagementdis" class="mainli"><a class="forallnotsear forallnotFedd" ng-click="uamanagement();" ><span class="glyphicon glyphicon-user" style="float:left;font-size:20px;padding-right:5px"></span><div style="float:left">User Account Management</div></a></li>
-                    <li ng-hide="organizationdis" class="mainli"><a ng-click="manageOrg()" class="forallnotsear"><span class="glyphicon glyphicon-gift" style="float:left;font-size:20px;padding-right:5px"></span><span>Manage org</span></a></li>
-                    <li ng-hide="rolemenudis" class="mainli"><a ng-click="roleMnu()" class="forallnotsear"><span class="glyphicon glyphicon-gift" style="float:left;font-size:20px;padding-right:5px"></span><span>Role</span></a></li>
+                    <li><a ng-mouseover="feedbackmenu()" class="forallnotsear feedbackmenu"><span class="icon-usermanage"></span> Feedback </a></li>
+                    <li ng-hide="useCaseMaintaindis" class="mainli"><a class="forallnotsear forallnotFedd" ng-mouseover="menuUseRule()" ><span class="glyphicon glyphicon-list-alt" style="float:left;font-size:20px;padding-right:5px"></span><div style="float:left">Use Case Maintenance</div></a> </li>
+                    <li ng-hide="userAccountManagementdis" class="mainli"><a class="forallnotsear forallnotFedd" ng-mouseover="uamanagement();" ><span class="glyphicon glyphicon-user" style="float:left;font-size:20px;padding-right:5px"></span><div style="float:left">User Account Management</div></a></li>
+                    <li ng-hide="organizationdis" class="mainli"><a ng-mouseover="manageOrg()" class="forallnotsear"><span class="glyphicon glyphicon-gift" style="float:left;font-size:20px;padding-right:5px"></span><span>Manage org</span></a></li>
+                    <li ng-hide="rolemenudis" class="mainli"><a ng-mouseover="roleMnu()" class="forallnotsear"><span class="glyphicon glyphicon-gift" style="float:left;font-size:20px;padding-right:5px"></span><span>Role</span></a></li>
                 </ul>
                 </div>
 	            
