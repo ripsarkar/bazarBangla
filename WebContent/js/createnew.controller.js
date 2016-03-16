@@ -1695,7 +1695,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     $scope.usecaseSurrId = data.UseCase[0].SurrId;
                     $scope.usecaseID = data.UseCase[0].Id;
                     $scope.usecaseName = data.UseCase[0].Name;
-                    $scope.usecaseDescrip = data.UseCase[0].Name;
+                    $scope.usecaseDescrip = data.UseCase[0].Description;
                     if ($scope.frameWork != '' && $scope.frameWork != 'undefined') {
                         $scope.tiggerCat();
                     }
