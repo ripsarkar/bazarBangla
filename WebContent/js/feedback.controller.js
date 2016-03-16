@@ -27,7 +27,7 @@ app.controller("feedbackController", ["$scope", "$rootScope", "$state", '$http',
         $scope.pageLoad = function() {
             $rootScope.loadinganimation = true;
 
-            $http.get($rootScope.url + '/getRulePkgExportData/' + $scope.cmpyId).success(function(data, status, headers, config) {
+            $http.get($rootScope.url + '/getRulePkgExportData/' + $rootScope.updatedOrgazingzingSurrId).success(function(data, status, headers, config) {
                 if (typeof data.Usecase != 'undefined' && data.Usecase.length > 0) {
                     var fbrule = data.Usecase;
                     var fb_tb = [];
