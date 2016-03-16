@@ -777,8 +777,8 @@ $scope.menu.menu = false;
             menu:true
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
-        
-        var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        $location.path('/home/feedback');
+        /*var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
         if(usecaselist != undefined){
             if(usecaselist.Users != undefined){
                 if(usecaselist.Users.UseCase != undefined){
@@ -792,7 +792,7 @@ $scope.menu.menu = false;
                 }
             }
         }
-        }
+        }*/
     };
 
     $scope.manageOrg = function(){
@@ -870,6 +870,7 @@ $scope.menu.menu = false;
             menu:true
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
+        $location.path('/home/organization');
     };
     $scope.uamanagement = function(){
     	 $scope.managePermissionForUserAccount();
@@ -928,6 +929,7 @@ $scope.menu.menu = false;
                 menu:true
             };
     	angular.element("ul.submainlinks li").removeClass("subactive");
+    	$location.path('/home/uamanagement');
     };
     $scope.roleMnu = function(){
     	 $scope.managePermissionForRole();
@@ -985,6 +987,7 @@ $scope.menu.menu = false;
                 menu:true
             };
     	angular.element("ul.submainlinks li").removeClass("subactive");
+    	$location.path('/home/createrole');
     };
     
     
