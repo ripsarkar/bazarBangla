@@ -87,7 +87,7 @@ app.controller("updaterole", ["$scope", "$rootScope", "$state", '$http', '$modal
     
 	 $scope.cmpyId = localStorage.getItem("cmpyId");
      $scope.usrId = localStorage.getItem("surrrip");
-     $rootScope.loadinganimation = true;
+     //$rootScope.loadinganimation = true;
      //$scope.orgName ={};
      $scope.orgName = parseInt($scope.cmpyId);
      $scope.currentPage = 0;
@@ -344,7 +344,7 @@ app.controller("viewrole", ["$scope", "$rootScope", "$state", '$http', '$modal',
     
      $scope.cmpyId = localStorage.getItem("cmpyId");
      $scope.usrId = localStorage.getItem("surrrip");
-     $rootScope.loadinganimation = true;
+     //$rootScope.loadinganimation = true;
      //$scope.orgName ={};
      $scope.orgName = parseInt($scope.cmpyId);
      $scope.currentPage = 0;
