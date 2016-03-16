@@ -27,7 +27,7 @@ app.controller("feedbackController", ["$scope", "$rootScope", "$state", '$http',
         $scope.pageLoad = function() {
             $rootScope.loadinganimation = true;
 
-            $http.get($rootScope.url + '/getRulePkgExportData/' + $scope.cmpyId).success(function(data, status, headers, config) {
+            $http.get($rootScope.url + '/getRulePkgExportData/' + $rootScope.updatedOrgazingzingSurrId).success(function(data, status, headers, config) {
                 if (typeof data.Usecase != 'undefined' && data.Usecase.length > 0) {
                     var fbrule = data.Usecase;
                     var fb_tb = [];
@@ -442,7 +442,8 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
 
         
         $scope.cpmysurrid = function() {
-            var URLviewpage = $rootScope.url+'/getCompany';
+        	$scope.vfbselPckg = [{"name":$rootScope.updatedOrgazingzing, "id":$rootScope.updatedOrgazingzingSurrId}];
+            /*var URLviewpage = $rootScope.url+'/getCompany';
             $http.get(URLviewpage).success(function(data, status, headers, config) {
                 if ($rootScope.role == "ADMIN") {
                     var chckall = {
@@ -454,7 +455,7 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
                     $scope.orgName = 'adm';
                 }
             }).error(function(data, status, headers, config) {
-                alert("Please contact your adminstrator");
+                aler*/t("Please contact your adminstrator");
             });
         }
 
