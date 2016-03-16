@@ -33,8 +33,8 @@ app.controller("createrolecrt", ["$scope", "$rootScope", "$state", '$http', '$mo
     $scope.cpmysurrid();
     
     $scope.submitrole = function(){
-    	var testId = /^[A-Za-z][A-Za-z0-9_.-\s]+$/;
-    	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
+        var testId = /^[A-Za-z][A-Za-z0-9_.-\s]+$/;
+        var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
         var testAlp = /^[a-zA-Z\s\d\/]+$/;
         var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
         
@@ -47,7 +47,7 @@ app.controller("createrolecrt", ["$scope", "$rootScope", "$state", '$http', '$mo
             return false;
         }
         else{
-        	if( $scope.createroleid !="" && $scope.createroleid != 'undefined' && $scope.createrolename !="" && $scope.createrolename !='undefined'  && typeof $scope.orgName != 'undefined' && $scope.orgName !=""){
+            if( $scope.createroleid !="" && $scope.createroleid != 'undefined' && $scope.createrolename !="" && $scope.createrolename !='undefined'  && typeof $scope.orgName != 'undefined' && $scope.orgName !=""){
                 var crtrole = {
                     role_id : $scope.createroleid,
                     role_name : $scope.createrolename,
@@ -85,9 +85,9 @@ app.controller("createrolecrt", ["$scope", "$rootScope", "$state", '$http', '$mo
 
 app.controller("updaterole", ["$scope", "$rootScope", "$state", '$http', '$modal', 'feedback_model', '$filter',function($scope, $rootScope, $state, $http, $modal, feedback_model, $filter) {
     
-	 $scope.cmpyId = localStorage.getItem("cmpyId");
+     $scope.cmpyId = localStorage.getItem("cmpyId");
      $scope.usrId = localStorage.getItem("surrrip");
-     $rootScope.loadinganimation = true;
+     //$rootScope.loadinganimation = true;
      //$scope.orgName ={};
      $scope.orgName = parseInt($scope.cmpyId);
      $scope.currentPage = 0;
@@ -171,7 +171,7 @@ app.controller("updaterole", ["$scope", "$rootScope", "$state", '$http', '$modal
                 if(permissiontypeList[int2].PermissionName=="update"){
                      $scope.vspselPckgs = permissiontypeList[int2].ObjectList;
                      $scope.orgName = parseInt($scope.cmpyId);
-                     $scope.pageLoad();
+                     //$scope.pageLoad();
                 }
             }
         }
@@ -189,8 +189,8 @@ app.controller("updaterole", ["$scope", "$rootScope", "$state", '$http', '$modal
      $scope.cpmysurrid();
  
      $scope.updateroleForm = function(id, roleId, roleName, roleDesc, index) {
-    	var testId = /^[A-Za-z][A-Za-z0-9_.-\s]{2,9}$/;
-     	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
+        var testId = /^[A-Za-z][A-Za-z0-9_.-\s]+$/;
+        var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
          var testAlp = /^[a-zA-Z\s\d\/]+$/;
          var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
          
@@ -203,7 +203,7 @@ app.controller("updaterole", ["$scope", "$rootScope", "$state", '$http', '$modal
              return false;
          }
          else{
-        	 var roleselecteddata = {
+             var roleselecteddata = {
                      id: id,
                      roleid:roleId,
                      rolename:roleName,
@@ -279,8 +279,8 @@ app.controller('updaterolepop', ['$scope', '$modalInstance', '$rootScope', '$sta
      $scope.roleForm(rolemodeldata);
 
      $scope.updatarolesubmit = function(id) {
-    	 var testId = /^[A-Za-z][A-Za-z0-9_.-\s]+$/;
-      	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
+         var testId = /^[A-Za-z][A-Za-z0-9_.-\s]+$/;
+        var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
           var testAlp = /^[a-zA-Z\s\d\/]+$/;
           var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
           
@@ -293,7 +293,7 @@ app.controller('updaterolepop', ['$scope', '$modalInstance', '$rootScope', '$sta
               return false;
           }
           else{
-        	  if($scope.roleuptFrm.roleId !="" && $scope.roleuptFrm.roleId !="" &&typeof $scope.roleuptFrm.roleId !='undefined' && $scope.roleuptFrm.rolename !="" && $scope.roleuptFrm.rolename !=null && typeof $scope.roleuptFrm.rolename != 'undefined' ){
+              if($scope.roleuptFrm.roleId !="" && $scope.roleuptFrm.roleId !="" &&typeof $scope.roleuptFrm.roleId !='undefined' && $scope.roleuptFrm.rolename !="" && $scope.roleuptFrm.rolename !=null && typeof $scope.roleuptFrm.rolename != 'undefined' ){
                   $scope.PostJson_role = {
                       "role_id": $scope.roleuptFrm.roleId,
                       "role_name": $scope.roleuptFrm.rolename,
@@ -323,7 +323,7 @@ app.controller('updaterolepop', ['$scope', '$modalInstance', '$rootScope', '$sta
                       alert(data.ErrMsg);
                   });
                   }else{
-                  	alert('Please fill all *Mandatory fields');
+                    alert('Please fill all *Mandatory fields');
                   }
           }
              
@@ -344,7 +344,7 @@ app.controller("viewrole", ["$scope", "$rootScope", "$state", '$http', '$modal',
     
      $scope.cmpyId = localStorage.getItem("cmpyId");
      $scope.usrId = localStorage.getItem("surrrip");
-     $rootScope.loadinganimation = true;
+     //$rootScope.loadinganimation = true;
      //$scope.orgName ={};
      $scope.orgName = parseInt($scope.cmpyId);
      $scope.currentPage = 0;
@@ -428,7 +428,7 @@ app.controller("viewrole", ["$scope", "$rootScope", "$state", '$http', '$modal',
                 if(permissiontypeList[int2].PermissionName=="read"){
                      $scope.vspselPckgs = permissiontypeList[int2].ObjectList;
                      $scope.orgName = parseInt($scope.cmpyId);
-                     $scope.pageLoad();
+                     //$scope.pageLoad();
                 }
             }
         }
