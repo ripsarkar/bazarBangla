@@ -761,7 +761,7 @@ $scope.menu.menu = false;
             menu:true
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
-        $location.path('/home/createusecase');
+        //$location.path('/home/createusecase');
     };
 
     
@@ -870,7 +870,7 @@ $scope.menu.menu = false;
             menu:true
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
-        $location.path('/home/organization');
+        //$location.path('/home/organization');
     };
     $scope.uamanagement = function(){
     	 $scope.managePermissionForUserAccount();
@@ -929,7 +929,7 @@ $scope.menu.menu = false;
                 menu:true
             };
     	angular.element("ul.submainlinks li").removeClass("subactive");
-    	$location.path('/home/uamanagement');
+    	//$location.path('/home/uamanagement');
     };
     $scope.roleMnu = function(){
     	 $scope.managePermissionForRole();
@@ -987,7 +987,7 @@ $scope.menu.menu = false;
                 menu:true
             };
     	angular.element("ul.submainlinks li").removeClass("subactive");
-    	$location.path('/home/createrole');
+    	//$location.path('/home/createrole');
     };
     
     
