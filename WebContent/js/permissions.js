@@ -155,7 +155,7 @@ $scope.sendPermissions = function(){
                   data:JSON.stringify(postjson)
                 }
                 $http(postdata).success(function(result){
-                          $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + localStorage.getItem("showallbutt")).success(function(result) {
+                          $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + localStorage.getItem("userIndustChTT")).success(function(result) {
                               sessionStorage.setItem("fetchPermission", JSON.stringify(result));
                               $scope.permission = sessionStorage.getItem("fetchPermission");
                              // console.log(sessionStorage.getItem("fetchPermission"));

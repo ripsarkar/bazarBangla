@@ -233,7 +233,7 @@ $scope.menu.organisation = false;
 $scope.menu.subrolemenu = false;
 $scope.menu.menu = false;
         var userIndustCh = $scope.userIndustChVa;
-        localStorage.setItem("showallbutt", $scope.userIndustChVa);
+        localStorage.setItem("userIndustChTT", $scope.userIndustChVa);
                             $rootScope.loadinganimation = true;
 
                             $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + userIndustCh).success(function(result) {
