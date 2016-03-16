@@ -171,7 +171,7 @@ app.controller("updaterole", ["$scope", "$rootScope", "$state", '$http', '$modal
                 if(permissiontypeList[int2].PermissionName=="update"){
                      $scope.vspselPckgs = permissiontypeList[int2].ObjectList;
                      $scope.orgName = parseInt($scope.cmpyId);
-                     $scope.pageLoad();
+                     //$scope.pageLoad();
                 }
             }
         }
@@ -428,7 +428,7 @@ app.controller("viewrole", ["$scope", "$rootScope", "$state", '$http', '$modal',
                 if(permissiontypeList[int2].PermissionName=="read"){
                      $scope.vspselPckgs = permissiontypeList[int2].ObjectList;
                      $scope.orgName = parseInt($scope.cmpyId);
-                     $scope.pageLoad();
+                     //$scope.pageLoad();
                 }
             }
         }
