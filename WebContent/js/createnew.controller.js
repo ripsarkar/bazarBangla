@@ -2335,10 +2335,12 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                                       $rootScope.loadinganimation = false;
                                   }).error(function (error) {
                                         alert("Server side error");
+                                        $rootScope.loadinganimation = false;
                                   });
                             }).error(function(data, status, headers, config) {
                                 //alert("Sorry Application error in serverside");
                             	alert(data.ErrMsg);
+                            	$rootScope.loadinganimation = false;
                             });
                         } else {
                             alert("Please fill all mandatory fields");
@@ -3194,10 +3196,12 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                               $rootScope.loadinganimation = false;
                           }).error(function (error) {
                                 alert("Server side error");
+                                $rootScope.loadinganimation = false;
                           });
                         }).error(function(data, status, headers, config) {
                             //alert("Sorry Application error in serverside");
                         	alert(data.ErrMsg);
+                        	$rootScope.loadinganimation = false;
                         });
                     } else {
                         alert("Please fill all mandatory fields");
