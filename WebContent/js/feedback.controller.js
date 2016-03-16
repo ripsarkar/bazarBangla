@@ -444,6 +444,7 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
         $scope.cpmysurrid = function() {
             var URLviewpage = $rootScope.url+'/getCompany';
             $scope.vfbselPckg = {"id":$rootScope.updatedOrgazingzing, "name":$rootScope.updatedOrgazingzingSurrId};
+            alert(JSON.stringify($scope.vfbselPckg));
             /*$http.get(URLviewpage).success(function(data, status, headers, config) {
                 if ($rootScope.role == "ADMIN") {
                     var chckall = {

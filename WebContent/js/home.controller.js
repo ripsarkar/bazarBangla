@@ -98,6 +98,9 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                           $scope.userIndustChVa = localStorage.getItem("nameCompany");
                           $rootScope.updatedOrgazingzing = result.User[0].company_name;
                           $rootScope.updatedOrgazingzingSurrId = result.User[0].company_surr_id;
+                          
+                          alert("L99-"+$rootScope.updatedOrgazingzing);
+                          alert("L99-"+$rootScope.updatedOrgazingzingSurrId);
 
    	                }
    	            	    $rootScope.loadinganimation = false;
@@ -241,6 +244,8 @@ $scope.menu.menu = false;
         for(var i=0;i<$scope.RfetchList.length;i++){
         	if($rootScope.updatedOrgazingzing == $scope.RfetchList[i].company_name){
                 $rootScope.updatedOrgazingzingSurrId = $scope.RfetchList[i].company_surr_id;
+                alert("L237-"+$rootScope.updatedOrgazingzing);
+                alert("L237-"+$rootScope.updatedOrgazingzingSurrId);
         	}
         }
 
