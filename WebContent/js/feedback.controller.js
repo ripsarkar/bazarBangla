@@ -443,14 +443,14 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
         
         $scope.cpmysurrid = function() {
             var URLviewpage = $rootScope.url+'/getCompany';
-            var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+           /* var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
             if(obj.Users.Organization !=undefined){
                 var permissiontypeList = obj.Users.Organization.PermissionTypeDet;
                 for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
                     if(permissiontypeList[int2].PermissionName=="read"){
                          //$scope.vspselPckgs = permissiontypeList[int2].ObjectList;
-                    	$scope.vfbselPckg = permissiontypeList[int2].ObjectList;
-                         /*if ($rootScope.role == "ADMIN") {
+                    	
+                         if ($rootScope.role == "ADMIN") {
                              var chckall = {
                                  "id": 'adm',
                                  "name": "All"
@@ -458,12 +458,12 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
                              //data.Company.unshift(chckall);
                              $scope.vfbselPckg = permissiontypeList[int2].ObjectList;
                              $scope.orgName = 'adm';
-                         }*/
+                         }
                          
                     }
                 }
-            } 
-            /*$http.get(URLviewpage).success(function(data, status, headers, config) {
+            } */
+            $http.get(URLviewpage).success(function(data, status, headers, config) {
                 if ($rootScope.role == "ADMIN") {
                     var chckall = {
                         "id": 'adm',
@@ -475,7 +475,7 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
                 }
             }).error(function(data, status, headers, config) {
                 alert("Please contact your adminstrator");
-            });*/
+            });
         }
 
         $scope.cpmysurrid();
@@ -552,7 +552,7 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
         }
 
 
-        $scope.pageLoad();
+        //$scope.pageLoad();
         $scope.sort = {
             column: '',
             descending: false
