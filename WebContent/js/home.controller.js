@@ -1,5 +1,4 @@
 'use strict';
-var userIndustCh;
 var app = angular.module('app').controller('HomeController', HomeController);
 HomeController.$inject = ['UserService', 'UserAuthFactory','AuthenticationFactory','$rootScope', '$scope', '$http','$location','$window',"$q"];
 
@@ -233,7 +232,8 @@ $scope.menu.uaman = false;
 $scope.menu.organisation = false;
 $scope.menu.subrolemenu = false;
 $scope.menu.menu = false;
-        	userIndustCh = $scope.userIndustChVa;
+        var userIndustCh = $scope.userIndustChVa;
+        $rootScope.updatedOrgazingzing = $scope.userIndustChVa;
                             $rootScope.loadinganimation = true;
 
                             $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + userIndustCh).success(function(result) {
