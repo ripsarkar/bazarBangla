@@ -451,11 +451,11 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
                          //$scope.vspselPckgs = permissiontypeList[int2].ObjectList;
 
                          if ($rootScope.role == "ADMIN") {
-                             var chckall = {
+                             /*var chckall = {
                                  "id": 'adm',
                                  "name": "All"
-                             };
-                             data.Company.unshift(chckall);
+                             };*/
+                             //data.Company.unshift(chckall);
                              $scope.vfbselPckg = permissiontypeList[int2].ObjectList;
                              $scope.orgName = 'adm';
                          }
