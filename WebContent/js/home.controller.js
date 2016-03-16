@@ -96,7 +96,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                           $rootScope.user_name = result.User[0].user_name;
                           $rootScope.companyNamee = result.User[0].company_name;
                           $scope.userIndustChVa = localStorage.getItem("nameCompany");
-
+						$rootScope.updatedOrgazingzing = result.User[0].company_name;
    	                }
    	            	    $rootScope.loadinganimation = false;
                          // console.log($rootScope.user_name);
@@ -233,7 +233,7 @@ $scope.menu.organisation = false;
 $scope.menu.subrolemenu = false;
 $scope.menu.menu = false;
         var userIndustCh = $scope.userIndustChVa;
-        localStorage.setItem("userIndustChTT", $scope.userIndustChVa);
+        $rootScope.updatedOrgazingzing = $scope.userIndustChVa;
                             $rootScope.loadinganimation = true;
 
                             $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + userIndustCh).success(function(result) {
