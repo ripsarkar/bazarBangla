@@ -96,7 +96,9 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                           $rootScope.user_name = result.User[0].user_name;
                           $rootScope.companyNamee = result.User[0].company_name;
                           $scope.userIndustChVa = localStorage.getItem("nameCompany");
-						$rootScope.updatedOrgazingzing = result.User[0].company_name;
+                          $rootScope.updatedOrgazingzing = result.User[0].company_name;
+                          $rootScope.updatedOrgazingzingSurrId = result.User[0].company_surr_id;
+
    	                }
    	            	    $rootScope.loadinganimation = false;
                          // console.log($rootScope.user_name);
@@ -235,6 +237,13 @@ $scope.menu.subrolemenu = false;
 $scope.menu.menu = false;
         var userIndustCh = $scope.userIndustChVa;
         $rootScope.updatedOrgazingzing = $scope.userIndustChVa;
+
+        for(var i=0;i<$scope.RfetchList.length;i++){
+        	if($rootScope.updatedOrgazingzing == $scope.RfetchList[i].company_name){
+                $rootScope.updatedOrgazingzingSurrId = $scope.RfetchList[i].company_surr_id;
+        	}
+        }
+
                             $rootScope.loadinganimation = true;
 
                             $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + userIndustCh).success(function(result) {
