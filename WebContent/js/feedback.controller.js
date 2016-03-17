@@ -533,7 +533,7 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
         }
 
 
-        $scope.pageLoad();
+        //$scope.pageLoad();
         $scope.sort = {
             column: '',
             descending: false
