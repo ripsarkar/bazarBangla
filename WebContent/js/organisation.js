@@ -151,7 +151,8 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
                           alert("Server side error");
                           });
             }).error(function(error){
-              alert("Registering Organisation failure");
+            	alert(error.ErrMsg);
+             // alert("Registering Organisation failure");
             });
 
             }

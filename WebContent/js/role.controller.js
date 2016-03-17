@@ -69,7 +69,8 @@ app.controller("createrolecrt", ["$scope", "$rootScope", "$state", '$http', '$mo
                           alert("Server side error");
                           });
                }).error(function(data, status, headers, config) {
-                   alert("Please contact your adminstrator");
+                   //alert("Please contact your adminstrator");
+            	   alert(data.ErrMsg)
                    $scope.reSet();
                });
             }else{
