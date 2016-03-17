@@ -79,14 +79,14 @@ app.directive("xyzcomp", function($http,$rootScope){
       //sending data
       $scope.ceateContact = function(){
       var numbercheck = /^[0-9]+$/;
-      var testAlpNu = /^[a-zA-Z0-9]+$/;
+      var testAlpNu = /^[A-Za-z][A-Za-z0-9_.-\s]{2,99}$/;
       var dateValidator = /^(\d{4})[-\/](\d{2})[-\/](\d{2})$/;
       if($scope.compList == ''){
         alert('Please select an Organization Name');
           return false;
       }
       else if($scope.subID == '' || !testAlpNu.test($scope.subID)){
-        alert('Please enter a valid Subscription Id(no special character)');
+        alert('Please enter a valid Subscription Id (special characters allowed: _ - .)');
           return false;
       }
       else if($scope.effecDate == '' || !dateValidator.test(angular.element(".effecDateMain").val())){
