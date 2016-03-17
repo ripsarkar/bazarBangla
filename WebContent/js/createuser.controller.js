@@ -12,7 +12,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
 	$scope.contactnum="";
 	$scope.emailadd="";
 	$scope.role="";
-	$scope.password="";
+	//$scope.password="";
 	//check box
 	$scope.isactive=true;
 	$scope.master=true;
@@ -22,7 +22,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     $scope.contractId="";
     //go to create user
 	$rootScope.updateuserName="";
-    $rootScope.passWord="";
+    //$rootScope.passWord="";
     $rootScope.updatefirstName="";
     $rootScope.updatemiddleName="";
     $rootScope.updatelastName="";
@@ -77,7 +77,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
 	$scope.contactnum=$rootScope.updatecontactNo;
 	$scope.emailadd=$rootScope.updateemail;
 	$scope.role=$rootScope.updaterole;
-	$scope.password=$rootScope.passWord;
+	//$scope.password=$rootScope.passWord;
 	activestatus=$rootScope.isACTIVE;
 	$scope.selectedCompanycr=$rootScope.updatecompanyName;
     $scope.industryName=$rootScope.Industryname;
@@ -139,7 +139,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     	
     	var params = {
         		username: $scope.usernamemain,
-        		password: $scope.password,
+        		//password: $scope.password,
         		firstname:$scope.firstname,
         		middlename:$scope.middlename,
         		lastname:$scope.lastname,
@@ -169,7 +169,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     			$scope.contactnum="";
     			$scope.emailadd="";
     			$scope.role="";
-    			$scope.password="";
+    			//$scope.password="";
     			//check box
     			$scope.isactive=false;
     			$scope.master=false;
@@ -196,7 +196,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     			$scope.contactnum="";
     			$scope.emailadd="";
     			$scope.role="";
-    			$scope.password="";
+    			//$scope.password="";
     			//check box
     			$scope.isactive=false;
     			$scope.master=false;
@@ -307,7 +307,7 @@ $rootScope.loadinganimation=true;
 		$scope.contactnum="";
 		$scope.emailadd="";
 		$scope.role="";
-		$scope.password="";
+		//$scope.password="";
 		//check box
 		$scope.isactive=false;
 		$scope.master=false;
