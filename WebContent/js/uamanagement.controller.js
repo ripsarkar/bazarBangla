@@ -16,7 +16,7 @@ app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$r
 		$scope.contactnum="";
 		$scope.emailadd="";
 		$scope.role="";
-		$scope.password="";
+		//$scope.password="";
 		$scope.isactive=false;
 		$scope.selectedCompanycr="";
 	    $scope.industryName="";
@@ -24,7 +24,7 @@ app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$r
 		$scope.master=false;
        //go to create user
 		$rootScope.updateuserName="";
-	    $rootScope.passWord="";
+	    //$rootScope.passWord="";
 	    $rootScope.updatefirstName="";
 	    $rootScope.updatemiddleName="";
 	    $rootScope.updatelastName="";
@@ -47,7 +47,7 @@ app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$r
 	   $http.get($rootScope.url+"/editUser/"+id).success(function(result) {
 		   //passing updatation values
 	       $rootScope.updateuserName=result.userName;
-	       $rootScope.passWord=result.password;
+	       //$rootScope.passWord=result.password;
 	       $rootScope.updatefirstName=result.firstName;
 	       $rootScope.updatemiddleName=result.middleName;
 	       $rootScope.updatelastName=result.lastName;
@@ -85,7 +85,7 @@ app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$r
    $scope.onviewuser = function() {//alert(2);
 		//edituser control vacating
 		$rootScope.updateuserName="";
-	    $rootScope.passWord="";
+	    //$rootScope.passWord="";
 	    $rootScope.updatefirstName="";
 	    $rootScope.updatemiddleName="";
 	    $rootScope.updatelastName="";
@@ -104,7 +104,7 @@ app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$r
    $scope.onviewMainuser = function() {//alert(2);
 		//edituser control vacating
 		$rootScope.updateuserName="";
-	    $rootScope.passWord="";
+	    //$rootScope.passWord="";
 	    $rootScope.updatefirstName="";
 	    $rootScope.updatemiddleName="";
 	    $rootScope.updatelastName="";
@@ -130,7 +130,7 @@ app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$r
 	$scope.contactnum="";
 	$scope.emailadd="";
 	$scope.role="";
-	$scope.password="";
+	//$scope.password="";
 	//check box
 	$scope.isactive=true;
 	$scope.master=true;
@@ -140,7 +140,7 @@ app.controller("uamanagement",["$scope","$rootScope","$http", function($scope,$r
     $scope.contractId="";
     //go to create user
 	$rootScope.updateuserName="";
-    $rootScope.passWord="";
+    //$rootScope.passWord="";
     $rootScope.updatefirstName="";
     $rootScope.updatemiddleName="";
     $rootScope.updatelastName="";
