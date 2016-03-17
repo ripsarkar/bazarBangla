@@ -455,8 +455,8 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
                     $scope.orgName = 'adm';
                 }
             }).error(function(data, status, headers, config) {
-                aler*/t("Please contact your adminstrator");
-            });
+                alert("Please contact your adminstrator");
+            });*/
         }
 
         $scope.cpmysurrid();
