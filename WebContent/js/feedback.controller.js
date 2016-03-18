@@ -566,8 +566,16 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
         }
         
         $scope.clickOnExport = function() {
-            document.getElementById('exporttoexcel').click();
-            console.clear();
+            //document.getElementById('exporttoexcel').click();
+            //console.clear();
+        	var URLviewpage = $scope.viewExceldownload;
+        	$http.get(URLviewpage, { responseType: 'arraybuffer' })
+			  .success(function(data, status, headers, config) {
+			    var blob = new Blob([data], {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});							
+				saveAs(blob,"feedbackData.xlsx");						
+				}).error(function(data, status, headers, config) {
+					alert("Please contact your adminstrator");
+			});
         };
     
     }]);
