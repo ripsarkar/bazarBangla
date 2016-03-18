@@ -766,7 +766,7 @@ $scope.menu.menu = false;
 		if (usecaselist != undefined) {
 			if (usecaselist.Users != undefined) {
 				if (usecaselist.Users.UseCase != undefined || usecaselist.Users.Rule != undefined) {
-					for (var i = 0; i < usecaselist.Users.UseCase.PermissionTypeDet.length; i++) {
+					for (var i = 0; i < 4; i++) {
 						if (usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "create") {
 							$location.path('/home/createusecase');
 							break;
@@ -898,7 +898,7 @@ $scope.menu.menu = false;
 		if (usecaselist != undefined) {
 			if (usecaselist.Users != undefined) {
 				if (usecaselist.Users.Organization != undefined || usecaselist.Users.Subscription != undefined) {
-					for (var i = 0; i < usecaselist.Users.Organization.PermissionTypeDet.length; i++) {
+					for (var i = 0; i < 5; i++) {
 						if (usecaselist.Users.Organization.PermissionTypeDet[i].PermissionName == "create") {
 							$location.path('/home/organization');
 							break;
@@ -981,24 +981,31 @@ $scope.menu.menu = false;
             };
     	angular.element("ul.submainlinks li").removeClass("subactive");
     	//$location.path('/home/uamanagement');
-    	/*var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
+    	var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
         if(usecaselist != undefined){
             if(usecaselist.Users != undefined){
                 if(usecaselist.Users.User != undefined){
                 for(var i=0;i<usecaselist.Users.User.PermissionTypeDet.length;i++){
                     if(usecaselist.Users.User.PermissionTypeDet[i].PermissionName == "create"){
                     	$location.path('/home/uamanagement');
+                		$rootScope.updateuserName = "";
+                		$rootScope.currentUserTab = 'html/uamcreateuser.html';
+                        $rootScope.$emit("uamanagerpage", {});
                     }
                     else if(usecaselist.Users.User.PermissionTypeDet[i].PermissionName == "update"){
                     	$location.path('/home/uamanagement');
+                        $rootScope.$emit("uaviewerpage", {});
+                        $rootScope.currentUserTab = 'html/viewuser.html';
                     }
                     else if(usecaselist.Users.User.PermissionTypeDet[i].PermissionName == "read"){
                     	$location.path('/home/uamanagement');
+                        $rootScope.$emit("uaviewerMainpage", {});
+                        $rootScope.currentUserTab = 'html/viewuser_main.html';
                     }
                 }
             }
         }
-        }*/
+        }
     };
     $scope.roleMnu = function(){
     	 $scope.managePermissionForRole();
