@@ -1183,7 +1183,8 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                 return false;
             }
-            else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+            //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+            else if($scope.crtRuleName == ''){
                 alert('Please enter a valid Rule Name');
                 return false;
             }
@@ -1484,7 +1485,8 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                 return false;
             }
-            else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+            //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+            else if($scope.crtRuleName == '' ){
                 alert('Please enter a valid Rule Name');
                 return false;
             }
@@ -1517,7 +1519,8 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                 return false;
             }
-            else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+            //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+            else if($scope.crtRuleName == ''){
                 alert('Please enter a valid Rule Name');
                 return false;
             }
@@ -3041,7 +3044,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                     return false;
                 }
-                else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                else if($scope.crtRuleName == ''){
                     alert('Please enter a valid Rule Name');
                     return false;
                 }
@@ -3325,7 +3329,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                     return false;
                 }
-                else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                else if($scope.crtRuleName == ''){
                     alert('Please enter a valid Rule Name');
                     return false;
                 }
@@ -3357,7 +3362,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                     return false;
                 }
-                else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                else if($scope.crtRuleName == ''){
                     alert('Please enter a valid Rule Name');
                     return false;
                 }
@@ -3404,7 +3410,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                     return false;
                 }
-                else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                else if($scope.crtRuleName == ''){
                     alert('Please enter a valid Rule Name');
                     return false;
                 }
@@ -3437,7 +3444,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                 return false;
             }
-            else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+            //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+            else if($scope.crtRuleName == ''){
                 alert('Please enter a valid Rule Name');
                 return false;
             }
