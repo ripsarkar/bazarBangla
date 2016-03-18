@@ -316,7 +316,7 @@ $scope.chckindustry = function() {
 $scope.goTo = function() {
 	
 	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
+	var testAlpNu = /^[A-Za-z].+$/;
     var testAlp = /^[a-zA-Z\s\d\/]+$/;
     var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
     
@@ -324,7 +324,8 @@ $scope.goTo = function() {
         alert('Please enter a valid Use Case Id (special characters allowed: _ - .)');
         return false;
     }
-    else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
+    //else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
+    else if($scope.usecaseName == ''){
         alert('Please enter a valid Use Case Name');
         return false;
     }
@@ -1918,7 +1919,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
                 $scope.goTo = function() {
                 	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-                	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
+                	var testAlpNu = /^[A-Za-z].+$/;
                     var testAlp = /^[a-zA-Z\s\d\/]+$/;
                     var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                     
@@ -1926,7 +1927,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         alert('Please enter a valid Use Case Id (special characters allowed: _ - .)');
                         return false;
                     }
-                    else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
+                    //else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
+                    else if($scope.usecaseName == ''){
                         alert('Please enter a valid Use Case Name');
                         return false;
                     }
