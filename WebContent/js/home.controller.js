@@ -756,21 +756,6 @@ $scope.menu.menu = false;
             menu:true
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
-    };
-
-    
-    $scope.feedbackmenu = function(){
-        $scope.menu = {
-            usecaserule :false,
-            feedback : true,
-            usecase:false,
-            rule:false,
-            uaman:false,
-            organisation:false,
-            subrolemenu:false,
-            menu:true
-        };
-        angular.element("ul.submainlinks li").removeClass("subactive");
         var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
 		if (usecaselist != undefined) {
 			if (usecaselist.Users != undefined) {
@@ -794,6 +779,36 @@ $scope.menu.menu = false;
 				}
 			}
 		}
+    };
+
+    
+    $scope.feedbackmenu = function(){
+        $scope.menu = {
+            usecaserule :false,
+            feedback : true,
+            usecase:false,
+            rule:false,
+            uaman:false,
+            organisation:false,
+            subrolemenu:false,
+            menu:true
+        };
+        angular.element("ul.submainlinks li").removeClass("subactive");
+        var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(usecaselist != undefined){
+            if(usecaselist.Users != undefined){
+                if(usecaselist.Users.UseCase != undefined){
+                for(var i=0;i<usecaselist.Users.UseCase.PermissionTypeDet.length;i++){
+                    if(usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "update"){
+                    	$location.path('/home/feedback');
+                    }
+                    else if(usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "read"){
+                    	$location.path('/home/viewfeedback');
+                    }
+                }
+            }
+        }
+        }
     };
 
     $scope.manageOrg = function(){
