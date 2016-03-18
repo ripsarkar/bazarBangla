@@ -762,6 +762,31 @@ $scope.menu.menu = false;
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
         //$location.path('/home/createusecase');
+        var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(usecaselist != undefined){
+            if(usecaselist.Users != undefined){
+                if(usecaselist.Users.UseCase != undefined){
+                for(var i=0;i<usecaselist.Users.UseCase.PermissionTypeDet.length;i++){
+                    if(usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "create"){
+                    	$location.path('/home/createusecase');
+                    }
+                    else if(usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "update"){
+                    	$location.path('/home/updateUsecase');
+                    }
+                }
+            }
+                if(usecaselist.Users.Rule != undefined){
+                    for(var i=0;i<usecaselist.Users.Rule.PermissionTypeDet.length;i++){
+                        if(usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "create"){
+                        	$location.path('/home/createrule');
+                        }
+                        else if(usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "update"){
+                        	$location.path('/home/updateRule');
+                        }
+                    }
+                }
+        }
+        }
     };
 
     
@@ -777,8 +802,8 @@ $scope.menu.menu = false;
             menu:true
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
-        $location.path('/home/feedback');
-        /*var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        //$location.path('/home/feedback');
+        var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
         if(usecaselist != undefined){
             if(usecaselist.Users != undefined){
                 if(usecaselist.Users.UseCase != undefined){
@@ -792,7 +817,7 @@ $scope.menu.menu = false;
                 }
             }
         }
-        }*/
+        }
     };
 
     $scope.manageOrg = function(){
@@ -871,6 +896,34 @@ $scope.menu.menu = false;
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
         //$location.path('/home/organization');
+        var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(usecaselist != undefined){
+            if(usecaselist.Users != undefined){
+                if(usecaselist.Users.Organization != undefined){
+                for(var i=0;i<usecaselist.Users.Organization.PermissionTypeDet.length;i++){
+                    if(usecaselist.Users.Organization.PermissionTypeDet[i].PermissionName == "create"){
+                    	$location.path('/home/organization');
+                    }
+                    else if(usecaselist.Users.Organization.PermissionTypeDet[i].PermissionName == "update"){
+                    	$location.path('/home/UpdateOrganisation');
+                    }
+                }
+            }
+                if(usecaselist.Users.Subscription != undefined){
+                    for(var i=0;i<usecaselist.Users.Subscription.PermissionTypeDet.length;i++){
+                        if(usecaselist.Users.Subscription.PermissionTypeDet[i].PermissionName == "create"){
+                        	$location.path('/home/subscription');
+                        }
+                        else if(usecaselist.Users.Subscription.PermissionTypeDet[i].PermissionName == "update"){
+                        	$location.path('/home/updatesubscription');
+                        }
+                        else if(usecaselist.Users.Subscription.PermissionTypeDet[i].PermissionName == "read"){
+                        	$location.path('/home/viewsubscription');
+                        }
+                    }
+                }
+        }
+        }
     };
     $scope.uamanagement = function(){
     	 $scope.managePermissionForUserAccount();
@@ -930,6 +983,24 @@ $scope.menu.menu = false;
             };
     	angular.element("ul.submainlinks li").removeClass("subactive");
     	//$location.path('/home/uamanagement');
+    	var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(usecaselist != undefined){
+            if(usecaselist.Users != undefined){
+                if(usecaselist.Users.User != undefined){
+                for(var i=0;i<usecaselist.Users.User.PermissionTypeDet.length;i++){
+                    if(usecaselist.Users.User.PermissionTypeDet[i].PermissionName == "create"){
+                    	$location.path('/home/uamanagement');
+                    }
+                    else if(usecaselist.Users.User.PermissionTypeDet[i].PermissionName == "update"){
+                    	$location.path('/home/uamanagement');
+                    }
+                    else if(usecaselist.Users.User.PermissionTypeDet[i].PermissionName == "read"){
+                    	$location.path('/home/uamanagement');
+                    }
+                }
+            }
+        }
+        }
     };
     $scope.roleMnu = function(){
     	 $scope.managePermissionForRole();
@@ -988,6 +1059,24 @@ $scope.menu.menu = false;
             };
     	angular.element("ul.submainlinks li").removeClass("subactive");
     	//$location.path('/home/createrole');
+    	var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
+        if(usecaselist != undefined){
+            if(usecaselist.Users != undefined){
+                if(usecaselist.Users.Role != undefined){
+                for(var i=0;i<usecaselist.Users.Role.PermissionTypeDet.length;i++){
+                    if(usecaselist.Users.Role.PermissionTypeDet[i].PermissionName == "create"){
+                    	$location.path('/home/createrole');
+                    }
+                    else if(usecaselist.Users.Role.PermissionTypeDet[i].PermissionName == "update"){
+                    	$location.path('/home/updaterole');
+                    }
+                    else if(usecaselist.Users.Role.PermissionTypeDet[i].PermissionName == "read"){
+                    	$location.path('/home/viewrole');
+                    }
+                }
+            }
+        }
+        }
     };
     
     
