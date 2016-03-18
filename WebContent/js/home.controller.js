@@ -776,7 +776,7 @@ $scope.menu.menu = false;
 						}
 					}
 				}
-				else (usecaselist.Users.Rule != undefined) {
+				else if(usecaselist.Users.Rule != undefined) {
 					for (var i = 0; i < usecaselist.Users.Rule.PermissionTypeDet.length; i++) {
 						if (usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "create") {
 							$location.path('/home/createrule');
@@ -911,8 +911,7 @@ $scope.menu.menu = false;
 							break;
 						}
 					}
-				} else
-					(usecaselist.Users.Subscription != undefined)
+				} else if(usecaselist.Users.Subscription != undefined)
 				{
 					for (var i = 0; i < usecaselist.Users.Subscription.PermissionTypeDet.length; i++) {
 						if (usecaselist.Users.Subscription.PermissionTypeDet[i].PermissionName == "create") {
