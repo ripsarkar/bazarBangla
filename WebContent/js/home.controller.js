@@ -773,15 +773,16 @@ $scope.menu.menu = false;
 							alert("5");
 							break;
 						}
-						else if (i>usecaselist.Users.Rule.PermissionTypeDet.length-1 && usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "create") {
+						else if (i>=usecaselist.Users.Rule.PermissionTypeDet.length-1 && usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "create") {
 							$location.path('/home/createrule');
 							alert("6");
 							break;
-						} else if (i>usecaselist.Users.Rule.PermissionTypeDet.length-1 && usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "update") {
+						} else if (i>=usecaselist.Users.Rule.PermissionTypeDet.length-1 && usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "update") {
 							$location.path('/home/updateRule');
 							alert("7");
 							break;
 						}
+						alert("loop-"+i);
 					}
 				}
 			}
