@@ -758,26 +758,26 @@ $scope.menu.menu = false;
         angular.element("ul.submainlinks li").removeClass("subactive");
         var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
 		if (usecaselist != undefined) {
-			alert("1");
+			
 			if (usecaselist.Users != undefined) {
-				alert("2");
+				
 				if (usecaselist.Users.UseCase != undefined || usecaselist.Users.Rule != undefined) {
-					alert("3");
+					
 					for (var i = 0; i < (usecaselist.Users.UseCase.PermissionTypeDet.length + usecaselist.Users.Rule.PermissionTypeDet.length); i++) {
-						if (usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "create" && i<usecaselist.Users.UseCase.PermissionTypeDet.length) {
+						if ( i<usecaselist.Users.UseCase.PermissionTypeDet.length && usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "create") {
 							$location.path('/home/createusecase');
 							alert("4");
 							break;
-						} else if (usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "update" && i<usecaselist.Users.UseCase.PermissionTypeDet.length) {
+						} else if (i<usecaselist.Users.UseCase.PermissionTypeDet.length && usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "update") {
 							$location.path('/home/updateUsecase');
 							alert("5");
 							break;
 						}
-						else if (usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "create") {
+						else if (i>usecaselist.Users.UseCase.PermissionTypeDet.length-1 && usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "create") {
 							$location.path('/home/createrule');
 							alert("6");
 							break;
-						} else if (usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "update") {
+						} else if (i>usecaselist.Users.UseCase.PermissionTypeDet.length-1 && usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "update") {
 							$location.path('/home/updateRule');
 							alert("7");
 							break;
