@@ -773,11 +773,11 @@ $scope.menu.menu = false;
 							alert("5");
 							break;
 						}
-						else if (usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "create" && i<usecaselist.Users.Rule.PermissionTypeDet.length) {
+						else if (usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "create") {
 							$location.path('/home/createrule');
 							alert("6");
 							break;
-						} else if (usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "update" && i<usecaselist.Users.Rule.PermissionTypeDet.length) {
+						} else if (usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "update") {
 							$location.path('/home/updateRule');
 							alert("7");
 							break;
