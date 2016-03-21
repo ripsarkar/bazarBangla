@@ -760,18 +760,18 @@ $scope.menu.menu = false;
 		if (usecaselist != undefined) {
 			if (usecaselist.Users != undefined) {
 				if (usecaselist.Users.UseCase != undefined || usecaselist.Users.Rule != undefined) {
-					for (var i = 0; i < 4; i++) {
-						if (usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "create") {
+					for (var i = 0; i < (usecaselist.Users.UseCase.PermissionTypeDet.length + usecaselist.Users.Rule.PermissionTypeDet.length); i++) {
+						if (usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "create" && i<usecaselist.Users.UseCase.PermissionTypeDet.length) {
 							$location.path('/home/createusecase');
 							break;
-						} else if (usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "update") {
+						} else if (usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "update" && i<usecaselist.Users.UseCase.PermissionTypeDet.length) {
 							$location.path('/home/updateUsecase');
 							break;
 						}
-						else if (usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "create") {
+						else if (usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "create" && i<usecaselist.Users.Rule.PermissionTypeDet.length) {
 							$location.path('/home/createrule');
 							break;
-						} else if (usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "update") {
+						} else if (usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "update" && i<usecaselist.Users.Rule.PermissionTypeDet.length) {
 							$location.path('/home/updateRule');
 							break;
 						}
@@ -794,21 +794,7 @@ $scope.menu.menu = false;
             menu:true
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
-        var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
-        if(usecaselist != undefined){
-            if(usecaselist.Users != undefined){
-                if(usecaselist.Users.UseCase != undefined){
-                for(var i=0;i<usecaselist.Users.UseCase.PermissionTypeDet.length;i++){
-                    if(usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "update"){
-                    	$location.path('/home/feedback');
-                    }
-                    else if(usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "read"){
-                    	$location.path('/home/viewfeedback');
-                    }
-                }
-            }
-        }
-        }
+        $location.path('/home/feedback');
     };
 
     $scope.manageOrg = function(){
