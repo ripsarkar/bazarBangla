@@ -766,23 +766,22 @@ $scope.menu.menu = false;
 					for (var i = 0; i < 4; i++) {
 						if ( usecaselist.Users.UseCase != undefined && usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "create") {
 							$location.path('/home/createusecase');
-							alert("4");
+							
 							break;
 						} else if (usecaselist.Users.UseCase != undefined && usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "update") {
 							$location.path('/home/updateUsecase');
-							alert("5");
+							
 							break;
 						}
 						else if (usecaselist.Users.Rule != undefined && usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "create") {
 							$location.path('/home/createrule');
-							alert("6");
+							
 							break;
 						} else if (usecaselist.Users.Rule != undefined && usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "update") {
 							$location.path('/home/updateRule');
-							alert("7");
+							
 							break;
 						}
-						alert("loop-"+i);
 					}
 				}
 			}
@@ -885,22 +884,22 @@ $scope.menu.menu = false;
 			if (usecaselist.Users != undefined) {
 				if (usecaselist.Users.Organization != undefined || usecaselist.Users.Subscription != undefined) {
 					for (var i = 0; i < 5; i++) {
-						if (usecaselist.Users.Organization.PermissionTypeDet[i].PermissionName == "create") {
+						if (usecaselist.Users.Organization != undefined && usecaselist.Users.Organization.PermissionTypeDet[i].PermissionName == "create") {
 							$location.path('/home/organization');
 							break;
 						}
-						else if (usecaselist.Users.Subscription.PermissionTypeDet[i].PermissionName == "create") {
+						else if (usecaselist.Users.Subscription != undefined && usecaselist.Users.Subscription.PermissionTypeDet[i].PermissionName == "create") {
 							$location.path('/home/subscription');
 							break;
 						}
-						else if (usecaselist.Users.Organization.PermissionTypeDet[i].PermissionName == "update") {
+						else if (usecaselist.Users.Organization != undefined && usecaselist.Users.Organization.PermissionTypeDet[i].PermissionName == "update") {
 							$location.path('/home/UpdateOrganisation');
 							break;
 						}
-						else if (usecaselist.Users.Subscription.PermissionTypeDet[i].PermissionName == "update") {
+						else if (usecaselist.Users.Subscription != undefined && usecaselist.Users.Subscription.PermissionTypeDet[i].PermissionName == "update") {
 							$location.path('/home/updatesubscription');
 							break;
-						} else if (usecaselist.Users.Subscription.PermissionTypeDet[i].PermissionName == "read") {
+						} else if (usecaselist.Users.Subscription != undefined && usecaselist.Users.Subscription.PermissionTypeDet[i].PermissionName == "read") {
 							$location.path('/home/viewsubscription');
 							break;
 						}
