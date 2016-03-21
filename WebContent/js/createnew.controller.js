@@ -698,7 +698,18 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
                           });
 
                         }).error(function(data, status, headers, config) {
-                            alert("Sorry Application error in serverside");
+                        	if (data.ErrCode == 611) {
+                        		alert("UsecaseName is Duplicate");
+                        	}
+                        	else if (data.ErrCode == 610) {
+                        		alert("UsecaseId is Duplicate");
+                        	}
+                        	else if (data.ErrCode == 601) {
+                        		alert("Application error in serverside");
+                        	}
+                        	else if (data.ErrCode == 606) {
+                        		alert("Invalid request usecase object not present in the request");
+                        	}
                         });
                     } else {
                         alert("Please fill all mandatory fields");
@@ -1356,7 +1367,25 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                                 alert("Server side error");
                           });
                     }).error(function(data, status, headers, config) {
-
+                    	if (data.ErrCode == 611) {
+                    		alert("Duplicate Rule Name present in rule object");
+                    	}
+                    	else if (data.ErrCode == 610) {
+                    		alert("Duplicate ruleId present in rule object");
+                    	}
+                    	else if (data.ErrCode == 601) {
+                    		alert("Application error in serverside");
+                    	}
+                    	else if (data.ErrCode == 606) {
+                    		alert("Invalid reuest rule object not present in the reuest");
+                    	}
+                    	else if (data.ErrCode == 607) {
+                    		alert("Invalid request usecase surr id not present in the request");
+                    	}
+                    	else if (data.ErrCode == 608) {
+                    		alert("Invalid request usecase object not present in the request");
+                    	}
+                    	
                     });
                 } else {
                     alert('Please fill all mandatory* fields');
