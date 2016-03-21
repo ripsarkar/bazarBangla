@@ -977,16 +977,17 @@ $scope.menu.menu = false;
                         $rootScope.$emit("uamanagerpage", {});
                         break;
                     }
-                    else if(usecaselist.Users.User.PermissionTypeDet[i].PermissionName == "update"){
-                    	$location.path('/home/uamanagement');
-                        $rootScope.$emit("uaviewerpage", {});
-                        $rootScope.currentUserTab = 'html/viewuser.html';
-                        break;
-                    }
+                    
                     else if(usecaselist.Users.User.PermissionTypeDet[i].PermissionName == "read"){
                     	$location.path('/home/uamanagement');
                         $rootScope.$emit("uaviewerMainpage", {});
                         $rootScope.currentUserTab = 'html/viewuser_main.html';
+                        break;
+                    }
+                    else if(usecaselist.Users.User.PermissionTypeDet[i].PermissionName == "update"){
+                    	$location.path('/home/uamanagement');
+                        $rootScope.$emit("uaviewerpage", {});
+                        $rootScope.currentUserTab = 'html/viewuser.html';
                         break;
                     }
                 }
