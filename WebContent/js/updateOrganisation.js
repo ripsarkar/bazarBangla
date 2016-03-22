@@ -145,8 +145,8 @@ $scope.updateOrganizationVal = function(compsurrID){
         alert('Please enter valid state');
           return false;
       }*/
-            else if($scope.country == '' || $scope.country != 'undefined'){
-        alert('Please enter country');
+            else if($scope.country == '' || $scope.country == 'undefined'){
+        alert('Please select country');
           return false;
       }
             else if($scope.zip == '' || !testAlpNu.test($scope.zip)){
