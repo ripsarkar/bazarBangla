@@ -87,7 +87,7 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
 
 
       $scope.sendOrganizationVal = function(){
-      var testAlpNu = /^[a-zA-Z0-9\d\/]+$/;
+      var testAlpNu = /^[^\s]+$/;
       var testAlp = /^[a-zA-Z\s\d\/]+$/;
       var testAddress = /^[a-zA-Z\s\d\/,]+$/;
       if($scope.organID == ''  || !testAlpNu.test($scope.organID)){
