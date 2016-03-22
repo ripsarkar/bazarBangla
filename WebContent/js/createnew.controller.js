@@ -682,20 +682,7 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
                 if (CategoryGr.length != 0) {
                     if (UsecaseService.getUpdateUsecase().SurrId != '' && UsecaseService.getUpdateUsecase().SurrId != 'undefined') {
                         $http.post($rootScope.url + '/saveUseCase', UsecasePostJson).success(function(data, status, headers, config) {
-                        	if (data.ErrCode == 611) {
-                        		alert("UsecaseName is Duplicate");
-                        	}
-                        	else if (data.ErrCode == 610) {
-                        		alert("UsecaseId is Duplicate");
-                        	}
-                        	else if (data.ErrCode == 601) {
-                        		alert("Application error in serverside");
-                        	}
-                        	else if (data.ErrCode == 606) {
-                        		alert("Invalid request usecase object not present in the request");
-                        	}
-                        	
-                        else{
+
                             UsecaseService.setbtnbackUC("");
                             UsecaseService.setcreateregbackuc("");
                             UsecaseService.setpagesflag("");
@@ -710,9 +697,20 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
                           }).error(function (error) {
                                 alert("Server side error");
                           });
-                        }
+                        
                         }).error(function(data, status, headers, config) {
-                            alert("Server side error");
+                        	if (data.ErrCode == 611) {
+                        		alert("UsecaseName is Duplicate");
+                        	}
+                        	else if (data.ErrCode == 610) {
+                        		alert("UsecaseId is Duplicate");
+                        	}
+                        	else if (data.ErrCode == 601) {
+                        		alert("Application error in serverside");
+                        	}
+                        	else if (data.ErrCode == 606) {
+                        		alert("Invalid request usecase object not present in the request");
+                        	}
                         });
                     } else {
                         alert("Please fill all mandatory fields");
@@ -1352,25 +1350,8 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
 
                 if (typeof $scope.crtUsercaseId != 'undefined' && $scope.crtUsercaseId != '' && typeof $scope.crtUsercaseName != 'undefined' && $scope.crtUsercaseName != '' && typeof $scope.crtRuleID != 'undefined' && $scope.crtRuleID != '' && typeof $scope.crtRuleName != 'undefined' && $scope.crtRuleName != '') {
                     $http.post($rootScope.url + '/saveRule', crtRule_postJson).success(function(data, status, headers, config) {
-                    	if (data.ErrCode == 611) {
-                    		alert("Duplicate Rule Name present in rule object");
-                    	}
-                    	else if (data.ErrCode == 610) {
-                    		alert("Duplicate ruleId present in rule object");
-                    	}
-                    	else if (data.ErrCode == 601) {
-                    		alert("Application error in serverside");
-                    	}
-                    	else if (data.ErrCode == 606) {
-                    		alert("Invalid reuest rule object not present in the reuest");
-                    	}
-                    	else if (data.ErrCode == 607) {
-                    		alert("Invalid request usecase surr id not present in the request");
-                    	}
-                    	else if (data.ErrCode == 608) {
-                    		alert("Invalid request usecase object not present in the request");
-                    	}
-                    else{
+                    	
+                    
                         alert('Usecase Rule Created Successfully');
                         UsecaseService.setUsecasecrtdata('');
 
@@ -1388,10 +1369,26 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                           }).error(function (error) {
                                 alert("Server side error");
                           });
-                    }
+                    
                     }).error(function(data, status, headers, config) {
-                        alert("Server side error");
-                    	
+                    	if (data.ErrCode == 611) {
+                    		alert("Duplicate Rule Name present in rule object");
+                    	}
+                    	else if (data.ErrCode == 610) {
+                    		alert("Duplicate ruleId present in rule object");
+                    	}
+                    	else if (data.ErrCode == 601) {
+                    		alert("Application error in serverside");
+                    	}
+                    	else if (data.ErrCode == 606) {
+                    		alert("Invalid reuest rule object not present in the reuest");
+                    	}
+                    	else if (data.ErrCode == 607) {
+                    		alert("Invalid request usecase surr id not present in the request");
+                    	}
+                    	else if (data.ErrCode == 608) {
+                    		alert("Invalid request usecase object not present in the request");
+                    	}                    	
                     });
                 } else {
                     alert('Please fill all mandatory* fields');
