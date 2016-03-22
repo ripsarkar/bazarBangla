@@ -109,6 +109,7 @@ $scope.updateOrganizationVal = function(compsurrID){
       var testAlpNu = /^[^\s]+$/;
       var testAlp = /^[a-zA-Z\s\d\/]+$/;
       var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+      alert($scope.country);
       if($scope.geocode == null){
         $scope.geocode = "";
       }
