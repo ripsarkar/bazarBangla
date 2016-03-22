@@ -20,8 +20,9 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
        $rootScope.loadinganimation=true; 
        var countrycall ={
         url:"data/restcountries.json",
+        dataType: "json",
         method:"GET",
-        headers:{"Access-control-Allow-Origin":"*",'Content-Type': 'application/json'}
+        headers:{"Access-control-Allow-Origin":"*","Content-Type": "application/json"}
        };
        $http(countrycall)
       .success(function(data, status, config, headers){
