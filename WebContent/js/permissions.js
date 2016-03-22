@@ -27,7 +27,7 @@ app.controller("permissionsCtrl",["$scope","$http", "$rootScope","$q","$timeout"
 
      //$scope.fnPopulateRoleList=function(){
      	if($rootScope.tabName =="User" || $rootScope.tabName =="Role"){
-          var promise5= $http.get($rootScope.url + '/getpopulateRoleforLogin/'+$rootScope.compSurrId).success(function(data) {
+          var promise5= $http.get($rootScope.url + '/getpopulateRoleforLogin/'+$rootScope.updatedOrgazingzingSurrId).success(function(data) {
               $scope.roleListli = data.Roles;             
               $rootScope.loadinganimation = false;
             }).error(function(data, status, headers, config) {                
@@ -35,7 +35,7 @@ app.controller("permissionsCtrl",["$scope","$http", "$rootScope","$q","$timeout"
           });
            }
         if($rootScope.tabName =="Subscription"){
-          var promise5= $http.get($rootScope.url + '/getpopulateRoleforSubscription/'+$rootScope.compSurrId).success(function(data) {
+          var promise5= $http.get($rootScope.url + '/getpopulateRoleforSubscription/'+$rootScope.updatedOrgazingzingSurrId).success(function(data) {
               $scope.roleListli = data.Roles;             
               $rootScope.loadinganimation = false;
             }).error(function(data, status, headers, config) {                
