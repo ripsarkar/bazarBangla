@@ -106,7 +106,7 @@ $scope.openUpdatePage = function(compsurrID){
           }
 
 $scope.updateOrganizationVal = function(compsurrID){
-      var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
+      var testAlpNu = /^[^\s]+$/;
       var testAlp = /^[a-zA-Z\s\d\/]+$/;
       var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
       if($scope.geocode == null){
@@ -116,7 +116,7 @@ $scope.updateOrganizationVal = function(compsurrID){
         alert('Please enter a valid Company Id(no special character)');
           return false;
       }
-      else if($scope.organName == ''  || !testAlpNu.test($scope.organName)){
+      else if($scope.organName == ''){
         alert('Please enter a valid Company Name');
           return false;
       }
@@ -136,11 +136,11 @@ $scope.updateOrganizationVal = function(compsurrID){
         alert('Please enter atleast one valid address');
           return false;
       }
-            else if($scope.city == ''  || !testAlp.test($scope.city)){
+            else if($scope.city == ''){
         alert('Please enter valid city');
           return false;
       }
-            else if($scope.state != ''  && !testAlp.test($scope.state)){
+            else if($scope.state != ''){
         alert('Please enter valid state');
           return false;
       }
@@ -152,7 +152,7 @@ $scope.updateOrganizationVal = function(compsurrID){
         alert('Please enter valid zipcode');
           return false;
       }
-            else if($scope.geocode != '' && !testAlpNu.test($scope.geocode)){
+            else if($scope.geocode != ''){
         alert('Please enter valid geocode');
           return false;
       }
