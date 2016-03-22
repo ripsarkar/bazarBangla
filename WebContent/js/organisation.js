@@ -102,14 +102,7 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
         alert('Please enter atleast one valid address');
           return false;
       }
-      else if($scope.compAdd2 != ''){
-        alert('Please enter valid 2nd address');
-          return false;
-      }
-      else if($scope.compAdd3 != ''){
-        alert('Please enter valid 3rd address');
-          return false;
-      }
+      
             else if($scope.city == ''){
         alert('Please enter valid city');
           return false;
@@ -126,10 +119,7 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
         alert('Please enter valid zipcode');
           return false;
       }
-            else if($scope.geocode != ''){
-        alert('Please enter valid geocode');
-          return false;
-      }
+          
       else{
 
              var callpost = {

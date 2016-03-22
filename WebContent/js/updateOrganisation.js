@@ -144,7 +144,7 @@ $scope.updateOrganizationVal = function(compsurrID){
         alert('Please enter valid state');
           return false;
       }*/
-            else if($scope.country == ''){
+            else if($scope.country == '' || $scope.country != 'undefined'){
         alert('Please enter country');
           return false;
       }
