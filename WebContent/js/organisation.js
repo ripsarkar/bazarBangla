@@ -18,7 +18,12 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
                 $scope.UsecaseIntry=[];
 
        $rootScope.loadinganimation=true; 
-       $http.get("data/restcountries.json")
+       var countrycall ={
+        url:"data/restcountries.json",
+        method:"GET",
+        headers:{"Access-control-Allow-Origin":"*",'Content-Type': 'application/json'}
+       };
+       $http(countrycall)
       .success(function(data, status, config, headers){
                 $scope.countryName = data;
         //$rootScope.loadinganimation=false; 
