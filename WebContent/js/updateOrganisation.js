@@ -140,10 +140,10 @@ $scope.updateOrganizationVal = function(compsurrID){
         alert('Please enter valid city');
           return false;
       }
-            else if($scope.state != ''){
+           /* else if($scope.state == ''){
         alert('Please enter valid state');
           return false;
-      }
+      }*/
             else if($scope.country == ''){
         alert('Please enter country');
           return false;
@@ -152,10 +152,10 @@ $scope.updateOrganizationVal = function(compsurrID){
         alert('Please enter valid zipcode');
           return false;
       }
-            else if($scope.geocode != ''){
+           /* else if($scope.geocode == ''){
         alert('Please enter valid geocode');
           return false;
-      }
+      }*/
       else{
 
 var updateorgjson = {
