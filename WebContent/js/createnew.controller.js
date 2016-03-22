@@ -314,7 +314,13 @@ $scope.chckindustry = function() {
 }
 
 $scope.goTo = function() {
-	
+    Indtsyarray = [];
+    for (var i = 0; i < $scope.UsecaseIntry.length; i++) {
+            var Indtsy = {};
+            Indtsy.surrId = $scope.UsecaseIntry[i];
+            Indtsyarray.push(Indtsy);
+    }
+
 	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
 	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
     var testAlp = /^[a-zA-Z\s\d\/]+$/;
