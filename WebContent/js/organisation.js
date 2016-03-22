@@ -87,30 +87,30 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
 
 
       $scope.sendOrganizationVal = function(){
-      var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
+      var testAlpNu = /^[a-zA-Z0-9\d\/]+$/;
       var testAlp = /^[a-zA-Z\s\d\/]+$/;
-      var testAddress = /^[a-zA-Z\s\d\/]+$/;
+      var testAddress = /^[a-zA-Z\s\d\/,]+$/;
       if($scope.organID == ''  || !testAlpNu.test($scope.organID)){
-        alert('Please enter a valid Company Id(no special character)');
+        alert('Please enter valid Organization ID ( No white space allowed)');
           return false;
       }
-      else if($scope.organName == ''  || !testAlpNu.test($scope.organName)){
+      else if($scope.organName == ''){
         alert('Please enter a valid Company Name');
           return false;
       }
-      else if($scope.compAdd1 == '' || !testAddress.test($scope.compAdd1)){
+      else if($scope.compAdd1 == ''){
         alert('Please enter atleast one valid address');
           return false;
       }
-      else if($scope.compAdd2 != '' && !testAddress.test($scope.compAdd2)){
+      else if($scope.compAdd2 != ''){
         alert('Please enter valid 2nd address');
           return false;
       }
-      else if($scope.compAdd3 != '' && !testAddress.test($scope.compAdd3)){
+      else if($scope.compAdd3 != ''){
         alert('Please enter valid 3rd address');
           return false;
       }
-            else if($scope.city == ''  || !testAlp.test($scope.city)){
+            else if($scope.city == ''){
         alert('Please enter valid city');
           return false;
       }
@@ -126,7 +126,7 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
         alert('Please enter valid zipcode');
           return false;
       }
-            else if($scope.geocode != '' && !testAlpNu.test($scope.geocode)){
+            else if($scope.geocode != ''){
         alert('Please enter valid geocode');
           return false;
       }
