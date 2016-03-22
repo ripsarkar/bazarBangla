@@ -19,7 +19,7 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
 
        $rootScope.loadinganimation=true; 
        var countrycall ={
-        url:"https://devucl.mybluemix.net/data/restcountries.json",
+        url:"data/restcountries.json",
         dataType: "json",
         method:"GET",
         data:"",
