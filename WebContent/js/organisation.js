@@ -22,6 +22,7 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
         url:"data/restcountries.json",
         dataType: "json",
         method:"GET",
+        data:"",
         headers:{"Access-control-Allow-Origin":"*","Content-Type": "application/json"}
        };
        $http(countrycall)
