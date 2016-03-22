@@ -130,7 +130,7 @@ app.directive('organization', ['MyAPIService','$http','$rootScope', function(MyA
             };
 
             $http(callpost).success(function(data){
-              alert("A request for Organisation sent");
+              alert("Organization created succesfully");
               //fetch permission
                           $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
                               sessionStorage.setItem("fetchPermission", JSON.stringify(result));
