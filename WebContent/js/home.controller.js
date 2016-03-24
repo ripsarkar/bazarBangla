@@ -48,7 +48,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
   		  var mju;
   		 if(mj[1]!=undefined){
 			  mju=mj[1];
-			  
+			  alert("mj1-"+mju);
 			  }else{
 				  
 				mju=localStorage.namerip;  
@@ -72,6 +72,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
    	                	$rootScope.loginError=false;
    	                	// Store
    	                	localStorage.setItem("rolerip", result.User[0].user_role_name);
+   	                	alert("mj2-"+localStorage.getItem("rolerip")+"mj2-"+result.User[0].user_role_name);
    	                	localStorage.setItem("surrrip", result.User[0].user_surr_id);
    	                	localStorage.setItem("surrComprip", result.User[0].company_surr_id);
    	                	localStorage.setItem("namerip", result.User[0].user_name);
@@ -299,6 +300,7 @@ $scope.menu.menu = false;
 ////		        header('Access-Control-Allow-Credentials: true');
 ////		        header('Access-Control-Max-Age: 86400');    // cache for 1 day
 ////		    }
+	   		alert("mj3-"+localStorage.getItem("rolerip")+"mj3-"+result.User[0].user_role_name);
 		  	 $rootScope.loadinganimation = true;
 			 $http.get($rootScope.url+"/logout:"+localStorage.getItem("namerip")).success(function(result) {
 	            	$rootScope.loadinganimation = false;
