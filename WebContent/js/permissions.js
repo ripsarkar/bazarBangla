@@ -5,7 +5,7 @@ app.controller("permissionsCtrl",["$scope","$http", "$rootScope","$q","$timeout"
 		  $scope.dummyMembertabOrga = false;
   $scope.$watch(function(){
       
-      if($rootScope.tabName == "User" || $rootScope.tabName == "Role"){
+      if($rootScope.tabName == "User" || $rootScope.tabName == "Role" || $rootScope.tabName == "Subscription"){
         $scope.membertabOrga = false;
 		$scope.dummyMembertabOrga = true;
       }
