@@ -299,16 +299,14 @@ $scope.menu.menu = false;
 ////		        header('Access-Control-Allow-Credentials: true');
 ////		        header('Access-Control-Max-Age: 86400');    // cache for 1 day
 ////		    }
-//		  
-//			 $http(logout).success(function(result) {
-//	            	$rootScope.loadinganimation = false;
-//	            	
-//	            	$location.path('/login');
-//	            }).error(function (error) {
-//		             $rootScope.loadinganimation = false;
-//		            	
-//		            	$location.path('/login');
-//		            });
+		  	 $rootScope.loadinganimation = true;
+			 $http.get($rootScope.url+"/logout:"+localStorage.getItem("namerip")).success(function(result) {
+	            	$rootScope.loadinganimation = false;
+	            	$location.path('/login');
+	         }).error(function (error) {
+		            $rootScope.loadinganimation = false;
+		           	$location.path('/login');
+		     });
 		}
 	
 	//local storage
