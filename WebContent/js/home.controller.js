@@ -276,7 +276,7 @@ $scope.menu.menu = false;
         //delete $window.sessionStorage.token;
        // delete $window.sessionStorage.user;	
 		$rootScope.loadinganimation = true;
-		 $http.get($rootScope.url+"/logout:"+localStorage.getItem("namerip")).success(function(result) {
+		 $http.get($rootScope.url+"/logout/"+localStorage.getItem("namerip")).success(function(result) {
            	$rootScope.loadinganimation = false;
            	$location.path('/login');
         }).error(function (error) {
