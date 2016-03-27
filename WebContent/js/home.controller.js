@@ -119,6 +119,23 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                               $location.path('/home/search');
                               $scope.fnTabsdisEnab();
                               $rootScope.loadinganimation = false;
+                              // load org from member list of permission json 
+                            	var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+                            	if(obj.Users.Organization !=undefined){
+
+                      			var permissiontypeList = obj.Users.Organization.PermissionTypeDet;
+                      			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                      				 if(permissiontypeList[int2].PermissionName=="member"){
+                      					 $scope.RfetchList =permissiontypeList[int2].ObjectList;
+                      					 var objComp = {};
+                                           objComp.company_name =localStorage.getItem("nameCompany");
+                                           $scope.RfetchList.push(objComp);
+                      					// $rootScope.loadinganimation = false;
+                      				}
+                      			}
+                      		
+                            	}
+
 
 
 
@@ -148,23 +165,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 //                          	alert("Internal server error");
 //                          });
                           
-                         // load org from member list of permission json 
-                      	var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
-                    	if(obj.Users.Organization !=undefined){
-
-                			var permissiontypeList = obj.Users.Organization.PermissionTypeDet;
-                			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
-                				 if(permissiontypeList[int2].PermissionName=="member"){
-                					 $scope.RfetchList =permissiontypeList[int2].ObjectList;
-                					 var objComp = {};
-                                     objComp.company_name =localStorage.getItem("nameCompany");
-                                     $scope.RfetchList.push(objComp);
-                					 $rootScope.loadinganimation = false;
-                				}
-                			}
-                		
-                    	}
-
+                      
    	            }).error(function (error) {
    	             $rootScope.loadinganimation = false;
    	             alert("Internal server error");
