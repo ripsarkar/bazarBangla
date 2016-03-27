@@ -128,7 +128,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                       				 if(permissiontypeList[int2].PermissionName=="member"){
                       					 $scope.RfetchList =permissiontypeList[int2].ObjectList;
                       					 var objComp = {};
-                                           objComp.company_name =localStorage.getItem("nameCompany");
+                                           objComp.Name =localStorage.getItem("nameCompany");
                                            $scope.RfetchList.push(objComp);
                       					// $rootScope.loadinganimation = false;
                       				}
