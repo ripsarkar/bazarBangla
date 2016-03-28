@@ -314,7 +314,7 @@ $scope.chckindustry = function() {
 }
 
 $scope.goTo = function() {
-    Indtsyarray = [];
+    var Indtsyarray = [];
     for (var i = 0; i < $scope.UsecaseIntry.length; i++) {
             var Indtsy = {};
             Indtsy.surrId = $scope.UsecaseIntry[i];
