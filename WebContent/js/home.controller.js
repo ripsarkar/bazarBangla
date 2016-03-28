@@ -23,8 +23,16 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 	   	          localStorage.setItem("isLoggedIn", true);
 	   	         
 	   	             
-	   	        }).error(function(status) {
-	   	          alert('Oops something went wrong!');
+	   	        }).error(function(data, status, headers, config) {
+	   	          alert('There could be some temporary technical problem. Please refresh / try again  and contact your system administrator');
+//			   	       if (status == 403) {
+//		           		//alert(data);
+//		           		var r = confirm(data);
+//		           		if (r == true) {
+//		           			$scope.localStorageclear();
+//		           		 }
+//			   	       }
+		           	
 	   	        });
 	   	   
 	   	   }
@@ -48,7 +56,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
   		  var mju;
   		 if(mj[1]!=undefined){
 			  mju=mj[1];
-			  
+			  //alert("mj1-"+mju);
 			  }else{
 				  
 				mju=localStorage.namerip;  
@@ -72,6 +80,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
    	                	$rootScope.loginError=false;
    	                	// Store
    	                	localStorage.setItem("rolerip", result.User[0].user_role_name);
+   	                	//alert("mj2-"+localStorage.getItem("rolerip")+"mj2-"+result.User[0].user_role_name);
    	                	localStorage.setItem("surrrip", result.User[0].user_surr_id);
    	                	localStorage.setItem("surrComprip", result.User[0].company_surr_id);
    	                	localStorage.setItem("namerip", result.User[0].user_name);
@@ -96,10 +105,8 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                           $rootScope.user_name = result.User[0].user_name;
                           $rootScope.companyNamee = result.User[0].company_name;
                           $scope.userIndustChVa = localStorage.getItem("nameCompany");
-                          $rootScope.updatedOrgazingzing = result.User[0].company_name;
-                          $rootScope.updatedOrgazingzingSurrId = result.User[0].company_surr_id;
-                          
-
+						$rootScope.updatedOrgazingzing = result.User[0].company_name;
+						$rootScope.updatedOrgazingzingSurrId = result.User[0].company_surr_id;
    	                }
    	            	    $rootScope.loadinganimation = false;
                          // console.log($rootScope.user_name);
@@ -120,6 +127,23 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                               $location.path('/home/search');
                               $scope.fnTabsdisEnab();
                               $rootScope.loadinganimation = false;
+                              // load org from member list of permission json 
+                            	var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
+                            	if(obj.Users.Organization !=undefined){
+
+                      			var permissiontypeList = obj.Users.Organization.PermissionTypeDet;
+                      			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
+                      				 if(permissiontypeList[int2].PermissionName=="member"){
+                      					 $scope.RfetchList =permissiontypeList[int2].ObjectList;
+                      					 var objComp = {};
+                                           objComp.Name =localStorage.getItem("nameCompany");
+                                           $scope.RfetchList.push(objComp);
+                      					// $rootScope.loadinganimation = false;
+                      				}
+                      			}
+                      		
+                            	}
+
 
 
 
@@ -138,17 +162,18 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 
   							}, 16);
   	                    }
-                          $http.get($rootScope.url + "/getOrgListForUser/" + localStorage.getItem("surrrip")).success(function(result) {
+//                          $http.get($rootScope.url + "/getOrgListForUser/" + localStorage.getItem("surrrip")).success(function(result) {
+//                          
+//                              $scope.RfetchList = result.Organization;
+//                              var objComp = {};
+//                              objComp.company_name =localStorage.getItem("nameCompany");
+//                              $scope.RfetchList.push(objComp);
+//                              $rootScope.loadinganimation = false;
+//                          }).error(function (error) {
+//                          	alert("Internal server error");
+//                          });
                           
-                              $scope.RfetchList = result.Organization;
-                              var objComp = {};
-                              objComp.company_name =localStorage.getItem("nameCompany");
-                              $scope.RfetchList.push(objComp);
-                              $rootScope.loadinganimation = false;
-                          }).error(function (error) {
-                          	alert("Internal server error");
-                          });
-
+                      
    	            }).error(function (error) {
    	             $rootScope.loadinganimation = false;
    	             alert("Internal server error");
@@ -165,15 +190,15 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 	    		$scope.useCaseMaintaindis = false;
 	    		$scope.organizationdis= false;
 	    		$scope.rolemenudis= false;	
-	    		
+
 	    var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
 
 	    	if(obj.Users.User==undefined){
 	    		$scope.userAccountManagementdis= true;
 	    	}
 	    	else{
-	    		$scope.userAccountManagementdis= false;
 	    		
+	    		$scope.userAccountManagementdis= false;
 	    	}
 	    	if(obj.Users.UseCase==undefined && obj.Users.Rule==undefined){
 	    		$scope.useCaseMaintaindis= true;
@@ -212,16 +237,31 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 	    	
 	    	if(obj.Users.Subscription==undefined && obj.Users.Organization==undefined){
 	    		$scope.organizationdis= true;
-	    	}
-	    	else{
+	    	}else{
 	    		
-	    		$scope.organizationdis= false;
+	    		 $scope.organizationdis= true;
+				  if(obj.Users.Organization!=undefined){			
+			  
+						angular.forEach(obj.Users.Organization.PermissionTypeDet, function(value, key) {					
+								var useCaseObj = obj.Users.Organization.PermissionTypeDet;
+								for(var i in useCaseObj){
+									debugger;
+									if(useCaseObj[i].PermissionName=='create' || useCaseObj[i].PermissionName=='update'){
+										$scope.organizationdis= false;								
+										break;
+									}
+								} 
+								
+								
+					
+						});
+					}
 	    	}
 	    	
 	    	if(obj.Users.Role==undefined){
 	    		$scope.rolemenudis= true;		
-	    	}
-	    	else{
+	    	}else{
+	    		
 	    		$scope.rolemenudis= false;	
 	    	}
 	    	
@@ -238,14 +278,12 @@ $scope.menu.subrolemenu = false;
 $scope.menu.menu = false;
         var userIndustCh = $scope.userIndustChVa;
         $rootScope.updatedOrgazingzing = $scope.userIndustChVa;
-
         for(var i=0;i<$scope.RfetchList.length;i++){
         	if($rootScope.updatedOrgazingzing == $scope.RfetchList[i].company_name){
                 $rootScope.updatedOrgazingzingSurrId = $scope.RfetchList[i].company_surr_id;
                 
         	}
         }
-
                             $rootScope.loadinganimation = true;
 
                             $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + userIndustCh).success(function(result) {
@@ -270,7 +308,10 @@ $scope.menu.menu = false;
 		$scope.showAllmode=true;
 	}
 	
-	
+	/*window.onbeforeunload = function () {
+		$scope.localStorageclear();
+	    return "You have logged out successfully!!!";
+	};*/
 	
 	//logout
 	$scope.localStorageclear=function(){
@@ -278,10 +319,19 @@ $scope.menu.menu = false;
 		//AuthenticationFactory.isLogged = false;
        // delete AuthenticationFactory.user;
         //delete $window.sessionStorage.token;
-       // delete $window.sessionStorage.user;		
+       // delete $window.sessionStorage.user;	
+//		$rootScope.loadinganimation = true;
+//		 $http.get($rootScope.url+"/logout/"+localStorage.getItem("namerip")).success(function(result) {
+//           	$rootScope.loadinganimation = false;
+//           	$location.path('/login');
+//        }).error(function (error) {
+//	            $rootScope.loadinganimation = false;
+//	           	$location.path('/login');
+//	     });
+	 	$location.path('/login');
 	   localStorage.clear();
 	   sessionStorage.clear();
-	   $location.path('/login');
+	   //$location.path('/login');
 //	   $rootScope.loadinganimation = true;
 //	   var logout =   {
 //				method: "GET",    			
@@ -304,16 +354,8 @@ $scope.menu.menu = false;
 ////		        header('Access-Control-Allow-Credentials: true');
 ////		        header('Access-Control-Max-Age: 86400');    // cache for 1 day
 ////		    }
-//		  
-//			 $http(logout).success(function(result) {
-//	            	$rootScope.loadinganimation = false;
-//	            	
-//	            	$location.path('/login');
-//	            }).error(function (error) {
-//		             $rootScope.loadinganimation = false;
-//		            	
-//		            	$location.path('/login');
-//		            });
+	   		//alert("mj3-"+localStorage.getItem("rolerip")+"mj3-"+result.User[0].user_role_name);
+		  	 
 		}
 	
 	//local storage
@@ -761,24 +803,30 @@ $scope.menu.menu = false;
             menu:true
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
-        //$location.path('/home/createusecase');
         var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
 		if (usecaselist != undefined) {
+			
 			if (usecaselist.Users != undefined) {
+				
 				if (usecaselist.Users.UseCase != undefined || usecaselist.Users.Rule != undefined) {
+					
 					for (var i = 0; i < 4; i++) {
-						if (usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "create") {
+						if ( usecaselist.Users.UseCase != undefined && usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "create") {
 							$location.path('/home/createusecase');
+							
 							break;
-						} else if (usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "update") {
+						} else if (usecaselist.Users.UseCase != undefined && usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "update") {
 							$location.path('/home/updateUsecase');
+							
 							break;
 						}
-						else if (usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "create") {
+						else if (usecaselist.Users.Rule != undefined && usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "create") {
 							$location.path('/home/createrule');
+							
 							break;
-						} else if (usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "update") {
+						} else if (usecaselist.Users.Rule != undefined && usecaselist.Users.Rule.PermissionTypeDet[i].PermissionName == "update") {
 							$location.path('/home/updateRule');
+							
 							break;
 						}
 					}
@@ -800,22 +848,7 @@ $scope.menu.menu = false;
             menu:true
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
-        //$location.path('/home/feedback');
-        var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
-        if(usecaselist != undefined){
-            if(usecaselist.Users != undefined){
-                if(usecaselist.Users.UseCase != undefined){
-                for(var i=0;i<usecaselist.Users.UseCase.PermissionTypeDet.length;i++){
-                    if(usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "update"){
-                    	$location.path('/home/feedback');
-                    }
-                    else if(usecaselist.Users.UseCase.PermissionTypeDet[i].PermissionName == "read"){
-                    	$location.path('/home/viewfeedback');
-                    }
-                }
-            }
-        }
-        }
+        $location.path('/home/feedback');
     };
 
     $scope.manageOrg = function(){
@@ -893,28 +926,27 @@ $scope.menu.menu = false;
             menu:true
         };
         angular.element("ul.submainlinks li").removeClass("subactive");
-        //$location.path('/home/organization');
         var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
 		if (usecaselist != undefined) {
 			if (usecaselist.Users != undefined) {
 				if (usecaselist.Users.Organization != undefined || usecaselist.Users.Subscription != undefined) {
 					for (var i = 0; i < 5; i++) {
-						if (usecaselist.Users.Organization.PermissionTypeDet[i].PermissionName == "create") {
+						if (usecaselist.Users.Organization != undefined && usecaselist.Users.Organization.PermissionTypeDet[i].PermissionName == "create") {
 							$location.path('/home/organization');
 							break;
 						}
-						else if (usecaselist.Users.Subscription.PermissionTypeDet[i].PermissionName == "create") {
+						else if (usecaselist.Users.Subscription != undefined && usecaselist.Users.Subscription.PermissionTypeDet[i].PermissionName == "create") {
 							$location.path('/home/subscription');
 							break;
 						}
-						else if (usecaselist.Users.Organization.PermissionTypeDet[i].PermissionName == "update") {
+						else if (usecaselist.Users.Organization != undefined && usecaselist.Users.Organization.PermissionTypeDet[i].PermissionName == "update") {
 							$location.path('/home/UpdateOrganisation');
 							break;
 						}
-						else if (usecaselist.Users.Subscription.PermissionTypeDet[i].PermissionName == "update") {
+						else if (usecaselist.Users.Subscription != undefined && usecaselist.Users.Subscription.PermissionTypeDet[i].PermissionName == "update") {
 							$location.path('/home/updatesubscription');
 							break;
-						} else if (usecaselist.Users.Subscription.PermissionTypeDet[i].PermissionName == "read") {
+						} else if (usecaselist.Users.Subscription != undefined && usecaselist.Users.Subscription.PermissionTypeDet[i].PermissionName == "read") {
 							$location.path('/home/viewsubscription');
 							break;
 						}
@@ -926,7 +958,7 @@ $scope.menu.menu = false;
     $scope.uamanagement = function(){
     	 $scope.managePermissionForUserAccount();
      	if(!$scope.CreateUserzd){
-     	     // angular.element(".disabfuncCUc5").attr("ui-sref","");
+     	     //angular.element(".disabfuncCUc5").attr("ui-sref","");
              angular.element(".disabfuncCUc5").attr("disabled","disabled");
              angular.element(".disabfuncCUc5").addClass(" btn btn-disabled");
              angular.element(".disabfuncCUc5").addClass("disabfuncCUcColor");
@@ -980,7 +1012,6 @@ $scope.menu.menu = false;
                 menu:true
             };
     	angular.element("ul.submainlinks li").removeClass("subactive");
-    	//$location.path('/home/uamanagement');
     	var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
         if(usecaselist != undefined){
             if(usecaselist.Users != undefined){
@@ -993,16 +1024,17 @@ $scope.menu.menu = false;
                         $rootScope.$emit("uamanagerpage", {});
                         break;
                     }
-                    else if(usecaselist.Users.User.PermissionTypeDet[i].PermissionName == "update"){
-                    	$location.path('/home/uamanagement');
-                        $rootScope.$emit("uaviewerpage", {});
-                        $rootScope.currentUserTab = 'html/viewuser.html';
-                        break;
-                    }
+                    
                     else if(usecaselist.Users.User.PermissionTypeDet[i].PermissionName == "read"){
                     	$location.path('/home/uamanagement');
                         $rootScope.$emit("uaviewerMainpage", {});
                         $rootScope.currentUserTab = 'html/viewuser_main.html';
+                        break;
+                    }
+                    else if(usecaselist.Users.User.PermissionTypeDet[i].PermissionName == "update"){
+                    	$location.path('/home/uamanagement');
+                        $rootScope.$emit("uaviewerpage", {});
+                        $rootScope.currentUserTab = 'html/viewuser.html';
                         break;
                     }
                 }
@@ -1066,7 +1098,6 @@ $scope.menu.menu = false;
                 menu:true
             };
     	angular.element("ul.submainlinks li").removeClass("subactive");
-    	//$location.path('/home/createrole');
     	var usecaselist =JSON.parse(sessionStorage.getItem("fetchPermission"));
         if(usecaselist != undefined){
             if(usecaselist.Users != undefined){
