@@ -239,7 +239,23 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 	    		$scope.organizationdis= true;
 	    	}else{
 	    		
-	    		$scope.organizationdis= false;
+	    		 $scope.organizationdis= true;
+				  if(obj.Users.Organization!=undefined){			
+			  
+						angular.forEach(obj.Users.Organization.PermissionTypeDet, function(value, key) {					
+								var useCaseObj = obj.Users.Organization.PermissionTypeDet;
+								for(var i in useCaseObj){
+									debugger;
+									if(useCaseObj[i].PermissionName=='create' || useCaseObj[i].PermissionName=='update'){
+										$scope.organizationdis= false;								
+										break;
+									}
+								} 
+								
+								
+					
+						});
+					}
 	    	}
 	    	
 	    	if(obj.Users.Role==undefined){
