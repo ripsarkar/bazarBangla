@@ -23,8 +23,12 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 	   	          localStorage.setItem("isLoggedIn", true);
 	   	         
 	   	             
-	   	        }).error(function(status) {
-	   	          alert('Oops something went wrong!');
+	   	        }).error(function(data, status, headers, config) {
+	   	          //alert('Oops something went wrong!');
+			   	       if (status == 403) {
+		           		alert(data);
+			   	       }
+		           	
 	   	        });
 	   	   
 	   	   }
