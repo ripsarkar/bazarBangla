@@ -286,7 +286,7 @@ $scope.menu.menu = false;
 	
 	window.onbeforeunload = function () {
 		$scope.localStorageclear();
-	    
+	    return "You have logged out successfully!!!";
 	};
 	
 	//logout
@@ -299,18 +299,13 @@ $scope.menu.menu = false;
 		$rootScope.loadinganimation = true;
 		 $http.get($rootScope.url+"/logout/"+localStorage.getItem("namerip")).success(function(result) {
            	$rootScope.loadinganimation = false;
-           	alert("You have logged out successfully!!!");
            	$location.path('/login');
-           	
         }).error(function (error) {
-            $rootScope.loadinganimation = false;
-            alert("You have logged out successfully!!!");
-           	$location.path('/login');
-	       
+	            $rootScope.loadinganimation = false;
+	           	$location.path('/login');
 	     });
 	   localStorage.clear();
 	   sessionStorage.clear();
-	   
 	   //$location.path('/login');
 //	   $rootScope.loadinganimation = true;
 //	   var logout =   {
