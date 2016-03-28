@@ -284,7 +284,10 @@ $scope.menu.menu = false;
 		$scope.showAllmode=true;
 	}
 	
-	
+	window.onbeforeunload = function () {
+		$scope.localStorageclear();
+	    return "You have logged out successfully!!!";
+	};
 	
 	//logout
 	$scope.localStorageclear=function(){
