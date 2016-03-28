@@ -127,6 +127,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                               $location.path('/home/search');
                               $scope.fnTabsdisEnab();
                               $rootScope.loadinganimation = false;
+                              $scope.RfetchList =[];
                               // load org from member list of permission json 
                             	var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
                             	if(obj.Users.Organization !=undefined){
