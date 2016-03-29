@@ -315,8 +315,9 @@ $scope.menu.menu = false;
 	};*/
 	
 	//logout
-	$scope.localStorageclear=function(){
 	console.log(localStorage.getItem("namerip"));
+
+	$scope.localStorageclear=function(){
 
 		$rootScope.loadinganimation = true;
 		 $http.get($rootScope.url+"/logout/"+localStorage.getItem("namerip")).success(function(result) {
