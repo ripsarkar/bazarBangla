@@ -24,14 +24,14 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 	   	         
 	   	             
 	   	        }).error(function(data, status, headers, config) {
-	   	          //alert('Oops something went wrong!');
-			   	       if (status == 403) {
+	   	          alert('There could be some temporary technical problem. Please refresh / try again  and contact your system administrator');
+			   	       /*if (status == 403) {
 		           		//alert(data);
 		           		var r = confirm(data);
 		           		if (r == true) {
 		           			$scope.localStorageclear();
 		           		 }
-			   	       }
+			   	       }*/
 		           	
 	   	        });
 	   	   
