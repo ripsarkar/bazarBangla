@@ -29,6 +29,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 		           		//alert(data);
 		           		var r = confirm(data);
 		           		if (r == true) {
+		           			alert("logged out");
 		           			$scope.localStorageclear();
 		           		 }
 		           		else{
