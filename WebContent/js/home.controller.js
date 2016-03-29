@@ -29,7 +29,6 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 		           		//alert(data);
 		           		var r = confirm(data);
 		           		if (r == true) {
-		           			alert("logged out");
 		           			$scope.localStorageclear();
 		           		 }
 		           		else{
@@ -328,7 +327,7 @@ $scope.menu.menu = false;
 	        //delete $window.sessionStorage.token;
 	       // delete $window.sessionStorage.user;	
 			$rootScope.loadinganimation = true;
-			 $http.get($rootScope.url+"/logout/"+localStorage.getItem("namerip")).success(function(result) {
+			 $http.get($rootScope.url+"/logout/"+mj[1]).success(function(result) {
 	           	$rootScope.loadinganimation = false;
 	           	$location.path('/login');
 	        }).error(function (error) {
