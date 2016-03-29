@@ -1,5 +1,4 @@
 'use strict';
-var userIdUser;
 var app = angular.module('app').controller('HomeController', HomeController);
 HomeController.$inject = ['UserService', 'UserAuthFactory','AuthenticationFactory','$rootScope', '$scope', '$http','$location','$window',"$q"];
 
@@ -85,7 +84,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
    	                	localStorage.setItem("surrrip", result.User[0].user_surr_id);
    	                	localStorage.setItem("surrComprip", result.User[0].company_surr_id);
    	                	localStorage.setItem("namerip", result.User[0].user_name);
-   	                	userIdUser = result.User[0].user_name;
+   	                	$rootScope.userIdUser = result.User[0].user_name;
    	                	if(result.User[0].user_middle_name!=null){
    	                		localStorage.setItem("fullname", (result.User[0].user_first_name+" "+result.User[0].user_middle_name+" "+result.User[0].user_last_name));	
    	                	}else{
@@ -317,7 +316,7 @@ $scope.menu.menu = false;
 	};*/
 	
 	//logout
-	console.log(userIdUser);
+	console.log($rootScope.userIdUser);
 
 	$scope.localStorageclear=function(){
 
