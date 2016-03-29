@@ -315,47 +315,21 @@ $scope.menu.menu = false;
 	
 	//logout
 	$scope.localStorageclear=function(){
-		
-		//AuthenticationFactory.isLogged = false;
-       // delete AuthenticationFactory.user;
-        //delete $window.sessionStorage.token;
-       // delete $window.sessionStorage.user;	
+
 		$rootScope.loadinganimation = true;
 		 $http.get($rootScope.url+"/logout/"+localStorage.getItem("namerip")).success(function(result) {
            	$rootScope.loadinganimation = false;
+            localStorage.clear();
+     	   	sessionStorage.clear();
            	$location.path('/login');
         }).error(function (error) {
 	            $rootScope.loadinganimation = false;
+	            localStorage.clear();
+	     	   	sessionStorage.clear();
 	           	$location.path('/login');
 	     });
-	   localStorage.clear();
-	   sessionStorage.clear();
-	   //$location.path('/login');
-//	   $rootScope.loadinganimation = true;
-//	   var logout =   {
-//				method: "GET",    			
-//		
-//				url: $rootScope.url+"/logout",
-//				headers: {
-//		               'Access-Control-Allow-Origin':"{$_SERVER['HTTP_ORIGIN']}",
-//		               'Access-Control-Request-Method': 'GET',
-//		               'Content-Type': "application/json",
-//		               'Access-Control-Allow-Headers': "Content-Type",
-//		              ' Access-Control-Allow-Credentials':'true',
-//		              'Access-Control-Max-Age': '86400'
-//		           }
-//					
-//	         
-//			};
-//			
-////			 if (isset($_SERVER['HTTP_ORIGIN'])) {
-////		        header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
-////		        header('Access-Control-Allow-Credentials: true');
-////		        header('Access-Control-Max-Age: 86400');    // cache for 1 day
-////		    }
-	   		//alert("mj3-"+localStorage.getItem("rolerip")+"mj3-"+result.User[0].user_role_name);
-		  	 
-		}
+	  
+	}
 	
 	//local storage
 	$rootScope.role = localStorage.getItem("rolerip");
