@@ -324,15 +324,15 @@ $scope.menu.menu = false;
 	       // delete AuthenticationFactory.user;
 	        //delete $window.sessionStorage.token;
 	       // delete $window.sessionStorage.user;	
-//			$rootScope.loadinganimation = true;
-//			 $http.get($rootScope.url+"/logout/"+localStorage.getItem("namerip")).success(function(result) {
-//	           	$rootScope.loadinganimation = false;
-//	           	$location.path('/login');
-//	        }).error(function (error) {
-//		            $rootScope.loadinganimation = false;
-//		           	$location.path('/login');
-//		     });
-		 	$location.path('/login');
+			$rootScope.loadinganimation = true;
+			 $http.get($rootScope.url+"/logout/"+localStorage.getItem("namerip")).success(function(result) {
+	           	$rootScope.loadinganimation = false;
+	           	$location.path('/login');
+	        }).error(function (error) {
+		            $rootScope.loadinganimation = false;
+		           	$location.path('/login');
+		     });
+//		 	$location.path('/login');
 		   localStorage.clear();
 		   sessionStorage.clear();
 		   //$location.path('/login');
