@@ -127,7 +127,9 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                               $location.path('/home/search');
                               $scope.fnTabsdisEnab();
                               $rootScope.loadinganimation = false;
+                              $scope.RfetchList =[];
                               // load org from member list of permission json 
+
                             	var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
                             	if(obj.Users.Organization !=undefined){
 
@@ -135,15 +137,14 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                       			for (var int2 = 0; int2 < permissiontypeList.length; int2++) {
                       				 if(permissiontypeList[int2].PermissionName=="member"){
                       					 $scope.RfetchList =permissiontypeList[int2].ObjectList;
-                      					 var objComp = {};
-                                           objComp.Name =localStorage.getItem("nameCompany");
-                                           $scope.RfetchList.push(objComp);
+                      					
                       					// $rootScope.loadinganimation = false;
                       				}
                       			}
-                      		
                             	}
-
+                      			 var objComp = {};
+                                 objComp.Name =localStorage.getItem("nameCompany");
+                                 $scope.RfetchList.push(objComp);
 
 
 
