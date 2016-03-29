@@ -186,6 +186,8 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
   	  }
 
 });
+console.log($rootScope.userIdUser);
+
 	//tab enable disable
 
 //Main Tabs disable enable
@@ -318,7 +320,6 @@ $scope.menu.menu = false;
 	};*/
 	
 	//logout
-console.log($rootScope.userIdUser);
 	$scope.localStorageclear=function(){
 
 		$rootScope.loadinganimation = true;
