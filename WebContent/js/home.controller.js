@@ -80,7 +80,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
    	                	$rootScope.loginError=false;
    	                	// Store
    	                	localStorage.setItem("rolerip", result.User[0].user_role_name);
-   	                	//alert("mj2-"+localStorage.getItem("rolerip")+"mj2-"+result.User[0].user_role_name);
+   	                	alert("mj2-"+localStorage.getItem("rolerip")+"mj2-"+result.User[0].user_role_name);
    	                	localStorage.setItem("surrrip", result.User[0].user_surr_id);
    	                	localStorage.setItem("surrComprip", result.User[0].company_surr_id);
    	                	localStorage.setItem("namerip", result.User[0].user_name);
