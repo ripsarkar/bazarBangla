@@ -322,12 +322,17 @@ $scope.menu.menu = false;
 		$scope.showAllmode=true;
 	}
 	
-	/*window.onbeforeunload = function () {
+	$window.onunload = function () {
 		
-		return $scope.localStorageclear();
+		return {
+
+		   localStorage.clear();
+		   sessionStorage.clear();
+			
+		}
 	};
 	
-	$scope.onExit = function() {
+	/*$scope.onExit = function() {
 		$scope.localStorageclear();
 	      return ('bye bye');
 	};
