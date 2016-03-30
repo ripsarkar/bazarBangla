@@ -315,10 +315,17 @@ $scope.menu.menu = false;
 		$scope.showAllmode=true;
 	}
 	
-	window.onbeforeunload = function () {
-		//$scope.localStorageclear();
+	/*window.onbeforeunload = function () {
+		
 		return $scope.localStorageclear();
 	};
+	
+	$scope.onExit = function() {
+		$scope.localStorageclear();
+	      return ('bye bye');
+	};
+
+	$window.onbeforeunload =  $scope.onExit;*/
 	
 	//logout
 	$scope.localStorageclear=function(){
