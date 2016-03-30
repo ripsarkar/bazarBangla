@@ -31,9 +31,9 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 		           		if (r == true) {
 		           			$scope.localStorageclear();
 		           		 }
-		           		else{
+		           		/*else{
 		           			$location.path('/login');
-		           		}
+		           		}*/
 			   	       }
 		           	
 	   	        });
