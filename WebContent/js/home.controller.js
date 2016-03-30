@@ -325,8 +325,14 @@ $scope.menu.menu = false;
 	window.onunload = function () {
 		localStorage.clear();
 		sessionStorage.clear();
-		
-		return true;
+		$rootScope.loadinganimation = true;
+		 $http.get($rootScope.url+"/logout/"+mj[1]).success(function(result) {
+          	$rootScope.loadinganimation = false;
+    		return true;
+       }).error(function (error) {
+	            $rootScope.loadinganimation = false;
+	    		return true;	           	
+	   });
 	};
 	
 	/*$scope.onExit = function() {
