@@ -147,7 +147,8 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                       			}
                             	}
                       			 var objComp = {};
-                                 objComp.Name =localStorage.getItem("nameCompany");
+                                 objComp.Name = localStorage.getItem("nameCompany");
+                                 objComp.SurrId = localStorage.getItem("surrComprip");
                                  $scope.RfetchList.push(objComp);
 
 
