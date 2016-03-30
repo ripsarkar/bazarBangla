@@ -317,8 +317,7 @@ $scope.menu.menu = false;
 	
 	window.onbeforeunload = function () {
 		//$scope.localStorageclear();
-		alert("Logout!!!");
-	    return $scope.localStorageclear();
+		return alert("Logout!!!");
 	};
 	
 	//logout
