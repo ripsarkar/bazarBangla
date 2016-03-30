@@ -323,13 +323,10 @@ $scope.menu.menu = false;
 	}
 	
 	window.onunload = function () {
+		localStorage.clear();
+		sessionStorage.clear();
 		
-		return {
-
-		   localStorage.clear();
-		   sessionStorage.clear();
-			
-		}
+		return true;
 	};
 	
 	/*$scope.onExit = function() {
