@@ -322,7 +322,7 @@ $scope.menu.menu = false;
 		$scope.showAllmode=true;
 	}
 	
-	$window.onunload = function () {
+	window.onunload = function () {
 		
 		return {
 
