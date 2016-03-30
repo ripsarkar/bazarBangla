@@ -326,13 +326,15 @@ $scope.menu.menu = false;
 		localStorage.clear();
 		sessionStorage.clear();
 		$rootScope.loadinganimation = true;
-		 $http.get($rootScope.url+"/logout/"+mj[1]).success(function(result) {
+		$http.get($rootScope.url+"/logout/"+mj[1]).success(function(result) {
           	$rootScope.loadinganimation = false;
     		return true;
        }).error(function (error) {
 	            $rootScope.loadinganimation = false;
 	    		return true;	           	
 	   });
+		alert("you have been logged out");
+
 	};
 	
 	/*$scope.onExit = function() {
