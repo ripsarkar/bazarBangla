@@ -322,7 +322,7 @@ $scope.menu.menu = false;
 		$scope.showAllmode=true;
 	}
 	
-	window.onunload = function () {
+	/*window.onunload = function () {
 		localStorage.clear();
 		sessionStorage.clear();
 		$rootScope.loadinganimation = true;
@@ -335,7 +335,7 @@ $scope.menu.menu = false;
 	   });
 		alert("you have been logged out");
 
-	};
+	};*/
 	
 	/*$scope.onExit = function() {
 		$scope.localStorageclear();
