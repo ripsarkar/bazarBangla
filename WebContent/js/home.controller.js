@@ -327,7 +327,7 @@ $scope.menu.menu = false;
 	window.onunload = function () {
 		localStorage.clear();
 		sessionStorage.clear();
-		alert("you have been logged out");
+		return true;
 	};
 	
 	/*$scope.onExit = function() {
