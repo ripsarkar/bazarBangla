@@ -27,13 +27,15 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 	   	          //alert('There could be some temporary technical problem. Please refresh / try again  and contact your system administrator');
 			   	       if (status == 403) {
 		           		//alert(data);
-		           		var r = confirm(data);
-		           		if (r == true) {
+		           		alert(data);
+	           			$scope.localStorageclear();
+
+		           		/*if (r == true) {
 		           			$scope.localStorageclear();
 		           		 }
 		           		else{
 		           			//$location.path('/login');
-		           		}
+		           		}*/
 			   	       }
 		           	
 	   	        });
