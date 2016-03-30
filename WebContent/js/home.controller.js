@@ -31,9 +31,9 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 		           		if (r == true) {
 		           			$scope.localStorageclear();
 		           		 }
-		           		/*else{
-		           			$location.path('/login');
-		           		}*/
+		           		else{
+		           			//$location.path('/login');
+		           		}
 			   	       }
 		           	
 	   	        });
@@ -322,20 +322,11 @@ $scope.menu.menu = false;
 		$scope.showAllmode=true;
 	}
 	
-	/*window.onunload = function () {
+	window.onunload = function () {
 		localStorage.clear();
 		sessionStorage.clear();
-		$rootScope.loadinganimation = true;
-		$http.get($rootScope.url+"/logout/"+mj[1]).success(function(result) {
-          	$rootScope.loadinganimation = false;
-    		return true;
-       }).error(function (error) {
-	            $rootScope.loadinganimation = false;
-	    		return true;	           	
-	   });
 		alert("you have been logged out");
-
-	};*/
+	};
 	
 	/*$scope.onExit = function() {
 		$scope.localStorageclear();
