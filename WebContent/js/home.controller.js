@@ -150,7 +150,14 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                                  objComp.Name = localStorage.getItem("nameCompany");
                                  objComp.SurrId = localStorage.getItem("surrComprip");
                                  $scope.RfetchList.push(objComp);
-
+								for (var i = 0; i < $scope.RfetchList.length; i++) {
+									for (var j = 0; j < $scope.RfetchList.length; j++) {
+										if(i!=j && $scope.RfetchList[i].Name == $scope.RfetchList[j].Name){
+										$scope.RfetchList.splice(j,1);
+										}
+									};
+									
+								};
 
 
                           }).error(function (error) {
