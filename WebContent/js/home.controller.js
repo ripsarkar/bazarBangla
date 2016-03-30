@@ -314,10 +314,10 @@ $scope.menu.menu = false;
 		$scope.showAllmode=true;
 	}
 	
-	/*window.onbeforeunload = function () {
-		$scope.localStorageclear();
-	    return "You have logged out successfully!!!";
-	};*/
+	window.onbeforeunload = function () {
+		//$scope.localStorageclear();
+	    return $scope.localStorageclear();
+	};
 	
 	//logout
 	$scope.localStorageclear=function(){
