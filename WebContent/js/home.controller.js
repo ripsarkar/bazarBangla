@@ -28,7 +28,8 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 			   	       if (status == 403) {
 		           		//alert(data);
 		           		alert(data);
-	           			$scope.localStorageclear();
+		           		$location.path('/login');
+	           			//$scope.localStorageclear();
 
 		           		/*if (r == true) {
 		           			$scope.localStorageclear();
