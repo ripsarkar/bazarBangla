@@ -3732,8 +3732,8 @@ if(usecaselist != undefined){
                 type : 'application/zip'
             });
             //trick to download store a file having its URL
-            if (navigator.msSaveBlob) { // IE 10+
-            	navigator.msSaveBlob(file, "Rulefiles.zip");
+            if (window.navigator.msSaveBlob) { // IE 10+
+            	window.navigator.msSaveBlob(file, "Rulefiles.zip");
             	    } else {
             var fileURL = URL.createObjectURL(file);
             var a         = document.createElement('a');
