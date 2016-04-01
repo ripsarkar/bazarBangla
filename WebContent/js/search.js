@@ -3722,6 +3722,8 @@ if(usecaselist != undefined){
             method : 'POST',
             headers : {
                 'Content-type' : 'application/json',
+                'access-control-allow-origin': '*',
+                'access-control-allow-credentials': true
             },
             data:JSON.stringify(postJson),
             responseType : 'arraybuffer'
