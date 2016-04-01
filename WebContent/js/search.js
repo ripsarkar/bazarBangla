@@ -3721,7 +3721,7 @@ if(usecaselist != undefined){
             url : resultURL,
             method : 'POST',
             headers : {
-                'Content-type' : 'application/x-zip',
+                "Content-Type":"application/x-zip",
             },
             data:JSON.stringify(postJson),
             responseType : 'arraybuffer'
