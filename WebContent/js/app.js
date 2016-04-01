@@ -172,6 +172,9 @@
 			        requiredLogin: true
 			      }
             });
+
+            $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+            
         }).run(run);
 
 
