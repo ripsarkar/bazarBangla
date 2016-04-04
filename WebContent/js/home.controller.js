@@ -11,7 +11,11 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 		angular.element(document).ready(function(){
 		usernameId = window.location.href;
 		});
-		var mj = usernameId.split("=");
+		var stringForUsername = usernameId.split("&");
+		var mj = stringForUsername[1].split("=");
+		//token for session
+		var tokenForSession = stringForUsername[0].split("=");
+		localStorage.setItem("tFSession", tokenForSession[1]);
 	   // console.log("dataloading value::"+$rootScope.dataLoading);
 	    if(!localStorage.token){
 	   	 var promise1= UserAuthFactory.login(mj[1]).success(function(data) {
