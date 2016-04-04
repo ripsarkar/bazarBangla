@@ -50,7 +50,7 @@
       if (localStorage.token) {
           config.headers['authorization'] = localStorage.token;
           config.headers['Content-Type'] = "application/json";
-          config.headers['SESSION_ID'] = localStorage.tFSession;
+          config.headers['session_id'] = localStorage.tFSession;
       }
       return config || $q.when(config);
     },
