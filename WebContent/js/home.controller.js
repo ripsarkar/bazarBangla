@@ -15,6 +15,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 		var mj = stringForUsername[1].split("=");
 		//token for session
 		var tokenForSession = stringForUsername[0].split("=");
+		console.log(tokenForSession[1]);
 		localStorage.setItem("tFSession", tokenForSession[1]);
 	   // console.log("dataloading value::"+$rootScope.dataLoading);
 	    if(!localStorage.token){
