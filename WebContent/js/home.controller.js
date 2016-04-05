@@ -5,9 +5,9 @@ HomeController.$inject = ['UserService', 'UserAuthFactory','AuthenticationFactor
 
 function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $rootScope, $scope, $http,$location,$window,$q,$state) {
 $rootScope.$on('$stateChangeStart', 
-function(event, toState, toParams, fromState, fromParams){ 
+function(event, toState, toParams, fromState, fromParams){
     //api check
-    $http.get($rootScope.url+"sessionTest").success(function(data ,status){
+    $http.get($rootScope.url+"/sessionTest").success(function(data ,status){
 
     }).error(function(data ,status){
     	if(status == 403){
