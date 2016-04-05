@@ -3,9 +3,9 @@
     
     angular
         .module('app', ['ngCookies','ui.router','ui.bootstrap'])
-        .config(function($stateProvider, $urlRouterProvider, $httpProvider, $routeProvider) {
+        .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
         $httpProvider.interceptors.push('TokenInterceptor');
-        //$httpProvider.interceptors.push('responseObserver');
+        $httpProvider.interceptors.push('responseObserver');
         //$httpProvider.defaults.headers.common = {'SESSION_ID':localStorage.getItem("tFSession")}
     	  // For any unmatched url, redirect to /login
     	  $urlRouterProvider.otherwise("/login");
