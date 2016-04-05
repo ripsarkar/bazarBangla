@@ -60,7 +60,7 @@
     }
   };
 });
- angular.module('app').factory('responseObserver', function responseObserver($q, $window) {
+ angular.module('app').factory('responseObserver', function responseObserver($q, $window, $location) {
     return {
         'responseError': function(errorResponse) {
             switch (errorResponse.status) {
