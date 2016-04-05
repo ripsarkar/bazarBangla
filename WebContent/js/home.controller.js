@@ -1,9 +1,21 @@
 'use strict';
 var app = angular.module('app').controller('HomeController', HomeController);
-HomeController.$inject = ['UserService', 'UserAuthFactory','AuthenticationFactory','$rootScope', '$scope', '$http','$location','$window',"$q"];
+HomeController.$inject = ['UserService', 'UserAuthFactory','AuthenticationFactory','$rootScope', '$scope', '$http','$location','$window',"$q","$state"];
 
 
-function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $rootScope, $scope, $http,$location,$window,$q) {
+function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $rootScope, $scope, $http,$location,$window,$q,$state) {
+$rootScope.$on('$stateChangeStart', 
+function(event, toState, toParams, fromState, fromParams){ 
+    //api check
+    $http.get($rootScope.url+"sessionTest").success(function(data ,status){
+
+    }).error(function(data ,status){
+    	if(status == 403){
+    		$location.path('/login');
+    		alert("You are logged in from another instance");
+    	}
+    });
+});	
 	if ($location.protocol() !== 'https') {
         $window.location.href = $location.absUrl().replace('http', 'https');
     }
