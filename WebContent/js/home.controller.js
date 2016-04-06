@@ -28,7 +28,8 @@ function(event, toState, toParams, fromState, fromParams){
 		//token for session
 		var tokenForSession = stringForUsername[0].split("=");
 		console.log(tokenForSession[1]);
-		localStorage.setItem("tFSession", tokenForSession[1]);
+		//localStorage.setItem("tFSession", tokenForSession[1]);
+		$rootScope.tFSession = tokenForSession[1];
 	   // console.log("dataloading value::"+$rootScope.dataLoading);
 	    if(!localStorage.token){
 	   	 var promise1= UserAuthFactory.login(mj[1]).success(function(data) {

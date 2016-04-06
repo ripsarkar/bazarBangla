@@ -42,7 +42,7 @@
 });
 
 
- angular.module('app').factory('TokenInterceptor', function($q, $window) {
+ angular.module('app').factory('TokenInterceptor', function($q, $window, $rootScope) {
   return {
     request: function(config) {
       config.headers = config.headers || {};
@@ -50,7 +50,8 @@
       if (localStorage.token) {
           config.headers['authorization'] = localStorage.token;
           config.headers['Content-Type'] = "application/json";
-          config.headers['session_id'] = localStorage.tFSession;
+          //config.headers['session_id'] = localStorage.tFSession;
+          config.headers['session_id'] = $rootScope.tFSession;
       }
       return config || $q.when(config);
     },
