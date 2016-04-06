@@ -4,7 +4,7 @@ HomeController.$inject = ['UserService', 'UserAuthFactory','AuthenticationFactor
 
 
 function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $rootScope, $scope, $http,$location,$window,$q,$state) {
-$rootScope.$on('$stateChangeStart', 
+/*$rootScope.$on('$stateChangeStart', 
 function(event, toState, toParams, fromState, fromParams){
     //api check
     $http.get($rootScope.url+"/sessionTest").success(function(data ,status){
@@ -15,7 +15,7 @@ function(event, toState, toParams, fromState, fromParams){
     		alert("You are logged in from another instance");
     	}
     });
-});	
+});*/	
 	if ($location.protocol() !== 'https') {
         $window.location.href = $location.absUrl().replace('http', 'https');
     }
