@@ -1595,6 +1595,9 @@ span.more-text.show {
 .searchtableUserPermission tbody tr:nth-child(2) td{
     width: 50%;
 }
+.searchtableUserPermission tbody tr:nth-child(2) td:nth-child(2) h4{
+    margin-top: 0px;
+}
 .searchtableUserPermission table > thead > tr > th {
     border-bottom: 0px;
 }

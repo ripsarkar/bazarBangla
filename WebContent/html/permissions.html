@@ -106,7 +106,9 @@
    </tr>
    <tr>
      <td colspan="6" class="info">Use Case by Industry</td>
-     
+       <td> 
+      <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
+    </td>   
    </tr>
    <tr ng-repeat="industry in usecInduLi">
    
@@ -120,7 +122,9 @@
     
    <tr>
      <td colspan="6" class="info">Specific Use case</td>
-     
+     <td> 
+      <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
+    </td>
    </tr>
    <tr ng-repeat="usecaLi in alluselist">
    
@@ -160,7 +164,9 @@
    </tr>
    <tr>
      <td colspan="6" class="info">Rules By Regulatory Category</td>
-     
+      <td> 
+      <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
+    </td>    
    </tr>
    <tr ng-repeat="regucat in regcatlist">   
     <td>{{regucat.Name}}</td>
@@ -172,7 +178,9 @@
    </tr>    
    <tr>
      <td colspan="6" class="info">Specific Rules</td>
-     
+     <td> 
+      <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
+    </td>  
    </tr>
  <tr ng-repeat="ruleall in allrulelist"> 
  <td value="{{ruleall.uc_rule_surr_id}}">{{ruleall.uc_rule_id}}</td>
