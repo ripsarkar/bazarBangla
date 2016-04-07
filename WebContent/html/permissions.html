@@ -251,11 +251,13 @@
      </tr>
      <tr class="info">
      <td colspan="4" >Organization List</td>
-     <td> 
+     <!-- <td> 
       <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
-    </td>
+    </td> -->
      </tr>
-     <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'">
+<!--      <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'">
+ -->     
+     <tr ng-repeat="companycr in companyListli| orderBy : 'name'">
      <td>{{companycr.name}}</td>
      <td><input type="checkbox" value="create" class="createsubs createsubsGen"  data-objectval="{{companycr.name}}"   ng-click="createindSub($event)" ng-disabled="disableCreateSub"></td>
      <td><input type="checkbox" value="read"   class="readsubs readsubsGen"    data-objectval="{{companycr.name}}"   ng-click="readindSub($event)" ng-disabled="disableReadSub"></td>
@@ -289,12 +291,13 @@
      </tr>
      <tr class="info">
      <td colspan="4" >Organization List</td>
-     <td> 
+     <!-- <td> 
       <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
-    </td>
+    </td> -->
      </tr>
-     <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'">
-     
+     <!-- <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'"> -->
+     <tr ng-repeat="companycr in companyListli| orderBy : 'name'">
+
 	  
      <td>{{companycr.name}}</td>
      <td><input type="checkbox" value="create"  class="createuser createuserGen"  data-objectval="{{companycr.name}}"  ng-click="createindUser($event)" ng-disabled="disableCreateUser"></td>
@@ -328,12 +331,12 @@
      </tr>
      <tr class="info">
      <td colspan="4" >Organization List</td>
-     <td> 
+     <!-- <td> 
       <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
     </td>
-     </tr>
-     <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'">
-     
+ -->     </tr>
+<!--      <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'">
+ -->     <tr ng-repeat="companycr in companyListli| orderBy : 'name'">
 	  
      <td>{{companycr.name}}</td>
      <td><input type="checkbox" value="create" class="createrole createroleGen"  data-objectval="{{companycr.name}}"  ng-click="createindRole($event)" ng-disabled="disableCreateRole"></td>
