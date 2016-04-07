@@ -106,11 +106,9 @@
    </tr>
    <tr>
      <td colspan="6" class="info">Use Case by Industry</td>
-       <td> 
-      <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
-    </td>   
+     
    </tr>
-   <tr ng-show="expanded" ng-repeat="industry in usecInduLi">
+   <tr ng-repeat="industry in usecInduLi">
    
     <td>{{industry.Name}}</td>
      <td><input type="checkbox" value="create" class="crtusecase crtusecaseGen"  data-filterType="IndustryName"  data-objectval="{{industry.Name}}"  ng-click="createind($event)" ng-disabled="disableCreate"></td>
@@ -122,11 +120,9 @@
     
    <tr>
      <td colspan="6" class="info">Specific Use case</td>
-     <td> 
-      <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
-    </td>
+     
    </tr>
-   <tr ng-show="expanded" ng-repeat="usecaLi in alluselist">
+   <tr ng-repeat="usecaLi in alluselist">
    
     <td value="{{usecaLi.usecase_surr_id}}">{{usecaLi.usecase_id}}</td>
      <td><!-- <input type="checkbox" value="create"  class="crtusecase" data-filterType="id"  data-objectval="{{usecaLi.usecase_surr_id}}"   ng-click="createindSpe($event)" ng-disabled="disableCreateSpe"> --></td>
@@ -164,11 +160,9 @@
    </tr>
    <tr>
      <td colspan="6" class="info">Rules By Regulatory Category</td>
-      <td> 
-      <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
-    </td>    
+     
    </tr>
-   <tr ng-show="expanded" ng-repeat="regucat in regcatlist">   
+   <tr ng-repeat="regucat in regcatlist">   
     <td>{{regucat.Name}}</td>
      <td><!-- <input type="checkbox" value="create" class="ctrrule"     data-objectval="{{regucat.Name}}" ng-click="createindRule($event)" ng-disabled="disableCreateRule"> --></td>
      <td><input type="checkbox" value="read"  class="readrule readruleGen"     data-filterType="RegCatName"  data-objectval="{{regucat.Name}}" ng-click="readindRule($event)" ng-disabled="disableReadRule"></td>
@@ -178,11 +172,9 @@
    </tr>    
    <tr>
      <td colspan="6" class="info">Specific Rules</td>
-     <td> 
-      <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
-    </td>  
+     
    </tr>
- <tr ng-show="expanded" ng-repeat="ruleall in allrulelist"> 
+ <tr ng-repeat="ruleall in allrulelist"> 
  <td value="{{ruleall.uc_rule_surr_id}}">{{ruleall.uc_rule_id}}</td>
      <td><!-- <input type="checkbox" value="create" class="ctrrule"  data-objectval="{{ruleall.uc_rule_surr_id}}" ng-click="createindRuleSpe($event)" ng-disabled="disableCreateRuleSpe"> --></td>
      <td><input type="checkbox" value="read"   class="readrulesp"   data-filterType="id"    data-objectval="{{ruleall.uc_rule_surr_id}}" ng-click="readindRuleSpe($event)" ng-disabled="disableReadRuleSpe"></td>
