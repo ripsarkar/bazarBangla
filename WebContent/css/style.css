@@ -1585,6 +1585,9 @@ span.more-text.show {
     float: left;
     width: 16%;
 }
+.searchtableUserPermission table > thead > tr > th {
+    border-bottom: 0px;
+}
 /*--------------------/permission table code----------------------*/
  .btnBottom{
   	margin-bottom:25px;
