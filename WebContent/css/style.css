@@ -1593,11 +1593,11 @@ span.more-text.show {
     width: 100%; float: left;
 }
 .searchtableUserPermission tbody tr:nth-child(2) td{
-    width: 50%;
+    width: 100%;
 }
-.searchtableUserPermission tbody tr:nth-child(2) td:nth-child(2) h4{
+/*.searchtableUserPermission tbody tr:nth-child(2) td:nth-child(2) h4{
     margin-top: 0px;
-}
+}*/
 .searchtableUserPermission table > thead > tr > th {
     border-bottom: 0px;
 }
