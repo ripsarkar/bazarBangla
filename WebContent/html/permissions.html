@@ -82,7 +82,7 @@
   <!-- Tab panes -->
   <div class="tab-content">  
     <div role="tabpanel" class="tab-pane active" id="usercase">
-  <div class="panel searchtableUser  panel-default">
+  <div class="panel searchtableUserPermission  panel-default">
       
    <table class="table table-striped">
    <thead>
@@ -137,7 +137,7 @@
   </div>
   </div>
     <div role="tabpanel" class="tab-pane" id="rule">
-  <div class="panel searchtableUser  panel-default">      
+  <div class="panel searchtableUserPermission  panel-default">      
        <table class="table table-striped">
    <thead>
    <tr class="tableheader">
@@ -230,7 +230,7 @@
 	     
      </tbody>
      </table></div>
-    <div role="tabpanel" class="tab-pane searchtableUser" id="subscription">
+    <div role="tabpanel" class="tab-pane searchtableUserPermission" id="subscription">
   <table class="table table-striped" >
      <thead>
      <tr class="tableheader">
@@ -268,9 +268,9 @@
      </table>
   
   </div>
-  <div role="tabpanel" class="tab-pane searchtableUser" id="user">
-  <table class="table table-striped" >
-     <thead>
+  <div role="tabpanel" class="tab-pane searchtableUserPermission" id="user">
+  <table class="table table-striped permissionTable" >
+     <thead class="permissionThead">
      <tr class="tableheader">
      <th></th>
      <th>Create</th>
@@ -279,7 +279,7 @@
      <th>Delete</th>
      </tr>
      </thead>
-     <tbody>
+     <tbody class="permissionBody">
      <tr>
      <td>All Organization</td>
      <td><input type="checkbox" value="create" class="createuser"  data-objectval="ALL" ng-click="creaindAllUser($event)" ng-disabled="disableCreateUserAll"></td> 
@@ -306,7 +306,7 @@
      </table
      </div>
   </div>
-  <div role="tabpanel" class="tab-pane searchtableUser" id="role">
+  <div role="tabpanel" class="tab-pane searchtableUserPermission" id="role">
   
   <table class="table table-striped" >
      <thead>

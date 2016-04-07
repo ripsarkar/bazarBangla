@@ -1568,6 +1568,24 @@ span.more-text.show {
     max-height: 250px;
     color: rgb(136, 136, 136) !important;
 }
+/*--------------------permission table code----------------------*/
+.searchtableUserPermission {
+    max-height: 250px;
+    color: rgb(136, 136, 136) !important;
+}
+.searchtableUserPermission, .permissionTable, .permissionThead, .permissionThead tr, .permissionBody, .permissionBody tr{
+    float: left;
+    width: 100%;
+}
+.permissionBody{
+    height: 250px;
+    overflow-y: scroll;
+}
+.permissionThead tr th,.permissionBody tr td{
+    float: left;
+    width: 16%;
+}
+/*--------------------/permission table code----------------------*/
  .btnBottom{
   	margin-bottom:25px;
    margin-left:60px;
