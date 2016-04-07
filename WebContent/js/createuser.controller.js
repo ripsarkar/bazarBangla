@@ -100,15 +100,17 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     		alert('Please enter a valid User name');
      	    return false;
     	}
-    	else if($scope.firstname == undefined || $scope.firstname == '' || !name.test($scope.firstname)){
+    	//else if($scope.firstname == undefined || $scope.firstname == '' || !name.test($scope.firstname)){
+    	else if($scope.firstname == undefined || $scope.firstname == ''){
     		alert('Please enter a valid First Name');
      	    return false;
     	}
-    	else if($scope.middlename == undefined || $scope.middlename != '' &&  !name.test($scope.middlename)){
+    	/*else if($scope.middlename == undefined || $scope.middlename != '' &&  !name.test($scope.middlename)){
     		alert('Please enter a valid Middle Name');
      	    return false;
-    	}
-    	else if($scope.lastname == undefined || $scope.lastname == '' || !name.test($scope.lastname)){
+    	}*/
+    	//else if($scope.lastname == undefined || $scope.lastname == '' || !name.test($scope.lastname)){
+    	else if($scope.lastname == undefined || $scope.lastname == ''){
     		alert('Please enter a valid Last Name');
      	    return false;
     	}
