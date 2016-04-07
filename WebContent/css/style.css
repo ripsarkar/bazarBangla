@@ -1573,15 +1573,15 @@ span.more-text.show {
     max-height: 250px;
     color: rgb(136, 136, 136) !important;
 }
-.searchtableUserPermission, .permissionTable, .permissionThead, .permissionThead tr, .permissionBody, .permissionBody tr{
+.searchtableUserPermission, .searchtableUserPermission table, .searchtableUserPermission thead, .searchtableUserPermission thead tr, .searchtableUserPermission tbody, .searchtableUserPermission tbody tr{
     float: left;
     width: 100%;
 }
-.permissionBody{
+.searchtableUserPermission tbody{
     height: 250px;
     overflow-y: scroll;
 }
-.permissionThead tr th,.permissionBody tr td{
+.searchtableUserPermission thead tr th,.searchtableUserPermission tbody tr td{
     float: left;
     width: 16%;
 }
