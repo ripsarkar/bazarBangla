@@ -1586,6 +1586,15 @@ span.more-text.show {
     width: 16%;
     text-align: center;
 }
+.searchtableUserPermission tbody tr td:first-child{
+    text-align: left;
+}
+.searchtableUserPermission tbody tr:nth-child(2){
+    width: 100%; float: left;
+}
+.searchtableUserPermission tbody tr:nth-child(2) td{
+    width: 50%;
+}
 .searchtableUserPermission table > thead > tr > th {
     border-bottom: 0px;
 }
