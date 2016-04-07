@@ -1570,7 +1570,7 @@ span.more-text.show {
 }
 /*--------------------permission table code----------------------*/
 .searchtableUserPermission {
-    max-height: 250px;
+    max-height: 230px;
     color: rgb(136, 136, 136) !important;
 }
 .searchtableUserPermission, .searchtableUserPermission table, .searchtableUserPermission thead, .searchtableUserPermission thead tr, .searchtableUserPermission tbody, .searchtableUserPermission tbody tr{
