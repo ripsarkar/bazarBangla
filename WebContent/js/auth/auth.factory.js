@@ -68,6 +68,7 @@
             case 403:
                 $location.path('/login');
                 alert("You are logged in from another instance");
+                window.alert = function() {};
                 break;
             }
             return $q.reject(errorResponse);
