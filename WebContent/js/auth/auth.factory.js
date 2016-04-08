@@ -42,7 +42,7 @@
 });
 
 
- angular.module('app').factory('TokenInterceptor', function($q, $window) {
+ angular.module('app').factory('TokenInterceptor', function($q, $window, $rootScope) {
   return {
     request: function(config) {
       config.headers = config.headers || {};
@@ -50,6 +50,8 @@
       if (localStorage.token) {
           config.headers['authorization'] = localStorage.token;
           config.headers['Content-Type'] = "application/json";
+          //config.headers['session_id'] = localStorage.tFSession;
+          config.headers['session_id'] = $rootScope.tFSession;
       }
       return config || $q.when(config);
     },
@@ -58,4 +60,18 @@
       return response || $q.when(response);
     }
   };
+});
+ angular.module('app').factory('responseObserver', function responseObserver($q, $window, $location) {
+    return {
+        'responseError': function(errorResponse) {
+            switch (errorResponse.status) {
+            case 403:
+                $location.path('/login');
+                alert("You are logged in from another instance");
+                window.alert = function() {};
+                break;
+            }
+            return $q.reject(errorResponse);
+        }
+    };
 });

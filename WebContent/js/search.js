@@ -3721,11 +3721,7 @@ if(usecaselist != undefined){
             url : resultURL,
             method : 'POST',
             headers : {
-                //'Content-type' : 'application/json',
-                //"access-control-allow-origin": "*",
-                //"access-control-allow-credentials": true,
-                "Content-Type":"application/x-zip",
-                //"Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept, Authorization"
+                'Content-type' : 'application/x-zip',
             },
             data:JSON.stringify(postJson),
             responseType : 'arraybuffer'

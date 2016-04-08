@@ -82,7 +82,7 @@
   <!-- Tab panes -->
   <div class="tab-content">  
     <div role="tabpanel" class="tab-pane active" id="usercase">
-  <div class="panel searchtableUser  panel-default">
+  <div class="panel searchtableUserPermission  panel-default">
       
    <table class="table table-striped">
    <thead>
@@ -137,7 +137,7 @@
   </div>
   </div>
     <div role="tabpanel" class="tab-pane" id="rule">
-  <div class="panel searchtableUser  panel-default">      
+  <div class="panel searchtableUserPermission  panel-default">      
        <table class="table table-striped">
    <thead>
    <tr class="tableheader">
@@ -188,7 +188,7 @@
   </div>
   
   </div>
-    <div role="tabpanel" class="tab-pane" id="org"> 
+    <div role="tabpanel" class="tab-pane searchtableUserPermission" id="org"> 
 	<table class="table table-striped" >
      <thead>
      <tr class="tableheader">
@@ -213,11 +213,12 @@
      </tr>
      <tr class="info">
      <td colspan="6" >Organization List</td>
-     <td> 
+     <!-- <td> 
       <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
-    </td>
+    </td> -->
      </tr>
-     <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'">
+     <!-- <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'"> -->
+     <tr ng-repeat="companycr in companyListli| orderBy : 'name'">
      
 	  <td>{{companycr.name}}</td>
      <td><!-- <input type="checkbox" value="create" class="createorg" data-objectval="{{companycr.name}}" ng-click="createindOrg($event)" ng-disabled="disableCreateOrg"> --></td>
@@ -230,7 +231,7 @@
 	     
      </tbody>
      </table></div>
-    <div role="tabpanel" class="tab-pane searchtableUser" id="subscription">
+    <div role="tabpanel" class="tab-pane searchtableUserPermission" id="subscription">
   <table class="table table-striped" >
      <thead>
      <tr class="tableheader">
@@ -251,11 +252,13 @@
      </tr>
      <tr class="info">
      <td colspan="4" >Organization List</td>
-     <td> 
+     <!-- <td> 
       <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
-    </td>
+    </td> -->
      </tr>
-     <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'">
+<!--      <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'">
+ -->     
+     <tr ng-repeat="companycr in companyListli| orderBy : 'name'">
      <td>{{companycr.name}}</td>
      <td><input type="checkbox" value="create" class="createsubs createsubsGen"  data-objectval="{{companycr.name}}"   ng-click="createindSub($event)" ng-disabled="disableCreateSub"></td>
      <td><input type="checkbox" value="read"   class="readsubs readsubsGen"    data-objectval="{{companycr.name}}"   ng-click="readindSub($event)" ng-disabled="disableReadSub"></td>
@@ -268,9 +271,9 @@
      </table>
   
   </div>
-  <div role="tabpanel" class="tab-pane searchtableUser" id="user">
-  <table class="table table-striped" >
-     <thead>
+  <div role="tabpanel" class="tab-pane searchtableUserPermission" id="user">
+  <table class="table table-striped permissionTable" >
+     <thead class="permissionThead">
      <tr class="tableheader">
      <th></th>
      <th>Create</th>
@@ -279,7 +282,7 @@
      <th>Delete</th>
      </tr>
      </thead>
-     <tbody>
+     <tbody class="permissionBody">
      <tr>
      <td>All Organization</td>
      <td><input type="checkbox" value="create" class="createuser"  data-objectval="ALL" ng-click="creaindAllUser($event)" ng-disabled="disableCreateUserAll"></td> 
@@ -289,12 +292,13 @@
      </tr>
      <tr class="info">
      <td colspan="4" >Organization List</td>
-     <td> 
+     <!-- <td> 
       <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
-    </td>
+    </td> -->
      </tr>
-     <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'">
-     
+     <!-- <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'"> -->
+     <tr ng-repeat="companycr in companyListli| orderBy : 'name'">
+
 	  
      <td>{{companycr.name}}</td>
      <td><input type="checkbox" value="create"  class="createuser createuserGen"  data-objectval="{{companycr.name}}"  ng-click="createindUser($event)" ng-disabled="disableCreateUser"></td>
@@ -306,7 +310,7 @@
      </table
      </div>
   </div>
-  <div role="tabpanel" class="tab-pane searchtableUser" id="role">
+  <div role="tabpanel" class="tab-pane searchtableUserPermission" id="role">
   
   <table class="table table-striped" >
      <thead>
@@ -328,12 +332,12 @@
      </tr>
      <tr class="info">
      <td colspan="4" >Organization List</td>
-     <td> 
+     <!-- <td> 
       <h4  ng-click="expanded = !expanded" expand ng-class="expanded ? 'accord1Heading' : 'accord1Heading accord2Heading'"></h4>
     </td>
-     </tr>
-     <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'">
-     
+ -->     </tr>
+<!--      <tr ng-show="expanded" ng-repeat="companycr in companyListli| orderBy : 'name'">
+ -->     <tr ng-repeat="companycr in companyListli| orderBy : 'name'">
 	  
      <td>{{companycr.name}}</td>
      <td><input type="checkbox" value="create" class="createrole createroleGen"  data-objectval="{{companycr.name}}"  ng-click="createindRole($event)" ng-disabled="disableCreateRole"></td>
@@ -346,7 +350,7 @@
      </table>
   </div>
   </div>
-  <input type="button" style="margin-top:15px;" class="btn btn-primary btnBottom buttonOrg" ng-click="sendPermissions()" value="Submit">
+  <input type="button" style="margin-top: 65px;" class="btn btn-primary btnBottom buttonOrg" ng-click="sendPermissions()" value="Submit">
 
 </div>
   

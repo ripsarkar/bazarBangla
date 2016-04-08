@@ -1568,6 +1568,40 @@ span.more-text.show {
     max-height: 250px;
     color: rgb(136, 136, 136) !important;
 }
+/*--------------------permission table code----------------------*/
+.searchtableUserPermission {
+    max-height: 230px;
+    color: rgb(136, 136, 136) !important;
+}
+.searchtableUserPermission, .searchtableUserPermission table, .searchtableUserPermission thead, .searchtableUserPermission thead tr, .searchtableUserPermission tbody, .searchtableUserPermission tbody tr{
+    float: left;
+    width: 100%;
+}
+.searchtableUserPermission tbody{
+    height: 250px;
+    overflow-y: scroll;
+}
+.searchtableUserPermission thead tr th,.searchtableUserPermission tbody tr td{
+    float: left;
+    width: 16%;
+    text-align: center;
+}
+.searchtableUserPermission tbody tr td:first-child{
+    text-align: left;
+}
+.searchtableUserPermission tbody tr:nth-child(2){
+    width: 100%; float: left;
+}
+.searchtableUserPermission tbody tr:nth-child(2) td{
+    width: 100%;
+}
+/*.searchtableUserPermission tbody tr:nth-child(2) td:nth-child(2) h4{
+    margin-top: 0px;
+}*/
+.searchtableUserPermission table > thead > tr > th {
+    border-bottom: 0px;
+}
+/*--------------------/permission table code----------------------*/
  .btnBottom{
   	margin-bottom:25px;
    margin-left:60px;
