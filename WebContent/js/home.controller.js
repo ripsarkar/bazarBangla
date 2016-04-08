@@ -143,7 +143,8 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                       		
                             	}
                             	var objComp = {};
-                                objComp.Name =localStorage.getItem("nameCompany");
+                            	objComp.Name =localStorage.getItem("nameCompany");
+                                objComp.SurrId = localStorage.getItem("surrComprip");
                                 $scope.RfetchList.push(objComp);
 
 
@@ -280,8 +281,8 @@ $scope.menu.menu = false;
         var userIndustCh = $scope.userIndustChVa;
         $rootScope.updatedOrgazingzing = $scope.userIndustChVa;
         for(var i=0;i<$scope.RfetchList.length;i++){
-        	if($rootScope.updatedOrgazingzing == $scope.RfetchList[i].company_name){
-                $rootScope.updatedOrgazingzingSurrId = $scope.RfetchList[i].company_surr_id;
+        	if($rootScope.updatedOrgazingzing == $scope.RfetchList[i].Name){
+                $rootScope.updatedOrgazingzingSurrId = $scope.RfetchList[i].SurrId;
                 
         	}
         }
