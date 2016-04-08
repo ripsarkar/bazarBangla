@@ -315,7 +315,13 @@ $scope.chckindustry = function() {
 }
 
 $scope.goTo = function() {
-	
+    var Indtsyarray = [];
+    for (var i = 0; i < $scope.UsecaseIntry.length; i++) {
+            var Indtsy = {};
+            Indtsy.surrId = $scope.UsecaseIntry[i];
+            Indtsyarray.push(Indtsy);
+    }
+
 	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
 	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
     var testAlp = /^[a-zA-Z\s\d\/]+$/;
@@ -325,7 +331,8 @@ $scope.goTo = function() {
         alert('Please enter a valid Use Case Id (special characters allowed: _ - .)');
         return false;
     }
-    else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
+    //else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
+    else if($scope.usecaseName == ''){
         alert('Please enter a valid Use Case Name');
         return false;
     }
@@ -682,6 +689,7 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
                 if (CategoryGr.length != 0) {
                     if (UsecaseService.getUpdateUsecase().SurrId != '' && UsecaseService.getUpdateUsecase().SurrId != 'undefined') {
                         $http.post($rootScope.url + '/saveUseCase', UsecasePostJson).success(function(data, status, headers, config) {
+
                             UsecaseService.setbtnbackUC("");
                             UsecaseService.setcreateregbackuc("");
                             UsecaseService.setpagesflag("");
@@ -696,9 +704,20 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
                           }).error(function (error) {
                                 alert("Server side error");
                           });
-
+                        
                         }).error(function(data, status, headers, config) {
-                            alert("Sorry Application error in serverside");
+                        	if (data.ErrCode == 611) {
+                        		alert("UsecaseName is Duplicate");
+                        	}
+                        	else if (data.ErrCode == 610) {
+                        		alert("UsecaseId is Duplicate");
+                        	}
+                        	else if (data.ErrCode == 601) {
+                        		alert("Application error in serverside");
+                        	}
+                        	else if (data.ErrCode == 606) {
+                        		alert("Invalid request usecase object not present in the request");
+                        	}
                         });
                     } else {
                         alert("Please fill all mandatory fields");
@@ -1183,7 +1202,8 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                 return false;
             }
-            else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+            //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+            else if($scope.crtRuleName == ''){
                 alert('Please enter a valid Rule Name');
                 return false;
             }
@@ -1337,6 +1357,8 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
 
                 if (typeof $scope.crtUsercaseId != 'undefined' && $scope.crtUsercaseId != '' && typeof $scope.crtUsercaseName != 'undefined' && $scope.crtUsercaseName != '' && typeof $scope.crtRuleID != 'undefined' && $scope.crtRuleID != '' && typeof $scope.crtRuleName != 'undefined' && $scope.crtRuleName != '') {
                     $http.post($rootScope.url + '/saveRule', crtRule_postJson).success(function(data, status, headers, config) {
+                    	
+                    
                         alert('Usecase Rule Created Successfully');
                         UsecaseService.setUsecasecrtdata('');
 
@@ -1354,8 +1376,26 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                           }).error(function (error) {
                                 alert("Server side error");
                           });
+                    
                     }).error(function(data, status, headers, config) {
-
+                    	if (data.ErrCode == 611) {
+                    		alert("Duplicate Rule Name present in rule object");
+                    	}
+                    	else if (data.ErrCode == 610) {
+                    		alert("Duplicate ruleId present in rule object");
+                    	}
+                    	else if (data.ErrCode == 601) {
+                    		alert("Application error in serverside");
+                    	}
+                    	else if (data.ErrCode == 606) {
+                    		alert("Invalid reuest rule object not present in the reuest");
+                    	}
+                    	else if (data.ErrCode == 607) {
+                    		alert("Invalid request usecase surr id not present in the request");
+                    	}
+                    	else if (data.ErrCode == 608) {
+                    		alert("Invalid request usecase object not present in the request");
+                    	}                    	
                     });
                 } else {
                     alert('Please fill all mandatory* fields');
@@ -1484,7 +1524,8 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                 return false;
             }
-            else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+            //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+            else if($scope.crtRuleName == ''){
                 alert('Please enter a valid Rule Name');
                 return false;
             }
@@ -1517,7 +1558,8 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                 return false;
             }
-            else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+            //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+            else if($scope.crtRuleName == ''){
                 alert('Please enter a valid Rule Name');
                 return false;
             }
@@ -1927,7 +1969,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         alert('Please enter a valid Use Case Id (special characters allowed: _ - .)');
                         return false;
                     }
-                    else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
+                    //else if($scope.usecaseName == ''  || !testAlpNu.test($scope.usecaseName)){
+                    else if($scope.usecaseName == ''){
                         alert('Please enter a valid Use Case Name');
                         return false;
                     }
@@ -2294,7 +2337,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
             $scope.UpdatedataSet();
             $scope.UseCaseformSubmit = function() {
-            	   $rootScope.loadinganimation = true;
+            	 $rootScope.loadinganimation = true;
                 	var Indtsyarray = [];
                     var Essptarray = [];
                     var CategoryGr = [];
@@ -2325,7 +2368,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                             $http.post($rootScope.url + '/updateUseCase', UsecasePostJson).success(function(data, status, headers, config) {                            
                                 UsecaseService.setpagesflag("");
                                 UsecaseService.setbtnbackUpUC("");
-                               
+                                
                                 //fetch permission api call
                                   $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
                                       sessionStorage.setItem("fetchPermission", JSON.stringify(result));
@@ -3040,7 +3083,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                     return false;
                 }
-                else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                else if($scope.crtRuleName == ''){
                     alert('Please enter a valid Rule Name');
                     return false;
                 }
@@ -3183,25 +3227,24 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
                         $http.post($rootScope.url + '/updateRule', crtRule_postJson).success(function(data, status, headers, config) {
                            
-                           
                             //fetch permission api call
                           $http.get($rootScope.url + "/managePermission/" + $rootScope.user_name + '/' + $rootScope.companyNamee).success(function(result) {
                               sessionStorage.setItem("fetchPermission", JSON.stringify(result));
                               $scope.permission = sessionStorage.getItem("fetchPermission");
-                             // console.log(sessionStorage.getItem("fetchPermission"));
                               alert('Update Rule Successfully saved');
                               ThdCrt.length = 0;
                               $scope.ThdCrttables.length = 0;
                               $state.reload();
                               $scope.reSetupdate();
+                             // console.log(sessionStorage.getItem("fetchPermission"));
                               $rootScope.loadinganimation = false;
                           }).error(function (error) {
-                                alert("Server side error");
+                                alert("Server side error"); 
                                 $rootScope.loadinganimation = false;
                           });
                         }).error(function(data, status, headers, config) {
                             //alert("Sorry Application error in serverside");
-                        	alert(data.ErrMsg);
+                        	 alert(data.ErrMsg);
                         	 $rootScope.loadinganimation = false;
                         });
                     } else {
@@ -3324,7 +3367,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                     return false;
                 }
-                else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                else if($scope.crtRuleName == ''){
                     alert('Please enter a valid Rule Name');
                     return false;
                 }
@@ -3356,7 +3400,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                     return false;
                 }
-                else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                else if($scope.crtRuleName == ''){
                     alert('Please enter a valid Rule Name');
                     return false;
                 }
@@ -3403,7 +3448,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                     return false;
                 }
-                else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+                else if($scope.crtRuleName == ''){
                     alert('Please enter a valid Rule Name');
                     return false;
                 }
@@ -3436,7 +3482,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 alert('Please enter a valid Rule Id(special characters allowed: _-.)');
                 return false;
             }
-            else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+            //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
+            else if($scope.crtRuleName == ''){
                 alert('Please enter a valid Rule Name');
                 return false;
             }
@@ -3457,5 +3504,6 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             }
            
         }
+
     }]);
 

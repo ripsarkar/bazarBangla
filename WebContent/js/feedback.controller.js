@@ -442,21 +442,11 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
 
         
         $scope.cpmysurrid = function() {
-        	$scope.vfbselPckg = [{"name":$rootScope.updatedOrgazingzing, "id":$rootScope.updatedOrgazingzingSurrId}];
-            /*var URLviewpage = $rootScope.url+'/getCompany';
-            $http.get(URLviewpage).success(function(data, status, headers, config) {
-                if ($rootScope.role == "ADMIN") {
-                    var chckall = {
-                        "id": 'adm',
-                        "name": "All"
-                    };
-                    data.Company.unshift(chckall);
-                    $scope.vfbselPckg = data.Company;
-                    $scope.orgName = 'adm';
-                }
-            }).error(function(data, status, headers, config) {
-                alert("Please contact your adminstrator");
-            });*/
+
+
+            var URLviewpage = $rootScope.url+'/getCompany';
+            $scope.vfbselPckg = [{"name":$rootScope.updatedOrgazingzing, "id":$rootScope.updatedOrgazingzingSurrId}];
+
         }
 
         $scope.cpmysurrid();
@@ -533,7 +523,7 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
         }
 
 
-        $scope.pageLoad();
+        //$scope.pageLoad();
         $scope.sort = {
             column: '',
             descending: false
@@ -566,8 +556,16 @@ app.controller("viewfeedbackController", ["$scope", "$rootScope", "$state", '$ht
         }
         
         $scope.clickOnExport = function() {
-            document.getElementById('exporttoexcel').click();
-            console.clear();
+            //document.getElementById('exporttoexcel').click();
+            //console.clear();
+        	var URLviewpage = $scope.viewExceldownload;
+        	$http.get(URLviewpage, { responseType: 'arraybuffer' })
+			  .success(function(data, status, headers, config) {
+			    var blob = new Blob([data], {type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});							
+				saveAs(blob,"feedbackData.xlsx");						
+				}).error(function(data, status, headers, config) {
+					alert("Please contact your adminstrator");
+			});
         };
     
     }]);

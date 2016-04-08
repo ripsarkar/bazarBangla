@@ -41,7 +41,6 @@ if(obj.Users.Organization !=undefined){
 
 
 
-
 $scope.countryNameUp = [
     {
         "name": "Afghanistan",
@@ -1032,7 +1031,8 @@ $scope.countryNameUp = [
 
 $scope.UsecaseIntry = [];
 $scope.openUpdatePage = function(compsurrID){
-	            var Indstryval=[];
+
+	       var Indstryval=[];
                 $rootScope.loadinganimation=true;
             $http.get( $rootScope.url + "/retrieveCompany/"+compsurrID).success(function(result){
                 $rootScope.loadinganimation=false;
@@ -1079,9 +1079,10 @@ $scope.openUpdatePage = function(compsurrID){
           }
 
 $scope.updateOrganizationVal = function(compsurrID){
-      var testAlpNu = /^[a-zA-Z0-9\s\d\/]+$/;
+      var testAlpNu = /^[^\s]+$/;
       var testAlp = /^[a-zA-Z\s\d\/]+$/;
       var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
+      
       if($scope.geocode == null){
         $scope.geocode = "";
       }
@@ -1089,7 +1090,7 @@ $scope.updateOrganizationVal = function(compsurrID){
         alert('Please enter a valid Company Id(no special character)');
           return false;
       }
-      else if($scope.organName == ''  || !testAlpNu.test($scope.organName)){
+      else if($scope.organName == ''){
         alert('Please enter a valid Company Name');
           return false;
       }
@@ -1109,26 +1110,26 @@ $scope.updateOrganizationVal = function(compsurrID){
         alert('Please enter atleast one valid address');
           return false;
       }
-            else if($scope.city == ''  || !testAlp.test($scope.city)){
+            else if($scope.city == ''){
         alert('Please enter valid city');
           return false;
       }
-            else if($scope.state != ''  && !testAlp.test($scope.state)){
+           /* else if($scope.state == ''){
         alert('Please enter valid state');
           return false;
-      }
-            else if($scope.country == ''){
-        alert('Please enter country');
+      }*/
+            else if($scope.country == '' || $scope.country == 'undefined'){
+        alert('Please select country');
           return false;
       }
             else if($scope.zip == '' || !testAlpNu.test($scope.zip)){
         alert('Please enter valid zipcode');
           return false;
       }
-            else if($scope.geocode != '' && !testAlpNu.test($scope.geocode)){
+           /* else if($scope.geocode == ''){
         alert('Please enter valid geocode');
           return false;
-      }
+      }*/
       else{
 
 var updateorgjson = {
@@ -1146,16 +1147,16 @@ var updateorgjson = {
   "user_surr_id" : localStorage.getItem("surrrip"),
   "company_surr_id" : $scope.companySurrId
 
-}              
-			if($scope.UsecaseIntry!=undefined){
-                for(var i=0;i<$scope.UsecaseIntry.length;i++){
-                var cOpI = {};
-                cOpI.SurrId = $scope.UsecaseIntry[i];
-                //console.log($scope.UsecaseIntry[i]);
-                    updateorgjson.company_industries.push(cOpI);
-                }
-			}
 
+}
+            if($scope.UsecaseIntry!=undefined){
+	                for(var i=0;i<$scope.UsecaseIntry.length;i++){
+	                var cOpI = {};
+	                cOpI.SurrId = $scope.UsecaseIntry[i];
+	                //console.log($scope.UsecaseIntry[i]);
+	                    updateorgjson.company_industries.push(cOpI);
+	                }
+           }
 
 
 var updarorg = {

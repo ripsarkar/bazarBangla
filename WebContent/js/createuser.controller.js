@@ -12,7 +12,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
 	$scope.contactnum="";
 	$scope.emailadd="";
 	$scope.role="";
-	$scope.password="";
+	//$scope.password="";
 	//check box
 	$scope.isactive=true;
 	$scope.master=true;
@@ -22,7 +22,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     $scope.contractId="";
     //go to create user
 	$rootScope.updateuserName="";
-    $rootScope.passWord="";
+    //$rootScope.passWord="";
     $rootScope.updatefirstName="";
     $rootScope.updatemiddleName="";
     $rootScope.updatelastName="";
@@ -77,7 +77,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
 	$scope.contactnum=$rootScope.updatecontactNo;
 	$scope.emailadd=$rootScope.updateemail;
 	$scope.role=$rootScope.updaterole;
-	$scope.password=$rootScope.passWord;
+	//$scope.password=$rootScope.passWord;
 	activestatus=$rootScope.isACTIVE;
 	$scope.selectedCompanycr=$rootScope.updatecompanyName;
     $scope.industryName=$rootScope.Industryname;
@@ -91,7 +91,10 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     $scope.sendcreateuser=function() {
     	//form validation
     	var usernameRegex = /^([a-zA-Z][a-zA-Z0-9._-]+@[a-zA-Z][a-zA-Z0-9-.]+.[a-zA-Z]{2,4})$/;
-    	var name = /^[a-zA-Z][a-zA-Z\s]+$/;
+
+    	//var name = /^[a-zA-Z][a-zA-Z\s]+$/;
+    	var name= /^[a-zA-Z\d][a-zA-Z\d\s]*$/; 
+
     	var contnumber = /^\+?([0-9]{1,5})\)?[-. ]?([0-9]{2,5})[-. ]?([0-9]{2,5})[-. ]?([0-9]{2,5})$/;  
     	var emailidfield = /^([a-zA-Z][a-zA-Z0-9._-]+@[a-zA-Z][a-zA-Z0-9-.]+.[a-zA-Z]{2,4})$/;
     	
@@ -99,15 +102,15 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     		alert('Please enter a valid User name');
      	    return false;
     	}
-    	else if($scope.firstname == '' || !name.test($scope.firstname)){
+    	else if($scope.firstname == undefined || $scope.firstname == '' || !name.test($scope.firstname)){
     		alert('Please enter a valid First Name');
      	    return false;
     	}
-    	else if($scope.middlename != '' &&  !name.test($scope.middlename)){
+    	else if($scope.middlename == undefined || $scope.middlename != '' &&  !name.test($scope.middlename)){
     		alert('Please enter a valid Middle Name');
      	    return false;
     	}
-    	else if($scope.lastname == '' || !name.test($scope.lastname)){
+    	else if($scope.lastname == undefined || $scope.lastname == '' || !name.test($scope.lastname)){
     		alert('Please enter a valid Last Name');
      	    return false;
     	}
@@ -139,7 +142,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     	
     	var params = {
         		username: $scope.usernamemain,
-        		password: $scope.password,
+        		//password: $scope.password,
         		firstname:$scope.firstname,
         		middlename:$scope.middlename,
         		lastname:$scope.lastname,
@@ -169,7 +172,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     			$scope.contactnum="";
     			$scope.emailadd="";
     			$scope.role="";
-    			$scope.password="";
+    			//$scope.password="";
     			//check box
     			$scope.isactive=false;
     			$scope.master=false;
@@ -198,7 +201,7 @@ app.controller("createUserController",["$scope","createUserService", "$rootScope
     			$scope.contactnum="";
     			$scope.emailadd="";
     			$scope.role="";
-    			$scope.password="";
+    			//$scope.password="";
     			//check box
     			$scope.isactive=false;
     			$scope.master=false;
@@ -309,7 +312,7 @@ $rootScope.loadinganimation=true;
 		$scope.contactnum="";
 		$scope.emailadd="";
 		$scope.role="";
-		$scope.password="";
+		//$scope.password="";
 		//check box
 		$scope.isactive=false;
 		$scope.master=false;

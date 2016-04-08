@@ -3721,7 +3721,11 @@ if(usecaselist != undefined){
             url : resultURL,
             method : 'POST',
             headers : {
+                //'Content-type' : 'application/json',
+                //"access-control-allow-origin": "*",
+                //"access-control-allow-credentials": true,
                 "Content-Type":"application/x-zip",
+                //"Access-Control-Allow-Headers":"Origin, X-Requested-With, Content-Type, Accept, Authorization"
             },
             data:JSON.stringify(postJson),
             responseType : 'arraybuffer'
@@ -3732,8 +3736,8 @@ if(usecaselist != undefined){
                 type : 'application/zip'
             });
             //trick to download store a file having its URL
-            if (navigator.msSaveBlob) { // IE 10+
-            	navigator.msSaveBlob(file, "Rulefiles.zip");
+            if (window.navigator.msSaveBlob) { // IE 10+
+            	window.navigator.msSaveBlob(file, "Rulefiles.zip");
             	    } else {
             var fileURL = URL.createObjectURL(file);
             var a         = document.createElement('a');

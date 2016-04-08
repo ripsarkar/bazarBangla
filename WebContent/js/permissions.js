@@ -5,7 +5,9 @@ app.controller("permissionsCtrl",["$scope","$http", "$rootScope","$q","$timeout"
 		  $scope.dummyMembertabOrga = false;
   $scope.$watch(function(){
       
-      if($rootScope.tabName == "User" || $rootScope.tabName == "Role"){
+
+      if($rootScope.tabName == "User" || $rootScope.tabName == "Role" || $rootScope.tabName == "Subscription"){
+
         $scope.membertabOrga = false;
 		$scope.dummyMembertabOrga = true;
       }
@@ -27,7 +29,7 @@ app.controller("permissionsCtrl",["$scope","$http", "$rootScope","$q","$timeout"
 
      //$scope.fnPopulateRoleList=function(){
      	if($rootScope.tabName =="User" || $rootScope.tabName =="Role"){
-          var promise5= $http.get($rootScope.url + '/getpopulateRoleforLogin/'+$rootScope.orgId).success(function(data) {
+          var promise5= $http.get($rootScope.url + '/getpopulateRoleforLogin/'+$rootScope.updatedOrgazingzingSurrId).success(function(data) {
               $scope.roleListli = data.Roles;             
               $rootScope.loadinganimation = false;
             }).error(function(data, status, headers, config) {                
@@ -35,7 +37,7 @@ app.controller("permissionsCtrl",["$scope","$http", "$rootScope","$q","$timeout"
           });
            }
         if($rootScope.tabName =="Subscription"){
-          var promise5= $http.get($rootScope.url + '/getpopulateRoleforSubscription/'+$rootScope.orgId).success(function(data) {
+          var promise5= $http.get($rootScope.url + '/getpopulateRoleforSubscription/'+$rootScope.updatedOrgazingzingSurrId).success(function(data) {
               $scope.roleListli = data.Roles;             
               $rootScope.loadinganimation = false;
             }).error(function(data, status, headers, config) {                
@@ -102,6 +104,7 @@ $scope.$watch(function(){
 	              Indtsyarray.push(Indtsy);
 	            }
             }
+
             postjson.PermissionFor.Role = Indtsyarray;
 
           }
@@ -114,7 +117,8 @@ $scope.$watch(function(){
                       /*{
                         "surrId": "9000"
                       }*/
-                    ]
+                    ],
+                    "organizationSurrId":localStorage.getItem("surrComprip")
                   },
                   "PermissionTo": {
                     "Subscription": [
@@ -210,8 +214,10 @@ $scope.fnFetchPermissions=function(id,name){
 	
 	
 };
-  
-  
+/*$scope.rolecheckNo = true;
+if($rootScope.tabName == "Role"){
+	$scope.rolecheckNo = false;
+} */ 
   $scope.fnLoadCheckBox=function(result){
 	
 	 var usecase=result.PermissionTo.UseCase;

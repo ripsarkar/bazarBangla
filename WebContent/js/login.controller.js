@@ -12,7 +12,7 @@
         });
         var mj2 = usernameId2.split("=");
         if(mj2[1] == "true"){
-            alert("Please clean your browser cache and then try to login/no other logged in browser should be opened");
+            alert("There could be some temporary technical problem. Please refresh / try again  and contact your system administrator");
         }
     ////////////////////////////////////////
     	if ($location.protocol() !== 'https') {
