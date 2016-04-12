@@ -698,6 +698,7 @@ a {
 .log-reg a {
     color: #99a3b1;
     font-weight: 400;
+    padding: 10px;
 }
 
 .log-reg a {
@@ -1542,13 +1543,15 @@ margin-bottom:0px !important;
   
  .loginbtn1{
   	margin-top:20%;
- 	padding-left:35%
+ 	padding-left:35%;
+ 	font-weight: bold;
    
   }
    
 .loginbtn2{
   	margin-top:12%;
- 	padding-left:35%
+ 	padding-left:35%;
+ 	font-weight: bold;
    
   }
  a.read-more, a.read-less {
