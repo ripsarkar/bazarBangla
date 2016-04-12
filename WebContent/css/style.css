@@ -1540,12 +1540,17 @@ margin-bottom:0px !important;
     display: inline-block;
   }
   
-   .loginbtn{
+ .loginbtn1{
   	margin-top:20%;
  	padding-left:35%
    
   }
    
+.loginbtn2{
+  	margin-top:12%;
+ 	padding-left:35%
+   
+  }
  a.read-more, a.read-less {
 	cursor: pointer;
 	color: blue;
