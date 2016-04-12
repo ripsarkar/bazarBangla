@@ -2935,8 +2935,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
                     }
                 }else if($scope.input[i].Label == "Transactional Data"){
                     $scope.Transactionaldata.push($scope.input[i]);
-                //} else if($scope.input[i].Label == "Referential Data"){
-                } else if($scope.input[i].Label == "Contextual Data"){
+                } else if($scope.input[i].Label == "Referential Data"){
                     $scope.ReferentialData.push($scope.input[i]);
                 } else if($scope.input[i].Label == "Event Name/Category"){
                     $scope.EventNameCategory.push($scope.input[i]);
@@ -2972,8 +2971,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
                 for (var j = 0; j < refedata.length; j++) {
                     var objr = {};
                     if (j == 0) {
-                        //objr["Label"] = "Referential Data";
-                    	objr["Label"] = "Contextual Data";
+                        objr["Label"] = "Referential Data";
                         objr["Value"] = refedata[j].Value;
                     } else {
                         objr["Label"] = "";
