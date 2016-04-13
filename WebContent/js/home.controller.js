@@ -19,7 +19,7 @@ function(event, toState, toParams, fromState, fromParams){
 	if ($location.protocol() !== 'https') {
         $window.location.href = $location.absUrl().replace('http', 'https');
     }
-		var usernameId;
+		/*var usernameId;
 		angular.element(document).ready(function(){
 		usernameId = window.location.href;
 		});
@@ -29,8 +29,12 @@ function(event, toState, toParams, fromState, fromParams){
 		var tokenForSession = stringForUsername[0].split("=");
 		console.log(tokenForSession[1]);
 		//localStorage.setItem("tFSession", tokenForSession[1]);
-		$rootScope.tFSession = tokenForSession[1];
+		$rootScope.tFSession = tokenForSession[1];*/
 	   // console.log("dataloading value::"+$rootScope.dataLoading);
+	    var mj = [];
+        mj[1] = $rootScope.usernameFromLogin;
+        $rootScope.tFSession = $rootScope.userSessionIdFromLogin;
+
 	    if(!localStorage.token){
 	   	 var promise1= UserAuthFactory.login(mj[1]).success(function(data) {
 	   	       
