@@ -697,8 +697,9 @@ a {
 .log-reg label,
 .log-reg a {
     color: #ffffff;
-    font-weight: 400;
-    padding: 10px;
+    font-weight: bolder;
+	padding: 5px;
+	font-size: 15px;
 }
 
 .log-reg a {
@@ -1542,7 +1543,7 @@ margin-bottom:0px !important;
   }
   
  .loginbtn1{
-  	margin-top:12%;
+  	margin-top:10%;
  	padding-left:35%;
  	font-weight: bold;
    
