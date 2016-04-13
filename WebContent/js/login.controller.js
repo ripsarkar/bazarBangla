@@ -5,7 +5,7 @@
 
     LoginController.$inject = ['$scope','$http','$location', 'AuthenticationService', 'FlashService','$rootScope','$window'];
     function LoginController($scope, $http, $location, AuthenticationService, FlashService, $rootScope,$window) {
-        $scope.gotoCustomer = function(){
+        /*$scope.gotoCustomer = function(){
             $http.get($rootScope.url+"/auth").success(function(result){
                 $location.path('/home/search');
                 $rootScope.usernameFromLogin = result.userid;
@@ -15,7 +15,7 @@
             }).error(function(result){
                 alert("try sometime later");
             });
-        }
+        }*/
     ////////////////////////////////////////
         var usernameId2;
         angular.element(document).ready(function(){
