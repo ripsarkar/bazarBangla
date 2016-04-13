@@ -27,7 +27,7 @@ function(event, toState, toParams, fromState, fromParams){
 		var mj = stringForUsername[1].split("=");
 		mj[1] = Aes.Ctr.decrypt(mj[1], "rip", 256);
 		//token for session
-		var tokenForSession = stringForUsername[0].split("=");
+		var tokenForSession = stringForUsername[0].split("SESSION_ID=");
 		console.log(tokenForSession[1]);
 		//localStorage.setItem("tFSession", tokenForSession[1]);
 		$rootScope.tFSession = tokenForSession[1];
