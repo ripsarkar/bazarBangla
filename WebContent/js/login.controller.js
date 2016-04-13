@@ -3,8 +3,8 @@
 
     angular.module('app').controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService','$rootScope','$window'];
-    function LoginController($location, AuthenticationService, FlashService, $rootScope,$window) {
+    LoginController.$inject = ['$scope','$location', 'AuthenticationService', 'FlashService','$rootScope','$window'];
+    function LoginController($scope, $location, AuthenticationService, FlashService, $rootScope,$window) {
         $scope.gotoCustomer = function(){
             $http.get($rootScope.url+"/auth").success(function(result){
                 $location.path('/home/search');
