@@ -25,6 +25,7 @@ function(event, toState, toParams, fromState, fromParams){
 		});
 		var stringForUsername = usernameId.split("&");
 		var mj = stringForUsername[1].split("=");
+		mj[1] = Aes.Ctr.decrypt(mj[1], "rip", 256);
 		//token for session
 		var tokenForSession = stringForUsername[0].split("=");
 		console.log(tokenForSession[1]);
