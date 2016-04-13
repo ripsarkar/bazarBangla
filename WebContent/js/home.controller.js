@@ -13,6 +13,8 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 		});
 		var mj = usernameId.split("=");
 	   // console.log("dataloading value::"+$rootScope.dataLoading);
+		$window.location.href = "https://ucl.mybluemix.net/#/home";
+
 	    if(!localStorage.token){
 	   	 var promise1= UserAuthFactory.login(mj[1]).success(function(data) {
 	   	       
