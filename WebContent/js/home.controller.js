@@ -25,10 +25,10 @@ function(event, toState, toParams, fromState, fromParams){
 		});
 		var stringForUsername = usernameId.split("&");
 		var mj = stringForUsername[1].split("=");
-		var loginPik = mj[1];
+		/*var loginPik = mj[1];
 		alert(mj[1]);
 		mj[1] = Aes.Ctr.decrypt(loginPik, "rip", 256);
-		alert(mj[1]);
+		alert(mj[1]);*/
 		//token for session
 		var tokenForSession = stringForUsername[0].split("SESSION_ID=");
 		console.log(tokenForSession[1]);
