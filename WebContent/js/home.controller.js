@@ -30,7 +30,7 @@ function(event, toState, toParams, fromState, fromParams){
 		console.log(tokenForSession[1]);
 		//localStorage.setItem("tFSession", tokenForSession[1]);
 		$rootScope.tFSession = tokenForSession[1];*/
-		$window.location.href = "https://devucl.mybluemix.net/#/home";
+		$window.location.href = "https://uat-ucl.mybluemix.net/#/home";
 
 	   // console.log("dataloading value::"+$rootScope.dataLoading);
 	   		var mj = usernameId.split("=");
