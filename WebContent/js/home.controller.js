@@ -23,14 +23,16 @@ function(event, toState, toParams, fromState, fromParams){
 		angular.element(document).ready(function(){
 		usernameId = window.location.href;
 		});
-		var stringForUsername = usernameId.split("&");
+		/*var stringForUsername = usernameId.split("&");
 		var mj = stringForUsername[1].split("=");
 		//token for session
 		var tokenForSession = stringForUsername[0].split("=");
 		console.log(tokenForSession[1]);
 		//localStorage.setItem("tFSession", tokenForSession[1]);
-		$rootScope.tFSession = tokenForSession[1];
+		$rootScope.tFSession = tokenForSession[1];*/
 	   // console.log("dataloading value::"+$rootScope.dataLoading);
+	   		var mj = usernameId.split("=");
+
 	    if(!localStorage.token){
 	   	 var promise1= UserAuthFactory.login(mj[1]).success(function(data) {
 	   	       

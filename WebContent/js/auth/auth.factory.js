@@ -61,7 +61,7 @@
     }
   };
 });
- angular.module('app').factory('responseObserver', function responseObserver($q, $window, $location) {
+/* angular.module('app').factory('responseObserver', function responseObserver($q, $window, $location) {
     return {
         'responseError': function(errorResponse) {
             switch (errorResponse.status) {
@@ -74,4 +74,4 @@
             return $q.reject(errorResponse);
         }
     };
-});
+});*/
