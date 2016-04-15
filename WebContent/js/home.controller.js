@@ -1,9 +1,21 @@
 'use strict';
 var app = angular.module('app').controller('HomeController', HomeController);
-HomeController.$inject = ['UserService', 'UserAuthFactory','AuthenticationFactory','$rootScope', '$scope', '$http','$location','$window',"$q"];
+HomeController.$inject = ['UserService', 'UserAuthFactory','AuthenticationFactory','$rootScope', '$scope', '$http','$location','$window',"$q","$state"];
 
 
-function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $rootScope, $scope, $http,$location,$window,$q) {
+function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $rootScope, $scope, $http,$location,$window,$q,$state) {
+/*$rootScope.$on('$stateChangeStart', 
+function(event, toState, toParams, fromState, fromParams){
+    //api check
+    $http.get($rootScope.url+"/sessionTest").success(function(data ,status){
+
+    }).error(function(data ,status){
+    	if(status == 403){
+    		$location.path('/login');
+    		alert("You are logged in from another instance");
+    	}
+    });
+});*/
 	if ($location.protocol() !== 'https') {
         $window.location.href = $location.absUrl().replace('http', 'https');
     }
@@ -11,9 +23,17 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 		angular.element(document).ready(function(){
 		usernameId = window.location.href;
 		});
-		var mj = usernameId.split("=");
-	   // console.log("dataloading value::"+$rootScope.dataLoading);
+		/*var stringForUsername = usernameId.split("&");
+		var mj = stringForUsername[1].split("=");
+		//token for session
+		var tokenForSession = stringForUsername[0].split("=");
+		console.log(tokenForSession[1]);
+		//localStorage.setItem("tFSession", tokenForSession[1]);
+		$rootScope.tFSession = tokenForSession[1];*/
 		$window.location.href = "https://ucl.mybluemix.net/#/home";
+
+	   // console.log("dataloading value::"+$rootScope.dataLoading);
+	   		var mj = usernameId.split("=");
 
 	    if(!localStorage.token){
 	   	 var promise1= UserAuthFactory.login(mj[1]).success(function(data) {
@@ -26,14 +46,20 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
 	   	         
 	   	             
 	   	        }).error(function(data, status, headers, config) {
-	   	          alert('There could be some temporary technical problem. Please refresh / try again  and contact your system administrator');
-//			   	       if (status == 403) {
-//		           		//alert(data);
-//		           		var r = confirm(data);
-//		           		if (r == true) {
-//		           			$scope.localStorageclear();
-//		           		 }
-//			   	       }
+	   	          //alert('There could be some temporary technical problem. Please refresh / try again  and contact your system administrator');
+			   	       if (status == 403) {
+		           		//alert(data);
+		           		alert(data);
+		           		//$location.path('/login');
+	           			$scope.localStorageclear();
+
+		           		/*if (r == true) {
+		           			$scope.localStorageclear();
+		           		 }
+		           		else{
+		           			//$location.path('/login');
+		           		}*/
+			   	       }
 		           	
 	   	        });
 	   	   
@@ -86,6 +112,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
    	                	localStorage.setItem("surrrip", result.User[0].user_surr_id);
    	                	localStorage.setItem("surrComprip", result.User[0].company_surr_id);
    	                	localStorage.setItem("namerip", result.User[0].user_name);
+   	                	$scope.userIdUserAbc = result.User[0].user_name;
    	                	if(result.User[0].user_middle_name!=null){
    	                		localStorage.setItem("fullname", (result.User[0].user_first_name+" "+result.User[0].user_middle_name+" "+result.User[0].user_last_name));	
    	                	}else{
@@ -131,6 +158,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                               $rootScope.loadinganimation = false;
                               $scope.RfetchList =[];
                               // load org from member list of permission json 
+
                             	var obj =JSON.parse(sessionStorage.getItem("fetchPermission"));
                             	if(obj.Users.Organization !=undefined){
 
@@ -142,13 +170,19 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
                       					// $rootScope.loadinganimation = false;
                       				}
                       			}
-                      		
                             	}
-                            	var objComp = {};
-                            	objComp.Name =localStorage.getItem("nameCompany");
-                                objComp.SurrId = localStorage.getItem("surrComprip");
-                                $scope.RfetchList.push(objComp);
-
+                      			 var objComp = {};
+                                 objComp.Name = localStorage.getItem("nameCompany");
+                                 objComp.SurrId = localStorage.getItem("surrComprip");
+                                 $scope.RfetchList.push(objComp);
+								for (var i = 0; i < $scope.RfetchList.length; i++) {
+									for (var j = 0; j < $scope.RfetchList.length; j++) {
+										if(i!=j && $scope.RfetchList[i].Name == $scope.RfetchList[j].Name){
+										$scope.RfetchList.splice(j,1);
+										}
+									};
+									
+								};
 
 
                           }).error(function (error) {
@@ -186,6 +220,7 @@ function HomeController(UserService,UserAuthFactory,AuthenticationFactory, $root
   	  }
 
 });
+
 	//tab enable disable
 
 //Main Tabs disable enable
@@ -312,55 +347,64 @@ $scope.menu.menu = false;
 		$scope.showAllmode=true;
 	}
 	
-	/*window.onbeforeunload = function () {
+	window.onunload = function () {
+		localStorage.clear();
+		sessionStorage.clear();
+		return true;
+	};
+	
+	/*$scope.onExit = function() {
 		$scope.localStorageclear();
-	    return "You have logged out successfully!!!";
-	};*/
+	      return ('bye bye');
+	};
+
+	$window.onbeforeunload =  $scope.onExit;*/
 	
 	//logout
 	$scope.localStorageclear=function(){
-		
+
 		//AuthenticationFactory.isLogged = false;
-       // delete AuthenticationFactory.user;
-        //delete $window.sessionStorage.token;
-       // delete $window.sessionStorage.user;	
-//		$rootScope.loadinganimation = true;
-//		 $http.get($rootScope.url+"/logout/"+localStorage.getItem("namerip")).success(function(result) {
-//           	$rootScope.loadinganimation = false;
-//           	$location.path('/login');
-//        }).error(function (error) {
-//	            $rootScope.loadinganimation = false;
-//	           	$location.path('/login');
-//	     });
-	 	$location.path('/login');
-	   localStorage.clear();
-	   sessionStorage.clear();
-	   //$location.path('/login');
-//	   $rootScope.loadinganimation = true;
-//	   var logout =   {
-//				method: "GET",    			
-//		
-//				url: $rootScope.url+"/logout",
-//				headers: {
-//		               'Access-Control-Allow-Origin':"{$_SERVER['HTTP_ORIGIN']}",
-//		               'Access-Control-Request-Method': 'GET',
-//		               'Content-Type': "application/json",
-//		               'Access-Control-Allow-Headers': "Content-Type",
-//		              ' Access-Control-Allow-Credentials':'true',
-//		              'Access-Control-Max-Age': '86400'
-//		           }
-//					
-//	         
-//			};
+	       // delete AuthenticationFactory.user;
+	        //delete $window.sessionStorage.token;
+	       // delete $window.sessionStorage.user;	
+			$rootScope.loadinganimation = true;
+			 $http.get($rootScope.url+"/logout/"+mj[1]).success(function(result) {
+	           	$rootScope.loadinganimation = false;
+	           	$location.path('/login');
+	        }).error(function (error) {
+		            $rootScope.loadinganimation = false;
+		           	$location.path('/login');
+		     });
+//		 	$location.path('/login');
+		   localStorage.clear();
+		   sessionStorage.clear();
+		   //$location.path('/login');
+//		   $rootScope.loadinganimation = true;
+//		   var logout =   {
+//					method: "GET",    			
 //			
-////			 if (isset($_SERVER['HTTP_ORIGIN'])) {
-////		        header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
-////		        header('Access-Control-Allow-Credentials: true');
-////		        header('Access-Control-Max-Age: 86400');    // cache for 1 day
-////		    }
-	   		//alert("mj3-"+localStorage.getItem("rolerip")+"mj3-"+result.User[0].user_role_name);
-		  	 
-		}
+//					url: $rootScope.url+"/logout",
+//					headers: {
+//			               'Access-Control-Allow-Origin':"{$_SERVER['HTTP_ORIGIN']}",
+//			               'Access-Control-Request-Method': 'GET',
+//			               'Content-Type': "application/json",
+//			               'Access-Control-Allow-Headers': "Content-Type",
+//			              ' Access-Control-Allow-Credentials':'true',
+//			              'Access-Control-Max-Age': '86400'
+//			           }
+//						
+//		         
+//				};
+//				
+////				 if (isset($_SERVER['HTTP_ORIGIN'])) {
+////			        header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+////			        header('Access-Control-Allow-Credentials: true');
+////			        header('Access-Control-Max-Age: 86400');    // cache for 1 day
+////			    }
+		   		//alert("mj3-"+localStorage.getItem("rolerip")+"mj3-"+result.User[0].user_role_name);
+			 
+	  
+	}
 	
 	//local storage
 	$rootScope.role = localStorage.getItem("rolerip");
