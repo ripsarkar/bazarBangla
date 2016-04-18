@@ -255,7 +255,7 @@ word-wrap: break-word;
     text-align: center;
 }
 .vmmid{
-    vertical-align: middle;
+    vertical-align: middle !important;
 }
 .activeiconred{
 background-color: #f00;
@@ -265,7 +265,6 @@ visibility: unset;
 color: #f00;
 width: 12px;
 font-size: 9px;
-padding-left: 20px;
 vertical-align: middle;
 }
 .activeicongreen{
@@ -276,7 +275,6 @@ visibility: unset;
 color: #0f0;
 width: 12px;
 font-size: 9px;
-padding-left: 20px;
 vertical-align: middle;
 }
 .adjustExpire{
