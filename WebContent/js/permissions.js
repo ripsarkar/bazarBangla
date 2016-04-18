@@ -11,7 +11,7 @@ app.controller("permissionsCtrl",["$scope","$http", "$rootScope","$q","$timeout"
       }
   });
       if($rootScope.tabName == "Role"){
-		$scopr.roleListDisPlay = false;
+		$scope.roleListDisPlay = false;
       }
   ///////////////////////////////////////////////////////////
 
