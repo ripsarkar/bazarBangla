@@ -251,6 +251,9 @@ word-wrap: break-word;
 	border-top: 0px solid #DDD !important;
 	vertical-align:top !important;
 }
+.mkcenter{
+    text-align: center;
+}
 .activeiconred{
 background-color: #f00;
 border-radius: 60px;
@@ -259,6 +262,8 @@ visibility: unset;
 color: #f00;
 width: 12px;
 font-size: 9px;
+padding-left: 20px;
+vertical-align: middle;
 }
 .activeicongreen{
 background-color: #0f0;
@@ -268,6 +273,8 @@ visibility: unset;
 color: #0f0;
 width: 12px;
 font-size: 9px;
+padding-left: 20px;
+vertical-align: middle;
 }
 .adjustExpire{
     padding-top: 30px;
