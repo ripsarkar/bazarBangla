@@ -33,6 +33,11 @@
 						<label> Contract ID </label> 
 						<p>{{contractId}}</p>
 					</div>
+					<div class="col-md-3 col-sm-6" style="display:none">
+					<label>Only expiring user accounts</label>
+						<input type="checkbox">
+						
+					</div>
 					<div class="col-md-3 col-sm-6">
 						   <label> </label>
                         <button class="tabsbtn btn btn-default ucsearchbutton" ng-click="clickme();"> Search</button>
@@ -60,7 +65,8 @@
 						<th>Last Name</th>
 						<th>Contact Number</th>
 						<th>Email Address</th>
-						<!-- <th>Role</th> -->
+						<th>Expiry date</th>
+						<th>Extend</th>
 						<th>Active</th>
 						<th>Edit</th>
 						<th>Permissions</th>
@@ -73,7 +79,8 @@
 						<td>{{user.lastName}}</td>
 						<td>{{user.contactNo}}</td>
 						<td>{{user.email}}</td>
-						<!-- <td>{{user.role}}</td> -->
+						<th>02/02/16</th>
+						<th><input type="button" class="btn btn-default"></th>
 						<td class="activeprev">{{user.isActive}}</td>
 						 <td><a ng-click="onuamedituser(user.id)"><i class="glyphicon glyphicon-edit"></i></a></td>
 						 <td ><a  ng-click="fnOpenPermission(user.id,user.userName,'User')"><span class="glyphicon glyphicon-thumbs-up" style="font-size: 12px;"></span></a></td>
