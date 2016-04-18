@@ -254,6 +254,9 @@ word-wrap: break-word;
 .mkcenter{
     text-align: center;
 }
+.vmmid{
+    vertical-align: middle;
+}
 .activeiconred{
 background-color: #f00;
 border-radius: 60px;

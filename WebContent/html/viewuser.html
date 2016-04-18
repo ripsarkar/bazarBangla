@@ -72,18 +72,18 @@
 						<th>Delete</th>
 					</tr>
 					<tr ng-repeat="user in userList" class="usecaseTable">
-						<td ng-model="datashown">{{user.userName}}</td>
-						<td ng-model="datashown">{{user.firstName}}</td>
-						<td>{{user.middleName}}</td>
-						<td>{{user.lastName}}</td>
-						<td>{{user.contactNo}}</td>
-						<td>{{user.email}}</td>
-						<th>02/02/16</th>
-						<th><div class="btn btn-default" ng-click="extendUser(user.email)">Press me</div></th>
-						<td><div class="activeprev" ng-click="activeUser(user.email)">{{user.isActive}}</div></td>
-						 <td align="center"><a ng-click="onuamedituser(user.id)"><i class="glyphicon glyphicon-edit"></i></a></td>
-						 <td align="center"><a  ng-click="fnOpenPermission(user.id,user.userName,'User')"><span class="glyphicon glyphicon-thumbs-up" style="font-size: 12px;"></span></a></td>
-						 <td align="center"><i class="glyphicon glyphicon-trash"></i></td>
+						<td class="vmmid" ng-model="datashown">{{user.userName}}</td>
+						<td class="vmmid" ng-model="datashown">{{user.firstName}}</td>
+						<td class="vmmid">{{user.middleName}}</td>
+						<td class="vmmid">{{user.lastName}}</td>
+						<td class="vmmid">{{user.contactNo}}</td>
+						<td class="vmmid">{{user.email}}</td>
+						<th class="vmmid">02/02/16</th>
+						<th class="vmmid"><div class="btn btn-default" ng-click="extendUser(user.email)">Press me</div></th>
+						<td class="vmmid"><div class="activeprev" ng-click="activeUser(user.email)">{{user.isActive}}</div></td>
+						 <td class="vmmid" align="center"><a ng-click="onuamedituser(user.id)"><i class="glyphicon glyphicon-edit"></i></a></td>
+						 <td class="vmmid" align="center"><a  ng-click="fnOpenPermission(user.id,user.userName,'User')"><span class="glyphicon glyphicon-thumbs-up" style="font-size: 12px;"></span></a></td>
+						 <td class="vmmid" align="center"><i class="glyphicon glyphicon-trash"></i></td>
 					</tr>						
 
 				</table>
