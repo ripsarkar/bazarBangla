@@ -252,11 +252,7 @@ word-wrap: break-word;
 	vertical-align:top !important;
 }
 .activeiconred{
-	background-image:url("../img/iconsprite2.png");
-	background-repeat: no-repeat;
-	background-position: 25px -147px;
-	background-size: 61px 204px;
-	text-indent: -9999px;
+background-color: #f00;
 }
 .activeicongreen{
 	background-image:url("../img/iconsprite2.png");
