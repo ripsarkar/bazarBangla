@@ -261,9 +261,13 @@ word-wrap: break-word;
 .activeicongreen{
 	background-image:url("../img/iconsprite2.png");
 	background-repeat: no-repeat;
-	background-position: 25px -172px;
+	background-position: 15px -172px;
 	background-size: 61px 204px;
 	text-indent: -9999px;
+}
+.adjustExpire{
+    padding-top: 30px;
+    font-weight: bold;
 }
 .checkboxstyle input{
 	/* visibility:hidden; */
