@@ -1,7 +1,37 @@
 //wrting the controller for viewuser page
 app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", function($scope, ViewUserService, $rootScope){
 	
-	// $rootScope.loadinganimation=true;	
+	// code for extend user expiration
+	/*$scope.extendUser = function(email){
+		$rootScope.loadinganimation = true;
+		$http.get($rootScope.url+"/extendUser/"+email).success(function(result){
+		$rootScope.loadinganimation = false;
+			alert("User Account extended for 30 more days");
+		}).error(function(result){
+
+		})
+	}
+	var expirelist = "notpresent";
+	$scope.activeUser = function(email){
+		$rootScope.loadinganimation = true;
+		if($scope.Expiring){
+			expirelist = "present";
+		}
+		$http.get($rootScope.url+"/activateUser/"+email).success(function(result){
+		
+		ViewUserService.getUserDetails($scope.selectedCompany.SurrId+"/"+expirelist).then(function(resultname)
+				{
+							$rootScope.loadinganimation = false;
+
+					$scope.userList = resultname.Users;					
+				});
+
+		}).error(function(result){
+			
+		})
+	}*/
+	
+	//////////////////////////////////
 
 	
 	$scope.industryName = "";
