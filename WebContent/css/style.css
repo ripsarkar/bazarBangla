@@ -253,13 +253,21 @@ word-wrap: break-word;
 }
 .activeiconred{
 background-color: #f00;
+border-radius: 60px;
+float: left;
+visibility: unset;
+color: #f00;
+width: 12px;
+font-size: 9px;
 }
 .activeicongreen{
-	background-image:url("../img/iconsprite2.png");
-	background-repeat: no-repeat;
-	background-position: 15px -172px;
-	background-size: 61px 204px;
-	text-indent: -9999px;
+background-color: #0f0;
+border-radius: 60px;
+float: left;
+visibility: unset;
+color: #0f0;
+width: 12px;
+font-size: 9px;
 }
 .adjustExpire{
     padding-top: 30px;

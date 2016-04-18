@@ -35,7 +35,7 @@
 					</div>
 					<div class="col-md-3 col-sm-6 adjustExpire">
 					<label>Only Expiring User Accounts</label>
-						<input type="checkbox">
+						<input type="checkbox" ng-model="isExpiringactive" ng-checked="Expiring" ng-click="checkexpiringStatus()">
 					</div>
 					<div class="col-md-3 col-sm-6">
 						   <label> </label>
@@ -79,8 +79,8 @@
 						<td>{{user.contactNo}}</td>
 						<td>{{user.email}}</td>
 						<th>02/02/16</th>
-						<th><div class="btn btn-default">Press me</div></th>
-						<td class="activeprev">{{user.isActive}}</td>
+						<th><div class="btn btn-default" ng-click="extendUser(user.email)">Press me</div></th>
+						<td><div class="activeprev" ng-click="activeUser(user.email)">{{user.isActive}}</div></td>
 						 <td align="center"><a ng-click="onuamedituser(user.id)"><i class="glyphicon glyphicon-edit"></i></a></td>
 						 <td align="center"><a  ng-click="fnOpenPermission(user.id,user.userName,'User')"><span class="glyphicon glyphicon-thumbs-up" style="font-size: 12px;"></span></a></td>
 						 <td align="center"><i class="glyphicon glyphicon-trash"></i></td>
