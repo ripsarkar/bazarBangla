@@ -266,6 +266,7 @@ color: #f00;
 width: 12px;
 font-size: 9px;
 vertical-align: middle;
+margin-left: 13px;
 }
 .activeicongreen{
 background-color: #0f0;
@@ -276,6 +277,7 @@ color: #0f0;
 width: 12px;
 font-size: 9px;
 vertical-align: middle;
+margin-left: 13px;
 }
 .adjustExpire{
     padding-top: 30px;
