@@ -214,7 +214,7 @@ function(event, toState, toParams, fromState, fromParams){
                       
    	            }).error(function (error) {
    	             $rootScope.loadinganimation = false;
-   	             //alert("Internal server error");
+   	             alert("Internal server error");
    	            });
   		  
   	  }

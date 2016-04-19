@@ -681,7 +681,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 		 
 	 }).error(function(data, status, headers, config) {
          $rootScope.loadinganimation = false;
-        alert("Internal server error");
+        //alert("Internal server error");
      });
 	 
 	 
