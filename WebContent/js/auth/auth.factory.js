@@ -65,7 +65,7 @@
     return {
         'responseError': function(errorResponse) {
             switch (errorResponse.status) {
-            case 403:
+            case 520:
                 $location.path('/login');
                 alert("You are logged in from another instance");
                 window.alert = function() {};
