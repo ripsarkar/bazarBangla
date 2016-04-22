@@ -27,7 +27,7 @@
  angular.module('app').factory('UserAuthFactory', function($window, $location, $http, AuthenticationFactory) {
   return {
     login: function() {
-      return $http.get('https://devuclapi.mybluemix.net/test/login');
+      return $http.get($rootScope.url+'/test/login');
     },
   }
 });
