@@ -40,7 +40,9 @@ function(event, toState, toParams, fromState, fromParams){
         $rootScope.tFSession = $rootScope.userSessionIdFromLogin;*/
 
 	    if(!localStorage.token){
-	   	 var promise1= UserAuthFactory.login(mj[1]).success(function(data) {
+	   	 //var promise1= UserAuthFactory.login(mj[1]).success(function(data) {
+	   	 var promise1= UserAuthFactory.login().success(function(data) {
+
 	   	       
 	   	          AuthenticationFactory.isLogged = true;
 	   	          

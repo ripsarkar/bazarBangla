@@ -14,7 +14,7 @@
   return auth;
 });
 
- angular.module('app').factory('UserAuthFactory', function($window, $location, $http, AuthenticationFactory) {
+/* angular.module('app').factory('UserAuthFactory', function($window, $location, $http, AuthenticationFactory) {
   return {
     login: function(username) {
       return $http.post('https://devuclapi.mybluemix.net/test/login', {
@@ -22,25 +22,15 @@
         //Password: password
       });
     },
-   /* logout: function() {
-
-      if (AuthenticationFactory.isLogged) {
-
-        AuthenticationFactory.isLogged = false;
-        delete AuthenticationFactory.user;
-        delete AuthenticationFactory.userRole;
-
-        delete $window.sessionStorage.token;
-        delete $window.sessionStorage.user;
-        delete $window.sessionStorage.userRole;
-
-        $location.path("/login");
-      }
-
-    }*/
+  }
+});*/
+ angular.module('app').factory('UserAuthFactory', function($window, $location, $http, AuthenticationFactory) {
+  return {
+    login: function() {
+      return $http.get('https://devuclapi.mybluemix.net/test/login');
+    },
   }
 });
-
 
  angular.module('app').factory('TokenInterceptor', function($q, $window, $rootScope) {
   return {
