@@ -24,7 +24,7 @@
     },
   }
 });*/
- angular.module('app').factory('UserAuthFactory', function($window, $location, $http, AuthenticationFactory) {
+ angular.module('app').factory('UserAuthFactory', function($window, $location, $http, AuthenticationFactory,$rootScope) {
   return {
     login: function() {
       return $http.get($rootScope.url+'/test/login');
