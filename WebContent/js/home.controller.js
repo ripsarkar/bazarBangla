@@ -19,7 +19,7 @@ function(event, toState, toParams, fromState, fromParams){
 	if ($location.protocol() !== 'https') {
         $window.location.href = $location.absUrl().replace('http', 'https');
     }
-		var usernameId;
+		/*var usernameId;
 		angular.element(document).ready(function(){
 		usernameId = window.location.href;
 		});
@@ -30,14 +30,9 @@ function(event, toState, toParams, fromState, fromParams){
 		mj[1] = Aes.Ctr.decrypt(dec, "rip", 256);
 		//token for session
 		var tokenForSession = stringForUsername[0].split("SESSION_ID=");
-		console.log(tokenForSession[1]);
-		//localStorage.setItem("tFSession", tokenForSession[1]);
 		$rootScope.tFSession = tokenForSession[1];
-		$window.location.href = $window.location.protocol+"/#/home";
-	    // console.log("dataloading value::"+$rootScope.dataLoading);
-	    /*var mj = [];
-        mj[1] = $rootScope.usernameFromLogin;
-        $rootScope.tFSession = $rootScope.userSessionIdFromLogin;*/
+		$window.location.href = $window.location.protocol+"/#/home";*/
+var mj = [];
 
 	    if(!localStorage.token){
 	   	 //var promise1= UserAuthFactory.login(mj[1]).success(function(data) {
@@ -46,10 +41,10 @@ function(event, toState, toParams, fromState, fromParams){
 	   	       
 	   	          AuthenticationFactory.isLogged = true;
 	   	          
-	   	          //$window.sessionStorage.token = data.token;
 	   	          localStorage.setItem("token", data.token);
 	   	          localStorage.setItem("isLoggedIn", true);
-	   	         
+	   	         mj[1] = data.user;
+	   	         $rootScope.tFSession = data.sessionId;
 	   	             
 	   	        }).error(function(data, status, headers, config) {
 	   	          //alert('There could be some temporary technical problem. Please refresh / try again  and contact your system administrator');
