@@ -35,6 +35,7 @@ function(event, toState, toParams, fromState, fromParams){
 var mj = [];
 
 	    if(!localStorage.token){
+
 	   	 var promise1= UserAuthFactory.login().success(function(data) {
 
 	   	       
@@ -44,7 +45,7 @@ var mj = [];
 	   	          localStorage.setItem("isLoggedIn", true);
 	   	         mj[1] = data.user;
 	   	         $rootScope.tFSession = data.sessionId;
-	   	               
+
 	   	        }).error(function(data, status, headers, config) {
 	   	          //alert('There could be some temporary technical problem. Please refresh / try again  and contact your system administrator');
 			   	       if (status == 403) {
