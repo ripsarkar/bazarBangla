@@ -1165,13 +1165,14 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 //////////////////END OF CODE FOR CYBERSEC///////////////	
 ////////////////////CODE FOR REGCAT/////////////////////
 	var matchfound2 = false;
-	var semimatchfound2 = false;
+
 	var subcatlast2 ={};
 	var UseCSubCat2={};
 	var usecase2 ={};
 var a,b;	
 	$scope.entervalueSubcat2 = function($event,ndval,nameval){
                                         console.log(postjsonresult);
+    var semimatchfound2 = false;
 		$scope.tableReset();
 		subcatlast2 ={};
 		UseCSubCat2={};
