@@ -1231,7 +1231,7 @@ var a,b;
 			}
 			if(semimatchfound2 == true){
 				postjsonresult.RegCat[a].RegPub[b].RegCntl.push(subcatlast2);
-			    //console.log(postjsonresult);
+			    console.log(postjsonresult);
 			}
 
 		}
@@ -1260,12 +1260,13 @@ var a,b;
 									if(postjsonresult.RegCat[i].RegPub[j].RegCntl.length==1){
 										
 										postjsonresult.RegCat.splice(i, 1);
-									    //console.log(postjsonresult);
+									    console.log(postjsonresult);
 
 										break;
 									}
 									else{
 										postjsonresult.RegCat[i].RegPub[j].RegCntl.splice(k, 1);
+                                        console.log(postjsonresult);
 										break;
 										
 									}
