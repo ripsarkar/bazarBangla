@@ -3596,7 +3596,7 @@ if(usecaselist != undefined){
        
       //$scope.modalMsg="";
       $scope.showPopup = function() {
-        console.log("hi I am modal");
+        console.log(postjsonresult.RegCat.length, postjsonresult.CyberSecFunc.length, postjsonresult.Industry.length, postjsonresult.EP.length, postjsonresult.ThreatModel.length, postjsonresult.LogSource.length,postjsonresult.useCaseRuleIdName);
         if(postjsonresult.RegCat.length ==0 && postjsonresult.CyberSecFunc.length ==0 && postjsonresult.Industry.length ==0 && postjsonresult.EP.length ==0 && postjsonresult.ThreatModel.length ==0 && postjsonresult.LogSource.length ==0 && (postjsonresult.useCaseRuleIdName == undefined || postjsonresult.useCaseRuleIdName == "")){ 
       		  $scope.showModal = true; 
       		  if(postjsonresult.oobParam==""){
