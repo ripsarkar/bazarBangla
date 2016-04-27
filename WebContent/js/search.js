@@ -1197,11 +1197,17 @@ var a,b;
 			//search criteria ends
 
 			for(var i=0;i<postjsonresult.RegCat.length;i++){
+                console.log(01);
 				if(postjsonresult.RegCat[i].id == ucSubCatSuID2){
+                    console.log(02);
 					for(var j=0;j<postjsonresult.RegCat[i].RegPub.length;j++){
+                        console.log(03);
 						if(postjsonresult.RegCat[i].RegPub[j].id == ucCatSuID2){
+                            console.log(04);
 							for(var k=0;k<postjsonresult.RegCat[i].RegPub[j].RegCntl.length;k++){
+                                console.log(05);
 								if(postjsonresult.RegCat[i].RegPub[j].RegCntl[k].id == subcatlast2["id"]){
+                                    console.log(06);
 									totalmatchfound2 = true;
 									break;
 								}
