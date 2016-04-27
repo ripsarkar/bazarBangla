@@ -1169,7 +1169,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	var subcatlast2 ={};
 	var UseCSubCat2={};
 	var usecase2 ={};
-	
+var a,b;	
 	$scope.entervalueSubcat2 = function($event,ndval,nameval){
 		
 		$scope.tableReset();
@@ -1206,6 +1206,8 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 								}
 							}
 							//alert("semimatchfound2");
+                            a = i;
+                            b=j;
 							semimatchfound2 = true;
 							break;
 							}
@@ -1226,7 +1228,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 			    //console.log(postjsonresult);
 			}
 			if(semimatchfound2 == true){
-				postjsonresult.RegCat[i].RegPub[j].RegCntl.push(subcatlast2);
+				postjsonresult.RegCat[a].RegPub[b].RegCntl.push(subcatlast2);
 			    //console.log(postjsonresult);
 			}
 
