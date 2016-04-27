@@ -1171,7 +1171,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	var usecase2 ={};
 var a,b;	
 	$scope.entervalueSubcat2 = function($event,ndval,nameval){
-		
+                                        console.log(postjsonresult);
 		$scope.tableReset();
 		subcatlast2 ={};
 		UseCSubCat2={};
