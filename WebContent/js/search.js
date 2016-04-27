@@ -1208,6 +1208,8 @@ var a,b;
 							//alert("semimatchfound2");
                             a = i;
                             b=j;
+                            console.log(i,j);
+                            console.log(a,b);
 							semimatchfound2 = true;
 							break;
 							}
