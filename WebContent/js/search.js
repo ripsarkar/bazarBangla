@@ -3611,7 +3611,9 @@ if(usecaselist != undefined){
        		  $scope.callService();
        	  }
         }
-      
+        $scope.dontShowAll = function(){
+            $scope.showModal = false;
+        }
         $scope.userMsg = "Please select search criteria from left";
         
         $scope.showPopup();
