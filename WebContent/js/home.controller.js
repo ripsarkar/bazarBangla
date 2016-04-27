@@ -215,7 +215,7 @@ var mj = [];
                       
    	            }).error(function (error) {
    	             $rootScope.loadinganimation = false;
-   	             alert("Internal server error");
+   	             $location.path('/login');
    	            });
   		  
   	  }
