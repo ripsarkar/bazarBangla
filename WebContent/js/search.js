@@ -796,8 +796,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	
 //////////////////CODE FOR CYBERSEC//////////////////////
 
-	var matchfound = false;
-	var semimatchfound = false;
+
 	var subcatlast ={};
 	var UseCSubCat={};
 	var usecase ={};
@@ -816,6 +815,8 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	}
 	
 	$scope.entervalueSubcat = function($event,ndval,nameval){
+    var matchfound = false;
+    var semimatchfound = false;
 		 $scope.tableReset();
 		
 		subcatlast ={};
@@ -1164,14 +1165,14 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 
 //////////////////END OF CODE FOR CYBERSEC///////////////	
 ////////////////////CODE FOR REGCAT/////////////////////
-	var matchfound2 = false;
-	var semimatchfound2 = false;
+
 	var subcatlast2 ={};
 	var UseCSubCat2={};
 	var usecase2 ={};
 	
 	$scope.entervalueSubcat2 = function($event,ndval,nameval){
-		
+    var matchfound2 = false;
+    var semimatchfound2 = false;
 		$scope.tableReset();
 		subcatlast2 ={};
 		UseCSubCat2={};
