@@ -29,11 +29,11 @@ function(event, toState, toParams, fromState, fromParams){
 		var dec = decodeURIComponent(loginPik);
 		mj[1] = Aes.Ctr.decrypt(dec, "rip", 256);
 		//token for session
-		*/
+		
 
 		var tokenForSession = stringForUsername[0].split("SESSION_ID=");
 		$rootScope.tFSession = tokenForSession[1];
-		$window.location.href = $window.location.protocol+"/#/home";
+		$window.location.href = $window.location.protocol+"/#/home";*/
 		var mj = [];
 
 
