@@ -251,19 +251,37 @@ word-wrap: break-word;
 	border-top: 0px solid #DDD !important;
 	vertical-align:top !important;
 }
+.mkcenter{
+    text-align: center;
+}
+.vmmid{
+    vertical-align: middle !important;
+}
 .activeiconred{
-	background-image:url("../img/iconsprite2.png");
-	background-repeat: no-repeat;
-	background-position: 25px -147px;
-	background-size: 61px 204px;
-	text-indent: -9999px;
+background-color: #f00;
+border-radius: 60px;
+float: left;
+visibility: unset;
+color: #f00;
+width: 12px;
+font-size: 9px;
+vertical-align: middle;
+margin-left: 13px;
 }
 .activeicongreen{
-	background-image:url("../img/iconsprite2.png");
-	background-repeat: no-repeat;
-	background-position: 25px -172px;
-	background-size: 61px 204px;
-	text-indent: -9999px;
+background-color: #0f0;
+border-radius: 60px;
+float: left;
+visibility: unset;
+color: #0f0;
+width: 12px;
+font-size: 9px;
+vertical-align: middle;
+margin-left: 13px;
+}
+.adjustExpire{
+    padding-top: 30px;
+    font-weight: bold;
 }
 .checkboxstyle input{
 	/* visibility:hidden; */
@@ -665,7 +683,7 @@ a {
 .logindesign {}
 
 .log-reg {
-    padding: 30px 80px 30px 30px;
+    padding: 30px 23px 30px 30px;
     background: #fff;
     border-radius: 4px;
     color: #848484;
@@ -696,8 +714,10 @@ a {
 
 .log-reg label,
 .log-reg a {
-    color: #99a3b1;
-    font-weight: 400;
+    color: #ffffff;
+    font-weight: bolder;
+	padding: 5px;
+	font-size: 15px;
 }
 
 .log-reg a {
@@ -719,7 +739,7 @@ a {
 }
 
 .btnucsr {
-    width: 120px;
+    width: 135px;
     margin-left: 5px;
 }
 
@@ -1540,12 +1560,19 @@ margin-bottom:0px !important;
     display: inline-block;
   }
   
-   .loginbtn{
-  	margin-top:20%;
- 	padding-left:35%
+ .loginbtn1{
+  	margin-top:7%;
+ 	padding-left:35%;
+ 	font-weight: bold;
    
   }
    
+.loginbtn2{
+  	margin-top:9%;
+ 	padding-left:35%;
+ 	font-weight: bold;
+   
+  }
  a.read-more, a.read-less {
 	cursor: pointer;
 	color: blue;

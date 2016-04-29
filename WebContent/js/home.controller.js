@@ -19,32 +19,36 @@ function(event, toState, toParams, fromState, fromParams){
 	if ($location.protocol() !== 'https') {
         $window.location.href = $location.absUrl().replace('http', 'https');
     }
-		var usernameId;
+		/*var usernameId;
 		angular.element(document).ready(function(){
 		usernameId = window.location.href;
 		});
-		/*var stringForUsername = usernameId.split("&");
-		var mj = stringForUsername[1].split("=");
+		var stringForUsername = usernameId.split("&");
+		var mj = stringForUsername[1].split("nU=");
+		var loginPik = mj[1];
+		var dec = decodeURIComponent(loginPik);
+		mj[1] = Aes.Ctr.decrypt(dec, "rip", 256);
 		//token for session
-		var tokenForSession = stringForUsername[0].split("=");
-		console.log(tokenForSession[1]);
-		//localStorage.setItem("tFSession", tokenForSession[1]);
-		$rootScope.tFSession = tokenForSession[1];*/
-		$window.location.href = "https://ucl.mybluemix.net/#/home";
+		*/
 
-	   // console.log("dataloading value::"+$rootScope.dataLoading);
-	   		var mj = usernameId.split("=");
+		var tokenForSession = stringForUsername[0].split("SESSION_ID=");
+		$rootScope.tFSession = tokenForSession[1];
+		$window.location.href = $window.location.protocol+"/#/home";
+		var mj = [];
+
 
 	    if(!localStorage.token){
-	   	 var promise1= UserAuthFactory.login(mj[1]).success(function(data) {
+
+	   	 var promise1= UserAuthFactory.login().success(function(data) {
+
 	   	       
 	   	          AuthenticationFactory.isLogged = true;
 	   	          
-	   	          //$window.sessionStorage.token = data.token;
 	   	          localStorage.setItem("token", data.token);
 	   	          localStorage.setItem("isLoggedIn", true);
-	   	         
-	   	             
+	   	         mj[1] = data.user;
+	   	         $rootScope.tFSession = data.sessionId;
+
 	   	        }).error(function(data, status, headers, config) {
 	   	          //alert('There could be some temporary technical problem. Please refresh / try again  and contact your system administrator');
 			   	       if (status == 403) {
@@ -214,7 +218,7 @@ function(event, toState, toParams, fromState, fromParams){
                       
    	            }).error(function (error) {
    	             $rootScope.loadinganimation = false;
-   	             alert("Internal server error");
+   	             $location.path('/login');
    	            });
   		  
   	  }

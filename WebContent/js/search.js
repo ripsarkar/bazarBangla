@@ -1171,7 +1171,9 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	var usecase2 ={};
 	
 	$scope.entervalueSubcat2 = function($event,ndval,nameval){
-    var matchfound2 = false;
+
+		  var matchfound2 = false;
+
     var semimatchfound2 = false;
 		$scope.tableReset();
 		subcatlast2 ={};
@@ -2936,7 +2938,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
                     }
                 }else if($scope.input[i].Label == "Transactional Data"){
                     $scope.Transactionaldata.push($scope.input[i]);
-                } else if($scope.input[i].Label == "Referential Data"){
+                } else if($scope.input[i].Label == "Contextual Data"){
                     $scope.ReferentialData.push($scope.input[i]);
                 } else if($scope.input[i].Label == "Event Name/Category"){
                     $scope.EventNameCategory.push($scope.input[i]);
@@ -2972,7 +2974,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
                 for (var j = 0; j < refedata.length; j++) {
                     var objr = {};
                     if (j == 0) {
-                        objr["Label"] = "Referential Data";
+                        objr["Label"] = "Contextual Data";
                         objr["Value"] = refedata[j].Value;
                     } else {
                         objr["Label"] = "";
@@ -3612,7 +3614,9 @@ if(usecaselist != undefined){
        		  $scope.callService();
        	  }
         }
-      
+        $scope.dontShowAll = function(){
+            $scope.showModal = false;
+        }
         $scope.userMsg = "Please select search criteria from left";
         
         $scope.showPopup();
