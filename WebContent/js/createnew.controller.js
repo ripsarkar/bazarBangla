@@ -292,7 +292,9 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             }
         }*/
 
-
+        $scope.checkAll = function() {
+            $scope.user.roles = angular.copy($scope.roles);
+          };
 
 $scope.chckindustry = function() {
     Indtsyarray = [];
