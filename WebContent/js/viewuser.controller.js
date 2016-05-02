@@ -1,5 +1,5 @@
 //wrting the controller for viewuser page
-app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", function($scope, ViewUserService, $rootScope){
+app.controller("viewUserController",["$scope","ViewUserService", "$rootScope","$http", function($scope, ViewUserService, $rootScope,$http){
 	
 	// code for extend user expiration
 	/*$scope.extendUser = function(email){
@@ -90,12 +90,17 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", f
 	/*-----------------search function starts-----------------*/
 	$scope.userList=[];
 	$scope.clickme=function(){
-		
+		if($scope.expiring == false){
 		ViewUserService.getUserDetails($scope.selectedCompany.SurrId).then(function(resultname)
 				{
 					$scope.userList = resultname.Users;					
 				});
-
+		}
+		else{
+			$http.get($rootScope.url+"/fetchExpiredUser/"+$scope.selectedCompany.SurrId).success(function(data){
+				$scope.userList = data.Users;
+			});
+			}
     }
     
 	/*-----------------/search function ends-----------------*/
