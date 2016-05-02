@@ -1476,6 +1476,10 @@ input[type=checkbox]:checked + label {
 label{
 font-weight: 400;
 }
+.checkList {
+	float:left;
+	width:100%;
+}
 
 .panel-body {
     padding: 0px;
