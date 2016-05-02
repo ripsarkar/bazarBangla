@@ -79,7 +79,15 @@ app.service("UsecaseService", function() {
 app.controller("UsecaseCtrlController", ["$scope", "$rootScope", "$state", "$http", 'UsecaseService',
 function($scope, $rootScope, $state, $http, UsecaseService) {
 
-
+	$scope.roles = [
+	                'guest', 
+	                'user', 
+	                'customer', 
+	                'admin'
+	              ];
+	              $scope.user = {
+	                roles: ['user']
+	              };
     $scope.pagemain = {
         main: true,
         usecase: false,
