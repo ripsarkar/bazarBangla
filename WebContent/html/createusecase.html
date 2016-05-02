@@ -73,8 +73,8 @@
                                             </option>
                                         </select> -->
                                         
-                                       <div class="checkList" ng-repeat="industrydata in industrydatas"> 
-											<label ng-repeat="industrydata in industrydatas  | orderBy:'Name'" value="{{industrydata.SurrId}}">
+                                       <div class="checkList" ng-repeat="industrydata in industrydatas  | orderBy:'Name'"> 
+											<label value="{{industrydata.SurrId}}">
 											  <input type="checkbox" checklist-model="UsecaseIntry" checklist-value="{{industrydata.SurrId}}"> {{industrydata.Name}}
 											</label>
 										<div>
