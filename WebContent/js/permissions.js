@@ -12,6 +12,7 @@ app.controller("permissionsCtrl",["$scope","$http", "$rootScope","$q","$timeout"
 		$scope.dummyMembertabOrga = true;
       }
   });
+  $scope.roleListDisPlay = true;
       if($rootScope.tabName == "Role"){
 		$scope.roleListDisPlay = false;
       }
