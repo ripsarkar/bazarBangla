@@ -105,7 +105,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
     var loadccker = 0;
     var backassgin =  null;
     var Indtsyarray = [];
-    
+    $scope.UsecaseIntry = [];
     $scope.reSet = function() {
         $scope.frameWork = '';
         $scope.useCaseCat = '';
@@ -313,14 +313,16 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
     }
 }*/
     $scope.chckindustryCheckbox = function($event,industDatas) {
+        Indtsyarray = [];
         if(angular.element($event.currentTarget).is(':checked') == true){
             var Indtsy = {};
             Indtsy.surrId = industDatas;
             Indtsyarray.push(Indtsy);
+            $scope.UsecaseIntry.push(Indtsyarray);
         }else{
-            for(i=0;i<Indtsyarray.length;i++){
-                if(Indtsyarray[i] == industDatas){
-                    Indtsyarray.splice(i,1);
+            for(i=0;i<$scope.UsecaseIntry.length;i++){
+                if($scope.UsecaseIntry[i] == industDatas){
+                    $scope.UsecaseIntry.splice(i,1);
                     break;
                 }
             }
