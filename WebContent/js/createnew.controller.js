@@ -168,7 +168,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             $scope.UsecaseCatgChange();
         }
     }
-    
+
     $scope.frameWorkUsecase = function() {
         $rootScope.loadinganimation = true;
         if ($scope.frameWork != '') {
@@ -294,7 +294,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
 
 
 
-$scope.chckindustry = function() {
+/*$scope.chckindustry = function() {
     Indtsyarray = [];
     if (typeof $scope.UsecaseIntry != 'undefined' && $scope.UsecaseIntry.length > 0) {
 
@@ -311,8 +311,22 @@ $scope.chckindustry = function() {
             Indtsyarray.push(Indtsy);
         }
     }
-}
-
+}*/
+    $scope.chckindustryCheckbox = function(industDatas) {
+        if(angular.element($event.currentTarget).is(':checked') == true){
+            var Indtsy = {};
+            Indtsy.surrId = industDatas;
+            Indtsyarray.push(Indtsy);
+        }else{
+            for(i=0;i<Indtsyarray.length;i++){
+                if(Indtsyarray[i] == industDatas){
+                    Indtsyarray.splice(i,1);
+                    break;
+                }
+            }
+        }
+    }
+    
 $scope.goTo = function() {
     var Indtsyarray = [];
     for (var i = 0; i < $scope.UsecaseIntry.length; i++) {
