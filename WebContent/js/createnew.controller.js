@@ -79,9 +79,6 @@ app.service("UsecaseService", function() {
 app.controller("UsecaseCtrlController", ["$scope", "$rootScope", "$state", "$http", 'UsecaseService',
 function($scope, $rootScope, $state, $http, UsecaseService) {
 
-	$scope.user = {
-		    roles: ['Energy']
-		  };
 
     $scope.pagemain = {
         main: true,
@@ -299,7 +296,6 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
 
 $scope.chckindustry = function() {
     Indtsyarray = [];
-    console.log(">>>-->>>"+$scope.user.roles);
     if (typeof $scope.UsecaseIntry != 'undefined' && $scope.UsecaseIntry.length > 0) {
 
         for (var i=0;i<$scope.UsecaseIntry.length-1;i++){
