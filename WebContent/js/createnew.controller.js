@@ -316,7 +316,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
         Indtsyarray = [];
         if(angular.element($event.currentTarget).is(':checked') == true){
             var Indtsy = {};
-            Indtsy.surrId = industDatas;
+            Indtsy = industDatas;
             Indtsyarray.push(Indtsy);
             $scope.UsecaseIntry.push(Indtsy);
         }else{
