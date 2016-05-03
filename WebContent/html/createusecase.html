@@ -14,7 +14,7 @@
         <div class="row">
             <div class="tabs">
                 <div class="tabsreg">
-                    <form name="CrtUsecaseFrm" novalidate autocomplete="off">
+                   <!--  <form name="CrtUsecaseFrm" novalidate autocomplete="off"> -->
                         <div class="margintp1 col-md-12">
                             <div class="row">
                                 <div class="col-md-12">
@@ -75,7 +75,7 @@
                                         
                                        <div class="checkList" ng-repeat="industrydata in industrydatas  | orderBy:'Name'"> 
 											<label value="{{industrydata.SurrId}}">
-											  <input type="checkbox" checklist-model="UsecaseIntry" checklist-value="{{industrydata.SurrId}}"> {{industrydata.Name}}
+											  <input type="checkbox" checklist-model="UsecaseIntry" checklist-value="{{industrydata.SurrId}}" ng-change="chckindustry()"> {{industrydata.Name}}
 											</label>
 										</div>
                                     </div>
@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                   <!--  </form> -->
                     <script>
                     angular.element("form").keypress(function(event) {
 						if(event.which == 13){
