@@ -74,7 +74,7 @@
                                         </select> -->
                                         
 											<label class="checkList" ng-repeat="industrydata in industrydatas  | orderBy:'Name'" value="{{industrydata.SurrId}}">
-											  <input type="checkbox" checklist-model="UsecaseIntry" checklist-value="{{industrydata.SurrId}}" ng-checked="chckindustry()"> {{industrydata.Name}}
+											  <input type="checkbox" checklist-model="addInd" checklist-value="{{industrydata.SurrId}}" ng-checked="addInd()"> {{industrydata.Name}}
 											</label>
                                     </div>
                                 </div>

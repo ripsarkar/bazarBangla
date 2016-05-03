@@ -1939,7 +1939,12 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         Indtsyarray.length = 0;
                     }
                 }
-
+                $scope.addInd = [];
+                $scope.addInd = function(){
+                	alert("working");
+                	console.log($scope.addInd.length);
+                }
+                
                 $scope.chckindustry = function() {
                     Indtsyarray = [];
 
