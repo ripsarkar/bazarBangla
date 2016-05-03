@@ -318,7 +318,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             var Indtsy = {};
             Indtsy.surrId = industDatas;
             Indtsyarray.push(Indtsy);
-            $scope.UsecaseIntry.push(Indtsyarray);
+            $scope.UsecaseIntry.push(Indtsy);
         }else{
             for(i=0;i<$scope.UsecaseIntry.length;i++){
                 if($scope.UsecaseIntry[i] == industDatas){
