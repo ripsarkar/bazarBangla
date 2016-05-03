@@ -312,7 +312,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
         }
     }
 }*/
-    $scope.chckindustryCheckbox = function(industDatas) {
+    $scope.chckindustryCheckbox = function($event,industDatas) {
         if(angular.element($event.currentTarget).is(':checked') == true){
             var Indtsy = {};
             Indtsy.surrId = industDatas;
@@ -326,7 +326,6 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             }
         }
     }
-    
 $scope.goTo = function() {
     var Indtsyarray = [];
     for (var i = 0; i < $scope.UsecaseIntry.length; i++) {
