@@ -1618,7 +1618,11 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
 
 app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$http", 'UsecaseService',
         function($scope, $rootScope, $state, $http, UsecaseService) {
-
+			$scope.addInd = [];
+		    $scope.addIndustry = function(){
+		    	alert("working");
+		    	console.log($scope.addInd.length);
+		    }
             $scope.SamePageReload = function() {
                 $state.go($state.current, {}, {
                     reload: true
@@ -1939,11 +1943,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         Indtsyarray.length = 0;
                     }
                 }
-                $scope.addInd = [];
-                $scope.addInd = function(){
-                	alert("working");
-                	console.log($scope.addInd.length);
-                }
+                
                 
                 $scope.chckindustry = function() {
                     Indtsyarray = [];
