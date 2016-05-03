@@ -75,7 +75,7 @@
                                         
                                        <div class="checkList" ng-repeat="industrydata in industrydatas  | orderBy:'Name'"> 
 											<label value="{{industrydata.SurrId}}">
-											  <input type="checkbox" checklist-model="UsecaseIntry" checklist-value="{{industrydata.SurrId}}" ng-checked="chckindustry()"> {{industrydata.Name}}
+											  <input type="checkbox" checklist-model="user.roles" checklist-value="{{industrydata.SurrId}}" ng-checked="chckindustry()"> {{industrydata.Name}}
 											</label>
 										</div>
                                     </div>

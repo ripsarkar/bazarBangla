@@ -79,6 +79,9 @@ app.service("UsecaseService", function() {
 app.controller("UsecaseCtrlController", ["$scope", "$rootScope", "$state", "$http", 'UsecaseService',
 function($scope, $rootScope, $state, $http, UsecaseService) {
 
+	$scope.user = {
+		    roles: ['Energy']
+		  };
 
     $scope.pagemain = {
         main: true,
@@ -105,7 +108,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
     var loadccker = 0;
     var backassgin =  null;
     var Indtsyarray = [];
-    $scope.UsecaseIntry = [];
+    
     $scope.reSet = function() {
         $scope.frameWork = '';
         $scope.useCaseCat = '';
@@ -292,13 +295,11 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             }
         }*/
 
-        $scope.checkAll = function() {
-            $scope.user.roles = angular.copy($scope.roles);
-          };
+
 
 $scope.chckindustry = function() {
     Indtsyarray = [];
-    console.log(">>>>>"+$scope.UsecaseIntry.length);
+    console.log(">>>-->>>"+$scope.user.roles);
     if (typeof $scope.UsecaseIntry != 'undefined' && $scope.UsecaseIntry.length > 0) {
 
         for (var i=0;i<$scope.UsecaseIntry.length-1;i++){
