@@ -298,7 +298,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
 
 $scope.chckindustry = function() {
     Indtsyarray = [];
-    console.log(JSON.stringify($scope.UsecaseIntry));
+    console.log($scope.UsecaseIntry.length);
     if (typeof $scope.UsecaseIntry != 'undefined' && $scope.UsecaseIntry.length > 0) {
 
         for (var i=0;i<$scope.UsecaseIntry.length-1;i++){
