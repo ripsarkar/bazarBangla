@@ -89,6 +89,11 @@
                             </div>
                         </div>
                     </form>
+                    <div class="checkList" ng-repeat="industrydata in industrydatas  | orderBy:'Name'"> 
+											<label value="{{industrydata.SurrId}}">
+											  <input type="checkbox" checklist-model="UsecaseIntry" checklist-value="{{industrydata.SurrId}}"> {{industrydata.Name}}
+											</label>
+										</div>
                     <script>
                     angular.element("form").keypress(function(event) {
 						if(event.which == 13){
