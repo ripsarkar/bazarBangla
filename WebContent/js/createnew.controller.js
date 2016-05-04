@@ -328,6 +328,24 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             }
         }
     }
+    $scope.Items = [{
+        Name: "Item one"
+    }, {
+        Name: "Item two"
+    }, {
+        Name: "Item three"
+    }];
+    $scope.checkAll = function () {
+        if ($scope.selectedAll) {
+            $scope.selectedAll = true;
+        } else {
+            $scope.selectedAll = false;
+        }
+        angular.forEach($scope.Items, function (item) {
+            item.Selected = $scope.selectedAll;
+        });
+
+    };
 $scope.goTo = function() {
     var Indtsyarray = [];
     for (var i = 0; i < $scope.UsecaseIntry.length; i++) {

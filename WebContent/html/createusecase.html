@@ -74,9 +74,20 @@
                                         </select> -->
                                         
 											<label class="checkList" ng-repeat="industrydata in industrydatas  | orderBy:'Name'" value="{{industrydata.SurrId}}">
-											  <!-- <input type="checkbox" checklist-model="UsecaseIntry" checklist-value="{{industrydata.SurrId}}" ng-checked="chckindustry()"> -->
                                               <input type="checkbox" ng-click="chckindustryCheckbox($event,industrydata.SurrId)">{{industrydata.Name}}
 											</label>
+											<div>
+											    <ul>
+											        <li>
+											            <input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" />Select All
+											        </li>
+											        <li ng-repeat="item in Items">
+											            <label>
+											                <input type="checkbox" ng-model="item.Selected" /> {{item.Name}}
+											            </label>
+											        </li>
+											    </ul>
+											</div>
                                     </div>
                                 </div>
                             </div>
