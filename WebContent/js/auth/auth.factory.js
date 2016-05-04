@@ -39,7 +39,7 @@
 	 // console.log($window.sessionStorage.token)
       if (localStorage.token) {
           config.headers['authorization'] = localStorage.token;
-          config.headers['Content-Type'] = "application/json";
+          //config.headers['Content-Type'] = "application/json";
           //config.headers['session_id'] = localStorage.tFSession;
           config.headers['session_id'] = $rootScope.tFSession;
       }
