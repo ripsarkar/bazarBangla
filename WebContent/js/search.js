@@ -3740,7 +3740,8 @@ if(usecaselist != undefined){
             method : 'POST',
             headers : {
                 'Accept': 'application/xml',
-                'Content-type' : 'application/x-zip'
+                'Content-type' : 'application/x-zip',
+                'Content-type' : 'text/html'
             },
             data:JSON.stringify(postJson),
             responseType : 'arraybuffer'
