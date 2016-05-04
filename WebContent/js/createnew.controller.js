@@ -341,7 +341,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
         } else {
             $scope.selectedAll = false;
         }
-        angular.forEach($scope.Items, function (item) {
+        angular.forEach($scope.industrydatas, function (industrydata) {
         	industrydata.Selected = $scope.selectedAll;
         });
 
