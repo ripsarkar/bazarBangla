@@ -1717,7 +1717,36 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
         }
     }
 
+    $scope.chckindustryCheckbox = function($event,industDatas) {
+        Indtsyarray = [];
+        if(angular.element($event.currentTarget).is(':checked') == true){
+            var Indtsy = {};
+            Indtsy = industDatas;
+            Indtsyarray.push(Indtsy);
+            $scope.UsecaseIntry.push(Indtsy);
+        }else{
+            for(i=0;i<$scope.UsecaseIntry.length;i++){
+                if($scope.UsecaseIntry[i] == industDatas){
+                    $scope.UsecaseIntry.splice(i,1);
+                    break;
+                }
+            }
+        }
+    }
+    
+    $scope.checkAll = function () {
+        if ($scope.selectedAll) {
+            $scope.selectedAll = true;
+            $scope.UsecaseIntry.splice(0,$scope.UsecaseIntry.length);
+        } else {
+            $scope.selectedAll = false;
+        }
+        angular.forEach($scope.industrydatas, function (industrydata) {
+        	industrydata.Selected = $scope.selectedAll;
+        	$scope.UsecaseIntry.push(industrydata.SurrId);
+        });
 
+    };
     $scope.reSet = function() {
         var r = confirm("Are you sure you want to reset the form?");
         if (r == true) {

@@ -117,9 +117,18 @@
                                                         <label>Industry <span class="red"> *</span></label>
                                                         <!-- <select multiple class="form-control" ng-options="industrydata.SurrId as industrydata.Name for industrydata in industrydatas | orderBy:'Name'" required ng-model="UsecaseIntry">
                                                         </select> -->
-                                                        <label class="checkList" ng-repeat="industrydata in industrydatas  | orderBy:'Name'" value="{{industrydata.SurrId}}">
-			                                              <input type="checkbox" ng-click="chckindustryCheckbox($event,industrydata.SurrId)">{{industrydata.Name}}
-														</label>
+                                                        <div class="indList">
+														    <ul>
+														        <li>
+														            <input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /> Select All
+														        </li>
+														        <li ng-repeat="industrydata in industrydatas  | orderBy:'Name'">
+														            <label>
+														                <input type="checkbox" ng-model="industrydata.Selected" ng-click="chckindustryCheckbox($event,industrydata.SurrId)" /> {{industrydata.Name}}
+														            </label>
+														        </li>
+														    </ul>
+														</div>
                                                     </div>
                                                 </div>
                                             </div>
