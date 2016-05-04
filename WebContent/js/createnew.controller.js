@@ -1749,8 +1749,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
     };
     
-    $scope.exists = function (item, list) {
-        return list.indexOf(item) > -1;
+    $scope.exists = function (item) {
+        return $scope.selected.indexOf(item) > -1;
     };
     $scope.reSet = function() {
         var r = confirm("Are you sure you want to reset the form?");
