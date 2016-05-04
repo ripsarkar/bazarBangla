@@ -1480,6 +1480,9 @@ font-weight: 400;
 	float:left;
 	width:100%;
 }
+.indList li {
+    list-style-type: none;
+}
 
 .panel-body {
     padding: 0px;

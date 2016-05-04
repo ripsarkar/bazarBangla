@@ -328,21 +328,17 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             }
         }
     }
-    $scope.Items = [{
-        Name: "Item one"
-    }, {
-        Name: "Item two"
-    }, {
-        Name: "Item three"
-    }];
+    
     $scope.checkAll = function () {
         if ($scope.selectedAll) {
             $scope.selectedAll = true;
+            $scope.UsecaseIntry.clear();
         } else {
             $scope.selectedAll = false;
         }
         angular.forEach($scope.industrydatas, function (industrydata) {
         	industrydata.Selected = $scope.selectedAll;
+        	$scope.UsecaseIntry.push(industrydata);
         });
 
     };
