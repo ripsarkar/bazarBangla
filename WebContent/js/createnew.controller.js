@@ -1647,7 +1647,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
 
 app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$http", 'UsecaseService',
         function($scope, $rootScope, $state, $http, UsecaseService) {
-
+			$scope.selected = [];
             $scope.SamePageReload = function() {
                 $state.go($state.current, {}, {
                     reload: true
@@ -1683,7 +1683,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 $scope.frameWorkUsecase();
                 var indsarry = UsecaseService.getUpdtindsty();
                 $scope.UsecaseIntry = [];
-                $scope.selected = [];
+                
                 $scope.UsecaseIntry.length = 0;
                 for (var i = 0; i < indsarry.length; i++) {
                     $scope.UsecaseIntry.push(indsarry[i].surrId);
