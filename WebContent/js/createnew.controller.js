@@ -332,7 +332,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
     $scope.checkAll = function () {
         if ($scope.selectedAll) {
             $scope.selectedAll = true;
-            $scope.UsecaseIntry.clear();
+            $scope.UsecaseIntry.splice(0,$scope.UsecaseIntry.length);
         } else {
             $scope.selectedAll = false;
         }
