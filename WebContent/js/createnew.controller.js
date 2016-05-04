@@ -342,7 +342,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             $scope.selectedAll = false;
         }
         angular.forEach($scope.Items, function (item) {
-            item.Selected = $scope.selectedAll;
+        	industrydata.Selected = $scope.selectedAll;
         });
 
     };
