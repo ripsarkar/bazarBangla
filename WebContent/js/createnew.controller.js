@@ -1683,6 +1683,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 $scope.frameWorkUsecase();
                 var indsarry = UsecaseService.getUpdtindsty();
                 $scope.UsecaseIntry = [];
+                $scope.selected = [];
                 $scope.UsecaseIntry.length = 0;
                 for (var i = 0; i < indsarry.length; i++) {
                     $scope.UsecaseIntry.push(indsarry[i].surrId);
@@ -1747,6 +1748,10 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
         });
 
     };
+    
+    $scope.exists = function (item, list) {
+        return list.indexOf(item) > -1;
+    };
     $scope.reSet = function() {
         var r = confirm("Are you sure you want to reset the form?");
         if (r == true) {
@@ -1810,6 +1815,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     if (data.Industry.length > 0) {
                         for (var j = 0; j < data.Industry.length; j++) {
                             $scope.UsecaseIntry.push(data.Industry[j].SurrId);
+                            $scope.selected.push(data.Industry[j].SurrId);
                         }
                     }
                     $scope.chckindustry();

@@ -124,7 +124,7 @@
 														        </li>
 														        <li ng-repeat="industrydata in industrydatas  | orderBy:'Name'">
 														            <label>
-														                <input type="checkbox" ng-model="industrydata.Selected" ng-click="chckindustryCheckbox($event,industrydata.SurrId)" /> {{industrydata.Name}}
+														                <input type="checkbox" ng-checked="exists(industrydata.SurrId, selected)" ng-model="industrydata.Selected" ng-click="chckindustryCheckbox($event,industrydata.SurrId)" /> {{industrydata.Name}}
 														            </label>
 														        </li>
 														    </ul>
