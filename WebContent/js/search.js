@@ -3739,7 +3739,7 @@ if(usecaselist != undefined){
             url : resultURL,
             method : 'POST',
             headers : {
-                'Content-type' : 'application/x-zip',
+                'Content-type' : 'application/json',
             },
             data:JSON.stringify(postJson),
             responseType : 'arraybuffer'
