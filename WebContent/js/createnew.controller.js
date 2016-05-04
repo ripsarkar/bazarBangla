@@ -1812,10 +1812,13 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         updatePage: true
                     }
                     $scope.UsecaseIntry = [];
+                    $scope.selected = [];
                     if (data.Industry.length > 0) {
                         for (var j = 0; j < data.Industry.length; j++) {
                             $scope.UsecaseIntry.push(data.Industry[j].SurrId);
                             $scope.selected.push(data.Industry[j].SurrId);
+                            console.log($scope.selected.length);
+                            console.log($scope.selected);
                         }
                     }
                     $scope.chckindustry();
