@@ -338,7 +338,8 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
         }
         angular.forEach($scope.industrydatas, function (industrydata) {
         	industrydata.Selected = $scope.selectedAll;
-        	$scope.UsecaseIntry.push(industrydata.SurrId);
+        	if(industrydata.Name=='ALL')
+        		$scope.UsecaseIntry.push(industrydata.SurrId);
         });
 
     };
@@ -1744,7 +1745,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
         }
         angular.forEach($scope.industrydatas, function (industrydata) {
         	industrydata.Selected = $scope.selectedAll;
-        	$scope.UsecaseIntry.push(industrydata.SurrId);
+        	if(industrydata.Name=='ALL')
+        		$scope.UsecaseIntry.push(industrydata.SurrId);
         });
 
     };
