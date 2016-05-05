@@ -338,9 +338,8 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
         }
         angular.forEach($scope.industrydatas, function (industrydata) {
         	industrydata.Selected = $scope.selectedAll;
-        	//$scope.UsecaseIntry.push(industrydata.SurrId);
+        	$scope.UsecaseIntry.push(industrydata.SurrId);
         });
-        $scope.UsecaseIntry.push($scope.industrydatas[0].SurrId);
 
     };
 $scope.goTo = function() {
