@@ -89,6 +89,7 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope","$
 	
 	/*-----------------search function starts-----------------*/
 	$scope.userList=[];
+	$scope.isExpiringactive = false;
 	$scope.clickme=function(){
 		if($scope.isExpiringactive == false){
 		ViewUserService.getUserDetails($scope.selectedCompany.SurrId).then(function(resultname)
