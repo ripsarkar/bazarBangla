@@ -81,7 +81,7 @@
 											        <li>
 											            <input type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /> Select All
 											        </li>
-											        <li ng-repeat="industrydata in industrydatas  | orderBy:'Name'">
+											        <li ng-repeat="industrydata in industrydatas  | orderBy:'Name' | limitTo:1-industrydatas.length">
 											            <label>
 											                <input type="checkbox" ng-model="industrydata.Selected" ng-click="chckindustryCheckbox($event,industrydata.SurrId)" /> {{industrydata.Name}}
 											            </label>
