@@ -102,9 +102,12 @@ word-wrap: break-word;
 }
 .indList {
     border:1px solid black;
+    height: 83px;
+	width: 500px;
 }
 .indList li {
     list-style-type: none;
+    display: inline-block;
 }
 .tree {
     min-height:20px;
