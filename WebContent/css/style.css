@@ -103,11 +103,12 @@ word-wrap: break-word;
 .indList {
     border:1px solid black;
     height: 114px;
-	width: 500px;
+	width: 845px;
 }
 .indList li {
     list-style-type: none;
     display: inline-block;
+    width: 200px;
 }
 .tree {
     min-height:20px;
