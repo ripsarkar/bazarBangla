@@ -320,6 +320,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             Indtsyarray.push(Indtsy);
             $scope.UsecaseIntry.push(Indtsy);
         }else{
+        	
             for(i=0;i<$scope.UsecaseIntry.length;i++){
                 if($scope.UsecaseIntry[i] == industDatas){
                     $scope.UsecaseIntry.splice(i,1);

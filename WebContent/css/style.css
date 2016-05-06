@@ -100,6 +100,12 @@ word-wrap: break-word;
 .parenttreenone, .parenttreenone ul{
 	padding:0 !important;
 }
+.indList {
+    border:1px solid black;
+}
+.indList li {
+    list-style-type: none;
+}
 .tree {
     min-height:20px;
     padding:19px;
@@ -1480,9 +1486,8 @@ font-weight: 400;
 	float:left;
 	width:100%;
 }
-.indList li {
-    list-style-type: none;
-}
+
+
 
 .panel-body {
     padding: 0px;
