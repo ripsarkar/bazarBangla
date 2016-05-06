@@ -67,11 +67,14 @@
                                 <div class="margintp1">
                                     <div class="col-md-3">
                                         <label>Industry <span class="red"> *</span></label>
+                                        	
 											<div class="indList">
-											    <ul>
+												<ul>
 											        <li>
 											            <input type="checkbox" id="all" ng-model="selectedAll" ng-click="checkAll()"/> Select All
 											        </li>
+												</ul>
+											    <ul>
 											        <li ng-repeat="industrydata in industrydatas  | orderBy:'Name'">
 											            <label ng-hide="industrydata.Name=='ALL'">
 											                <input type="checkbox" ng-model="industrydata.Selected" ng-click="chckindustryCheckbox($event,industrydata.SurrId)" /> {{industrydata.Name}}
