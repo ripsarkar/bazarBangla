@@ -320,13 +320,25 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             Indtsyarray.push(Indtsy);
             $scope.UsecaseIntry.push(Indtsy);
         }else{
-        	
-            for(i=0;i<$scope.UsecaseIntry.length;i++){
-                if($scope.UsecaseIntry[i] == industDatas){
-                    $scope.UsecaseIntry.splice(i,1);
-                    break;
+        	var index = $scope.UsecaseIntry.indexOf($scope.industrydatas[0].SurrId);
+        	if(index > -1){
+        		$scope.UsecaseIntry.splice(index, 1);
+        		$scope.selectedAll = false;
+        		angular.forEach($scope.industrydatas, function (industrydata) {
+                	
+                	if(industrydata.SurrId!=industDatas && industrydata.Name!='ALL')
+                		$scope.UsecaseIntry.push(industrydata.SurrId);
+                });
+        	}
+        	else{
+        		for(i=0;i<$scope.UsecaseIntry.length;i++){
+                    if($scope.UsecaseIntry[i] == industDatas){
+                        $scope.UsecaseIntry.splice(i,1);
+                        break;
+                    }
                 }
-            }
+        	}
+            
         }
     }
     
