@@ -341,7 +341,6 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
         	if(industrydata.Name=='ALL')
         		$scope.UsecaseIntry.push(industrydata.SurrId);
         });
-
     };
 $scope.goTo = function() {
     var Indtsyarray = [];
