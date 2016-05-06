@@ -110,6 +110,7 @@ word-wrap: break-word;
     display: inline-block;
     width: 200px;
 }
+ul.indVals  li:first-child{  display:none;}
 .tree {
     min-height:20px;
     padding:19px;
