@@ -20,14 +20,14 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope","$
 		ViewUserService.getUserDetails($scope.selectedCompany.SurrId).then(function(resultname)
 				{
 					$scope.userList = resultname.Users;	
-							$rootScope.loadinganimation = true;
+							$rootScope.loadinganimation = false;
 				
 				});
 		}
 		else{
 			$http.get($rootScope.url+"/fetchExpiredUser/"+$scope.selectedCompany.SurrId).success(function(data){
 				$scope.userList = data.Users;
-						$rootScope.loadinganimation = true;
+						$rootScope.loadinganimation = false;
 
 			});
 			}
