@@ -16,14 +16,21 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope","$
 		$rootScope.loadinganimation = true;
 
 		$http.get($rootScope.url+"/deleteUser/"+usersurrId+"/"+activityStatus).success(function(result){
-		
-		/*ViewUserService.getUserDetails($scope.selectedCompany.SurrId+"/"+expirelist).then(function(resultname)
+		if($scope.isExpiringactive == false){
+		ViewUserService.getUserDetails($scope.selectedCompany.SurrId).then(function(resultname)
 				{
-							$rootScope.loadinganimation = false;
+					$scope.userList = resultname.Users;	
+							$rootScope.loadinganimation = true;
+				
+				});
+		}
+		else{
+			$http.get($rootScope.url+"/fetchExpiredUser/"+$scope.selectedCompany.SurrId).success(function(data){
+				$scope.userList = data.Users;
+						$rootScope.loadinganimation = true;
 
-					$scope.userList = resultname.Users;					
-				});*/
-
+			});
+			}
 		}).error(function(result){
 			
 		})
