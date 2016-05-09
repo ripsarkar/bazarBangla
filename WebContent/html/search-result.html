@@ -38,7 +38,7 @@
 						<td style="width: 9%;">{{result.RuleIdValue}}
 						</td>
 						<td><a class="dimensionTableBasic" href="javascript:void(0);"
-							ng-click="getResult(result)"> {{result.Rule}}</a></td>
+							ng-click="getResult(result)"> {{result.RuleIdValue}}:{{result.Rule}}</a></td>
 						<td style="width: 9%;" align="left" class="oobvalue">{{result.oob_flag}}</td>
 						<td style="width: 7%;" align="left" ng-hide="exported">
 							<div ng-show="result.exportYes">
@@ -187,8 +187,8 @@
 	<!-- relationship table -->
 	<div ng-show="dimensionrelationtable">
 		<h4>
-			<span class="relacategoryBold">Relationships </span><span
-				class="relacategoryN">for </span><span class="relacategoryBold">
+			<!-- <span class="relacategoryBold">Relationships </span><span
+				class="relacategoryN">for </span><span class="relacategoryBold"> -->
 				Use Case # : </span> <span class="relacategoryN">{{useCaseNo}} </span><span
 				class="relacategoryBold"> Use Case Name : </span><span
 				class="relacategoryN">{{useCaseName}} </span>
@@ -245,7 +245,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th class="tableheaderLeft">Use Case Rule:</th>
+							<th class="tableheaderLeft">SIEM Rules:</th>
 							<td>
 								<li ng-repeat="ucrul in dimensionucrules" class="relaList"><a
 									class="tooltiphov" data-toggle="tooltip" data-placement="left"
