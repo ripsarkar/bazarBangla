@@ -197,33 +197,10 @@
 			<div class="table table-striped relationshiptable">
 				<table class="table">
 					<tbody>
-						<tr>
-							<th class="tableheaderLeft">Regulatory category:</th>
+					    <tr>
+							<th class="tableheaderLeft">Description:</th>
 							<td>
-								<li class="relaList">
-									<div id="regcatallinucresult" class="tooltiphov"></div>
-							</li> 
-							</td>
-
-						</tr>
-
-						<tr>
-							<th class="tableheaderLeft">Essential Practice:</th>
-							<td>
-								<li ng-repeat="essenprac in dimensionessentialpractice"
-								class="relaList"><a class="tooltiphov"
-									data-toggle="tooltip" data-placement="left"
-									title="{{essenprac.desc}}" tooltip-placement="left">{{essenprac.name}}:{{essenprac.desc}}{{$last
-										? '' : ', '}}</a></li>
-							</td>
-						</tr>
-						<tr>
-							<th class="tableheaderLeft">Industry:</th>
-							<td>
-								<li ng-repeat="indus in dimensionindustry" class="relaList"><a
-									class="tooltiphov" data-toggle="tooltip" data-placement="left"
-									title="{{indus.desc}}" tooltip-placement="left">{{indus.name}}{{$last
-										? '' : ', '}}</a></li>
+								<li class="relaList"> </li>
 							</td>
 						</tr>
 						<tr>
@@ -245,6 +222,25 @@
 							</td>
 						</tr>
 						<tr>
+							<th class="tableheaderLeft">Industry:</th>
+							<td>
+								<li ng-repeat="indus in dimensionindustry" class="relaList"><a
+									class="tooltiphov" data-toggle="tooltip" data-placement="left"
+									title="{{indus.desc}}" tooltip-placement="left">{{indus.name}}{{$last
+										? '' : ', '}}</a></li>
+							</td>
+						</tr>
+						<tr>
+							<th class="tableheaderLeft">Essential Practice:</th>
+							<td>
+								<li ng-repeat="essenprac in dimensionessentialpractice"
+								class="relaList"><a class="tooltiphov"
+									data-toggle="tooltip" data-placement="left"
+									title="{{essenprac.desc}}" tooltip-placement="left">{{essenprac.name}}:{{essenprac.desc}}{{$last
+										? '' : ', '}}</a></li>
+							</td>
+						</tr>
+						<tr>
 							<th class="tableheaderLeft">SIEM Rules:</th>
 							<td>
 								<li ng-repeat="ucrul in dimensionucrules" class="relaList"><a
@@ -253,6 +249,17 @@
 										? '' : ', '}}</a></li>
 							</td>
 						</tr>
+						<tr>
+							<th class="tableheaderLeft">Regulatory category:</th>
+							<td>
+								<li class="relaList">
+									<div id="regcatallinucresult" class="tooltiphov"></div>
+							</li> 
+							</td>
+
+						</tr>
+
+												
 					</tbody>
 				</table>
 			</div>
