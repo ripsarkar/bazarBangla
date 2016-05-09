@@ -6,30 +6,28 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope","$
 		$rootScope.loadinganimation = true;
 		$http.get($rootScope.url+"/extendExpiredUser/"+usersurrId).success(function(result){
 		$rootScope.loadinganimation = false;
-			alert("User Account extended for 30 more days, thank you");
+			alert("Expiry date extended successfully");
 		}).error(function(result){
 
 		})
 	}
-	/*var expirelist = "notpresent";
-	$scope.activeUser = function(email){
+	var expirelist = "notpresent";
+	$scope.activeUser = function(usersurrId,activityStatus){
 		$rootScope.loadinganimation = true;
-		if($scope.Expiring){
-			expirelist = "present";
-		}
-		$http.get($rootScope.url+"/activateUser/"+email).success(function(result){
+
+		$http.get($rootScope.url+"/deleteUser/"+usersurrId+"/"+activityStatus).success(function(result){
 		
-		ViewUserService.getUserDetails($scope.selectedCompany.SurrId+"/"+expirelist).then(function(resultname)
+		/*ViewUserService.getUserDetails($scope.selectedCompany.SurrId+"/"+expirelist).then(function(resultname)
 				{
 							$rootScope.loadinganimation = false;
 
 					$scope.userList = resultname.Users;					
-				});
+				});*/
 
 		}).error(function(result){
 			
 		})
-	}*/
+	}
 	
 	//////////////////////////////////
 
