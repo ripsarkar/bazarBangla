@@ -2,16 +2,16 @@
 app.controller("viewUserController",["$scope","ViewUserService", "$rootScope","$http", function($scope, ViewUserService, $rootScope,$http){
 	
 	// code for extend user expiration
-	/*$scope.extendUser = function(email){
+	$scope.extendUser = function(usersurrId){
 		$rootScope.loadinganimation = true;
-		$http.get($rootScope.url+"/extendUser/"+email).success(function(result){
+		$http.get($rootScope.url+"/extendExpiredUser/"+usersurrId).success(function(result){
 		$rootScope.loadinganimation = false;
-			alert("User Account extended for 30 more days");
+			alert("User Account extended for 30 more days, thank you");
 		}).error(function(result){
 
 		})
 	}
-	var expirelist = "notpresent";
+	/*var expirelist = "notpresent";
 	$scope.activeUser = function(email){
 		$rootScope.loadinganimation = true;
 		if($scope.Expiring){
