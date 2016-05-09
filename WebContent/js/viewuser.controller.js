@@ -5,8 +5,21 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope","$
 	$scope.extendUser = function(usersurrId){
 		$rootScope.loadinganimation = true;
 		$http.get($rootScope.url+"/extendExpiredUser/"+usersurrId).success(function(result){
-		$rootScope.loadinganimation = false;
+		if($scope.isExpiringactive == false){
+		ViewUserService.getUserDetails($scope.selectedCompany.SurrId).then(function(resultname)
+				{
+					$scope.userList = resultname.Users;	
+							$rootScope.loadinganimation = false;
 			alert("Expiry date extended successfully");
+				});
+		}
+		else{
+			$http.get($rootScope.url+"/fetchExpiredUser/"+$scope.selectedCompany.SurrId).success(function(data){
+				$scope.userList = data.Users;
+						$rootScope.loadinganimation = false;
+			alert("Expiry date extended successfully");
+			});
+			}
 		}).error(function(result){
 
 		})
