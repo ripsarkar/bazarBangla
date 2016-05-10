@@ -79,7 +79,7 @@
 						<td class="vmmid">{{user.contactNo}}</td>
 						<td class="vmmid">{{user.email}}</td>
 						<td class="vmmid">{{user.expiration_date}}</td>
-						<td class="vmmid" align="center"><div class="glyphicon glyphicon-warning-sign expireIco" ng-click="extendUser(user.id)" ng-if='user.ToBeExpired=="Y" || isExpiringactive==true'></div></td>
+						<td class="vmmid" align="center"><div class="glyphicon glyphicon-alert expireIco" ng-click="extendUser(user.id)" ng-if='user.ToBeExpired=="Y" || isExpiringactive==true'></div></td>
 						<td class="vmmid"><div class="activeprev" ng-click="activeUser(user.id,user.isActive)">{{user.isActive}}</div></td>
 						 <td class="vmmid" align="center"><a ng-click="onuamedituser(user.id)"><i class="glyphicon glyphicon-edit"></i></a></td>
 						 <td class="vmmid" align="center"><a  ng-click="fnOpenPermission(user.id,user.userName,'User')"><span class="glyphicon glyphicon-thumbs-up" style="font-size: 12px;"></span></a></td>
