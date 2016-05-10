@@ -1,4 +1,17 @@
 /*-------------ripunjoy css-------------*/
+.labelInputStyle{
+    height: 46px;
+border: 1px solid #ccc;
+width: 100%;
+padding-left: 6px;
+margin-bottom: 0px;
+background-color: #008CCE;
+color: #fff;
+}
+.paddingleftrightremove{
+    padding-left: 0px;
+padding-right: 0px;
+}
 .expireIco{
 font-size: 15px !important;
 color: yellow !important;
