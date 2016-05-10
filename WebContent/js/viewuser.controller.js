@@ -6,6 +6,8 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope","$
 		$rootScope.loadinganimation = true;
 		$http.get($rootScope.url+"/extendExpiredUser/"+usersurrId).success(function(result){
 		if($scope.isExpiringactive == false){
+						$scope.expiryButton = false;
+
 		ViewUserService.getUserDetails($scope.selectedCompany.SurrId).then(function(resultname)
 				{
 					$scope.userList = resultname.Users;	
@@ -14,6 +16,8 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope","$
 				});
 		}
 		else{
+						$scope.expiryButton = true;
+
 			$http.get($rootScope.url+"/fetchExpiredUser/"+$scope.selectedCompany.SurrId).success(function(data){
 				$scope.userList = data.Users;
 						$rootScope.loadinganimation = false;
@@ -30,6 +34,8 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope","$
 
 		$http.get($rootScope.url+"/deleteUser/"+usersurrId+"/"+activityStatus).success(function(result){
 		if($scope.isExpiringactive == false){
+						$scope.expiryButton = false;
+
 		ViewUserService.getUserDetails($scope.selectedCompany.SurrId).then(function(resultname)
 				{
 					$scope.userList = resultname.Users;	
@@ -38,6 +44,7 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope","$
 				});
 		}
 		else{
+			$scope.expiryButton = true;
 			$http.get($rootScope.url+"/fetchExpiredUser/"+$scope.selectedCompany.SurrId).success(function(data){
 				$scope.userList = data.Users;
 						$rootScope.loadinganimation = false;
@@ -108,14 +115,17 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope","$
 	/*-----------------search function starts-----------------*/
 	$scope.userList=[];
 	$scope.isExpiringactive = false;
+	$scope.expiryButton = false;
 	$scope.clickme=function(){
 		if($scope.isExpiringactive == false){
+			$scope.expiryButton = false;
 		ViewUserService.getUserDetails($scope.selectedCompany.SurrId).then(function(resultname)
 				{
 					$scope.userList = resultname.Users;					
 				});
 		}
 		else{
+			$scope.expiryButton = true;
 			$http.get($rootScope.url+"/fetchExpiredUser/"+$scope.selectedCompany.SurrId).success(function(data){
 				$scope.userList = data.Users;
 			});
