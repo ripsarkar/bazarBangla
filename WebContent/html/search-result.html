@@ -128,9 +128,10 @@
 				<div class="ruleinput" ng-show="ruleinput">
 					<div class="panel panel-default tablecontrol">
 						<table class="table table-striped">
-							<tr>
-								<th class="tableheaderLeft">Event Name/Category</th>
-								<td><li ng-repeat="rule in inputDisplaydata track by $index">{{rule.Value}}</li></td>
+							<tr ng-repeat="rule in inputDisplaydata track by $index">
+								<th class="tableheaderLeft">{{rule.Label}}</th>
+								
+								<td>{{rule.Value}}</td>
 							</tr>
 						</table>
 					</div>
