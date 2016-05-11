@@ -116,7 +116,7 @@
 								<th class="tableheaderLeft">Vendor and Product</th>
 							</tr>
 							<tr ng-repeat="rule in logSource">
-								<td>{{rule.key}}
+								<th>{{rule.key}}
 								</th>
 								<td>{{rule.value}}</td>
 							</tr>
@@ -127,27 +127,21 @@
 				</div>
 				<div class="ruleinput" ng-show="ruleinput">
 					<div class="panel panel-default tablecontrol">
-
 						<table class="table table-striped">
-							<tr ng-repeat="rule in inputDisplaydata track by $index">
-								<th class="tableheaderLeft">{{rule.Label}}</th>
-								</td>
-								<td>{{rule.Value}}</td>
+							<tr>
+								<th class="tableheaderLeft">Event Name/Category</th>
+								<td><li ng-repeat="rule in inputDisplaydata track by $index">{{rule.Value}}</li></td>
 							</tr>
-
-
-
 						</table>
 					</div>
 					<div class="clearfix"></div>
-
 				</div>
 				<div class="ruleinput" ng-show="ruleoutput">
 					<div class="panel panel-default tablecontrol">
 						<table class="table table-striped">
 							<tr ng-repeat="rule in output">
 								<th class="tableheaderLeft">{{rule.Label}}</th>
-								</td>
+								
 								<td>{{rule.Value}}</td>
 							</tr>
 						</table>
