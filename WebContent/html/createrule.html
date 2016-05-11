@@ -55,11 +55,11 @@
                                 </div>
                                 <div class="col-md-4 col-sm-6">
                                     <label> Out of Box </label><br>
-								<select class="form-control valselect" ng-model="formcontrolYN">
-								<!--  ng-change="yngetDetailscr(formcontrolYN)" -->
-									<option>Yes</option>
-									<option>No</option>
-								</select>
+                                <select class="form-control valselect" ng-model="formcontrolYN">
+                                <!--  ng-change="yngetDetailscr(formcontrolYN)" -->
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="margintp1">
@@ -124,40 +124,43 @@
                         <div class="clearfix"></div>
                         <div class="ruleinput" ng-show="ruleinput">
                             <div class="row margintp1">
-                                <div class="col-md-2 paddingleftrightremove">
-                                    <label class="labelInputStyle">Transactional Data </label>
+                                <div class="col-md-4">
+                                    <label>Transactional Data </label>
                                     <select multiple ng-change="chckfunction()" class="form-control" ng-model="crtRuleTrsn">
                                         <option ng-repeat="transdata in transdatas  | orderBy:'Name'" value="{{transdata.SurrId}}">
                                             {{transdata.Name}}
                                         </option>
                                     </select>
                                 </div>
-                                <div class="col-md-2 paddingleftrightremove">
-                                    <label class="labelInputStyle">Contextual Data </label>
+                                <div class="col-md-4">
+                                    <label>Contextual Data </label>
                                     <select multiple class="form-control" ng-model="crtRuleRefr">
                                         <option ng-repeat="Referdata in Referdatas  | orderBy:'Name'" value="{{Referdata.SurrId}}">
                                             {{Referdata.Name}}
                                         </option>
                                     </select>
                                 </div>
-                                <div class="col-md-2 paddingleftrightremove">
-                                    <label class="labelInputStyle">Event Name/ Categroy </label>
+                                <div class="col-md-4">
+                                    <label>Event Name/ Categroy </label>
                                     <select multiple class="form-control" ng-model="crtRuleEventName">
                                         <option ng-repeat="eventcatdata in eventcatdatas  | orderBy:'Name'" value="{{eventcatdata.SurrId}}">
                                             {{eventcatdata.Name}}
                                         </option>
                                     </select>
                                 </div>
-                                <div class="col-md-2 paddingleftrightremove">
-                                    <label class="labelInputStyle">Event Attributes </label>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="row margintp1">
+                                <div class="col-md-4">
+                                    <label>Event Attributes </label>
                                     <select multiple class="form-control" ng-model="crtRuleEventAttribute" required>
                                         <option ng-repeat="eventAttr in dataeventAttr  | orderBy:'Name'" value="{{eventAttr.SurrId}}">
                                             {{eventAttr.Name}}
                                         </option>
                                     </select>
                                 </div>
-                                <div class="col-md-2 paddingleftrightremove">
-                                    <label class="labelInputStyle">Log Source </label>
+                                <div class="col-md-4">
+                                    <label>Log Source </label>
                                     <select multiple class="form-control" ng-model="crtRuleLogSource">
                                         <option ng-repeat="log in LogSource  | orderBy:'Name'" value="{{log.SurrId}}">
                                             {{log.Name}}
@@ -282,7 +285,7 @@
                             <div class="clearfix"></div>
                             <div class="margintp1 col-md-12">
                                 <div class="col-md-offset-4 col-md-4">
-                                	 <button type="reset" class="btn btn-none tabsbtn" id="reSet"> Clear</button>
+                                     <button type="reset" class="btn btn-none tabsbtn" id="reSet"> Clear</button>
                                     <!--ng-disabled="CreateRuleFrom.$invalid"-->
                                     <button type="submit" class="btn btn-primary tabsbtn" ng-click="crtRuleSubmit()"> Submit </button>
                                   <!--   <button class="btn btn-primary tabsbtn" ng-click="liresponse()"> Next </button> -->
