@@ -2727,6 +2727,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 		
 		$scope.useCaseNo = usecrule.IdLabel
 		$scope.useCaseName = usecrule.UseCase;
+		$scope.useCaseDesc = usecrule.description;
 
 		SearchResultService.usecaseRelationships(datasurr).success(function(output)
 		    	{		
@@ -3843,12 +3844,14 @@ if(usecaselist != undefined){
                             $scope.usecase = $scope.subcatObj.UseCase[k];
                             $scope.jsonObj["IdLabel"] = $scope.usecase.id_label;
                             $scope.jsonObj["UseCase"] = $scope.usecase.name;
+                            $scope.jsonObj["description"] = $scope.usecase.description;
                             $scope.jsonObj["UseCaseSurr"] = $scope.usecase.id;
                         } else {
                             if ($scope.usecase == null) {
                                 $scope.usecase = $scope.subcatObj.UseCase[k];
                                 $scope.jsonObj["IdLabel"] = $scope.usecase.id_label;
                                 $scope.jsonObj["UseCase"] = $scope.usecase.name;
+                                $scope.jsonObj["description"] = $scope.usecase.description;
                                 $scope.jsonObj["UseCaseSurr"] = $scope.usecase.id;
 
                             } else {
