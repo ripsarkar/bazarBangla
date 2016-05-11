@@ -78,7 +78,7 @@
 								ng-class="licreateruledetails" ng-click="lidetails()"> Rule
 									Details</a></li>
 							<li class="tabshead"><a herf="" ng-class="licreateruleinput"
-								ng-click="liinput()"> Log sources</a></li>
+								ng-click="liinput()"> Log Sources</a></li>
 							<li class="tabshead"><a herf=""
 								ng-class="licreateruleinputdata" ng-click="liinputdata()">Input
 							</a></li>
@@ -112,8 +112,8 @@
 
 						<table class="table table-striped">
 							<tr>
-								<th class="tableheaderLeft">Keyword</th>
-								<th class="tableheaderLeft">Description</th>
+								<th class="tableheaderLeft">Type</th>
+								<th class="tableheaderLeft">Vendor and Product</th>
 							</tr>
 							<tr ng-repeat="rule in logSource">
 								<td>{{rule.key}}
