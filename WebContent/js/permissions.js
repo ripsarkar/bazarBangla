@@ -120,7 +120,7 @@ $scope.$watch(function(){
                         "surrId": "9000"
                       }*/
                     ],
-                    "organizationSurrId":localStorage.getItem("surrComprip")
+                    "organizationSurrId":$rootScope.updatedOrgazingzingSurrId
                   },
                   "PermissionTo": {
                     "Subscription": [
