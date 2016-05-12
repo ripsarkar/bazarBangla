@@ -4,6 +4,8 @@
 width: 100%;
 padding-left: 6px;
 margin-bottom: 0px;
+     background-image: url("../img/ico_dateextend.png");
+     background-repeat: no-repeat;
 background-color: #008CCE;
 color: #fff;
 }
