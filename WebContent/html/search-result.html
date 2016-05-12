@@ -38,7 +38,7 @@
 						<td style="width: 9%;">{{result.RuleIdValue}}
 						</td>
 						<td><a class="dimensionTableBasic" href="javascript:void(0);"
-							ng-click="getResult(result)"> {{result.RuleIdValue}}:{{result.Rule}}</a></td>
+							ng-click="getResult(result)">{{result.Rule}}</a></td>
 						<td style="width: 9%;" align="left" class="oobvalue">{{result.oob_flag}}</td>
 						<td style="width: 7%;" align="left" ng-hide="exported">
 							<div ng-show="result.exportYes">
@@ -231,7 +231,7 @@
 								<li ng-repeat="essenprac in dimensionessentialpractice"
 								class="relaList"><a class="tooltiphov"
 									data-toggle="tooltip" data-placement="left"
-									title="{{essenprac.desc}}" tooltip-placement="left">{{essenprac.name}}:{{essenprac.desc}}{{$last
+									title="{{essenprac.desc}}" tooltip-placement="left">{{essenprac.name}}: {{essenprac.desc}}{{$last
 										? '' : ', '}}</a></li>
 							</td>
 						</tr>
@@ -240,8 +240,8 @@
 							<td>
 								<li ng-repeat="ucrul in dimensionucrules" class="relaList"><a
 									class="tooltiphov" data-toggle="tooltip" data-placement="left"
-									title="{{ucrul.desc}}" tooltip-placement="left">{{ucrul.name}}{{$last
-										? '' : ', '}}</a></li>
+									title="{{ucrul.desc}}" tooltip-placement="left">{{ucrul.id}}: {{ucrul.name}}{{$last
+										? '' : ' '}}</a></li>
 							</td>
 						</tr>
 						<tr>
