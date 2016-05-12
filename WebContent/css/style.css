@@ -4,8 +4,6 @@
 width: 100%;
 padding-left: 6px;
 margin-bottom: 0px;
-     background-image: url("../img/ico_dateextend.png");
-     background-repeat: no-repeat;
 background-color: #008CCE;
 color: #fff;
 }
@@ -14,6 +12,8 @@ color: #fff;
 padding-right: 0px;
 }
 .expireIco{
+     background-image: url("../img/ico_dateextend.png");
+     background-repeat: no-repeat;
 font-size: 15px !important;
 color: yellow !important;
 }
