@@ -14,6 +14,8 @@ padding-right: 0px;
 .expireIco{
      background-image: url("../img/ico_dateextend.png");
      background-repeat: no-repeat;
+     width: 26px;
+height: 26px;
 font-size: 15px !important;
 color: yellow !important;
 }
