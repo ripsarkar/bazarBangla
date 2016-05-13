@@ -799,7 +799,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
         $scope.relEveFieIns = function(){
             console.log("hi2");
             if($scope.relEveFieAdd != ""){
-                //angular.element(".relEveFie").prepend("<option>"+$scope.relEveFieAdd+"</option>");
+                angular.element(".relEveFie").prepend("<option>"+$scope.relEveFieAdd+"</option>");
                 console.log($scope.relEveFieAdd);
                 $scope.crtRuleEventAttribute.push($scope.relEveFieAdd);
             }
