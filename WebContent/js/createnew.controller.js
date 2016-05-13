@@ -796,7 +796,9 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
     function($scope, $rootScope, $state, $http, UsecaseService,$filter) {
         $scope.relEveFieAdd = "";
         $scope.relEveFieIns = function(){
+            console.log("hi2");
 
+console.log($scope.relEveFieAdd);
             if($scope.relEveFieAdd != ""){
                 //angular.element(".relEveFie").prepend("<option>"+$scope.relEveFieAdd+"</option>");
                 console.log($scope.relEveFieAdd);
