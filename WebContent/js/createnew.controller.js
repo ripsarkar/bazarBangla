@@ -805,7 +805,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                         relevePrese == false;
                         break;
                     }
-                })
+                });
                 
                 if(relevePrese == true){
                 angular.element(".relEveFie").prepend("<option>"+$scope.relEveFieAdd+"</option>");
