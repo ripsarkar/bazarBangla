@@ -802,7 +802,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
             if($scope.relEveFieAdd != ""){
 
                 angular.element(".relEveFie").children("option").each(function(){
-                    if(angular.element(this).val() == $scope.relEveFieAdd){
+                    if(angular.element(this).text() == $scope.relEveFieAdd){
                         relevePrese == false;
                                 return false;
                     }
