@@ -796,8 +796,8 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
     function($scope, $rootScope, $state, $http, UsecaseService,$filter) {
         $scope.relEveFieAdd = "";
         $scope.crtRuleEventAttribute = [];
-        var relevePrese = true;
         $scope.relEveFieIns = function(){
+        var relevePrese = true;
 
             if($scope.relEveFieAdd != ""){
 
