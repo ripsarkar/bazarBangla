@@ -1,4 +1,11 @@
 /*-------------ripunjoy css-------------*/
+.customefield{
+    margin-top: 4px;
+}
+.inputcusttom{
+    padding-right: 0px;
+    width: 63%;
+}
 .labelInputStyle{
     height: 46px;
 width: 100%;
