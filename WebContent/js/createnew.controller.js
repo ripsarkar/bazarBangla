@@ -794,7 +794,14 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
 
 app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http', 'UsecaseService','$filter',
     function($scope, $rootScope, $state, $http, UsecaseService,$filter) {
-        
+        $scope.relEveFieAdd = "";
+        $scope.relEveFieIns = function(){
+
+            if($scope.relEveFieAdd != ""){
+                //angular.element(".relEveFie").prepend("<option>"+$scope.relEveFieAdd+"</option>");
+                $scope.crtRuleEventAttribute.push($scope.relEveFieAdd);
+            }
+        }
     angular.element("ul.submainlinks li").removeClass("subactive");
     angular.element('li.createrule').addClass("subactive");
         $scope.formcontrolYN = "No";

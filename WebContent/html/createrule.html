@@ -154,10 +154,11 @@
                                 <div class="col-md-4">
                                     <label>Relevant Event Fields </label>
                                     <select multiple class="form-control" ng-model="crtRuleEventAttribute" required>
-                                        <option ng-repeat="eventAttr in dataeventAttr  | orderBy:'Name'" value="{{eventAttr.SurrId}}">
+                                        <option class="relEveFie" ng-repeat="eventAttr in dataeventAttr  | orderBy:'Name'" value="{{eventAttr.SurrId}}">
                                             {{eventAttr.Name}}
                                         </option>
                                     </select>
+                                    <input type="text" class="form-control" ng-model="relEveFieAdd"><button class="btn btn-primary" ng-click="relEveFieIns">Insert</button>
                                 </div>
                                 <div class="col-md-4">
                                     <label>Log Source </label>
