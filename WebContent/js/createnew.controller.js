@@ -796,12 +796,21 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
     function($scope, $rootScope, $state, $http, UsecaseService,$filter) {
         $scope.relEveFieAdd = "";
         $scope.crtRuleEventAttribute = [];
+        var relevePrese = true;
         $scope.relEveFieIns = function(){
-            console.log("hi2");
+
             if($scope.relEveFieAdd != ""){
+                angular.element(".relEveFie").children("option").each(function(){
+                    if(angular.element(this).val() == $scope.relEveFieAdd){
+                        relevePrese == false;
+                        break;
+                    }
+                })
+                
+                if(relevePrese == true){
                 angular.element(".relEveFie").prepend("<option>"+$scope.relEveFieAdd+"</option>");
-                console.log($scope.relEveFieAdd);
                 $scope.crtRuleEventAttribute.push($scope.relEveFieAdd);
+                }
             }
         }
     angular.element("ul.submainlinks li").removeClass("subactive");
