@@ -800,7 +800,9 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
         $scope.relEveFieIns = function(){
 
             if($scope.relEveFieAdd != ""){
-                angular.element(".relEveFie").children("option").each(function(){
+                angular.element(".relEveFie").prepend("<option>"+$scope.relEveFieAdd+"</option>");
+                $scope.crtRuleEventAttribute.push($scope.relEveFieAdd);
+                /*angular.element(".relEveFie").children("option").each(function(){
                     if(angular.element(this).val() == $scope.relEveFieAdd){
                         relevePrese == false;
                         break;
@@ -810,7 +812,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 if(relevePrese == true){
                 angular.element(".relEveFie").prepend("<option>"+$scope.relEveFieAdd+"</option>");
                 $scope.crtRuleEventAttribute.push($scope.relEveFieAdd);
-                }
+                }*/
             }
         }
     angular.element("ul.submainlinks li").removeClass("subactive");
