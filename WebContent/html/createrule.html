@@ -157,8 +157,8 @@
                                         <option class="relEveFie" ng-repeat="eventAttr in dataeventAttr  | orderBy:'Name'" value="{{eventAttr.SurrId}}">
                                             {{eventAttr.Name}}
                                         </option>
-                                    </select>
-                                    <input type="text" class="form-control" ng-model="relEveFieAdd"><input type="button"  class="btn btn-primary" ng-click="relEveFieIns()" value="Insert">
+                                    </select><div class="row"><div class="col-md-8"><input type="text" class="form-control" ng-model="relEveFieAdd"></div><div class="col-md-4"><input type="button"  class="btn btn-primary" ng-click="relEveFieIns()" value="Insert"></div></div>
+                                    
                                 </div>
                                 <div class="col-md-4">
                                     <label>Log Source </label>
