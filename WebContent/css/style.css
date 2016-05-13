@@ -503,8 +503,8 @@ body {
     padding: 8px;
 }
 
-.searchtable th {width: 11.1%;float:left;}
-.searchtable td {width: 11.1%;float:left;}
+.searchtable th {width: 14.1%;float:left;}
+.searchtable td {width: 14.1%;float:left;}
 .searchtable td:last-child {padding-right: 14px;}
 .searchtabBody tr{
 	width:102%;
