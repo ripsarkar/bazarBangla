@@ -1554,7 +1554,9 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
         $scope.ruleinput = false;
         $scope.ruleoutput = false;
         $scope.ruleresponse = false;
-        $scope.rulethd = false;
+        $scope.rulethd = false;            
+        $scope.ruletun = false;
+
 
         $scope.lidetails = function() {
             $scope.licreateruledetails = 'active';
@@ -1564,13 +1566,17 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
             $scope.licreateruleoutput = 'no-active';
             $scope.licreateruleresponse = 'no-active';
             $scope.licreaterulethd = 'no-active';
+                        $scope.licreateruletun = 'no-active';
+
             $scope.ruledetails = true;
             $scope.rulesource = false;
             $scope.ruleinput = false;
             $scope.ruleinputdata = false;
             $scope.ruleoutput = false;
             $scope.ruleresponse = false;
-            $scope.rulethd = false;
+            $scope.rulethd = false;            
+            $scope.ruletun = false;
+
 
 
         }
@@ -1597,12 +1603,16 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 $scope.licreateruleoutput = 'no-active';
                 $scope.licreateruleresponse = 'no-active';
                 $scope.licreaterulethd = 'no-active';
+            $scope.licreateruletun = 'no-active';
+
                 $scope.ruledetails = false;
                 $scope.ruleinput = true;
                 $scope.rulesource = false;
                 $scope.ruleinputdata = false;
                 $scope.ruleoutput = false;
-                $scope.rulethd = false;
+                $scope.rulethd = false;            
+                $scope.ruletun = false;
+
             }
         	
             
@@ -1631,12 +1641,16 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                  $scope.licreateruleoutput = 'active';
                  $scope.licreateruleresponse = 'no-active';
                  $scope.licreaterulethd = 'no-active';
+            $scope.licreateruletun = 'no-active';
+
                  $scope.ruledetails = false;
                  $scope.rulesource = false;
                  $scope.ruleinput = false;
                  $scope.ruleoutput = true;
                  $scope.ruleresponse = false;
-                 $scope.rulethd = false;
+                 $scope.rulethd = false;            
+                 $scope.ruletun = false;
+
             }
            
         }
@@ -1649,12 +1663,16 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
             $scope.licreateruleoutput = 'no-active';
             $scope.licreateruleresponse = 'active';
             $scope.licreaterulethd = 'no-active';
+            $scope.licreateruletun = 'no-active';
+
             $scope.ruledetails = false;
             $scope.rulesource = false;
             $scope.ruleinput = false;
             $scope.ruleoutput = false;
             $scope.ruleresponse = true;
-            $scope.rulethd = false;
+            $scope.rulethd = false;            
+            $scope.ruletun = false;
+
         }
         $scope.lithd = function() {
             $scope.licreateruledetails = 'no-active';
@@ -1664,12 +1682,31 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
             $scope.licreateruleoutput = 'no-active';
             $scope.licreateruleresponse = 'no-active';
             $scope.licreaterulethd = 'active';
+            $scope.licreateruletun = 'no-active';
             $scope.ruledetails = false;
             $scope.rulesource = false;
             $scope.ruleinput = false;
             $scope.ruleoutput = false;
             $scope.ruleresponse = false;
             $scope.rulethd = true;
+            $scope.ruletun = false;
+        }
+        $scope.litun = function() {
+            $scope.licreateruledetails = 'no-active';
+            $scope.licreateruleinput = 'no-active';
+            $scope.licreateruleinputdata = 'no-active';
+            $scope.licreaterulelog = 'no-active';
+            $scope.licreateruleoutput = 'no-active';
+            $scope.licreateruleresponse = 'no-active';
+            $scope.licreaterulethd = 'no-active';
+            $scope.licreateruletun = 'active';
+            $scope.ruledetails = false;
+            $scope.rulesource = false;
+            $scope.ruleinput = false;
+            $scope.ruleoutput = false;
+            $scope.ruleresponse = false;
+            $scope.rulethd = false;
+            $scope.ruletun = true;
         }
 
     }
