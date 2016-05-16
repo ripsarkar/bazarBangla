@@ -1493,7 +1493,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                     transgetdata.Name = data.Input[i].Value;
                     transgetdata.SurrId = data.Input[i].SurrId;
                     $scope.transdatas.push(transgetdata);
-                } else if (data.Input[i].Name == 'Referential Data') {
+                } else if (data.Input[i].Name == 'Contextual Data') {
                     var Refergetdata = {};
                     Refergetdata.Name = data.Input[i].Value;
                     Refergetdata.SurrId = data.Input[i].SurrId;
@@ -2641,7 +2641,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         transgetdata.SurrId = data.Input[i].SurrId;
                         $scope.transdatas.push(transgetdata);
                         //console.log(i);
-                    } else if (data.Input[i].Name == 'Referential Data') {
+                    } else if (data.Input[i].Name == 'Contextual Data') {
                         var Refergetdata = {};
                         Refergetdata.Name = data.Input[i].Value;
                         Refergetdata.SurrId = data.Input[i].SurrId;
@@ -2772,7 +2772,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                                     if (data.input[i].Selected == 'True') {
                                         $scope.crtRuleTrsn.push(data.input[i].UCSR_INPUT_SURR_ID);
                                     }
-                                } else if (data.input[i].UCSR_INPUT_NAME == "Referential Data") {
+                                } else if (data.input[i].UCSR_INPUT_NAME == "Contextual Data") {
                                     if (data.input[i].Selected == 'True') {
                                         $scope.crtRuleRefr.push(data.input[i].UCSR_INPUT_SURR_ID);
                                     }
@@ -3428,7 +3428,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         transgetdata.Name = data.Input[i].Value;
                         transgetdata.SurrId = data.Input[i].SurrId;
                         $scope.transdatas.push(transgetdata);
-                    } else if (data.Input[i].Name == 'Referential Data') {
+                    } else if (data.Input[i].Name == 'Contextual Data') {
                         var Refergetdata = {};
                         Refergetdata.Name = data.Input[i].Value;
                         Refergetdata.SurrId = data.Input[i].SurrId;
