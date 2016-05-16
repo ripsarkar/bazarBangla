@@ -140,7 +140,7 @@
 				<div class="ruleinput" ng-show="ruleoutput">
 					<div class="panel panel-default tablecontrol">
 						<table class="table table-striped">
-							<tr ng-repeat="rule in output">
+							<tr ng-if="rule.Label==='Reference Set'" ng-repeat="rule in output">
 								<th class="tableheaderLeft">{{rule.Label}}</th>
 								
 								<td>{{rule.Value}}</td>
