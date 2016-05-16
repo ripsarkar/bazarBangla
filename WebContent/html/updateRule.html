@@ -177,15 +177,16 @@
                                         </select>
 
                                     </div> -->
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="row margintp1">
                                     <div class="col-md-4 ">
                                         <label>Relevant Event Fields</label>
                                         <select multiple class="form-control" ng-model="crtRuleEventAttribute" name="crtRuleEventAttribute" ng-options="eventAttr.SurrId as eventAttr.Name for eventAttr in dataeventAttr | orderBy:'Name'" required>
                                         </select>
 
                                     </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="row margintp1">
+
                                     <div class="col-md-4 ">
                                         <label>Log Source </label>
                                         <select multiple class="form-control" ng-model="crtRuleLogSource" name="crtRuleLogSource" ng-options="logdata.SurrId as logdata.Name for logdata in LogSource | orderBy:'Name'">
