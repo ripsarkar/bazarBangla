@@ -113,6 +113,7 @@
                                         <!--<li class="tabshead"><a herf="" ng-class="licreateruleinputdata" ng-click="liinputdata()"> Input Data Elements</a></li>
                                 <li class="tabshead"><a herf="" ng-class="licreaterulelog" ng-click="lilog()"> Log Resource</a></li>-->
                                         <li class="tabshead"><a herf="" ng-class="licreateruleoutput" ng-click="lioutput()"> Rule Actions</a></li>
+                                        <li class="tabshead"><a herf="" ng-class="licreateruletun" ng-click="litun()"> Tuning Guidelines</a></li>
                                         <li class="tabshead"><a herf="" ng-class="licreaterulethd" ng-click="lithd()"> Threat Model</a></li>
                                        <!--  <li class="tabshead"><a herf="" ng-class="licreateruleresponse" ng-click="liresponse()"> Response</a></li> -->
                                     </div>
@@ -239,7 +240,29 @@
                                     </div>
                                 </div>
                             </div>
+                        <!-- -->
+                        <div class="clearfix"></div>
+                        <div class="ruletun" ng-show="ruletun">
+                            <div class="row margintp1">
+                                <div class="col-md-4">
+                                    <label>Rule parameters</label>
+                                    <textarea class="form-control" placeholder="Rule parameters" maxlength="2000" ng-model="crtRuleParameters" id="crtRuleParameters" name="crtRuleParameters"></textarea>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Rule dependencies</label>
+                                    <textarea class="form-control" placeholder="Rule dependencies" maxlength="2000" ng-model="crtRuleDependencies" id="crtRuleDependencies" name="crtRuleDependencies"></textarea>
+                                </div>
+                            </div>
                             <div class="clearfix"></div>
+                            <div class="margintp1 col-md-12">
+                                <div class="col-md-offset-4 col-md-4">
+                                    <!--<button class="btn btn-none tabsbtn" type="reset"> Clear</button>-->
+                                    <button class="btn btn-primary tabsbtn" ng-click="lithd()"> Next </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- -->
+                        <div class="clearfix"></div>
                         <div class="rulethd" ng-show="rulethd">
                             <div class="row margintp1">
                                 <div class="col-md-3 col-sm-6">

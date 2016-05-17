@@ -3478,6 +3478,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
 
             $scope.licreateruledetails = 'active';
+                    $scope.ruletun = false;
             $scope.ruledetails = true;
             $scope.rulesource = false;
             $scope.ruleinput = false;
@@ -3493,6 +3494,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 $scope.licreateruleoutput = 'no-active';
                 $scope.licreateruleresponse = 'no-active';
                 $scope.licreaterulethd = 'no-active';
+                    $scope.licreateruletun = 'no-active';
+                    $scope.ruletun = false;
                 $scope.ruledetails = true;
                 $scope.rulesource = false;
                 $scope.ruleinput = false;
@@ -3526,6 +3529,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     $scope.licreateruleoutput = 'no-active';
                     $scope.licreateruleresponse = 'no-active';
                     $scope.licreaterulethd = 'no-active';
+                    $scope.licreateruletun = 'no-active';
+                    $scope.ruletun = false;
                     $scope.ruledetails = false;
                     $scope.ruleinput = true;
                     $scope.rulesource = false;
@@ -3559,6 +3564,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                      $scope.licreateruleoutput = 'active';
                      $scope.licreateruleresponse = 'no-active';
                      $scope.licreaterulethd = 'no-active';
+                    $scope.licreateruletun = 'no-active';
+                    $scope.ruletun = false;
                      $scope.ruledetails = false;
                      $scope.rulesource = false;
                      $scope.ruleinput = false;
@@ -3577,6 +3584,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 $scope.licreateruleoutput = 'no-active';
                 $scope.licreateruleresponse = 'active';
                 $scope.licreaterulethd = 'no-active';
+                    $scope.licreateruletun = 'no-active';
+                    $scope.ruletun = false;
                 $scope.ruledetails = false;
                 $scope.rulesource = false;
                 $scope.ruleinput = false;
@@ -3584,6 +3593,23 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 $scope.ruleresponse = true;
                 $scope.rulethd = false;
             }
+        $scope.litun = function() {
+            $scope.licreateruledetails = 'no-active';
+            $scope.licreateruleinput = 'no-active';
+            $scope.licreateruleinputdata = 'no-active';
+            $scope.licreaterulelog = 'no-active';
+            $scope.licreateruleoutput = 'no-active';
+            $scope.licreateruleresponse = 'no-active';
+            $scope.licreaterulethd = 'no-active';
+            $scope.licreateruletun = 'active';
+            $scope.ruledetails = false;
+            $scope.rulesource = false;
+            $scope.ruleinput = false;
+            $scope.ruleoutput = false;
+            $scope.ruleresponse = false;
+            $scope.rulethd = false;
+            $scope.ruletun = true;
+        }
             $scope.lithd = function() {
             	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
             	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
@@ -3607,6 +3633,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     $scope.licreateruleoutput = 'no-active';
                     $scope.licreateruleresponse = 'no-active';
                     $scope.licreaterulethd = 'active';
+                    $scope.licreateruletun = 'no-active';
+                    $scope.ruletun = false;
                     $scope.ruledetails = false;
                     $scope.rulesource = false;
                     $scope.ruleinput = false;
@@ -3617,37 +3645,4 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 
             }
         
-
-        $scope.lithd = function() {
-        	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
-        	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
-            var testAlp = /^[a-zA-Z\s\d\/]+$/;
-            var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
-            
-            if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                alert('Please enter a valid Rule Id(special characters allowed: _-.)');
-                return false;
-            }
-            //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
-            else if($scope.crtRuleName == ''){
-                alert('Please enter a valid Rule Name');
-                return false;
-            }
-            else{
-            	 $scope.licreateruledetails = 'no-active';
-                 $scope.licreateruleinput = 'no-active';
-                 $scope.licreateruleinputdata = 'no-active';
-                 $scope.licreaterulelog = 'no-active';
-                 $scope.licreateruleoutput = 'no-active';
-                 $scope.licreateruleresponse = 'no-active';
-                 $scope.licreaterulethd = 'active';
-                 $scope.ruledetails = false;
-                 $scope.rulesource = false;
-                 $scope.ruleinput = false;
-                 $scope.ruleoutput = false;
-                 $scope.ruleresponse = false;
-                 $scope.rulethd = true;
-            }
-           
-        }
     }]);
