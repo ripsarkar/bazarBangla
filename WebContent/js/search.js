@@ -2934,6 +2934,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
             $scope.Transactionaldata = [];
             $scope.ReferentialData = [];
             $scope.EventNameCategory = [];
+            $scope.ruletuning = result.RuleTuning;
             for (var i = 0; i < $scope.input.length; i++) {
                 if ($scope.input[i].Label == "Event Attributes") {
                     var events = $scope.input[i].Value;
