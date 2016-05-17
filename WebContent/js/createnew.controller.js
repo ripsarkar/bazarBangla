@@ -1411,6 +1411,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                     "output": crtRuleOuput_SurrId,
                     "event_attribute": evtattri_SurrId,
                     "log_source": logSou_SurrId,
+                    //"RuleTuning":$scope.crtRuleParameters,
                     "ThreadModelGroup": ThdCrt
                 };
 
