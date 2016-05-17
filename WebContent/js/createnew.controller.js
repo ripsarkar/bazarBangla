@@ -2720,6 +2720,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         }
 
                         if (typeof data != 'undefined' && data.Rule.length > 0 && typeof data.Rule[0].UC_RULE_SURR_ID != 'undefined') {
+                            $scope.updRuleParameters = data.Rule[0].RULE_PARAMETERS;
+                            $scope.updRuleDependencies = data.Rule[0].RULE_DEPENDENCIES;
                             $scope.updateRule_surrId = data.Rule[0].UC_RULE_SURR_ID;
                             $scope.crtRuleID = data.Rule[0].UC_RULE_ID;
                             $scope.crtRuleName = data.Rule[0].UC_RULE_NAME;
