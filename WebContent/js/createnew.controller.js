@@ -1405,7 +1405,10 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                         "response_text": $scope.crtRuleResponse,
                         "event_name": "",
                         "rule_description": $scope.crtRuleDsecpt,
-                        "oob_flag": statusOOB
+                        "oob_flag": statusOOB,
+                        //
+                        "rule_parameters":$scope.crtRuleParameters,
+                        "rule_dependencies":$scope.crtRuleDependencies
                     },
                     "input": crtRuleInput_SurrId,
                     "output": crtRuleOuput_SurrId,
@@ -3363,7 +3366,10 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                             "reference_set_ind": $scope.crtRuleRefSet,
                             "event_name": "",
                             "response_text": $scope.crtRuleResponse,
-                            "oob_flag": statusOOBu
+                            "oob_flag": statusOOBu,
+                            //
+                        "rule_parameters":$scope.updRuleParameters,
+                        "rule_dependencies":$scope.updRuleDependencies
                         },
                         "input": crtRuleInput_SurrId,
                         "output": crtRuleOuput_SurrId,
