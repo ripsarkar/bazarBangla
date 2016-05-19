@@ -181,7 +181,7 @@
                                     <div class="col-md-4 ">
                                         <label>Relevant Event Fields</label>
                                         <select multiple class="form-control" ng-model="crtRuleEventAttribute" name="crtRuleEventAttribute" ng-options="eventAttr.SurrId as eventAttr.Name for eventAttr in dataeventAttr | orderBy:'Name'" required>
-                                        </select>
+                                        </select><div class="row customefield"><div class="col-md-8 inputcusttom"><input type="text" class="form-control" ng-model="relEveFieAdd"></div><div class="col-md-4"><input type="button"  class="btn btn-primary" ng-click="relEveFieIns()" value="Insert"></div></div>
 
                                     </div>
                                 </div>

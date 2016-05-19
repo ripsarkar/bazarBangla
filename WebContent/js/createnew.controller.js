@@ -794,6 +794,7 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
 
 app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http', 'UsecaseService','$filter',
     function($scope, $rootScope, $state, $http, UsecaseService,$filter) {
+        //code for custon event attribute field
         $scope.relEveFieAdd = "";
         $scope.crtRuleEventAttribute = [];
         $scope.relEveFieIns = function(){
@@ -814,6 +815,8 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 }
             }
         }
+        //code for custon event attribute field
+
     angular.element("ul.submainlinks li").removeClass("subactive");
     angular.element('li.createrule').addClass("subactive");
         $scope.formcontrolYN = "No";
@@ -1269,6 +1272,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
             }
             else{
             	var evtattri_SurrId = [];
+                var customeventattr_SurrId = [];
                 var logSou_SurrId = [];
                 var crtRuleInput_SurrId = [];
                 var crtRuleOuput_SurrId = [];
@@ -1302,8 +1306,15 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 if (typeof $scope.crtRuleEventAttribute != 'undefined') {
                     for (var i = 0; i < $scope.crtRuleEventAttribute.length; i++) {
                         var evtattri = {};
+                        var customeventattr = {};
+                        if(isNaN($scope.crtRuleEventAttribute[i])){
+                        customeventattr.customVal = $scope.crtRuleEventAttribute[i];
+                        customeventattr_SurrId.push(customeventattr);
+                        console.log("customeva:"+$scope.crtRuleEventAttribute[i]));
+                        }else{
                         evtattri.SurrId = $scope.crtRuleEventAttribute[i];
                         evtattri_SurrId.push(evtattri);
+                        }
                     }
                 }
 
@@ -1413,6 +1424,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                     "input": crtRuleInput_SurrId,
                     "output": crtRuleOuput_SurrId,
                     "event_attribute": evtattri_SurrId,
+                    "custom_event_attr": customeventattr_SurrId,
                     "log_source": logSou_SurrId,
                     //"RuleTuning":$scope.crtRuleParameters,
                     "ThreadModelGroup": ThdCrt
@@ -2567,6 +2579,28 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
     app.controller("updateRuleController", ["$scope", "$rootScope", "$state", '$http', 'UsecaseService',
         function($scope, $rootScope, $state, $http, UsecaseService) {
+                    //code for custon event attribute field
+        $scope.relEveFieAdd = "";
+        $scope.crtRuleEventAttribute = [];
+        $scope.relEveFieIns = function(){
+        var relevePrese = true;
+
+            if($scope.relEveFieAdd != ""){
+
+                angular.element(".relEveFie").children("option").each(function(){
+                    if(angular.element(this).text() == $scope.relEveFieAdd){
+                        relevePrese = false;
+                                return false;
+                    }
+                });
+                
+                if(relevePrese == true){
+                angular.element(".relEveFie").prepend("<option>"+$scope.relEveFieAdd+"</option>");
+                $scope.crtRuleEventAttribute.push($scope.relEveFieAdd);
+                }
+            }
+        }
+        //code for custon event attribute field
 
             $scope.pagemain = {
                 main: true,
@@ -3241,6 +3275,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 }
                 else{
                 	var evtattri_SurrId = [];
+                    var customeventattr_SurrId = [];
                     var logSou_SurrId = [];
                     var crtRuleInput_SurrId = [];
                     var crtRuleOuput_SurrId = [];
@@ -3272,8 +3307,15 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     if (typeof $scope.crtRuleEventAttribute != 'undefined') {
                         for (var i = 0; i < $scope.crtRuleEventAttribute.length; i++) {
                             var evtattri = {};
+                        var customeventattr = {};
+                        if(isNaN($scope.crtRuleEventAttribute[i])){
+                        customeventattr.customVal = $scope.crtRuleEventAttribute[i];
+                        customeventattr_SurrId.push(customeventattr);
+                        console.log("customeva:"+$scope.crtRuleEventAttribute[i]));
+                        }else{
                             evtattri.SurrId = $scope.crtRuleEventAttribute[i];
                             evtattri_SurrId.push(evtattri);
+                        }
                         }
                     }
 
@@ -3374,6 +3416,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         "input": crtRuleInput_SurrId,
                         "output": crtRuleOuput_SurrId,
                         "event_attribute": evtattri_SurrId,
+                        "custom_event_attr": customeventattr_SurrId,                       
                         "log_source": logSou_SurrId,
                         "ThreadModelGroup": ThdCrt
                     };
