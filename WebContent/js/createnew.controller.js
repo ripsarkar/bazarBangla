@@ -1310,7 +1310,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                         if(isNaN($scope.crtRuleEventAttribute[i])){
                         customeventattr.customVal = $scope.crtRuleEventAttribute[i];
                         customeventattr_SurrId.push(customeventattr);
-                        console.log("customeva:"+$scope.crtRuleEventAttribute[i]));
+                        console.log("customeva:"+$scope.crtRuleEventAttribute[i]);
                         }else{
                         evtattri.SurrId = $scope.crtRuleEventAttribute[i];
                         evtattri_SurrId.push(evtattri);
@@ -3311,7 +3311,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         if(isNaN($scope.crtRuleEventAttribute[i])){
                         customeventattr.customVal = $scope.crtRuleEventAttribute[i];
                         customeventattr_SurrId.push(customeventattr);
-                        console.log("customeva:"+$scope.crtRuleEventAttribute[i]));
+                        console.log("customeva:"+$scope.crtRuleEventAttribute[i]);
                         }else{
                             evtattri.SurrId = $scope.crtRuleEventAttribute[i];
                             evtattri_SurrId.push(evtattri);
