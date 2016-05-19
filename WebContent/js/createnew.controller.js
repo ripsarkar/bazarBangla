@@ -1424,7 +1424,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                     "input": crtRuleInput_SurrId,
                     "output": crtRuleOuput_SurrId,
                     "event_attribute": evtattri_SurrId,
-                    "custom_event_attr": customeventattr_SurrId,
+                    //"custom_event_attr": customeventattr_SurrId,
                     "log_source": logSou_SurrId,
                     //"RuleTuning":$scope.crtRuleParameters,
                     "ThreadModelGroup": ThdCrt
@@ -2670,7 +2670,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 $scope.refesetdatas = [];
 
                 $scope.LogSource = $scope.Rule_data.LogSource;
-                //$scope.dataeventAttr = $scope.Rule_data.EventAttribute;
+                $scope.dataeventAttr = $scope.Rule_data.EventAttribute;
                 for (var i = 0; i < data.Input.length; i++) {
                     if (data.Input[i].Name == 'Transactional Data') {
                         //console.log(i);
@@ -2745,7 +2745,6 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     var appstatuesoob;
 
                     $http.get($rootScope.url + '/getDetailsbyUcRuleID/' + ruleidtakeval).success(function(data, status, headers, config) {
-                        $scope.dataeventAttr = data.event_attribute;
                         //console.log(JSON.stringify(data, null,2));
                         $rootScope.loadinganimation = false;
                         //for oob value
@@ -3417,7 +3416,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         "input": crtRuleInput_SurrId,
                         "output": crtRuleOuput_SurrId,
                         "event_attribute": evtattri_SurrId,
-                        "custom_event_attr": customeventattr_SurrId,                       
+                        //"custom_event_attr": customeventattr_SurrId,                       
                         "log_source": logSou_SurrId,
                         "ThreadModelGroup": ThdCrt
                     };
