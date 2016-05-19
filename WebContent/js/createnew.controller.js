@@ -2670,7 +2670,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 $scope.refesetdatas = [];
 
                 $scope.LogSource = $scope.Rule_data.LogSource;
-                $scope.dataeventAttr = $scope.Rule_data.EventAttribute;
+                //$scope.dataeventAttr = $scope.Rule_data.EventAttribute;
                 for (var i = 0; i < data.Input.length; i++) {
                     if (data.Input[i].Name == 'Transactional Data') {
                         //console.log(i);
@@ -2745,6 +2745,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     var appstatuesoob;
 
                     $http.get($rootScope.url + '/getDetailsbyUcRuleID/' + ruleidtakeval).success(function(data, status, headers, config) {
+                        $scope.dataeventAttr = data.event_attribute;
                         //console.log(JSON.stringify(data, null,2));
                         $rootScope.loadinganimation = false;
                         //for oob value
