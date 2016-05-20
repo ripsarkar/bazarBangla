@@ -1620,11 +1620,12 @@ margin-bottom:0px !important;
 .loginbtn3{
   	margin-top:18%;
  	padding-left:80%;
- 	font-weight: bold;
   }
 .loginbtn3 a{
   	color: #008CCE!important;
   	text-decoration: none !important;
+  	font-weight: normal;
+	font-size: small;
   }
  a.read-more, a.read-less {
 	cursor: pointer;
