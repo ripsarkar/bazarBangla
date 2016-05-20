@@ -1624,6 +1624,7 @@ margin-bottom:0px !important;
   }
 .loginbtn3 a{
   	color: #008CCE!important;
+  	text-decoration: none !important;
   }
  a.read-more, a.read-less {
 	cursor: pointer;
