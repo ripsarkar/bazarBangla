@@ -44,6 +44,8 @@
           config.headers['Content-Type'] = "application/json";
           //config.headers['session_id'] = localStorage.tFSession;
           config.headers['session_id'] = $rootScope.tFSession;
+          config.headers['user'] = $rootScope.tFUser;
+
       }
       return config || $q.when(config);
     },

@@ -14,7 +14,7 @@
         <div class="row">
             <div class="tabs">
                 <div class="tabsreg">
-                    <form name="CrtUsecaseFrm" novalidate autocomplete="off">
+                   <!--  <form name="CrtUsecaseFrm" novalidate autocomplete="off"> -->
                         <div class="margintp1 col-md-12">
                             <div class="row">
                                 <div class="col-md-12">
@@ -67,11 +67,21 @@
                                 <div class="margintp1">
                                     <div class="col-md-3">
                                         <label>Industry <span class="red"> *</span></label>
-                                        <select multiple class="form-control" required ng-model="UsecaseIntry" ng-change="chckindustry()">
-                                            <option ng-repeat="industrydata in industrydatas  | orderBy:'Name'" value="{{industrydata.SurrId}}">
-                                                {{industrydata.Name}}
-                                            </option>
-                                        </select>
+                                        	
+											<div class="indList">
+												<ul>
+											        <li>
+											            <input type="checkbox" id="all" ng-model="selectedAll" ng-click="checkAll()"/> Select All
+											        </li>
+												</ul>
+											    <ul class="indVals">
+											        <li ng-repeat="industrydata in industrydatas  | orderBy:'Name'">
+											            <label ng-hide="industrydata.Name=='ALL'">
+											                <input type="checkbox" ng-model="industrydata.Selected" ng-click="chckindustryCheckbox($event,industrydata.SurrId)" /> {{industrydata.Name}} 
+											            </label>
+											        </li>
+											    </ul>
+											</div>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +92,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                   <!--  </form> -->
                     <script>
                     angular.element("form").keypress(function(event) {
 						if(event.which == 13){

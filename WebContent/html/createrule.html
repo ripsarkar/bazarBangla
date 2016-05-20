@@ -57,11 +57,11 @@
                                 </div>
                                 <div class="col-md-4 col-sm-6">
                                     <label> Out of Box </label><br>
-								<select class="form-control valselect" ng-model="formcontrolYN">
-								<!--  ng-change="yngetDetailscr(formcontrolYN)" -->
-									<option>Yes</option>
-									<option>No</option>
-								</select>
+                                <select class="form-control valselect" ng-model="formcontrolYN">
+                                <!--  ng-change="yngetDetailscr(formcontrolYN)" -->
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="margintp1">
@@ -85,9 +85,11 @@
                                     <li class="tabshead"><a herf="" ng-class="licreateruleinput" ng-click="liinput()"> Inputs</a></li>
                                     <!--<li class="tabshead"><a herf="" ng-class="licreateruleinputdata" ng-click="liinputdata()"> Input Data Elements</a></li>
                                 <li class="tabshead"><a herf="" ng-class="licreaterulelog" ng-click="lilog()"> Log Resource</a></li>-->
-                                    <li class="tabshead"><a herf="" ng-class="licreateruleoutput" ng-click="lioutput()"> Output</a></li>
+                                    <li class="tabshead"><a herf="" ng-class="licreateruleoutput" ng-click="lioutput()"> Rule Actions</a></li>
+                                    <li class="tabshead"><a herf="" ng-class="licreateruletun" ng-click="litun()"> Tuning Guidelines</a></li>
                                     <li class="tabshead"><a herf="" ng-class="licreaterulethd" ng-click="lithd()"> Threat Model</a></li>
                                    <!--  <li class="tabshead"><a herf="" ng-class="licreateruleresponse" ng-click="liresponse()"> Response</a></li> -->
+
                                 </div>
                             </div>
                         </div>
@@ -142,25 +144,27 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="col-md-4">
+                                <!-- <div class="col-md-4">
                                     <label>Event Name/ Categroy </label>
                                     <select multiple class="form-control" ng-model="crtRuleEventName">
                                         <option ng-repeat="eventcatdata in eventcatdatas  | orderBy:'Name'" value="{{eventcatdata.SurrId}}">
                                             {{eventcatdata.Name}}
                                         </option>
                                     </select>
+                                </div> -->
+                                <div class="col-md-4">
+                                    <label>Relevant Event Fields </label>
+                                    <select class="relEveFie" multiple class="form-control" ng-model="crtRuleEventAttribute" required>
+                                        <option ng-repeat="eventAttr in dataeventAttr  | orderBy:'Name'" value="{{eventAttr.SurrId}}">
+                                            {{eventAttr.Name}}
+                                        </option>
+                                    </select><!-- <div class="row customefield"><div class="col-md-8 inputcusttom"><input type="text" class="form-control" ng-model="relEveFieAdd"></div><div class="col-md-4"><input type="button"  class="btn btn-primary" ng-click="relEveFieIns()" value="Insert"></div></div> -->
+                                    
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                             <div class="row margintp1">
-                                <div class="col-md-4">
-                                    <label>Event Attributes </label>
-                                    <select multiple class="form-control" ng-model="crtRuleEventAttribute" required>
-                                        <option ng-repeat="eventAttr in dataeventAttr  | orderBy:'Name'" value="{{eventAttr.SurrId}}">
-                                            {{eventAttr.Name}}
-                                        </option>
-                                    </select>
-                                </div>
+
                                 <div class="col-md-4">
                                     <label>Log Source </label>
                                     <select multiple class="form-control" ng-model="crtRuleLogSource">
@@ -182,7 +186,7 @@
                         <div class="clearfix"></div>
                         <div class="ruleinput" ng-show="ruleoutput">
                             <div class="row margintp1">
-                                <div class=" col-md-4">
+                                <!-- <div class=" col-md-4">
                                     <label>DashBoard</label>
                                     <select class="form-control" ng-model="crtRuleDashBoard">
                                         <option ng-repeat="dash in dashboarddatas | orderBy:'Name'" value="{{dash.SurrId}}">
@@ -198,7 +202,7 @@
                                             {{alert.Name}}
                                         </option>
                                     </select>
-                                </div>
+                                </div> -->
                                 <div class=" col-md-4">
                                     <label>Reference Set </label>
                                     <select class="form-control" ng-model="crtReferSet">
@@ -208,7 +212,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="clearfix"></div>
+                            <!-- <div class="clearfix"></div>
                             <div class="row margintp1">
                                 <div class=" col-md-4">
                                     <label>Report </label>
@@ -219,6 +223,27 @@
                                     </select>
                                 </div>
                                 <div class="clearfix"></div>
+                            </div> -->
+                            <div class="clearfix"></div>
+                            <div class="margintp1 col-md-12">
+                                <div class="col-md-offset-4 col-md-4">
+                                    <!--<button class="btn btn-none tabsbtn" type="reset"> Clear</button>-->
+                                    <button class="btn btn-primary tabsbtn" ng-click="litun()"> Next </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- -->
+                        <div class="clearfix"></div>
+                        <div class="ruletun" ng-show="ruletun">
+                            <div class="row margintp1">
+                                <div class="col-md-4">
+                                    <label>Rule parameters</label>
+                                    <textarea class="form-control" placeholder="Rule parameters" maxlength="2000" ng-model="crtRuleParameters" id="crtRuleParameters" name="crtRuleParameters"></textarea>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Rule dependencies</label>
+                                    <textarea class="form-control" placeholder="Rule dependencies" maxlength="2000" ng-model="crtRuleDependencies" id="crtRuleDependencies" name="crtRuleDependencies"></textarea>
+                                </div>
                             </div>
                             <div class="clearfix"></div>
                             <div class="margintp1 col-md-12">
@@ -228,7 +253,7 @@
                                 </div>
                             </div>
                         </div>
-                    
+                        <!-- -->
                         <div class="clearfix"></div>
                         <div class="rulethd" ng-show="rulethd">
                             <div class="row margintp1">
@@ -287,7 +312,7 @@
                             <div class="clearfix"></div>
                             <div class="margintp1 col-md-12">
                                 <div class="col-md-offset-4 col-md-4">
-                                	 <button type="reset" class="btn btn-none tabsbtn" id="reSet"> Clear</button>
+                                     <button type="reset" class="btn btn-none tabsbtn" id="reSet"> Clear</button>
                                     <!--ng-disabled="CreateRuleFrom.$invalid"-->
                                     <button type="submit" class="btn btn-primary tabsbtn" ng-click="crtRuleSubmit()"> Submit </button>
                                   <!--   <button class="btn btn-primary tabsbtn" ng-click="liresponse()"> Next </button> -->
@@ -312,6 +337,7 @@
                                 </div>
                             </div>
                         </div> -->
+
                     </div>
                 </div>
             </div>

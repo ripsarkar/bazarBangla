@@ -815,7 +815,7 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 	}
 	
 	$scope.entervalueSubcat = function($event,ndval,nameval){
-    var matchfound = false;
+            var matchfound = false;
     var semimatchfound = false;
 		 $scope.tableReset();
 		
@@ -1166,12 +1166,14 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 //////////////////END OF CODE FOR CYBERSEC///////////////	
 ////////////////////CODE FOR REGCAT/////////////////////
 
+
 	var subcatlast2 ={};
 	var UseCSubCat2={};
 	var usecase2 ={};
-	
+var a,b;	
 	$scope.entervalueSubcat2 = function($event,ndval,nameval){
-		  var matchfound2 = false;
+                                        console.log(postjsonresult);
+        var matchfound2 = false;
     var semimatchfound2 = false;
 		$scope.tableReset();
 		subcatlast2 ={};
@@ -1197,16 +1199,26 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 			//search criteria ends
 
 			for(var i=0;i<postjsonresult.RegCat.length;i++){
+                console.log(01);
 				if(postjsonresult.RegCat[i].id == ucSubCatSuID2){
+                    console.log(02);
 					for(var j=0;j<postjsonresult.RegCat[i].RegPub.length;j++){
+                        console.log(03);
 						if(postjsonresult.RegCat[i].RegPub[j].id == ucCatSuID2){
+                            console.log(04);
 							for(var k=0;k<postjsonresult.RegCat[i].RegPub[j].RegCntl.length;k++){
+                                console.log(05);
 								if(postjsonresult.RegCat[i].RegPub[j].RegCntl[k].id == subcatlast2["id"]){
+                                    console.log(06);
 									totalmatchfound2 = true;
 									break;
 								}
 							}
 							//alert("semimatchfound2");
+                            a = i;
+                            b=j;
+                            console.log(i,j);
+                            console.log(a,b);
 							semimatchfound2 = true;
 							break;
 							}
@@ -1227,8 +1239,8 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 			    //console.log(postjsonresult);
 			}
 			if(semimatchfound2 == true){
-				postjsonresult.RegCat[i].RegPub[j].RegCntl.push(subcatlast2);
-			    //console.log(postjsonresult);
+				postjsonresult.RegCat[a].RegPub[b].RegCntl.push(subcatlast2);
+			    console.log(postjsonresult);
 			}
 
 		}
@@ -1257,12 +1269,13 @@ app.controller("searchController",["$scope","SearchResultService","$rootScope", 
 									if(postjsonresult.RegCat[i].RegPub[j].RegCntl.length==1){
 										
 										postjsonresult.RegCat.splice(i, 1);
-									    //console.log(postjsonresult);
+									    console.log(postjsonresult);
 
 										break;
 									}
 									else{
 										postjsonresult.RegCat[i].RegPub[j].RegCntl.splice(k, 1);
+                                        console.log(postjsonresult);
 										break;
 										
 									}
@@ -2714,6 +2727,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
 		
 		$scope.useCaseNo = usecrule.IdLabel
 		$scope.useCaseName = usecrule.UseCase;
+		$scope.useCaseDesc = usecrule.description;
 
 		SearchResultService.usecaseRelationships(datasurr).success(function(output)
 		    	{		
@@ -2920,6 +2934,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
             $scope.Transactionaldata = [];
             $scope.ReferentialData = [];
             $scope.EventNameCategory = [];
+            $scope.ruletuning = result.RuleTuning;
             for (var i = 0; i < $scope.input.length; i++) {
                 if ($scope.input[i].Label == "Event Attributes") {
                     var events = $scope.input[i].Value;
@@ -3011,6 +3026,8 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
         $scope.licreateruleoutput = 'no-active';
         $scope.licreaterulethd = 'no-active';
         $scope.licreateruleresponse = 'no-active';
+        $scope.licreateruletun = 'no-active';
+        $scope.ruletun = false;
         $scope.ruledetails = true;
         $scope.rulesource = false;
         $scope.ruleinput = false;
@@ -3053,6 +3070,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
     }
 
     $scope.licreateruledetails = 'active';
+        $scope.ruletun = false;
     $scope.ruledetails = true;
     $scope.rulesource = false;
     $scope.ruleinput = false;
@@ -3068,6 +3086,8 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
         $scope.licreateruleoutput = 'no-active';
         $scope.licreaterulethd = 'no-active';
         $scope.licreateruleresponse = 'no-active';
+        $scope.licreateruletun = 'no-active';
+        $scope.ruletun = false;
         $scope.ruledetails = true;
         $scope.rulesource = false;
         $scope.ruleinput = false;
@@ -3085,6 +3105,8 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
         $scope.licreateruleoutput = 'no-active';
         $scope.licreaterulethd = 'no-active';
         $scope.licreateruleresponse = 'no-active';
+        $scope.licreateruletun = 'no-active';
+        $scope.ruletun = false;
         $scope.ruledetails = false;
         $scope.rulesource = true;
         $scope.ruleinput = false;
@@ -3101,6 +3123,8 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
         $scope.licreateruleoutput = 'no-active';
         $scope.licreaterulethd = 'no-active';
         $scope.licreateruleresponse = 'no-active';
+        $scope.licreateruletun = 'no-active';
+        $scope.ruletun = false;
         $scope.ruledetails = false;
         $scope.rulesource = false;
         $scope.ruleinput = true;
@@ -3117,10 +3141,29 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
         $scope.licreateruleoutput = 'active';
         $scope.licreaterulethd = 'no-active';
         $scope.licreateruleresponse = 'no-active';
+        $scope.licreateruletun = 'no-active';
+        $scope.ruletun = false;
         $scope.ruledetails = false;
         $scope.rulesource = false;
         $scope.ruleinput = false;
         $scope.ruleoutput = true;
+        $scope.rulethd = false;
+        $scope.ruleresponse = false;
+    }
+    $scope.litun = function() {
+        $scope.licreateruledetails = 'no-active';
+        $scope.licreateruleinput = 'no-active';
+        $scope.licreateruleinputdata = 'no-active';
+        $scope.licreaterulelog = 'no-active';
+        $scope.licreateruleoutput = 'no-active';
+        $scope.licreaterulethd = 'no-active';
+        $scope.licreateruleresponse = 'no-active';
+        $scope.licreateruletun = 'active';
+        $scope.ruletun = true;
+        $scope.ruledetails = false;
+        $scope.rulesource = false;
+        $scope.ruleinput = false;
+        $scope.ruleoutput = false;
         $scope.rulethd = false;
         $scope.ruleresponse = false;
     }
@@ -3132,6 +3175,8 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
         $scope.licreateruleoutput = 'no-active';
         $scope.licreaterulethd = 'active';
         $scope.licreateruleresponse = 'no-active';
+        $scope.licreateruletun = 'no-active';
+        $scope.ruletun = false;
         $scope.ruledetails = false;
         $scope.rulesource = false;
         $scope.ruleinput = false;
@@ -3148,6 +3193,8 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
         $scope.licreateruleoutput = 'no-active';
         $scope.licreaterulethd = 'no-active';
         $scope.licreateruleresponse = 'active';
+        $scope.licreateruletun = 'no-active';
+        $scope.ruletun = false;
         $scope.ruledetails = false;
         $scope.rulesource = false;
         $scope.ruleinput = false;
@@ -3597,6 +3644,7 @@ if(usecaselist != undefined){
        
       //$scope.modalMsg="";
       $scope.showPopup = function() {
+        console.log(postjsonresult.RegCat.length, postjsonresult.CyberSecFunc.length, postjsonresult.Industry.length, postjsonresult.EP.length, postjsonresult.ThreatModel.length, postjsonresult.LogSource.length,postjsonresult.useCaseRuleIdName);
         if(postjsonresult.RegCat.length ==0 && postjsonresult.CyberSecFunc.length ==0 && postjsonresult.Industry.length ==0 && postjsonresult.EP.length ==0 && postjsonresult.ThreatModel.length ==0 && postjsonresult.LogSource.length ==0 && (postjsonresult.useCaseRuleIdName == undefined || postjsonresult.useCaseRuleIdName == "")){ 
       		  $scope.showModal = true; 
       		  if(postjsonresult.oobParam==""){
@@ -3615,6 +3663,7 @@ if(usecaselist != undefined){
         $scope.dontShowAll = function(){
             $scope.showModal = false;
         }
+      
         $scope.userMsg = "Please select search criteria from left";
         
         $scope.showPopup();
@@ -3736,8 +3785,8 @@ if(usecaselist != undefined){
                 type : 'application/zip'
             });
             //trick to download store a file having its URL
-            if (window.navigator.msSaveBlob) { // IE 10+
-            	window.navigator.msSaveBlob(file, "Rulefiles.zip");
+            if (navigator.msSaveBlob) { // IE 10+
+            	navigator.msSaveBlob(file, "Rulefiles.zip");
             	    } else {
             var fileURL = URL.createObjectURL(file);
             var a         = document.createElement('a');
@@ -3828,12 +3877,14 @@ if(usecaselist != undefined){
                             $scope.usecase = $scope.subcatObj.UseCase[k];
                             $scope.jsonObj["IdLabel"] = $scope.usecase.id_label;
                             $scope.jsonObj["UseCase"] = $scope.usecase.name;
+                            $scope.jsonObj["description"] = $scope.usecase.description;
                             $scope.jsonObj["UseCaseSurr"] = $scope.usecase.id;
                         } else {
                             if ($scope.usecase == null) {
                                 $scope.usecase = $scope.subcatObj.UseCase[k];
                                 $scope.jsonObj["IdLabel"] = $scope.usecase.id_label;
                                 $scope.jsonObj["UseCase"] = $scope.usecase.name;
+                                $scope.jsonObj["description"] = $scope.usecase.description;
                                 $scope.jsonObj["UseCaseSurr"] = $scope.usecase.id;
 
                             } else {

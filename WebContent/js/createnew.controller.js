@@ -106,7 +106,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
     var loadccker = 0;
     var backassgin =  null;
     var Indtsyarray = [];
-    
+    $scope.UsecaseIntry = [];
     $scope.reSet = function() {
         $scope.frameWork = '';
         $scope.useCaseCat = '';
@@ -169,7 +169,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             $scope.UsecaseCatgChange();
         }
     }
-    
+
     $scope.frameWorkUsecase = function() {
         $rootScope.loadinganimation = true;
         if ($scope.frameWork != '') {
@@ -295,7 +295,7 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
 
 
 
-$scope.chckindustry = function() {
+/*$scope.chckindustry = function() {
     Indtsyarray = [];
     if (typeof $scope.UsecaseIntry != 'undefined' && $scope.UsecaseIntry.length > 0) {
 
@@ -312,8 +312,50 @@ $scope.chckindustry = function() {
             Indtsyarray.push(Indtsy);
         }
     }
-}
-
+}*/
+    $scope.chckindustryCheckbox = function($event,industDatas) {
+        Indtsyarray = [];
+        if(angular.element($event.currentTarget).is(':checked') == true){
+            var Indtsy = {};
+            Indtsy = industDatas;
+            Indtsyarray.push(Indtsy);
+            $scope.UsecaseIntry.push(Indtsy);
+        }else{
+        	var index = $scope.UsecaseIntry.indexOf($scope.industrydatas[0].SurrId);
+        	if(index > -1){
+        		$scope.UsecaseIntry.splice(index, 1);
+        		$scope.selectedAll = false;
+        		angular.forEach($scope.industrydatas, function (industrydata) {
+                	
+                	if(industrydata.SurrId!=industDatas && industrydata.Name!='ALL')
+                		$scope.UsecaseIntry.push(industrydata.SurrId);
+                });
+        	}
+        	else{
+        		for(i=0;i<$scope.UsecaseIntry.length;i++){
+                    if($scope.UsecaseIntry[i] == industDatas){
+                        $scope.UsecaseIntry.splice(i,1);
+                        break;
+                    }
+                }
+        	}
+            
+        }
+    }
+    
+    $scope.checkAll = function () {
+        if ($scope.selectedAll) {
+            $scope.selectedAll = true;
+            $scope.UsecaseIntry.splice(0,$scope.UsecaseIntry.length);
+        } else {
+            $scope.selectedAll = false;
+        }
+        angular.forEach($scope.industrydatas, function (industrydata) {
+        	industrydata.Selected = $scope.selectedAll;
+        	if(industrydata.Name=='ALL')
+        		$scope.UsecaseIntry.push(industrydata.SurrId);
+        });
+    };
 $scope.goTo = function() {
     var Indtsyarray = [];
     for (var i = 0; i < $scope.UsecaseIntry.length; i++) {
@@ -753,7 +795,26 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
 
 app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http', 'UsecaseService','$filter',
     function($scope, $rootScope, $state, $http, UsecaseService,$filter) {
-        
+        $scope.relEveFieAdd = "";
+        $scope.crtRuleEventAttribute = [];
+        $scope.relEveFieIns = function(){
+        var relevePrese = true;
+
+            if($scope.relEveFieAdd != ""){
+
+                angular.element(".relEveFie").children("option").each(function(){
+                    if(angular.element(this).text() == $scope.relEveFieAdd){
+                        relevePrese = false;
+                                return false;
+                    }
+                });
+                
+                if(relevePrese == true){
+                angular.element(".relEveFie").prepend("<option>"+$scope.relEveFieAdd+"</option>");
+                $scope.crtRuleEventAttribute.push($scope.relEveFieAdd);
+                }
+            }
+        }
     angular.element("ul.submainlinks li").removeClass("subactive");
     angular.element('li.createrule').addClass("subactive");
         $scope.formcontrolYN = "No";
@@ -1345,12 +1406,16 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                         "response_text": $scope.crtRuleResponse,
                         "event_name": "",
                         "rule_description": $scope.crtRuleDsecpt,
-                        "oob_flag": statusOOB
+                        "oob_flag": statusOOB,
+                        //
+                        "rule_parameters":$scope.crtRuleParameters,
+                        "rule_dependencies":$scope.crtRuleDependencies
                     },
                     "input": crtRuleInput_SurrId,
                     "output": crtRuleOuput_SurrId,
                     "event_attribute": evtattri_SurrId,
                     "log_source": logSou_SurrId,
+                    //"RuleTuning":$scope.crtRuleParameters,
                     "ThreadModelGroup": ThdCrt
                 };
 
@@ -1433,7 +1498,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                     transgetdata.Name = data.Input[i].Value;
                     transgetdata.SurrId = data.Input[i].SurrId;
                     $scope.transdatas.push(transgetdata);
-                } else if (data.Input[i].Name == 'Referential Data') {
+                } else if (data.Input[i].Name == 'Contextual Data') {
                     var Refergetdata = {};
                     Refergetdata.Name = data.Input[i].Value;
                     Refergetdata.SurrId = data.Input[i].SurrId;
@@ -1494,7 +1559,9 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
         $scope.ruleinput = false;
         $scope.ruleoutput = false;
         $scope.ruleresponse = false;
-        $scope.rulethd = false;
+        $scope.rulethd = false;            
+        $scope.ruletun = false;
+
 
         $scope.lidetails = function() {
             $scope.licreateruledetails = 'active';
@@ -1504,13 +1571,17 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
             $scope.licreateruleoutput = 'no-active';
             $scope.licreateruleresponse = 'no-active';
             $scope.licreaterulethd = 'no-active';
+                        $scope.licreateruletun = 'no-active';
+
             $scope.ruledetails = true;
             $scope.rulesource = false;
             $scope.ruleinput = false;
             $scope.ruleinputdata = false;
             $scope.ruleoutput = false;
             $scope.ruleresponse = false;
-            $scope.rulethd = false;
+            $scope.rulethd = false;            
+            $scope.ruletun = false;
+
 
 
         }
@@ -1537,12 +1608,16 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 $scope.licreateruleoutput = 'no-active';
                 $scope.licreateruleresponse = 'no-active';
                 $scope.licreaterulethd = 'no-active';
+            $scope.licreateruletun = 'no-active';
+
                 $scope.ruledetails = false;
                 $scope.ruleinput = true;
                 $scope.rulesource = false;
                 $scope.ruleinputdata = false;
                 $scope.ruleoutput = false;
-                $scope.rulethd = false;
+                $scope.rulethd = false;            
+                $scope.ruletun = false;
+
             }
         	
             
@@ -1571,12 +1646,16 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                  $scope.licreateruleoutput = 'active';
                  $scope.licreateruleresponse = 'no-active';
                  $scope.licreaterulethd = 'no-active';
+            $scope.licreateruletun = 'no-active';
+
                  $scope.ruledetails = false;
                  $scope.rulesource = false;
                  $scope.ruleinput = false;
                  $scope.ruleoutput = true;
                  $scope.ruleresponse = false;
-                 $scope.rulethd = false;
+                 $scope.rulethd = false;            
+                 $scope.ruletun = false;
+
             }
            
         }
@@ -1589,12 +1668,16 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
             $scope.licreateruleoutput = 'no-active';
             $scope.licreateruleresponse = 'active';
             $scope.licreaterulethd = 'no-active';
+            $scope.licreateruletun = 'no-active';
+
             $scope.ruledetails = false;
             $scope.rulesource = false;
             $scope.ruleinput = false;
             $scope.ruleoutput = false;
             $scope.ruleresponse = true;
-            $scope.rulethd = false;
+            $scope.rulethd = false;            
+            $scope.ruletun = false;
+
         }
         $scope.lithd = function() {
             $scope.licreateruledetails = 'no-active';
@@ -1604,12 +1687,31 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
             $scope.licreateruleoutput = 'no-active';
             $scope.licreateruleresponse = 'no-active';
             $scope.licreaterulethd = 'active';
+            $scope.licreateruletun = 'no-active';
             $scope.ruledetails = false;
             $scope.rulesource = false;
             $scope.ruleinput = false;
             $scope.ruleoutput = false;
             $scope.ruleresponse = false;
             $scope.rulethd = true;
+            $scope.ruletun = false;
+        }
+        $scope.litun = function() {
+            $scope.licreateruledetails = 'no-active';
+            $scope.licreateruleinput = 'no-active';
+            $scope.licreateruleinputdata = 'no-active';
+            $scope.licreaterulelog = 'no-active';
+            $scope.licreateruleoutput = 'no-active';
+            $scope.licreateruleresponse = 'no-active';
+            $scope.licreaterulethd = 'no-active';
+            $scope.licreateruletun = 'active';
+            $scope.ruledetails = false;
+            $scope.rulesource = false;
+            $scope.ruleinput = false;
+            $scope.ruleoutput = false;
+            $scope.ruleresponse = false;
+            $scope.rulethd = false;
+            $scope.ruletun = true;
         }
 
     }
@@ -1619,7 +1721,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
 
 app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$http", 'UsecaseService',
         function($scope, $rootScope, $state, $http, UsecaseService) {
-
+			$scope.selected = [];
             $scope.SamePageReload = function() {
                 $state.go($state.current, {}, {
                     reload: true
@@ -1655,6 +1757,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 $scope.frameWorkUsecase();
                 var indsarry = UsecaseService.getUpdtindsty();
                 $scope.UsecaseIntry = [];
+                
                 $scope.UsecaseIntry.length = 0;
                 for (var i = 0; i < indsarry.length; i++) {
                     $scope.UsecaseIntry.push(indsarry[i].surrId);
@@ -1689,7 +1792,52 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
         }
     }
 
+    $scope.chckindustryCheckbox = function($event,industDatas) {
+    	Indtsyarray = [];
+        if(angular.element($event.currentTarget).is(':checked') == true){
+            var Indtsy = {};
+            Indtsy = industDatas;
+            Indtsyarray.push(Indtsy);
+            $scope.UsecaseIntry.push(Indtsy);
+        }else{
+        	var index = $scope.UsecaseIntry.indexOf($scope.industrydatas[0].SurrId);
+        	if(index > -1){
+        		$scope.UsecaseIntry.splice(index, 1);
+        		$scope.selectedAll = false;
+        		angular.forEach($scope.industrydatas, function (industrydata) {   	
+                	if(industrydata.SurrId!=industDatas && industrydata.Name!='ALL')
+                		$scope.UsecaseIntry.push(industrydata.SurrId);
+                });
+        	}
+        	else{
+        		for(i=0;i<$scope.UsecaseIntry.length;i++){
+                    if($scope.UsecaseIntry[i] == industDatas){
+                        $scope.UsecaseIntry.splice(i,1);
+                        break;
+                    }
+                }
+        	}
+        }
+    }
+    
+    $scope.checkAll = function () {
+        if ($scope.selectedAll) {
+            $scope.selectedAll = true;
+            $scope.UsecaseIntry.splice(0,$scope.UsecaseIntry.length);
+        } else {
+            $scope.selectedAll = false;
+        }
+        angular.forEach($scope.industrydatas, function (industrydata) {
+        	industrydata.Selected = $scope.selectedAll;
+        	if(industrydata.Name=='ALL')
+        		$scope.UsecaseIntry.push(industrydata.SurrId);
+        });
 
+    };
+    
+    $scope.exists = function (item) {
+        return $scope.selected.indexOf(item) > -1;
+    };
     $scope.reSet = function() {
         var r = confirm("Are you sure you want to reset the form?");
         if (r == true) {
@@ -1750,9 +1898,11 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         updatePage: true
                     }
                     $scope.UsecaseIntry = [];
+                    $scope.selected = [];
                     if (data.Industry.length > 0) {
                         for (var j = 0; j < data.Industry.length; j++) {
                             $scope.UsecaseIntry.push(data.Industry[j].SurrId);
+                            $scope.selected.push(data.Industry[j].SurrId);
                         }
                     }
                     $scope.chckindustry();
@@ -2496,7 +2646,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         transgetdata.SurrId = data.Input[i].SurrId;
                         $scope.transdatas.push(transgetdata);
                         //console.log(i);
-                    } else if (data.Input[i].Name == 'Referential Data') {
+                    } else if (data.Input[i].Name == 'Contextual Data') {
                         var Refergetdata = {};
                         Refergetdata.Name = data.Input[i].Value;
                         Refergetdata.SurrId = data.Input[i].SurrId;
@@ -2574,6 +2724,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         }
 
                         if (typeof data != 'undefined' && data.Rule.length > 0 && typeof data.Rule[0].UC_RULE_SURR_ID != 'undefined') {
+                            $scope.updRuleParameters = data.Rule[0].RULE_PARAMETERS;
+                            $scope.updRuleDependencies = data.Rule[0].RULE_DEPENDENCIES;
                             $scope.updateRule_surrId = data.Rule[0].UC_RULE_SURR_ID;
                             $scope.crtRuleID = data.Rule[0].UC_RULE_ID;
                             $scope.crtRuleName = data.Rule[0].UC_RULE_NAME;
@@ -2627,7 +2779,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                                     if (data.input[i].Selected == 'True') {
                                         $scope.crtRuleTrsn.push(data.input[i].UCSR_INPUT_SURR_ID);
                                     }
-                                } else if (data.input[i].UCSR_INPUT_NAME == "Referential Data") {
+                                } else if (data.input[i].UCSR_INPUT_NAME == "Contextual Data") {
                                     if (data.input[i].Selected == 'True') {
                                         $scope.crtRuleRefr.push(data.input[i].UCSR_INPUT_SURR_ID);
                                     }
@@ -3215,7 +3367,10 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                             "reference_set_ind": $scope.crtRuleRefSet,
                             "event_name": "",
                             "response_text": $scope.crtRuleResponse,
-                            "oob_flag": statusOOBu
+                            "oob_flag": statusOOBu,
+                            //
+                        "rule_parameters":$scope.updRuleParameters,
+                        "rule_dependencies":$scope.updRuleDependencies
                         },
                         "input": crtRuleInput_SurrId,
                         "output": crtRuleOuput_SurrId,
@@ -3283,7 +3438,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         transgetdata.Name = data.Input[i].Value;
                         transgetdata.SurrId = data.Input[i].SurrId;
                         $scope.transdatas.push(transgetdata);
-                    } else if (data.Input[i].Name == 'Referential Data') {
+                    } else if (data.Input[i].Name == 'Contextual Data') {
                         var Refergetdata = {};
                         Refergetdata.Name = data.Input[i].Value;
                         Refergetdata.SurrId = data.Input[i].SurrId;
@@ -3332,6 +3487,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
 
             $scope.licreateruledetails = 'active';
+                    $scope.ruletun = false;
             $scope.ruledetails = true;
             $scope.rulesource = false;
             $scope.ruleinput = false;
@@ -3347,6 +3503,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 $scope.licreateruleoutput = 'no-active';
                 $scope.licreateruleresponse = 'no-active';
                 $scope.licreaterulethd = 'no-active';
+                    $scope.licreateruletun = 'no-active';
+                    $scope.ruletun = false;
                 $scope.ruledetails = true;
                 $scope.rulesource = false;
                 $scope.ruleinput = false;
@@ -3380,6 +3538,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     $scope.licreateruleoutput = 'no-active';
                     $scope.licreateruleresponse = 'no-active';
                     $scope.licreaterulethd = 'no-active';
+                    $scope.licreateruletun = 'no-active';
+                    $scope.ruletun = false;
                     $scope.ruledetails = false;
                     $scope.ruleinput = true;
                     $scope.rulesource = false;
@@ -3413,6 +3573,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                      $scope.licreateruleoutput = 'active';
                      $scope.licreateruleresponse = 'no-active';
                      $scope.licreaterulethd = 'no-active';
+                    $scope.licreateruletun = 'no-active';
+                    $scope.ruletun = false;
                      $scope.ruledetails = false;
                      $scope.rulesource = false;
                      $scope.ruleinput = false;
@@ -3431,6 +3593,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 $scope.licreateruleoutput = 'no-active';
                 $scope.licreateruleresponse = 'active';
                 $scope.licreaterulethd = 'no-active';
+                    $scope.licreateruletun = 'no-active';
+                    $scope.ruletun = false;
                 $scope.ruledetails = false;
                 $scope.rulesource = false;
                 $scope.ruleinput = false;
@@ -3438,6 +3602,23 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 $scope.ruleresponse = true;
                 $scope.rulethd = false;
             }
+        $scope.litun = function() {
+            $scope.licreateruledetails = 'no-active';
+            $scope.licreateruleinput = 'no-active';
+            $scope.licreateruleinputdata = 'no-active';
+            $scope.licreaterulelog = 'no-active';
+            $scope.licreateruleoutput = 'no-active';
+            $scope.licreateruleresponse = 'no-active';
+            $scope.licreaterulethd = 'no-active';
+            $scope.licreateruletun = 'active';
+            $scope.ruledetails = false;
+            $scope.rulesource = false;
+            $scope.ruleinput = false;
+            $scope.ruleoutput = false;
+            $scope.ruleresponse = false;
+            $scope.rulethd = false;
+            $scope.ruletun = true;
+        }
             $scope.lithd = function() {
             	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
             	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
@@ -3461,6 +3642,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     $scope.licreateruleoutput = 'no-active';
                     $scope.licreateruleresponse = 'no-active';
                     $scope.licreaterulethd = 'active';
+                    $scope.licreateruletun = 'no-active';
+                    $scope.ruletun = false;
                     $scope.ruledetails = false;
                     $scope.rulesource = false;
                     $scope.ruleinput = false;
@@ -3471,38 +3654,5 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 
             }
         
-
-        $scope.lithd = function() {
-        	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
-        	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
-            var testAlp = /^[a-zA-Z\s\d\/]+$/;
-            var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
-            
-            if($scope.crtRuleID == ''  || !testId.test($scope.crtRuleID)){
-                alert('Please enter a valid Rule Id(special characters allowed: _-.)');
-                return false;
-            }
-            //else if($scope.crtRuleName == ''  || !testAlpNu.test($scope.crtRuleName)){
-            else if($scope.crtRuleName == ''){
-                alert('Please enter a valid Rule Name');
-                return false;
-            }
-            else{
-            	 $scope.licreateruledetails = 'no-active';
-                 $scope.licreateruleinput = 'no-active';
-                 $scope.licreateruleinputdata = 'no-active';
-                 $scope.licreaterulelog = 'no-active';
-                 $scope.licreateruleoutput = 'no-active';
-                 $scope.licreateruleresponse = 'no-active';
-                 $scope.licreaterulethd = 'active';
-                 $scope.ruledetails = false;
-                 $scope.rulesource = false;
-                 $scope.ruleinput = false;
-                 $scope.ruleoutput = false;
-                 $scope.ruleresponse = false;
-                 $scope.rulethd = true;
-            }
-           
-        }
     }]);
 

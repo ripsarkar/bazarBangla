@@ -65,7 +65,7 @@
             <div class="row">
                 <div class="tabs">
                     <div class="tabsreg">
-                        <form name="UpdateUsecaseFrom" novalidate autocomplete="off">
+                       <!--  <form name="UpdateUsecaseFrom" novalidate autocomplete="off"> -->
                             <div class="margintp1 col-md-12">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -117,8 +117,22 @@
                                                 <div class="margintp1">
                                                     <div class="col-md-3">
                                                         <label>Industry <span class="red"> *</span></label>
-                                                        <select multiple class="form-control" ng-options="industrydata.SurrId as industrydata.Name for industrydata in industrydatas | orderBy:'Name'" required ng-model="UsecaseIntry">
-                                                        </select>
+                                                        <!-- <select multiple class="form-control" ng-options="industrydata.SurrId as industrydata.Name for industrydata in industrydatas | orderBy:'Name'" required ng-model="UsecaseIntry">
+                                                        </select> -->
+                                                        <div class="indList">
+                                                        	<ul>
+														        <li>
+														            <input type="checkbox" id="all" ng-model="selectedAll" ng-click="checkAll()"/> Select All
+														        </li>
+															</ul>
+														    <ul class="indVals">
+														        <li ng-repeat="industrydata in industrydatas  | orderBy:'Name'">
+														            <label ng-hide="industrydata.Name=='ALL'">
+														                <input type="checkbox" ng-checked="exists(industrydata.SurrId)" ng-model="industrydata.Selected" ng-click="chckindustryCheckbox($event,industrydata.SurrId)" /> {{industrydata.Name}}
+														            </label>
+														        </li>
+														    </ul>
+														</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -133,7 +147,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        <!-- </form> -->
                     </div>
                 </div>
             </div>

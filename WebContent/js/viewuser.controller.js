@@ -1,35 +1,60 @@
 //wrting the controller for viewuser page
-app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", function($scope, ViewUserService, $rootScope){
+app.controller("viewUserController",["$scope","ViewUserService", "$rootScope","$http", function($scope, ViewUserService, $rootScope,$http){
 	
 	// code for extend user expiration
-	/*$scope.extendUser = function(email){
+	$scope.extendUser = function(usersurrId){
 		$rootScope.loadinganimation = true;
-		$http.get($rootScope.url+"/extendUser/"+email).success(function(result){
-		$rootScope.loadinganimation = false;
-			alert("User Account extended for 30 more days");
+		$http.get($rootScope.url+"/extendExpiredUser/"+usersurrId).success(function(result){
+		if($scope.isExpiringactive == false){
+						$scope.expiryButton = false;
+
+		ViewUserService.getUserDetails($scope.selectedCompany.SurrId).then(function(resultname)
+				{
+					$scope.userList = resultname.Users;	
+							$rootScope.loadinganimation = false;
+			alert("Expiry date extended successfully");
+				});
+		}
+		else{
+						$scope.expiryButton = true;
+
+			$http.get($rootScope.url+"/fetchExpiredUser/"+$scope.selectedCompany.SurrId).success(function(data){
+				$scope.userList = data.Users;
+						$rootScope.loadinganimation = false;
+			alert("Expiry date extended successfully");
+			});
+			}
 		}).error(function(result){
 
 		})
 	}
 	var expirelist = "notpresent";
-	$scope.activeUser = function(email){
+	$scope.activeUser = function(usersurrId,activityStatus){
 		$rootScope.loadinganimation = true;
-		if($scope.Expiring){
-			expirelist = "present";
-		}
-		$http.get($rootScope.url+"/activateUser/"+email).success(function(result){
-		
-		ViewUserService.getUserDetails($scope.selectedCompany.SurrId+"/"+expirelist).then(function(resultname)
+
+		$http.get($rootScope.url+"/deleteUser/"+usersurrId+"/"+activityStatus).success(function(result){
+		if($scope.isExpiringactive == false){
+						$scope.expiryButton = false;
+
+		ViewUserService.getUserDetails($scope.selectedCompany.SurrId).then(function(resultname)
 				{
+					$scope.userList = resultname.Users;	
 							$rootScope.loadinganimation = false;
-
-					$scope.userList = resultname.Users;					
+				
 				});
+		}
+		else{
+			$scope.expiryButton = true;
+			$http.get($rootScope.url+"/fetchExpiredUser/"+$scope.selectedCompany.SurrId).success(function(data){
+				$scope.userList = data.Users;
+						$rootScope.loadinganimation = false;
 
+			});
+			}
 		}).error(function(result){
 			
 		})
-	}*/
+	}
 	
 	//////////////////////////////////
 
@@ -89,13 +114,22 @@ app.controller("viewUserController",["$scope","ViewUserService", "$rootScope", f
 	
 	/*-----------------search function starts-----------------*/
 	$scope.userList=[];
+	$scope.isExpiringactive = false;
+	$scope.expiryButton = false;
 	$scope.clickme=function(){
-		
+		if($scope.isExpiringactive == false){
+			$scope.expiryButton = false;
 		ViewUserService.getUserDetails($scope.selectedCompany.SurrId).then(function(resultname)
 				{
 					$scope.userList = resultname.Users;					
 				});
-
+		}
+		else{
+			$scope.expiryButton = true;
+			$http.get($rootScope.url+"/fetchExpiredUser/"+$scope.selectedCompany.SurrId).success(function(data){
+				$scope.userList = data.Users;
+			});
+			}
     }
     
 	/*-----------------/search function ends-----------------*/

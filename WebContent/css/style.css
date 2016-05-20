@@ -1,4 +1,31 @@
 /*-------------ripunjoy css-------------*/
+.customefield{
+    margin-top: 4px;
+}
+.inputcusttom{
+    padding-right: 0px;
+    width: 63%;
+}
+.labelInputStyle{
+    height: 46px;
+width: 100%;
+padding-left: 6px;
+margin-bottom: 0px;
+background-color: #008CCE;
+color: #fff;
+}
+.paddingleftrightremove{
+    padding-left: 0px;
+padding-right: 0px;
+}
+.expireIco{
+     background-image: url("../img/ico_dateextend.png");
+     background-repeat: no-repeat;
+     width: 26px;
+height: 26px;
+font-size: 15px !important;
+color: yellow !important;
+}
 /*-------css for top right corner organization list-------*/
 .selectlistTopOrg{
     width:150px;
@@ -100,6 +127,17 @@ word-wrap: break-word;
 .parenttreenone, .parenttreenone ul{
 	padding:0 !important;
 }
+.indList {
+    border:1px solid black;
+    height: 114px;
+	width: 845px;
+}
+.indList li {
+    list-style-type: none;
+    display: inline-block;
+    width: 200px;
+}
+ul.indVals  li:first-child{  display:none;}
 .tree {
     min-height:20px;
     padding:19px;
@@ -371,12 +409,12 @@ height: 240px;
     padding: 25% 50% 50%;
 }
 
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,300,400,700);
 @font-face {
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 300;
-    src: url(http://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff);
+    src: url(https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff);
 }
 
 body {
@@ -472,8 +510,8 @@ body {
     padding: 8px;
 }
 
-.searchtable th {width: 11.1%;float:left;}
-.searchtable td {width: 11.1%;float:left;}
+.searchtable th {width: 14.1%;float:left;}
+.searchtable td {width: 14.1%;float:left;}
 .searchtable td:last-child {padding-right: 14px;}
 .searchtabBody tr{
 	width:102%;
@@ -1476,6 +1514,12 @@ input[type=checkbox]:checked + label {
 label{
 font-weight: 400;
 }
+.checkList {
+	float:left;
+	width:100%;
+}
+
+
 
 .panel-body {
     padding: 0px;
