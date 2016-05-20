@@ -1617,6 +1617,12 @@ margin-bottom:0px !important;
  	font-weight: bold;
    
   }
+.loginbtn3{
+  	margin-top:12%;
+ 	padding-left:45%;
+ 	font-weight: bold;
+ 	color: #05A8E6;  
+  }
  a.read-more, a.read-less {
 	cursor: pointer;
 	color: blue;
