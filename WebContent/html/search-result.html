@@ -130,7 +130,7 @@
 						<table class="table table-striped">
 							<tr ng-if="rule.Label !='Event Name/Category'" ng-repeat="rule in inputDisplaydata track by $index">
 								<th class="tableheaderLeft">{{rule.Label}}</th>
-								<td ng-if="rule.Label!='Relevant Event Fields' || rule.Label !='Event Name/Category'">{{rule.Value}}</td>
+								<td ng-if="rule.Label!='Relevant Event Fields'">{{rule.Value}}</td>
 								<td ng-if="rule.Label==='Relevant Event Fields'">{{rule.Value[0]}}</td>
 							</tr>
 						</table>
