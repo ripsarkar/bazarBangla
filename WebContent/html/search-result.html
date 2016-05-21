@@ -128,7 +128,7 @@
 				<div class="ruleinput" ng-show="ruleinput">
 					<div class="panel panel-default tablecontrol">
 						<table class="table table-striped">
-							<tr ng-if="rule.Label !='Event Name/Category'" ng-repeat="rule in inputDisplaydata track by $index">
+							<tr ng-repeat="rule in inputDisplaydata track by $index">
 								<th class="tableheaderLeft">{{rule.Label}}</th>
 								<td ng-if="rule.Label!='Relevant Event Fields'">{{rule.Value}}</td>
 								<td ng-if="rule.Label==='Relevant Event Fields'">{{rule.Value[0]}}</td>
