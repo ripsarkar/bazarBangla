@@ -3009,7 +3009,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
                         obje["Label"] = "";
                         obje["Value"] = evetdata[j].Value;
                     }
-                    $scope.inputDisplay.push(obje);
+                    //$scope.inputDisplay.push(obje);
                 }
             }
             
