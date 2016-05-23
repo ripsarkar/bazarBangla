@@ -320,24 +320,24 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             Indtsyarray.push(Indtsy);
             $scope.UsecaseIntry.push(Indtsy);
         }else{
-        	var index = $scope.UsecaseIntry.indexOf($scope.industrydatas[0].SurrId);
-        	if(index > -1){
-        		$scope.UsecaseIntry.splice(index, 1);
-        		$scope.selectedAll = false;
-        		angular.forEach($scope.industrydatas, function (industrydata) {
-                	
-                	if(industrydata.SurrId!=industDatas && industrydata.Name!='ALL')
-                		$scope.UsecaseIntry.push(industrydata.SurrId);
+            var index = $scope.UsecaseIntry.indexOf($scope.industrydatas[0].SurrId);
+            if(index > -1){
+                $scope.UsecaseIntry.splice(index, 1);
+                $scope.selectedAll = false;
+                angular.forEach($scope.industrydatas, function (industrydata) {
+                    
+                    if(industrydata.SurrId!=industDatas && industrydata.Name!='ALL')
+                        $scope.UsecaseIntry.push(industrydata.SurrId);
                 });
-        	}
-        	else{
-        		for(i=0;i<$scope.UsecaseIntry.length;i++){
+            }
+            else{
+                for(i=0;i<$scope.UsecaseIntry.length;i++){
                     if($scope.UsecaseIntry[i] == industDatas){
                         $scope.UsecaseIntry.splice(i,1);
                         break;
                     }
                 }
-        	}
+            }
             
         }
     }
@@ -350,9 +350,9 @@ function($scope, $rootScope, $state, $http, UsecaseService) {
             $scope.selectedAll = false;
         }
         angular.forEach($scope.industrydatas, function (industrydata) {
-        	industrydata.Selected = $scope.selectedAll;
-        	if(industrydata.Name=='ALL')
-        		$scope.UsecaseIntry.push(industrydata.SurrId);
+            industrydata.Selected = $scope.selectedAll;
+            if(industrydata.Name=='ALL')
+                $scope.UsecaseIntry.push(industrydata.SurrId);
         });
     };
 $scope.goTo = function() {
@@ -363,8 +363,8 @@ $scope.goTo = function() {
             Indtsyarray.push(Indtsy);
     }
 
-	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
+    var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
+    var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
     var testAlp = /^[a-zA-Z\s\d\/]+$/;
     var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
     
@@ -378,7 +378,7 @@ $scope.goTo = function() {
         return false;
     }
     else{
-    	if (typeof $scope.usecaseDescrip == 'undefined') {
+        if (typeof $scope.usecaseDescrip == 'undefined') {
             $scope.usecaseDescrip = "";
         }
         $scope.useCase = {
@@ -696,7 +696,7 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
         }
 
         $scope.UseCaseformSubmit = function() {
-        	
+            
                 //var Indtsyarray = [];
                 var Essptarray = [];
                 var CategoryGr = [];
@@ -747,18 +747,18 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
                           });
                         
                         }).error(function(data, status, headers, config) {
-                        	if (data.ErrCode == 611) {
-                        		alert("UsecaseName is Duplicate");
-                        	}
-                        	else if (data.ErrCode == 610) {
-                        		alert("UsecaseId is Duplicate");
-                        	}
-                        	else if (data.ErrCode == 601) {
-                        		alert("Application error in serverside");
-                        	}
-                        	else if (data.ErrCode == 606) {
-                        		alert("Invalid request usecase object not present in the request");
-                        	}
+                            if (data.ErrCode == 611) {
+                                alert("UsecaseName is Duplicate");
+                            }
+                            else if (data.ErrCode == 610) {
+                                alert("UsecaseId is Duplicate");
+                            }
+                            else if (data.ErrCode == 601) {
+                                alert("Application error in serverside");
+                            }
+                            else if (data.ErrCode == 606) {
+                                alert("Invalid request usecase object not present in the request");
+                            }
                         });
                     } else {
                         alert("Please fill all mandatory fields");
@@ -794,6 +794,7 @@ app.controller("UsecaseRegController", ["$scope", "$rootScope", "$state", '$http
 
 app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http', 'UsecaseService','$filter',
     function($scope, $rootScope, $state, $http, UsecaseService,$filter) {
+        //code for custon event attribute field
         $scope.relEveFieAdd = "";
         $scope.crtRuleEventAttribute = [];
         $scope.relEveFieIns = function(){
@@ -814,6 +815,8 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 }
             }
         }
+        //code for custon event attribute field
+
     angular.element("ul.submainlinks li").removeClass("subactive");
     angular.element('li.createrule').addClass("subactive");
         $scope.formcontrolYN = "No";
@@ -1252,9 +1255,9 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
         });
 
         $scope.crtRuleSubmit = function() {
-        	
-        	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
-        	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
+            
+            var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
+            var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
             var testAlp = /^[a-zA-Z\s\d\/]+$/;
             var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
             
@@ -1268,7 +1271,8 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 return false;
             }
             else{
-            	var evtattri_SurrId = [];
+                var evtattri_SurrId = [];
+                var customeventattr_SurrId = [];
                 var logSou_SurrId = [];
                 var crtRuleInput_SurrId = [];
                 var crtRuleOuput_SurrId = [];
@@ -1302,8 +1306,15 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 if (typeof $scope.crtRuleEventAttribute != 'undefined') {
                     for (var i = 0; i < $scope.crtRuleEventAttribute.length; i++) {
                         var evtattri = {};
+                        var customeventattr = {};
+                        if(isNaN($scope.crtRuleEventAttribute[i])){
+                        customeventattr.customVal = $scope.crtRuleEventAttribute[i];
+                        customeventattr_SurrId.push(customeventattr);
+                        console.log("customeva:"+$scope.crtRuleEventAttribute[i]);
+                        }else{
                         evtattri.SurrId = $scope.crtRuleEventAttribute[i];
                         evtattri_SurrId.push(evtattri);
+                        }
                     }
                 }
 
@@ -1413,6 +1424,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                     "input": crtRuleInput_SurrId,
                     "output": crtRuleOuput_SurrId,
                     "event_attribute": evtattri_SurrId,
+                    "custom_event_attr": customeventattr_SurrId,
                     "log_source": logSou_SurrId,
                     //"RuleTuning":$scope.crtRuleParameters,
                     "ThreadModelGroup": ThdCrt
@@ -1421,7 +1433,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
 
                 if (typeof $scope.crtUsercaseId != 'undefined' && $scope.crtUsercaseId != '' && typeof $scope.crtUsercaseName != 'undefined' && $scope.crtUsercaseName != '' && typeof $scope.crtRuleID != 'undefined' && $scope.crtRuleID != '' && typeof $scope.crtRuleName != 'undefined' && $scope.crtRuleName != '') {
                     $http.post($rootScope.url + '/saveRule', crtRule_postJson).success(function(data, status, headers, config) {
-                    	
+                        
                     
                         alert('Usecase Rule Created Successfully');
                         UsecaseService.setUsecasecrtdata('');
@@ -1442,30 +1454,30 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                           });
                     
                     }).error(function(data, status, headers, config) {
-                    	if (data.ErrCode == 611) {
-                    		alert("Duplicate Rule Name present in rule object");
-                    	}
-                    	else if (data.ErrCode == 610) {
-                    		alert("Duplicate ruleId present in rule object");
-                    	}
-                    	else if (data.ErrCode == 601) {
-                    		alert("Application error in serverside");
-                    	}
-                    	else if (data.ErrCode == 606) {
-                    		alert("Invalid reuest rule object not present in the reuest");
-                    	}
-                    	else if (data.ErrCode == 607) {
-                    		alert("Invalid request usecase surr id not present in the request");
-                    	}
-                    	else if (data.ErrCode == 608) {
-                    		alert("Invalid request usecase object not present in the request");
-                    	}                    	
+                        if (data.ErrCode == 611) {
+                            alert("Duplicate Rule Name present in rule object");
+                        }
+                        else if (data.ErrCode == 610) {
+                            alert("Duplicate ruleId present in rule object");
+                        }
+                        else if (data.ErrCode == 601) {
+                            alert("Application error in serverside");
+                        }
+                        else if (data.ErrCode == 606) {
+                            alert("Invalid reuest rule object not present in the reuest");
+                        }
+                        else if (data.ErrCode == 607) {
+                            alert("Invalid request usecase surr id not present in the request");
+                        }
+                        else if (data.ErrCode == 608) {
+                            alert("Invalid request usecase object not present in the request");
+                        }                       
                     });
                 } else {
                     alert('Please fill all mandatory* fields');
                 }
             }
-        	
+            
                 
         }
         
@@ -1585,8 +1597,8 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
 
         }
         $scope.liinput = function() {
-        	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
-        	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
+            var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
+            var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
             var testAlp = /^[a-zA-Z\s\d\/]+$/;
             var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
             
@@ -1600,7 +1612,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 return false;
             }
             else{
-            	$scope.licreateruledetails = 'no-active';
+                $scope.licreateruledetails = 'no-active';
                 $scope.licreateruleinput = 'active';
                 $scope.licreateruleinputdata = 'no-active';
                 $scope.licreaterulelog = 'no-active';
@@ -1618,13 +1630,13 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 $scope.ruletun = false;
 
             }
-        	
+            
             
         }
 
         $scope.lioutput = function() {
-        	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
-        	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
+            var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
+            var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
             var testAlp = /^[a-zA-Z\s\d\/]+$/;
             var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
             
@@ -1638,7 +1650,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 return false;
             }
             else{
-            	 $scope.licreateruledetails = 'no-active';
+                 $scope.licreateruledetails = 'no-active';
                  $scope.licreateruleinput = 'no-active';
                  $scope.licreateruleinputdata = 'no-active';
                  $scope.licreaterulelog = 'no-active';
@@ -1720,7 +1732,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
 
 app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$http", 'UsecaseService',
         function($scope, $rootScope, $state, $http, UsecaseService) {
-			$scope.selected = [];
+            $scope.selected = [];
             $scope.SamePageReload = function() {
                 $state.go($state.current, {}, {
                     reload: true
@@ -1792,30 +1804,30 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
     }
 
     $scope.chckindustryCheckbox = function($event,industDatas) {
-    	Indtsyarray = [];
+        Indtsyarray = [];
         if(angular.element($event.currentTarget).is(':checked') == true){
             var Indtsy = {};
             Indtsy = industDatas;
             Indtsyarray.push(Indtsy);
             $scope.UsecaseIntry.push(Indtsy);
         }else{
-        	var index = $scope.UsecaseIntry.indexOf($scope.industrydatas[0].SurrId);
-        	if(index > -1){
-        		$scope.UsecaseIntry.splice(index, 1);
-        		$scope.selectedAll = false;
-        		angular.forEach($scope.industrydatas, function (industrydata) {   	
-                	if(industrydata.SurrId!=industDatas && industrydata.Name!='ALL')
-                		$scope.UsecaseIntry.push(industrydata.SurrId);
+            var index = $scope.UsecaseIntry.indexOf($scope.industrydatas[0].SurrId);
+            if(index > -1){
+                $scope.UsecaseIntry.splice(index, 1);
+                $scope.selectedAll = false;
+                angular.forEach($scope.industrydatas, function (industrydata) {     
+                    if(industrydata.SurrId!=industDatas && industrydata.Name!='ALL')
+                        $scope.UsecaseIntry.push(industrydata.SurrId);
                 });
-        	}
-        	else{
-        		for(i=0;i<$scope.UsecaseIntry.length;i++){
+            }
+            else{
+                for(i=0;i<$scope.UsecaseIntry.length;i++){
                     if($scope.UsecaseIntry[i] == industDatas){
                         $scope.UsecaseIntry.splice(i,1);
                         break;
                     }
                 }
-        	}
+            }
         }
     }
     
@@ -1827,9 +1839,9 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             $scope.selectedAll = false;
         }
         angular.forEach($scope.industrydatas, function (industrydata) {
-        	industrydata.Selected = $scope.selectedAll;
-        	if(industrydata.Name=='ALL')
-        		$scope.UsecaseIntry.push(industrydata.SurrId);
+            industrydata.Selected = $scope.selectedAll;
+            if(industrydata.Name=='ALL')
+                $scope.UsecaseIntry.push(industrydata.SurrId);
         });
 
     };
@@ -2109,8 +2121,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 }
 
                 $scope.goTo = function() {
-                	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
-                	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
+                    var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,9}$/;
+                    var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
                     var testAlp = /^[a-zA-Z\s\d\/]+$/;
                     var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                     
@@ -2124,7 +2136,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         return false;
                     }
                     else{
-                    	$scope.chckindustry();
+                        $scope.chckindustry();
                         if (typeof $scope.usecaseDescrip == 'undefined') {
                             $scope.usecaseDescrip = "";
                         }
@@ -2486,8 +2498,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
             $scope.UpdatedataSet();
             $scope.UseCaseformSubmit = function() {
-            	 $rootScope.loadinganimation = true;
-                	var Indtsyarray = [];
+                 $rootScope.loadinganimation = true;
+                    var Indtsyarray = [];
                     var Essptarray = [];
                     var CategoryGr = [];
                     var ThdCrt = [];
@@ -2532,8 +2544,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                                   });
                             }).error(function(data, status, headers, config) {
                                 //alert("Sorry Application error in serverside");
-                            	alert(data.ErrMsg);
-                            	 $rootScope.loadinganimation = false;
+                                alert(data.ErrMsg);
+                                 $rootScope.loadinganimation = false;
                             });
                         } else {
                             alert("Please fill all mandatory fields");
@@ -2567,6 +2579,28 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
     app.controller("updateRuleController", ["$scope", "$rootScope", "$state", '$http', 'UsecaseService',
         function($scope, $rootScope, $state, $http, UsecaseService) {
+                    //code for custon event attribute field
+        $scope.relEveFieAdd = "";
+        $scope.crtRuleEventAttribute = [];
+        $scope.relEveFieIns = function(){
+        var relevePrese = true;
+
+            if($scope.relEveFieAdd != ""){
+
+                angular.element(".relEveFie").children("option").each(function(){
+                    if(angular.element(this).text() == $scope.relEveFieAdd){
+                        relevePrese = false;
+                                return false;
+                    }
+                });
+                
+                if(relevePrese == true){
+                angular.element(".relEveFie").prepend("<option>"+$scope.relEveFieAdd+"</option>");
+                $scope.crtRuleEventAttribute.push($scope.relEveFieAdd);
+                }
+            }
+        }
+        //code for custon event attribute field
 
             $scope.pagemain = {
                 main: true,
@@ -2636,7 +2670,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 $scope.refesetdatas = [];
 
                 $scope.LogSource = $scope.Rule_data.LogSource;
-                $scope.dataeventAttr = $scope.Rule_data.EventAttribute;
+                //$scope.dataeventAttr = $scope.Rule_data.EventAttribute;
                 for (var i = 0; i < data.Input.length; i++) {
                     if (data.Input[i].Name == 'Transactional Data') {
                         //console.log(i);
@@ -2711,6 +2745,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     var appstatuesoob;
 
                     $http.get($rootScope.url + '/getDetailsbyUcRuleID/' + ruleidtakeval).success(function(data, status, headers, config) {
+                        $scope.dataeventAttr = data.event_attribute;
                         //console.log(JSON.stringify(data, null,2));
                         $rootScope.loadinganimation = false;
                         //for oob value
@@ -3224,9 +3259,9 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             // Update Rule post Json
             var ThdCrt = [];
             $scope.crtRuleSubmit = function() {
-            	$rootScope.loadinganimation = true;
-            	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
-            	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
+                $rootScope.loadinganimation = true;
+                var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
+                var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
                 var testAlp = /^[a-zA-Z\s\d\/]+$/;
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                 
@@ -3240,7 +3275,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     return false;
                 }
                 else{
-                	var evtattri_SurrId = [];
+                    var evtattri_SurrId = [];
+                    var customeventattr_SurrId = [];
                     var logSou_SurrId = [];
                     var crtRuleInput_SurrId = [];
                     var crtRuleOuput_SurrId = [];
@@ -3272,8 +3308,15 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     if (typeof $scope.crtRuleEventAttribute != 'undefined') {
                         for (var i = 0; i < $scope.crtRuleEventAttribute.length; i++) {
                             var evtattri = {};
+                        var customeventattr = {};
+                        if(isNaN($scope.crtRuleEventAttribute[i])){
+                        customeventattr.customVal = $scope.crtRuleEventAttribute[i];
+                        customeventattr_SurrId.push(customeventattr);
+                        console.log("customeva:"+$scope.crtRuleEventAttribute[i]);
+                        }else{
                             evtattri.SurrId = $scope.crtRuleEventAttribute[i];
                             evtattri_SurrId.push(evtattri);
+                        }
                         }
                     }
 
@@ -3374,6 +3417,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         "input": crtRuleInput_SurrId,
                         "output": crtRuleOuput_SurrId,
                         "event_attribute": evtattri_SurrId,
+                        "custom_event_attr": customeventattr_SurrId,                       
                         "log_source": logSou_SurrId,
                         "ThreadModelGroup": ThdCrt
                     };
@@ -3398,14 +3442,14 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                           });
                         }).error(function(data, status, headers, config) {
                             //alert("Sorry Application error in serverside");
-                        	 alert(data.ErrMsg);
-                        	 $rootScope.loadinganimation = false;
+                             alert(data.ErrMsg);
+                             $rootScope.loadinganimation = false;
                         });
                     } else {
                         alert("Please fill all mandatory fields");
                     }
                 }
-                	               
+                                   
                 
             }
             
@@ -3515,8 +3559,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
             }
             $scope.liinput = function() {
-            	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
-            	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
+                var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
+                var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
                 var testAlp = /^[a-zA-Z\s\d\/]+$/;
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                 
@@ -3530,7 +3574,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     return false;
                 }
                 else{
-                	$scope.licreateruledetails = 'no-active';
+                    $scope.licreateruledetails = 'no-active';
                     $scope.licreateruleinput = 'active';
                     $scope.licreateruleinputdata = 'no-active';
                     $scope.licreaterulelog = 'no-active';
@@ -3550,8 +3594,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             }
 
             $scope.lioutput = function() {
-            	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
-            	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
+                var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
+                var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
                 var testAlp = /^[a-zA-Z\s\d\/]+$/;
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                 
@@ -3565,7 +3609,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     return false;
                 }
                 else{
-                	 $scope.licreateruledetails = 'no-active';
+                     $scope.licreateruledetails = 'no-active';
                      $scope.licreateruleinput = 'no-active';
                      $scope.licreateruleinputdata = 'no-active';
                      $scope.licreaterulelog = 'no-active';
@@ -3619,8 +3663,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
             $scope.ruletun = true;
         }
             $scope.lithd = function() {
-            	var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
-            	var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
+                var testId = /^[A-Za-z][A-Za-z0-9_.-]{2,19}$/;
+                var testAlpNu = /^[A-Za-z][a-zA-Z0-9\s\d\/()_,-.]+$/;
                 var testAlp = /^[a-zA-Z\s\d\/]+$/;
                 var testAddress = /^[a-zA-Z0-9\s\d\/]+$/;
                 
@@ -3634,7 +3678,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     return false;
                 }
                 else{
-                	$scope.licreateruledetails = 'no-active';
+                    $scope.licreateruledetails = 'no-active';
                     $scope.licreateruleinput = 'no-active';
                     $scope.licreateruleinputdata = 'no-active';
                     $scope.licreaterulelog = 'no-active';
