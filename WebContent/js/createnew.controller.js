@@ -3347,16 +3347,18 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                                 }
                             }
                             if(noFlagToCus == false){
-                            for(var a=0;a<custonEVattArr.length;a++){
-                                if($scope.crtRuleEventAttribute[i] == custonEVattArr[a].SurrId){
-                                    chekAl = true;
-                                    break;
+                                        evtattri.SurrId = $scope.crtRuleEventAttribute[i];
+                                        evtattri_SurrId.push(evtattri);
+                                /*for(var a=0;a<custonEVattArr.length;a++){
+                                    if($scope.crtRuleEventAttribute[i] == custonEVattArr[a].SurrId){
+                                        chekAl = true;
+                                        break;
+                                    }
                                 }
-                            }
-                            if(chekAl == false){
-                                    evtattri.SurrId = $scope.crtRuleEventAttribute[i];
-                                    evtattri_SurrId.push(evtattri);
-                            }
+                                if(chekAl == false){
+                                        evtattri.SurrId = $scope.crtRuleEventAttribute[i];
+                                        evtattri_SurrId.push(evtattri);
+                                }*/
                             }
                         }
                         }
