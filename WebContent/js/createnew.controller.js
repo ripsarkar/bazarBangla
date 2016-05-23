@@ -3342,7 +3342,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                                             noFlagToCus = true;
                                             break;
                                     }
-                                    j=-1;
+                                    j=j-1;
                                 }
                             }
                             if(noFlagToCus == false){
