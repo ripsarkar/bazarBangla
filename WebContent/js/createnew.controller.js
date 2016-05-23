@@ -812,6 +812,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 if(relevePrese == true){
                 angular.element(".relEveFie").prepend("<option>"+$scope.relEveFieAdd+"</option>");
                 $scope.crtRuleEventAttribute.push($scope.relEveFieAdd);
+                console.log("updruleEA"+$scope.crtRuleEventAttribute);
                 }
             }
         }
