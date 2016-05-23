@@ -800,7 +800,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
         $scope.relEveFieIns = function(){
         var relevePrese = true;
 
-            if($scope.relEveFieAdd != ""){
+            if($scope.relEveFieAdd != "" || isNaN($scope.relEveFieAdd)){
 
                 angular.element(".relEveFie").children("option").each(function(){
                     if(angular.element(this).text() == $scope.relEveFieAdd){
@@ -814,6 +814,9 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 $scope.crtRuleEventAttribute.push($scope.relEveFieAdd);
                 console.log("updruleEA"+$scope.crtRuleEventAttribute);
                 }
+            }
+            else{
+                alert("Do not enter number");
             }
         }
         //code for custon event attribute field
@@ -2586,7 +2589,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
         $scope.relEveFieIns = function(){
         var relevePrese = true;
 
-            if($scope.relEveFieAdd != ""){
+            if($scope.relEveFieAdd != "" || isNaN($scope.relEveFieAdd)){
 
                 angular.element(".relEveFie").children("option").each(function(){
                     if(angular.element(this).text() == $scope.relEveFieAdd){
@@ -2599,6 +2602,9 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 angular.element(".relEveFie").prepend('<option style="color:#FFF;background-color:#05A8E6">'+$scope.relEveFieAdd+'</option>');
                 $scope.crtRuleEventAttribute.push($scope.relEveFieAdd);
                 }
+            }
+            else{
+                alert("Do not enter number");
             }
         }
         //code for custon event attribute field
