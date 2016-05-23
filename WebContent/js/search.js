@@ -3078,6 +3078,7 @@ $scope.cliThreModMid = function($event,ndvlqe,nameval){
     $scope.ruleoutput = false;
     $scope.rulethd = false;
     $scope.ruleresponse = false;
+    $scope.rulever = false;
 
     $scope.lidetails = function() {
         $scope.licreateruledetails = 'active';

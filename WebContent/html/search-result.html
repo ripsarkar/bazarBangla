@@ -193,8 +193,8 @@
 								<th class="tableheaderLeft">Rule Saved Date</th>
 							</tr>
 							<tr ng-repeat="rule in ruleVersions">
-								<th>{{rule.RuleName}}</th>
-								<td>{{rule.RuleSavedDate}}</td>
+								<td>{{rule.RuleName}}</td>
+								<td>{{rule.RuleSavedDate.substring(0, 11)}}</td>
 							</tr>
 						</table>
 					</div>
