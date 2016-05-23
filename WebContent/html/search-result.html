@@ -87,7 +87,7 @@
 							</li>
 							<li class="tabshead"><a herf="" ng-class="licreateruletun" ng-click="litun()">Tuning Guidelines</a></li>
 							<li class="tabshead"><a herf="" ng-class="licreaterulethd" ng-click="lithd()"> Threat Model</a></li>
-							<li class="tabshead"><a herf="" ng-class="licreaterulethd" ng-click="lithd()"> Versions Log</a></li>
+							<li class="tabshead"><a herf="" ng-class="licreaterulethd" ng-click="lithd()"> Version Logs</a></li>
 						</div>
 					</div>
 				</div>
@@ -184,7 +184,23 @@
 					</div>
 					<div class="clearfix"></div>
 				</div>
+				<div class="ruleinput" ng-show="rulesource">
+					<div class="panel panel-default tablecontrol">
 
+						<table class="table table-striped">
+							<tr>
+								<th class="tableheaderLeft">Rule Name</th>
+								<th class="tableheaderLeft">Rule Saved Date</th>
+							</tr>
+							<tr ng-repeat="rule in logSource">
+								<th>{{rule.key}}</th>
+								<td>{{rule.value}}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="clearfix"></div>
+
+				</div>
 
 			</div>
 		</div>
