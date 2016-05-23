@@ -3332,7 +3332,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         }else{
                             for(var b=0;b<custonEVattArr.length;b++){
                                 if($scope.crtRuleEventAttribute[i]==custonEVattArr[b].SurrId){
-                                    customvalueYes[b].Selected = "Yes";
+                                    custonEVattArr[b].Selected = "Yes";
                                     noFlagToCus = true;
                                     break;
                                 }
