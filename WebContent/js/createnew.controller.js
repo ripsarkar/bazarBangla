@@ -800,7 +800,7 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
         $scope.relEveFieIns = function(){
         var relevePrese = true;
 
-            if($scope.relEveFieAdd != "" || isNaN($scope.relEveFieAdd)){
+            if($scope.relEveFieAdd != "" && isNaN($scope.relEveFieAdd)){
 
                 angular.element(".relEveFie").children("option").each(function(){
                     if(angular.element(this).text() == $scope.relEveFieAdd){
@@ -2589,7 +2589,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
         $scope.relEveFieIns = function(){
         var relevePrese = true;
 
-            if($scope.relEveFieAdd != "" || isNaN($scope.relEveFieAdd)){
+            if($scope.relEveFieAdd != "" && isNaN($scope.relEveFieAdd)){
 
                 angular.element(".relEveFie").children("option").each(function(){
                     if(angular.element(this).text() == $scope.relEveFieAdd){
