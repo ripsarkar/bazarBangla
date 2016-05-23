@@ -2596,7 +2596,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 });
                 
                 if(relevePrese == true){
-                angular.element(".relEveFie").prepend("<option>"+$scope.relEveFieAdd+"</option>");
+                angular.element(".relEveFie").prepend('<option style="color:#FFF;background-color:#05A8E6">'+$scope.relEveFieAdd+'</option>');
                 $scope.crtRuleEventAttribute.push($scope.relEveFieAdd);
                 }
             }
