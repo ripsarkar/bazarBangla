@@ -2671,7 +2671,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 $scope.refesetdatas = [];
 
                 $scope.LogSource = $scope.Rule_data.LogSource;
-                $scope.dataeventAttr = $scope.Rule_data.EventAttribute;
+                //$scope.dataeventAttr = $scope.Rule_data.EventAttribute;
                 for (var i = 0; i < data.Input.length; i++) {
                     if (data.Input[i].Name == 'Transactional Data') {
                         //console.log(i);
@@ -2746,8 +2746,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     var appstatuesoob;
 
                     $http.get($rootScope.url + '/getDetailsbyUcRuleID/' + ruleidtakeval).success(function(data, status, headers, config) {
-                        $scope.dataeventAttr2 = data.event_attribute;
-                        console.log($scope.dataeventAttr2);
+                        $scope.dataeventAttr = data.event_attribute;
+                        console.log($scope.dataeventAttr);
                         //console.log(JSON.stringify(data, null,2));
                         $rootScope.loadinganimation = false;
                         //for oob value
@@ -3310,11 +3310,11 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
                     if (typeof $scope.crtRuleEventAttribute != 'undefined') {
                         var customvalueYes = {};
-                            for(var j=0;j< $scope.dataeventAttr2.length; j++){
-                                if($scope.dataeventAttr2[j].CUSTOM_EVENT_OBJ == "Yes"){
+                            for(var j=0;j< $scope.dataeventAttr.length; j++){
+                                if($scope.dataeventAttr[j].CUSTOM_EVENT_OBJ == "Yes"){
 
                                             customvalueYes = {};
-                                            customvalueYes.SurrId = $scope.dataeventAttr2[j].RULE_ATT_SURR_ID;
+                                            customvalueYes.SurrId = $scope.dataeventAttr[j].RULE_ATT_SURR_ID;
                                             customvalueYes.Selected = "No";
                                             custonEVattArr.push(customvalueYes);
 
