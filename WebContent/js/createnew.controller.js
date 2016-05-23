@@ -3323,20 +3323,26 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                                 if($scope.dataeventAttr2[j].CUSTOM_EVENT_OBJ == "Yes"){
                                     for (var k = 0; k < $scope.crtRuleEventAttribute.length; k++) {
                                         if ($scope.dataeventAttr2[j].RULE_ATT_SURR_ID == $scope.crtRuleEventAttribute[k]) {
+                                            customvalueYes = {};
                                             customvalueYes.SurrId = $scope.dataeventAttr2[j].RULE_ATT_SURR_ID;
                                             customvalueYes.Selected = "Yes";
                                             custonEVattArr.push(customvalueYes);
+                                            $scope.dataeventAttr2.splice(j,1);
                                             flagToCus = true;
+                                            noFlagToCus = true;
                                             break;
                                         }
                                     }
                                     if(flagToCus == false){
+                                            customvalueYes = {};
                                             customvalueYes.SurrId = $scope.dataeventAttr2[j].RULE_ATT_SURR_ID;
                                             customvalueYes.Selected = "No";
                                             custonEVattArr.push(customvalueYes);
+                                            $scope.dataeventAttr2.splice(j,1);
                                             noFlagToCus = true;
                                             break;
                                     }
+                                    j=-1;
                                 }
                             }
                             if(noFlagToCus == false){
