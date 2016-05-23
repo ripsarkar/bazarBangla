@@ -2746,7 +2746,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                     var appstatuesoob;
 
                     $http.get($rootScope.url + '/getDetailsbyUcRuleID/' + ruleidtakeval).success(function(data, status, headers, config) {
-                        //$scope.dataeventAttr = data.event_attribute;
+                        $scope.dataeventAttr2 = data.event_attribute;
+                        console.log($scope.dataeventAttr2);
                         //console.log(JSON.stringify(data, null,2));
                         $rootScope.loadinganimation = false;
                         //for oob value
@@ -3278,6 +3279,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 else{
                     var evtattri_SurrId = [];
                     var customeventattr_SurrId = [];
+                    var custonEVattArr = [];
                     var logSou_SurrId = [];
                     var crtRuleInput_SurrId = [];
                     var crtRuleOuput_SurrId = [];
@@ -3308,15 +3310,39 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
 
                     if (typeof $scope.crtRuleEventAttribute != 'undefined') {
                         for (var i = 0; i < $scope.crtRuleEventAttribute.length; i++) {
-                            var evtattri = {};
+                        var evtattri = {};
                         var customeventattr = {};
+                        var customvalueYes = {};
+                        var flagToCus = false;
+                        var noFlagToCus = false;
                         if(isNaN($scope.crtRuleEventAttribute[i])){
                         customeventattr.customVal = $scope.crtRuleEventAttribute[i];
                         customeventattr_SurrId.push(customeventattr);
-                        console.log("customeva:"+$scope.crtRuleEventAttribute[i]);
                         }else{
+                            for(var j=0;j< $scope.dataeventAttr2.length; j++){
+                                if($scope.dataeventAttr2[j].CUSTOM_EVENT_OBJ == "Yes"){
+                                    for (var k = 0; k < $scope.crtRuleEventAttribute.length; k++) {
+                                        if ($scope.dataeventAttr2[j].RULE_ATT_SURR_ID == $scope.crtRuleEventAttribute[k]) {
+                                            customvalueYes.SurrId = $scope.dataeventAttr2[j].RULE_ATT_SURR_ID;
+                                            customvalueYes.Selected = "Yes";
+                                            custonEVattArr.push(customvalueYes);
+                                            flagToCus = true;
+                                            break;
+                                        }
+                                    }
+                                    if(flagToCus == false){
+                                            customvalueYes.SurrId = $scope.dataeventAttr2[j].RULE_ATT_SURR_ID;
+                                            customvalueYes.Selected = "No";
+                                            custonEVattArr.push(customvalueYes);
+                                            noFlagToCus = true;
+                                            break;
+                                    }
+                                }
+                            }
+                            if(noFlagToCus == false){
                             evtattri.SurrId = $scope.crtRuleEventAttribute[i];
                             evtattri_SurrId.push(evtattri);
+                            }
                         }
                         }
                     }
@@ -3418,7 +3444,10 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         "input": crtRuleInput_SurrId,
                         "output": crtRuleOuput_SurrId,
                         "event_attribute": evtattri_SurrId,
-                        "custom_event_attr": customeventattr_SurrId,                       
+                        "custom_event_attr": {
+                                "oldValue": custonEVattArr,
+                                "newValue": customeventattr_SurrId
+                            },                    
                         "log_source": logSou_SurrId,
                         "ThreadModelGroup": ThdCrt
                     };
