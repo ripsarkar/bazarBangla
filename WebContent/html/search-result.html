@@ -192,7 +192,7 @@
 								<th class="tableheaderLeft">Rule Name</th>
 								<th class="tableheaderLeft">Rule Saved Date</th>
 							</tr>
-							<tr ng-repeat="rule in ruleVersions">
+							<tr ng-repeat="rule in ruleVersions | orderBy:'RuleSavedDate'">
 								<td>{{rule.RuleName}}</td>
 								<td>{{rule.RuleSavedDate.substring(0, 11)}}</td>
 							</tr>
