@@ -3315,7 +3315,6 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         var customvalueYes = {};
                         var flagToCus = false;
                         var noFlagToCus = false;
-                        var chekAl = false;
                         if(isNaN($scope.crtRuleEventAttribute[i])){
                         customeventattr.customVal = $scope.crtRuleEventAttribute[i];
                         customeventattr_SurrId.push(customeventattr);
@@ -3347,18 +3346,8 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                                 }
                             }
                             if(noFlagToCus == false){
-                                        evtattri.SurrId = $scope.crtRuleEventAttribute[i];
-                                        evtattri_SurrId.push(evtattri);
-                                /*for(var a=0;a<custonEVattArr.length;a++){
-                                    if($scope.crtRuleEventAttribute[i] == custonEVattArr[a].SurrId){
-                                        chekAl = true;
-                                        break;
-                                    }
-                                }
-                                if(chekAl == false){
-                                        evtattri.SurrId = $scope.crtRuleEventAttribute[i];
-                                        evtattri_SurrId.push(evtattri);
-                                }*/
+                            evtattri.SurrId = $scope.crtRuleEventAttribute[i];
+                            evtattri_SurrId.push(evtattri);
                             }
                         }
                         }
