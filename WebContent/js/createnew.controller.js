@@ -3354,6 +3354,9 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         }
                         
                     }
+                    else{
+                        $scope.crtRuleEventAttribute = [];
+                    }
                     if($scope.crtRuleEventAttribute.length == 0){
 
                         evtattri_SurrId=[];
