@@ -2587,7 +2587,6 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
         $scope.relEveFieAdd = "";
         $scope.crtRuleEventAttribute = [];
         $scope.relEveFieIns = function(){
-            console.log($scope.crtRuleEventAttribute.length);
         var relevePrese = true;
 
             if($scope.relEveFieAdd != "" && isNaN($scope.relEveFieAdd)){
@@ -2601,6 +2600,10 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                 
                 if(relevePrese == true){
                 angular.element(".relEveFie").prepend('<option style="color:#FFF;background-color:#05A8E6">'+$scope.relEveFieAdd+'</option>');
+                if(typeof $scope.crtRuleEventAttribute == 'undefined'){
+                    $scope.crtRuleEventAttribute = [];
+                    console.log("converted to array");
+                }
                 $scope.crtRuleEventAttribute.push($scope.relEveFieAdd);
                 }
             }
