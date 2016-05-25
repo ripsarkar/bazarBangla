@@ -2587,6 +2587,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
         $scope.relEveFieAdd = "";
         $scope.crtRuleEventAttribute = [];
         $scope.relEveFieIns = function(){
+            console.log($scope.crtRuleEventAttribute.length);
         var relevePrese = true;
 
             if($scope.relEveFieAdd != "" && isNaN($scope.relEveFieAdd)){
@@ -3313,7 +3314,12 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                             crtRuleInput_SurrId.push(crtRuleEventNameId);
                         }
                     }
+                    /*if($scope.crtRuleEventAttribute.length == 0){
 
+                        evtattri_SurrId=[];
+                        custonEVattArr=[];
+                        customeventattr_SurrId=[];
+                    }*/
                     if (typeof $scope.crtRuleEventAttribute != 'undefined') {
                         var customvalueYes = {};
                             for(var j=0;j< $scope.dataeventAttr.length; j++){
@@ -3330,7 +3336,6 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         for (var i = 0; i < $scope.crtRuleEventAttribute.length; i++) {
                         var evtattri = {};
                         var customeventattr = {};
-                        var flagToCus = false;
                         var noFlagToCus = false;
                         if(isNaN($scope.crtRuleEventAttribute[i])){
                         customeventattr.customVal = $scope.crtRuleEventAttribute[i];
