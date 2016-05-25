@@ -3314,12 +3314,7 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                             crtRuleInput_SurrId.push(crtRuleEventNameId);
                         }
                     }
-                    /*if($scope.crtRuleEventAttribute.length == 0){
 
-                        evtattri_SurrId=[];
-                        custonEVattArr=[];
-                        customeventattr_SurrId=[];
-                    }*/
                     if (typeof $scope.crtRuleEventAttribute != 'undefined') {
                         var customvalueYes = {};
                             for(var j=0;j< $scope.dataeventAttr.length; j++){
@@ -3356,7 +3351,23 @@ app.controller("UpdateusecaseController", ["$scope", "$rootScope", "$state", "$h
                         }
                         
                     }
+                    if($scope.crtRuleEventAttribute.length == 0){
 
+                        evtattri_SurrId=[];
+                        
+                        customeventattr_SurrId=[];
+                                                var customvalueYes = {};
+                            for(var j=0;j< $scope.dataeventAttr.length; j++){
+                                if($scope.dataeventAttr[j].CUSTOM_EVENT_OBJ == "Yes"){
+
+                                            customvalueYes = {};
+                                            customvalueYes.SurrId = $scope.dataeventAttr[j].RULE_ATT_SURR_ID;
+                                            customvalueYes.Selected = "No";
+                                            custonEVattArr.push(customvalueYes);
+
+                                }
+                            }
+                    }
                     if (typeof $scope.crtRuleLogSource != 'undefined') {
                         for (var j = 0; j < $scope.crtRuleLogSource.length; j++) {
                             var logSouId = {};
