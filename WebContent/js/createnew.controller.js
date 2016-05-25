@@ -810,8 +810,15 @@ app.controller("CreateRuleController", ["$scope", "$rootScope", "$state", '$http
                 });
                 
                 if(relevePrese == true){
-                angular.element(".relEveFie").prepend("<option>"+$scope.relEveFieAdd+"</option>");
+                angular.element(".relEveFie").prepend('<option style="color:#FFF;background-color:#05A8E6">'+$scope.relEveFieAdd+'</option>');
+                if(typeof $scope.crtRuleEventAttribute == 'undefined'){
+                $scope.crtRuleEventAttribute = [];
+                console.log("converted to array");
                 $scope.crtRuleEventAttribute.push($scope.relEveFieAdd);
+                }
+                else{
+                $scope.crtRuleEventAttribute.push($scope.relEveFieAdd);
+                }
                 console.log("updruleEA"+$scope.crtRuleEventAttribute);
                 }
             }
