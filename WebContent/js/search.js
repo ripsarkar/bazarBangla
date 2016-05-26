@@ -1182,11 +1182,17 @@ var a,b;
 		//get last id
 		subcatlast2["id"] = parseInt(ndval);
 		//get 2ndid
-		var ucCatSuID2=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('input').val();
-		var ucCatSuName=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('div').text();
+        //old code when reg pub and reg ctrl heading present
+/*		var ucCatSuID2=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('input').val();
+		var ucCatSuName=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('div').text();*/
+        var ucCatSuID2=angular.element($event.currentTarget).parent().parent().parent().children('input').val();
+        var ucCatSuName=angular.element($event.currentTarget).parent().parent().parent().children('div').text();
 		//get 1stid
-		var ucSubCatSuID2=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().parent().parent().children('input').val();
-		var ucSubCatSuName=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().parent().parent().children('div').text();
+        //old code when reg pub and reg ctrl heading present
+/*        var ucSubCatSuID2=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().parent().parent().children('input').val();
+        var ucSubCatSuName=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().parent().parent().children('div').text();*/
+		var ucSubCatSuID2=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().children('input').val();
+		var ucSubCatSuName=angular.element($event.currentTarget).parent().parent().parent().parent().parent().parent().parent().children('div').text();
 		
 		//pushing name in result addition
 		var totalname = ucSubCatSuName +"-"+ ucCatSuName +"-"+ nameval;
@@ -1307,7 +1313,8 @@ var a,b;
 	
 	//
 	var nameval2="";
-	for(i=0;i<angular.element($event.currentTarget).parent('li').children('ul').children('li').children('ul').children('li').length;i++){
+        //old code when reg pub and reg ctrl heading present
+/*	for(i=0;i<angular.element($event.currentTarget).parent('li').children('ul').children('li').children('ul').children('li').length;i++){
 
 	if(i==0){
 		nameval2 =  nameval2  + angular.element($event.currentTarget).parent('li').children('ul').children('li').children('ul').children('li').children('div').eq(i).text();
@@ -1316,7 +1323,17 @@ var a,b;
 		nameval2 =  nameval2 + "," + angular.element($event.currentTarget).parent('li').children('ul').children('li').children('ul').children('li').children('div').eq(i).text();
 		
 	}
-	}
+	}*/
+    for(i=0;i<angular.element($event.currentTarget).parent('li').children('ul').children('li').length;i++){
+
+    if(i==0){
+        nameval2 =  nameval2  + angular.element($event.currentTarget).parent('li').children('ul').children('li').children('div').eq(i).text();
+    }else{
+        
+        nameval2 =  nameval2 + "," + angular.element($event.currentTarget).parent('li').children('ul').children('li').children('div').eq(i).text();
+        
+    }
+    }
 	var ndval = ndvalusesub;
 	
 
@@ -1324,15 +1341,24 @@ var a,b;
 	var ucCatSuID=parseInt(ndvalusesub);
 	var ucCatSuName=nameval;
 	//get 1stid	
-	var ucSubCatSuID=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('input').val();
-	var ucSubCatSuName=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('div').text();
+        //old code when reg pub and reg ctrl heading present
+/*	var ucSubCatSuID=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('input').val();
+	var ucSubCatSuName=angular.element($event.currentTarget).parent().parent().parent().parent().parent().children('div').text();*/
+    var ucSubCatSuID=angular.element($event.currentTarget).parent().parent().parent().children('input').val();
+    var ucSubCatSuName=angular.element($event.currentTarget).parent().parent().parent().children('div').text();
 
 	subcatlast["id"] = [];
-	angular.element($event.currentTarget).parent().children('ul').children('li').children('ul').children('li').each(function(){
+        //old code when reg pub and reg ctrl heading present
+/*	angular.element($event.currentTarget).parent().children('ul').children('li').children('ul').children('li').each(function(){
 		subcatlast ={};
 		subcatlast["id"] = parseInt(angular.element(this).children('input').val());
 		UseCSubCat["RegCntl"].push(subcatlast);
-	});
+	});*/
+    angular.element($event.currentTarget).parent().children('ul').children('li').each(function(){
+        subcatlast ={};
+        subcatlast["id"] = parseInt(angular.element(this).children('input').val());
+        UseCSubCat["RegCntl"].push(subcatlast);
+    });
 	
 	//
 	var totalname = ucSubCatSuName +"-"+ nameval +"-"+ nameval2;		
